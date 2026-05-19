@@ -417,11 +417,18 @@ async def recommend_stream(
                 await asyncio.sleep(0)
 
             # 完成
-            yield sse_event("done", {
+            done_data = {
                 "total": len(recommendations),
                 "rank_method": rank_method,
                 "mode_used": mode,
-            })
+            }
+            if profile.quality_level:
+                done_data["quality"] = {
+                    "level": profile.quality_level,
+                    "confidence": profile.quality_confidence,
+                    "reasons": profile.quality_reasons,
+                }
+            yield sse_event("done", done_data)
 
         except Exception as e:
             yield sse_event("error", {"message": str(e)})

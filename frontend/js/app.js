@@ -152,7 +152,8 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
                             recommendations.push(eventData);
                             break;
                         case 'done':
-                            renderResults(recommendations);
+                            latestDoneData = eventData;
+                            renderResults(recommendations, latestDoneData);
                             break;
                         case 'error':
                             throw new Error(eventData.message || 'Unknown error');
@@ -172,7 +173,9 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
     }
 });
 
-function renderResults(recommendations) {
+let latestDoneData = null;
+
+function renderResults(recommendations, doneData = null) {
     const resultsEl = document.getElementById('results');
     const countEl = document.getElementById('result-count');
 
@@ -185,7 +188,20 @@ function renderResults(recommendations) {
 
     countEl.textContent = `${recommendations.length} 个结果`;
 
-    resultsEl.innerHTML = recommendations.map((rec, idx) => {
+    // 构建质量信息 HTML
+    let qualityHtml = '';
+    if (doneData && doneData.quality) {
+        const q = doneData.quality;
+        const levelClass = `quality-${q.level.toLowerCase()}`;
+        qualityHtml = `
+        <div class="quality-badge-container">
+            <span class="quality-badge ${levelClass}">${q.level}</span>
+            <span class="quality-label">论文质量评估</span>
+            <span class="quality-confidence">置信度 ${Math.round(q.confidence * 100)}%</span>
+        </div>`;
+    }
+
+    resultsEl.innerHTML = qualityHtml + recommendations.map((rec, idx) => {
         const rankMethodText = rec.rank_method === 'llm' ? 'AI智能' : '规则';
         const rankMethodClass = rec.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
         const quartileClass = rec.quartile ? `quartile-${rec.quartile.toLowerCase()}` : '';

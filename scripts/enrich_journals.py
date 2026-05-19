@@ -92,7 +92,7 @@ JOURNAL_KNOWLEDGE = {
     "IEEE Transactions on Knowledge and Data Engineering": {
         "scope_text": "knowledge and data engineering, data mining, machine learning for data mining, big data analytics, data streams, graph data mining, text mining, time series analysis, data warehousing, data quality, data integration, knowledge graphs, data privacy, recommend systems, deep learning for structured data",
         "subject_tags": ["数据库/数据挖掘/内容检索", "data mining", "knowledge engineering", "big data", "machine learning"],
-        "submission_url": "https://pub敛ieee.org/xplore/html/tkde/",
+        "submission_url": "https://ieeexplore.ieee.org/xplore/about.jsp",
         "keywords": ["data mining", "big data", "knowledge graphs", "machine learning", "data analytics"],
     },
     "The VLDB Journal": {
@@ -342,14 +342,11 @@ def find_best_match(journal_name: str) -> Optional[tuple]:
         "www": "World Wide Web",
         "dmkd": "Data Mining and Knowledge Discovery",
         "spe": "Software: Practice and Experience",
-        "tifs": "IEEE Transactions on Information Forensics and Security",
-        "cn": "Computer Networks",
         "compsec": "Computers & Security",
         "kbs": "Knowledge-Based Systems",
         "eswa": "Expert Systems with Applications",
         "isci": "Information Sciences",
         "algo": "Algorithmica",
-        "tosca": "IEEE Transactions on Services Computing",
         "tcc": "IEEE Transactions on Cloud Computing",
         "tocs": "ACM Transactions on Computer Systems",
     }

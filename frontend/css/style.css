@@ -445,6 +445,40 @@ textarea {
 .rank-llm { background: #dbeafe; color: #1e40af; }
 .rank-rule { background: #f3f4f6; color: #6b7280; }
 
+.quality-badge-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.quality-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.quality-q1 { background: linear-gradient(135deg, #065f46, #059669); color: #fff; }
+.quality-q2 { background: linear-gradient(135deg, #1e40af, #3b82f6); color: #fff; }
+.quality-q3 { background: linear-gradient(135deg, #92400e, #d97706); color: #fff; }
+.quality-q4 { background: linear-gradient(135deg, #6b7280, #9ca3af); color: #fff; }
+
+.quality-label {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.quality-confidence {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-left: auto;
+}
+
 .card-actions {
     display: flex;
     align-items: center;
