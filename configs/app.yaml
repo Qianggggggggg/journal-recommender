@@ -1,0 +1,50 @@
+app:
+  host: "0.0.0.0"
+  port: 8000
+  log_level: "INFO"
+
+minimax:
+  api_key: "${MINIMAX_API_KEY}"
+  base_url: "https://api.minimax.chat"
+  model: "MiniMax-M2.7"
+  temperature: 0.7
+
+ollama:
+  base_url: "http://localhost:11434"
+  embedding_model: "qwen3-embedding:4b"
+
+retrieval:
+  title_mode:
+    bm25_top_k: 18
+    vector_top_k: 18
+    tag_top_k: 15
+    text_top_k: 10
+    final_candidates: 30
+  abstract_mode:
+    bm25_top_k: 22
+    vector_top_k: 22
+    tag_top_k: 18
+    text_top_k: 12
+    final_candidates: 40
+  full_mode:
+    bm25_top_k: 25
+    vector_top_k: 25
+    tag_top_k: 20
+    text_top_k: 15
+    final_candidates: 50
+  merge_weights:
+    bm25: 0.35
+    vector: 0.35
+    tag: 0.2
+    text: 0.1
+
+ranking:
+  rule_stage:
+    top_k: 10
+  llm_stage:
+    top_k: 5
+
+data:
+  journal_store_path: "data/processed/journals.jsonl"
+  faiss_index_path: "data/processed/journals_index.faiss"
+  metadata_path: "data/processed/journals_metadata.parquet"

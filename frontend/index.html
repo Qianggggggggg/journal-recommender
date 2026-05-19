@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文投稿期刊推荐系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>论文投稿期刊推荐系统</h1>
+            <div class="mode-switch">
+                <button class="mode-btn active" data-mode="title">标题模式</button>
+                <button class="mode-btn" data-mode="abstract">摘要模式</button>
+                <button class="mode-btn" data-mode="full">全文模式</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="form-group">
+                    <label for="title">论文标题 *</label>
+                    <input type="text" id="title" placeholder="请输入论文标题" required>
+                </div>
+
+                <div class="form-group" id="abstract-group">
+                    <label for="abstract">摘要</label>
+                    <textarea id="abstract" rows="4" placeholder="请输入论文摘要（可选）"></textarea>
+                </div>
+
+                <div class="form-group hidden" id="fulltext-group">
+                    <label for="full_text">全文（支持 PDF、TXT、MD 格式）</label>
+                    <input type="file" id="full_text" accept=".pdf,.txt,.md" placeholder="上传全文文件">
+                    <p class="file-hint">支持 PDF、TXT、MD 格式</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="top_k">推荐数量</label>
+                    <select id="top_k">
+                        <option value="3">3</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="oa_preference">OA 偏好</label>
+                    <select id="oa_preference">
+                        <option value="any">不限制</option>
+                        <option value="full_oa">完全 OA</option>
+                        <option value="hybrid">混合 OA</option>
+                    </select>
+                </div>
+
+                <button id="recommend-btn" class="btn-primary">推荐</button>
+            </section>
+
+            <section class="result-section">
+                <h2>推荐结果</h2>
+                <div id="loading" class="hidden">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <div class="progress-info">
+                            <div class="spinner"></div>
+                            <div id="progress-text" class="progress-text">准备中...</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="results"></div>
+                <div id="warning" class="warning hidden"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>支持三种输入模式：标题模式（快速粗筛）、摘要模式（主力推荐）、全文模式（高精度）</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

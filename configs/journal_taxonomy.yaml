@@ -1,0 +1,58 @@
+subject_tags:
+  - id: "ai"
+    label: "人工智能"
+    keywords: ["AI", "人工智能", "机器学习", "深度学习"]
+  - id: "cv"
+    label: "计算机视觉"
+    keywords: ["CV", "Computer Vision", "图像", "视频"]
+  - id: "nlp"
+    label: "自然语言处理"
+    keywords: ["NLP", "Natural Language Processing", "文本", "语言"]
+  - id: "se"
+    label: "软件工程"
+    keywords: ["SE", "Software Engineering", "软件", "系统"]
+  - id: "network"
+    label: "网络与通信"
+    keywords: ["Network", "通信", "分布式", "云计算"]
+  - id: "security"
+    label: "信息安全"
+    keywords: ["Security", "安全", "加密", "隐私"]
+  - id: "db"
+    label: "数据库"
+    keywords: ["DB", "Database", "数据", "存储"]
+  - id: "theory"
+    label: "理论计算"
+    keywords: ["Theory", "算法", "计算", "形式化"]
+
+method_types:
+  - id: "method"
+    label: "方法论"
+    description: "提出新方法、算法、模型"
+  - id: "system"
+    label: "系统"
+    description: "系统设计、实现、评估"
+  - id: "experiment"
+    label: "实验"
+    description: "实验验证、方法对比"
+  - id: "survey"
+    label: "综述"
+    description: "文献综述、调研"
+
+paper_types:
+  - id: "theory"
+    label: "理论"
+    description: "理论分析、证明"
+  - id: "application"
+    label: "应用"
+    description: "应用研究、实践"
+  - id: "engineering"
+    label: "工程"
+    description: "系统工程、实现"
+
+oa_types:
+  - id: "full_oa"
+    label: "完全开放获取"
+  - id: "hybrid"
+    label: "混合OA"
+  - id: "subscription"
+    label: "订阅制"

@@ -1,0 +1,110 @@
+paper_profile_system: |
+  你是一个专业的学术论文分析助手。请根据论文信息提取以下结构化特征：
+  - research_area: 研究领域（如 AI、CV、NLP、SE、Security、DB、Network 等）
+  - method_type: 方法类型（method/system/experiment/survey）
+  - paper_type: 论文类型（theory/application/engineering）
+  - keywords: 关键词（5-8个）
+  - novelty: 创新点简述
+  - application_domain: 应用领域
+  - techniques: 具体技术（transformer、GNN、强化学习、联邦学习、元学习、大语言模型等）
+  - datasets: 使用的数据集（ImageNet、COCO、SQuAD、WikiSQL 等）
+  - evaluation_metrics: 评估指标（mAP、F1、BLEU、Accuracy、AUC、Latency 等）
+  - novelty_type: 创新类型（新方法/新应用/新基准/性能提升/效率优化）
+
+paper_profile_user: |
+  论文标题：{title}
+  摘要：{abstract}
+  全文摘要：{full_text_summary}
+
+  请提取上述结构化特征，以 JSON 格式输出。
+
+llm_ranker_system: |
+  你是一个专业的学术期刊匹配顾问。请根据论文信息为候选期刊打分排序。
+
+  评分标准：
+  - 0.9-1.0: 高度匹配，scope 完全覆盖论文主题
+  - 0.7-0.9: 较好匹配，scope 覆盖主要方向
+  - 0.5-0.7: 中等匹配，部分领域重叠
+  - 0.3-0.5: 较弱匹配，仅表面相关
+  - 0.0-0.3: 不匹配
+
+llm_ranker_user: |
+  论文信息：
+  - 标题：{title}
+  - 研究领域：{research_area}
+  - 方法类型：{method_type}
+  - 论文类型：{paper_type}
+  - 关键词：{keywords}
+  - 创新点：{novelty}
+  - 应用领域：{application_domain}
+  - 具体技术：{techniques}
+  - 数据集：{datasets}
+  - 评估指标：{evaluation_metrics}
+  - 创新类型：{novelty_type}
+
+  候选期刊：
+  {journals_info}
+
+  请为每个期刊给出：
+  1. 匹配度分数（0-1，精确到小数点后两位）
+  2. 推荐理由（3-5条，每条要具体说明匹配点）
+  3. 置信度（0-1）
+
+  推荐理由应包括：
+  - 期刊 scope 与论文主题的具体关联
+  - 研究领域的匹配程度
+  - 方法/技术的契合度
+  - 期刊定位（理论/应用/工程）与论文类型的匹配
+  - 过往发表类似论文的情况（如有）
+
+  输出格式：
+  {{
+    "rankings": [
+      {{"journal_id": "...", "score": 0.92, "reasons": ["理由1", "理由2", "理由3"], "confidence": 0.88}},
+      ...
+    ]
+  }}
+
+explainer_system: |
+  你是一个专业的学术期刊推荐解释助手。请为每条推荐生成详细、具体、有说服力的匹配理由。
+
+explainer_user: |
+  论文特征：
+  - 标题：{title}
+  - 研究领域：{research_area}
+  - 方法类型：{method_type}
+  - 论文类型：{paper_type}
+  - 关键词：{keywords}
+  - 创新点：{novelty}
+  - 应用领域：{application_domain}
+  - 具体技术：{techniques}
+  - 数据集：{datasets}
+  - 评估指标：{evaluation_metrics}
+  - 创新类型：{novelty_type}
+
+  期刊信息：
+  - 名称：{journal_name}
+  - Scope：{scope_text}
+  - 分区：{quartile}
+  - OA类型：{oa_type}
+  - 审稿周期：{review_time}
+  - 关键词：{journal_keywords}
+
+  请生成 2-3 条简洁推荐理由，每条理由包含具体匹配点和简短说明
+
+  推荐理由类型：
+  - Scope对齐：期刊 scope 中明确提及的与论文主题相关的内容
+  - 研究领域覆盖：论文的研究领域在期刊主题范围内的程度
+  - 技术方法契合：论文使用的具体技术与期刊发表范围的匹配
+  - 期刊定位匹配：期刊侧重理论/应用/工程与论文类型的匹配
+  - 质量信号：期刊分区、审稿周期等客观指标
+
+  输出格式：
+  {{
+    "reasons": [
+      "Scope对齐：期刊scope明确提及'{techniques}在{application_domain}的应用'，与本论文的{title}高度相关",
+      "研究领域覆盖：论文的{research_area}在期刊的征稿范围内，覆盖度较高",
+      "技术契合：本论文使用的{techniques}方法正是期刊关注的技术方向",
+      ...
+    ]
+  }}
