@@ -4,6 +4,7 @@ from typing import List, Optional, Dict, Any
 
 from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
+from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker
@@ -19,11 +20,13 @@ class RecommenderPipeline:
         rule_scorer: RuleScorer,
         llm_ranker: Optional[LLMRanker] = None,
         explainer: Optional[Explainer] = None,
+        quality_assessor: Optional[PaperQualityAssessor] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
         self.llm_ranker = llm_ranker
         self.explainer = explainer
+        self.quality_assessor = quality_assessor
 
     def recommend(
         self,
@@ -32,8 +35,21 @@ class RecommenderPipeline:
         top_k: int = 5,
         mode: str = "abstract",
         oa_preference: str = "any",
+        quality_prompts: Optional[Dict[str, str]] = None,
     ) -> Dict[str, Any]:
         """执行推荐流程"""
+        # 0. 评估论文质量
+        if self.quality_assessor and quality_prompts:
+            quality = self.quality_assessor.assess(
+                paper_input,
+                paper_profile,
+                quality_prompts.get("system", ""),
+                quality_prompts.get("user", ""),
+            )
+            paper_profile.quality_level = quality.level
+            paper_profile.quality_confidence = quality.confidence
+            paper_profile.quality_reasons = quality.reasons
+
         # 1. 候选召回
         query_text = paper_input.title
         if paper_input.abstract:

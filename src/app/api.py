@@ -25,6 +25,7 @@ from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker
 from ..recommender.explainer import Explainer
+from ..papers.quality_assessor import PaperQualityAssessor
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
 from ..utils.file_parser import extract_text_from_file
@@ -123,11 +124,16 @@ def get_pipeline() -> RecommenderPipeline:
 
         explainer = Explainer(llm, prompts["explainer_system"], prompts["explainer_user"])
 
+        quality_assessor = None
+        if llm:
+            quality_assessor = PaperQualityAssessor(llm)
+
         _pipeline = RecommenderPipeline(
             candidate_generator=generator,
             rule_scorer=scorer,
             llm_ranker=llm_ranker,
             explainer=explainer,
+            quality_assessor=quality_assessor,
         )
 
     return _pipeline
@@ -185,12 +191,17 @@ async def recommend(request: Request):
     profile = parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
 
     # 执行推荐
+    quality_prompts = {
+        "system": prompts.get("paper_quality_assessor_system", ""),
+        "user": prompts.get("paper_quality_assessor_user", ""),
+    }
     result = pipeline.recommend(
         paper_input,
         profile,
         top_k=top_k,
         mode=mode,
         oa_preference=oa_preference,
+        quality_prompts=quality_prompts,
     )
 
     # 获取排序方法
@@ -278,7 +289,36 @@ async def recommend_stream(
             })
             await asyncio.sleep(0)
 
-            # 阶段 2: 候选召回 (20-50%)
+            # 阶段 1.5: 评估论文质量 (20-25%)
+            yield sse_event("progress", {
+                "stage": "quality",
+                "percent": 22,
+                "message": "正在评估论文质量..."
+            })
+            await asyncio.sleep(0)
+
+            quality_prompts = {
+                "system": prompts.get("paper_quality_assessor_system", ""),
+                "user": prompts.get("paper_quality_assessor_user", ""),
+            }
+            quality = pipeline.quality_assessor.assess(
+                paper_input, profile,
+                quality_prompts.get("system", ""),
+                quality_prompts.get("user", ""),
+            ) if pipeline.quality_assessor else None
+
+            if quality:
+                profile.quality_level = quality.level
+                profile.quality_confidence = quality.confidence
+                profile.quality_reasons = quality.reasons
+                yield sse_event("progress", {
+                    "stage": "quality",
+                    "percent": 25,
+                    "message": f"论文质量评估完成: {quality.level}"
+                })
+                await asyncio.sleep(0)
+
+            # 阶段 2: 候选召回 (25-50%)
             yield sse_event("progress", {
                 "stage": "retrieval",
                 "percent": 25,

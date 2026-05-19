@@ -49,6 +49,16 @@ class RuleScorer:
         ])
         return self._compute_keyword_overlap(paper_text, journal_text)
 
+    def _get_quartile_weight(self, quartile: str) -> int:
+        """获取分区权重（1-4）"""
+        weights = {"Q1": 4, "Q2": 3, "Q3": 2, "Q4": 1}
+        return weights.get(quartile or "", 2)  # 默认 Q3
+
+    def _get_quality_level_weight(self, quality_level: str) -> int:
+        """获取论文质量等级权重（1-4）"""
+        weights = {"Q1": 4, "Q2": 3, "Q3": 2, "Q4": 1}
+        return weights.get(quality_level or "", 2)
+
     def score(
         self, journal: Journal, paper_profile: PaperProfile, oa_preference: str = "any"
     ) -> Tuple[float, List[str]]:
@@ -229,6 +239,19 @@ class RuleScorer:
                (oa_preference == "hybrid" and journal.oa_type in ["full_oa", "hybrid"]):
                 score += self.weights["oa_preference_match"]
                 reasons.append(f"OA类型匹配: {journal.oa_type}")
+
+        # 论文质量与期刊分区匹配约束
+        if paper_profile.quality_level:
+            qlevel = self._get_quartile_weight(journal.quartile)
+            plevel = self._get_quality_level_weight(paper_profile.quality_level)
+            gap = qlevel - plevel
+            if gap > 1:
+                # 期刊分区高于论文质量太多，大幅降权
+                score *= 0.5
+                reasons.append(f"质量匹配: 期刊分区({journal.quartile})高于论文质量({paper_profile.quality_level})，匹配度下调")
+            elif gap == 1:
+                score *= 0.8
+                reasons.append(f"质量匹配: 期刊分区({journal.quartile})略高于论文质量({paper_profile.quality_level})")
 
         return score, reasons
 

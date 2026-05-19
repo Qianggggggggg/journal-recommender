@@ -3,80 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>论文投稿期刊推荐系统</title>
+    <title>论文投稿期刊推荐</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>论文投稿期刊推荐系统</h1>
-            <div class="mode-switch">
-                <button class="mode-btn active" data-mode="title">标题模式</button>
-                <button class="mode-btn" data-mode="abstract">摘要模式</button>
-                <button class="mode-btn" data-mode="full">全文模式</button>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>期刊推荐</span>
             </div>
-        </header>
+            <nav class="nav-items">
+                <a href="#" class="nav-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>推荐</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="mode-indicator" id="mode-indicator">摘要模式</div>
+            </div>
+        </aside>
 
-        <main>
-            <section class="input-section">
-                <div class="form-group">
-                    <label for="title">论文标题 *</label>
-                    <input type="text" id="title" placeholder="请输入论文标题" required>
+        <div class="main">
+            <header class="topbar">
+                <div class="mode-switch">
+                    <button class="mode-btn active" data-mode="title">标题</button>
+                    <button class="mode-btn" data-mode="abstract">摘要</button>
+                    <button class="mode-btn" data-mode="full">全文</button>
                 </div>
+            </header>
 
-                <div class="form-group" id="abstract-group">
-                    <label for="abstract">摘要</label>
-                    <textarea id="abstract" rows="4" placeholder="请输入论文摘要（可选）"></textarea>
-                </div>
-
-                <div class="form-group hidden" id="fulltext-group">
-                    <label for="full_text">全文（支持 PDF、TXT、MD 格式）</label>
-                    <input type="file" id="full_text" accept=".pdf,.txt,.md" placeholder="上传全文文件">
-                    <p class="file-hint">支持 PDF、TXT、MD 格式</p>
-                </div>
-
-                <div class="form-group">
-                    <label for="top_k">推荐数量</label>
-                    <select id="top_k">
-                        <option value="3">3</option>
-                        <option value="5" selected>5</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="oa_preference">OA 偏好</label>
-                    <select id="oa_preference">
-                        <option value="any">不限制</option>
-                        <option value="full_oa">完全 OA</option>
-                        <option value="hybrid">混合 OA</option>
-                    </select>
-                </div>
-
-                <button id="recommend-btn" class="btn-primary">推荐</button>
-            </section>
-
-            <section class="result-section">
-                <h2>推荐结果</h2>
-                <div id="loading" class="hidden">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div id="progress-fill" class="progress-fill"></div>
+            <main class="content">
+                <div class="input-panel">
+                    <div class="input-wrapper">
+                        <div class="form-group">
+                            <label for="title">论文标题</label>
+                            <input type="text" id="title" placeholder="输入论文标题...">
                         </div>
-                        <div class="progress-info">
-                            <div class="spinner"></div>
-                            <div id="progress-text" class="progress-text">准备中...</div>
+
+                        <div class="form-group" id="abstract-group">
+                            <label for="abstract">摘要</label>
+                            <textarea id="abstract" placeholder="输入论文摘要..."></textarea>
                         </div>
+
+                        <div class="form-group hidden" id="fulltext-group">
+                            <label for="full_text">全文文件</label>
+                            <div class="file-upload">
+                                <input type="file" id="full_text" accept=".pdf,.txt,.md">
+                                <div class="file-upload-content">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                    </svg>
+                                    <span id="file-name">上传 PDF、TXT 或 MD 文件</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="options-row">
+                            <div class="form-group">
+                                <label for="top_k">推荐数量</label>
+                                <select id="top_k">
+                                    <option value="3">3</option>
+                                    <option value="5" selected>5</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="oa_preference">OA 偏好</label>
+                                <select id="oa_preference">
+                                    <option value="any">不限制</option>
+                                    <option value="full_oa">完全 OA</option>
+                                    <option value="hybrid">混合 OA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="recommend-btn" class="btn-primary">
+                            <span>开始推荐</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-                <div id="results"></div>
-                <div id="warning" class="warning hidden"></div>
-            </section>
-        </main>
 
-        <footer>
-            <p>支持三种输入模式：标题模式（快速粗筛）、摘要模式（主力推荐）、全文模式（高精度）</p>
-        </footer>
+                <div class="result-panel">
+                    <div class="panel-header">
+                        <h2>推荐结果</h2>
+                        <span class="result-count" id="result-count"></span>
+                    </div>
+
+                    <div id="loading" class="loading-state hidden">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <div class="progress-info">
+                                <div class="spinner"></div>
+                                <span id="progress-text" class="progress-text">准备中...</span>
+                            </div>
+                        </div>
+                        <div class="skeleton-list">
+                            <div class="skeleton-card"></div>
+                            <div class="skeleton-card"></div>
+                            <div class="skeleton-card"></div>
+                        </div>
+                    </div>
+
+                    <div id="empty-state" class="empty-state">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        <p>输入论文信息，获取期刊推荐</p>
+                    </div>
+
+                    <div id="error-state" class="error-state hidden">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>
+                        </svg>
+                        <span id="error-message">发生错误</span>
+                    </div>
+
+                    <div id="results" class="results-list"></div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <script src="/static/js/app.js"></script>

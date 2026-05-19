@@ -22,6 +22,10 @@ class PaperProfile(BaseModel):
     datasets: List[str] = Field(default_factory=list, description="数据集")
     evaluation_metrics: List[str] = Field(default_factory=list, description="评估指标")
     novelty_type: str = Field(default="method", description="创新类型: new_method/new_application/benchmark/performance/efficiency")
+    # 论文质量评估
+    quality_level: Optional[str] = Field(default=None, description="论文质量等级: Q1/Q2/Q3/Q4")
+    quality_confidence: float = Field(default=0.0)
+    quality_reasons: List[str] = Field(default_factory=list)
 
 
 class PaperInput(BaseModel):

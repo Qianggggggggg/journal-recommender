@@ -11,6 +11,10 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
         const mode = btn.dataset.mode;
         const abstractGroup = document.getElementById('abstract-group');
         const fulltextGroup = document.getElementById('fulltext-group');
+        const modeIndicator = document.getElementById('mode-indicator');
+
+        const modeLabels = { title: '标题模式', abstract: '摘要模式', full: '全文模式' };
+        modeIndicator.textContent = modeLabels[mode];
 
         if (mode === 'title') {
             abstractGroup.classList.add('hidden');
@@ -25,18 +29,63 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
     });
 });
 
+// 文件上传显示文件名
+document.getElementById('full_text').addEventListener('change', (e) => {
+    const fileName = document.getElementById('file-name');
+    const file = e.target.files[0];
+    fileName.textContent = file ? file.name : '上传 PDF、TXT 或 MD 文件';
+});
+
+// 重置各状态
+function resetStates() {
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('error-state').classList.add('hidden');
+    document.getElementById('results').innerHTML = '';
+    document.getElementById('result-count').textContent = '';
+}
+
+// 显示空状态
+function showEmptyState() {
+    resetStates();
+    document.getElementById('empty-state').classList.remove('hidden');
+}
+
+function updateProgress(data) {
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    if (progressFill) progressFill.style.width = `${data.percent}%`;
+    if (progressText) progressText.textContent = data.message || `处理中 ${data.percent}%`;
+}
+
+// 显示错误
+function showError(message) {
+    resetStates();
+    document.getElementById('error-message').textContent = message;
+    document.getElementById('error-state').classList.remove('hidden');
+}
+
+// 显示 loading
+function showLoading() {
+    resetStates();
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    if (progressFill) progressFill.style.width = '0%';
+    if (progressText) progressText.textContent = '准备中...';
+    document.getElementById('loading').classList.remove('hidden');
+}
+
 // 推荐按钮
 document.getElementById('recommend-btn').addEventListener('click', async () => {
     const title = document.getElementById('title').value.trim();
     if (!title) {
-        alert('请输入论文标题');
+        showError('请输入论文标题');
         return;
     }
 
     const mode = document.querySelector('.mode-btn.active').dataset.mode;
     const abstract = document.getElementById('abstract').value.trim();
 
-    // 处理全文文件上传
     let fullText = '';
     if (mode === 'full') {
         const fileInput = document.getElementById('full_text');
@@ -51,17 +100,11 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
 
     const btn = document.getElementById('recommend-btn');
     btn.disabled = true;
-    document.getElementById('loading').classList.remove('hidden');
-    document.getElementById('progress-fill').style.width = '0%';
-    document.getElementById('progress-text').textContent = '准备中...';
-    document.getElementById('results').innerHTML = '';
-    document.getElementById('warning').classList.add('hidden');
+    showLoading();
 
-    // 收集推荐结果
     const recommendations = [];
 
     try {
-        // 构建 SSE URL
         const params = new URLSearchParams({
             title: title,
             abstract: abstract,
@@ -72,13 +115,11 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
 
         const response = await fetch(`${API_BASE}/recommend/stream?${params}`, {
             method: 'GET',
-            headers: {
-                'Accept': 'text/event-stream',
-            },
+            headers: { 'Accept': 'text/event-stream' },
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`请求失败 (${response.status})`);
         }
 
         const reader = response.body.getReader();
@@ -91,7 +132,6 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
 
             buffer += decoder.decode(value, { stream: true });
 
-            // 处理 SSE 事件 (event: type\ndata: {...}\n\n)
             while (buffer.includes('\n\n')) {
                 const eventEnd = buffer.indexOf('\n\n');
                 const eventBlock = buffer.slice(0, eventEnd);
@@ -110,10 +150,9 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
                             break;
                         case 'recommendation':
                             recommendations.push(eventData);
-                            renderRecommendation(eventData);
                             break;
                         case 'done':
-                            document.getElementById('loading').classList.add('hidden');
+                            renderResults(recommendations);
                             break;
                         case 'error':
                             throw new Error(eventData.message || 'Unknown error');
@@ -122,58 +161,121 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
             }
         }
 
-        // 显示警告
-        if (recommendations.length === 0) {
-            document.getElementById('results').innerHTML = '<p>未找到合适的推荐期刊</p>';
+        if (recommendations.length === 0 && !buffer.includes('event: done')) {
+            showEmptyState();
         }
 
     } catch (error) {
-        document.getElementById('results').innerHTML = `
-            <div class="warning">请求失败: ${error.message}</div>
-        `;
+        showError(error.message);
     } finally {
         btn.disabled = false;
-        document.getElementById('loading').classList.add('hidden');
     }
 });
 
-function updateProgress(data) {
-    const progressFill = document.getElementById('progress-fill');
-    const progressText = document.getElementById('progress-text');
-
-    progressFill.style.width = `${data.percent}%`;
-    progressText.textContent = data.message || `进度 ${data.percent}%`;
-}
-
-function renderRecommendation(rec) {
+function renderResults(recommendations) {
     const resultsEl = document.getElementById('results');
+    const countEl = document.getElementById('result-count');
 
-    const rankMethodText = rec.rank_method === 'llm' ? 'AI智能排序' : '规则排序';
-    const rankMethodClass = rec.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
-    const methodBadge = `<span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>`;
+    resetStates();
 
-    const card = document.createElement('div');
-    card.className = 'journal-card';
-    card.innerHTML = `
-        <div class="journal-header">
-            <span class="journal-name">${rec.journal_name}</span>
-            ${rec.quartile ? `<span class="journal-quartile quartile-${rec.quartile.toLowerCase()}">${rec.quartile}</span>` : ''}
-            ${methodBadge}
+    if (!recommendations || recommendations.length === 0) {
+        showEmptyState();
+        return;
+    }
+
+    countEl.textContent = `${recommendations.length} 个结果`;
+
+    resultsEl.innerHTML = recommendations.map((rec, idx) => {
+        const rankMethodText = rec.rank_method === 'llm' ? 'AI智能' : '规则';
+        const rankMethodClass = rec.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
+        const quartileClass = rec.quartile ? `quartile-${rec.quartile.toLowerCase()}` : '';
+        const quartileHtml = rec.quartile ? `<span class="journal-quartile ${quartileClass}">${rec.quartile}</span>` : '';
+
+        const oaLabel = rec.oa_type === 'full_oa' ? '完全OA' : rec.oa_type === 'hybrid' ? '混合OA' : '订阅';
+
+        return `
+        <div class="journal-card" data-index="${idx}">
+            <div class="card-header">
+                <div class="card-title-row">
+                    <span class="journal-name">${rec.journal_name}</span>
+                    ${quartileHtml}
+                    <span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>
+                </div>
+                <div class="card-actions">
+                    <button class="expand-btn" onclick="toggleCard(${idx})" aria-label="展开详情">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-tags">
+                    ${rec.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    <span class="tag">${oaLabel}</span>
+                </div>
+                <ul class="card-reasons">
+                    ${rec.match_reasons.map(r => `<li>${r}</li>`).join('')}
+                </ul>
+                <div class="confidence-row">
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${Math.round(rec.confidence * 100)}%"></div>
+                    </div>
+                    <span class="confidence-text">${Math.round(rec.confidence * 100)}%</span>
+                </div>
+            </div>
+            <div class="card-details">
+                <div class="details-grid">
+                    ${rec.submission_url ? `
+                    <div class="detail-item">
+                        <label>投稿链接</label>
+                        <a href="${rec.submission_url}" target="_blank">打开链接</a>
+                    </div>
+                    ` : ''}
+                    ${rec.homepage_url ? `
+                    <div class="detail-item">
+                        <label>期刊主页</label>
+                        <a href="${rec.homepage_url}" target="_blank">打开链接</a>
+                    </div>
+                    ` : ''}
+                    ${rec.publisher ? `
+                    <div class="detail-item">
+                        <label>出版社</label>
+                        <span>${rec.publisher}</span>
+                    </div>
+                    ` : ''}
+                    ${rec.impact_like_score ? `
+                    <div class="detail-item">
+                        <label>影响因子</label>
+                        <span>${rec.impact_like_score}</span>
+                    </div>
+                    ` : ''}
+                    ${rec.review_time ? `
+                    <div class="detail-item">
+                        <label>审稿周期</label>
+                        <span>${rec.review_time}</span>
+                    </div>
+                    ` : ''}
+                    ${rec.apc ? `
+                    <div class="detail-item">
+                        <label>版面费</label>
+                        <span>${rec.apc}</span>
+                    </div>
+                    ` : ''}
+                </div>
+            </div>
         </div>
-        <div class="journal-tags">
-            ${rec.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-            <span class="tag">${rec.oa_type === 'full_oa' ? '完全OA' : rec.oa_type === 'hybrid' ? '混合OA' : '订阅'}</span>
-        </div>
-        <ul class="journal-reasons">
-            ${rec.match_reasons.map(r => `<li>${r}</li>`).join('')}
-        </ul>
-        <div class="confidence-bar">
-            <div class="confidence-fill" style="width: ${rec.confidence * 100}%"></div>
-        </div>
-        ${rec.submission_url ? `<a href="${rec.submission_url}" target="_blank">投稿链接</a>` : ''}
-    `;
-    resultsEl.appendChild(card);
+        `;
+    }).join('');
 }
+
+// 展开/收起卡片
+window.toggleCard = function(index) {
+    const card = document.querySelector(`.journal-card[data-index="${index}"]`);
+    if (card) {
+        card.classList.toggle('expanded');
+    }
+};
 
 // 读取文件内容
 async function readFileContent(file) {
@@ -183,39 +285,4 @@ async function readFileContent(file) {
         reader.onerror = (e) => reject(e);
         reader.readAsText(file);
     });
-}
-
-function renderResults(data) {
-    const resultsEl = document.getElementById('results');
-
-    if (!data.recommendations || data.recommendations.length === 0) {
-        resultsEl.innerHTML = '<p>未找到合适的推荐期刊</p>';
-        return;
-    }
-
-    // 显示排序方法
-    const rankMethodText = data.rank_method === 'llm' ? 'AI智能排序' : '规则排序';
-    const rankMethodClass = data.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
-    const methodBadge = `<span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>`;
-
-    resultsEl.innerHTML = data.recommendations.map(rec => `
-        <div class="journal-card">
-            <div class="journal-header">
-                <span class="journal-name">${rec.journal_name}</span>
-                ${rec.quartile ? `<span class="journal-quartile quartile-${rec.quartile.toLowerCase()}">${rec.quartile}</span>` : ''}
-                ${methodBadge}
-            </div>
-            <div class="journal-tags">
-                ${rec.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                <span class="tag">${rec.oa_type === 'full_oa' ? '完全OA' : rec.oa_type === 'hybrid' ? '混合OA' : '订阅'}</span>
-            </div>
-            <ul class="journal-reasons">
-                ${rec.match_reasons.map(r => `<li>${r}</li>`).join('')}
-            </ul>
-            <div class="confidence-bar">
-                <div class="confidence-fill" style="width: ${rec.confidence * 100}%"></div>
-            </div>
-            ${rec.submission_url ? `<a href="${rec.submission_url}" target="_blank">投稿链接</a>` : ''}
-        </div>
-    `).join('');
 }
