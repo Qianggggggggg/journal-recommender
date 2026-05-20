@@ -43,6 +43,7 @@ function resetStates() {
     document.getElementById('error-state').classList.add('hidden');
     document.getElementById('results').innerHTML = '';
     document.getElementById('result-count').textContent = '';
+    document.getElementById('download-pdf-btn').classList.add('hidden');
 }
 
 // 显示空状态
@@ -105,15 +106,18 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
     const recommendations = [];
 
     try {
-        const params = new URLSearchParams({
-            title: title,
-            abstract: abstract,
-            mode: mode,
-            top_k: topK,
-            oa_preference: oaPreference,
-        });
+        const params = {
+        title: title,
+        abstract: abstract,
+        mode: mode,
+        top_k: topK,
+        oa_preference: oaPreference,
+    };
+    latestParams = params;
 
-        const response = await fetch(`${API_BASE}/recommend/stream?${params}`, {
+    const urlParams = new URLSearchParams(params);
+
+        const response = await fetch(`${API_BASE}/recommend/stream?${urlParams}`, {
             method: 'GET',
             headers: { 'Accept': 'text/event-stream' },
         });
@@ -174,6 +178,44 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
 });
 
 let latestDoneData = null;
+let latestParams = null;
+
+// 下载 PDF 按钮
+document.getElementById('download-pdf-btn').addEventListener('click', async () => {
+    if (!latestParams) return;
+
+    const btn = document.getElementById('download-pdf-btn');
+    btn.disabled = true;
+    btn.innerHTML = `<svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"/></svg> 生成中...`;
+
+    try {
+        const response = await fetch(`${API_BASE}/recommend/pdf`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(latestParams),
+        });
+
+        if (!response.ok) {
+            throw new Error(`下载失败 (${response.status})`);
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `期刊推荐报告_${latestParams.title.substring(0, 20)}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+        showError(error.message);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> 下载 PDF`;
+    }
+});
 
 function renderResults(recommendations, doneData = null) {
     const resultsEl = document.getElementById('results');
@@ -187,6 +229,7 @@ function renderResults(recommendations, doneData = null) {
     }
 
     countEl.textContent = `${recommendations.length} 个结果`;
+    document.getElementById('download-pdf-btn').classList.remove('hidden');
 
     // 构建质量信息 HTML
     let qualityHtml = '';

@@ -297,6 +297,27 @@ textarea {
     border-radius: 12px;
 }
 
+.btn-download {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-download:hover { background: var(--accent-hover); }
+.btn-download:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-download svg { flex-shrink: 0; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { animation: spin 1s linear infinite; }
+
 /* Empty State */
 .empty-state {
     display: flex;
