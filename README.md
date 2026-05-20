@@ -70,12 +70,77 @@ python scripts/rebuild_index.py
 
 ## 启动项目
 
+### 方式一：直接运行
+
 ```bash
+# 激活虚拟环境
 source paper/bin/activate
+
+# 启动服务
+python -m src.app.main
+```
+
+### 方式二：使用 uvicorn
+
+```bash
+# 激活虚拟环境
+source paper/bin/activate
+
+# 启动服务（支持热重载）
 uvicorn src.app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+### 访问
+
 启动后访问：http://localhost:8000
+
+## 重启项目
+
+### 正常重启
+
+```bash
+# 1. 停止当前服务（Ctrl+C）
+
+# 2. 重新激活虚拟环境
+source paper/bin/activate
+
+# 3. 重新启动
+python -m src.app.main
+```
+
+### 代码修改后重启
+
+如果使用 `uvicorn --reload`，代码修改后会自动重载。
+
+手动重启：
+
+```bash
+# 1. 停止当前服务
+# 在运行 uvicorn 的终端按 Ctrl+C
+
+# 2. 重新启动
+uvicorn src.app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 清理后重启
+
+如果需要重新构建数据：
+
+```bash
+# 1. 停止当前服务
+
+# 2. 删除旧数据（可选）
+rm -rf data/processed/journals.jsonl
+rm -rf data/processed/journals_index.faiss
+rm -rf data/processed/journals_metadata.parquet
+
+# 3. 重新采集数据
+python scripts/create_sample_journals.py
+python scripts/rebuild_index.py
+
+# 4. 重启服务
+python -m src.app.main
+```
 
 ## 项目结构
 
