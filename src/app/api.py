@@ -244,6 +244,32 @@ async def recommend(request: Request):
     )
 
 
+def _apply_quality_adjustment(
+    ranked: list,
+    paper_profile,
+) -> list:
+    """应用质量软权重调整（解耦）"""
+    if paper_profile.paper_strength is None:
+        return ranked
+
+    strength = paper_profile.paper_strength
+    base_adjustment = 0.9 + 0.2 * (strength - 0.5)
+
+    adjusted = []
+    for journal, score, reasons in ranked:
+        ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
+        adjustment = max(0.8, min(1.08, base_adjustment * ccf_multiplier))
+        new_reasons = reasons.copy()
+        if strength >= 0.75:
+            new_reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
+        elif strength < 0.35:
+            new_reasons.append(f"弱论文调整({(adjustment-1)*100:.0f}%)")
+        adjusted.append((journal, score * adjustment, new_reasons))
+
+    adjusted.sort(key=lambda x: x[1], reverse=True)
+    return adjusted
+
+
 @router.get("/recommend/stream")
 async def recommend_stream(
     title: str = Query(...),
@@ -359,6 +385,9 @@ async def recommend_stream(
                 candidates, profile, oa_preference=oa_preference, top_k=10
             )
 
+            # 应用质量软权重调整（解耦）
+            rule_ranked = _apply_quality_adjustment(rule_ranked, profile)
+
             # 阶段 4: LLM 精排 (60-80%)
             rank_method = "rule"
             llm_ranked = rule_ranked
@@ -371,6 +400,9 @@ async def recommend_stream(
                 })
                 await asyncio.sleep(0)
                 llm_ranked, rank_method = pipeline.llm_ranker.rank(rule_ranked, profile, top_k=top_k)
+            else:
+                # 无 LLM ranker 时，使用规则排序结果（补充 confidence）
+                llm_ranked = [(j, s, r, 0.5) for j, s, r in rule_ranked[:top_k]]
 
             yield sse_event("progress", {
                 "stage": "ranking",

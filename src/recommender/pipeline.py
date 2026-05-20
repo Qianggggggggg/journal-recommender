@@ -1,6 +1,6 @@
 """推荐流程编排"""
 import yaml
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 
 from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
@@ -64,10 +64,13 @@ class RecommenderPipeline:
         if not candidates:
             return {"recommendations": [], "warning": "未找到合适的候选期刊"}
 
-        # 2. 阶段一：规则打分
+        # 2. 阶段一：规则打分（只做主题匹配，不含质量调整）
         rule_ranked = self.rule_scorer.rank(
             candidates, paper_profile, oa_preference=oa_preference, top_k=10
         )
+
+        # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
+        rule_ranked = self._apply_quality_adjustment(rule_ranked, paper_profile)
 
         # 3. 阶段二：LLM 精排
         rank_method = "rule"
@@ -104,6 +107,39 @@ class RecommenderPipeline:
             result["warning"] = "置信度较低，建议补充摘要以获得更精确的推荐"
 
         return result
+
+    def _apply_quality_adjustment(
+        self,
+        ranked: List[Tuple[Journal, float, List[str]]],
+        paper_profile: PaperProfile,
+    ) -> List[Tuple[Journal, float, List[str]]]:
+        """应用质量软权重调整（解耦：质量评估结果不再直接流入 RuleScorer）"""
+        if paper_profile.paper_strength is None:
+            return ranked
+
+        strength = paper_profile.paper_strength
+
+        # 软权重公式：0.9 + 0.2*(strength-0.5)
+        base_adjustment = 0.9 + 0.2 * (strength - 0.5)
+
+        adjusted = []
+        for journal, score, reasons in ranked:
+            ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
+            adjustment = base_adjustment * ccf_multiplier
+            adjustment = max(0.8, min(1.08, adjustment))
+
+            adjusted_score = score * adjustment
+            new_reasons = reasons.copy()
+            if strength >= 0.75:
+                new_reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
+            elif strength < 0.35:
+                new_reasons.append(f"弱论文调整({(adjustment-1)*100:.0f}%)")
+
+            adjusted.append((journal, adjusted_score, new_reasons))
+
+        # 重新排序
+        adjusted.sort(key=lambda x: x[1], reverse=True)
+        return adjusted
 
     @classmethod
     def from_config(cls, config_path: str = "configs/app.yaml") -> "RecommenderPipeline":
