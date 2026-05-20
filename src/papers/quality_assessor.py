@@ -116,16 +116,16 @@ class PaperQualityAssessor:
             # 提取各维度分数 (0~3)
             novelty_score = data.get("novelty_score", 2)
             rigor_score = data.get("rigor_score", 1)
-            completeness_score = data.get("completeness_score", 1)
+            reproducibility_score = data.get("reproducibility_score", 1)
             significance_score = data.get("significance_score", 1)
             clarity_score = data.get("clarity_score", 1)
 
             # 计算 paper_strength (归一化到 0~1)
-            # 各维度权重: novelty 最重要, rigor 其次
+            # 各维度权重: novelty 35%, rigor 25%, reproducibility 15%, significance 15%, clarity 10%
             raw_strength = (
                 novelty_score * 0.35 +
                 rigor_score * 0.25 +
-                completeness_score * 0.15 +
+                reproducibility_score * 0.15 +
                 significance_score * 0.15 +
                 clarity_score * 0.10
             )
@@ -135,7 +135,7 @@ class PaperQualityAssessor:
             evidence = {
                 "novelty": data.get("novelty_evidence", "未提供"),
                 "rigor": data.get("rigor_evidence", "未提供"),
-                "completeness": data.get("completeness_evidence", "未提供"),
+                "reproducibility": data.get("reproducibility_evidence", "未提供"),
                 "significance": data.get("significance_evidence", "未提供"),
                 "clarity": data.get("clarity_evidence", "未提供"),
             }
@@ -170,9 +170,9 @@ class PaperQualityAssessor:
         paper_input: PaperInput,
         paper_profile: PaperProfile,
     ) -> PaperQuality:
-        """规则降级评估（新版多维度）"""
+        """规则降级评估（新版多维度：证据驱动）"""
 
-        # === 内容信号 ===
+        # === novelty (0~3): 创新类型 + 数据集 ===
         novelty_type = getattr(paper_profile, 'novelty_type', '') or ''
         novelty_scores = {
             "new_method": 3, "benchmark": 2.5, "performance": 2,
@@ -180,49 +180,55 @@ class PaperQualityAssessor:
         }
         novelty_score = novelty_scores.get(novelty_type, 1)
 
-        # 数据集 (0~3)
         datasets = getattr(paper_profile, 'datasets', []) or []
-        if len(datasets) >= 3:
+        dataset_count = len(datasets)
+        if dataset_count >= 3:
             dataset_score = 3
-        elif len(datasets) == 2:
+        elif dataset_count == 2:
             dataset_score = 2
-        elif len(datasets) == 1:
+        elif dataset_count == 1:
             dataset_score = 1
         else:
             dataset_score = 0
 
-        # 评估指标 (0~3)
+        # novelty 维度: 创新类型为主，数据集为辅
+        novelty_dim = novelty_score * 0.6 + dataset_score * 0.4
+        novelty_evidence = f"创新类型: {novelty_type}, 数据集: {dataset_count}个"
+        if dataset_count == 0:
+            novelty_evidence += " (insufficient_evidence: 未提供数据集)"
+
+        # === rigor (0~3): 评估指标 + 技术复杂度 ===
         metrics = getattr(paper_profile, 'evaluation_metrics', []) or []
         metric_score = min(len(metrics), 3)
-
-        # 技术数量 (0~2, 辅助)
         techniques = getattr(paper_profile, 'techniques', []) or []
         tech_score = min(len(techniques) / 2, 2)
+        rigor_dim = metric_score * 0.5 + tech_score * 0.3 + min(dataset_score, 2) * 0.2
+        rigor_evidence = f"评估指标: {len(metrics)}项, 技术: {len(techniques)}个"
+        if len(metrics) == 0:
+            rigor_evidence += " (insufficient_evidence: 未提供评估指标)"
 
-        # === 写作信号（辅助，不占太大比重）===
-        abstract_len = len(paper_input.abstract) if paper_input.abstract else 0
-        writing_score = 1.0 if abstract_len > 200 else 0.5 if abstract_len > 50 else 0
+        # === reproducibility (0~3): 数据集 + 全文信息 ===
+        # 规则：数据集数量是 reproducibility 的主要信号
+        if dataset_count >= 3:
+            repro_score = 3
+        elif dataset_count == 2:
+            repro_score = 2
+        elif dataset_count == 1:
+            repro_score = 1
+        else:
+            repro_score = 0
 
         full_text_len = len(paper_input.full_text) if paper_input.full_text else 0
-        if full_text_len > 3000:
-            writing_score = min(writing_score + 0.5, 2)
+        if full_text_len > 2000:
+            repro_score = min(repro_score + 0.5, 3)
 
-        # === 计算各维度 ===
-        # novelty: 主要看创新类型 + 数据集
-        novelty_evidence = f"创新类型: {novelty_type}, 数据集: {len(datasets)}个"
-        novelty_dim = novelty_score * 0.6 + dataset_score * 0.4
+        repro_evidence = f"数据集: {dataset_count}个"
+        if full_text_len > 2000:
+            repro_evidence += ", 全文完整"
+        if dataset_count == 0 and full_text_len < 500:
+            repro_evidence += " (insufficient_evidence: 数据集和全文信息均不足)"
 
-        # rigor: 看指标数量 + 技术复杂度
-        rigor_evidence = f"评估指标: {len(metrics)}项, 技术: {len(techniques)}个"
-        rigor_dim = (metric_score * 0.5 + tech_score * 0.3 + min(dataset_score, 2) * 0.2)
-
-        # completeness: 摘要 + 全文
-        completeness_evidence = f"摘要长度: {abstract_len}字"
-        if full_text_len > 3000:
-            completeness_evidence += ", 全文完整"
-        completeness_dim = writing_score
-
-        # significance: 通过 novelty_type 推断
+        # === significance (0~3): 通过 novelty_type 推断 ===
         if novelty_type in ("new_method", "benchmark"):
             significance_score = 2.5
         elif novelty_type in ("performance", "new_application"):
@@ -230,25 +236,30 @@ class PaperQualityAssessor:
         else:
             significance_score = 1.5
         significance_evidence = f"创新类型: {novelty_type}"
-        significance_dim = significance_score
+        if novelty_type == "":
+            significance_evidence += " (insufficient_evidence: 未提供创新类型)"
 
-        # clarity: 主要看摘要完整度
+        # === clarity (0~3): 摘要完整度 ===
+        abstract_len = len(paper_input.abstract) if paper_input.abstract else 0
         if abstract_len > 300:
             clarity_dim = 2.5
             clarity_evidence = "摘要完整（>300字）"
         elif abstract_len > 100:
             clarity_dim = 2.0
             clarity_evidence = "摘要较完整（>100字）"
-        else:
+        elif abstract_len > 0:
             clarity_dim = 1.0
             clarity_evidence = "摘要较短"
+        else:
+            clarity_dim = 0
+            clarity_evidence = "insufficient_evidence: 未提供摘要"
 
         # === 综合 paper_strength ===
         raw_strength = (
             novelty_dim * 0.35 +
             rigor_dim * 0.25 +
-            completeness_dim * 0.15 +
-            significance_dim * 0.15 +
+            repro_score * 0.15 +
+            significance_score * 0.15 +
             clarity_dim * 0.10
         )
         paper_strength = min(raw_strength / 3.0, 1.0)
@@ -263,11 +274,11 @@ class PaperQualityAssessor:
         reasons = []
         if novelty_score >= 2.5:
             reasons.append("方法创新性强")
-        if dataset_score >= 2:
-            reasons.append(f"多数据集验证({dataset_score}个)")
-        if metric_score >= 2:
-            reasons.append(f"多指标评估({metric_score}项)")
-        if paper_strength >= 0.6:
+        if dataset_count >= 2:
+            reasons.append(f"多数据集验证({dataset_count}个)")
+        if len(metrics) >= 3:
+            reasons.append(f"多指标评估({len(metrics)}项)")
+        if paper_strength >= 0.7:
             reasons.append("论文整体强度较高")
         elif paper_strength < 0.35:
             reasons.append("建议补充实验后再投高分区")
@@ -276,7 +287,7 @@ class PaperQualityAssessor:
         uncertainty_reasons = []
         if abstract_len < 100:
             uncertainty_reasons.append("摘要信息不足")
-        if len(datasets) == 0:
+        if dataset_count == 0:
             uncertainty_reasons.append("未提供数据集信息")
         if full_text_len < 500:
             uncertainty_reasons.append("全文信息有限")
@@ -290,7 +301,7 @@ class PaperQualityAssessor:
             evidence={
                 "novelty": novelty_evidence,
                 "rigor": rigor_evidence,
-                "completeness": completeness_evidence,
+                "reproducibility": repro_evidence,
                 "significance": significance_evidence,
                 "clarity": clarity_evidence,
             },
