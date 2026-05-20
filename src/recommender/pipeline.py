@@ -51,6 +51,7 @@ class RecommenderPipeline:
             paper_profile.quality_level = quality.quality_level
             paper_profile.quality_confidence = quality.confidence
             paper_profile.quality_reasons = quality.reasons
+            paper_profile.ccf_research_area = quality.ccf_research_area
 
         # 1. 候选召回
         query_text = paper_input.title

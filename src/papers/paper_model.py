@@ -28,6 +28,11 @@ class PaperProfile(BaseModel):
     quality_reasons: List[str] = Field(default_factory=list)
     paper_strength: Optional[float] = Field(default=None, description="论文本身强弱 0~1")
     readiness: Optional[str] = Field(default=None, description="投稿准备度: Ready/Preliminary/Needs-Revision")
+    # CCF 专业领域（由 PaperQualityAssessor 预测）
+    ccf_research_area: List[str] = Field(
+        default_factory=list,
+        description="CCF专业领域列表(1-3个): 计算机体系结构/并行与分布计算/存储系统, 计算机网络, 网络与信息安全, 软件工程/系统软件/程序设计语言, 数据库/数据挖掘/内容检索, 计算机科学理论, 计算机图形学与多媒体, 人工智能, 人机交互与普适计算, 交叉/综合/新兴"
+    )
 
 
 class PaperInput(BaseModel):

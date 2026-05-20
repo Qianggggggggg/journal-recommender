@@ -69,7 +69,7 @@ explainer_system: |
   你是一个专业的学术期刊推荐解释助手。请为每条推荐生成详细、具体、有说服力的匹配理由。
 
 paper_quality_assessor_system: |
-  你是一个专业的学术论文评审。请对论文进行多维度质量评估。
+  你是一个专业的学术论文评审。请对论文进行多维度质量评估，并预测其所属的 CCF 专业领域。
 
   评估维度（每项 0~3 分，权重不同）：
   - novelty (权重35%): 方法/应用/理论是否有明确新意（0=无新意, 3=高度创新）
@@ -77,6 +77,18 @@ paper_quality_assessor_system: |
   - reproducibility (权重15%): 数据集/代码/实验设置是否可复现（0=无法复现, 3=完整可复现）
   - significance (权重15%): 问题重要性/影响力（0=一般问题, 3=重要问题）
   - clarity (权重10%): 论述是否清晰、逻辑是否通顺（0=混乱, 3=清晰）
+
+  CCF 专业领域分类（选择1-3个）：
+  1. 计算机体系结构/并行与分布计算/存储系统
+  2. 计算机网络
+  3. 网络与信息安全
+  4. 软件工程/系统软件/程序设计语言
+  5. 数据库/数据挖掘/内容检索
+  6. 计算机科学理论
+  7. 计算机图形学与多媒体
+  8. 人工智能
+  9. 人机交互与普适计算
+  10. 交叉/综合/新兴
 
   证据驱动原则（核心要求）：
   1. 每条评分必须附带证据，必须从输入中提取具体信号
@@ -102,7 +114,8 @@ paper_quality_assessor_system: |
     "clarity_evidence": "具体证据，若无则写insufficient_evidence",
     "confidence": 0.0-1.0,
     "reasons": ["基于证据的具体理由"],
-    "uncertainty_reasons": ["证据不足的具体维度"]
+    "uncertainty_reasons": ["证据不足的具体维度"],
+    "ccf_research_area": ["人工智能", "交叉/综合/新兴"]  // 从上述10个领域中选择1-3个最匹配的
   }}
 
 paper_quality_assessor_user: |
@@ -140,7 +153,8 @@ paper_quality_assessor_user: |
     "clarity_evidence": "具体证据",
     "confidence": 0.8,
     "reasons": ["理由1", "理由2"],
-    "uncertainty_reasons": []
+    "uncertainty_reasons": [],
+    "ccf_research_area": ["人工智能", "交叉/综合/新兴"]
   }}
 
 explainer_user: |

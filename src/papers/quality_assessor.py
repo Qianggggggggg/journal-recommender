@@ -41,6 +41,12 @@ class PaperQuality(BaseModel):
     # 不确定原因
     uncertainty_reasons: List[str] = Field(default_factory=list)
 
+    # CCF 专业领域预测
+    ccf_research_area: List[str] = Field(
+        default_factory=list,
+        description="CCF专业领域列表(1-3个): 计算机体系结构/并行与分布计算/存储系统, 计算机网络, 网络与信息安全, 软件工程/系统软件/程序设计语言, 数据库/数据挖掘/内容检索, 计算机科学理论, 计算机图形学与多媒体, 人工智能, 人机交互与普适计算, 交叉/综合/新兴"
+    )
+
     @staticmethod
     def _strength_to_level(strength: float) -> str:
         """将 strength 映射到 Q1-Q4"""
@@ -157,6 +163,7 @@ class PaperQualityAssessor:
                 reasons=data.get("reasons", []),
                 evidence=evidence,
                 uncertainty_reasons=uncertainty_reasons,
+                ccf_research_area=data.get("ccf_research_area", []),
             )
 
         raise PaperQualityError(f"LLM响应格式错误，无法解析: {response.content}")

@@ -343,10 +343,11 @@ async def recommend_stream(
                 profile.quality_level = quality.quality_level
                 profile.quality_confidence = quality.confidence
                 profile.quality_reasons = quality.reasons
+                profile.ccf_research_area = quality.ccf_research_area
                 yield sse_event("progress", {
                     "stage": "quality",
                     "percent": 25,
-                    "message": f"论文质量评估完成: {quality.quality_level} (strength={quality.paper_strength:.2f})"
+                    "message": f"论文质量评估完成: {quality.quality_level} (strength={quality.paper_strength:.2f}, CCF领域={quality.ccf_research_area})"
                 })
                 await asyncio.sleep(0)
 

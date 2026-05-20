@@ -12,6 +12,7 @@ class RuleScorer:
         # 权重配置
         self.weights = {
             "research_area_match": 2.0,
+            "ccf_area_match": 3.0,    # CCF领域匹配（最高优先级）
             "technique_match": 1.8,
             "method_type_match": 1.5,
             "paper_type_match": 1.0,
@@ -72,6 +73,13 @@ class RuleScorer:
             if matched_areas:
                 score += self.weights["research_area_match"]
                 reasons.append(f"研究领域匹配: {', '.join(matched_areas)}")
+
+        # CCF 专业领域匹配（最高优先级）
+        if paper_profile.ccf_research_area:
+            matched_areas = [a for a in paper_profile.ccf_research_area if a in journal.subject_tags]
+            if matched_areas:
+                score += self.weights["ccf_area_match"]
+                reasons.append(f"CCF领域匹配: {', '.join(matched_areas)}")
 
         # 具体技术匹配
         if paper_profile.techniques:
