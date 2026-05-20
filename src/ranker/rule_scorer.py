@@ -239,22 +239,39 @@ class RuleScorer:
                 score += self.weights["oa_preference_match"]
                 reasons.append(f"OA类型匹配: {journal.oa_type}")
 
-        # 论文质量与期刊CCF评级匹配约束
-        # CCF评级: A=4, B=3, C=2 (作为内部分区)
-        # 论文质量: Q1=4, Q2=3, Q3=2, Q4=1
-        # gap > 1 (例如Q4论文→CCF-A期刊) → 大幅降权
-        # gap == 1 (例如Q3论文→CCF-A期刊) → 略降
-        if paper_profile.quality_level:
-            # 获取CCF评级权重（A=4, B=3, C=2）
-            ccf_weights = {"A": 4, "B": 3, "C": 2}
-            ccf_weight = ccf_weights.get(journal.ccf_rating, 3) if journal.ccf_rating else 3
-            plevel = self._get_quality_level_weight(paper_profile.quality_level)
-            gap = ccf_weight - plevel
-            if gap > 1:
-                score *= 0.5
-                reasons.append(f"质量匹配: CCF-{journal.ccf_rating}期刊高于论文质量({paper_profile.quality_level})，匹配度下调")
-            elif gap == 1:
-                score *= 0.8
+        # 论文质量软权重调整（替代硬惩罚）
+        # 核心原则：不再"拒绝"推荐，只是"调整权重"
+        # paper_strength ∈ [0, 1]
+        # - 高 strength（>0.7）→ 略微提升高分区（CCF-A）候选
+        # - 低 strength（<0.4）→ 略微降低高分区（CCF-A）候选
+        # - CCF-B/C 受影响较小
+        if paper_profile.paper_strength is not None:
+            strength = paper_profile.paper_strength
+
+            # 基础调整系数: 0.9 + 0.2*(strength-0.5) → strength=1.0时=1.0, strength=0时=0.8
+            base_adjustment = 0.9 + 0.2 * (strength - 0.5)
+
+            # CCF-A 期刊：影响力最大，调整 ±5%
+            # CCF-B 期刊：调整 ±2%
+            # CCF-C 期刊：几乎不受影响
+            ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
+            if journal.ccf_rating == "A":
+                ccf_multiplier = 1.05
+            elif journal.ccf_rating == "B":
+                ccf_multiplier = 1.02
+            else:
+                ccf_multiplier = 1.0
+
+            adjustment = base_adjustment * ccf_multiplier
+            # 最终范围限制 [0.8, 1.08]，防止极端
+            adjustment = max(0.8, min(1.08, adjustment))
+
+            score *= adjustment
+
+            if strength >= 0.75:
+                reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
+            elif strength < 0.35:
+                reasons.append(f"弱论文调整({(adjustment-1)*100:.0f}%)")
 
         return score, reasons
 
