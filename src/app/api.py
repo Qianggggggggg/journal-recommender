@@ -570,26 +570,22 @@ async def recommend_stream(
             })
             await asyncio.sleep(0)
 
-            # 阶段 5: 生成推荐理由 (80-95%)
+            # 阶段 5: 构建推荐结果（直接使用 LLMRanker 输出的 reasons）
             yield sse_event("progress", {
-                "stage": "explaining",
+                "stage": "building",
                 "percent": 85,
-                "message": "正在生成推荐理由..."
+                "message": "正在构建推荐结果..."
             })
             await asyncio.sleep(0)
 
             recommendations = []
             for idx, (journal, score, reasons, confidence) in enumerate(llm_ranked):
-                match_reasons = reasons
-                if pipeline.explainer:
-                    match_reasons = pipeline.explainer.explain(journal, profile)
-
                 rec = {
                     "journal_id": journal.journal_id,
                     "journal_name": journal.journal_name,
                     "score": score,
                     "confidence": confidence,
-                    "match_reasons": match_reasons,
+                    "match_reasons": reasons if reasons else [],
                     "matched_fields": ["research_area", "method_type"],
                     "tags": journal.subject_tags,
                     "oa_type": journal.oa_type,

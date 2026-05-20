@@ -83,18 +83,14 @@ class RecommenderPipeline:
         else:
             llm_ranked = [(j, s, r, 0.5) for j, s, r in rule_ranked[:top_k]]
 
-        # 4. 生成推荐理由
+        # 4. 构建推荐结果（直接使用 LLMRanker 输出的 reasons，不再单独调用 Explainer）
         recommendations = []
         for journal, score, reasons, confidence in llm_ranked:
-            match_reasons = reasons
-            if self.explainer:
-                match_reasons = self.explainer.explain(journal, paper_profile)
-
             recommendations.append(JournalMatch(
                 journal=journal,
                 score=score,
                 confidence=confidence,
-                match_reasons=match_reasons,
+                match_reasons=reasons if reasons else [],
                 matched_fields=["research_area", "method_type"],
             ))
 
