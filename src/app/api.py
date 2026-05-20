@@ -5,7 +5,7 @@ import os
 import yaml
 from fastapi import APIRouter, HTTPException, Query, UploadFile, File, Form, Body
 from fastapi.requests import Request
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, Response
 from pydantic import BaseModel
 from .schemas import (
     RecommendResponse,
@@ -30,6 +30,7 @@ from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
 from ..utils.file_parser import extract_text_from_file
+from ..utils.pdf_exporter import PDFExporter
 
 
 class RecommendRequest(BaseModel):
@@ -245,6 +246,86 @@ async def recommend(request: Request):
         mode_used=result.get("mode_used", mode),
         rank_method=result.get("rank_method", "rule"),
         warning=result.get("warning"),
+    )
+
+
+@router.post("/recommend/pdf")
+async def recommend_pdf(request: Request):
+    """推荐结果 PDF 导出"""
+    pipeline = get_pipeline()
+
+    # 解析请求
+    content_type = request.headers.get("content-type", "")
+
+    if "application/json" in content_type:
+        body = await request.body()
+        import json
+        data = json.loads(body)
+        title = data.get("title", "")
+        abstract = data.get("abstract", "")
+        full_text = data.get("full_text", "")
+        mode = data.get("mode", "abstract")
+        top_k = data.get("top_k", 5)
+        oa_preference = data.get("oa_preference", "any")
+    else:
+        form = await request.form()
+        title = form.get("title", "")
+        abstract = form.get("abstract", "")
+        full_text = ""
+        mode = form.get("mode", "abstract")
+        top_k = int(form.get("top_k", 5))
+        oa_preference = form.get("oa_preference", "any")
+
+    # 解析论文
+    paper_input = PaperInput(
+        title=title,
+        abstract=abstract or "",
+        full_text=full_text or "",
+        mode=mode,
+    )
+
+    with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
+        prompts = yaml.safe_load(f)
+
+    try:
+        profile = pipeline.parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
+    except PaperParserError as e:
+        raise HTTPException(status_code=503, detail=f"论文解析失败: {e}")
+
+    # 执行推荐
+    quality_prompts = {
+        "system": prompts.get("paper_quality_assessor_system", ""),
+        "user": prompts.get("paper_quality_assessor_user", ""),
+    }
+    try:
+        result = pipeline.recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            oa_preference=oa_preference,
+            quality_prompts=quality_prompts,
+        )
+    except PaperQualityError as e:
+        raise HTTPException(status_code=503, detail=f"论文质量评估失败: {e}")
+
+    # 生成 PDF
+    exporter = PDFExporter()
+    pdf_bytes = exporter.export(
+        title=title,
+        abstract=abstract,
+        recommendations=result.get("recommendations", []),
+        paper_profile=result.get("paper_profile"),
+    )
+
+    # 生成文件名
+    safe_title = "".join(c if c.isalnum() or c in " -_" else "_" for c in title[:30])
+    filename = f"期刊推荐报告_{safe_title}.pdf"
+
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename*=UTF-8''{filename}"},
     )
 
 
