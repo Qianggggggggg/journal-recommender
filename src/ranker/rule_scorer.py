@@ -216,16 +216,15 @@ class RuleScorer:
                         reasons.append(f"创新类型契合: {paper_profile.novelty_type}")
                         break
 
-        # 分区加分（差分级）
-        if journal.quartile == "Q1":
-            score += self.weights["quartile_q1"]
-            reasons.append(f"高分区期刊: Q1")
-        elif journal.quartile == "Q2":
-            score += self.weights["quartile_q2"]
-            reasons.append(f"中分区期刊: Q2")
-        elif journal.quartile == "Q3":
-            score += self.weights["quartile_q3"]
-            reasons.append(f"较低分区期刊: Q3")
+        # CCF评级加分（A=4, B=3, C=2映射到quartile）
+        # 注意：journals_ccf.jsonl 中 CCF-A→quartile=Q1, CCF-B→Q2, CCF-C→Q3
+        # 因此quartile加分已经隐含CCF权重，此处额外加CCF标识reason
+        if journal.ccf_rating == "A":
+            reasons.append(f"CCF-A类期刊")
+        elif journal.ccf_rating == "B":
+            reasons.append(f"CCF-B类期刊")
+        elif journal.ccf_rating == "C":
+            reasons.append(f"CCF-C类期刊")
 
         # 影响因子加分（归一化，值域 [0, 0.5]）
         if journal.impact_like_score and journal.impact_like_score > 0:
@@ -240,18 +239,22 @@ class RuleScorer:
                 score += self.weights["oa_preference_match"]
                 reasons.append(f"OA类型匹配: {journal.oa_type}")
 
-        # 论文质量与期刊分区匹配约束
+        # 论文质量与期刊CCF评级匹配约束
+        # CCF评级: A=4, B=3, C=2 (作为内部分区)
+        # 论文质量: Q1=4, Q2=3, Q3=2, Q4=1
+        # gap > 1 (例如Q4论文→CCF-A期刊) → 大幅降权
+        # gap == 1 (例如Q3论文→CCF-A期刊) → 略降
         if paper_profile.quality_level:
-            qlevel = self._get_quartile_weight(journal.quartile)
+            # 获取CCF评级权重（A=4, B=3, C=2）
+            ccf_weights = {"A": 4, "B": 3, "C": 2}
+            ccf_weight = ccf_weights.get(journal.ccf_rating, 3) if journal.ccf_rating else 3
             plevel = self._get_quality_level_weight(paper_profile.quality_level)
-            gap = qlevel - plevel
+            gap = ccf_weight - plevel
             if gap > 1:
-                # 期刊分区高于论文质量太多，大幅降权
                 score *= 0.5
-                reasons.append(f"质量匹配: 期刊分区({journal.quartile})高于论文质量({paper_profile.quality_level})，匹配度下调")
+                reasons.append(f"质量匹配: CCF-{journal.ccf_rating}期刊高于论文质量({paper_profile.quality_level})，匹配度下调")
             elif gap == 1:
                 score *= 0.8
-                reasons.append(f"质量匹配: 期刊分区({journal.quartile})略高于论文质量({paper_profile.quality_level})")
 
         return score, reasons
 

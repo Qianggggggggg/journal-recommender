@@ -206,6 +206,7 @@ function renderResults(recommendations, doneData = null) {
         const rankMethodClass = rec.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
         const quartileClass = rec.quartile ? `quartile-${rec.quartile.toLowerCase()}` : '';
         const quartileHtml = rec.quartile ? `<span class="journal-quartile ${quartileClass}">${rec.quartile}</span>` : '';
+        const ccfHtml = rec.ccf_rating ? `<span class="ccf-badge ccf-${rec.ccf_rating.toLowerCase()}">CCF-${rec.ccf_rating}</span>` : '';
 
         const oaLabel = rec.oa_type === 'full_oa' ? '完全OA' : rec.oa_type === 'hybrid' ? '混合OA' : '订阅';
 
@@ -215,6 +216,7 @@ function renderResults(recommendations, doneData = null) {
                 <div class="card-title-row">
                     <span class="journal-name">${rec.journal_name}</span>
                     ${quartileHtml}
+                    ${ccfHtml}
                     <span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>
                 </div>
                 <div class="card-actions">
