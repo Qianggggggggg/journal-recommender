@@ -157,6 +157,8 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
                             break;
                         case 'done':
                             latestDoneData = eventData;
+                            window._latestRecommendations = recommendations;
+                            window._latestPaperProfile = eventData.paper_profile || null;
                             renderResults(recommendations, latestDoneData);
                             break;
                         case 'error':
@@ -182,17 +184,23 @@ let latestParams = null;
 
 // 下载 PDF 按钮
 document.getElementById('download-pdf-btn').addEventListener('click', async () => {
-    if (!latestParams) return;
+    if (!latestParams || !latestDoneData) return;
 
     const btn = document.getElementById('download-pdf-btn');
     btn.disabled = true;
     btn.innerHTML = `<svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"/></svg> 生成中...`;
 
     try {
-        const response = await fetch(`${API_BASE}/recommend/pdf`, {
+        const payload = {
+            ...latestParams,
+            recommendations: window._latestRecommendations || [],
+            paper_profile: window._latestPaperProfile || null,
+        };
+
+        const response = await fetch(`${API_BASE}/recommend/pdf/from-results`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(latestParams),
+            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {

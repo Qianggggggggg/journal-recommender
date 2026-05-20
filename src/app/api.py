@@ -249,6 +249,79 @@ async def recommend(request: Request):
     )
 
 
+@router.post("/recommend/pdf/from-results")
+async def recommend_pdf_from_results(request: Request):
+    """从已生成的推荐结果直接导出 PDF（不复用 pipeline）"""
+    body = await request.body()
+    data = json.loads(body)
+
+    title = data.get("title", "")
+    abstract = data.get("abstract", "")
+    recommendations_data = data.get("recommendations", [])
+    paper_profile_data = data.get("paper_profile")
+
+    # 直接生成 PDF（不调用 pipeline）
+    exporter = PDFExporter()
+
+    # 构建 PaperProfile 对象（如果有）
+    profile = None
+    if paper_profile_data:
+        from ..papers.paper_model import PaperProfile
+        profile = PaperProfile(
+            title=paper_profile_data.get("title", ""),
+            research_area=paper_profile_data.get("research_area", []),
+            method_type=paper_profile_data.get("method_type", ""),
+            paper_type=paper_profile_data.get("paper_type", ""),
+            keywords=paper_profile_data.get("keywords", []),
+        )
+
+    # 构建 JournalMatch 对象列表
+    from ..journals.journal_model import Journal, JournalMatch
+    matches = []
+    for rec in recommendations_data:
+        journal = Journal(
+            journal_id=rec.get("journal_id", ""),
+            journal_name=rec.get("journal_name", ""),
+            publisher=rec.get("publisher", ""),
+            scope_text=rec.get("scope_text", ""),
+            subject_tags=rec.get("tags", []),
+            keywords=[],
+            oa_type=rec.get("oa_type", "subscription"),
+            submission_url=rec.get("submission_url", ""),
+            homepage_url=rec.get("homepage_url", ""),
+            quartile=rec.get("quartile", ""),
+            ccf_rating=rec.get("ccf_rating", ""),
+            impact_like_score=rec.get("impact_like_score") or None,
+            review_time=rec.get("review_time") or "",
+            apc=rec.get("apc") or None,
+        )
+        match = JournalMatch(
+            journal=journal,
+            score=rec.get("score", 0.0),
+            confidence=rec.get("confidence", 0.0),
+            match_reasons=rec.get("match_reasons", []),
+            matched_fields=rec.get("matched_fields", []),
+        )
+        matches.append(match)
+
+    pdf_bytes = exporter.export(
+        title=title,
+        abstract=abstract,
+        recommendations=matches,
+        paper_profile=profile,
+    )
+
+    # 生成文件名
+    safe_title = "".join(c if c.isalnum() or c in " -_" else "_" for c in title[:30])
+    filename = f"journal_recommendation_{safe_title}.pdf"
+
+    return Response(
+        content=bytes(pdf_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename*=UTF-8''{filename}"},
+    )
+
+
 @router.post("/recommend/pdf")
 async def recommend_pdf(request: Request):
     """推荐结果 PDF 导出"""

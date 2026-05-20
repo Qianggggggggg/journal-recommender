@@ -43,9 +43,8 @@ class PDFExporter:
         pdf.info_row("论文标题", title)
 
         if abstract:
-            # 截取过长摘要
-            abstract_display = abstract[:500] + "..." if len(abstract) > 500 else abstract
-            pdf.info_row("摘要", abstract_display)
+            # 不截取摘要，完整显示
+            pdf.info_row("摘要", abstract)
 
         if paper_profile:
             if paper_profile.research_area:
@@ -53,9 +52,9 @@ class PDFExporter:
             if paper_profile.method_type:
                 pdf.info_row("方法类型", paper_profile.method_type)
             if paper_profile.keywords:
-                pdf.info_row("关键词", ", ".join(paper_profile.keywords[:8]))
+                pdf.info_row("关键词", ", ".join(paper_profile.keywords))
             if paper_profile.techniques:
-                pdf.info_row("技术方法", ", ".join(paper_profile.techniques[:5]))
+                pdf.info_row("技术方法", ", ".join(paper_profile.techniques))
             if paper_profile.ccf_research_area:
                 pdf.info_row("CCF领域", ", ".join(paper_profile.ccf_research_area))
 
@@ -80,7 +79,7 @@ class PDFExporter:
 
         # 页脚
         pdf.ln(10)
-        pdf.set_font("Helvetica", size=8)
+        pdf.set_font("CJK", size=8)
         pdf.set_text_color(128, 128, 128)
         pdf.cell(0, 5, f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", align="C")
         pdf.ln(3)
@@ -92,6 +91,21 @@ class PDFExporter:
 class PDFReport(FPDF):
     """PDF 报告样式"""
 
+    def __init__(self):
+        super().__init__()
+        self.set_auto_page_break(auto=True, margin=15)
+        # 添加中文字体支持 - 使用 Arial Unicode 跨平台兼容
+        try:
+            self.add_font('CJK', '', '/Library/Fonts/Arial Unicode.ttf')
+        except Exception:
+            try:
+                self.add_font('CJK', '', '/System/Library/Fonts/Hiragino Sans GB.ttc')
+            except Exception:
+                try:
+                    self.add_font('CJK', '', '/System/Library/Fonts/STHeiti Medium.ttc')
+                except Exception:
+                    pass
+
     def header(self):
         """页眉"""
         pass
@@ -102,7 +116,7 @@ class PDFReport(FPDF):
 
     def chapter_title(self, title: str):
         """章节标题"""
-        self.set_font("Helvetica", size=14)
+        self.set_font("CJK", size=14)
         self.set_text_color(25, 25, 112)  # 深蓝色
         self.cell(0, 8, title)
         self.ln(8)
@@ -115,21 +129,17 @@ class PDFReport(FPDF):
 
     def chapter_body(self, text: str):
         """正文段落标题"""
-        self.set_font("Helvetica", size=11)
+        self.set_font("CJK", size=11)
         self.set_text_color(80, 80, 80)
         self.cell(0, 6, text)
         self.ln(6)
 
     def info_row(self, label: str, value: str):
         """信息行"""
-        self.set_font("Helvetica", size=10)
+        self.set_font("CJK", size=10)
         self.set_text_color(60, 60, 60)
-
-        # 标签加粗
-        self.set_font("Helvetica", size=10, style="B")
-        self.cell(25, 5, label)
-        self.set_font("Helvetica", size=10)
-        self.multi_cell(0, 5, value)
+        # 紧凑布局：标签和值之间用空格分隔，不占用固定宽度
+        self.multi_cell(0, 5, f"{label} {value}")
         self.ln(1)
 
     def journal_entry(
@@ -143,16 +153,16 @@ class PDFReport(FPDF):
         submission_url: str,
     ):
         """期刊条目"""
-        self.set_font("Helvetica", size=11)
+        self.set_font("CJK", size=11)
         self.set_text_color(0, 51, 102)
 
-        # 序号和名称
-        self.set_font("Helvetica", size=11, style="B")
+        # 序号和名称 - CJK字体不支持bold
+        self.set_font("CJK", size=11)
         self.cell(0, 6, f"{rank}. {name}")
         self.ln(6)
 
         # 标签行
-        self.set_font("Helvetica", size=9)
+        self.set_font("CJK", size=9)
         self.set_text_color(100, 100, 100)
 
         # 彩色标签
@@ -172,17 +182,23 @@ class PDFReport(FPDF):
 
         # 推荐理由
         if reasons:
-            self.set_font("Helvetica", size=9)
-            for reason in reasons[:5]:
-                # 截取过长理由
-                reason_display = reason[:60] + "..." if len(reason) > 60 else reason
+            self.set_font("CJK", size=9)
+            for reason in reasons[:10]:
+                # 不截取理由，完整显示
+                reason_display = reason
+                # 确保在左边界开始，如空间不足则新建页
+                if self.get_y() > 270:
+                    self.add_page()
+                self.set_x(10)
+                # 使用 cell + Ln 代替 multi_cell，避免对齐问题
                 self.cell(5, 4, "•")
-                self.multi_cell(0, 4, reason_display)
+                self.cell(0, 4, reason_display)
+                self.ln(4)
 
         # 投稿链接
         if submission_url:
             self.ln(1)
-            self.set_font("Helvetica", size=8)
+            self.set_font("CJK", size=8)
             self.set_text_color(0, 102, 204)
             self.cell(0, 4, f"投稿: {submission_url}")
 
