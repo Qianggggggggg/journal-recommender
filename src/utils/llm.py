@@ -27,7 +27,7 @@ class MiniMaxLLM:
         self.max_tokens = max_tokens
         self.temperature = temperature
 
-    def chat(self, system: str, user: str) -> LLMResponse:
+    def chat(self, system: str, user: str, timeout: float = 60.0) -> LLMResponse:
         """发送对话请求"""
         url = f"{self.base_url}/v1/text/chatcompletion_v2"
         headers = {
@@ -43,7 +43,7 @@ class MiniMaxLLM:
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
         }
-        response = httpx.post(url, json=payload, headers=headers, timeout=60)
+        response = httpx.post(url, json=payload, headers=headers, timeout=timeout)
         response.raise_for_status()
         data = response.json()
         if "choices" not in data:
@@ -53,3 +53,7 @@ class MiniMaxLLM:
             model=self.model,
             usage=data.get("usage", {}),
         )
+
+    def chat_with_timeout(self, system: str, user: str, timeout: float = 180.0) -> LLMResponse:
+        """发送对话请求（带超时参数）"""
+        return self.chat(system, user, timeout=timeout)

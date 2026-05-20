@@ -89,7 +89,7 @@ paper_quality_assessor_system: |
   - 如 "摘要未提及数据集"、"未看到消融实验"、"全文信息不足"
 
   输出格式（必须为有效 JSON）：
-  {
+  {{
     "novelty_score": 0-3,
     "rigor_score": 0-3,
     "reproducibility_score": 0-3,
@@ -103,7 +103,7 @@ paper_quality_assessor_system: |
     "confidence": 0.0-1.0,
     "reasons": ["基于证据的具体理由"],
     "uncertainty_reasons": ["证据不足的具体维度"]
-  }
+  }}
 
 paper_quality_assessor_user: |
   论文信息：
@@ -126,22 +126,22 @@ paper_quality_assessor_user: |
   3. 每条 evidence 必须引用输入中的具体内容，不能泛泛而谈
   4. 输出必须为有效 JSON
 
-  输出格式：
-  {
-    "novelty_score": 0-3,
-    "rigor_score": 0-3,
-    "reproducibility_score": 0-3,
-    "significance_score": 0-3,
-    "clarity_score": 0-3,
-    "novelty_evidence": "...",
-    "rigor_evidence": "...",
-    "reproducibility_evidence": "...",
-    "significance_evidence": "...",
-    "clarity_evidence": "...",
-    "confidence": 0.0-1.0,
-    "reasons": ["..."],
-    "uncertainty_reasons": ["..."]
-  }
+  输出格式（必须为有效 JSON，不要包含任何占位符）：
+  {{
+    "novelty_score": 2,
+    "rigor_score": 2,
+    "reproducibility_score": 2,
+    "significance_score": 2,
+    "clarity_score": 2,
+    "novelty_evidence": "具体证据",
+    "rigor_evidence": "具体证据",
+    "reproducibility_evidence": "具体证据",
+    "significance_evidence": "具体证据",
+    "clarity_evidence": "具体证据",
+    "confidence": 0.8,
+    "reasons": ["理由1", "理由2"],
+    "uncertainty_reasons": []
+  }}
 
 explainer_user: |
   论文特征：

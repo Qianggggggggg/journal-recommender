@@ -1,6 +1,7 @@
 """API 路由"""
 from typing import Optional, Union
 import json
+import os
 import yaml
 from fastapi import APIRouter, HTTPException, Query, UploadFile, File, Form, Body
 from fastapi.requests import Request
@@ -15,7 +16,7 @@ from .schemas import (
     PaperProfileResponse,
 )
 from ..recommender.pipeline import RecommenderPipeline
-from ..papers.paper_parser import PaperParser
+from ..papers.paper_parser import PaperParser, PaperParserError
 from ..papers.paper_model import PaperInput, PaperProfile
 from ..journals.journal_store import JournalStore
 from ..journals.vector_searcher import VectorSearcher, FaissIndex
@@ -23,9 +24,9 @@ from ..retriever.bm25_retriever import BM25Retriever
 from ..retriever.embedding_retriever import EmbeddingRetriever
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
-from ..ranker.llm_ranker import LLMRanker
+from ..ranker.llm_ranker import LLMRanker, LLMRankerError
 from ..recommender.explainer import Explainer
-from ..papers.quality_assessor import PaperQualityAssessor
+from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
 from ..utils.file_parser import extract_text_from_file
@@ -80,22 +81,18 @@ def get_pipeline() -> RecommenderPipeline:
         bm25 = BM25Retriever(_store)
         bm25.build_index()
 
-        # 初始化 LLM（如果配置了 API key）
-        llm = None
-        try:
-            import os
-            api_key = app_config["minimax"]["api_key"]
-            if api_key.startswith("${") and api_key.endswith("}"):
-                env_var = api_key[2:-1]
-                api_key = os.getenv(env_var)
-            if api_key:
-                llm = MiniMaxLLM(
-                    api_key=api_key,
-                    base_url=app_config["minimax"]["base_url"],
-                    model=app_config["minimax"]["model"],
-                )
-        except Exception:
-            pass
+        # 初始化 LLM（必须配置 API key）
+        api_key = app_config["minimax"]["api_key"]
+        if api_key.startswith("${") and api_key.endswith("}"):
+            env_var = api_key[2:-1]
+            api_key = os.getenv(env_var)
+        if not api_key:
+            raise RuntimeError("MINIMAX_API_KEY 未配置，请设置环境变量")
+        llm = MiniMaxLLM(
+            api_key=api_key,
+            base_url=app_config["minimax"]["base_url"],
+            model=app_config["minimax"]["model"],
+        )
 
         embedding_client = OllamaEmbedding(
             base_url=app_config["ollama"]["base_url"],
@@ -114,19 +111,18 @@ def get_pipeline() -> RecommenderPipeline:
         generator = CandidateGenerator(_store, bm25, embedding_retriever, merge_weights=merge_weights)
         scorer = RuleScorer()
 
-        llm_ranker = None
-        if llm:
-            llm_ranker = LLMRanker(
-                llm,
-                prompts["llm_ranker_system"],
-                prompts["llm_ranker_user"],
-            )
+        llm_ranker = LLMRanker(
+            llm,
+            prompts["llm_ranker_system"],
+            prompts["llm_ranker_user"],
+        )
 
         explainer = Explainer(llm, prompts["explainer_system"], prompts["explainer_user"])
 
-        quality_assessor = None
-        if llm:
-            quality_assessor = PaperQualityAssessor(llm)
+        quality_assessor = PaperQualityAssessor(llm)
+
+        # 初始化论文解析器
+        parser = PaperParser(llm)
 
         _pipeline = RecommenderPipeline(
             candidate_generator=generator,
@@ -135,6 +131,9 @@ def get_pipeline() -> RecommenderPipeline:
             explainer=explainer,
             quality_assessor=quality_assessor,
         )
+
+        # 将 parser 附加到 pipeline 以便在 API 中使用
+        _pipeline.parser = parser
 
     return _pipeline
 
@@ -187,22 +186,27 @@ async def recommend(request: Request):
     with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
 
-    parser = PaperParser()
-    profile = parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
+    try:
+        profile = pipeline.parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
+    except PaperParserError as e:
+        raise HTTPException(status_code=503, detail=f"论文解析失败: {e}")
 
     # 执行推荐
     quality_prompts = {
         "system": prompts.get("paper_quality_assessor_system", ""),
         "user": prompts.get("paper_quality_assessor_user", ""),
     }
-    result = pipeline.recommend(
-        paper_input,
-        profile,
-        top_k=top_k,
-        mode=mode,
-        oa_preference=oa_preference,
-        quality_prompts=quality_prompts,
-    )
+    try:
+        result = pipeline.recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            oa_preference=oa_preference,
+            quality_prompts=quality_prompts,
+        )
+    except PaperQualityError as e:
+        raise HTTPException(status_code=503, detail=f"论文质量评估失败: {e}")
 
     # 获取排序方法
     rank_method = result.get("rank_method", "rule")
@@ -305,7 +309,7 @@ async def recommend_stream(
             with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
                 prompts = yaml.safe_load(f)
 
-            parser = PaperParser()
+            parser = pipeline.parser
             profile = parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
 
             yield sse_event("progress", {

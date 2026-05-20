@@ -7,7 +7,7 @@ from ..papers.paper_model import PaperInput, PaperProfile
 from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
-from ..ranker.llm_ranker import LLMRanker
+from ..ranker.llm_ranker import LLMRanker, LLMRankerError
 from .explainer import Explainer
 
 
@@ -72,10 +72,13 @@ class RecommenderPipeline:
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
         rule_ranked = self._apply_quality_adjustment(rule_ranked, paper_profile)
 
-        # 3. 阶段二：LLM 精排
+        # 3. 阶段二：LLM 精排（如失败则抛出明确错误，不再降级）
         rank_method = "rule"
         if self.llm_ranker:
-            llm_ranked, rank_method = self.llm_ranker.rank(rule_ranked, paper_profile, top_k=top_k)
+            try:
+                llm_ranked, rank_method = self.llm_ranker.rank(rule_ranked, paper_profile, top_k=top_k)
+            except LLMRankerError as e:
+                raise LLMRankerError(f"LLM精排失败: {e}")
         else:
             llm_ranked = [(j, s, r, 0.5) for j, s, r in rule_ranked[:top_k]]
 
