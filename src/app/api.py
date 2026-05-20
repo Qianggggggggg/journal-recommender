@@ -25,7 +25,6 @@ from ..retriever.embedding_retriever import EmbeddingRetriever
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
-from ..recommender.explainer import Explainer
 from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
@@ -118,8 +117,6 @@ def get_pipeline() -> RecommenderPipeline:
             prompts["llm_ranker_user"],
         )
 
-        explainer = Explainer(llm, prompts["explainer_system"], prompts["explainer_user"])
-
         quality_assessor = PaperQualityAssessor(llm)
 
         # 初始化论文解析器
@@ -129,7 +126,6 @@ def get_pipeline() -> RecommenderPipeline:
             candidate_generator=generator,
             rule_scorer=scorer,
             llm_ranker=llm_ranker,
-            explainer=explainer,
             quality_assessor=quality_assessor,
         )
 
@@ -599,9 +595,9 @@ async def recommend_stream(
                 progress_percent = 85 + (idx * 10 // max(len(llm_ranked), 1))
                 yield sse_event("recommendation", rec)
                 yield sse_event("progress", {
-                    "stage": "explaining",
+                    "stage": "streaming",
                     "percent": progress_percent,
-                    "message": f"已生成 {idx + 1}/{len(llm_ranked)} 条推荐理由"
+                    "message": f"正在推送第 {idx + 1}/{len(llm_ranked)} 条结果"
                 })
                 await asyncio.sleep(0)
 

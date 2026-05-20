@@ -8,7 +8,6 @@ from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
-from .explainer import Explainer
 
 
 class RecommenderPipeline:
@@ -19,13 +18,11 @@ class RecommenderPipeline:
         candidate_generator: CandidateGenerator,
         rule_scorer: RuleScorer,
         llm_ranker: Optional[LLMRanker] = None,
-        explainer: Optional[Explainer] = None,
         quality_assessor: Optional[PaperQualityAssessor] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
         self.llm_ranker = llm_ranker
-        self.explainer = explainer
         self.quality_assessor = quality_assessor
 
     def recommend(
@@ -157,5 +154,4 @@ class RecommenderPipeline:
             candidate_generator=None,  # 外部注入
             rule_scorer=RuleScorer(),
             llm_ranker=None,
-            explainer=None,
         )
