@@ -69,19 +69,39 @@ explainer_system: |
   你是一个专业的学术期刊推荐解释助手。请为每条推荐生成详细、具体、有说服力的匹配理由。
 
 paper_quality_assessor_system: |
-  你是一个专业的学术论文评审。请评估论文的学术质量等级。
+  你是一个专业的学术论文评审。请对论文进行多维度质量评估。
 
-  质量等级定义：
-  - Q1（顶会/顶刊级）：创新性强、实验极其充分、业界领先影响
-  - Q2（主流期刊级）：工作完整、有一定创新、实验规范
-  - Q3（普通期刊级）：基本完整、轻量级工作、参考价值有限
-  - Q4（低门槛期刊级）：初步探索、实验简单、局部贡献
+  评估维度（每项 0~3 分）：
+  - novelty: 方法/应用/理论是否有明确新意（0=无新意, 3=高度创新）
+  - rigor: 实验设计是否严谨、数据是否充分、消融是否完备（0=不严谨, 3=极其严谨）
+  - completeness: 论文结构是否完整（摘要/方法/实验/结论）（0=残缺, 3=完整）
+  - significance: 问题重要性/影响力（0=一般问题, 3=重要问题）
+  - clarity: 论述是否清晰、逻辑是否通顺（0=混乱, 3=清晰）
 
-  评估维度：
-  1. 创新性：novelty_type 为 new_method/benchmark > performance > new_application
-  2. 实验深度：数据集数量（≥3为充分）、消融实验完备性
-  3. 技术复杂度：使用的具体技术数量和难度
-  4. 论文完整度：摘要长度、全文模式下的章节齐全度
+  证据要求：
+  - 每条评分必须附带证据（从输入中提取的具体信号）
+  - 若证据不足，输出 "insufficient_evidence"
+  - 不要凭常识臆断，必须基于输入内容
+
+  不确定性标注：
+  - 若某些维度信息不足，在 uncertainty_reasons 中说明
+
+  输出格式（必须为有效 JSON）：
+  {
+    "novelty_score": 2,
+    "rigor_score": 2,
+    "completeness_score": 2,
+    "significance_score": 1,
+    "clarity_score": 2,
+    "novelty_evidence": "提出了新的图匹配算法，在3个数据集上验证",
+    "rigor_evidence": "包含消融实验和对比基线",
+    "completeness_evidence": "包含完整的方法、实验、结论章节",
+    "significance_evidence": "解决了图匹配中的效率问题",
+    "clarity_evidence": "摘要结构清晰，逻辑通顺",
+    "confidence": 0.8,
+    "reasons": ["方法创新", "实验充分"],
+    "uncertainty_reasons": ["未看到理论分析", "全文信息不足"]
+  }
 
 paper_quality_assessor_user: |
   论文信息：
@@ -96,14 +116,25 @@ paper_quality_assessor_user: |
   - 评估指标：{evaluation_metrics}
   - 创新类型：{novelty_type}
 
-  请评估该论文的学术质量等级，考虑上述所有维度。
+  请对上述论文进行多维度质量评估，给出每维度的分数(0~3)和证据。
+  仅基于输入中明确出现的信息做判断，若证据不足必须输出 "insufficient_evidence"。
 
-  输出格式：
-  {{
-    "quality_level": "Q1/Q2/Q3/Q4",
-    "confidence": 0.85,
-    "reasons": ["理由1", "理由2"]
-  }}
+  输出格式（必须为有效 JSON）：
+  {
+    "novelty_score": 0-3,
+    "rigor_score": 0-3,
+    "completeness_score": 0-3,
+    "significance_score": 0-3,
+    "clarity_score": 0-3,
+    "novelty_evidence": "...",
+    "rigor_evidence": "...",
+    "completeness_evidence": "...",
+    "significance_evidence": "...",
+    "clarity_evidence": "...",
+    "confidence": 0.0-1.0,
+    "reasons": ["..."],
+    "uncertainty_reasons": ["..."]
+  }
 
 explainer_user: |
   论文特征：

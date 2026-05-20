@@ -193,11 +193,17 @@ function renderResults(recommendations, doneData = null) {
     if (doneData && doneData.quality) {
         const q = doneData.quality;
         const levelClass = `quality-${q.level.toLowerCase()}`;
+        const readinessLabel = {
+            'Ready': '可投稿',
+            'Preliminary': '待完善',
+            'Needs-Revision': '需修改'
+        };
         qualityHtml = `
         <div class="quality-badge-container">
             <span class="quality-badge ${levelClass}">${q.level}</span>
-            <span class="quality-label">论文质量评估</span>
-            <span class="quality-confidence">置信度 ${Math.round(q.confidence * 100)}%</span>
+            <span class="quality-strength">强度 ${Math.round((q.paper_strength || 0.5) * 100)}%</span>
+            <span class="quality-readiness">${readinessLabel[q.readiness] || q.readiness}</span>
+            <span class="quality-confidence">置信 ${Math.round(q.confidence * 100)}%</span>
         </div>`;
     }
 

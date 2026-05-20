@@ -1,4 +1,4 @@
-"""论文质量评估器测试"""
+"""论文质量评估器测试（新版多维度）"""
 import pytest
 from unittest.mock import MagicMock
 
@@ -7,7 +7,7 @@ from src.papers.paper_model import PaperInput, PaperProfile
 
 
 class TestPaperQualityAssessor:
-    """PaperQualityAssessor 单元测试"""
+    """PaperQualityAssessor 单元测试（新版）"""
 
     def test_assess_fallback_to_rules_when_no_llm(self):
         """无 LLM 时应降级到规则评估"""
@@ -24,7 +24,9 @@ class TestPaperQualityAssessor:
         result = assessor.assess(paper_input, profile, "", "")
 
         assert isinstance(result, PaperQuality)
-        assert result.level in ["Q1", "Q2", "Q3", "Q4"]
+        assert result.quality_level in ["Q1", "Q2", "Q3", "Q4"]
+        assert result.paper_strength is not None
+        assert 0.0 <= result.paper_strength <= 1.0
         assert 0.0 <= result.confidence <= 1.0
 
     def test_assess_by_rules_new_method_high_score(self):
@@ -41,13 +43,17 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # new_method=2, datasets(3+)=1.5, metrics(4)=1, techniques(3+)=0.8, abstract>300=0.5, full_text>2000=1.0
-        # total = 2+1.5+1+0.8+0.5+1 = 6.8 >= 6.0 → Q1
-        assert result.level == "Q1"
-        assert result.confidence >= 0.8
+        # 新方法novelty_score=3, 3个数据集=3, 4个指标=3, 摘要>300=2.5, 全文>3000=额外加分
+        # novelty_dim = 3*0.6 + 3*0.4 = 3.0
+        # rigor_dim = 3*0.5 + 2*0.3 + 2*0.2 = 2.3
+        # completeness_dim = 2.5 (abstract完整)
+        # 预期 paper_strength >= 0.75 -> Q1
+        assert result.quality_level == "Q1"
+        assert result.paper_strength >= 0.75
+        assert result.readiness in ["Ready", "Preliminary"]
 
     def test_assess_by_rules_performance_mid_score(self):
-        """性能提升 + 少数据集 = Q2"""
+        """性能提升 + 少数据集 = Q2/Q3"""
         assessor = PaperQualityAssessor(llm=None)
         paper_input = PaperInput(title="Test", abstract="A" * 200)
         profile = PaperProfile(
@@ -60,9 +66,11 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # performance=1.2, dataset(1)=0.8, metrics(2)=0.5, techniques(1)=0, abstract<300=0, full_text=0
-        # total = 1.2+0.8+0.5 = 2.5 >= 4.0? 否 → 2.5 >= 2.0 是 → Q3
-        assert result.level in ["Q2", "Q3"]
+        # novelty_score = 2, dataset_score = 1, metric_score = 2
+        # novelty_dim = 2*0.6 + 1*0.4 = 1.6
+        # rigor_dim = 2*0.5 + 1*0.3 + 1*0.2 = 1.5
+        # strength ≈ (1.6*0.35 + 1.5*0.25 + ...)/3 < 0.55 -> Q2/Q3
+        assert result.quality_level in ["Q2", "Q3"]
 
     def test_assess_by_rules_new_application_low_score(self):
         """新应用 + 无数据集 = Q4"""
@@ -78,9 +86,8 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # new_application=1.0, no datasets=0, no metrics=0, no techniques=0, short abstract=0
-        # total = 1.0 < 2.0 → Q4
-        assert result.level == "Q4"
+        assert result.quality_level == "Q4"
+        assert result.paper_strength < 0.35
 
     def test_assess_by_rules_empty_profile(self):
         """空 profile 降级到 Q4"""
@@ -90,29 +97,26 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # method=0.5, no datasets, no metrics, no techniques, no abstract, no full_text
-        # total = 0.5 → Q4, confidence = min(0.5/8.0, 1.0) = 0.0625
-        assert result.level == "Q4"
-        assert result.confidence == 0.0625
+        assert result.quality_level == "Q4"
+        assert result.readiness == "Needs-Revision"
 
-    def test_assess_by_rules_q2_boundary(self):
-        """边界测试: score=4.0 应为 Q2"""
+    def test_assess_by_rules_has_evidence(self):
+        """规则评估应包含证据字段"""
         assessor = PaperQualityAssessor(llm=None)
-        # 手动构造刚好达到 Q2 阈值的场景
         paper_input = PaperInput(title="Test", abstract="A" * 300)
         profile = PaperProfile(
             title="Test",
-            novelty_type="benchmark",  # 1.5
-            datasets=["dataset1", "dataset2"],  # >=1, <3 → 0.8
-            techniques=["tech1", "tech2"],  # >=2 → 0
-            evaluation_metrics=["acc", "f1", "mAP"],  # >=3 → 1.0
+            novelty_type="new_method",
+            datasets=["dataset1"],
+            techniques=["tech1"],
+            evaluation_metrics=["metric1"],
         )
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # benchmark=1.5, datasets=0.8, metrics=1.0, techniques=0, abstract=0.5, full=0
-        # total = 1.5+0.8+1.0+0.5 = 3.8 < 4.0 → 实际 Q3
-        assert result.level in ["Q1", "Q2", "Q3", "Q4"]
+        assert isinstance(result.evidence, dict)
+        assert "novelty" in result.evidence
+        assert "rigor" in result.evidence
 
     def test_assess_by_llm_fallback_on_exception(self):
         """LLM 抛异常时降级到规则"""
@@ -125,52 +129,73 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "system", "user")
 
-        assert result.level in ["Q1", "Q2", "Q3", "Q4"]
+        assert result.quality_level in ["Q1", "Q2", "Q3", "Q4"]
         assert mock_llm.chat.called
 
-    def test_quality_level_q1_confidence(self):
-        """Q1 论文应有高置信度"""
+    def test_readiness_levels(self):
+        """测试三种准备度状态"""
         assessor = PaperQualityAssessor(llm=None)
-        paper_input = PaperInput(title="Test", abstract="A" * 500, full_text="B" * 5000)
-        profile = PaperProfile(
-            title="Test",
-            novelty_type="new_method",
-            datasets=["d1", "d2", "d3"],
-            techniques=["t1", "t2", "t3"],
+
+        # 高 strength -> Ready
+        high_input = PaperInput(title="Test", abstract="A" * 500, full_text="B" * 5000)
+        high_profile = PaperProfile(
+            title="Test", novelty_type="new_method",
+            datasets=["d1", "d2"], techniques=["t1", "t2"],
             evaluation_metrics=["m1", "m2", "m3"],
         )
+        high_result = assessor.assess(high_input, high_profile, "", "")
+        assert high_result.readiness in ["Ready", "Preliminary"]
 
-        result = assessor.assess(paper_input, profile, "", "")
+        # 低 strength -> Needs-Revision
+        low_input = PaperInput(title="Test", abstract="short")
+        low_profile = PaperProfile(title="Test", novelty_type="", datasets=[], techniques=[], evaluation_metrics=[])
+        low_result = assessor.assess(low_input, low_profile, "", "")
+        assert low_result.readiness == "Needs-Revision"
 
-        # 预期 score >= 6.0 → Q1, confidence = min(score/8.0, 1.0) = min(>=0.75, 1.0)
-        assert result.level == "Q1"
-        assert result.confidence >= 0.7
+    def test_strength_to_level_mapping(self):
+        """测试 strength -> level 映射"""
+        # Q1: >= 0.75
+        assert PaperQuality._strength_to_level(0.8) == "Q1"
+        assert PaperQuality._strength_to_level(0.75) == "Q1"
+        # Q2: >= 0.55
+        assert PaperQuality._strength_to_level(0.6) == "Q2"
+        assert PaperQuality._strength_to_level(0.55) == "Q2"
+        # Q3: >= 0.35
+        assert PaperQuality._strength_to_level(0.4) == "Q3"
+        assert PaperQuality._strength_to_level(0.35) == "Q3"
+        # Q4: < 0.35
+        assert PaperQuality._strength_to_level(0.3) == "Q4"
+        assert PaperQuality._strength_to_level(0.0) == "Q4"
 
-    def test_reasons_not_empty_for_qualified_papers(self):
-        """有数据集验证的论文应有 reason"""
+    def test_readiness_inference(self):
+        """测试准备度推断逻辑"""
+        # strength >= 0.6 && novelty >= 2 -> Ready
+        assert PaperQuality._strength_to_readiness(0.7, 2) == "Ready"
+        # strength >= 0.35 -> Preliminary
+        assert PaperQuality._strength_to_readiness(0.5, 1) == "Preliminary"
+        # else -> Needs-Revision
+        assert PaperQuality._strength_to_readiness(0.3, 1) == "Needs-Revision"
+
+    def test_uncertainty_reasons(self):
+        """信息不足时应有不确性原因"""
         assessor = PaperQualityAssessor(llm=None)
-        paper_input = PaperInput(title="Test", abstract="A" * 100)
-        profile = PaperProfile(
-            title="Test",
-            novelty_type="performance",
-            datasets=["ImageNet"],
-            techniques=[],
-            evaluation_metrics=["accuracy"],
-        )
+        paper_input = PaperInput(title="Test", abstract="")
+        profile = PaperProfile(title="Test")
 
         result = assessor.assess(paper_input, profile, "", "")
 
-        # performance=1.2 + dataset=0.8 + metrics=0.5 = 2.5 → Q3
-        # reasons 应包含 "性能提升" 和 "数据集验证(1个)"
-        assert len(result.reasons) >= 1
+        assert len(result.uncertainty_reasons) >= 1
+        assert any("摘要" in r or "信息" in r for r in result.uncertainty_reasons)
 
-    def test_benchmark_novelty_type(self):
-        """benchmark 创新类型得分 1.5"""
+    def test_paper_strength_range(self):
+        """paper_strength 应在 [0, 1] 范围内"""
         assessor = PaperQualityAssessor(llm=None)
-        paper_input = PaperInput(title="Test", abstract="A" * 100)
-        profile = PaperProfile(title="Test", novelty_type="benchmark", datasets=[], techniques=[], evaluation_metrics=[])
 
-        result = assessor.assess(paper_input, profile, "", "")
+        test_cases = [
+            (PaperInput(title="Test", abstract=""), PaperProfile(title="Test")),
+            (PaperInput(title="Test", abstract="A" * 500), PaperProfile(title="Test", novelty_type="new_method")),
+        ]
 
-        # benchmark=1.5, others=0 → total=1.5 < 2.0 → Q4
-        assert result.level == "Q4"
+        for inp, prof in test_cases:
+            result = assessor.assess(inp, prof, "", "")
+            assert 0.0 <= result.paper_strength <= 1.0

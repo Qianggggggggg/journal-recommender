@@ -46,7 +46,9 @@ class RecommenderPipeline:
                 quality_prompts.get("system", ""),
                 quality_prompts.get("user", ""),
             )
-            paper_profile.quality_level = quality.level
+            paper_profile.paper_strength = quality.paper_strength
+            paper_profile.readiness = quality.readiness
+            paper_profile.quality_level = quality.quality_level
             paper_profile.quality_confidence = quality.confidence
             paper_profile.quality_reasons = quality.reasons
 

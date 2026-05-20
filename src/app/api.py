@@ -308,13 +308,15 @@ async def recommend_stream(
             ) if pipeline.quality_assessor else None
 
             if quality:
-                profile.quality_level = quality.level
+                profile.paper_strength = quality.paper_strength
+                profile.readiness = quality.readiness
+                profile.quality_level = quality.quality_level
                 profile.quality_confidence = quality.confidence
                 profile.quality_reasons = quality.reasons
                 yield sse_event("progress", {
                     "stage": "quality",
                     "percent": 25,
-                    "message": f"论文质量评估完成: {quality.level}"
+                    "message": f"论文质量评估完成: {quality.quality_level} (strength={quality.paper_strength:.2f})"
                 })
                 await asyncio.sleep(0)
 
@@ -425,6 +427,8 @@ async def recommend_stream(
             if profile.quality_level:
                 done_data["quality"] = {
                     "level": profile.quality_level,
+                    "paper_strength": profile.paper_strength,
+                    "readiness": profile.readiness,
                     "confidence": profile.quality_confidence,
                     "reasons": profile.quality_reasons,
                 }
