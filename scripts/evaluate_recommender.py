@@ -235,10 +235,11 @@ def main():
     # 推荐函数（调用本地 API）
     def recommender_func(title: str, abstract: str):
         import requests
-        response = requests.get(
-            f"{args.api_url}/api/recommend/stream",
-            params={"title": title, "abstract": abstract, "mode": "abstract", "top_k": 5},
-            headers={"Accept": "application/json"},
+        import json
+        response = requests.post(
+            f"{args.api_url}/api/recommend",
+            json={"title": title, "abstract": abstract, "mode": "abstract", "top_k": 5},
+            headers={"Content-Type": "application/json", "Accept": "application/json"},
             timeout=120,
         )
         if response.status_code != 200:
