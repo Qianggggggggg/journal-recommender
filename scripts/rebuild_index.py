@@ -88,7 +88,6 @@ def rebuild_faiss():
         'journal_name': j.journal_name,
         'subject_tags': ','.join(j.subject_tags),
         'ccf_rating': j.ccf_rating or '',
-        'quartile': j.quartile or '',
     } for j in journals])
 
     df.to_parquet(metadata_path)

@@ -2,6 +2,7 @@
 import yaml
 from typing import List, Optional, Dict, Any, Tuple
 
+from ..utils.text import quality_adjustment_factor
 from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
 from ..papers.quality_assessor import PaperQualityAssessor
@@ -116,14 +117,12 @@ class RecommenderPipeline:
 
         strength = paper_profile.paper_strength
 
-        # 软权重公式：0.9 + 0.2*(strength-0.5)
-        base_adjustment = 0.9 + 0.2 * (strength - 0.5)
+        base_adjustment = quality_adjustment_factor(strength)
 
         adjusted = []
         for journal, score, reasons in ranked:
             ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
             adjustment = base_adjustment * ccf_multiplier
-            adjustment = max(0.8, min(1.08, adjustment))
 
             adjusted_score = score * adjustment
             new_reasons = reasons.copy()

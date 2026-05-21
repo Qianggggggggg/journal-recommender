@@ -1,11 +1,13 @@
 """论文质量评估（纯LLM）"""
+import logging
 from typing import Optional, List, Dict
 from pydantic import BaseModel, Field
-import re
 import tenacity
 
-from ..utils.llm import MiniMaxLLM
+from ..utils.llm import MiniMaxLLM, parse_json_response
 from .paper_model import PaperInput, PaperProfile
+
+logger = logging.getLogger(__name__)
 
 
 class PaperQuality(BaseModel):
@@ -22,8 +24,8 @@ class PaperQuality(BaseModel):
 
     # 汇总标签（向后兼容）
     quality_level: str = Field(
-        default="Q3",
-        description="质量等级: Q1/Q2/Q3/Q4 (由 paper_strength 映射)"
+        default="C",
+        description="质量等级: A/B/C/D (D表示未达发表水平)"
     )
 
     # 置信度
@@ -49,15 +51,15 @@ class PaperQuality(BaseModel):
 
     @staticmethod
     def _strength_to_level(strength: float) -> str:
-        """将 strength 映射到 Q1-Q4"""
+        """将 strength 映射到 A/B/C/D"""
         if strength >= 0.75:
-            return "Q1"
+            return "A"
         elif strength >= 0.55:
-            return "Q2"
+            return "B"
         elif strength >= 0.35:
-            return "Q3"
+            return "C"
         else:
-            return "Q4"
+            return "D"  # 未达发表水平
 
     @staticmethod
     def _strength_to_readiness(strength: float, novelty_score: int) -> str:
@@ -87,7 +89,7 @@ class PaperQualityAssessor:
         wait=tenacity.wait_exponential(multiplier=2, min=2, max=8),
         stop=tenacity.stop_after_attempt(3),
         reraise=True,
-        before_sleep=lambda retry_state: print(f"[PaperQualityAssessor] Retry {retry_state.attempt_number}/3 after error..."),
+        before_sleep=lambda retry_state: logger.warning(f"[PaperQualityAssessor] Retry {retry_state.attempt_number}/3 after error..."),
     )
     def assess(
         self,
@@ -100,7 +102,7 @@ class PaperQualityAssessor:
         user_filled = user_prompt.format(
             title=paper_input.title,
             abstract=paper_input.abstract or "",
-            full_text_summary=paper_input.full_text[:500] if paper_input.full_text else "",
+            full_text_summary=paper_input.full_text if paper_input.full_text else "",
             research_area=", ".join(paper_profile.research_area) if paper_profile.research_area else "未知",
             method_type=paper_profile.method_type,
             keywords=", ".join(paper_profile.keywords) if paper_profile.keywords else "无",
@@ -115,10 +117,9 @@ class PaperQualityAssessor:
         except Exception as e:
             raise PaperQualityError(f"LLM调用失败: {e}")
 
-        import json
-        json_match = re.search(r'\{.*\}', response.content, re.DOTALL)
-        if json_match:
-            data = json.loads(json_match.group())
+        # 解析 JSON 响应
+        data = parse_json_response(response.content)
+        if data:
 
             # 提取各维度分数 (0~3)
             novelty_score = data.get("novelty_score", 2)

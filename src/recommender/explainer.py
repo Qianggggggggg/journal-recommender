@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from ..journals.journal_model import Journal
 from ..papers.paper_model import PaperProfile
-from ..utils.llm import MiniMaxLLM
+from ..utils.llm import MiniMaxLLM, parse_json_response
 
 
 class Explainer:
@@ -44,7 +44,6 @@ class Explainer:
             novelty_type=paper_profile.novelty_type or "method",
             journal_name=journal.journal_name,
             scope_text=journal.scope_text,
-            quartile=journal.quartile or "unknown",
             oa_type=journal.oa_type,
             review_time=journal.review_time or "unknown",
             journal_keywords=", ".join(journal.keywords) or "无",
@@ -52,10 +51,8 @@ class Explainer:
 
         try:
             response = self.llm.chat(self.system_prompt, user_prompt)
-            import re
-            json_match = re.search(r'\{.*\}', response.content, re.DOTALL)
-            if json_match:
-                data = json.loads(json_match.group())
+            data = parse_json_response(response.content)
+            if data:
                 reasons = data.get("reasons", [])
                 if reasons:
                     return reasons
@@ -90,11 +87,7 @@ class Explainer:
             labels = {"method": "方法论", "system": "系统设计", "experiment": "实验", "survey": "综述"}
             reasons.append(f"类型：{labels.get(paper_profile.method_type, paper_profile.method_type)}")
 
-        # 4. 期刊质量
-        if journal.quartile:
-            reasons.append(f"期刊：{journal.quartile}区")
-
-        # 5. OA模式
+        # 4. OA模式
         if journal.oa_type:
             labels = {"full_oa": "完全OA", "hybrid": "混合OA", "subscription": "订阅"}
             reasons.append(f"出版：{labels.get(journal.oa_type, journal.oa_type)}")

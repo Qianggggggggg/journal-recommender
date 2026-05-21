@@ -1,15 +1,80 @@
 """MiniMax LLM 调用封装"""
+import json
+import logging
 import os
-from typing import Optional
+import re
+from typing import Optional, Any
 
 import httpx
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 
 
 class LLMResponse(BaseModel):
     content: str
     model: str
     usage: dict
+
+
+def parse_json_response(content: str) -> dict[str, Any] | None:
+    """
+    从 LLM 响应中解析 JSON。
+
+    策略：
+    1. 直接尝试 json.loads 解析完整内容（如果内容本身就是 JSON）
+    2. 使用正则提取第一个 JSON 对象
+    3. 清理常见的 markdown 代码块格式
+    """
+    if not content or not content.strip():
+        return None
+
+    # 策略1：直接解析（处理完整响应本身就是 JSON 的情况）
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        pass
+
+    # 策略2：清理 markdown 代码块格式
+    cleaned = content.strip()
+    if cleaned.startswith("```"):
+        # 移除 ```json 或 ``` 等代码块标记
+        lines = cleaned.split("\n")
+        # 跳过第一行（```json 或 ```）
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        # 移除最后一行（```）
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        cleaned = "\n".join(lines)
+
+    # 策略3：提取 JSON 对象或数组
+    json_patterns = [
+        # 匹配 {...} 或 [...] 包裹的 JSON
+        r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}',  # 嵌套支持
+        r'\[[^\[\]]*(?:\[[^\[\]]*\][^\[\]]*)*\]',
+    ]
+
+    for pattern in json_patterns:
+        match = re.search(pattern, cleaned, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group())
+            except json.JSONDecodeError:
+                continue
+
+    # 策略4：尝试更宽松的匹配（取最后一个 { 开始的子串）
+    last_brace = content.rfind("{")
+    last_bracket = content.rfind("[")
+    start = max(last_brace, last_bracket)
+    if start > 0:
+        try:
+            return json.loads(content[start:])
+        except json.JSONDecodeError:
+            pass
+
+    logger.warning(f"无法解析 JSON 响应: {content[:100]}...")
+    return None
 
 
 class MiniMaxLLM:

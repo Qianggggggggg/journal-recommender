@@ -91,9 +91,11 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
     if (mode === 'full') {
         const fileInput = document.getElementById('full_text');
         const file = fileInput.files[0];
-        if (file) {
-            fullText = await readFileContent(file);
+        if (!file) {
+            showError('请上传 PDF 文件（全文模式必须上传论文）');
+            return;
         }
+        fullText = await readFileContent(file);
     }
 
     const topK = parseInt(document.getElementById('top_k').value);
@@ -107,20 +109,31 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
 
     try {
         const params = {
-        title: title,
-        abstract: abstract,
-        mode: mode,
-        top_k: topK,
-        oa_preference: oaPreference,
-    };
-    latestParams = params;
+            title: title,
+            abstract: abstract,
+            mode: mode,
+            top_k: topK,
+            oa_preference: oaPreference,
+        };
+        latestParams = params;
 
-    const urlParams = new URLSearchParams(params);
-
-        const response = await fetch(`${API_BASE}/recommend/stream?${urlParams}`, {
-            method: 'GET',
-            headers: { 'Accept': 'text/event-stream' },
-        });
+        let response;
+        if (mode === 'full' && fullText) {
+            // full 模式：POST JSON body 传输 full_text
+            params.full_text = fullText;
+            response = await fetch(`${API_BASE}/recommend/stream`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
+                body: JSON.stringify(params),
+            });
+        } else {
+            // title/abstract 模式：GET URL 参数
+            const urlParams = new URLSearchParams(params);
+            response = await fetch(`${API_BASE}/recommend/stream?${urlParams}`, {
+                method: 'GET',
+                headers: { 'Accept': 'text/event-stream' },
+            });
+        }
 
         if (!response.ok) {
             throw new Error(`请求失败 (${response.status})`);
@@ -259,22 +272,22 @@ function renderResults(recommendations, doneData = null) {
     }
 
     resultsEl.innerHTML = qualityHtml + recommendations.map((rec, idx) => {
-        const rankMethodText = rec.rank_method === 'llm' ? 'AI智能' : '规则';
+        const rankMethodText = '';
         const rankMethodClass = rec.rank_method === 'llm' ? 'rank-llm' : 'rank-rule';
-        const quartileClass = rec.quartile ? `quartile-${rec.quartile.toLowerCase()}` : '';
-        const quartileHtml = rec.quartile ? `<span class="journal-quartile ${quartileClass}">${rec.quartile}</span>` : '';
-        const ccfHtml = rec.ccf_rating ? `<span class="ccf-badge ccf-${rec.ccf_rating.toLowerCase()}">CCF-${rec.ccf_rating}</span>` : '';
+        // 确保 ccf_rating 显示，有默认值 "N/A" 如果没有
+        const ccfRating = rec.ccf_rating || '';
+        const ccfClass = ccfRating ? `ccf-${ccfRating.toLowerCase()}` : '';
+        const ccfHtml = ccfRating ? `<span class="ccf-badge ${ccfClass}" style="display:inline-block;padding:0.15rem 0.4rem;border-radius:3px;font-size:0.6rem;font-weight:700;margin-left:0.3rem;background:${ccfRating==='A'?'linear-gradient(135deg,#d4a017,#f5d06a)':ccfRating==='B'?'linear-gradient(135deg,#1e40af,#3b82f6)':ccfRating==='C'?'linear-gradient(135deg,#16a34a,#4ade80)':ccfRating==='D'?'linear-gradient(135deg,#6b7280,#9ca3af)':''};color:${ccfRating==='A'?'#1a1a1a':'#fff'}">CCF-${ccfRating}</span>` : '';
 
         const oaLabel = rec.oa_type === 'full_oa' ? '完全OA' : rec.oa_type === 'hybrid' ? '混合OA' : '订阅';
 
         return `
-        <div class="journal-card" data-index="${idx}">
+        <div class="journal-card" data-index="${idx}" style="animation-delay: ${idx * 0.08}s">
             <div class="card-header">
                 <div class="card-title-row">
                     <span class="journal-name">${rec.journal_name}</span>
-                    ${quartileHtml}
                     ${ccfHtml}
-                    <span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>
+                    ${rankMethodText ? `<span class="rank-badge ${rankMethodClass}">${rankMethodText}</span>` : ''}
                 </div>
                 <div class="card-actions">
                     <button class="expand-btn" onclick="toggleCard(${idx})" aria-label="展开详情">
@@ -290,7 +303,7 @@ function renderResults(recommendations, doneData = null) {
                     <span class="tag">${oaLabel}</span>
                 </div>
                 <ul class="card-reasons">
-                    ${rec.match_reasons.map(r => `<li>${r}</li>`).join('')}
+                    ${(rec.match_reasons || []).filter((r, i, arr) => arr.indexOf(r) === i).map(r => `<li>${r}</li>`).join('')}
                 </ul>
                 <div class="confidence-row">
                     <div class="confidence-bar">

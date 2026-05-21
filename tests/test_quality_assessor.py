@@ -31,7 +31,7 @@ class TestPaperQualityAssessor:
         result = assessor.assess(paper_input, profile, "system", "user")
 
         assert isinstance(result, PaperQuality)
-        assert result.quality_level == "Q1"
+        assert result.quality_level == "A"
         assert result.paper_strength >= 0.75
         assert result.confidence == 0.8
 
@@ -98,18 +98,18 @@ class TestPaperQualityAssessor:
 
     def test_strength_to_level_mapping(self):
         """测试 strength -> level 映射"""
-        # Q1: >= 0.75
-        assert PaperQuality._strength_to_level(0.8) == "Q1"
-        assert PaperQuality._strength_to_level(0.75) == "Q1"
-        # Q2: >= 0.55
-        assert PaperQuality._strength_to_level(0.6) == "Q2"
-        assert PaperQuality._strength_to_level(0.55) == "Q2"
-        # Q3: >= 0.35
-        assert PaperQuality._strength_to_level(0.4) == "Q3"
-        assert PaperQuality._strength_to_level(0.35) == "Q3"
-        # Q4: < 0.35
-        assert PaperQuality._strength_to_level(0.3) == "Q4"
-        assert PaperQuality._strength_to_level(0.0) == "Q4"
+        # A: >= 0.75
+        assert PaperQuality._strength_to_level(0.8) == "A"
+        assert PaperQuality._strength_to_level(0.75) == "A"
+        # B: >= 0.55
+        assert PaperQuality._strength_to_level(0.6) == "B"
+        assert PaperQuality._strength_to_level(0.55) == "B"
+        # C: >= 0.35
+        assert PaperQuality._strength_to_level(0.4) == "C"
+        assert PaperQuality._strength_to_level(0.35) == "C"
+        # D: < 0.35
+        assert PaperQuality._strength_to_level(0.3) == "D"
+        assert PaperQuality._strength_to_level(0.0) == "D"
 
     def test_readiness_inference(self):
         """测试准备度推断逻辑"""

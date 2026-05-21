@@ -32,7 +32,6 @@ class JournalResponse(BaseModel):
     matched_fields: List[str]
     tags: List[str]
     oa_type: str
-    quartile: Optional[str]
     submission_url: Optional[str]
     rank_method: str = Field("rule", description="排序方法: rule/llm")
 
@@ -52,7 +51,6 @@ class JournalListItem(BaseModel):
     journal_name: str
     subject_tags: List[str]
     oa_type: str
-    quartile: Optional[str]
 
 
 class JournalListResponse(BaseModel):

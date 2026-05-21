@@ -60,7 +60,7 @@ def test_recommend_endpoint_with_mock(mock_llm):
             mock_profile.novelty_type = "new_method"
             mock_profile.paper_strength = 0.8
             mock_profile.readiness = "Ready"
-            mock_profile.quality_level = "Q1"
+            mock_profile.quality_level = "A"
             mock_profile.quality_confidence = 0.8
             mock_profile.quality_reasons = []
             MockParser.return_value.parse.return_value = mock_profile
@@ -69,7 +69,7 @@ def test_recommend_endpoint_with_mock(mock_llm):
                 mock_quality = MagicMock()
                 mock_quality.paper_strength = 0.8
                 mock_quality.readiness = "Ready"
-                mock_quality.quality_level = "Q1"
+                mock_quality.quality_level = "A"
                 mock_quality.confidence = 0.8
                 mock_quality.reasons = []
                 MockAssessor.return_value.assess.return_value = mock_quality

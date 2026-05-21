@@ -238,7 +238,7 @@ def main():
         import json
         response = requests.post(
             f"{args.api_url}/api/recommend",
-            json={"title": title, "abstract": abstract, "mode": "abstract", "top_k": 5},
+            json={"title": title, "abstract": abstract, "mode": "full", "top_k": 5},
             headers={"Content-Type": "application/json", "Accept": "application/json"},
             timeout=120,
         )

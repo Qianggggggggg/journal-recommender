@@ -1,12 +1,14 @@
 """LLM 排序（阶段二）"""
 import json
-import re
+import logging
 import tenacity
 from typing import List, Tuple
 
 from ..journals.journal_model import Journal
 from ..papers.paper_model import PaperProfile
-from ..utils.llm import MiniMaxLLM
+from ..utils.llm import MiniMaxLLM, parse_json_response
+
+logger = logging.getLogger(__name__)
 
 
 class LLMRankerError(Exception):
@@ -26,7 +28,7 @@ class LLMRanker:
         wait=tenacity.wait_exponential(multiplier=2, min=2, max=8),
         stop=tenacity.stop_after_attempt(3),
         reraise=True,
-        before_sleep=lambda retry_state: print(f"[LLMRanker] Retry {retry_state.attempt_number}/3 after error..."),
+        before_sleep=lambda retry_state: logger.warning(f"[LLMRanker] Retry {retry_state.attempt_number}/3 after error..."),
     )
     def rank(
         self,
@@ -42,7 +44,6 @@ class LLMRanker:
                 "journal_id": journal.journal_id,
                 "journal_name": journal.journal_name,
                 "scope": journal.scope_text or "",  # 完整 scope
-                "quartile": journal.quartile or "unknown",
                 "oa_type": journal.oa_type,
                 "subject_tags": journal.subject_tags[:5],  # 限制标签数量
                 "keywords": journal.keywords[:5],  # 限制关键词数量
@@ -71,11 +72,10 @@ class LLMRanker:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 
         # 解析结果
-        json_match = re.search(r'\{.*\}', response.content, re.DOTALL)
-        if not json_match:
+        data = parse_json_response(response.content)
+        if not data:
             raise LLMRankerError(f"LLM响应格式错误，无法解析: {response.content}")
 
-        data = json.loads(json_match.group())
         rankings = data.get("rankings", [])
 
         # 构建结果

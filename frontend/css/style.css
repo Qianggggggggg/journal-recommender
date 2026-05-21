@@ -11,10 +11,6 @@
     --error-bg: #fff5f5;
     --error-border: #ffcccc;
     --error-text: #dc2626;
-    --q1-bg: #dcfce7; --q1-color: #166534;
-    --q2-bg: #dbeafe; --q2-color: #1e40af;
-    --q3-bg: #fef3c7; --q3-color: #92400e;
-    --q4-bg: #f3f4f6; --q4-color: #6b7280;
     --radius: 8px;
     --shadow: 0 1px 3px rgba(0,0,0,0.06);
     --shadow-hover: 0 4px 12px rgba(0,0,0,0.1);
@@ -423,6 +419,13 @@ textarea {
     overflow: hidden;
     transition: box-shadow 0.2s, transform 0.2s;
     cursor: pointer;
+    animation: cardShimmer 0.6s ease-out;
+}
+
+@keyframes cardShimmer {
+    0% { opacity: 0; transform: translateY(8px); }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .journal-card:hover {
@@ -441,32 +444,28 @@ textarea {
     border-bottom: 1px solid var(--border);
 }
 
-.card-title-row { display: flex; align-items: center; gap: 0.75rem; }
+.card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
 
 .journal-name {
     font-weight: 600;
     font-size: 0.95rem;
+    flex-shrink: 0;
 }
-
-.journal-quartile {
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.quartile-q1 { background: var(--q1-bg); color: var(--q1-color); }
-.quartile-q2 { background: var(--q2-bg); color: var(--q2-color); }
-.quartile-q3 { background: var(--q3-bg); color: var(--q3-color); }
-.quartile-q4 { background: var(--q4-bg); color: var(--q4-color); }
 
 .rank-badge {
+    margin-left: auto;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    flex-shrink: 0;
 }
 
 .rank-llm { background: #dbeafe; color: #1e40af; }
@@ -490,10 +489,10 @@ textarea {
     font-weight: 700;
 }
 
-.quality-q1 { background: linear-gradient(135deg, #065f46, #059669); color: #fff; }
-.quality-q2 { background: linear-gradient(135deg, #1e40af, #3b82f6); color: #fff; }
-.quality-q3 { background: linear-gradient(135deg, #92400e, #d97706); color: #fff; }
-.quality-q4 { background: linear-gradient(135deg, #6b7280, #9ca3af); color: #fff; }
+.quality-a { background: linear-gradient(135deg, #d4a017, #f5d06a); color: #1a1a1a; text-shadow: 0 1px 1px rgba(255,255,255,0.3); }
+.quality-b { background: linear-gradient(135deg, #1e40af, #3b82f6); color: #fff; }
+.quality-c { background: linear-gradient(135deg, #16a34a, #4ade80); color: #fff; }
+.quality-d { background: linear-gradient(135deg, #6b7280, #9ca3af); color: #fff; }
 
 .quality-strength {
     font-size: 0.75rem;
@@ -523,9 +522,10 @@ textarea {
     margin-left: 0.3rem;
 }
 
-.ccf-a { background: linear-gradient(135deg, #065f46, #059669); color: #fff; }
+.ccf-a { background: linear-gradient(135deg, #d4a017, #f5d06a); color: #1a1a1a; text-shadow: 0 1px 1px rgba(255,255,255,0.3); }
 .ccf-b { background: linear-gradient(135deg, #1e40af, #3b82f6); color: #fff; }
-.ccf-c { background: linear-gradient(135deg, #92400e, #d97706); color: #fff; }
+.ccf-c { background: linear-gradient(135deg, #16a34a, #4ade80); color: #fff; }
+.ccf-d { background: linear-gradient(135deg, #6b7280, #9ca3af); color: #fff; }
 
 .card-actions {
     display: flex;

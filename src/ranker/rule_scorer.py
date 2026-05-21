@@ -13,12 +13,12 @@ class RuleScorer:
         self.weights = {
             "research_area_match": 2.0,
             "ccf_area_match": 3.0,    # CCF领域匹配（最高优先级）
+            "ccf_a_weight": 1.0,      # CCF-A 期刊加分
+            "ccf_b_weight": 0.6,      # CCF-B 期刊加分
+            "ccf_c_weight": 0.2,       # CCF-C 期刊加分
             "technique_match": 1.8,
             "method_type_match": 1.5,
             "paper_type_match": 1.0,
-            "quartile_q1": 1.0,    # Q1 加分
-            "quartile_q2": 0.6,    # Q2 加分
-            "quartile_q3": 0.2,    # Q3 加分
             "oa_preference_match": 0.3,
             "keyword_overlap": 1.2,
             "dataset_match": 1.0,
@@ -49,16 +49,6 @@ class RuleScorer:
             journal.journal_name,
         ])
         return self._compute_keyword_overlap(paper_text, journal_text)
-
-    def _get_quartile_weight(self, quartile: str) -> int:
-        """获取分区权重（1-4）"""
-        weights = {"Q1": 4, "Q2": 3, "Q3": 2, "Q4": 1}
-        return weights.get(quartile or "", 2)  # 默认 Q3
-
-    def _get_quality_level_weight(self, quality_level: str) -> int:
-        """获取论文质量等级权重（1-4）"""
-        weights = {"Q1": 4, "Q2": 3, "Q3": 2, "Q4": 1}
-        return weights.get(quality_level or "", 2)
 
     def score(
         self, journal: Journal, paper_profile: PaperProfile, oa_preference: str = "any"
@@ -224,14 +214,15 @@ class RuleScorer:
                         reasons.append(f"创新类型契合: {paper_profile.novelty_type}")
                         break
 
-        # CCF评级加分（A=4, B=3, C=2映射到quartile）
-        # 注意：journals_ccf.jsonl 中 CCF-A→quartile=Q1, CCF-B→Q2, CCF-C→Q3
-        # 因此quartile加分已经隐含CCF权重，此处额外加CCF标识reason
+        # CCF评级加分（A=1.0, B=0.6, C=0.2）
         if journal.ccf_rating == "A":
+            score += self.weights["ccf_a_weight"]
             reasons.append(f"CCF-A类期刊")
         elif journal.ccf_rating == "B":
+            score += self.weights["ccf_b_weight"]
             reasons.append(f"CCF-B类期刊")
         elif journal.ccf_rating == "C":
+            score += self.weights["ccf_c_weight"]
             reasons.append(f"CCF-C类期刊")
 
         # 影响因子加分（归一化，值域 [0, 0.5]）

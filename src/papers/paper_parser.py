@@ -1,11 +1,14 @@
 """论文解析（纯LLM）"""
+import logging
 import time
 from typing import Optional
 
 import tenacity
 
-from ..utils.llm import MiniMaxLLM
+from ..utils.llm import MiniMaxLLM, parse_json_response
 from .paper_model import PaperProfile, PaperInput
+
+logger = logging.getLogger(__name__)
 
 
 class PaperParserError(Exception):
@@ -25,14 +28,14 @@ class PaperParser:
         wait=tenacity.wait_exponential(multiplier=2, min=2, max=8),
         stop=tenacity.stop_after_attempt(3),
         reraise=True,
-        before_sleep=lambda retry_state: print(f"[PaperParser] Retry {retry_state.attempt_number}/3 after error..."),
+        before_sleep=lambda retry_state: logger.warning(f"[PaperParser] Retry {retry_state.attempt_number}/3 after error..."),
     )
     def parse(self, paper_input: PaperInput, system_prompt: str, user_prompt: str) -> PaperProfile:
         """解析论文（LLM驱动，重试3次）"""
         user_filled = user_prompt.format(
             title=paper_input.title,
             abstract=paper_input.abstract or "",
-            full_text_summary=paper_input.full_text[:500] if paper_input.full_text else "",
+            full_text_summary=paper_input.full_text if paper_input.full_text else "",
         )
 
         try:
@@ -41,12 +44,8 @@ class PaperParser:
             raise PaperParserError(f"LLM调用失败: {e}")
 
         # 解析 JSON 响应
-        import json
-        import re
-
-        json_match = re.search(r'\{.*\}', response.content, re.DOTALL)
-        if json_match:
-            data = json.loads(json_match.group())
+        data = parse_json_response(response.content)
+        if data:
 
             # 确保列表字段是列表类型（防御 LLM 返回字符串的情况）
             list_fields = ["research_area", "application_domain", "keywords", "techniques", "datasets", "evaluation_metrics"]

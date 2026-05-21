@@ -1,4 +1,5 @@
 """API 路由"""
+from functools import lru_cache
 from typing import Optional, Union
 import json
 import os
@@ -25,6 +26,7 @@ from ..retriever.embedding_retriever import EmbeddingRetriever
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
+from ..utils.text import quality_adjustment_factor
 from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
@@ -47,6 +49,13 @@ router = APIRouter()
 # 全局组件（实际应通过依赖注入）
 _pipeline: Optional[RecommenderPipeline] = None
 _store: Optional[JournalStore] = None
+
+
+@lru_cache(maxsize=1)
+def _load_prompts() -> dict:
+    """加载 prompts.yaml（带缓存，避免每次请求重新读取）"""
+    with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 def get_pipeline() -> RecommenderPipeline:
@@ -180,8 +189,7 @@ async def recommend(request: Request):
         mode=mode,
     )
 
-    with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
-        prompts = yaml.safe_load(f)
+    prompts = _load_prompts()
 
     try:
         profile = pipeline.parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
@@ -220,7 +228,6 @@ async def recommend(request: Request):
             matched_fields=rec.matched_fields,
             tags=rec.journal.subject_tags,
             oa_type=rec.journal.oa_type,
-            quartile=rec.journal.quartile,
             submission_url=rec.journal.submission_url,
             rank_method=rank_method,
         ))
@@ -285,7 +292,6 @@ async def recommend_pdf_from_results(request: Request):
             oa_type=rec.get("oa_type", "subscription"),
             submission_url=rec.get("submission_url", ""),
             homepage_url=rec.get("homepage_url", ""),
-            quartile=rec.get("quartile", ""),
             ccf_rating=rec.get("ccf_rating", ""),
             impact_like_score=rec.get("impact_like_score") or None,
             review_time=rec.get("review_time") or "",
@@ -353,8 +359,7 @@ async def recommend_pdf(request: Request):
         mode=mode,
     )
 
-    with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
-        prompts = yaml.safe_load(f)
+    prompts = _load_prompts()
 
     try:
         profile = pipeline.parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
@@ -407,12 +412,12 @@ def _apply_quality_adjustment(
         return ranked
 
     strength = paper_profile.paper_strength
-    base_adjustment = 0.9 + 0.2 * (strength - 0.5)
+    base_adjustment = quality_adjustment_factor(strength)
 
     adjusted = []
     for journal, score, reasons in ranked:
         ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
-        adjustment = max(0.8, min(1.08, base_adjustment * ccf_multiplier))
+        adjustment = base_adjustment * ccf_multiplier
         new_reasons = reasons.copy()
         if strength >= 0.75:
             new_reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
@@ -425,15 +430,31 @@ def _apply_quality_adjustment(
 
 
 @router.get("/recommend/stream")
-async def recommend_stream(
-    title: str = Query(...),
-    abstract: str = Query(""),
-    mode: str = Query("abstract"),
-    top_k: int = Query(5, ge=1, le=20),
-    oa_preference: str = Query("any"),
-):
+@router.post("/recommend/stream")
+async def recommend_stream(request: Request):
     """流式推荐期刊（SSE）"""
+    import json
     pipeline = get_pipeline()
+
+    # 支持 GET（URL参数）和 POST（JSON body）
+    content_type = request.headers.get("content-type", "")
+    if "application/json" in content_type:
+        body = await request.body()
+        data = json.loads(body)
+        title = data.get("title", "")
+        abstract = data.get("abstract", "")
+        full_text = data.get("full_text", "")
+        mode = data.get("mode", "abstract")
+        top_k = data.get("top_k", 5)
+        oa_preference = data.get("oa_preference", "any")
+    else:
+        # GET 方式（兼容旧调用）
+        title = request.query_params.get("title", "")
+        abstract = request.query_params.get("abstract", "")
+        full_text = ""
+        mode = request.query_params.get("mode", "abstract")
+        top_k = int(request.query_params.get("top_k", 5))
+        oa_preference = request.query_params.get("oa_preference", "any")
 
     async def event_generator():
         import asyncio
@@ -452,7 +473,7 @@ async def recommend_stream(
             paper_input = PaperInput(
                 title=title,
                 abstract=abstract or "",
-                full_text="",
+                full_text=full_text or "",
                 mode=mode,
             )
 
@@ -585,8 +606,13 @@ async def recommend_stream(
                     "matched_fields": ["research_area", "method_type"],
                     "tags": journal.subject_tags,
                     "oa_type": journal.oa_type,
-                    "quartile": journal.quartile,
                     "submission_url": journal.submission_url or "",
+                    "homepage_url": journal.homepage_url or "",
+                    "publisher": journal.publisher or "",
+                    "ccf_rating": journal.ccf_rating or "",
+                    "impact_like_score": journal.impact_like_score,
+                    "review_time": journal.review_time or "",
+                    "apc": journal.apc,
                     "rank_method": rank_method,
                 }
                 recommendations.append(rec)
@@ -657,7 +683,6 @@ async def list_journals(
                 journal_name=j.journal_name,
                 subject_tags=j.subject_tags,
                 oa_type=j.oa_type,
-                quartile=j.quartile,
             )
             for j in journals
         ],

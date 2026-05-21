@@ -15,7 +15,7 @@ class Journal(BaseModel):
     submission_url: Optional[str] = Field(default=None, description="投稿链接")
     homepage_url: Optional[str] = Field(default=None, description="期刊主页")
     sqr_rank: Optional[int] = Field(default=None, description="SCImago 排名")
-    quartile: Optional[str] = Field(default=None, description="分区: Q1/Q2/Q3/Q4")
+    quartile: Optional[str] = Field(default=None, description="已废弃，请使用 ccf_rating")
     ccf_rating: Optional[str] = Field(default=None, description="CCF评级: A/B/C")
     impact_like_score: Optional[float] = Field(default=None, description="影响因子指标")
     review_time: Optional[str] = Field(default=None, description="审稿周期估算")

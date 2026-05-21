@@ -174,7 +174,7 @@ explainer_user: |
   期刊信息：
   - 名称：{journal_name}
   - Scope：{scope_text}
-  - 分区：{quartile}
+  - 分区：{ccf_rating}
   - OA类型：{oa_type}
   - 审稿周期：{review_time}
   - 关键词：{journal_keywords}

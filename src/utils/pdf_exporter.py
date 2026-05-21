@@ -1,4 +1,7 @@
 """推荐结果 PDF 导出"""
+import logging
+import platform
+import sys
 from typing import List, Optional
 from datetime import datetime
 
@@ -6,6 +9,42 @@ from fpdf import FPDF
 
 from ..journals.journal_model import JournalMatch
 from ..papers.paper_model import PaperProfile
+
+logger = logging.getLogger(__name__)
+
+
+def _get_cjk_font_paths():
+    """获取跨平台 CJK 字体路径列表"""
+    system = platform.system()
+    paths = []
+
+    if system == "Darwin":
+        paths.extend([
+            "/Library/Fonts/Arial Unicode.ttf",
+            "/System/Library/Fonts/Hiragino Sans GB.ttc",
+            "/System/Library/Fonts/STHeiti Medium.ttc",
+        ])
+    elif system == "Windows":
+        paths.extend([
+            "C:/Windows/Fonts/arialuni.ttf",
+            "C:/Windows/Fonts/msyh.ttc",
+            "C:/Windows/Fonts/simhei.ttf",
+        ])
+    else:  # Linux
+        paths.extend([
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+            "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+        ])
+
+    # 当前工作目录下的字体
+    import os
+    cwd = os.getcwd()
+    paths.extend([
+        os.path.join(cwd, "fonts", "Arial Unicode.ttf"),
+        os.path.join(cwd, "fonts", "arialuni.ttf"),
+    ])
+
+    return paths
 
 
 class PDFExporter:
@@ -69,7 +108,6 @@ class PDFExporter:
             pdf.journal_entry(
                 rank=i,
                 name=journal.journal_name,
-                quartile=journal.quartile or "N/A",
                 ccf=journal.ccf_rating or "N/A",
                 score=match.score,
                 reasons=match.match_reasons,
@@ -94,17 +132,21 @@ class PDFReport(FPDF):
     def __init__(self):
         super().__init__()
         self.set_auto_page_break(auto=True, margin=15)
-        # 添加中文字体支持 - 使用 Arial Unicode 跨平台兼容
-        try:
-            self.add_font('CJK', '', '/Library/Fonts/Arial Unicode.ttf')
-        except Exception:
+        # 添加中文字体支持 - 尝试多个跨平台路径
+        font_added = False
+        for font_path in _get_cjk_font_paths():
             try:
-                self.add_font('CJK', '', '/System/Library/Fonts/Hiragino Sans GB.ttc')
+                self.add_font('CJK', '', font_path)
+                font_added = True
+                break
             except Exception:
-                try:
-                    self.add_font('CJK', '', '/System/Library/Fonts/STHeiti Medium.ttc')
-                except Exception:
-                    pass
+                continue
+
+        if not font_added:
+            logger.warning(
+                "未找到可用的 CJK 中文字体，PDF 中文可能无法正确渲染。"
+                " 请安装 Arial Unicode.ttf 或其他 CJK 字体。"
+            )
 
     def header(self):
         """页眉"""
@@ -146,7 +188,6 @@ class PDFReport(FPDF):
         self,
         rank: int,
         name: str,
-        quartile: str,
         ccf: str,
         score: float,
         reasons: List[str],
@@ -165,12 +206,17 @@ class PDFReport(FPDF):
         self.set_font("CJK", size=9)
         self.set_text_color(100, 100, 100)
 
-        # 彩色标签
-        self.set_fill_color(0, 51, 102)
-        self.set_text_color(255, 255, 255)
-        self.cell(18, 5, f" {quartile} ", fill=True)
+        # 彩色标签 - 与前端一致的 CCF 等级颜色
+        ccf_colors = {
+            "A": (212, 160, 23),   # 金色
+            "B": (30, 64, 175),    # 蓝色
+            "C": (22, 163, 74),    # 绿色
+            "D": (107, 114, 128),  # 灰色
+        }
+        bg_color = ccf_colors.get(ccf.upper(), (107, 114, 128))
 
-        self.set_fill_color(102, 102, 102)
+        self.set_fill_color(*bg_color)
+        self.set_text_color(255, 255, 255)
         self.cell(18, 5, f" CCF-{ccf} ", fill=True)
 
         self.set_fill_color(220, 220, 220)

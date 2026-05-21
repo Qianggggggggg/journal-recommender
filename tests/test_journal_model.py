@@ -12,7 +12,6 @@ def test_journal_model():
         keywords=["deep learning", "neural network"],
         scope_text="Computer vision and pattern recognition",
         oa_type="subscription",
-        quartile="Q1",
     )
     assert journal.journal_id == "tpami"
     assert "cv" in journal.subject_tags

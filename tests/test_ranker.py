@@ -13,7 +13,6 @@ def test_rule_scorer():
         journal_name="AI Journal",
         subject_tags=["ai"],
         target_paper_type=["method", "experiment"],
-        quartile="Q1",
         oa_type="full_oa",
     )
     profile = PaperProfile(
@@ -32,9 +31,9 @@ def test_rule_scorer_rank():
     """测试规则排序"""
     scorer = RuleScorer()
     journals = [
-        Journal(journal_id="j1", journal_name="J1", subject_tags=["ai"], quartile="Q1"),
-        Journal(journal_id="j2", journal_name="J2", subject_tags=["cv"], quartile="Q2"),
-        Journal(journal_id="j3", journal_name="J3", subject_tags=["ai"], quartile="Q2"),
+        Journal(journal_id="j1", journal_name="J1", subject_tags=["ai"]),
+        Journal(journal_id="j2", journal_name="J2", subject_tags=["cv"]),
+        Journal(journal_id="j3", journal_name="J3", subject_tags=["ai"]),
     ]
     profile = PaperProfile(title="Test", research_area=["ai"])
 
