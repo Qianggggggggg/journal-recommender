@@ -1,6 +1,23 @@
 """文件解析工具"""
 import re
+from dataclasses import dataclass
 from pathlib import Path
+from typing import List, Tuple
+
+
+@dataclass
+class LayoutBlock:
+    """Layout-aware text block from PyMuPDF"""
+    text: str
+    font_size: float
+    font_name: str
+    bold: bool
+    x0: float
+    y0: float
+    x1: float
+    y1: float
+    page: int
+
 
 
 def extract_text_from_file(file_content: bytes, filename: str) -> str:
@@ -72,3 +89,70 @@ def clean_text(text: str, max_length: int = 50000) -> str:
         text = text[:max_length]
 
     return text.strip()
+
+
+def extract_layout_blocks(file_content: bytes, filename: str) -> Tuple[List[LayoutBlock], str]:
+    """
+    使用 PyMuPDF 提取 layout-aware blocks。
+
+    返回: (blocks, full_text)
+    - blocks: 按阅读顺序排列的 LayoutBlock 列表
+    - full_text: 简单拼接的全文（向后兼容）
+    """
+    import fitz  # PyMuPDF
+
+    ext = Path(filename).suffix.lower()
+    if ext != ".pdf":
+        return [], extract_text_from_file(file_content, filename)
+
+    try:
+        doc = fitz.open(stream=file_content, filetype="pdf")
+        blocks = []
+        full_text_parts = []
+
+        for page_num, page in enumerate(doc):
+            # 使用 dict 模式获取 blocks（关键区别于 PyPDF2）
+            blocks_data = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+
+            for block in blocks_data.get("blocks", []):
+                if block.get("type") != 0:  # 只处理文本块
+                    continue
+
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        text = span.get("text", "").strip()
+                        if not text:
+                            continue
+
+                        # 提取字体信息
+                        font = span.get("font", "")
+                        size = span.get("size", 0)
+                        bold = "bold" in font.lower() or "Heavy" in font
+
+                        # 坐标
+                        bbox = span.get("bbox", [0, 0, 0, 0])
+
+                        layout_block = LayoutBlock(
+                            text=text,
+                            font_size=size,
+                            font_name=font,
+                            bold=bold,
+                            x0=bbox[0],
+                            y0=bbox[1],
+                            x1=bbox[2],
+                            y1=bbox[3],
+                            page=page_num + 1,
+                        )
+                        blocks.append(layout_block)
+                        full_text_parts.append(text)
+
+        doc.close()
+
+        # 按阅读顺序排序（按 page, y, x）
+        blocks.sort(key=lambda b: (b.page, b.y0, b.x0))
+
+        return blocks, " ".join(full_text_parts)
+
+    except Exception as e:
+        print(f"[LayoutExtraction] error: {e}")
+        return [], ""
