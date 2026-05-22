@@ -366,6 +366,14 @@ async def recommend_pdf(request: Request):
         mode = form.get("mode", "abstract")
         top_k = int(form.get("top_k", 5))
         oa_preference = form.get("oa_preference", "any")
+        file = form.get("file")
+
+        # 处理文件上传
+        if file and mode == "full":
+            content = await file.read()
+            blocks, full_text = extract_layout_blocks(content, file.filename)
+            paper_ast = build_paper_ast(blocks, title=title)
+            full_text = paper_ast.to_markdown()
 
     # 解析论文
     paper_input = PaperInput(
@@ -549,6 +557,8 @@ async def recommend_stream(request: Request):
             query_text = title
             if abstract:
                 query_text += " " + abstract
+            if full_text:
+                query_text += " " + full_text[:5000]  # 限制长度避免过长
 
             candidates = pipeline.candidate_generator.generate(
                 query_text, profile, top_k=50, mode=mode
