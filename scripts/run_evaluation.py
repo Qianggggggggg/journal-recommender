@@ -41,7 +41,8 @@ from src.ranker.llm_ranker import LLMRanker
 from src.utils.llm import MiniMaxLLM
 from src.utils.embedding import OllamaEmbedding
 from src.utils.text import clean_text
-from src.utils.file_parser import extract_text_from_pdf
+from src.utils.file_parser import extract_layout_blocks
+from src.papers.section_splitter import build_paper_ast
 
 
 @dataclass
@@ -234,8 +235,9 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
             try:
                 with open(pdf_path, "rb") as f:
                     pdf_content = f.read()
-                full_text = extract_text_from_pdf(pdf_content)
-                full_text = clean_text(full_text)
+                blocks, _ = extract_layout_blocks(pdf_content, pdf_path)
+                paper_ast = build_paper_ast(blocks, title=title)
+                full_text = paper_ast.to_markdown()
             except Exception as e:
                 print(f"\nPDF读取失败: {arxiv_id} - {e}")
 
@@ -256,29 +258,16 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
             print(f"\n解析失败: {title[:30]}... - {e}")
             continue
 
-        # 质量评估
-        quality_prompts = {
-            "system": prompts.get("paper_quality_assessor_system", ""),
-            "user": prompts.get("paper_quality_assessor_user", ""),
-        }
-        try:
-            quality = pipeline.quality_assessor.assess(paper_input, profile,
-                                                       quality_prompts.get("system", ""),
-                                                       quality_prompts.get("user", ""))
-            profile.paper_strength = quality.paper_strength
-            profile.quality_level = quality.quality_level
-            profile.ccf_research_area = quality.ccf_research_area
-        except Exception as e:
-            print(f"\n质量评估失败: {title[:30]}... - {e}")
-            continue
-
-        # 执行推荐
+        # 执行推荐（内部统一处理质量评估，不再重复调用）
         try:
             rec_result = pipeline.recommend(
                 paper_input, profile,
                 top_k=top_k,
                 mode=mode,
-                quality_prompts=quality_prompts,
+                quality_prompts={
+                    "system": prompts.get("paper_quality_assessor_system", ""),
+                    "user": prompts.get("paper_quality_assessor_user", ""),
+                },
             )
         except Exception as e:
             print(f"\n推荐失败: {title[:30]}... - {e}")
