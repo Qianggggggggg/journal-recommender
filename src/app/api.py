@@ -30,7 +30,8 @@ from ..utils.text import quality_adjustment_factor
 from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm import MiniMaxLLM
 from ..utils.embedding import OllamaEmbedding
-from ..utils.file_parser import extract_text_from_file
+from ..utils.file_parser import extract_text_from_file, extract_layout_blocks
+from ..papers.section_splitter import build_paper_ast
 from ..utils.pdf_exporter import PDFExporter
 
 
@@ -151,6 +152,9 @@ async def recommend(request: Request):
 
     # 解析请求（支持 JSON 和 Form）
     content_type = request.headers.get("content-type", "")
+    print(f"[DEBUG] content_type: '{content_type}'")
+    body_preview = await request.body()
+    print(f"[DEBUG] body len: {len(body_preview)}, preview: {body_preview[:200]}")
 
     if "application/json" in content_type:
         # JSON 格式
@@ -179,7 +183,19 @@ async def recommend(request: Request):
     full_text_content = ""
     if file and mode == "full":
         content = await file.read()
-        full_text_content = extract_text_from_file(content, file.filename)
+        print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
+
+        # 使用 PyMuPDF layout extraction
+        blocks, full_text = extract_layout_blocks(content, file.filename)
+        print(f"[DEBUG] extracted {len(blocks)} blocks, text length: {len(full_text)}")
+
+        # 构建 Paper AST
+        paper_ast = build_paper_ast(blocks, title=title)
+        markdown = paper_ast.to_markdown()
+        print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections, markdown length: {len(markdown)}")
+
+        # 用 markdown 替换 full_text
+        full_text_content = markdown
 
     # 解析论文
     paper_input = PaperInput(
