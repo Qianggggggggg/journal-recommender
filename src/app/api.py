@@ -186,8 +186,7 @@ async def recommend(request: Request):
         print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
 
         # 使用 PyMuPDF layout extraction
-        blocks, full_text = extract_layout_blocks(content, file.filename)
-        print(f"[DEBUG] extracted {len(blocks)} blocks, text length: {len(full_text)}")
+        blocks, _ = extract_layout_blocks(content, file.filename)
 
         # 构建 Paper AST
         paper_ast = build_paper_ast(blocks, title=title)
