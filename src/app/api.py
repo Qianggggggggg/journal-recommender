@@ -459,9 +459,20 @@ async def recommend_stream(request: Request):
     import json
     pipeline = get_pipeline()
 
-    # 支持 GET（URL参数）和 POST（JSON body 或 FormData）
+    # 支持 GET（URL参数）、POST（JSON body 或 FormData）
     content_type = request.headers.get("content-type", "")
-    if "application/json" in content_type:
+    method = request.method
+
+    if method == "GET":
+        # GET 方式：读取 query params
+        title = request.query_params.get("title", "")
+        abstract = request.query_params.get("abstract", "")
+        full_text = ""
+        mode = request.query_params.get("mode", "abstract")
+        top_k = int(request.query_params.get("top_k", 5))
+        oa_preference = request.query_params.get("oa_preference", "any")
+    elif "application/json" in content_type:
+        # POST JSON body
         body = await request.body()
         data = json.loads(body)
         title = data.get("title", "")
@@ -471,7 +482,7 @@ async def recommend_stream(request: Request):
         top_k = data.get("top_k", 5)
         oa_preference = data.get("oa_preference", "any")
     else:
-        # POST 方式：支持 FormData
+        # POST FormData
         form = await request.form()
         title = form.get("title", "")
         abstract = form.get("abstract", "")
