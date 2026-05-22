@@ -43,6 +43,19 @@ class PaperInput(BaseModel):
     mode: str = Field(default="abstract", description="title/abstract/full")
 
 
+class Block(BaseModel):
+    """单个文本块（来自 PyMuPDF）"""
+    text: str = ""
+    font_size: float = 0.0
+    font_name: str = ""
+    bold: bool = False
+    x0: float = 0.0
+    y0: float = 0.0
+    x1: float = 0.0
+    y1: float = 0.0
+    page_number: int = 0
+
+
 class SectionSplitResult(BaseModel):
     """章节切分结果"""
     introduction: str = ""
@@ -50,3 +63,32 @@ class SectionSplitResult(BaseModel):
     experiment: str = ""
     conclusion: str = ""
     other: str = ""
+    blocks: List[Block] = Field(default_factory=list)  # 新增
+
+
+class Section(BaseModel):
+    """论文章节"""
+    title: str = ""
+    level: int = 1  # 1=title, 2=section, 3=subsection
+    content: str = ""  # 该章节的完整文本
+    blocks: List[Block] = Field(default_factory=list)  # 原始 blocks
+
+
+class PaperDocument(BaseModel):
+    """论文结构化文档（Paper AST）"""
+    title: str = ""
+    abstract: str = ""
+    sections: List[Section] = Field(default_factory=list)
+    all_blocks: List[Block] = Field(default_factory=list)
+
+    def to_markdown(self) -> str:
+        """转换为 Markdown 格式"""
+        lines = []
+        if self.title:
+            lines.append(f"# {self.title}\n")
+        if self.abstract:
+            lines.append(f"## Abstract\n{self.abstract}\n")
+        for section in self.sections:
+            level_prefix = "#" * min(section.level + 1, 6)
+            lines.append(f"{level_prefix} {section.title}\n{section.content}\n")
+        return "\n".join(lines)
