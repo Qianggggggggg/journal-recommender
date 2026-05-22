@@ -1,8 +1,11 @@
 """文件解析工具"""
+import logging
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Tuple
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -55,7 +58,7 @@ def extract_text_from_pdf(file_content: bytes) -> str:
 
         return "\n".join(text_parts)
     except Exception as e:
-        print(f"PDF extraction error: {e}")
+        logger.error(f"PDF extraction failed: {e}")
         return ""
 
 
@@ -106,53 +109,51 @@ def extract_layout_blocks(file_content: bytes, filename: str) -> Tuple[List[Layo
         return [], extract_text_from_file(file_content, filename)
 
     try:
-        doc = fitz.open(stream=file_content, filetype="pdf")
-        blocks = []
-        full_text_parts = []
+        with fitz.open(stream=file_content, filetype="pdf") as doc:
+            blocks = []
+            full_text_parts = []
 
-        for page_num, page in enumerate(doc):
-            # 使用 dict 模式获取 blocks（关键区别于 PyPDF2）
-            blocks_data = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+            for page_num, page in enumerate(doc):
+                # 使用 dict 模式获取 blocks（关键区别于 PyPDF2）
+                blocks_data = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
 
-            for block in blocks_data.get("blocks", []):
-                if block.get("type") != 0:  # 只处理文本块
-                    continue
+                for block in blocks_data.get("blocks", []):
+                    if block.get("type") != 0:  # 只处理文本块
+                        continue
 
-                for line in block.get("lines", []):
-                    for span in line.get("spans", []):
-                        text = span.get("text", "").strip()
-                        if not text:
-                            continue
+                    for line in block.get("lines", []):
+                        for span in line.get("spans", []):
+                            text = span.get("text", "").strip()
+                            if not text:
+                                continue
 
-                        # 提取字体信息
-                        font = span.get("font", "")
-                        size = span.get("size", 0)
-                        bold = "bold" in font.lower() or "Heavy" in font
+                            # 提取字体信息
+                            font = span.get("font", "")
+                            size = span.get("size", 0)
+                            bold = "bold" in font.lower() or "heavy" in font.lower()
 
-                        # 坐标
-                        bbox = span.get("bbox", [0, 0, 0, 0])
+                            # 坐标
+                            bbox = span.get("bbox", [0, 0, 0, 0])
 
-                        layout_block = LayoutBlock(
-                            text=text,
-                            font_size=size,
-                            font_name=font,
-                            bold=bold,
-                            x0=bbox[0],
-                            y0=bbox[1],
-                            x1=bbox[2],
-                            y1=bbox[3],
-                            page=page_num + 1,
-                        )
-                        blocks.append(layout_block)
-                        full_text_parts.append(text)
+                            layout_block = LayoutBlock(
+                                text=text,
+                                font_size=size,
+                                font_name=font,
+                                bold=bold,
+                                x0=bbox[0],
+                                y0=bbox[1],
+                                x1=bbox[2],
+                                y1=bbox[3],
+                                page=page_num + 1,
+                            )
+                            blocks.append(layout_block)
+                            full_text_parts.append(text)
 
-        doc.close()
+            # 按阅读顺序排序（按 page, y, x）
+            blocks.sort(key=lambda b: (b.page, b.y0, b.x0))
 
-        # 按阅读顺序排序（按 page, y, x）
-        blocks.sort(key=lambda b: (b.page, b.y0, b.x0))
-
-        return blocks, " ".join(full_text_parts)
+            return blocks, " ".join(full_text_parts)
 
     except Exception as e:
-        print(f"[LayoutExtraction] error: {e}")
+        logger.error(f"Layout extraction failed: {e}")
         return [], ""
