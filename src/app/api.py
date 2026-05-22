@@ -459,7 +459,7 @@ async def recommend_stream(request: Request):
     import json
     pipeline = get_pipeline()
 
-    # 支持 GET（URL参数）和 POST（JSON body）
+    # 支持 GET（URL参数）和 POST（JSON body 或 FormData）
     content_type = request.headers.get("content-type", "")
     if "application/json" in content_type:
         body = await request.body()
@@ -471,13 +471,32 @@ async def recommend_stream(request: Request):
         top_k = data.get("top_k", 5)
         oa_preference = data.get("oa_preference", "any")
     else:
-        # GET 方式（兼容旧调用）
-        title = request.query_params.get("title", "")
-        abstract = request.query_params.get("abstract", "")
+        # POST 方式：支持 FormData
+        form = await request.form()
+        title = form.get("title", "")
+        abstract = form.get("abstract", "")
         full_text = ""
-        mode = request.query_params.get("mode", "abstract")
-        top_k = int(request.query_params.get("top_k", 5))
-        oa_preference = request.query_params.get("oa_preference", "any")
+        mode = form.get("mode", "abstract")
+        top_k = int(form.get("top_k", 5))
+        oa_preference = form.get("oa_preference", "any")
+        file = form.get("file")  # UploadFile 对象
+
+        # 处理文件上传（full-text 模式）
+        if file and mode == "full":
+            content = await file.read()
+            print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
+
+            # 使用 PyMuPDF layout extraction
+            blocks, _ = extract_layout_blocks(content, file.filename)
+            print(f"[DEBUG] extracted {len(blocks)} blocks")
+
+            # 构建 Paper AST
+            paper_ast = build_paper_ast(blocks, title=title)
+            markdown = paper_ast.to_markdown()
+            print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections")
+
+            # 用 markdown 替换 full_text
+            full_text = markdown
 
     async def event_generator():
         import asyncio
