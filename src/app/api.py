@@ -292,6 +292,13 @@ async def recommend_pdf_from_results(request: Request):
             paper_type=paper_profile_data.get("paper_type", ""),
             keywords=paper_profile_data.get("keywords", []),
         )
+        # 补充 quality 信息（从前端 SSE doneData.quality 传入）
+        quality_data = data.get("quality", {})
+        if quality_data:
+            profile.quality_level = quality_data.get("level")
+            profile.paper_strength = quality_data.get("paper_strength")
+            profile.quality_confidence = quality_data.get("confidence")
+            profile.readiness = quality_data.get("readiness")
 
     # 构建 JournalMatch 对象列表
     from ..journals.journal_model import Journal, JournalMatch

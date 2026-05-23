@@ -65,9 +65,9 @@ class LLMRanker:
             journals_info=json.dumps(journals_info, ensure_ascii=False, indent=2),
         )
 
-        # 调用 LLM（超时 180s）
+        # 调用 LLM（超时 180s，自动调整max_tokens）
         try:
-            response = self.llm.chat_with_timeout(self.system_prompt, user_prompt, timeout=180)
+            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=180)
         except Exception as e:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 

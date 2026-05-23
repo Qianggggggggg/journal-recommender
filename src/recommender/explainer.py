@@ -50,7 +50,7 @@ class Explainer:
         )
 
         try:
-            response = self.llm.chat(self.system_prompt, user_prompt)
+            response = self.llm.chat_auto(self.system_prompt, user_prompt)
             data = parse_json_response(response.content)
             if data:
                 reasons = data.get("reasons", [])

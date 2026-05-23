@@ -37,9 +37,11 @@ class PaperParser:
             abstract=paper_input.abstract or "",
             full_text_summary=paper_input.full_text if paper_input.full_text else "",
         )
+        print(f"[DEBUG] paper_input.title='{paper_input.title}', abstract len={len(paper_input.abstract)}, full_text len={len(paper_input.full_text)}")
+        print(f"[DEBUG] user_filled first 200: {user_filled[:200]}")
 
         try:
-            response = self.llm.chat(system_prompt, user_filled)
+            response = self.llm.chat_auto(system_prompt, user_filled)
         except Exception as e:
             raise PaperParserError(f"LLM调用失败: {e}")
 

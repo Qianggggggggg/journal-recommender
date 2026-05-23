@@ -87,15 +87,14 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
     const mode = document.querySelector('.mode-btn.active').dataset.mode;
     const abstract = document.getElementById('abstract').value.trim();
 
-    let fullText = '';
+    let file = null;
     if (mode === 'full') {
         const fileInput = document.getElementById('full_text');
-        const file = fileInput.files[0];
+        file = fileInput.files[0];
         if (!file) {
             showError('请上传 PDF 文件（全文模式必须上传论文）');
             return;
         }
-        fullText = await readFileContent(file);
     }
 
     const topK = parseInt(document.getElementById('top_k').value);
@@ -108,6 +107,7 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
     const recommendations = [];
 
     try {
+        let response;
         const params = {
             title: title,
             abstract: abstract,
@@ -117,17 +117,31 @@ document.getElementById('recommend-btn').addEventListener('click', async () => {
         };
         latestParams = params;
 
-        let response;
-        if (mode === 'full' && fullText) {
-            // full 模式：POST JSON body 传输 full_text
-            params.full_text = fullText;
+        if (mode === 'full' && file) {
+            // full 模式：Form-data 上传文件，后端解析 PDF
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('abstract', abstract);
+            formData.append('mode', mode);
+            formData.append('top_k', topK);
+            formData.append('oa_preference', oaPreference);
+            formData.append('file', file);
+
             response = await fetch(`${API_BASE}/recommend/stream`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
-                body: JSON.stringify(params),
+                body: formData,
+                headers: { 'Accept': 'text/event-stream' },
             });
         } else {
             // title/abstract 模式：GET URL 参数
+            const params = {
+                title: title,
+                abstract: abstract,
+                mode: mode,
+                top_k: topK,
+                oa_preference: oaPreference,
+            };
+            latestParams = params;
             const urlParams = new URLSearchParams(params);
             response = await fetch(`${API_BASE}/recommend/stream?${urlParams}`, {
                 method: 'GET',
@@ -208,6 +222,7 @@ document.getElementById('download-pdf-btn').addEventListener('click', async () =
             ...latestParams,
             recommendations: window._latestRecommendations || [],
             paper_profile: window._latestPaperProfile || null,
+            quality: latestDoneData?.quality || null,  // 论文评级、强度、置信度
         };
 
         const response = await fetch(`${API_BASE}/recommend/pdf/from-results`, {
@@ -307,9 +322,9 @@ function renderResults(recommendations, doneData = null) {
                 </ul>
                 <div class="confidence-row">
                     <div class="confidence-bar">
-                        <div class="confidence-fill" style="width: ${Math.round(rec.confidence * 100)}%"></div>
+                        <div class="confidence-fill" style="width: ${Math.round((rec.score || 0) * 100)}%"></div>
                     </div>
-                    <span class="confidence-text">${Math.round(rec.confidence * 100)}%</span>
+                    <span class="confidence-text">匹配度: ${Math.round((rec.score || 0) * 100)}%</span>
                 </div>
             </div>
             <div class="card-details">

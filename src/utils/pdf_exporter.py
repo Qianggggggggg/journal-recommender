@@ -101,6 +101,22 @@ class PDFExporter:
 
         # 推荐期刊列表
         pdf.chapter_body("推荐期刊列表")
+
+        # 论文质量信息（评级、强度、置信度）- 放在推荐列表上方
+        if paper_profile and paper_profile.quality_level:
+            quality_parts = []
+            if paper_profile.quality_level:
+                quality_parts.append(f"论文评级: {paper_profile.quality_level}")
+            if paper_profile.paper_strength is not None:
+                quality_parts.append(f"论文强度: {int(paper_profile.paper_strength * 100)}%")
+            if paper_profile.quality_confidence is not None and paper_profile.quality_confidence > 0:
+                quality_parts.append(f"评估置信度: {int(paper_profile.quality_confidence * 100)}%")
+            if quality_parts:
+                pdf.set_font("CJK", size=10)
+                pdf.set_text_color(80, 80, 80)
+                pdf.cell(0, 5, " | ".join(quality_parts))
+                pdf.ln(6)
+
         pdf.ln(2)
 
         for i, match in enumerate(recommendations, 1):

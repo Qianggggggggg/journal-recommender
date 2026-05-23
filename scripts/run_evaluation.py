@@ -65,13 +65,15 @@ class EvaluationResult:
     # Level Match Rate
     level_match_count: int
 
-    # 分质量等级统计
-    strong_count: int
-    strong_hit_at_5: int
-    medium_count: int
-    medium_hit_at_5: int
-    weak_count: int
-    weak_hit_at_5: int
+    # 分质量等级统计 (A/B/C/D)
+    level_a_count: int
+    level_a_hit_at_5: int
+    level_b_count: int
+    level_b_hit_at_5: int
+    level_c_count: int
+    level_c_hit_at_5: int
+    level_d_count: int
+    level_d_hit_at_5: int
 
     # 按领域统计
     by_area: dict
@@ -109,12 +111,14 @@ def calculate_metrics(result: EvaluationResult) -> dict:
     }
 
     # 分质量等级
-    if result.strong_count > 0:
-        metrics["Strong Hit@5"] = f"{result.strong_hit_at_5}/{result.strong_count} ({result.strong_hit_at_5*100/result.strong_count:.1f}%)"
-    if result.medium_count > 0:
-        metrics["Medium Hit@5"] = f"{result.medium_hit_at_5}/{result.medium_count} ({result.medium_hit_at_5*100/result.medium_count:.1f}%)"
-    if result.weak_count > 0:
-        metrics["Weak Hit@5"] = f"{result.weak_hit_at_5}/{result.weak_count} ({result.weak_hit_at_5*100/result.weak_count:.1f}%)"
+    if result.level_a_count > 0:
+        metrics["A级 Hit@5"] = f"{result.level_a_hit_at_5}/{result.level_a_count} ({result.level_a_hit_at_5*100/result.level_a_count:.1f}%)"
+    if result.level_b_count > 0:
+        metrics["B级 Hit@5"] = f"{result.level_b_hit_at_5}/{result.level_b_count} ({result.level_b_hit_at_5*100/result.level_b_count:.1f}%)"
+    if result.level_c_count > 0:
+        metrics["C级 Hit@5"] = f"{result.level_c_hit_at_5}/{result.level_c_count} ({result.level_c_hit_at_5*100/result.level_c_count:.1f}%)"
+    if result.level_d_count > 0:
+        metrics["D级 Hit@5"] = f"{result.level_d_hit_at_5}/{result.level_d_count} ({result.level_d_hit_at_5*100/result.level_d_count:.1f}%)"
 
     return metrics
 
@@ -209,9 +213,10 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
         hit_at_1=0, hit_at_3=0, hit_at_5=0, hit_at_10=0,
         area_match_count=0,
         level_match_count=0,
-        strong_count=0, strong_hit_at_5=0,
-        medium_count=0, medium_hit_at_5=0,
-        weak_count=0, weak_hit_at_5=0,
+        level_a_count=0, level_a_hit_at_5=0,
+        level_b_count=0, level_b_hit_at_5=0,
+        level_c_count=0, level_c_hit_at_5=0,
+        level_d_count=0, level_d_hit_at_5=0,
         by_area=defaultdict(lambda: {"total": 0, "hit": 0, "area_match": 0}),
         by_level=defaultdict(lambda: {"total": 0, "hit": 0}),
         paper_results=[],
@@ -297,18 +302,20 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
         if profile.quality_level and profile.quality_level == ccf_level:
             result.level_match_count += 1
 
-        # 分质量等级统计
-        quality_level = get_paper_quality_level(profile.paper_strength)
-
-        if quality_level == "strong":
-            result.strong_count += 1
-            if hit_5: result.strong_hit_at_5 += 1
-        elif quality_level == "medium":
-            result.medium_count += 1
-            if hit_5: result.medium_hit_at_5 += 1
+        # 分质量等级统计（使用评估输出的 quality_level: A/B/C/D）
+        q_level = profile.quality_level or "D"
+        if q_level == "A":
+            result.level_a_count += 1
+            if hit_5: result.level_a_hit_at_5 += 1
+        elif q_level == "B":
+            result.level_b_count += 1
+            if hit_5: result.level_b_hit_at_5 += 1
+        elif q_level == "C":
+            result.level_c_count += 1
+            if hit_5: result.level_c_hit_at_5 += 1
         else:
-            result.weak_count += 1
-            if hit_5: result.weak_hit_at_5 += 1
+            result.level_d_count += 1
+            if hit_5: result.level_d_hit_at_5 += 1
 
         # 按领域统计
         result.by_area[research_area]["total"] += 1
@@ -328,14 +335,22 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
             "recommended_journals": recommended_journals[:top_k],
             "hit_5": hit_5,
             "paper_strength": profile.paper_strength,
-            "quality_level": quality_level,
+            "quality_level": q_level,
             "ccf_research_area": profile.ccf_research_area,
         })
 
         # 更新进度条描述
         if show_progress:
+            n = len(result.paper_results)
+            top_k = result.top_k
+            hit_val = getattr(result, f"hit_at_{top_k}", 0)
+            hit_rate = f"{hit_val*100/n:.1f}%" if n > 0 else "0%"
+            level_rate = f"{result.level_match_count*100/n:.1f}%" if n > 0 else "0%"
+            area_rate = f"{result.area_match_count*100/n:.1f}%" if n > 0 else "0%"
             pbar.set_postfix({
-                "Hit@5": f"{result.hit_at_5}/{len(result.paper_results)}({result.hit_at_5*100/len(result.paper_results):.1f}%)"
+                f"Hit@{top_k}": f"{hit_val}/{n}({hit_rate})",
+                "Level": f"{result.level_match_count}/{n}({level_rate})",
+                "Area": f"{result.area_match_count}/{n}({area_rate})",
             })
 
     return result
@@ -362,12 +377,14 @@ def print_report(result: EvaluationResult):
     print(f"  Level Match Rate: {metrics['Level Match Rate']}")
 
     print(f"\n--- 分质量等级 Hit@5 ---")
-    if result.strong_count > 0:
-        print(f"  强论文 (n={result.strong_count}): {metrics.get('Strong Hit@5', 'N/A')}")
-    if result.medium_count > 0:
-        print(f"  中论文 (n={result.medium_count}): {metrics.get('Medium Hit@5', 'N/A')}")
-    if result.weak_count > 0:
-        print(f"  弱论文 (n={result.weak_count}): {metrics.get('Weak Hit@5', 'N/A')}")
+    if result.level_a_count > 0:
+        print(f"  A级 (n={result.level_a_count}): {metrics.get('A级 Hit@5', 'N/A')}")
+    if result.level_b_count > 0:
+        print(f"  B级 (n={result.level_b_count}): {metrics.get('B级 Hit@5', 'N/A')}")
+    if result.level_c_count > 0:
+        print(f"  C级 (n={result.level_c_count}): {metrics.get('C级 Hit@5', 'N/A')}")
+    if result.level_d_count > 0:
+        print(f"  D级 (n={result.level_d_count}): {metrics.get('D级 Hit@5', 'N/A')}")
 
     print(f"\n--- 按领域分布 ---")
     for area, stats in sorted(result.by_area.items()):
@@ -405,12 +422,14 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "hit_at_10": result.hit_at_10,
             "area_match_count": result.area_match_count,
             "level_match_count": result.level_match_count,
-            "strong_count": result.strong_count,
-            "strong_hit_at_5": result.strong_hit_at_5,
-            "medium_count": result.medium_count,
-            "medium_hit_at_5": result.medium_hit_at_5,
-            "weak_count": result.weak_count,
-            "weak_hit_at_5": result.weak_hit_at_5,
+            "level_a_count": result.level_a_count,
+            "level_a_hit_at_5": result.level_a_hit_at_5,
+            "level_b_count": result.level_b_count,
+            "level_b_hit_at_5": result.level_b_hit_at_5,
+            "level_c_count": result.level_c_count,
+            "level_c_hit_at_5": result.level_c_hit_at_5,
+            "level_d_count": result.level_d_count,
+            "level_d_hit_at_5": result.level_d_hit_at_5,
         },
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),

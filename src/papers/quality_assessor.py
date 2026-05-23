@@ -113,7 +113,7 @@ class PaperQualityAssessor:
         )
 
         try:
-            response = self.llm.chat(system_prompt, user_filled)
+            response = self.llm.chat_auto(system_prompt, user_filled)
         except Exception as e:
             raise PaperQualityError(f"LLM调用失败: {e}")
 
@@ -122,7 +122,8 @@ class PaperQualityAssessor:
         if data:
 
             # 提取各维度分数 (0~3)
-            novelty_score = data.get("novelty_score", 2)
+            # 新prompt要求严格评分，默认值大幅下调
+            novelty_score = data.get("novelty_score", 1)
             rigor_score = data.get("rigor_score", 1)
             reproducibility_score = data.get("reproducibility_score", 1)
             significance_score = data.get("significance_score", 1)
@@ -153,8 +154,13 @@ class PaperQualityAssessor:
             # 准备度
             readiness = PaperQuality._strength_to_readiness(paper_strength, novelty_score)
 
-            # 汇总等级
-            quality_level = PaperQuality._strength_to_level(paper_strength)
+            # 汇总等级：优先使用LLM输出的严格评估结果，否则根据strength计算
+            # 新prompt已要求LLM直接输出quality_level
+            llm_quality_level = data.get("quality_level")
+            if llm_quality_level in ["A", "B", "C", "D"]:
+                quality_level = llm_quality_level
+            else:
+                quality_level = PaperQuality._strength_to_level(paper_strength)
 
             return PaperQuality(
                 paper_strength=paper_strength,
