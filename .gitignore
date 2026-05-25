@@ -29,8 +29,3 @@ data/processed/
 *.faiss
 *.parquet
 *.jsonl
-
-.idea/
-.vscode/
-*.swp
-*.swo
