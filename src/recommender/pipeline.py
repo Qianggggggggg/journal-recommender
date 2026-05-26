@@ -65,7 +65,7 @@ class RecommenderPipeline:
 
         # 2. 阶段一：规则打分（只做主题匹配，不含质量调整）
         rule_ranked = self.rule_scorer.rank(
-            candidates, paper_profile, oa_preference=oa_preference, top_k=10
+            candidates, paper_profile, oa_preference=oa_preference, top_k=20
         )
 
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
@@ -95,6 +95,8 @@ class RecommenderPipeline:
         # 5. 构建响应
         result = {
             "recommendations": recommendations,
+            "candidates": candidates,  # 粗排候选（用于调试分析）
+            "rule_ranked": rule_ranked,  # RuleScorer 排序结果（用于调试分析）
             "paper_profile": paper_profile,
             "mode_used": mode,
             "rank_method": rank_method,
@@ -126,7 +128,7 @@ class RecommenderPipeline:
 
             adjusted_score = score * adjustment
             new_reasons = reasons.copy()
-            if strength >= 0.75:
+            if strength >= 0.65:
                 new_reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
             elif strength < 0.35:
                 new_reasons.append(f"弱论文调整({(adjustment-1)*100:.0f}%)")

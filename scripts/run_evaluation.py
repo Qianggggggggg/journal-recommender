@@ -23,6 +23,8 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from datetime import datetime
 from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 # 导入推荐系统组件
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -62,8 +64,15 @@ class EvaluationResult:
     # 领域匹配
     area_match_count: int
 
+    # 推荐期刊的专业领域命中（subject_tags 命中 research_area）
+    area_subject_tag_match_count: int
+
     # Level Match Rate
     level_match_count: int
+
+    # 粗排命中统计
+    coarse_hit_count: int  # 粗排命中（实际期刊在 top 50 候选中）
+    coarse_hit_in_rule_top10_count: int  # 粗排候选在 RuleScorer top10 中
 
     # 分质量等级统计 (A/B/C/D)
     level_a_count: int
@@ -89,9 +98,9 @@ def get_paper_quality_level(strength: float) -> str:
     """根据 paper_strength 划分质量等级"""
     if strength is None:
         return "unknown"
-    if strength >= 0.7:
+    if strength >= 0.65:
         return "strong"
-    elif strength >= 0.4:
+    elif strength >= 0.50:
         return "medium"
     else:
         return "weak"
@@ -185,7 +194,8 @@ def init_pipeline() -> RecommenderPipeline:
     merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.4, "vector": 0.4, "tag": 0.2})
 
     generator = CandidateGenerator(store, bm25, embedding_retriever, merge_weights=merge_weights)
-    scorer = RuleScorer()
+    # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
+    scorer = RuleScorer(journals=store.journals)
     llm_ranker = LLMRanker(llm, prompts["llm_ranker_system"], prompts["llm_ranker_user"])
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
@@ -201,18 +211,141 @@ def init_pipeline() -> RecommenderPipeline:
     return pipeline
 
 
-def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k: int,
-                   prompts: dict, show_progress: bool = True) -> EvaluationResult:
-    """运行评估"""
+def evaluate_single_paper(
+    paper: dict,
+    pipeline: RecommenderPipeline,
+    prompts: dict,
+    mode: str,
+    top_k: int,
+) -> dict:
+    """
+    并行评估单篇论文，返回结果字典（非 EvaluationResult，避免锁竞争）
+    """
+    title = paper.get("title", "")
+    abstract = paper.get("abstract", "")
+    venue = paper.get("venue", "")
+    ccf_level = paper.get("ccf_level", "C")
+    research_area = paper.get("research_area", [""])[0] if paper.get("research_area") else ""
+    arxiv_id = paper.get("external_ids", {}).get("arXiv", "")
+    pdf_path = paper.get("pdf_path", "")
 
-    # 初始化结果
+    # 获取全文（如果需要）
+    full_text = ""
+    if mode == "full" and pdf_path and os.path.exists(pdf_path):
+        try:
+            with open(pdf_path, "rb") as f:
+                pdf_content = f.read()
+            blocks, _ = extract_layout_blocks(pdf_content, pdf_path)
+            paper_ast = build_paper_ast(blocks, title=title)
+            full_text = paper_ast.to_markdown()
+        except Exception as e:
+            print(f"\nPDF读取失败: {arxiv_id} - {e}")
+
+    paper_input = PaperInput(
+        title=title,
+        abstract=abstract or "",
+        full_text=full_text,
+        mode=mode,
+    )
+
+    # 解析论文
+    try:
+        profile = pipeline.parser.parse(
+            paper_input,
+            prompts["paper_profile_system"],
+            prompts["paper_profile_user"],
+        )
+    except Exception as e:
+        print(f"\n解析失败: {title[:30]}... - {e}")
+        return None
+
+    # 推荐
+    try:
+        rec_result = pipeline.recommend(
+            paper_input, profile,
+            top_k=top_k,
+            mode=mode,
+            quality_prompts={
+                "system": prompts.get("paper_quality_assessor_system", ""),
+                "user": prompts.get("paper_quality_assessor_user", ""),
+            },
+        )
+    except Exception as e:
+        print(f"\n推荐失败: {title[:30]}... - {e}")
+        return None
+
+    recommendations = rec_result.get("recommendations", [])
+    candidates = rec_result.get("candidates", [])
+    rule_ranked = rec_result.get("rule_ranked", [])
+    recommended_journals = [rec.journal.journal_name for rec in recommendations]
+    candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
+    rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
+
+    # 计算 Hit@K
+    hit_1 = venue in recommended_journals[:1] if len(recommended_journals) >= 1 else False
+    hit_3 = venue in recommended_journals[:3] if len(recommended_journals) >= 3 else False
+    hit_5 = venue in recommended_journals[:5] if len(recommended_journals) >= 5 else False
+    hit_10 = venue in recommended_journals[:10] if len(recommended_journals) >= 10 else venue in recommended_journals
+
+    # 粗排是否命中（实际发表的期刊在 top 50 候选中）
+    coarse_hit = venue in candidate_journal_names if venue else False
+
+    # 粗排候选中是否包含实际发表的期刊（用于分析 RuleScorer 的选择）
+    coarse_hit_in_rule_top10 = venue in rule_ranked_names[:10] if venue else False
+
+    q_level = profile.quality_level or "D"
+
+    return {
+        "arxiv": arxiv_id,
+        "title": title[:50],
+        "venue": venue,
+        "ccf_level": ccf_level,
+        "research_area": research_area,
+        "recommended_journals": recommended_journals[:top_k],
+        "hit_1": hit_1,
+        "hit_3": hit_3,
+        "hit_5": hit_5,
+        "hit_10": hit_10,
+        "coarse_hit": coarse_hit,  # 粗排命中
+        "coarse_hit_in_rule_top10": coarse_hit_in_rule_top10,  # 粗排候选在 RuleScorer top10 中
+        "paper_strength": profile.paper_strength,
+        "quality_level": q_level,
+        "ccf_research_area": profile.ccf_research_area,
+        "area_match": bool(
+            profile.ccf_research_area and research_area in profile.ccf_research_area
+        ) if research_area else False,
+        "level_match": q_level == ccf_level,
+        "area_subject_tag_match": any(
+            research_area and any(
+                tag in rec.journal.subject_tags
+                for tag in (research_area if isinstance(research_area, list) else [research_area])
+            )
+            for rec in recommendations if hasattr(rec, 'journal')
+        ) if research_area and recommendations else False,
+    }
+
+
+def run_evaluation(
+    papers: list,
+    pipeline: RecommenderPipeline,
+    mode: str,
+    top_k: int,
+    prompts: dict,
+    show_progress: bool = True,
+    workers: int = 4,
+) -> EvaluationResult:
+    """运行评估（并行）"""
+
     result = EvaluationResult(
         total_count=len(papers),
         mode=mode,
         top_k=top_k,
         hit_at_1=0, hit_at_3=0, hit_at_5=0, hit_at_10=0,
         area_match_count=0,
+        area_subject_tag_match_count=0,
         level_match_count=0,
+        coarse_hit_count=0,
+        coarse_hit_in_rule_top10_count=0,
         level_a_count=0, level_a_hit_at_5=0,
         level_b_count=0, level_b_hit_at_5=0,
         level_c_count=0, level_c_hit_at_5=0,
@@ -222,136 +355,98 @@ def run_evaluation(papers: list, pipeline: RecommenderPipeline, mode: str, top_k
         paper_results=[],
     )
 
-    # 进度条
-    pbar = tqdm(papers, desc=f"评估 [{mode}/top{top_k}]", unit="篇") if show_progress else papers
+    results_lock = threading.Lock()
 
-    for paper in pbar:
-        title = paper.get("title", "")
-        abstract = paper.get("abstract", "")
-        venue = paper.get("venue", "")  # 实际发表期刊 (ground truth)
-        ccf_level = paper.get("ccf_level", "C")  # 论文对应的CCF等级
-        research_area = paper.get("research_area", [""])[0] if paper.get("research_area") else ""
-        arxiv_id = paper.get("external_ids", {}).get("arXiv", "")
-        pdf_path = paper.get("pdf_path", "")
+    def update_result(paper_result: dict):
+        if paper_result is None:
+            return
+        with results_lock:
+            # 累加 Hit@K
+            if paper_result["hit_1"]: result.hit_at_1 += 1
+            if paper_result["hit_3"]: result.hit_at_3 += 1
+            if paper_result["hit_5"]: result.hit_at_5 += 1
+            if paper_result["hit_10"]: result.hit_at_10 += 1
 
-        # 获取全文（如果需要）
-        full_text = ""
-        if mode == "full" and pdf_path and os.path.exists(pdf_path):
-            try:
-                with open(pdf_path, "rb") as f:
-                    pdf_content = f.read()
-                blocks, _ = extract_layout_blocks(pdf_content, pdf_path)
-                paper_ast = build_paper_ast(blocks, title=title)
-                full_text = paper_ast.to_markdown()
-            except Exception as e:
-                print(f"\nPDF读取失败: {arxiv_id} - {e}")
+            # 领域匹配（LLM预测的领域 vs 论文实际领域）
+            if paper_result["area_match"]:
+                result.area_match_count += 1
+                area = paper_result["research_area"]
+                result.by_area[area]["area_match"] += 1
 
-        # 构建输入
-        paper_input = PaperInput(
-            title=title,
-            abstract=abstract or "",
-            full_text=full_text,
-            mode=mode,
+            # 推荐期刊的 subject_tags 命中论文 research_area
+            if paper_result.get("area_subject_tag_match"):
+                result.area_subject_tag_match_count += 1
+
+            # Level Match
+            if paper_result["level_match"]:
+                result.level_match_count += 1
+
+            # 粗排命中统计
+            if paper_result.get("coarse_hit"):
+                result.coarse_hit_count += 1
+            if paper_result.get("coarse_hit_in_rule_top10"):
+                result.coarse_hit_in_rule_top10_count += 1
+
+            # 分质量等级统计
+            q_level = paper_result["quality_level"]
+            if q_level == "A":
+                result.level_a_count += 1
+                if paper_result["hit_5"]: result.level_a_hit_at_5 += 1
+            elif q_level == "B":
+                result.level_b_count += 1
+                if paper_result["hit_5"]: result.level_b_hit_at_5 += 1
+            elif q_level == "C":
+                result.level_c_count += 1
+                if paper_result["hit_5"]: result.level_c_hit_at_5 += 1
+            else:
+                result.level_d_count += 1
+                if paper_result["hit_5"]: result.level_d_hit_at_5 += 1
+
+            # 按领域统计
+            area = paper_result["research_area"]
+            result.by_area[area]["total"] += 1
+            if paper_result["hit_5"]: result.by_area[area]["hit"] += 1
+
+            # 按CCF等级统计
+            ccf = paper_result["ccf_level"]
+            result.by_level[ccf]["total"] += 1
+            if paper_result["hit_5"]: result.by_level[ccf]["hit"] += 1
+
+            # 保存单篇结果
+            result.paper_results.append({
+                k: v for k, v in paper_result.items()
+                if k not in ["hit_1", "hit_3", "hit_5", "hit_10", "area_match", "level_match"]
+            })
+
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(
+                evaluate_single_paper,
+                paper, pipeline, prompts, mode, top_k,
+            ): paper
+            for paper in papers
+        }
+
+        pbar = tqdm(
+            as_completed(futures),
+            total=len(papers),
+            desc=f"评估 [{mode}/top{top_k}/w{workers}]",
+            unit="篇",
         )
 
-        # 解析论文
-        try:
-            profile = pipeline.parser.parse(paper_input,
-                                           prompts["paper_profile_system"],
-                                           prompts["paper_profile_user"])
-        except Exception as e:
-            print(f"\n解析失败: {title[:30]}... - {e}")
-            continue
+        for future in pbar:
+            paper_result = future.result()
+            update_result(paper_result)
 
-        # 执行推荐（内部统一处理质量评估，不再重复调用）
-        try:
-            rec_result = pipeline.recommend(
-                paper_input, profile,
-                top_k=top_k,
-                mode=mode,
-                quality_prompts={
-                    "system": prompts.get("paper_quality_assessor_system", ""),
-                    "user": prompts.get("paper_quality_assessor_user", ""),
-                },
-            )
-        except Exception as e:
-            print(f"\n推荐失败: {title[:30]}... - {e}")
-            continue
-
-        recommendations = rec_result.get("recommendations", [])
-        recommended_journals = [rec.journal.journal_name for rec in recommendations]
-
-        # 计算 Hit@K
-        hit_1 = venue in recommended_journals[:1] if len(recommended_journals) >= 1 else False
-        hit_3 = venue in recommended_journals[:3] if len(recommended_journals) >= 3 else False
-        hit_5 = venue in recommended_journals[:5] if len(recommended_journals) >= 5 else False
-        hit_10 = venue in recommended_journals[:10] if len(recommended_journals) >= 10 else False
-
-        if hit_1: result.hit_at_1 += 1
-        if hit_3: result.hit_at_3 += 1
-        if hit_5: result.hit_at_5 += 1
-        if hit_10: result.hit_at_10 += 1
-
-        # 领域匹配
-        if profile.ccf_research_area:
-            if research_area in profile.ccf_research_area:
-                result.area_match_count += 1
-                result.by_area[research_area]["area_match"] += 1
-
-        # Level Match：PaperQualityAssessor 评估的论文质量等级 == 论文实际发表期刊的 CCF 等级
-        if profile.quality_level and profile.quality_level == ccf_level:
-            result.level_match_count += 1
-
-        # 分质量等级统计（使用评估输出的 quality_level: A/B/C/D）
-        q_level = profile.quality_level or "D"
-        if q_level == "A":
-            result.level_a_count += 1
-            if hit_5: result.level_a_hit_at_5 += 1
-        elif q_level == "B":
-            result.level_b_count += 1
-            if hit_5: result.level_b_hit_at_5 += 1
-        elif q_level == "C":
-            result.level_c_count += 1
-            if hit_5: result.level_c_hit_at_5 += 1
-        else:
-            result.level_d_count += 1
-            if hit_5: result.level_d_hit_at_5 += 1
-
-        # 按领域统计
-        result.by_area[research_area]["total"] += 1
-        if hit_5: result.by_area[research_area]["hit"] += 1
-
-        # 按CCF等级统计
-        result.by_level[ccf_level]["total"] += 1
-        if hit_5: result.by_level[ccf_level]["hit"] += 1
-
-        # 保存单篇结果
-        result.paper_results.append({
-            "arxiv": arxiv_id,
-            "title": title[:50],
-            "venue": venue,
-            "ccf_level": ccf_level,
-            "research_area": research_area,
-            "recommended_journals": recommended_journals[:top_k],
-            "hit_5": hit_5,
-            "paper_strength": profile.paper_strength,
-            "quality_level": q_level,
-            "ccf_research_area": profile.ccf_research_area,
-        })
-
-        # 更新进度条描述
-        if show_progress:
+            # 更新进度条
             n = len(result.paper_results)
-            top_k = result.top_k
-            hit_val = getattr(result, f"hit_at_{top_k}", 0)
-            hit_rate = f"{hit_val*100/n:.1f}%" if n > 0 else "0%"
-            level_rate = f"{result.level_match_count*100/n:.1f}%" if n > 0 else "0%"
-            area_rate = f"{result.area_match_count*100/n:.1f}%" if n > 0 else "0%"
-            pbar.set_postfix({
-                f"Hit@{top_k}": f"{hit_val}/{n}({hit_rate})",
-                "Level": f"{result.level_match_count}/{n}({level_rate})",
-                "Area": f"{result.area_match_count}/{n}({area_rate})",
-            })
+            if n > 0:
+                hit_k = getattr(result, f"hit_at_{top_k}", 0)
+                pbar.set_postfix({
+                    f"Hit@{top_k}": f"{hit_k}/{n}({hit_k*100/n:.1f}%)",
+                    "Level": f"{result.level_match_count}/{n}({result.level_match_count*100/n:.1f}%)",
+                    "Area": f"{result.area_match_count}/{n}({result.area_match_count*100/n:.1f}%)",
+                })
 
     return result
 
@@ -373,8 +468,15 @@ def print_report(result: EvaluationResult):
     print(f"  Hit@10: {metrics['Hit@10']}")
 
     print(f"\n--- 其他指标 ---")
+    total = result.total_count if result.total_count > 0 else 1
     print(f"  领域匹配准确率: {metrics['Area Match Rate']}")
+    print(f"  推荐期刊subject_tags命中: {result.area_subject_tag_match_count}/{total} ({result.area_subject_tag_match_count*100/total:.1f}%)")
     print(f"  Level Match Rate: {metrics['Level Match Rate']}")
+
+    # 粗排命中分析
+    print(f"\n--- 粗排命中分析 ---")
+    print(f"  粗排命中（top50候选包含实际期刊）: {result.coarse_hit_count}/{total} ({result.coarse_hit_count*100/total:.1f}%)")
+    print(f"  粗排命中且在RuleScorer top10中: {result.coarse_hit_in_rule_top10_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top10_count*100/max(result.coarse_hit_count,1):.1f}%)")
 
     print(f"\n--- 分质量等级 Hit@5 ---")
     if result.level_a_count > 0:
@@ -422,6 +524,9 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "hit_at_10": result.hit_at_10,
             "area_match_count": result.area_match_count,
             "level_match_count": result.level_match_count,
+            "coarse_hit_count": result.coarse_hit_count,
+            "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
+            "area_subject_tag_match_count": result.area_subject_tag_match_count,
             "level_a_count": result.level_a_count,
             "level_a_hit_at_5": result.level_a_hit_at_5,
             "level_b_count": result.level_b_count,
@@ -457,6 +562,8 @@ def main():
                         help="限制评估论文数量（用于测试）")
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
+    parser.add_argument("--workers", "-w", type=int, default=4,
+                        help="并行线程数（默认4）")
 
     args = parser.parse_args()
 
@@ -482,7 +589,7 @@ def main():
         print(f"开始评估 | 模式: {args.mode} | Top-{top_k}")
         print(f"{'='*70}")
 
-        result = run_evaluation(papers, pipeline, args.mode, top_k, prompts, show_progress=True)
+        result = run_evaluation(papers, pipeline, args.mode, top_k, prompts, show_progress=True, workers=args.workers)
 
         # 打印报告
         print_report(result)

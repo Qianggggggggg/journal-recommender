@@ -1,5 +1,7 @@
 """规则打分（阶段一）"""
-from typing import List, Tuple, Set
+from typing import List, Tuple, Optional
+
+from rank_bm25 import BM25Plus
 
 from ..journals.journal_model import Journal
 from ..papers.paper_model import PaperProfile
@@ -8,23 +10,61 @@ from ..papers.paper_model import PaperProfile
 class RuleScorer:
     """规则打分器"""
 
-    def __init__(self):
+    def __init__(self, journals: Optional[List[Journal]] = None):
         # 权重配置
         self.weights = {
-            "research_area_match": 2.0,
-            "ccf_area_match": 3.0,    # CCF领域匹配（最高优先级）
-            "ccf_a_weight": 1.0,      # CCF-A 期刊加分
-            "ccf_b_weight": 0.6,      # CCF-B 期刊加分
-            "ccf_c_weight": 0.2,       # CCF-C 期刊加分
-            "technique_match": 1.8,
+            # 文本匹配特征（新增/调整）
+            "bm25_title_scope": 3.0,    # BM25 标题-scope 相似度（归一化）
+            "title_journal_name": 1.0,   # 标题词在期刊名中匹配
+            "technique_match": 2.0,      # 技术词重叠
+            "keyword_overlap": 1.5,      # 关键词重叠
+            # 已有特征（保留）
             "method_type_match": 1.5,
             "paper_type_match": 1.0,
-            "oa_preference_match": 0.3,
-            "keyword_overlap": 1.2,
             "dataset_match": 1.0,
             "metric_match": 0.8,
             "novelty_match": 0.7,
+            "oa_preference_match": 0.3,
         }
+
+        # 预建 BM25 索引（期刊 scope）
+        self._bm25_index: Optional[BM25Plus] = None
+        self._journal_scopeTexts: List[str] = []
+        self._max_bm25_score: float = 1.0  # 用于归一化
+
+        if journals:
+            self._build_bm25_index(journals)
+
+    def _build_bm25_index(self, journals: List[Journal]):
+        """预建期刊 scope 的 BM25 索引"""
+        self._journal_scopeTexts = [j.scope_text for j in journals]
+        if self._journal_scopeTexts:
+            # 使用 BM25Plus（更鲁棒，对长文本友好）
+            tokenized_corpus = [text.split() for text in self._journal_scopeTexts]
+            self._bm25_index = BM25Plus(tokenized_corpus)
+            # 预计算一个基准分数用于归一化（使用 "machine learning" 作为查询）
+            dummy_query = "machine learning deep neural network".split()
+            dummy_scores = self._bm25_index.get_scores(dummy_query)
+            self._max_bm25_score = max(dummy_scores) if max(dummy_scores) > 0 else 1.0
+
+    def _compute_bm25_title_scope(self, paper_profile: PaperProfile) -> List[float]:
+        """计算论文标题（+关键词）与所有期刊 scope 的 BM25 分数"""
+        if not self._bm25_index or not self._journal_scopeTexts:
+            return [0.0] * len(self._journal_scopeTexts) if self._journal_scopeTexts else []
+
+        # 构建查询文本：标题 + 关键词
+        query_parts = [paper_profile.title]
+        if paper_profile.keywords:
+            query_parts.extend(paper_profile.keywords)
+        query = " ".join(query_parts)
+        tokenized_query = query.split()
+
+        scores = self._bm25_index.get_scores(tokenized_query)
+        # 归一化到 0~1
+        normalized = []
+        for s in scores:
+            normalized.append(s / self._max_bm25_score if self._max_bm25_score > 0 else 0.0)
+        return normalized
 
     def _compute_keyword_overlap(self, text1: str, text2: str) -> float:
         """计算关键词重叠度（0-1）"""
@@ -50,6 +90,15 @@ class RuleScorer:
         ])
         return self._compute_keyword_overlap(paper_text, journal_text)
 
+    def _compute_title_journal_name_match(self, paper_profile: PaperProfile, journal: Journal) -> float:
+        """标题词与期刊名称的匹配（长度>2的词）"""
+        title_words = set(w.lower() for w in paper_profile.title.split() if len(w) > 2)
+        journal_name_words = set(w.lower() for w in journal.journal_name.split() if len(w) > 2)
+        if not title_words or not journal_name_words:
+            return 0.0
+        intersection = title_words & journal_name_words
+        return 1.0 if intersection else 0.0
+
     def score(
         self, journal: Journal, paper_profile: PaperProfile, oa_preference: str = "any"
     ) -> Tuple[float, List[str]]:
@@ -57,19 +106,21 @@ class RuleScorer:
         score = 0.0
         reasons = []
 
-        # 研究领域匹配
-        if paper_profile.research_area:
-            matched_areas = [a for a in paper_profile.research_area if a in journal.subject_tags]
-            if matched_areas:
-                score += self.weights["research_area_match"]
-                reasons.append(f"研究领域匹配: {', '.join(matched_areas)}")
+        # 预计算 BM25 标题-scope（只计算一次）
+        journal_idx = self._journal_scopeTexts.index(journal.scope_text) if journal.scope_text in self._journal_scopeTexts else -1
+        bm25_scores = self._compute_bm25_title_scope(paper_profile)
+        bm25_score = bm25_scores[journal_idx] if journal_idx >= 0 else 0.0
 
-        # CCF 专业领域匹配（最高优先级）
-        if paper_profile.ccf_research_area:
-            matched_areas = [a for a in paper_profile.ccf_research_area if a in journal.subject_tags]
-            if matched_areas:
-                score += self.weights["ccf_area_match"]
-                reasons.append(f"CCF领域匹配: {', '.join(matched_areas)}")
+        # BM25 标题-scope 匹配
+        if bm25_score > 0.1:
+            score += self.weights["bm25_title_scope"] * bm25_score
+            reasons.append(f"标题-领域BM25匹配度: {bm25_score:.2f}")
+
+        # 标题-期刊名匹配
+        title_name_match = self._compute_title_journal_name_match(paper_profile, journal)
+        if title_name_match > 0:
+            score += self.weights["title_journal_name"]
+            reasons.append("标题词命中期刊名")
 
         # 具体技术匹配
         if paper_profile.techniques:
@@ -84,10 +135,11 @@ class RuleScorer:
                 if matched_techs:
                     reasons.append(f"技术契合: {', '.join(matched_techs[:3])} (重叠度: {tech_overlap:.2f})")
 
-        # 方法类型匹配
-        if paper_profile.method_type in journal.target_paper_type:
-            score += self.weights["method_type_match"]
-            reasons.append(f"方法类型匹配: {paper_profile.method_type}")
+        # 方法类型匹配（需要 journal.target_paper_type 非空）
+        if paper_profile.method_type and journal.target_paper_type:
+            if paper_profile.method_type in journal.target_paper_type:
+                score += self.weights["method_type_match"]
+                reasons.append(f"方法类型匹配: {paper_profile.method_type}")
 
         # 论文类型匹配
         if paper_profile.paper_type:
@@ -103,7 +155,6 @@ class RuleScorer:
         # 数据集匹配（专项）
         if paper_profile.datasets:
             known_datasets = {
-                # 通用数据集
                 "pubmed": ["pubmed", "biomedical", "生物医学"],
                 "imagenet": ["imagenet", "image net"],
                 "coco": ["coco", "ms coco", "common objects in context"],
@@ -113,16 +164,13 @@ class RuleScorer:
                 "squad": ["squad", "question answering"],
                 "arxiv": ["arxiv", "cs.", "computer science"],
                 "github": ["github", "code generation", "program synthesis"],
-                # 知识图谱
                 "freebase": ["freebase", "knowledge graph"],
                 "dbpedia": ["dbpedia", "knowledge base"],
                 "wikidata": ["wikidata", "knowledge graph"],
                 "wordnet": ["wordnet", "lexical"],
-                # 视觉
                 "voc": ["voc", "pascal voc", "object detection"],
                 "visual_genome": ["visual genome", "scene graph"],
                 "flickr": ["flickr", "image caption"],
-                # NLP
                 "sst": ["sst", "sentiment", "情感分析"],
                 "snli": ["snli", "natural language inference", "entailment"],
                 "multinli": ["multinli", "multi-genre nli"],
@@ -131,19 +179,15 @@ class RuleScorer:
                 "kg": ["knowledge graph", "knowledge base"],
                 "ner": ["ner", "named entity recognition", "命名实体"],
                 "relation extraction": ["relation extraction", "relex"],
-                # 图/网络
                 "citation network": ["citation network", "bibliographic", "co-citation"],
-                "arxiv": ["arxiv", "citation", "academic"],
             }
             matched_datasets = []
             scope_lower = journal.scope_text.lower()
             for ds in paper_profile.datasets:
                 ds_lower = ds.lower()
-                # 精确匹配
                 if ds_lower in scope_lower:
                     matched_datasets.append(ds)
                 else:
-                    # 别名匹配
                     for known, aliases in known_datasets.items():
                         if ds_lower in aliases or any(alias in ds_lower for alias in aliases):
                             if any(alias in scope_lower for alias in aliases):
@@ -154,7 +198,6 @@ class RuleScorer:
                 score += self.weights["dataset_match"]
                 reasons.append(f"数据集匹配: {', '.join(matched_datasets[:3])}")
             else:
-                # 回退：通用重叠度
                 dataset_overlap = self._compute_keyword_overlap(
                     " ".join(paper_profile.datasets), journal.scope_text
                 )
@@ -214,32 +257,12 @@ class RuleScorer:
                         reasons.append(f"创新类型契合: {paper_profile.novelty_type}")
                         break
 
-        # CCF评级加分（A=1.0, B=0.6, C=0.2）
-        if journal.ccf_rating == "A":
-            score += self.weights["ccf_a_weight"]
-            reasons.append(f"CCF-A类期刊")
-        elif journal.ccf_rating == "B":
-            score += self.weights["ccf_b_weight"]
-            reasons.append(f"CCF-B类期刊")
-        elif journal.ccf_rating == "C":
-            score += self.weights["ccf_c_weight"]
-            reasons.append(f"CCF-C类期刊")
-
-        # 影响因子加分（归一化，值域 [0, 0.5]）
-        if journal.impact_like_score and journal.impact_like_score > 0:
-            # 假设影响因子范围 0-10，归一化到 0.5
-            impact_bonus = min(journal.impact_like_score / 10.0 * 0.5, 0.5)
-            score += impact_bonus
-
         # OA 偏好匹配
         if oa_preference != "any":
             if (oa_preference == "full_oa" and journal.oa_type == "full_oa") or \
                (oa_preference == "hybrid" and journal.oa_type in ["full_oa", "hybrid"]):
                 score += self.weights["oa_preference_match"]
                 reasons.append(f"OA类型匹配: {journal.oa_type}")
-
-        # 注意：质量调整（paper_strength）不再在 RuleScorer 内计算
-        # 质量调整在 Pipeline 中统一应用，实现解耦
 
         return score, reasons
 
