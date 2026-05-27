@@ -580,7 +580,7 @@ def main():
                         help="限制评估论文数量（用于测试）")
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
-    parser.add_argument("--workers", "-w", type=int, default=2,
+    parser.add_argument("--workers", "-w", type=int, default=4,
                         help="并行线程数（默认4）")
 
     args = parser.parse_args()

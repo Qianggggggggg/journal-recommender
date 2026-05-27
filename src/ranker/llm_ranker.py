@@ -45,6 +45,7 @@ class LLMRanker:
                 "journal_name": journal.journal_name,
                 "scope": journal.scope_text or "",  # 完整 scope
                 "oa_type": journal.oa_type,
+                "ccf_rating": journal.ccf_rating or "未知",  # 真实 CCF 等级
                 "subject_tags": journal.subject_tags[:5],  # 限制标签数量
                 "keywords": journal.keywords[:5],  # 限制关键词数量
                 "rule_rank": idx + 1,                         # 粗排排名（1-based）
@@ -69,9 +70,9 @@ class LLMRanker:
             total_candidates=len(candidates),
         )
 
-        # 调用 LLM（超时 180s，自动调整max_tokens）
+        # 调用 LLM（超时 300s，自动调整max_tokens）
         try:
-            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=180)
+            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=300)
         except Exception as e:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 

@@ -51,12 +51,12 @@ class PaperQuality(BaseModel):
 
     @staticmethod
     def _strength_to_level(strength: float) -> str:
-        """将 strength 映射到 A/B/C/D"""
+        """将 strength 映射到 A/B/C/D（与 prompt 中的阈值保持一致）"""
         if strength >= 0.65:
             return "A"
-        elif strength >= 0.50:
+        elif strength >= 0.45:
             return "B"
-        elif strength >= 0.35:
+        elif strength >= 0.25:
             return "C"
         else:
             return "D"  # 未达发表水平
