@@ -15,9 +15,10 @@ class RuleScorer:
         self.weights = {
             # 文本匹配特征（新增/调整）
             "bm25_title_scope": 3.0,    # BM25 标题-scope 相似度（归一化）
-            "title_journal_name": 1.0,   # 标题词在期刊名中匹配
+            "title_journal_name": 1.5,   # 标题词在期刊名中匹配（权重提升）
+            "journal_name_keyword": 1.0,  # 期刊名关键词与论文 keywords/techniques 匹配（新增）
             "technique_match": 2.0,      # 技术词重叠
-            "keyword_overlap": 1.5,      # 关键词重叠
+            "keyword_overlap": 1.5,     # 关键词重叠
             # 已有特征（保留）
             "method_type_match": 1.5,
             "paper_type_match": 1.0,
@@ -25,6 +26,8 @@ class RuleScorer:
             "metric_match": 0.8,
             "novelty_match": 0.7,
             "oa_preference_match": 0.3,
+            # 领域仲裁信号（权重为0，不参与计分，仅作为理由传递给LLM）
+            "research_area_match": 0.0,
         }
 
         # 预建 BM25 索引（期刊 scope）
@@ -91,13 +94,36 @@ class RuleScorer:
         return self._compute_keyword_overlap(paper_text, journal_text)
 
     def _compute_title_journal_name_match(self, paper_profile: PaperProfile, journal: Journal) -> float:
-        """标题词与期刊名称的匹配（长度>2的词）"""
-        title_words = set(w.lower() for w in paper_profile.title.split() if len(w) > 2)
-        journal_name_words = set(w.lower() for w in journal.journal_name.split() if len(w) > 2)
+        """标题词与期刊名称的匹配（长度>1的词，排除停用词）"""
+        stop_words = {"the", "a", "an", "of", "and", "in", "on", "for", "to", "with", "by", "from", "is", "as", "at"}
+        title_words = set(w.lower() for w in paper_profile.title.split() if len(w) > 1 and w.lower() not in stop_words)
+        journal_name_words = set(w.lower() for w in journal.journal_name.split() if len(w) > 1 and w.lower() not in stop_words)
         if not title_words or not journal_name_words:
             return 0.0
         intersection = title_words & journal_name_words
         return 1.0 if intersection else 0.0
+
+    def _compute_journal_name_keyword_match(self, paper_profile: PaperProfile, journal: Journal) -> float:
+        """期刊名关键词与论文 keywords/techniques 的匹配"""
+        # 停用词
+        stop_words = {"the", "a", "an", "of", "and", "in", "on", "for", "to", "with", "by", "from", "is", "as", "at", "journal", "transactions", "ieee", "acm", "international", "proceedings"}
+        journal_name_words = set(w.lower() for w in journal.journal_name.split() if len(w) > 1 and w.lower() not in stop_words)
+        if not journal_name_words:
+            return 0.0
+
+        # 合并论文的 keywords 和 techniques
+        paper_terms = set()
+        if paper_profile.keywords:
+            paper_terms.update(w.lower() for w in paper_profile.keywords)
+        if paper_profile.techniques:
+            paper_terms.update(w.lower() for w in paper_profile.techniques)
+
+        if not paper_terms:
+            return 0.0
+
+        # 匹配：期刊名词中的词是否出现在论文关键词/技术词中
+        overlap = journal_name_words & paper_terms
+        return 1.0 if overlap else 0.0
 
     def score(
         self, journal: Journal, paper_profile: PaperProfile, oa_preference: str = "any"
@@ -121,6 +147,12 @@ class RuleScorer:
         if title_name_match > 0:
             score += self.weights["title_journal_name"]
             reasons.append("标题词命中期刊名")
+
+        # 期刊名关键词与论文 keywords/techniques 匹配（新增）
+        jn_keyword_match = self._compute_journal_name_keyword_match(paper_profile, journal)
+        if jn_keyword_match > 0:
+            score += self.weights["journal_name_keyword"]
+            reasons.append("期刊名专有词命中论文关键词/技术词")
 
         # 具体技术匹配
         if paper_profile.techniques:
@@ -256,6 +288,12 @@ class RuleScorer:
                         score += self.weights["novelty_match"]
                         reasons.append(f"创新类型契合: {paper_profile.novelty_type}")
                         break
+
+        # 领域仲裁信号（research_area 与 subject_tags 精确匹配，不加分仅作理由）
+        if paper_profile.research_area and journal.subject_tags:
+            matched_areas = [ra for ra in paper_profile.research_area if ra in journal.subject_tags]
+            if matched_areas:
+                reasons.append(f"领域标签对齐: {', '.join(matched_areas)}")
 
         # OA 偏好匹配
         if oa_preference != "any":

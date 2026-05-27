@@ -37,9 +37,9 @@ class LLMRanker:
         top_k: int = 5,
     ) -> Tuple[List[Tuple[Journal, float, List[str], float]], str]:
         """LLM 精排（LLM驱动，重试3次）"""
-        # 构建期刊信息（精简字段）
+        # 构建期刊信息（精简字段，含 RuleScorer 参考信息）
         journals_info = []
-        for journal, rule_score, reasons in candidates:
+        for idx, (journal, rule_score, reasons) in enumerate(candidates):
             journals_info.append({
                 "journal_id": journal.journal_id,
                 "journal_name": journal.journal_name,
@@ -47,12 +47,15 @@ class LLMRanker:
                 "oa_type": journal.oa_type,
                 "subject_tags": journal.subject_tags[:5],  # 限制标签数量
                 "keywords": journal.keywords[:5],  # 限制关键词数量
+                "rule_rank": idx + 1,                         # 粗排排名（1-based）
+                "rule_reasons": reasons if reasons else [],  # 粗排匹配理由（参考）
             })
 
         # 填充 prompt
         user_prompt = self.user_prompt_template.format(
             title=paper_profile.title,
             research_area=", ".join(paper_profile.research_area) or "未知",
+            ccf_research_area=", ".join(paper_profile.ccf_research_area) if paper_profile.ccf_research_area else "未提供",
             method_type=paper_profile.method_type or "method",
             paper_type=paper_profile.paper_type or "application",
             keywords=", ".join(paper_profile.keywords) or "无",
@@ -63,6 +66,7 @@ class LLMRanker:
             evaluation_metrics=", ".join(paper_profile.evaluation_metrics) or "未提供",
             novelty_type=paper_profile.novelty_type or "method",
             journals_info=json.dumps(journals_info, ensure_ascii=False, indent=2),
+            total_candidates=len(candidates),
         )
 
         # 调用 LLM（超时 180s，自动调整max_tokens）
