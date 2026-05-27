@@ -32,7 +32,7 @@ class TestPaperQualityAssessor:
 
         assert isinstance(result, PaperQuality)
         assert result.quality_level == "A"
-        assert result.paper_strength >= 0.75
+        assert result.paper_strength >= 0.65
         assert result.confidence == 0.8
 
     def test_assess_by_llm_parsing_error_retry(self):
@@ -98,17 +98,17 @@ class TestPaperQualityAssessor:
 
     def test_strength_to_level_mapping(self):
         """测试 strength -> level 映射"""
-        # A: >= 0.75
+        # A: >= 0.65
         assert PaperQuality._strength_to_level(0.8) == "A"
-        assert PaperQuality._strength_to_level(0.75) == "A"
-        # B: >= 0.55
+        assert PaperQuality._strength_to_level(0.65) == "A"
+        # B: >= 0.50
         assert PaperQuality._strength_to_level(0.6) == "B"
-        assert PaperQuality._strength_to_level(0.55) == "B"
+        assert PaperQuality._strength_to_level(0.50) == "B"
         # C: >= 0.35
-        assert PaperQuality._strength_to_level(0.4) == "C"
+        assert PaperQuality._strength_to_level(0.49) == "C"
         assert PaperQuality._strength_to_level(0.35) == "C"
         # D: < 0.35
-        assert PaperQuality._strength_to_level(0.3) == "D"
+        assert PaperQuality._strength_to_level(0.34) == "D"
         assert PaperQuality._strength_to_level(0.0) == "D"
 
     def test_readiness_inference(self):

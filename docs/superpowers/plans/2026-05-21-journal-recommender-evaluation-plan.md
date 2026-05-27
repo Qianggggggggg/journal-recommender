@@ -450,9 +450,9 @@ def load_ccf_journals(ccf_path: str = "data/journals_ccf.jsonl") -> dict[str, di
 
 def get_paper_quality_level(strength: float) -> str:
     """根据 paper_strength 划分质量等级"""
-    if strength >= 0.7:
+    if strength >= 0.65:
         return "strong"
-    elif strength >= 0.4:
+    elif strength >= 0.50:
         return "medium"
     else:
         return "weak"

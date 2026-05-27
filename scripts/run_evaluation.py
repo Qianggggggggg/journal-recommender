@@ -73,6 +73,7 @@ class EvaluationResult:
     # 粗排命中统计
     coarse_hit_count: int  # 粗排命中（实际期刊在 top 50 候选中）
     coarse_hit_in_rule_top10_count: int  # 粗排候选在 RuleScorer top10 中
+    coarse_hit_in_rule_top20_count: int  # 粗排候选在 RuleScorer top20 中
 
     # 分质量等级统计 (A/B/C/D)
     level_a_count: int
@@ -190,8 +191,8 @@ def init_pipeline() -> RecommenderPipeline:
     if store.has_vector_search():
         embedding_retriever = EmbeddingRetriever(store, embedding_client)
 
-    retrieval_config = app_config.get("retrieval", {})
-    merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.4, "vector": 0.4, "tag": 0.2})
+    retrieval_config = app_config.get("candidate_generator", {})
+    merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
 
     generator = CandidateGenerator(store, bm25, embedding_retriever, merge_weights=merge_weights)
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
@@ -274,6 +275,10 @@ def evaluate_single_paper(
         print(f"\n推荐失败: {title[:30]}... - {e}")
         return None
 
+    def _normalize_venue(venue: str) -> str:
+        """标准化期刊名用于比较（去除首尾空格，转小写）"""
+        return venue.strip().lower() if venue else ""
+
     recommendations = rec_result.get("recommendations", [])
     candidates = rec_result.get("candidates", [])
     rule_ranked = rec_result.get("rule_ranked", [])
@@ -281,17 +286,24 @@ def evaluate_single_paper(
     candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
     rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
 
+    # 标准化 venue 用于比较
+    venue_normalized = _normalize_venue(venue)
+    candidate_journal_names_norm = [j.lower() for j in candidate_journal_names]
+    rule_ranked_names_norm = [j.lower() for j in rule_ranked_names]
+    recommended_journals_norm = [j.lower() for j in recommended_journals]
+
     # 计算 Hit@K
-    hit_1 = venue in recommended_journals[:1] if len(recommended_journals) >= 1 else False
-    hit_3 = venue in recommended_journals[:3] if len(recommended_journals) >= 3 else False
-    hit_5 = venue in recommended_journals[:5] if len(recommended_journals) >= 5 else False
-    hit_10 = venue in recommended_journals[:10] if len(recommended_journals) >= 10 else venue in recommended_journals
+    hit_1 = venue_normalized in recommended_journals_norm[:1] if len(recommended_journals) >= 1 else False
+    hit_3 = venue_normalized in recommended_journals_norm[:3] if len(recommended_journals) >= 3 else False
+    hit_5 = venue_normalized in recommended_journals_norm[:5] if len(recommended_journals) >= 5 else False
+    hit_10 = venue_normalized in recommended_journals_norm[:10] if len(recommended_journals) >= 10 else venue_normalized in recommended_journals_norm
 
     # 粗排是否命中（实际发表的期刊在 top 50 候选中）
-    coarse_hit = venue in candidate_journal_names if venue else False
+    coarse_hit = venue_normalized in candidate_journal_names_norm if venue else False
 
     # 粗排候选中是否包含实际发表的期刊（用于分析 RuleScorer 的选择）
-    coarse_hit_in_rule_top10 = venue in rule_ranked_names[:10] if venue else False
+    coarse_hit_in_rule_top10 = venue_normalized in rule_ranked_names_norm[:10] if venue else False
+    coarse_hit_in_rule_top20 = venue_normalized in rule_ranked_names_norm[:20] if venue else False
 
     q_level = profile.quality_level or "D"
 
@@ -308,6 +320,7 @@ def evaluate_single_paper(
         "hit_10": hit_10,
         "coarse_hit": coarse_hit,  # 粗排命中
         "coarse_hit_in_rule_top10": coarse_hit_in_rule_top10,  # 粗排候选在 RuleScorer top10 中
+        "coarse_hit_in_rule_top20": coarse_hit_in_rule_top20,  # 粗排候选在 RuleScorer top20 中
         "paper_strength": profile.paper_strength,
         "quality_level": q_level,
         "ccf_research_area": profile.ccf_research_area,
@@ -346,6 +359,7 @@ def run_evaluation(
         level_match_count=0,
         coarse_hit_count=0,
         coarse_hit_in_rule_top10_count=0,
+        coarse_hit_in_rule_top20_count=0,
         level_a_count=0, level_a_hit_at_5=0,
         level_b_count=0, level_b_hit_at_5=0,
         level_c_count=0, level_c_hit_at_5=0,
@@ -386,6 +400,8 @@ def run_evaluation(
                 result.coarse_hit_count += 1
             if paper_result.get("coarse_hit_in_rule_top10"):
                 result.coarse_hit_in_rule_top10_count += 1
+            if paper_result.get("coarse_hit_in_rule_top20"):
+                result.coarse_hit_in_rule_top20_count += 1
 
             # 分质量等级统计
             q_level = paper_result["quality_level"]
@@ -477,6 +493,7 @@ def print_report(result: EvaluationResult):
     print(f"\n--- 粗排命中分析 ---")
     print(f"  粗排命中（top50候选包含实际期刊）: {result.coarse_hit_count}/{total} ({result.coarse_hit_count*100/total:.1f}%)")
     print(f"  粗排命中且在RuleScorer top10中: {result.coarse_hit_in_rule_top10_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top10_count*100/max(result.coarse_hit_count,1):.1f}%)")
+    print(f"  粗排命中且在RuleScorer top20中: {result.coarse_hit_in_rule_top20_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top20_count*100/max(result.coarse_hit_count,1):.1f}%)")
 
     print(f"\n--- 分质量等级 Hit@5 ---")
     if result.level_a_count > 0:
@@ -526,6 +543,7 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "level_match_count": result.level_match_count,
             "coarse_hit_count": result.coarse_hit_count,
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
+            "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
             "area_subject_tag_match_count": result.area_subject_tag_match_count,
             "level_a_count": result.level_a_count,
             "level_a_hit_at_5": result.level_a_hit_at_5,
@@ -562,7 +580,7 @@ def main():
                         help="限制评估论文数量（用于测试）")
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
-    parser.add_argument("--workers", "-w", type=int, default=4,
+    parser.add_argument("--workers", "-w", type=int, default=2,
                         help="并行线程数（默认4）")
 
     args = parser.parse_args()

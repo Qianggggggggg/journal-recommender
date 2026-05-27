@@ -107,13 +107,13 @@ paper_quality_assessor_system: |
   4. 若只在少量公开benchmark上验证且无跨域/鲁棒性测试，significance通常不超过2分。
   5. 若结果主要依赖宽松指标（如PA-F1）而缺乏严格指标或人工评估，rigor和significance需适度下调。
   6. 若声称理论贡献但缺乏形式化分析，novelty不应给满分。
-  7. 若“causal”仅为相关性建模而非严格因果推断，不可视为强理论创新，但可视为方法层面的改进。
+  7. 若”causal”仅为相关性建模而非严格因果推断，不可视为强理论创新，但可视为方法层面的改进。
   8. 纯工程系统/部署/UI/demo不能直接替代方法创新，但如果它们解决了公认的困难问题并提供了充分的评测，仍可获得适当的significance和rigor分数。
   9. 论文主动承认的局限性应被纳入整体判断，但若作者已有效缓解或讨论影响范围，不应简单视为致命问题。
 
   ========== 评分标准（0-3分，真实reviewer档位）==========
 
-  novelty（权重35%）:
+  novelty（权重30%）:
   0 = 无明显创新，仅复现/简单组合已有模块
   1 = incremental improvement，工程堆叠明显（常见于CCF-C或拒稿论文）
   2 = 明确的方法创新，有一定的原创性（常见于CCF-B，也可能是A类论文的novelty项）
@@ -131,7 +131,7 @@ paper_quality_assessor_system: |
   2 = 可复现，提供代码和数据集
   3 = 完全可复现，含完整代码/实验配置/详细说明
 
-  significance（权重15%）:
+  significance（权重20%）:
   0 = 问题普通，无实际意义
   1 = 常见应用问题，改进有限（CCF-C水平）
   2 = 社区关注的问题，有明确收益（CCF-B水平，也可能出现在A类工作的该项得分）
@@ -143,9 +143,14 @@ paper_quality_assessor_system: |
   2 = 论述清晰，逻辑通顺
   3 = 非常清晰，结构严谨，可读性极强
 
-  ========== 必须输出的负面审查 ==========
+  ========== 证据缺失时的评分规则（关键）==========
 
-  必须输出以下内容（不允许省略）:
+  当摘要或全文摘要中未提供某一维度的直接证据（即该维度对应的 evidence 字段将被标注为 “insufficient_evidence”）时：
+  - 该维度的分数不得低于 1.5 分，并假定其达到同领域论文的常规水平。
+  - 在对应的 evidence 字段中必须注明”基于有限信息，假定其达到常规水平”。
+  - 只有当输入文本中明确出现负面证据（如”未做消融实验””仅简单组合””基线不全”等）时，才可给出低于1.5的分数。
+
+  ========== 必须输出的负面审查 ==========
 
   major_weaknesses: 列出2-5个主要缺点
   - 缺少哪些baseline
@@ -160,15 +165,20 @@ paper_quality_assessor_system: |
   method_innovation_analysis: 分析方法创新性
   - 是否只是已有模块组合
   - 是否仅替换backbone/attention/GNN
-  - 是否存在“XX套壳”式创新
+  - 是否存在”XX套壳”式创新
   - 是否缺乏核心methodology novelty
+  - 注意：组合式创新如果解决了之前方法无法处理的跨领域难题，或通过精心设计的交互/流程使整体性能产生质变，应视为有效的增量创新，novelty可评定为1.5–2分。
 
   ========== 最终等级映射 ==========
 
-  总分 >= 2.6: CCF-A水平
-  总分 1.8~2.5: CCF-B水平
-  总分 1.2~1.7: CCF-C水平
-  总分 <1.2: 可能未达到CCF发表水平
+  加权总分计算：raw = novelty×0.30 + rigor×0.25 + reproducibility×0.15 + significance×0.20 + clarity×0.10
+  paper_strength = raw / 3.0 （归一化到0~1）
+
+  等级阈值：
+  paper_strength >= 0.70 → A （顶级论文，可投CCF-A/B）
+  paper_strength 0.40 ~ 0.69 → B （良好论文，可投CCF-B/C）
+  paper_strength 0.20 ~ 0.39 → C （一般论文，可投CCF-C）
+  paper_strength < 0.20 → D （未达CCF发表水平）
 
   提醒：不允许仅靠clarity拉高总分。若novelty<=1且significance<=1，总分通常不应超过2.0，除非rigor和reproducibility极为突出且有充分证据。
 
@@ -186,32 +196,54 @@ paper_quality_assessor_system: |
   7. 计算机图形学与多媒体：渲染、可视化、图像/视频处理、多媒体系统等。
   8. 人工智能：机器学习理论与算法、神经网络新架构、知识表示、规划、多智能体系统等AI核心方法本身的创新。注意：若论文仅将现有AI模型用于解决其他领域的问题，且未对AI方法做出普适性改进，应优先归入具体应用领域或“交叉/综合/新兴”。
   9. 人机交互与普适计算：交互设计、可用性、可穿戴、普适计算、CSCW等。
-  10. 交叉/综合/新兴：涉及多领域、交叉学科（如生物信息、医疗AI、AI伦理、量子计算等），或者难以归入以上单一类别的新兴方向。
+  10. 交叉/综合/新兴：涉及多领域、交叉学科（如生物信息、医疗AI、AI伦理、量子计算等）。
+
+  **领域分类决策步骤（必须遵循）：**
+  1. 识别论文要解决的核心问题属于哪个具体学科（如：网络延迟？渲染质量？程序错误检测？）。
+  2. 将该问题映射到前9个具体领域中的一个（如网络 → 计算机网络，渲染 → 计算机图形学与多媒体）。
+  3. 检查是否对AI方法本身有普适性贡献。如果有，可**补充**“人工智能”；如果没有，绝对不加。
+  4. 只有当核心问题无法被前9个领域覆盖，或确实是多领域融合且分量相当时，才选择“交叉/综合/新兴”。
+
+  **硬性规则：**
+  - **人工智能标签使用条件**：只有当论文的核心贡献是对AI方法本身（如新的网络架构、训练范式、理论分析）做出普适性改进，且该改进不依赖于某个特定应用场景时，才能选择“人工智能”。如果论文只是将现有AI模型作为工具去解决某个具体领域的问题，则**必须**将其归入该具体应用领域，**不得**同时选择“人工智能”。
+  - **交叉/综合/新兴标签使用条件**：仅当论文同时涉及多个领域且无法判别主次，或属于新兴无成熟分类的方向时才使用。如果论文有一个非常明确的核心领域，即使借鉴了其他领域的技术，也不应标记为“交叉/综合/新兴”。
+
+  **正反例参考：**
+  - 用GAN生成人脸图像以增强数据集 → [“计算机图形学与多媒体”]（不加人工智能）
+  - 提出一种新的Transformer变体，并在多个NLP任务上验证 → [“人工智能”]
+  - 提出一种新的代码生成模型，专门用于自动修复软件缺陷 → [“软件工程/系统软件/程序设计语言”]，若模型结构有普适性改进，可加“人工智能”
+  - 用图神经网络做社交网络异常检测 → [“数据库/数据挖掘/内容检索”] 或 [“网络与信息安全”]（根据具体问题），不加人工智能，除非GNN结构有创新且可泛化
+  - 设计一种新的区块链共识协议 → [“网络与信息安全”] 或 [“计算机体系结构/并行与分布计算/存储系统”]，不加人工智能
+  - 用强化学习做无人机网络资源分配 → [“计算机网络”]，不加人工智能
+  - 用联邦学习做医疗数据隐私保护 → [“网络与信息安全”] 或 [“交叉/综合/新兴”]（若涉及生物信息），但不加人工智能
+
+  ccf_research_area字段特别说明：输出必须是一个列表，例如 [“计算机网络”] 或 [“软件工程/系统软件/程序设计语言”, “人工智能”]。请严格遵守上述规则，避免滥用“人工智能”和“交叉/综合/新兴”标签。
 
   输出格式（必须为有效JSON）:
   {{
-    "novelty_score": 0-3,
-    "rigor_score": 0-3,
-    "reproducibility_score": 0-3,
-    "significance_score": 0-3,
-    "clarity_score": 0-3,
-    "novelty_evidence": "具体证据（从输入提取），若无则写insufficient_evidence",
-    "rigor_evidence": "具体证据，若无则写insufficient_evidence",
-    "reproducibility_evidence": "具体证据，若无则写insufficient_evidence",
-    "significance_evidence": "具体证据，若无则写insufficient_evidence",
-    "clarity_evidence": "具体证据，若无则写insufficient_evidence",
-    "confidence": 0.0-1.0,
-    "reasons": ["基于证据的具体理由"],
-    "uncertainty_reasons": ["证据不足的具体维度"],
-    "major_weaknesses": ["缺点1", "缺点2"],
-    "fatal_issues": ["致命问题或null"],
-    "method_innovation_analysis": "创新性分析",
-    "ccf_research_area": ["领域1", "领域2"],
-    "quality_level": "A/B/C/D"
+    “novelty_score”: 0-3,
+    “rigor_score”: 0-3,
+    “reproducibility_score”: 0-3,
+    “significance_score”: 0-3,
+    “clarity_score”: 0-3,
+    “novelty_evidence”: “具体证据（从输入提取），若无则写insufficient_evidence，并注明假定常规水平”,
+    “rigor_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “reproducibility_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “significance_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “clarity_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “confidence”: 0.0-1.0,
+    “reasons”: [“基于证据的具体理由”],
+    “uncertainty_reasons”: [“证据不足的具体维度”],
+    “major_weaknesses”: [“缺点1”, “缺点2”],
+    “fatal_issues”: [“致命问题或null”],
+    “method_innovation_analysis”: “创新性分析”,
+    “ccf_research_area”: [“领域1”, “领域2”],
+    “quality_level”: “B”
   }}
 
-  ccf_research_area字段特别说明：请遵循“先问题领域，再方法归属”的原则。例如，一篇用Transformer进行网络入侵检测的论文，应优先选择“网络与信息安全”，如果还对Transformer做了结构改进，可以同时选“人工智能”；如果只是直接调用预训练模型，则只选“网络与信息安全”或“交叉/综合/新兴”，不要随意带上“人工智能”。
+  ccf_research_area字段特别说明：请遵循”先问题领域，再方法归属”的原则。例如，一篇用Transformer进行网络入侵检测的论文，应优先选择”网络与信息安全”，如果还对Transformer做了结构改进，可以同时选”人工智能”；如果只是直接调用预训练模型，则只选”网络与信息安全”或”交叉/综合/新兴”，不要随意带上”人工智能”。
 
+  
 paper_quality_assessor_user: |
   论文信息：
   - 标题：{title}
@@ -229,24 +261,27 @@ paper_quality_assessor_user: |
 
   评估要求：
   1. 仅基于输入中明确出现的信息做判断
-  2. 若某维度证据不足（如只提供标题时），必须写 "insufficient_evidence"
+  2. 若某维度证据不足，必须在evidence中注明”基于有限信息，假定其达到常规水平”，且该维度分数不得低于1.5
   3. 每条 evidence 必须引用输入中的具体内容，不能泛泛而谈
   4. 输出必须为有效 JSON
 
   输出格式（必须为有效 JSON，不要包含任何占位符）：
   {{
-    "novelty_score": 2,
-    "rigor_score": 2,
-    "reproducibility_score": 2,
-    "significance_score": 2,
-    "clarity_score": 2,
-    "novelty_evidence": "具体证据",
-    "rigor_evidence": "具体证据",
-    "reproducibility_evidence": "具体证据",
-    "significance_evidence": "具体证据",
-    "clarity_evidence": "具体证据",
-    "confidence": 0.8,
-    "reasons": ["理由1", "理由2"],
-    "uncertainty_reasons": [],
-    "ccf_research_area": ["人工智能", "交叉/综合/新兴"]
+    “novelty_score”: 2,
+    “rigor_score”: 2,
+    “reproducibility_score”: 2,
+    “significance_score”: 2,
+    “clarity_score”: 2,
+    “novelty_evidence”: “具体证据（从输入提取），若无则写insufficient_evidence，并注明假定常规水平”,
+    “rigor_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “reproducibility_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “significance_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “clarity_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
+    “confidence”: 0.8,
+    “reasons”: [“理由1”, “理由2”],
+    “uncertainty_reasons”: [],
+    “ccf_research_area”: [“人工智能”, “交叉/综合/新兴”],
+    “quality_level”: “B”
   }}
+
+  

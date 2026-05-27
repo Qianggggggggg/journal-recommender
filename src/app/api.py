@@ -115,8 +115,8 @@ def get_pipeline() -> RecommenderPipeline:
             embedding_retriever = EmbeddingRetriever(_store, embedding_client)
 
         # 读取召回权重配置
-        retrieval_config = app_config.get("retrieval", {})
-        merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.4, "vector": 0.4, "tag": 0.2})
+        retrieval_config = app_config.get("candidate_generator", {})
+        merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
 
         generator = CandidateGenerator(_store, bm25, embedding_retriever, merge_weights=merge_weights)
         scorer = RuleScorer()
@@ -449,7 +449,7 @@ def _apply_quality_adjustment(
         ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
         adjustment = base_adjustment * ccf_multiplier
         new_reasons = reasons.copy()
-        if strength >= 0.75:
+        if strength >= 0.65:
             new_reasons.append(f"强论文调整(+{(adjustment-1)*100:.0f}%)")
         elif strength < 0.35:
             new_reasons.append(f"弱论文调整({(adjustment-1)*100:.0f}%)")
@@ -620,7 +620,7 @@ async def recommend_stream(request: Request):
             await asyncio.sleep(0)
 
             rule_ranked = pipeline.rule_scorer.rank(
-                candidates, profile, oa_preference=oa_preference, top_k=10
+                candidates, profile, oa_preference=oa_preference, top_k=20
             )
 
             # 应用质量软权重调整（解耦）

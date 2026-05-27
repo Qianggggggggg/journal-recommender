@@ -50,9 +50,9 @@ Hit@5 = (实际期刊在 Top-5 中的论文数) / (总论文数)
 
 ### 4.2 论文质量等级划分
 基于 PaperQualityAssessor 输出的 paper_strength：
-- **强论文**：paper_strength >= 0.7
-- **中论文**：0.4 <= paper_strength < 0.7
-- **弱论文**：paper_strength < 0.4
+- **强论文**：paper_strength >= 0.65
+- **中论文**：0.50 <= paper_strength < 0.65
+- **弱论文**：paper_strength < 0.50
 
 ### 4.3 Level Match
 | 论文质量 | 推荐期刊 CCF 等级 |

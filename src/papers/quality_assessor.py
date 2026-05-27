@@ -52,9 +52,9 @@ class PaperQuality(BaseModel):
     @staticmethod
     def _strength_to_level(strength: float) -> str:
         """将 strength 映射到 A/B/C/D"""
-        if strength >= 0.75:
+        if strength >= 0.65:
             return "A"
-        elif strength >= 0.55:
+        elif strength >= 0.50:
             return "B"
         elif strength >= 0.35:
             return "C"
@@ -154,13 +154,8 @@ class PaperQualityAssessor:
             # 准备度
             readiness = PaperQuality._strength_to_readiness(paper_strength, novelty_score)
 
-            # 汇总等级：优先使用LLM输出的严格评估结果，否则根据strength计算
-            # 新prompt已要求LLM直接输出quality_level
-            llm_quality_level = data.get("quality_level")
-            if llm_quality_level in ["A", "B", "C", "D"]:
-                quality_level = llm_quality_level
-            else:
-                quality_level = PaperQuality._strength_to_level(paper_strength)
+            # 汇总等级：信任 LLM 输出
+            quality_level = data.get("quality_level", "C")
 
             return PaperQuality(
                 paper_strength=paper_strength,

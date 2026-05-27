@@ -21,7 +21,7 @@ class CandidateGenerator:
         self.store = store
         self.bm25_retriever = bm25_retriever
         self.embedding_retriever = embedding_retriever
-        self.merge_weights = merge_weights or {"bm25": 0.35, "vector": 0.35, "tag": 0.2, "text": 0.1}
+        self.merge_weights = merge_weights or {"bm25": 0.45, "vector": 0.35, "text": 0.20}
 
     def generate(
         self,
@@ -33,9 +33,9 @@ class CandidateGenerator:
         """生成候选期刊"""
         # 各路召回数量配置
         config = {
-            "title": {"bm25": 18, "vector": 18, "tag": 15, "text": 10},
-            "abstract": {"bm25": 22, "vector": 22, "tag": 18, "text": 12},
-            "full": {"bm25": 25, "vector": 25, "tag": 20, "text": 15},
+            "title": {"bm25": 22, "vector": 22, "text": 16},
+            "abstract": {"bm25": 28, "vector": 28, "text": 14},
+            "full": {"bm25": 32, "vector": 32, "text": 16},
         }
         cfg = config.get(mode, config["abstract"])
 
@@ -50,14 +50,11 @@ class CandidateGenerator:
         if self.embedding_retriever:
             vector_results = self.embedding_retriever.retrieve(rich_query, top_k=cfg["vector"])
 
-        # 3. 标签过滤
-        tag_filtered = self._filter_by_tags(paper_profile, top_k=cfg["tag"])
-
-        # 4. 文本搜索（关键词交集）
+        # 3. 文本搜索（关键词交集）
         text_results = self._text_search(paper_profile, top_k=cfg["text"])
 
-        # 5. 合并去重
-        candidates = self._merge_results(bm25_results, vector_results, tag_filtered, text_results, top_k=top_k)
+        # 4. 合并去重
+        candidates = self._merge_results(bm25_results, vector_results, text_results, top_k=top_k)
 
         return candidates
 
@@ -79,83 +76,62 @@ class CandidateGenerator:
 
     def _build_rich_query(self, query_text: str, paper_profile: PaperProfile) -> str:
         """构建丰富的检索 query，整合 paper_profile 的所有关键字段"""
-        parts = [query_text]
-
-        if paper_profile.techniques:
-            parts.append(" ".join(paper_profile.techniques))
-        if paper_profile.datasets:
-            parts.append(" ".join(paper_profile.datasets))
-        if paper_profile.evaluation_metrics:
-            parts.append(" ".join(paper_profile.evaluation_metrics))
-        if paper_profile.keywords:
-            parts.append(" ".join(paper_profile.keywords))
-        if paper_profile.application_domain:
-            parts.append(" ".join(paper_profile.application_domain))
-        if paper_profile.novelty_type:
-            parts.append(paper_profile.novelty_type)
-
+        parts = [
+            query_text,  # 论文标题+摘要
+            query_text,  # 重复一次以提升权重
+            " ".join(paper_profile.keywords),
+            " ".join(paper_profile.techniques),
+            " ".join(paper_profile.application_domain),
+            " ".join(paper_profile.keywords),      # 再次重复
+            " ".join(paper_profile.techniques),    # 再次重复
+            " ".join(paper_profile.datasets),
+            " ".join(paper_profile.evaluation_metrics),
+            paper_profile.novelty_type or "",
+        ]
         return " ".join(parts)
 
-    def _filter_by_tags(
-        self, paper_profile: PaperProfile, top_k: int = 20
-    ) -> List[Tuple[Journal, float]]:
-        """标签过滤召回"""
-        results = []
-        for journal in self.store._journals:
-            score = 0.0
-            # 研究领域匹配
-            if paper_profile.research_area:
-                for area in paper_profile.research_area:
-                    if area in journal.subject_tags:
-                        score += 1.0
-            # 应用领域匹配
-            if paper_profile.application_domain:
-                for domain in paper_profile.application_domain:
-                    if domain in journal.subject_tags:
-                        score += 0.8
-            # 论文类型匹配
-            if paper_profile.method_type in journal.target_paper_type:
-                score += 0.5
-            # 技术匹配（检查是否在 journal.scope_text 中出现）
-            if paper_profile.techniques:
-                scope_lower = journal.scope_text.lower()
-                for tech in paper_profile.techniques:
-                    if tech.lower() in scope_lower:
-                        score += 0.3
-            if score > 0:
-                results.append((journal, score))
+    def _normalize_scores(self, results: List[Tuple[Journal, float]]) -> List[Tuple[Journal, float]]:
+        """对单路结果做 min-max 归一化到 [0,1]"""
+        if not results:
+            return []
 
-        # 按分数排序
-        results.sort(key=lambda x: x[1], reverse=True)
-        return results[:top_k]
+        scores = [score for _, score in results]
+        min_score = min(scores)
+        max_score = max(scores)
+
+        if max_score == min_score:
+            # 所有分数相同，归一化为 0
+            return [(journal, 0.0) for journal, _ in results]
+
+        normalized = [(journal, (score - min_score) / (max_score - min_score)) for journal, score in results]
+        return normalized
 
     def _merge_results(
         self,
         bm25_results: List[Tuple[Journal, float]],
         vector_results: List[Tuple[Journal, float]],
-        tag_results: List[Tuple[Journal, float]],
         text_results: Optional[List[Tuple[Journal, float]]] = None,
         top_k: int = 50,
     ) -> List[Journal]:
-        """合并去重"""
+        """合并去重（各路分数归一化后加权合并）"""
+        # 先对每路做 min-max 归一化
+        bm25_norm = self._normalize_scores(bm25_results)
+        vector_norm = self._normalize_scores(vector_results)
+        text_norm = self._normalize_scores(text_results) if text_results else []
+
         score_map: Dict[str, float] = {}
 
-        # BM25 结果
-        for journal, score in bm25_results:
+        # BM25 结果（已归一化）
+        for journal, score in bm25_norm:
             score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["bm25"]
 
-        # 向量结果
-        for journal, score in vector_results:
+        # 向量结果（已归一化）
+        for journal, score in vector_norm:
             score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["vector"]
 
-        # 标签结果
-        for journal, score in tag_results:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["tag"]
-
-        # 文本搜索结果
-        if text_results:
-            for journal, score in text_results:
-                score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["text"]
+        # 文本搜索结果（已归一化）
+        for journal, score in text_norm:
+            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["text"]
 
         # 排序取 top_k
         sorted_ids = sorted(score_map.keys(), key=lambda x: score_map[x], reverse=True)[:top_k]
