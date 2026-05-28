@@ -16,7 +16,7 @@ class TestPaperQualityAssessor:
     def test_assess_by_llm_success(self):
         """LLM 评估成功"""
         mock_llm = MagicMock()
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 2, "reproducibility_score": 2, "significance_score": 2, "clarity_score": 2, "confidence": 0.8, "reasons": ["方法创新"], "novelty_evidence": "提出了新方法", "rigor_evidence": "实验充分", "reproducibility_evidence": "数据集完整", "significance_evidence": "问题重要", "clarity_evidence": "论述清晰"}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 2, "reproducibility_score": 2, "significance_score": 2, "clarity_score": 2, "confidence": 0.8, "reasons": ["方法创新"], "novelty_evidence": "提出了新方法", "rigor_evidence": "实验充分", "reproducibility_evidence": "数据集完整", "significance_evidence": "问题重要", "clarity_evidence": "论述清晰"}')
 
         assessor = PaperQualityAssessor(llm=mock_llm)
         paper_input = PaperInput(title="Test Paper", abstract="This is a test abstract " * 30)
@@ -39,7 +39,7 @@ class TestPaperQualityAssessor:
         """LLM 返回格式错误时重试后抛出明确错误"""
         mock_llm = MagicMock()
         # 连续返回无法解析的响应
-        mock_llm.chat.return_value = MagicMock(content="这是一条无法解析的响应")
+        mock_llm.chat_auto.return_value = MagicMock(content="这是一条无法解析的响应")
 
         assessor = PaperQualityAssessor(llm=mock_llm)
         paper_input = PaperInput(title="Test Paper", abstract="test")
@@ -50,13 +50,13 @@ class TestPaperQualityAssessor:
             assessor.assess(paper_input, profile, "system", "user")
 
         # 验证重试了3次
-        assert mock_llm.chat.call_count == 3
+        assert mock_llm.chat_auto.call_count == 3
 
     def test_assess_by_llm_network_error_retry(self):
         """LLM 网络错误时重试"""
         mock_llm = MagicMock()
         # 前两次失败，第三次成功
-        mock_llm.chat.side_effect = [
+        mock_llm.chat_auto.side_effect = [
             Exception("Network error"),
             Exception("Network error"),
             MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.5, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
@@ -68,13 +68,13 @@ class TestPaperQualityAssessor:
 
         result = assessor.assess(paper_input, profile, "system", "user")
 
-        assert mock_llm.chat.call_count == 3
+        assert mock_llm.chat_auto.call_count == 3
         assert result.paper_strength is not None
 
     def test_readiness_levels(self):
         """测试三种准备度状态"""
         mock_llm = MagicMock()
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.5, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.5, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
         assessor = PaperQualityAssessor(llm=mock_llm)
 
         # 高 strength -> Ready
@@ -85,30 +85,30 @@ class TestPaperQualityAssessor:
             evaluation_metrics=["m1", "m2", "m3"],
         )
         # 模拟高评分
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 3, "reproducibility_score": 3, "significance_score": 3, "clarity_score": 3, "confidence": 0.9, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 3, "reproducibility_score": 3, "significance_score": 3, "clarity_score": 3, "confidence": 0.9, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
         high_result = assessor.assess(high_input, high_profile, "system", "user")
         assert high_result.readiness == "Ready"
 
         # 低 strength -> Needs-Revision
         low_input = PaperInput(title="Test", abstract="short")
         low_profile = PaperProfile(title="Test")
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 1, "rigor_score": 0, "reproducibility_score": 0, "significance_score": 0, "clarity_score": 0, "confidence": 0.3, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 1, "rigor_score": 0, "reproducibility_score": 0, "significance_score": 0, "clarity_score": 0, "confidence": 0.3, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
         low_result = assessor.assess(low_input, low_profile, "system", "user")
         assert low_result.readiness == "Needs-Revision"
 
     def test_strength_to_level_mapping(self):
         """测试 strength -> level 映射"""
-        # A: >= 0.65
+        # A: >= 0.72
         assert PaperQuality._strength_to_level(0.8) == "A"
-        assert PaperQuality._strength_to_level(0.65) == "A"
-        # B: >= 0.50
+        assert PaperQuality._strength_to_level(0.72) == "A"
+        # B: >= 0.52
         assert PaperQuality._strength_to_level(0.6) == "B"
-        assert PaperQuality._strength_to_level(0.50) == "B"
-        # C: >= 0.35
+        assert PaperQuality._strength_to_level(0.52) == "B"
+        # C: >= 0.32
         assert PaperQuality._strength_to_level(0.49) == "C"
-        assert PaperQuality._strength_to_level(0.35) == "C"
-        # D: < 0.35
-        assert PaperQuality._strength_to_level(0.34) == "D"
+        assert PaperQuality._strength_to_level(0.32) == "C"
+        # D: < 0.32
+        assert PaperQuality._strength_to_level(0.31) == "D"
         assert PaperQuality._strength_to_level(0.0) == "D"
 
     def test_readiness_inference(self):
@@ -123,7 +123,7 @@ class TestPaperQualityAssessor:
     def test_paper_strength_range(self):
         """paper_strength 应在 [0, 1] 范围内"""
         mock_llm = MagicMock()
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.5, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.5, "reasons": [], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
         assessor = PaperQualityAssessor(llm=mock_llm)
 
         test_cases = [
@@ -138,7 +138,7 @@ class TestPaperQualityAssessor:
     def test_confidence_from_llm(self):
         """置信度应从 LLM 响应中提取"""
         mock_llm = MagicMock()
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.95, "reasons": ["测试"], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 2, "rigor_score": 1, "reproducibility_score": 1, "significance_score": 1, "clarity_score": 1, "confidence": 0.95, "reasons": ["测试"], "novelty_evidence": "", "rigor_evidence": "", "reproducibility_evidence": "", "significance_evidence": "", "clarity_evidence": ""}')
 
         assessor = PaperQualityAssessor(llm=mock_llm)
         paper_input = PaperInput(title="Test", abstract="test")
@@ -151,7 +151,7 @@ class TestPaperQualityAssessor:
     def test_evidence_from_llm(self):
         """证据字段应从 LLM 响应中提取"""
         mock_llm = MagicMock()
-        mock_llm.chat.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 2, "reproducibility_score": 2, "significance_score": 2, "clarity_score": 2, "confidence": 0.8, "reasons": ["创新性强"], "novelty_evidence": "提出了新的图索引方法", "rigor_evidence": "在4个数据集上进行了充分实验", "reproducibility_evidence": "使用了标准基准数据集", "significance_evidence": "解决了现有RAG系统的关键问题", "clarity_evidence": "论文结构清晰，论述流畅"}')
+        mock_llm.chat_auto.return_value = MagicMock(content='{"novelty_score": 3, "rigor_score": 2, "reproducibility_score": 2, "significance_score": 2, "clarity_score": 2, "confidence": 0.8, "reasons": ["创新性强"], "novelty_evidence": "提出了新的图索引方法", "rigor_evidence": "在4个数据集上进行了充分实验", "reproducibility_evidence": "使用了标准基准数据集", "significance_evidence": "解决了现有RAG系统的关键问题", "clarity_evidence": "论文结构清晰，论述流畅"}')
 
         assessor = PaperQualityAssessor(llm=mock_llm)
         paper_input = PaperInput(title="Test", abstract="A" * 300)

@@ -74,6 +74,13 @@ class EvaluationResult:
     mrr: float = 0.0
     ndcg_at_5: float = 0.0
 
+    # 新增指标
+    ndcg_at_10: float = 0.0  # NDCG@10（真正跑满10个）
+    area_hit_at_5: int = 0   # 同领域命中（推荐top5中有同领域期刊）
+    area_hit_at_10: int = 0  # 同领域命中 top10
+    level_hit_at_5: int = 0   # 同CCF档位命中（top5中有同CCF等级期刊）
+    level_hit_at_10: int = 0  # 同CCF档位命中 top10
+
     # 粗排命中统计
     coarse_hit_count: int = 0  # 粗排命中（实际期刊在 top 50 候选中）
     coarse_hit_in_rule_top10_count: int = 0  # 粗排候选在 RuleScorer top10 中
@@ -146,6 +153,11 @@ def calculate_metrics(result: EvaluationResult) -> dict:
         "Level Match Rate": f"{result.level_match_count}/{total} ({result.level_match_count*100/total:.1f}%)",
         "MRR": f"{result.mrr/total:.4f}" if total > 0 else "N/A",
         "NDCG@5": f"{result.ndcg_at_5/total:.4f}" if total > 0 else "N/A",
+        "NDCG@10": f"{result.ndcg_at_10/total:.4f}" if total > 0 else "N/A",
+        "同领域命中@5": f"{result.area_hit_at_5}/{total} ({result.area_hit_at_5*100/total:.1f}%)",
+        "同领域命中@10": f"{result.area_hit_at_10}/{total} ({result.area_hit_at_10*100/total:.1f}%)",
+        "同CCF档位@5": f"{result.level_hit_at_5}/{total} ({result.level_hit_at_5*100/total:.1f}%)",
+        "同CCF档位@10": f"{result.level_hit_at_10}/{total} ({result.level_hit_at_10*100/total:.1f}%)",
     }
 
     # 分质量等级
@@ -320,11 +332,11 @@ def evaluate_single_paper(
     rule_ranked_names_norm = [j.lower() for j in rule_ranked_names]
     recommended_journals_norm = [j.lower() for j in recommended_journals]
 
-    # 计算 Hit@K
+    # 计算 Hit@K（真正跑10个）
     hit_1 = venue_normalized in recommended_journals_norm[:1] if len(recommended_journals) >= 1 else False
     hit_3 = venue_normalized in recommended_journals_norm[:3] if len(recommended_journals) >= 3 else False
     hit_5 = venue_normalized in recommended_journals_norm[:5] if len(recommended_journals) >= 5 else False
-    hit_10 = venue_normalized in recommended_journals_norm[:10] if len(recommended_journals) >= 10 else venue_normalized in recommended_journals_norm
+    hit_10 = venue_normalized in recommended_journals_norm[:10] if venue else False
 
     # 粗排是否命中（实际发表的期刊在 top 50 候选中）
     coarse_hit = venue_normalized in candidate_journal_names_norm if venue else False
@@ -342,9 +354,32 @@ def evaluate_single_paper(
             relevant_rank = i + 1
             break
 
+    # 同领域命中（research_area 匹配任一 subject_tags）
+    research_areas_set = set(research_area) if research_area else set()
+    area_hit_5 = False
+    area_hit_10 = False
+    for i, rec in enumerate(recommendations[:10]):
+        if rec.journal.subject_tags and research_areas_set:
+            if set(rec.journal.subject_tags) & research_areas_set:
+                if i < 5:
+                    area_hit_5 = True
+                area_hit_10 = True
+                break
+
+    # 同 CCF 档位命中（ccf_level 匹配期刊 ccf_rating）
+    level_hit_5 = False
+    level_hit_10 = False
+    for i, rec in enumerate(recommendations[:10]):
+        if rec.journal.ccf_rating and ccf_level:
+            if rec.journal.ccf_rating.upper() == ccf_level.upper():
+                if i < 5:
+                    level_hit_5 = True
+                level_hit_10 = True
+                break
+
     return {
         "arxiv": arxiv_id,
-        "title": title[:50],
+        "title": title[:80],
         "venue": venue,
         "ccf_level": ccf_level,
         "research_area": research_area,
@@ -372,6 +407,27 @@ def evaluate_single_paper(
             )
             for rec in recommendations if hasattr(rec, 'journal')
         ) if research_area and recommendations else False,
+        # 新增指标
+        "area_hit_5": area_hit_5,
+        "area_hit_10": area_hit_10,
+        "level_hit_5": level_hit_5,
+        "level_hit_10": level_hit_10,
+        # 每篇论文的详细推荐信息（用于定位问题）
+        "recommendations_detail": [
+            {
+                "rank": i + 1,
+                "journal_name": rec.journal.journal_name,
+                "journal_id": rec.journal.journal_id,
+                "ccf_rating": rec.journal.ccf_rating or "未知",
+                "subject_tags": rec.journal.subject_tags[:5],
+                "rule_rank": rule_ranked_names.index(rec.journal.journal_name) + 1 if rec.journal.journal_name in rule_ranked_names else -1,
+                "rule_score": rule_ranked[rule_ranked_names.index(rec.journal.journal_name)][1] if rec.journal.journal_name in rule_ranked_names else None,
+                "llm_score": rec.score,
+                "confidence": rec.confidence,
+                "match_reasons": rec.match_reasons[:5] if rec.match_reasons else [],
+            }
+            for i, rec in enumerate(recommendations[:top_k])
+        ],
     }
 
 
@@ -394,6 +450,9 @@ def run_evaluation(
         area_match_count=0,
         area_subject_tag_match_count=0,
         level_match_count=0,
+        ndcg_at_10=0.0,
+        area_hit_at_5=0, area_hit_at_10=0,
+        level_hit_at_5=0, level_hit_at_10=0,
         coarse_hit_count=0,
         coarse_hit_in_rule_top10_count=0,
         coarse_hit_in_rule_top20_count=0,
@@ -438,6 +497,21 @@ def run_evaluation(
                 import math
                 result.mrr += 1.0 / rank
                 result.ndcg_at_5 += 1.0 / math.log2(rank + 1)  # 二值相关性: DCG=1/log2(r+1), IDCG=1/log2(2)=1
+
+            # NDCG@10（真正跑满10个，只有10个结果时才计算）
+            recommended_journals = paper_result.get("recommended_journals", [])
+            if len(recommended_journals) >= 10 and rank > 0:
+                result.ndcg_at_10 += 1.0 / math.log2(rank + 1)
+
+            # 同领域/同CCF档位命中
+            if paper_result.get("area_hit_5"):
+                result.area_hit_at_5 += 1
+            if paper_result.get("area_hit_10"):
+                result.area_hit_at_10 += 1
+            if paper_result.get("level_hit_5"):
+                result.level_hit_at_5 += 1
+            if paper_result.get("level_hit_10"):
+                result.level_hit_at_10 += 1
 
             # 粗排命中统计
             if paper_result.get("coarse_hit"):
@@ -503,13 +577,15 @@ def run_evaluation(
             if n > 0:
                 hit_k = getattr(result, f"hit_at_{top_k}", 0)
                 mrr_val = result.mrr / n
-                ndcg_val = result.ndcg_at_5 / n
+                ndcg5_val = result.ndcg_at_5 / n
+                ndcg10_val = result.ndcg_at_10 / n
                 pbar.set_postfix({
                     f"Hit@{top_k}": f"{hit_k}/{n}({hit_k*100/n:.1f}%)",
                     "MRR": f"{mrr_val:.3f}",
-                    "NDCG@5": f"{ndcg_val:.3f}",
-                    "Level": f"{result.level_match_count}/{n}({result.level_match_count*100/n:.1f}%)",
-                    "Area": f"{result.area_match_count}/{n}({result.area_match_count*100/n:.1f}%)",
+                    "NDCG@5": f"{ndcg5_val:.3f}",
+                    "NDCG@10": f"{ndcg10_val:.3f}",
+                    "Area@5": f"{result.area_hit_at_5}/{n}",
+                    "Lvl@5": f"{result.level_hit_at_5}/{n}",
                 })
 
     return result
@@ -538,6 +614,11 @@ def print_report(result: EvaluationResult):
     print(f"  Level Match Rate: {metrics['Level Match Rate']}")
     print(f"  MRR: {metrics['MRR']}")
     print(f"  NDCG@5: {metrics['NDCG@5']}")
+    print(f"  NDCG@10: {metrics['NDCG@10']}")
+    print(f"  同领域命中@5: {metrics['同领域命中@5']}")
+    print(f"  同领域命中@10: {metrics['同领域命中@10']}")
+    print(f"  同CCF档位@5: {metrics['同CCF档位@5']}")
+    print(f"  同CCF档位@10: {metrics['同CCF档位@10']}")
 
     # 粗排命中分析
     print(f"\n--- 粗排命中分析 ---")

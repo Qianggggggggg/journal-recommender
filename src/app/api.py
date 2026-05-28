@@ -119,7 +119,7 @@ def get_pipeline() -> RecommenderPipeline:
         merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
 
         generator = CandidateGenerator(_store, bm25, embedding_retriever, merge_weights=merge_weights)
-        scorer = RuleScorer()
+        scorer = RuleScorer(journals=_store.journals)
 
         llm_ranker = LLMRanker(
             llm,

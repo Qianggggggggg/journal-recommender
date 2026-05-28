@@ -94,16 +94,16 @@ paper_profile_system: |
 
   **输出格式（必须严格遵循）**：
   {
-    "research_area": ["计算机图形学与多媒体"],  // CCF专业领域列表，1-3个
-    "method_type": "method",  // method/system/experiment/survey
-    "paper_type": "theory",  // theory/application/engineering
-    "keywords": ["关键词1", "关键词2"],  // 5-8个
-    "novelty": "创新点简述",  // 1-2句话
-    "application_domain": ["应用领域"],  // 应用领域列表
-    "techniques": ["transformer", "GNN"],  // 具体技术
-    "datasets": ["ImageNet"],  // 使用的数据集
-    "evaluation_metrics": ["mAP", "F1"],  // 评估指标
-    "novelty_type": "新方法"  // 新方法/新应用/新基准/性能提升/效率优化
+    "research_area": ["计算机图形学与多媒体"],
+    "method_type": "method",
+    "paper_type": "theory",
+    "keywords": ["reinforcement learning", "runtime verification"],
+    "novelty": "创新点简述",
+    "application_domain": ["应用领域"],
+    "techniques": ["transformer", "GNN", "3D Gaussian Splatting"],
+    "datasets": ["ImageNet"],
+    "evaluation_metrics": ["mAP", "F1"],
+    "novelty_type": "new_method"
   }
 
   必须返回有效的 JSON 对象，不要包裹在 markdown 代码块中，不要添加额外解释。
@@ -118,18 +118,39 @@ paper_profile_user: |
 llm_ranker_system: |
   你是一个专业的学术期刊匹配顾问。请根据论文信息和候选期刊的粗排排名（rule_rank）为候选期刊打分排序。
 
+  rule_rank 只是弱先验，不是排序约束。
+  最终排序必须以 topic/scope fit 为主。
+  如果某期刊的 subject_tags 与论文 research_area 一致，且 scope/keywords 明确覆盖论文主题，即使 rule_rank 较低，也应提升。
+  如果某期刊只是泛泛覆盖 AI、machine learning、computer science，但不覆盖论文具体问题，应降低。
+  不要因为 CCF 等级高就提升主题不精确的期刊。
+
+  评分依据：
+  - 主题与 scope 精确匹配：50%
+  - 期刊专门性与论文问题一致：20%
+  - 技术/数据集/应用场景匹配：15%
+  - subject_tags 与 research_area 一致：10%
+  - rule_rank 参考信号：5%
+
   评分标准：
-  - 0.9-1.0: 高度匹配，scope 完全覆盖论文主题，且 rule_rank ≤ 3
-  - 0.7-0.9: 较好匹配，scope 覆盖主要方向，rule_rank 在 4-7 之间
-  - 0.5-0.7: 中等匹配，部分领域重叠，rule_rank 在 8-12 之间
-  - 0.3-0.5: 较弱匹配，仅表面相关，rule_rank 在 13-20 之间
-  - 0.0-0.3: 不匹配，rule_rank > 20
+  - 0.9-1.0: 高度匹配，scope 完全覆盖论文主题
+  - 0.7-0.9: 较好匹配，scope 覆盖主要方向
+  - 0.5-0.7: 中等匹配，部分领域重叠
+  - 0.3-0.5: 较弱匹配，仅表面相关
+  - 0.0-0.3: 不匹配，主题几乎无关
 
   重要原则：
-  - 候选期刊已按粗排规则初排（rule_rank 1=最匹配），你的主要任务是在此基础上做小幅微调（±3位），而非重新独立打分。
-  - rule_rank ≤ 5 的期刊若 scope 无明显偏差，应保持在 Top 5。
-  - 最终分数应与 rule_rank 保持一致：rank 高则分数高，rank 低则分数低。
-  - 只有当 LLM 发现 rule_rank 与实际匹配度严重不符（如 scope 描述模糊但实际领域很匹配，或反过来）时，才在 ±0.15 范围内调整分数。
+  - 候选期刊已按粗排规则初排（rule_rank 1=最匹配），你的主要任务是在此基础上做小幅微调，而非重新独立打分。
+  - 最终分数应与 topic/scope fit 保持一致：如果 scope 明确覆盖论文主题，即使 rule_rank 较高，也应给高分。
+  - 如果 LLM 发现 rule_rank 与实际 topic/scope 匹配严重不符，应果断调整分数（不受 ±0.15 限制）。
+
+  === 泛强刊抢位惩罚机制 ===
+
+  以下期刊属于"宽泛顶级期刊"，主题覆盖极广但专门性弱：
+  - JMLR (Journal of Machine Learning Research)
+  - JACM (Journal of the ACM)
+  - SIAM Journal on Computing (SICOMP)
+  - IEEE Trans. on Pattern Analysis and Machine Intelligence (TPAMI)
+  - Machine Learning (Springer)
 
   === 推荐理由写作要求（必须严格遵守）===
   每条推荐理由必须面向最终用户（研究者），帮助他们快速理解"为什么这本期刊适合我的论文"。
@@ -182,7 +203,7 @@ llm_ranker_user: |
 
   **使用规则**：
   1. **排序基准**：候选期刊按 rule_rank 初步排序，排名越靠前匹配度越高（共 {total_candidates} 本候选）。
-  2. **参考而非盲从**：rule_rank 是重要的初始排序，但你拥有最终决定权。大多数情况下，调整幅度在 ±5 位内是合理的，但如果你确信某期刊的匹配度远高于或远低于其 rule_rank（例如，一篇“计算机视觉”论文在 Top 20 内发现了一本完美的 CV 期刊，但它被规则排在靠后位置），你可以并且应该将其大幅提升或降低。
+  2. **参考而非盲从**：rule_rank 是重要的初始排序，但你拥有最终决定权。大多数情况下，调整幅度在 ±5 位内是合理的，但如果你确信某期刊的匹配度远高于或远低于其 rule_rank（例如，一篇"计算机视觉"论文在 Top 20 内发现了一本完美的 CV 期刊，但它被规则排在靠后位置），你可以并且应该将其大幅提升或降低。
   3. **举证大幅调整**：如果你将某期刊的排名上调或下调超过 5 位，必须在 reasons 中详细说明调整原因，并引用具体的匹配证据。
   4. **领域信号**：如果期刊的 subject_tags 与论文的 {research_area} 研究领域分类一致，应作为强匹配信号，在理由中强调。
 
@@ -201,8 +222,7 @@ llm_ranker_user: |
   输出格式：
   {{
     "rankings": [
-      {{"journal_id": "...", "score": 0.92, "reasons": ["Scope对齐：...", "研究领域覆盖：...", "技术契合：..."], "confidence": 0.88}},
-      ...
+      {{"journal_id": "...", "score": 0.92, "reasons": ["Scope对齐：...", "技术方法契合：..."], "confidence": 0.88}}
     ]
   }}
 
@@ -224,6 +244,15 @@ paper_quality_assessor_system: |
     3. 是否存在明显的benchmark overfitting；
     4. 是否缺少关键且公认的baseline；
     5. 核心贡献是否具有原创性（可以是新的技术组合产生了质的提升，而不一定需要每个组件都全新）。
+
+  **摘要模式下的A档收紧规则**：
+  在仅有标题和摘要时（full_text为空），除非摘要明确出现以下强证据，否则不应给A：
+  - 多数据集或大规模实验（超过3个数据集）
+  - 明确 SOTA/显著提升且说明 baseline（如"比XXX方法提升X%"）
+  - 理论证明或复杂度分析
+  - 开源系统/数据集/benchmark 有明确贡献
+  - 解决领域公认核心问题
+  如果摘要仅描述了方法框架或初步实验，应倾向于 B 或 C。
 
   CCF-B：
   - 允许高质量的增量创新。
@@ -248,7 +277,7 @@ paper_quality_assessor_system: |
   4. 若只在少量公开benchmark上验证且无跨域/鲁棒性测试，significance通常不超过2分。
   5. 若结果主要依赖宽松指标（如PA-F1）而缺乏严格指标或人工评估，rigor和significance需适度下调。
   6. 若声称理论贡献但缺乏形式化分析，novelty不应给满分。
-  7. 若”causal”仅为相关性建模而非严格因果推断，不可视为强理论创新，但可视为方法层面的改进。
+  7. 若"causal"仅为相关性建模而非严格因果推断，不可视为强理论创新，但可视为方法层面的改进。
   8. 纯工程系统/部署/UI/demo不能直接替代方法创新，但如果它们解决了公认的困难问题并提供了充分的评测，仍可获得适当的significance和rigor分数。
   9. 论文主动承认的局限性应被纳入整体判断，但若作者已有效缓解或讨论影响范围，不应简单视为致命问题。
 
@@ -304,7 +333,7 @@ paper_quality_assessor_system: |
   method_innovation_analysis: 分析方法创新性
   - 是否只是已有模块组合
   - 是否仅替换backbone/attention/GNN
-  - 是否存在”XX套壳”式创新
+  - 是否存在"XX套壳"式创新
   - 是否缺乏核心methodology novelty
   - 注意：组合式创新如果解决了之前方法无法处理的跨领域难题，或通过精心设计的交互/流程使整体性能产生质变，应视为有效的增量创新，novelty可评定为1.5–2分。
 
@@ -327,37 +356,35 @@ paper_quality_assessor_system: |
 
   ========== 反思机制（必须执行）==========
 
-  在你开始打分之前，请先完成以下预判步骤：
+  在输出最终分数前，先完成以下自检步骤：
 
-  1. 等级预判：根据论文摘要和标题，用2-3句话说明你判断这篇论文属于CCF-A/B/C中的哪个等级，以及最主要的依据是什么。不要在这里给具体分数，只需要给出等级和简要理由。
+  1. 等级预判：判断这篇论文属于CCF-A/B/C中的哪个等级，主要依据是什么。
 
-  2. 分数推导：基于你的等级预判，推断各维度应该在什么范围。例如："如果我认为这是CCF-C论文，那么 novelty 应在1.5-2.0之间..."
+  2. 自检：审视"这些分数是否与等级预判一致"。如果出现矛盾（例如预判CCF-C但 novelty=2.5），需要调整分数使其与预判等级匹配。
 
-  3. 正式开始打分：只有在完成上述两步之后，才进入输出格式中的各项分数。
-
-  4. 自检：在输出最终分数后，重新审视"这些分数是否与我在步骤1中的等级预判一致"。如果出现矛盾（例如预判CCF-C但 novelty=2.5），需要调整分数使其与预判等级匹配，并说明调整原因。
+  3. 将上述反思过程和调整原因包含在 reasons 数组中，格式如："预判CCF-B等级，novelty调整至2.0以匹配等级预期..."
 
   输出格式（必须为有效JSON）:
-  {{
-    “novelty_score”: 0-3,
-    “rigor_score”: 0-3,
-    “reproducibility_score”: 0-3,
-    “significance_score”: 0-3,
-    “clarity_score”: 0-3,
-    “novelty_evidence”: “具体证据（从输入提取），若无则写insufficient_evidence，并注明假定常规水平”,
-    “rigor_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “reproducibility_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “significance_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “clarity_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “confidence”: 0.0-1.0,
-    “reasons”: [“基于证据的具体理由”],
-    “uncertainty_reasons”: [“证据不足的具体维度”],
-    “major_weaknesses”: [“缺点1”, “缺点2”],
-    “fatal_issues”: [“致命问题或null”],
-    “method_innovation_analysis”: “创新性分析”,
-  }}
+  {
+    "novelty_score": 0-3,
+    "rigor_score": 0-3,
+    "reproducibility_score": 0-3,
+    "significance_score": 0-3,
+    "clarity_score": 0-3,
+    "novelty_evidence": "具体证据（从输入提取），若无则写insufficient_evidence",
+    "rigor_evidence": "具体证据，若无则写insufficient_evidence",
+    "reproducibility_evidence": "具体证据，若无则写insufficient_evidence",
+    "significance_evidence": "具体证据，若无则写insufficient_evidence",
+    "clarity_evidence": "具体证据，若无则写insufficient_evidence",
+    "confidence": 0.0-1.0,
+    "reasons": ["基于证据的具体理由"],
+    "uncertainty_reasons": ["证据不足的具体维度"],
+    "quality_level": "A/B/C/D"
+  }
 
-  
+  **重要：你必须直接输出上述JSON格式，不要输出任何思考过程、预判文字、解释或额外内容。**
+
+
 paper_quality_assessor_user: |
   论文信息：
   - 标题：{title}
@@ -375,26 +402,28 @@ paper_quality_assessor_user: |
 
   评估要求：
   1. 仅基于输入中明确出现的信息做判断
-  2. 若某维度证据不足，必须在evidence中注明”基于有限信息，假定其达到常规水平”，且该维度分数不得低于1.5
+  2. 若某维度证据不足：
+     - 不得假定其达到常规水平
+     - 分数应为 1.0-1.5
+     - confidence 应降低
+     - evidence 写 "insufficient_evidence: 输入未提供..."
   3. 每条 evidence 必须引用输入中的具体内容，不能泛泛而谈
   4. 输出必须为有效 JSON
 
   输出格式（必须为有效 JSON，不要包含任何占位符）：
   {{
-    “novelty_score”: 2,
-    “rigor_score”: 2,
-    “reproducibility_score”: 2,
-    “significance_score”: 2,
-    “clarity_score”: 2,
-    “novelty_evidence”: “具体证据（从输入提取），若无则写insufficient_evidence，并注明假定常规水平”,
-    “rigor_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “reproducibility_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “significance_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “clarity_evidence”: “具体证据，若无则写insufficient_evidence，并注明假定常规水平”,
-    “confidence”: 0.8,
-    “reasons”: [“理由1”, “理由2”],
-    “uncertainty_reasons”: [],
-    “quality_level”: “B”
+    "novelty_score": 2,
+    "rigor_score": 2,
+    "reproducibility_score": 2,
+    "significance_score": 2,
+    "clarity_score": 2,
+    "novelty_evidence": "具体证据（从输入提取），若无则写insufficient_evidence",
+    "rigor_evidence": "具体证据，若无则写insufficient_evidence",
+    "reproducibility_evidence": "具体证据，若无则写insufficient_evidence",
+    "significance_evidence": "具体证据，若无则写insufficient_evidence",
+    "clarity_evidence": "具体证据，若无则写insufficient_evidence",
+    "confidence": 0.8,
+    "reasons": ["理由1", "理由2"],
+    "uncertainty_reasons": [],
+    "quality_level": "B"
   }}
-
-  

@@ -32,7 +32,10 @@ def parse_json_response(content: str) -> dict[str, Any] | None:
 
     # 策略1：直接解析
     try:
-        return json.loads(content)
+        result = json.loads(content)
+        # 确保解析结果是 dict 或 list，否则继续尝试后续策略
+        if isinstance(result, (dict, list)):
+            return result
     except json.JSONDecodeError:
         pass
 

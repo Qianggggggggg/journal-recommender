@@ -20,7 +20,7 @@ class RuleScorer:
             "technique_match": 2.0,      # 技术词重叠
             "keyword_overlap": 1.5,     # 关键词重叠
             # 已有特征（保留）
-            "method_type_match": 1.5,
+            "method_type_match": 0,  # 期刊 target_paper_type 全为空，暂不启用
             "paper_type_match": 1.0,
             "dataset_match": 1.0,
             "metric_match": 0.8,
@@ -273,7 +273,7 @@ class RuleScorer:
                 score += self.weights["metric_match"]
                 reasons.append(f"评估指标: {', '.join(matched_metrics[:3])}")
 
-        # 创新类型匹配
+        # 创新类型匹配（支持中英文枚举）
         if paper_profile.novelty_type:
             novelty_keywords = {
                 "new_method": ["novel", "new method", "新的方法", "创新方法"],
@@ -282,11 +282,17 @@ class RuleScorer:
                 "performance": ["performance", "improvement", "提升", "性能"],
                 "efficiency": ["efficiency", "fast", "efficient", "高效", "加速"],
             }
-            if paper_profile.novelty_type in novelty_keywords:
-                for kw in novelty_keywords[paper_profile.novelty_type]:
+            # 标准化映射（中英文 -> 英文）
+            novelty_normalize = {
+                "新方法": "new_method", "新应用": "new_application", "新基准": "benchmark",
+                "性能提升": "performance", "效率优化": "efficiency",
+            }
+            normalized_type = novelty_normalize.get(paper_profile.novelty_type, paper_profile.novelty_type)
+            if normalized_type in novelty_keywords:
+                for kw in novelty_keywords[normalized_type]:
                     if kw.lower() in journal.scope_text.lower():
                         score += self.weights["novelty_match"]
-                        reasons.append(f"创新类型契合: {paper_profile.novelty_type}")
+                        reasons.append(f"创新类型契合: {normalized_type}")
                         break
 
         # 领域仲裁信号（research_area 与 subject_tags 精确匹配，不加分仅作理由）

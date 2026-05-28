@@ -64,22 +64,47 @@ class RecommenderPipeline:
             return {"recommendations": [], "warning": "未找到合适的候选期刊"}
 
         # 2. 阶段一：规则打分（只做主题匹配，不含质量调整）
-        rule_ranked = self.rule_scorer.rank(
-            candidates, paper_profile, oa_preference=oa_preference, top_k=20
+        # 扩大候选集到 40，确保不漏掉同领域高召回期刊
+        rule_ranked_all = self.rule_scorer.rank(
+            candidates, paper_profile, oa_preference=oa_preference, top_k=40
         )
 
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
-        rule_ranked = self._apply_quality_adjustment(rule_ranked, paper_profile)
+        rule_ranked_all = self._apply_quality_adjustment(rule_ranked_all, paper_profile)
+
+        # 构建 LLM 候选集：top20 + 同领域高召回候选 + subject_tags 匹配候选
+        llm_candidates = rule_ranked_all[:20]  # top20 必选
+        seen_ids = {j.journal_id for j, _, _ in llm_candidates}
+
+        # 同领域但未入选的高分候选（从 top20 之后找）
+        if paper_profile.research_area:
+            research_areas = set(paper_profile.research_area)
+            for journal, score, reasons in rule_ranked_all[20:]:
+                if journal.subject_tags and journal.journal_id not in seen_ids:
+                    matched = set(journal.subject_tags) & research_areas
+                    if matched and len(llm_candidates) < 30:
+                        llm_candidates.append((journal, score, reasons))
+                        seen_ids.add(journal.journal_id)
+
+        # subject_tags 与 ccf_research_area 匹配的候选（兜底）
+        if paper_profile.ccf_research_area:
+            ccf_areas = set(paper_profile.ccf_research_area)
+            for journal, score, reasons in rule_ranked_all[20:]:
+                if journal.subject_tags and journal.journal_id not in seen_ids:
+                    matched = set(journal.subject_tags) & ccf_areas
+                    if matched and len(llm_candidates) < 30:
+                        llm_candidates.append((journal, score, reasons))
+                        seen_ids.add(journal.journal_id)
 
         # 3. 阶段二：LLM 精排（如失败则抛出明确错误，不再降级）
         rank_method = "rule"
         if self.llm_ranker:
             try:
-                llm_ranked, rank_method = self.llm_ranker.rank(rule_ranked, paper_profile, top_k=top_k)
+                llm_ranked, rank_method = self.llm_ranker.rank(llm_candidates, paper_profile, top_k=top_k)
             except LLMRankerError as e:
                 raise LLMRankerError(f"LLM精排失败: {e}")
         else:
-            llm_ranked = [(j, s, r, 0.5) for j, s, r in rule_ranked[:top_k]]
+            llm_ranked = [(j, s, r, 0.5) for j, s, r in llm_candidates[:top_k]]
 
         # 4. 构建推荐结果（直接使用 LLMRanker 输出的 reasons，不再单独调用 Explainer）
         recommendations = []
@@ -96,7 +121,7 @@ class RecommenderPipeline:
         result = {
             "recommendations": recommendations,
             "candidates": candidates,  # 粗排候选（用于调试分析）
-            "rule_ranked": rule_ranked,  # RuleScorer 排序结果（用于调试分析）
+            "rule_ranked": rule_ranked_all,  # RuleScorer 排序结果（用于调试分析）
             "paper_profile": paper_profile,
             "mode_used": mode,
             "rank_method": rank_method,
