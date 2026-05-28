@@ -70,9 +70,9 @@ class LLMRanker:
             total_candidates=len(candidates),
         )
 
-        # 调用 LLM（超时 300s，自动调整max_tokens）
+        # 调用 LLM（超时 200s，自动调整max_tokens）
         try:
-            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=300)
+            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=200)
         except Exception as e:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 
@@ -81,7 +81,13 @@ class LLMRanker:
         if not data:
             raise LLMRankerError(f"LLM响应格式错误，无法解析: {response.content}")
 
-        rankings = data.get("rankings", [])
+        # 兼容处理：data 可能是 dict{"rankings": [...]} 或直接的列表 [...]
+        if isinstance(data, dict):
+            rankings = data.get("rankings", [])
+        elif isinstance(data, list):
+            rankings = data
+        else:
+            raise LLMRankerError(f"LLM响应格式错误，期望 dict 或 list，实际: {type(data)}")
 
         # 构建结果
         rank_map = {r["journal_id"]: r for r in rankings}

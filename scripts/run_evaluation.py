@@ -70,29 +70,31 @@ class EvaluationResult:
     # Level Match Rate
     level_match_count: int
 
+    # MRR 和 NDCG@5
+    mrr: float = 0.0
+    ndcg_at_5: float = 0.0
+
     # 粗排命中统计
-    coarse_hit_count: int  # 粗排命中（实际期刊在 top 50 候选中）
-    coarse_hit_in_rule_top10_count: int  # 粗排候选在 RuleScorer top10 中
-    coarse_hit_in_rule_top20_count: int  # 粗排候选在 RuleScorer top20 中
+    coarse_hit_count: int = 0  # 粗排命中（实际期刊在 top 50 候选中）
+    coarse_hit_in_rule_top10_count: int = 0  # 粗排候选在 RuleScorer top10 中
+    coarse_hit_in_rule_top20_count: int = 0  # 粗排候选在 RuleScorer top20 中
 
     # 分质量等级统计 (A/B/C/D)
-    level_a_count: int
-    level_a_hit_at_5: int
-    level_b_count: int
-    level_b_hit_at_5: int
-    level_c_count: int
-    level_c_hit_at_5: int
-    level_d_count: int
-    level_d_hit_at_5: int
+    level_a_count: int = 0
+    level_a_hit_at_5: int = 0
+    level_b_count: int = 0
+    level_b_hit_at_5: int = 0
+    level_c_count: int = 0
+    level_c_hit_at_5: int = 0
+    level_d_count: int = 0
+    level_d_hit_at_5: int = 0
 
     # 按领域统计
-    by_area: dict
-
-    # 按CCF等级统计
-    by_level: dict
+    by_area: dict = None
+    by_level: dict = None
 
     # 每篇论文详情
-    paper_results: list
+    paper_results: list = None
 
 
 def get_paper_quality_level(strength: float) -> str:
@@ -107,6 +109,30 @@ def get_paper_quality_level(strength: float) -> str:
         return "weak"
 
 
+def calculate_mrr(relevant_rank: int) -> float:
+    """计算倒数排名（rank 从 1 开始，未命中为 0）"""
+    if relevant_rank <= 0:
+        return 0.0
+    return 1.0 / relevant_rank
+
+
+def calculate_dcg_at_k(gains: list, k: int) -> float:
+    """计算 DCG@k"""
+    dcg = 0.0
+    for i, gain in enumerate(gains[:k]):
+        dcg += gain / (i + 1)  # 或使用 1/log2(i+2)，这里用位置折扣
+    return dcg
+
+
+def calculate_ndcg_at_k(recommended_gains: list, ideal_gains: list, k: int) -> float:
+    """计算 NDCG@k（recommended_gains 和 ideal_gains 都是相关性分数列表）"""
+    dcg = calculate_dcg_at_k(recommended_gains, k)
+    idcg = calculate_dcg_at_k(ideal_gains, k)
+    if idcg == 0:
+        return 0.0
+    return dcg / idcg
+
+
 def calculate_metrics(result: EvaluationResult) -> dict:
     """计算各项指标"""
     total = result.total_count if result.total_count > 0 else 1
@@ -118,6 +144,8 @@ def calculate_metrics(result: EvaluationResult) -> dict:
         "Hit@10": f"{result.hit_at_10}/{total} ({result.hit_at_10*100/total:.1f}%)",
         "Area Match Rate": f"{result.area_match_count}/{total} ({result.area_match_count*100/total:.1f}%)",
         "Level Match Rate": f"{result.level_match_count}/{total} ({result.level_match_count*100/total:.1f}%)",
+        "MRR": f"{result.mrr/total:.4f}" if total > 0 else "N/A",
+        "NDCG@5": f"{result.ndcg_at_5/total:.4f}" if total > 0 else "N/A",
     }
 
     # 分质量等级
@@ -307,6 +335,13 @@ def evaluate_single_paper(
 
     q_level = profile.quality_level or "D"
 
+    # 计算 relevant_rank（1-indexed，未命中为 0）
+    relevant_rank = 0
+    for i, jname in enumerate(recommended_journals_norm):
+        if jname == venue_normalized:
+            relevant_rank = i + 1
+            break
+
     return {
         "arxiv": arxiv_id,
         "title": title[:50],
@@ -318,6 +353,8 @@ def evaluate_single_paper(
         "hit_3": hit_3,
         "hit_5": hit_5,
         "hit_10": hit_10,
+        "relevant_rank": relevant_rank,  # MRR 计算用
+        "ndcg_gain": 1.0 if relevant_rank > 0 else 0.0,  # NDCG 计算用（二值相关性）
         "coarse_hit": coarse_hit,  # 粗排命中
         "coarse_hit_in_rule_top10": coarse_hit_in_rule_top10,  # 粗排候选在 RuleScorer top10 中
         "coarse_hit_in_rule_top20": coarse_hit_in_rule_top20,  # 粗排候选在 RuleScorer top20 中
@@ -395,6 +432,13 @@ def run_evaluation(
             if paper_result["level_match"]:
                 result.level_match_count += 1
 
+            # MRR 和 NDCG@5 累加
+            rank = paper_result.get("relevant_rank", 0)
+            if rank > 0:
+                import math
+                result.mrr += 1.0 / rank
+                result.ndcg_at_5 += 1.0 / math.log2(rank + 1)  # 二值相关性: DCG=1/log2(r+1), IDCG=1/log2(2)=1
+
             # 粗排命中统计
             if paper_result.get("coarse_hit"):
                 result.coarse_hit_count += 1
@@ -431,7 +475,7 @@ def run_evaluation(
             # 保存单篇结果
             result.paper_results.append({
                 k: v for k, v in paper_result.items()
-                if k not in ["hit_1", "hit_3", "hit_5", "hit_10", "area_match", "level_match"]
+                if k not in ["hit_1", "hit_3", "hit_5", "hit_10", "area_match", "level_match", "relevant_rank", "ndcg_gain"]
             })
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -458,8 +502,12 @@ def run_evaluation(
             n = len(result.paper_results)
             if n > 0:
                 hit_k = getattr(result, f"hit_at_{top_k}", 0)
+                mrr_val = result.mrr / n
+                ndcg_val = result.ndcg_at_5 / n
                 pbar.set_postfix({
                     f"Hit@{top_k}": f"{hit_k}/{n}({hit_k*100/n:.1f}%)",
+                    "MRR": f"{mrr_val:.3f}",
+                    "NDCG@5": f"{ndcg_val:.3f}",
                     "Level": f"{result.level_match_count}/{n}({result.level_match_count*100/n:.1f}%)",
                     "Area": f"{result.area_match_count}/{n}({result.area_match_count*100/n:.1f}%)",
                 })
@@ -488,6 +536,8 @@ def print_report(result: EvaluationResult):
     print(f"  领域匹配准确率: {metrics['Area Match Rate']}")
     print(f"  推荐期刊subject_tags命中: {result.area_subject_tag_match_count}/{total} ({result.area_subject_tag_match_count*100/total:.1f}%)")
     print(f"  Level Match Rate: {metrics['Level Match Rate']}")
+    print(f"  MRR: {metrics['MRR']}")
+    print(f"  NDCG@5: {metrics['NDCG@5']}")
 
     # 粗排命中分析
     print(f"\n--- 粗排命中分析 ---")
@@ -541,6 +591,8 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "hit_at_10": result.hit_at_10,
             "area_match_count": result.area_match_count,
             "level_match_count": result.level_match_count,
+            "mrr": result.mrr / result.total_count if result.total_count > 0 else 0.0,
+            "ndcg_at_5": result.ndcg_at_5 / result.total_count if result.total_count > 0 else 0.0,
             "coarse_hit_count": result.coarse_hit_count,
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
             "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
@@ -580,7 +632,7 @@ def main():
                         help="限制评估论文数量（用于测试）")
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
-    parser.add_argument("--workers", "-w", type=int, default=4,
+    parser.add_argument("--workers", "-w", type=int, default=10,
                         help="并行线程数（默认4）")
 
     args = parser.parse_args()

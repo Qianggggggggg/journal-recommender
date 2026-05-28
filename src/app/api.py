@@ -152,9 +152,9 @@ async def recommend(request: Request):
 
     # 解析请求（支持 JSON 和 Form）
     content_type = request.headers.get("content-type", "")
-    print(f"[DEBUG] content_type: '{content_type}'")
+    #print(f"[DEBUG] content_type: '{content_type}'")
     body_preview = await request.body()
-    print(f"[DEBUG] body len: {len(body_preview)}, preview: {body_preview[:200]}")
+    #print(f"[DEBUG] body len: {len(body_preview)}, preview: {body_preview[:200]}")
 
     if "application/json" in content_type:
         # JSON 格式
@@ -183,7 +183,7 @@ async def recommend(request: Request):
     full_text_content = ""
     if file and mode == "full":
         content = await file.read()
-        print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
+        #print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
 
         # 使用 PyMuPDF layout extraction
         blocks, _ = extract_layout_blocks(content, file.filename)
@@ -191,7 +191,7 @@ async def recommend(request: Request):
         # 构建 Paper AST
         paper_ast = build_paper_ast(blocks, title=title)
         markdown = paper_ast.to_markdown()
-        print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections, markdown length: {len(markdown)}")
+        #print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections, markdown length: {len(markdown)}")
 
         # 用 markdown 替换 full_text
         full_text_content = markdown
@@ -502,16 +502,16 @@ async def recommend_stream(request: Request):
         # 处理文件上传（full-text 模式）
         if file and mode == "full":
             content = await file.read()
-            print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
+            #print(f"[DEBUG] file size: {len(content)}, filename: {file.filename}")
 
             # 使用 PyMuPDF layout extraction
             blocks, _ = extract_layout_blocks(content, file.filename)
-            print(f"[DEBUG] extracted {len(blocks)} blocks")
+            #print(f"[DEBUG] extracted {len(blocks)} blocks")
 
             # 构建 Paper AST
             paper_ast = build_paper_ast(blocks, title=title)
             markdown = paper_ast.to_markdown()
-            print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections")
+            #print(f"[DEBUG] Paper AST: {len(paper_ast.sections)} sections")
 
             # 用 markdown 替换 full_text
             full_text = markdown

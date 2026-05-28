@@ -22,54 +22,63 @@ def parse_json_response(content: str) -> dict[str, Any] | None:
     从 LLM 响应中解析 JSON。
 
     策略：
-    1. 直接尝试 json.loads 解析完整内容（如果内容本身就是 JSON）
-    2. 使用正则提取第一个 JSON 对象
-    3. 清理常见的 markdown 代码块格式
+    1. 直接尝试 json.loads 解析完整内容
+    2. 清理 markdown 代码块格式，再尝试解析
+    3. 从第一个 [ 尝试解析数组
+    4. 从第一个 { 尝试解析对象
     """
     if not content or not content.strip():
         return None
 
-    # 策略1：直接解析（处理完整响应本身就是 JSON 的情况）
+    # 策略1：直接解析
     try:
         return json.loads(content)
     except json.JSONDecodeError:
         pass
 
-    # 策略2：清理 markdown 代码块格式
+    # 策略2：清理 markdown 代码块格式（处理多行和前后文字）
     cleaned = content.strip()
-    if cleaned.startswith("```"):
-        # 移除 ```json 或 ``` 等代码块标记
-        lines = cleaned.split("\n")
-        # 跳过第一行（```json 或 ```）
-        if lines and lines[0].startswith("```"):
-            lines = lines[1:]
-        # 移除最后一行（```）
-        if lines and lines[-1].strip() == "```":
-            lines = lines[:-1]
-        cleaned = "\n".join(lines)
+    # 去掉所有 ```...``` 代码块（可能有多层嵌套）
+    import re as re_module
+    # 移除 ```json ... ``` 和 ``` ... ``` 格式
+    cleaned = re_module.sub(r'```json\s*(.*?)\s*```', r'\1', cleaned, flags=re_module.DOTALL)
+    cleaned = re_module.sub(r'```\s*(.*?)\s*```', r'\1', cleaned, flags=re_module.DOTALL)
+    cleaned = cleaned.strip()
 
-    # 策略3：提取 JSON 对象或数组
-    json_patterns = [
-        # 匹配 {...} 或 [...] 包裹的 JSON
-        r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}',  # 嵌套支持
-        r'\[[^\[\]]*(?:\[[^\[\]]*\][^\[\]]*)*\]',
-    ]
+    # 策略2.5：移除无效的控制字符（0x00-0x08, 0x0b-0x0c, 0x0e-0x1f，但保留 \t\n\r）
+    # LLM 响应中的换行符可能被错误编码
+    def remove_invalid_controls(s):
+        return ''.join(c for c in s if ord(c) >= 0x20 or c in '\t\n\r')
+    cleaned = remove_invalid_controls(cleaned)
 
-    for pattern in json_patterns:
-        match = re.search(pattern, cleaned, re.DOTALL)
-        if match:
-            try:
-                return json.loads(match.group())
-            except json.JSONDecodeError:
-                continue
-
-    # 策略4：尝试更宽松的匹配（取最后一个 { 开始的子串）
-    last_brace = content.rfind("{")
-    last_bracket = content.rfind("[")
-    start = max(last_brace, last_bracket)
-    if start > 0:
+    # 策略3：尝试解析数组（优先），使用 raw_decode 处理尾部多余文本
+    first_bracket = cleaned.find("[")
+    if first_bracket >= 0:
         try:
-            return json.loads(content[start:])
+            result, end_idx = json.JSONDecoder().raw_decode(cleaned[first_bracket:])
+            # 检查 remainder：如果有实质内容残留（不是单纯的 ] 结尾），说明不是纯数组，是对象内的数组
+            remainder = cleaned[first_bracket + end_idx:].strip()
+            if remainder and not remainder.startswith("]"):
+                # 有实质内容残留，回退到策略4解析对象
+                pass
+            else:
+                return result
+        except json.JSONDecodeError:
+            pass
+
+    # 策略4：尝试解析对象
+    first_brace = cleaned.find("{")
+    if first_brace >= 0:
+        try:
+            result, _ = json.JSONDecoder().raw_decode(cleaned[first_brace:])
+            # 兼容处理：如果是包装格式 {"rankings": [...]}，提取内层数组
+            if isinstance(result, dict):
+                for key in ["rankings", "results", "items", "papers", "journals"]:
+                    if key in result and isinstance(result[key], list):
+                        inner = result[key]
+                        if len(inner) > 0:
+                            return inner
+            return result
         except json.JSONDecodeError:
             pass
 

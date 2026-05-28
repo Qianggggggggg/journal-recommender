@@ -49,14 +49,21 @@ class PaperQuality(BaseModel):
         description="CCF专业领域列表(1-3个): 计算机体系结构/并行与分布计算/存储系统, 计算机网络, 网络与信息安全, 软件工程/系统软件/程序设计语言, 数据库/数据挖掘/内容检索, 计算机科学理论, 计算机图形学与多媒体, 人工智能, 人机交互与普适计算, 交叉/综合/新兴"
     )
 
+    # 各维度分数（用于详细报告）
+    novelty_score: float = 0.0
+    rigor_score: float = 0.0
+    reproducibility_score: float = 0.0
+    significance_score: float = 0.0
+    clarity_score: float = 0.0
+
     @staticmethod
     def _strength_to_level(strength: float) -> str:
         """将 strength 映射到 A/B/C/D（与 prompt 中的阈值保持一致）"""
-        if strength >= 0.65:
+        if strength >= 0.72:
             return "A"
-        elif strength >= 0.45:
+        elif strength >= 0.52:
             return "B"
-        elif strength >= 0.25:
+        elif strength >= 0.32:
             return "C"
         else:
             return "D"  # 未达发表水平
@@ -130,11 +137,12 @@ class PaperQualityAssessor:
             clarity_score = data.get("clarity_score", 1)
 
             # 计算 paper_strength (归一化到 0~1)
+            # 权重与 prompt 中保持一致: novelty=0.30, rigor=0.25, reproducibility=0.15, significance=0.20, clarity=0.10
             raw_strength = (
-                novelty_score * 0.35 +
+                novelty_score * 0.30 +
                 rigor_score * 0.25 +
                 reproducibility_score * 0.15 +
-                significance_score * 0.15 +
+                significance_score * 0.20 +
                 clarity_score * 0.10
             )
             paper_strength = min(raw_strength / 3.0, 1.0)
@@ -154,8 +162,10 @@ class PaperQualityAssessor:
             # 准备度
             readiness = PaperQuality._strength_to_readiness(paper_strength, novelty_score)
 
-            # 汇总等级：信任 LLM 输出
-            quality_level = data.get("quality_level", "C")
+            # 汇总等级：以计算值为准，信任 LLM 但当计算值与输出不一致时用计算值修正
+            calculated_level = PaperQuality._strength_to_level(paper_strength)
+            llm_level = data.get("quality_level", "C")
+            quality_level = llm_level if llm_level == calculated_level else calculated_level
 
             return PaperQuality(
                 paper_strength=paper_strength,
@@ -165,7 +175,12 @@ class PaperQualityAssessor:
                 reasons=data.get("reasons", []),
                 evidence=evidence,
                 uncertainty_reasons=uncertainty_reasons,
-                ccf_research_area=data.get("ccf_research_area", []),
+                ccf_research_area=paper_profile.research_area,
+                novelty_score=novelty_score,
+                rigor_score=rigor_score,
+                reproducibility_score=reproducibility_score,
+                significance_score=significance_score,
+                clarity_score=clarity_score,
             )
 
         raise PaperQualityError(f"LLM响应格式错误，无法解析: {response.content}")

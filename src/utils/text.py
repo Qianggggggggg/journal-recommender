@@ -35,10 +35,10 @@ def quality_adjustment_factor(strength: float) -> float:
     """
     根据论文质量强度计算调整因子。
 
-    公式：0.9 + 0.2 * (strength - 0.5)
+    公式：1.0 + 0.2 * (strength - 0.5)
     - strength >= 0.65: 因子 > 1.0，质量好的论文略微提升
     - strength == 0.5:  因子 == 1.0，中等论文不调整
     - strength < 0.5:  因子 < 1.0，质量差的论文略微降低
     """
-    factor = 0.9 + 0.2 * (strength - 0.5)
-    return max(0.8, min(1.08, factor))
+    factor = 1.0 + 0.2 * (strength - 0.5)
+    return max(0.85, min(1.10, factor))
