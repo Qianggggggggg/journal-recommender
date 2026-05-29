@@ -355,7 +355,7 @@ def evaluate_single_paper(
             break
 
     # 同领域命中（research_area 匹配任一 subject_tags）
-    research_areas_set = set(research_area) if research_area else set()
+    research_areas_set = {research_area} if research_area else set()
     area_hit_5 = False
     area_hit_10 = False
     for i, rec in enumerate(recommendations[:10]):
@@ -686,6 +686,11 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "level_c_hit_at_5": result.level_c_hit_at_5,
             "level_d_count": result.level_d_count,
             "level_d_hit_at_5": result.level_d_hit_at_5,
+            # 同领域/同CCF档位命中
+            "area_hit_at_5": result.area_hit_at_5,
+            "area_hit_at_10": result.area_hit_at_10,
+            "level_hit_at_5": result.level_hit_at_5,
+            "level_hit_at_10": result.level_hit_at_10,
         },
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),
