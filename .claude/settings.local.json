@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://localhost:11434/api/tags)",
+      "mcp__MiniMax__understand_image",
+      "Bash(curl -s --max-time 90 \"http://localhost:8000/api/recommend/stream?title=A+Transformer+for+Text+Classification&abstract=A+novel+attention+mechanism+for+NLP&mode=abstract&top_k=3&oa_preference=any\" -N)",
+      "Bash(python -c ':*)",
+      "Bash(iconv -f GBK -t UTF-8 data/deepseek_csv_20260520_7dd79b.csv)",
+      "Bash(awk -F',' '{print $1}')",
+      "Bash(python3 -c \"import sys,json; [print\\(json.loads\\(l\\).get\\('journal_id',''\\)\\) for l in sys.stdin]\")",
+      "Bash(awk -F',' 'NR>1 {print $5\",\"$6\",\"$1\",\"$2\",\"$3\",\"$7\",\"$8}')",
+      "Bash(python3 -c \"import json; print\\(f'实际记录数: {sum\\(1 for _ in open\\(\\\\\"data/journals_ccf.jsonl\\\\\"\\)\\)}'\\)\")",
+      "Bash(python3:*)",
+      "Bash(find paper:*)",
+      "mcp__MiniMax__web_search",
+      "WebFetch(domain:arxiv.org)"
+    ]
+  }
+}

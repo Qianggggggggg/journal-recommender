@@ -1,0 +1,138 @@
+{
+  "timestamp": "20260526_165231",
+  "mode": "abstract",
+  "top_k": 5,
+  "total_count": 4,
+  "metrics": {
+    "hit_at_1": 1,
+    "hit_at_3": 2,
+    "hit_at_5": 3,
+    "hit_at_10": 0,
+    "area_match_count": 4,
+    "level_match_count": 3,
+    "coarse_hit_count": 4,
+    "coarse_hit_in_rule_top10_count": 3,
+    "area_subject_tag_match_count": 4,
+    "level_a_count": 0,
+    "level_a_hit_at_5": 0,
+    "level_b_count": 3,
+    "level_b_hit_at_5": 3,
+    "level_c_count": 1,
+    "level_c_hit_at_5": 0,
+    "level_d_count": 0,
+    "level_d_hit_at_5": 0
+  },
+  "by_area": {
+    "人工智能": {
+      "total": 4,
+      "hit": 3,
+      "area_match": 4
+    }
+  },
+  "by_level": {
+    "A": {
+      "total": 1,
+      "hit": 1
+    },
+    "B": {
+      "total": 2,
+      "hit": 2
+    },
+    "C": {
+      "total": 1,
+      "hit": 0
+    }
+  },
+  "paper_results": [
+    {
+      "arxiv": "1706.07269",
+      "title": "Explanation in Artificial Intelligence: Insights f",
+      "venue": "Artificial Intelligence",
+      "ccf_level": "A",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Artificial Intelligence",
+        "Journal of Artificial Intelligence Research",
+        "Journal of the ACM",
+        "Science China Information Sciences",
+        "Journal of Computer Science and Technology"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "paper_strength": 0.6666666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2405.07418",
+      "title": "Exploring the Effects of User-Agent and User-Desig",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "ACM Transactions on Interactive Intelligent Systems",
+        "IEEE Transactions on Affective Computing",
+        "Virtual Reality & Intelligent Hardware",
+        "Artificial Intelligence in Medicine",
+        "ACM Transactions on Applied Perception"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "paper_strength": 0.5416666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2412.19522",
+      "title": "Exploiting Domain-Specific Parallel Data on Multil",
+      "venue": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Transactions of the Association for Computational Linguistics",
+        "Computational Linguistics",
+        "Natural Language Engineering",
+        "Artificial Intelligence",
+        "Computer Speech & Language"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.4166666666666667,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2407.04191",
+      "title": "GazeFusion: Saliency-Guided Image Generation",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "International Journal of Computer Vision",
+        "Computer Vision and Image Understanding",
+        "ACM Transactions on Applied Perception",
+        "Computational Visual Media",
+        "IEEE Transactions on Visualization and Computer Graphics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "paper_strength": 0.5833333333333334,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    }
+  ]
+}

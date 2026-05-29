@@ -1,0 +1,173 @@
+[
+  {
+    "title": "KLNK: Expanding Page Boundaries in a Distributed S",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.6366666666666666,
+    "novelty_score": 2.0,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.6,
+    "significance_score": 2.0,
+    "clarity_score": 2.2
+  },
+  {
+    "title": "Enhancing Neural Network Reliability: Insights Fro",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.66,
+    "novelty_score": 2.2,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.6,
+    "significance_score": 2.0,
+    "clarity_score": 2.3
+  },
+  {
+    "title": "Polyhedral Specification and Code Generation of Sp",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.6249999999999999,
+    "novelty_score": 2.0,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Fair Coflow Scheduling via Controlled Slowdown",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.6366666666666666,
+    "novelty_score": 2.0,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.6,
+    "significance_score": 2.0,
+    "clarity_score": 2.2
+  },
+  {
+    "title": "A User Study on Explainable Online Reinforcement L",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "人机交互与普适计算"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.7033333333333333,
+    "novelty_score": 2.0,
+    "rigor_score": 2.2,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.3,
+    "clarity_score": 2.3
+  },
+  {
+    "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.68,
+    "novelty_score": 2.0,
+    "rigor_score": 2.2,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.1,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Dynamic Reliability Management in Neuromorphic Com",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.69,
+    "novelty_score": 2.1,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.2,
+    "clarity_score": 2.3
+  },
+  {
+    "title": "Trade-off topology design for hierarchical network",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.6049999999999999,
+    "novelty_score": 1.8,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Generative AI for Self-Adaptive Systems: State of ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言",
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.6616666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.2,
+    "clarity_score": 2.2
+  },
+  {
+    "title": "NORM: An FPGA-based Non-volatile Memory Emulation ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5750000000000001,
+    "novelty_score": 1.8,
+    "rigor_score": 1.6,
+    "reproducibility_score": 1.5,
+    "significance_score": 1.8,
+    "clarity_score": 2.0
+  }
+]

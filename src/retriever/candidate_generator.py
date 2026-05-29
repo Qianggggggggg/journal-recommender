@@ -6,6 +6,11 @@ from ..journals.journal_store import JournalStore
 from ..papers.paper_model import PaperProfile
 from .bm25_retriever import BM25Retriever
 from .embedding_retriever import EmbeddingRetriever
+from .typical_abstract_retriever import (
+    TypicalAbstractBM25Retriever,
+    TypicalAbstractEmbeddingRetriever,
+    TypicalAbstractTextRetriever,
+)
 
 
 class CandidateGenerator:
@@ -17,11 +22,23 @@ class CandidateGenerator:
         bm25_retriever: BM25Retriever,
         embedding_retriever: Optional[EmbeddingRetriever] = None,
         merge_weights: Optional[Dict[str, float]] = None,
+        retrieval_target: str = "scope_text",
+        typical_bm25_retriever: Optional[TypicalAbstractBM25Retriever] = None,
+        typical_embedding_retriever: Optional[TypicalAbstractEmbeddingRetriever] = None,
+        typical_text_retriever: Optional[TypicalAbstractTextRetriever] = None,
+        weight_gater: Optional[object] = None,
+        use_gating: bool = False,
     ):
         self.store = store
         self.bm25_retriever = bm25_retriever
         self.embedding_retriever = embedding_retriever
         self.merge_weights = merge_weights or {"bm25": 0.45, "vector": 0.35, "text": 0.20}
+        self.retrieval_target = retrieval_target
+        self.typical_bm25_retriever = typical_bm25_retriever
+        self.typical_embedding_retriever = typical_embedding_retriever
+        self.typical_text_retriever = typical_text_retriever
+        self.weight_gater = weight_gater
+        self.use_gating = use_gating
 
     def generate(
         self,
@@ -42,24 +59,31 @@ class CandidateGenerator:
         # 构建丰富的检索 query，包含 paper_profile 的所有关键字段
         rich_query = self._build_rich_query(query_text, paper_profile)
 
+        weights = self._weights_for_profile(paper_profile)
+
         # 1. BM25 召回
-        bm25_results = self.bm25_retriever.retrieve(rich_query, top_k=cfg["bm25"])
+        bm25 = self._active_bm25_retriever()
+        bm25_results = bm25.retrieve(rich_query, top_k=cfg["bm25"])
 
         # 2. 向量检索召回
         vector_results = []
-        if self.embedding_retriever:
-            vector_results = self.embedding_retriever.retrieve(rich_query, top_k=cfg["vector"])
+        vector = self._active_embedding_retriever()
+        if vector:
+            vector_results = vector.retrieve(rich_query, top_k=cfg["vector"])
 
         # 3. 文本搜索（关键词交集）
-        text_results = self._text_search(paper_profile, top_k=cfg["text"])
+        text_results = self._text_search(paper_profile, rich_query=rich_query, top_k=cfg["text"])
 
         # 4. 合并去重
-        candidates = self._merge_results(bm25_results, vector_results, text_results, top_k=top_k)
+        candidates = self._merge_results(bm25_results, vector_results, text_results, top_k=top_k, weights=weights)
 
         return candidates
 
-    def _text_search(self, paper_profile: PaperProfile, top_k: int = 10) -> List[Tuple[Journal, float]]:
+    def _text_search(self, paper_profile: PaperProfile, rich_query: str = "", top_k: int = 10) -> List[Tuple[Journal, float]]:
         """基于关键词交集的文本搜索"""
+        if self._use_typical_abstracts() and self.typical_text_retriever:
+            return self.typical_text_retriever.retrieve(rich_query, top_k=top_k)
+
         # 构建检索文本：从 paper_profile 的多个字段提取关键词
         query_parts = [paper_profile.title]
         if paper_profile.abstract:
@@ -112,8 +136,10 @@ class CandidateGenerator:
         vector_results: List[Tuple[Journal, float]],
         text_results: Optional[List[Tuple[Journal, float]]] = None,
         top_k: int = 50,
+        weights: Optional[Dict[str, float]] = None,
     ) -> List[Journal]:
         """合并去重（各路分数归一化后加权合并）"""
+        weights = weights or self.merge_weights
         # 先对每路做 min-max 归一化
         bm25_norm = self._normalize_scores(bm25_results)
         vector_norm = self._normalize_scores(vector_results)
@@ -123,15 +149,15 @@ class CandidateGenerator:
 
         # BM25 结果（已归一化）
         for journal, score in bm25_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["bm25"]
+            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["bm25"]
 
         # 向量结果（已归一化）
         for journal, score in vector_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["vector"]
+            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["vector"]
 
         # 文本搜索结果（已归一化）
         for journal, score in text_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * self.merge_weights["text"]
+            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["text"]
 
         # 排序取 top_k
         sorted_ids = sorted(score_map.keys(), key=lambda x: score_map[x], reverse=True)[:top_k]
@@ -139,3 +165,26 @@ class CandidateGenerator:
         # 返回 Journal 对象列表
         journal_map = {j.journal_id: j for j in self.store._journals}
         return [journal_map[jid] for jid in sorted_ids if jid in journal_map]
+
+    def _use_typical_abstracts(self) -> bool:
+        return self.retrieval_target in {"typical_abstracts", "semantic_anchors"}
+
+    def _active_bm25_retriever(self):
+        if self._use_typical_abstracts() and self.typical_bm25_retriever:
+            return self.typical_bm25_retriever
+        return self.bm25_retriever
+
+    def _active_embedding_retriever(self):
+        if self._use_typical_abstracts() and self.typical_embedding_retriever:
+            return self.typical_embedding_retriever
+        return self.embedding_retriever
+
+    def _weights_for_profile(self, paper_profile: PaperProfile) -> Dict[str, float]:
+        if self.use_gating and self.weight_gater:
+            weights = self.weight_gater.predict_weights(paper_profile)
+            return {
+                "bm25": float(weights.get("bm25", self.merge_weights["bm25"])),
+                "vector": float(weights.get("vector", self.merge_weights["vector"])),
+                "text": float(weights.get("text", self.merge_weights["text"])),
+            }
+        return self.merge_weights

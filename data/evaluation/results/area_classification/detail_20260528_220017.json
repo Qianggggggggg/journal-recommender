@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Enhancing Neural Network Reliability: Insights Fro",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Fair Coflow Scheduling via Controlled Slowdown",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Polyhedral Specification and Code Generation of Sp",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": true,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.7833333333333333,
+    "novelty_score": 2.5,
+    "rigor_score": 2.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  }
+]

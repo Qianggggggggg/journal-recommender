@@ -5,6 +5,11 @@ from unittest.mock import patch, MagicMock
 from starlette.testclient import TestClient
 
 from src.app.main import app
+from src.app.api import _build_candidate_generator
+from src.journals.journal_model import Journal
+from src.journals.journal_store import JournalStore
+from src.papers.paper_model import PaperProfile
+from src.retriever.bm25_retriever import BM25Retriever
 
 
 @pytest.fixture
@@ -32,6 +37,61 @@ def test_health_endpoint(client):
     data = response.json()
     assert data["status"] == "ok"
     assert "version" in data
+
+
+def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
+    """配置 typical_abstracts 时，应接入典型摘要三路召回。"""
+    abstracts_dir = tmp_path / "typical_abstracts"
+    abstracts_dir.mkdir()
+    (abstracts_dir / "target.json").write_text(
+        json.dumps({
+            "journal_id": "target",
+            "journal_name": "Target Journal",
+            "abstracts": [
+                {
+                    "method_type": "method",
+                    "novelty_level": "new_method",
+                    "abstract": "Graph neural recommendation systems for representation learning.",
+                }
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    store = JournalStore(store_path=str(tmp_path / "journals.jsonl"))
+    store.add_journal(Journal(journal_id="other", journal_name="Other Journal", journal_profile="unrelated systems"))
+    store.add_journal(Journal(journal_id="target", journal_name="Target Journal", journal_profile="general computing"))
+
+    bm25 = BM25Retriever(store)
+    bm25.build_index()
+    app_config = {
+        "candidate_generator": {
+            "retrieval_target": "typical_abstracts",
+            "merge_weights": {"bm25": 0.45, "vector": 0.35, "text": 0.20},
+        },
+        "data": {
+            "typical_abstracts_dir": str(abstracts_dir),
+            "typical_abstracts_faiss_path": str(tmp_path / "missing.faiss"),
+            "typical_abstracts_metadata_path": str(tmp_path / "missing.parquet"),
+        },
+    }
+
+    generator = _build_candidate_generator(
+        store=store,
+        bm25=bm25,
+        embedding_retriever=None,
+        embedding_client=MagicMock(),
+        app_config=app_config,
+    )
+
+    assert generator.retrieval_target == "typical_abstracts"
+    assert generator.typical_bm25_retriever is not None
+    assert generator.typical_embedding_retriever is not None
+    assert generator.typical_text_retriever is not None
+
+    profile = PaperProfile(title="Graph neural recommendation", keywords=["graph", "recommendation"])
+    candidates = generator.generate("graph neural recommendation", profile, top_k=3)
+    assert candidates[0].journal_id == "target"
 
 
 def test_journals_endpoint(client):

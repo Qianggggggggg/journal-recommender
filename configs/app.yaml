@@ -14,6 +14,9 @@ ollama:
   embedding_model: "qwen3-embedding:4b"
 
 candidate_generator:
+  retrieval_target: "typical_abstracts"  # scope_text | typical_abstracts
+  weighting_strategy: "fixed"            # fixed | gating
+  gating_model_path: "data/models/gating_network.pt"
   merge_weights:
     bm25: 0.45
     vector: 0.35
@@ -23,3 +26,13 @@ data:
   journal_store_path: "data/processed/journals.jsonl"
   faiss_index_path: "data/processed/journals_index.faiss"
   metadata_path: "data/processed/journals_metadata.parquet"
+  typical_abstracts_dir: "data/typical_abstracts"
+  typical_abstracts_faiss_path: "data/processed/typical_abstracts_index.faiss"
+  typical_abstracts_metadata_path: "data/processed/typical_abstracts_metadata.parquet"
+
+ranking:
+  strategy: "llm"               # llm | two_tower | two_stage
+  use_two_tower: false          # ablation switch
+  use_cross_encoder: false      # ablation switch
+  two_tower_model_path: "data/models/two_tower_ranker.pt"
+  cross_encoder_model_path: "data/models/cross_ranker.pt"

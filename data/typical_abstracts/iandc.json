@@ -1,0 +1,27 @@
+{
+  "journal_id": "iandc",
+  "journal_name": "Information and Computation",
+  "ccf_rating": "A",
+  "abstracts": [
+    {
+      "method_type": "理论分析型",
+      "novelty_level": "范式创新",
+      "abstract": "This paper introduces a novel framework for characterizing quantum Merlin-Arthur (QMA) protocols through topological invariants, establishing a fundamental connection between quantum complexity theory and algebraic topology that has not been previously explored. We develop a generalized model of multi-prover quantum interactive proofs where the entanglement structure induces nontrivial topological features in the verifier's acceptance space. Our main contribution is proving that the complexity class QMA(poly) is contained in P^NP when the underlying证明 graph admits a specific topological classification, thereby providing an entirely new structural approach to QMA-hardness results. We further demonstrate that this topological characterization enables the resolution of longstanding open problems regarding the power of proof systems with non-adaptive measurements. The framework reveals unexpected relationships between quantum multi-prover interactive proofs and formal languages recognized by topological automata, significantly extending the scope of quantum computation theory. These results suggest that topological methods can provide deeper insights into the fundamental limits of quantum verification, opening promising research directions in quantum complexity and opening new vistas for understanding quantum advantage in verification tasks."
+    },
+    {
+      "method_type": "理论分析型",
+      "novelty_level": "显著改进",
+      "abstract": "We substantially improve the known lower bounds for the space complexity of Boltzmann sampling, a fundamental problem in algorithmic combinatorial enumeration. Prior work established that any unary context-free languages requires Ω(log n) space for uniform sampling, and this bound remained the best known for nearly a decade. Through a refined analysis of the communication complexity of sampling problems and a novel application of Razborov's flag algebra method to the space-bounded regime, we prove that uniform sampling from a significant subclass of unambiguous CFLs requires Ω(n^0.25) space on probabilistic space-bounded Turing machines. This exponentially improves over the previous Ω(log n) lower bound and matches the known upper bounds up to a polynomial factor. Our technical innovations include a new notion of space-bounded discrepancy for sampling distributions and an improved analysis of the information bottleneck in space-constrained samplers. Furthermore, we extend our techniques to establish improved lower bounds for the related problems of approximate counting and uniform generation of constraint satisfaction instances, demonstrating the broad applicability of our approach to computational complexity theory."
+    },
+    {
+      "method_type": "系统设计型",
+      "novelty_level": "范式创新",
+      "abstract": "We present QuantumHoare, a groundbreaking verification framework for quantum programs that fundamentally reconceptualizes the relationship between quantum mechanics and program verification. Unlike existing approaches that merely adapt classical Floyd-Hoare logic to quantum settings, QuantumHoare introduces quantum superdense Hoare triples that track both classical and quantum entanglement resources explicitly. The framework enables compositional verification of quantum programs by introducing novel inference rules for quantum commands that preserve entanglement structure across program components. We implement QuantumHoare as a fully automated verification tool supporting a rich specification language for quantum properties including entanglement preservation, coherence maintenance, and measurement-dependent postconditions. Our case studies demonstrate the framework's effectiveness on prominent quantum algorithms including Quantum Fourier Transform, Grover search, and Variational Quantum Eigensolver implementations. The tool successfully verifies properties that were previously only approachable through manual proof or not verifiable at all, establishing QuantumHoare as a paradigm shift in program verification for quantum computation."
+    },
+    {
+      "method_type": "系统设计型",
+      "novelty_level": "显著改进",
+      "abstract": "We present an efficient construction of extractable witness encryption for all NP languages that achieves near-optimal ciphertext size and extraction security, significantly improving upon the state-of-the-art. The proposed scheme operates in the standard model under the hardness of the Learning With Errors (LWE) assumption, without requiring any trusted setup or random oracles. Our key technical innovation is a novel approach to constructing extractable witness encryption that avoids the circularity issues inherent in previous constructions by introducing a hierarchical encryption structure with delegatable extraction rights. The ciphertext size in our scheme scales as O(n log λ), where n is the witness length and λ is the security parameter, representing a quadratic improvement over prior extractable WE constructions. We provide a complete implementation demonstrating practical efficiency for cryptographic applications including escrow encryption and time-lock puzzles with extractable properties. Our work resolves an important open problem by achieving extractable witness encryption under a standard, well-studied assumption while maintaining strong security guarantees."
+    }
+  ]
+}

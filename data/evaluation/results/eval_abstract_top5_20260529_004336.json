@@ -1,0 +1,2465 @@
+{
+  "timestamp": "20260529_004336",
+  "mode": "abstract",
+  "top_k": 5,
+  "total_count": 102,
+  "metrics": {
+    "hit_at_1": 23,
+    "hit_at_3": 47,
+    "hit_at_5": 53,
+    "hit_at_10": 53,
+    "area_match_count": 74,
+    "level_match_count": 39,
+    "mrr": 0.3459150326797385,
+    "ndcg_at_5": 0.38986315106192443,
+    "coarse_hit_count": 88,
+    "coarse_hit_in_rule_top10_count": 58,
+    "coarse_hit_in_rule_top20_count": 64,
+    "area_subject_tag_match_count": 92,
+    "level_a_count": 21,
+    "level_a_hit_at_5": 12,
+    "level_b_count": 75,
+    "level_b_hit_at_5": 37,
+    "level_c_count": 6,
+    "level_c_hit_at_5": 4,
+    "level_d_count": 0,
+    "level_d_hit_at_5": 0
+  },
+  "by_area": {
+    "计算机体系结构/并行与分布计算/存储系统": {
+      "total": 10,
+      "hit": 7,
+      "area_match": 7
+    },
+    "计算机网络": {
+      "total": 10,
+      "hit": 6,
+      "area_match": 6
+    },
+    "网络与信息安全": {
+      "total": 9,
+      "hit": 4,
+      "area_match": 8
+    },
+    "软件工程/系统软件/程序设计语言": {
+      "total": 11,
+      "hit": 6,
+      "area_match": 10
+    },
+    "数据库/数据挖掘/内容检索": {
+      "total": 9,
+      "hit": 5,
+      "area_match": 8
+    },
+    "计算机科学理论": {
+      "total": 9,
+      "hit": 3,
+      "area_match": 8
+    },
+    "计算机图形学与多媒体": {
+      "total": 14,
+      "hit": 7,
+      "area_match": 13
+    },
+    "人工智能": {
+      "total": 11,
+      "hit": 4,
+      "area_match": 7
+    },
+    "人机交互与普适计算": {
+      "total": 10,
+      "hit": 7,
+      "area_match": 6
+    },
+    "交叉/综合/新兴": {
+      "total": 9,
+      "hit": 4,
+      "area_match": 1
+    }
+  },
+  "by_level": {
+    "A": {
+      "total": 37,
+      "hit": 24
+    },
+    "B": {
+      "total": 33,
+      "hit": 15
+    },
+    "C": {
+      "total": 32,
+      "hit": 14
+    }
+  },
+  "paper_results": [
+    {
+      "arxiv": "",
+      "title": "KLNK: Expanding Page Boundaries in a Distributed S",
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "ccf_level": "A",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "IEEE Transactions on Parallel and Distributed Systems",
+        "Journal of Parallel and Distributed Computing",
+        "Distributed Computing",
+        "ACM Transactions on Computer Systems",
+        "Parallel Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+      "venue": "IEEE Transactions on Cloud Computing",
+      "ccf_level": "B",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "Journal of Computer Security",
+        "Computers & Security",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "IEEE Transactions on Cloud Computing",
+        "ACM Transactions on Privacy and Security"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2307.04098",
+      "title": "A User Study on Explainable Online Reinforcement L",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "ccf_level": "B",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "ACM Transactions on Autonomous and Adaptive Systems",
+        "Journal of Machine Learning Research",
+        "ACM Transactions on Interactive Intelligent Systems",
+        "Machine Learning",
+        "User Modeling and User-Adapted Interaction"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言",
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Fair Coflow Scheduling via Controlled Slowdown",
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "ccf_level": "A",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "The Journal of Supercomputing",
+        "CCF Transactions on High Performance Computing",
+        "Performance Evaluation: An International Journal",
+        "The Journal of Grid computing",
+        "Real-Time Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5666666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2208.11858",
+      "title": "Polyhedral Specification and Code Generation of Sp",
+      "venue": "ACM Transactions on Architecture and Code Optimization",
+      "ccf_level": "A",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "ACM Transactions on Architecture and Code Optimization",
+        "Future Generation Computer Systems",
+        "Journal of Parallel and Distributed Computing",
+        "Automated Software Engineering",
+        "Journal of the ACM"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.8083333333333332,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言",
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Trade-off topology design for hierarchical network",
+      "venue": "CCF Transactions on High Performance Computing",
+      "ccf_level": "C",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "The Journal of Supercomputing",
+        "Networks",
+        "Journal of Network and Computer Applications",
+        "Journal of Systems Architecture: Embedded Software Design",
+        "IEEE/ACM Transactions on Networking"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统",
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2105.02038",
+      "title": "Dynamic Reliability Management in Neuromorphic Com",
+      "venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "IEEE Transactions on Reliability",
+        "ACM Journal on Emerging Technologies in Computing Systems",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "ACM Transactions on Embedded Computing Systems",
+        "Proceedings of the IEEE"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Enhancing Neural Network Reliability: Insights Fro",
+      "venue": "IEEE Transactions on Computers",
+      "ccf_level": "A",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "IEEE Transactions on Dependable and Secure Computing",
+        "IEEE Transactions on Reliability",
+        "Journal of the ACM",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "Neural Networks"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2512.04680",
+      "title": "Generative AI for Self-Adaptive Systems: State of ",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "ccf_level": "B",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "ACM Transactions on Autonomous and Adaptive Systems",
+        "Journal of Artificial Intelligence Research",
+        "Artificial Intelligence",
+        "Automated Software Engineering",
+        "Engineering Applications of Artificial Intelligence"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言",
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2404.15292",
+      "title": "Multi-Objective Optimization for Multi-UAV-Assiste",
+      "venue": "IEEE Transactions on Mobile Computing",
+      "ccf_level": "A",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Mobile Computing",
+        "Mobile Networks and Applications",
+        "Wireless Communications and Mobile Computing",
+        "Journal of Global Optimization",
+        "Journal of Network and Computer Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5791666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Goal-Oriented Medium Access with Distributed Belie",
+      "venue": "IEEE/ACM Transactions on Networking",
+      "ccf_level": "A",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "Ad hoc Networks",
+        "ACM Transactions on Sensor Networks",
+        "IEEE/ACM Transactions on Networking",
+        "IEEE Journal on Selected Areas in Communications",
+        "Wireless Networks"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "LNNIDS: A Hybrid Liquid Neural Network based IDS f",
+      "venue": "ACM Transactions on Internet Technology",
+      "ccf_level": "B",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "ACM Transactions on Internet of Things",
+        "IEEE Internet of Things Journal",
+        "Journal of Network and Computer Applications",
+        "Neural Computing and Applications",
+        "IEEE Transactions on Neural Networks and learning systems"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2501.06033",
+      "title": "IoT Firmware Version Identification Using Transfer",
+      "venue": "ACM Transactions on Internet Technology",
+      "ccf_level": "B",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "ACM Transactions on Internet of Things",
+        "IEEE Internet of Things Journal",
+        "Security and Communication Networks",
+        "Cybersecurity",
+        "ACM Transactions on Sensor Networks"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全",
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Resilient Collaborative Caching for Multi-Edge Sys",
+      "venue": "IEEE/ACM Transactions on Networking",
+      "ccf_level": "A",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Parallel and Distributed Systems",
+        "Future Generation Computer Systems",
+        "IEEE Transactions on Mobile Computing",
+        "ACM Transactions on Internet of Things",
+        "IEEE Internet of Things Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "A new hybrid approach combining GCN and LSTM for r",
+      "venue": "Computer Networks",
+      "ccf_level": "B",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "ACM Transactions on Knowledge Discovery from Data",
+        "Journal of Network and Computer Applications",
+        "Journal of Computer Security",
+        "Computer Networks",
+        "IEEE/ACM Transactions on Networking"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "1808.03031",
+      "title": "A Constrained Shortest Path Scheme for Virtual Net",
+      "venue": "IEEE Transactions on Network and Service Management",
+      "ccf_level": "C",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Network and Service Management",
+        "Journal of Network and Computer Applications",
+        "IEEE/ACM Transactions on Networking",
+        "Networks",
+        "INFORMS Journal on Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Zero trust-based authentication for Inter-Satellit",
+      "venue": "Ad hoc Networks",
+      "ccf_level": "C",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "Security and Communication Networks",
+        "Ad hoc Networks",
+        "Computer Networks",
+        "Mobile Networks and Applications",
+        "Wireless Networks"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6375000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2202.07948",
+      "title": "NORM: An FPGA-based Non-volatile Memory Emulation ",
+      "venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "ACM Transactions on Reconfigurable Technology and Systems",
+        "ACM Journal on Emerging Technologies in Computing Systems",
+        "ACM Transactions on Embedded Computing Systems",
+        "ACM Transactions on Architecture and Code Optimization",
+        "ACM Transactions on Design Automation of Electronic Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Aligning Task- and Reconstruction-Oriented Communi",
+      "venue": "IEEE Journal on Selected Areas in Communications",
+      "ccf_level": "A",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Communications",
+        "IEEE Journal on Selected Areas in Communications",
+        "Computer Communications",
+        "Wireless Communications and Mobile Computing",
+        "IET Communications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6750000000000002,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统",
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "A novel model for optimal selection of relay bus w",
+      "venue": "Wireless Networks",
+      "ccf_level": "C",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Reliability",
+        "IEEE Transactions on Fuzzy Systems",
+        "Fuzzy Sets and Systems",
+        "Ad hoc Networks",
+        "Expert Systems with Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Rethinking Membership Inference Attacks Against Tr",
+      "venue": "IEEE Transactions on Information Forensics and Security",
+      "ccf_level": "A",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "ACM Transactions on Privacy and Security",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "Journal of Information Security and Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6333333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2310.08822",
+      "title": "A High-Throughput and Secure Coded Blockchain for ",
+      "venue": "IEEE Transactions on Dependable and Secure Computing",
+      "ccf_level": "A",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "ACM Transactions on Internet of Things",
+        "IEEE Internet of Things Journal",
+        "Blockchain: Research and Applications",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "ACM Distributed Ledger Technologies: Research and Practice"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统",
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "CDDA-MD: An efficient malicious traffic detection ",
+      "venue": "Computers & Security",
+      "ccf_level": "B",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "IET Information Security",
+        "Journal of Computer Security",
+        "Computers & Security",
+        "IEEE/ACM Transactions on Networking",
+        "ACM Transactions on Privacy and Security"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2412.13049",
+      "title": "TIMESAFE: Timing Interruption Monitoring and Secur",
+      "venue": "ACM Transactions on Privacy and Security",
+      "ccf_level": "B",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "IET Information Security",
+        "Journal of Computer Security",
+        "Computers & Security",
+        "Security and Communication Networks",
+        "International Journal of Information and Computer Security"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "LTL-based runtime verification framework for cyber",
+      "venue": "Computers & Security",
+      "ccf_level": "B",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "ACM Transactions on Cyber-Physical Systems",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "IEEE Transactions on Information Forensics and Security",
+        "Real-Time Systems",
+        "ACM Transactions on Programming Languages and Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "RC-NVM: Recovery-Aware Reliability-Security Co-Des",
+      "venue": "IEEE Transactions on Dependable and Secure Computing",
+      "ccf_level": "A",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "IEEE Transactions on Reliability",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "ACM Transactions on Storage",
+        "IET Information Security",
+        "IEEE Transactions on Very Large Scale Integration (VLSI) Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5666666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统",
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2110.09428",
+      "title": "Distinguishing Natural and Computer-Generated Imag",
+      "venue": "Journal of Information Security and Applications",
+      "ccf_level": "C",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "International Journal of Computer Vision",
+        "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+        "Computer Vision and Image Understanding",
+        "Pattern Recognition",
+        "Image and Vision Computing"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2103.14235",
+      "title": "Socio-Technical Grounded Theory for Software Engin",
+      "venue": "IEEE Transactions on Software Engineering",
+      "ccf_level": "A",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "ACM Transactions on Software Engineering and Methodology",
+        "IEEE Transactions on Software Engineering",
+        "Empirical Software Engineering",
+        "International Journal of Software Engineering and Knowledge Engineering",
+        "Automated Software Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Analysis and Mitigation of Covert Timing Communica",
+      "venue": "Security and Communication Networks",
+      "ccf_level": "C",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "Journal of Information Security and Applications",
+        "Journal of Computer Security",
+        "Computers & Security",
+        "Journal of Network and Computer Applications",
+        "EURASIP Journal on Information Security"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Locally Abstract, Globally Concrete Semantics of C",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "ccf_level": "A",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Journal of Logical and Algebraic Methods in Programming",
+        "ACM Transactions on Programming Languages and Systems",
+        "Science of Computer Programming",
+        "Mathematical Structures in Computer Science",
+        "Journal of Functional Programming"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7833333333333333,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论",
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Decomposition-based Synthesis for Applying Divide-",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "ccf_level": "A",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "ACM Transactions on Software Engineering and Methodology",
+        "Automated Software Engineering",
+        "Science of Computer Programming",
+        "Formal Methods in System Design",
+        "Formal Aspects of Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7666666666666666,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Enhancing vulnerability detection efficiency: An e",
+      "venue": "Journal of Information Security and Applications",
+      "ccf_level": "C",
+      "research_area": "网络与信息安全",
+      "recommended_journals": [
+        "Journal of Information Security and Applications",
+        "Computers & Security",
+        "Automated Software Engineering",
+        "Journal of Computer Security",
+        "Software Testing, Verification and Reliability"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Adversities in Abstract Interpretation - Accommoda",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "ccf_level": "A",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Journal of the ACM",
+        "Formal Aspects of Computing",
+        "Journal of Computer and System Sciences",
+        "International Journal of Approximate Reasoning",
+        "European Journal of Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.8083333333333332,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言",
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "Evolution of code technical debt in microservices ",
+      "venue": "Journal of Systems and Software",
+      "ccf_level": "B",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Journal of Software: Evolution and Process",
+        "Empirical Software Engineering",
+        "Software Quality Journal",
+        "IEEE Transactions on Software Engineering",
+        "ACM Transactions on Software Engineering and Methodology"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6083333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Proactive–reactive microservice architecture globa",
+      "venue": "Journal of Systems and Software",
+      "ccf_level": "B",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "ACM Transactions on Autonomous and Adaptive Systems",
+        "Software: Practice and Experience",
+        "IEEE Transactions on Services Computing",
+        "Performance Evaluation: An International Journal",
+        "ACM Transactions on Architecture and Code Optimization"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6166666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Mitigating Noise in Quantum Software Testing Using",
+      "venue": "IEEE Transactions on Software Engineering",
+      "ccf_level": "A",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Software Testing, Verification and Reliability",
+        "Journal of Machine Learning Research",
+        "ACM Transactions in Quantum Computing",
+        "Machine Learning",
+        "Automated Software Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Applying bayesian data analysis for causal inferen",
+      "venue": "Empirical Software Engineering",
+      "ccf_level": "B",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Requirements Engineering",
+        "Empirical Software Engineering",
+        "IEEE Transactions on Software Engineering",
+        "ACM Transactions on Software Engineering and Methodology",
+        "Software Quality Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5666666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "1807.04962",
+      "title": "Knowledge Management Strategies and Processes in A",
+      "venue": "International Journal of Software Engineering and Knowledge Engineering",
+      "ccf_level": "C",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "International Journal of Knowledge Management",
+        "International Journal of Software Engineering and Knowledge Engineering",
+        "Data & Knowledge Engineering",
+        "Data & Knowledge Engineering",
+        "IEEE Transactions on Knowledge and Data Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "On the correlation between architectural smells an",
+      "venue": "Software Quality Journal",
+      "ccf_level": "C",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Software Quality Journal",
+        "International Journal of Software Tools for Technology Transfer",
+        "Empirical Software Engineering",
+        "Automated Software Engineering",
+        "ACM Transactions on Software Engineering and Methodology"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Database Repairing with Soft Functional Dependenci",
+      "venue": "ACM Transactions on Database Systems",
+      "ccf_level": "A",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "ACM Transactions on Database Systems",
+        "Journal of Database Management",
+        "Journal of the ACM",
+        "SIAM Journal on Computing",
+        "European Journal of Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Supporting the identification of prevalent quality",
+      "venue": "Software Quality Journal",
+      "ccf_level": "C",
+      "research_area": "软件工程/系统软件/程序设计语言",
+      "recommended_journals": [
+        "Software Quality Journal",
+        "IEEE Transactions on Software Engineering",
+        "ACM Transactions on Software Engineering and Methodology",
+        "Automated Software Engineering",
+        "Journal of Systems and Software"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5416666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Linking Entities across Relations and Graphs",
+      "venue": "ACM Transactions on Database Systems",
+      "ccf_level": "A",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "Algorithmica",
+        "SIAM Journal on Computing",
+        "Journal of Computer and System Sciences",
+        "ACM Transactions on Algorithms",
+        "The VLDB Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6666666666666669,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "The Ring: Worst-case Optimal Joins in Graph Databa",
+      "venue": "ACM Transactions on Database Systems",
+      "ccf_level": "A",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "Journal of Web Semantics",
+        "IEEE Transactions on Knowledge and Data Engineering",
+        "Data & Knowledge Engineering",
+        "ACM Transactions on Database Systems",
+        "The VLDB Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6750000000000002,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2211.14489",
+      "title": "Fair-RGNN: Mitigating Relational Bias on Knowledge",
+      "venue": "ACM Transactions on Knowledge Discovery from Data",
+      "ccf_level": "B",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "Data Mining and Knowledge Discovery",
+        "IEEE Transactions on Knowledge and Data Engineering",
+        "ACM Transactions on Knowledge Discovery from Data",
+        "Data & Knowledge Engineering",
+        "Knowledge and Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6249999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2408.02456",
+      "title": "Enhancing Heterogeneous Knowledge Graph Completion",
+      "venue": "ACM Transactions on Knowledge Discovery from Data",
+      "ccf_level": "B",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "IEEE Transactions on Knowledge and Data Engineering",
+        "Data Mining and Knowledge Discovery",
+        "ACM Transactions on Knowledge Discovery from Data",
+        "Data & Knowledge Engineering",
+        "Knowledge and Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6833333333333335,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Optimisation of multiple clustering based undersam",
+      "venue": "Information Sciences",
+      "ccf_level": "B",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "Journal of Information Security and Applications",
+        "IEEE Transactions on Information Forensics and Security",
+        "Journal of Computer Security",
+        "EURASIP Journal on Information Security",
+        "International Journal of Information and Computer Security"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "网络与信息安全"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "Order, subset construction and sequential pattern ",
+      "venue": "Information Sciences",
+      "ccf_level": "B",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "Data Mining and Knowledge Discovery",
+        "SIAM Journal on Computing",
+        "Journal of Computer and System Sciences",
+        "Journal of Complexity",
+        "Pattern Analysis and Applications"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2306.08302",
+      "title": "Unifying Large Language Models and Knowledge Graph",
+      "venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "ccf_level": "A",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "IEEE Transactions on Knowledge and Data Engineering",
+        "Artificial Intelligence",
+        "Data & Knowledge Engineering",
+        "Data & Knowledge Engineering",
+        "Natural Language Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6166666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2307.04644",
+      "title": "Fairness and Diversity in Recommender Systems: A S",
+      "venue": "ACM Transactions on Intelligent Systems and Technology",
+      "ccf_level": "C",
+      "research_area": "数据库/数据挖掘/内容检索",
+      "recommended_journals": [
+        "ACM Transactions on Recommender Systems",
+        "ACM Transactions on Information Systems",
+        "European Journal of Information Systems",
+        "The Computer Journal",
+        "Journal of Intelligent Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7416666666666667,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2112.00713",
+      "title": "hIPPYlib-MUQ: A Bayesian Inference Software Framew",
+      "venue": "ACM Transactions on Mathematical Software",
+      "ccf_level": "B",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "ACM Transactions on Mathematical Software",
+        "International Journal of Approximate Reasoning",
+        "SIAM Journal on Imaging Sciences",
+        "Journal of the ACM",
+        "Machine Learning"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "交叉/综合/新兴",
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Ultrasparse Ultrasparsifiers and Faster Laplacian ",
+      "venue": "ACM Transactions on Algorithms",
+      "ccf_level": "B",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "SIAM Journal on Computing",
+        "Journal of Computer and System Sciences",
+        "Journal of Complexity",
+        "SIAM Journal on Discrete Mathematics",
+        "Discrete Applied Mathematics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7833333333333333,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "1501.02069",
+      "title": "Stateless model checking for TSO and PSO",
+      "venue": "Acta Informatica",
+      "ccf_level": "C",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "ACM Transactions on Computational Logic",
+        "Formal Aspects of Computing",
+        "Journal of Logical and Algebraic Methods in Programming",
+        "Logical Methods in Computer Science",
+        "Science of Computer Programming"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.8083333333333332,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "NP-Hardness of Approximating Meta-Complexity: A Cr",
+      "venue": "SIAM Journal on Computing",
+      "ccf_level": "A",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "Computational complexity",
+        "Journal of Complexity",
+        "SIAM Journal on Computing",
+        "Information and Computation",
+        "Journal of the ACM"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7916666666666666,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Average-Case Rigidity Lower Bounds",
+      "venue": "Theory of Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "Computational complexity",
+        "Journal of Complexity",
+        "SIAM Journal on Computing",
+        "Information and Computation",
+        "Journal of Computer and System Sciences"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.8083333333333332,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "A Simpler and Parallelizable O(sqrt(log n))-Approx",
+      "venue": "ACM Transactions on Algorithms",
+      "ccf_level": "B",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "SIAM Journal on Computing",
+        "Algorithmica",
+        "ACM Transactions on Algorithms",
+        "Journal of Computer and System Sciences",
+        "Discrete Applied Mathematics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.75,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Improved Online Scheduling with Restarts on a Sing",
+      "venue": "Theory of Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "SIAM Journal on Computing",
+        "Journal of the ACM",
+        "Journal of Computer and System Sciences",
+        "Algorithmica",
+        "ACM Transactions on Algorithms"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7833333333333333,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2201.05989",
+      "title": "Instant neural graphics primitives with a multires",
+      "venue": "ACM Transactions on Graphics",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "ACM Transactions on Graphics",
+        "IEEE Transactions on Visualization and Computer Graphics",
+        "Neural Computing and Applications",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "Neural Networks"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7916666666666666,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Peeling Close to the Orientability Threshold Spati",
+      "venue": "ACM Transactions on Algorithms",
+      "ccf_level": "B",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "SIAM Journal on Computing",
+        "Journal of the ACM",
+        "ACM Transactions on Knowledge Discovery from Data",
+        "Data Mining and Knowledge Discovery",
+        "Theory of Computing Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索",
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Interactive Volume Visualization via Multi-Resolut",
+      "venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "IEEE Transactions on Visualization and Computer Graphics",
+        "International Journal of Neural Systems",
+        "Neural Networks",
+        "Computer Graphics Forum",
+        "Computers & Graphics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6916666666666668,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Real-time Multi-Map Saliency-Driven Gaze Behavior ",
+      "venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "computer animation & virtual worlds",
+        "ACM Transactions on Graphics",
+        "Virtual Reality & Intelligent Hardware",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "International Journal of Computer Vision"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2502.13372",
+      "title": "MoVer: Motion Verification for Motion Graphics Ani",
+      "venue": "ACM Transactions on Graphics",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "ACM Transactions on Graphics",
+        "IEEE Transactions on Visualization and Computer Graphics",
+        "IEEE Transactions on Software Engineering",
+        "ACM Transactions on Software Engineering and Methodology",
+        "Automated Software Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7166666666666668,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体",
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Real-time Neural Appearance Models",
+      "venue": "ACM Transactions on Graphics",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "Graphical Models",
+        "Computer-Aided Design",
+        "Real-Time Systems",
+        "Journal of Machine Learning Research",
+        "International Journal of Computational Intelligence and Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7416666666666667,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Low-Light Phase Retrieval With Implicit Generative",
+      "venue": "IEEE Transactions on Image Processing",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "SIAM Journal on Imaging Sciences",
+        "Computer Vision and Image Understanding",
+        "Pattern Recognition",
+        "Medical Image Analysis",
+        "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Generalized Lipschitz Tracing of Implicit Surfaces",
+      "venue": "Computer Graphics Forum",
+      "ccf_level": "B",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "Graphical Models",
+        "Computer-Aided Design",
+        "Parallel Computing",
+        "Journal of Symbolic Computation",
+        "The Computer Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5958333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "High-Similarity-Pass Attention for Single Image Su",
+      "venue": "IEEE Transactions on Image Processing",
+      "ccf_level": "A",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "IEEE Transactions on Image Processing",
+        "Computer Vision and Image Understanding",
+        "Image and Vision Computing",
+        "IEEE Transactions on Multimedia",
+        "Pattern Recognition"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Control Structures in Computable Numberings and th",
+      "venue": "Theory of Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机科学理论",
+      "recommended_journals": [
+        "The Journal of Symbolic Logic",
+        "Mathematical Structures in Computer Science",
+        "Logical Methods in Computer Science",
+        "ACM Transactions on Computational Logic",
+        "Annals of Pure and Applied Logic"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7000000000000001,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "SPaGS: Fast and Accurate 3D Gaussian Splatting for",
+      "venue": "Computer Graphics Forum",
+      "ccf_level": "B",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "Computational Visual Media",
+        "Graphical Models",
+        "International Journal of Computer Vision",
+        "computer animation & virtual worlds",
+        "Virtual Reality & Intelligent Hardware"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Rendering piecewise approximations of SDFs through",
+      "venue": "Computers & Graphics",
+      "ccf_level": "C",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "Graphical Models",
+        "Computers & Graphics",
+        "Virtual Reality & Intelligent Hardware",
+        "SIAM Journal on Computing",
+        "Algorithmica"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.75,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "A point-normal interpolatory subdivision scheme pr",
+      "venue": "Computer Aided Geometric Design",
+      "ccf_level": "B",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "Computational Geometry: Theory and Applications",
+        "Computer Aided Geometric Design",
+        "Discrete & Computational Geometry",
+        "Computer-Aided Design",
+        "ACM Transactions on Graphics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Research on a multi‐scale degradation fusion netwo",
+      "venue": "IET Image Processing",
+      "ccf_level": "C",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "IEEE Transactions on Image Processing",
+        "SIAM Journal on Imaging Sciences",
+        "Computer Vision and Image Understanding",
+        "IET Image Processing",
+        "Image and Vision Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Policy Gradient Methods in the Presence of Symmetr",
+      "venue": "Journal of Machine Learning Research",
+      "ccf_level": "A",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Neural Computation",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "Journal of the ACM"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7416666666666667,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Localisation of Regularised and Multiview Support ",
+      "venue": "Journal of Machine Learning Research",
+      "ccf_level": "A",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Journal of Complexity",
+        "The Journal of Symbolic Logic",
+        "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6666666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "计算机科学理论"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2304.10320",
+      "title": "Neurosymbolic Models for Computer Graphics",
+      "venue": "Computer Graphics Forum",
+      "ccf_level": "B",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "IEEE Transactions on Visualization and Computer Graphics",
+        "ACM Transactions on Graphics",
+        "The Visual Computer",
+        "IET Computer Vision",
+        "International Journal of Computer Vision"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7166666666666668,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2407.04191",
+      "title": "GazeFusion: Saliency-Guided Image Generation",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Journal of Visual Communication and Image Representation",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "Visual Informatics",
+        "International Journal of Computer Vision",
+        "Image and Vision Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7583333333333334,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2405.11029",
+      "title": "Generative artificial intelligence: a systematic r",
+      "venue": "Multimedia Tools and Applications",
+      "ccf_level": "C",
+      "research_area": "计算机图形学与多媒体",
+      "recommended_journals": [
+        "International Journal of Pattern Recognition and Artificial Intelligence",
+        "Journal of Experimental and Theoretical Artificial Intelligence",
+        "Artificial Intelligence",
+        "Journal of Artificial Intelligence Research",
+        "Engineering Applications of Artificial Intelligence"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2405.07418",
+      "title": "Exploring the Effects of User-Agent and User-Desig",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "ACM Transactions on Interactive Intelligent Systems",
+        "IEEE Transactions on Affective Computing",
+        "IEEE Journal of Biomedical and Health Informatics",
+        "ACM Transactions on Computing for Healthcare"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人机交互与普适计算",
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "1706.07269",
+      "title": "Explanation in Artificial Intelligence: Insights f",
+      "venue": "Artificial Intelligence",
+      "ccf_level": "A",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Artificial Intelligence",
+        "Journal of Experimental and Theoretical Artificial Intelligence",
+        "Journal of Artificial Intelligence Research",
+        "ACM Transactions on Recommender Systems",
+        "IEEE Transactions on Computational Social Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6416666666666667,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Incremental Learning Methodologies for Addressing ",
+      "venue": "Journal of Artificial Intelligence Research",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "Neural Networks"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2412.19522",
+      "title": "Exploiting Domain-Specific Parallel Data on Multil",
+      "venue": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "ACM Transactions on Asian and Low-Resource Language Information Processing",
+        "Machine Translation",
+        "Natural Language Engineering",
+        "IEEE Transactions on Audio, Speech and Language Processing",
+        "Computer Speech & Language"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5333333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Feature selection based on multi-perspective dynam",
+      "venue": "Applied Intelligence",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "International Journal of Approximate Reasoning",
+        "International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems",
+        "Information Sciences",
+        "Fuzzy Sets and Systems",
+        "Soft Computing"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Discovering top-k periodic and high-utility patter",
+      "venue": "Applied Intelligence",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Information Sciences",
+        "IEEE Transactions on Knowledge and Data Engineering",
+        "Data Mining and Knowledge Discovery",
+        "ACM Transactions on Knowledge Discovery from Data",
+        "Knowledge and Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "From classification to landmark-aware identificati",
+      "venue": "Neural Computing and Applications",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "IEEE Transactions on Multimedia",
+        "Medical Image Analysis",
+        "Journal of Machine Learning Research",
+        "Pattern Recognition",
+        "IEEE Transactions on Medical Imaging"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "GUI Behaviors to Minimize Pointing-based Interacti",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "ccf_level": "A",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "ACM Transactions on Computer-Human Interaction",
+        "International Journal of Human-Computer Interaction",
+        "Human-Computer Interaction",
+        "International Journal of Human-Computer Studies"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Performance analysis of subsampled LiDAR point clo",
+      "venue": "Applied Intelligence",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+        "Computer Vision and Image Understanding",
+        "International Journal of Pattern Recognition and Artificial Intelligence",
+        "Pattern Recognition",
+        "IEEE Transactions on Neural Networks and learning systems"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6166666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2407.17489",
+      "title": "Cognitive Spillover in Human-AI Teams",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "ccf_level": "A",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "ACM Transactions on Computer-Human Interaction",
+        "IEEE Transactions on Computational Social Systems",
+        "Computer Supported Cooperative Work",
+        "ACM Transactions on Interactive Intelligent Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7250000000000001,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Synthesizing mmWave range-doppler data from videos",
+      "venue": "CCF Transactions on Pervasive Computing and Interaction",
+      "ccf_level": "B",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Computer Vision and Image Understanding",
+        "Pattern Recognition",
+        "IEEE Transactions on Multimedia",
+        "International Journal of Computer Vision",
+        "ACM Transactions on Knowledge Discovery from Data"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "交叉/综合/新兴",
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "Ironies of Generative AI: Understanding and Mitiga",
+      "venue": "International Journal of Human-Computer Interaction",
+      "ccf_level": "B",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Human-Computer Interaction",
+        "International Journal of Human-Computer Interaction",
+        "ACM Transactions on Computer-Human Interaction",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "Interacting with Computers"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7416666666666667,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2308.08496",
+      "title": "Understanding user intent modeling for conversatio",
+      "venue": "User Modeling and User-Adapted Interaction",
+      "ccf_level": "B",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "ACM Transactions on Recommender Systems",
+        "User Modeling and User-Adapted Interaction",
+        "ACM Transactions on Interactive Intelligent Systems",
+        "International Journal of Human-Computer Studies",
+        "ACM Transactions on Information Systems"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5916666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2503.04296",
+      "title": "The Role of Robot Competence, Autonomy, and Person",
+      "venue": "ACM Transactions on Human-Robot Interaction",
+      "ccf_level": "C",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "ACM Transactions on Human-Robot Interaction",
+        "IEEE Transactions on Human-Machine Systems",
+        "IEEE Transactions on Robotics",
+        "IEEE Transactions on Affective Computing",
+        "ACM Transactions on Computer-Human Interaction"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6583333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Achieving Symmetry in Synchronous Interaction in H",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "ccf_level": "A",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Computer Supported Cooperative Work",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "International Journal of Human-Computer Interaction",
+        "Human-Computer Interaction",
+        "ACM Transactions on Computer-Human Interaction"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7416666666666667,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "In-bed gesture recognition to support the communic",
+      "venue": "Pervasive and Mobile Computing",
+      "ccf_level": "C",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Pattern Recognition",
+        "International Journal of Pattern Recognition and Artificial Intelligence",
+        "Pattern Recognition Letters",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "IEEE Journal of Biomedical and Health Informatics"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "On-device indoor place prediction using WiFi-RTT a",
+      "venue": "Pervasive and Mobile Computing",
+      "ccf_level": "C",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "Proceedings of the IEEE",
+        "Pervasive and Mobile Computing",
+        "Mobile Networks and Applications",
+        "IEEE Transactions on Mobile Computing",
+        "CCF Transactions on Pervasive Computing and Interaction"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.6833333333333335,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "计算机网络"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Edge computing and 5G network integration for mobi",
+      "venue": "Pervasive and Mobile Computing",
+      "ccf_level": "C",
+      "research_area": "人机交互与普适计算",
+      "recommended_journals": [
+        "IEEE Transactions on Services Computing",
+        "Service Oriented Computing and Applications",
+        "IEEE Transactions on Network and Service Management",
+        "Journal of Parallel and Distributed Computing",
+        "Journal of Network and Computer Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5499999999999999,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统",
+        "计算机网络"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "A Survey on Stream-Based Architectures: From Accel",
+      "venue": "Proceedings of the IEEE",
+      "ccf_level": "A",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "ACM Transactions on Computer Systems",
+        "ACM Transactions on Architecture and Code Optimization",
+        "IEEE Transactions on Parallel and Distributed Systems",
+        "The Journal of Supercomputing",
+        "Journal of Systems Architecture: Embedded Software Design"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6083333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "",
+      "title": "Adaptive and Fair Transformation for Recoverable M",
+      "venue": "Journal of the ACM",
+      "ccf_level": "A",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "SIAM Journal on Computing",
+        "Algorithmica",
+        "Journal of the ACM",
+        "Journal of Computer and System Sciences",
+        "ACM Transactions on Algorithms"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7250000000000001,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "A Review of Safe Reinforcement Learning Methods fo",
+      "venue": "Proceedings of the IEEE",
+      "ccf_level": "A",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Expert Systems with Applications",
+        "ACM Transactions on Cyber-Physical Systems",
+        "IEEE Transactions on Neural Networks and learning systems"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.7166666666666668,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Serverless Computing: A Technological and Architec",
+      "venue": "Journal of Computer Science and Technology",
+      "ccf_level": "B",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "IEEE Transactions on Cloud Computing",
+        "Journal of Parallel and Distributed Computing",
+        "Proceedings of the IEEE",
+        "Journal of the ACM",
+        "The Computer Journal"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2404.03425",
+      "title": "ChangeMamba: Remote Sensing Change Detection With ",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "ccf_level": "B",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "IEEE Transactions on Geoscience and Remote Sensing",
+        "IEEE Geoscience and Remote Sensing Letters",
+        "International Journal of Geographical Information Science",
+        "Computer Vision and Image Understanding",
+        "Pattern Recognition"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7083333333333334,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Rotation Equivariant Convolution-based Network for",
+      "venue": "IEEE Geoscience and Remote Sensing Letters",
+      "ccf_level": "C",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "IEEE Transactions on Geoscience and Remote Sensing",
+        "IEEE Geoscience and Remote Sensing Letters",
+        "Computer Vision and Image Understanding",
+        "IEEE Transactions on Multimedia",
+        "Pattern Recognition"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.5166666666666666,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "计算机图形学与多媒体"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2412.08649",
+      "title": "Multi-modal Representation Learning Enables Accura",
+      "venue": "IEEE Journal of Biomedical and Health Informatics",
+      "ccf_level": "C",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Bioinformatics",
+        "PLOS Computational Biology",
+        "IEEE Transactions on Neural Networks and learning systems"
+      ],
+      "coarse_hit": false,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6916666666666668,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "",
+      "title": "Robust graph structure learning to improve multi-o",
+      "venue": "BMC Bioinformatics",
+      "ccf_level": "C",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Data Mining and Knowledge Discovery",
+        "IEEE Transactions on Neural Networks and learning systems",
+        "IEEE Transactions on Knowledge and Data Engineering"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "coarse_hit_in_rule_top20": false,
+      "paper_strength": 0.6333333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2401.16822",
+      "title": "EarthGPT: A Universal Multimodal Large Language Mo",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "ccf_level": "B",
+      "research_area": "交叉/综合/新兴",
+      "recommended_journals": [
+        "IEEE Transactions on Geoscience and Remote Sensing",
+        "Computer Vision and Image Understanding",
+        "IET Computer Vision",
+        "IET Image Processing",
+        "Image and Vision Computing"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "coarse_hit_in_rule_top20": true,
+      "paper_strength": 0.7899999999999999,
+      "quality_level": "A",
+      "ccf_research_area": [
+        "计算机图形学与多媒体",
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    }
+  ]
+}

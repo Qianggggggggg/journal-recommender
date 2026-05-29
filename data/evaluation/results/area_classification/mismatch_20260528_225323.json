@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Polyhedral Specification and Code Generation of Sp",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.6249999999999999,
+    "novelty_score": 2.0,
+    "rigor_score": 1.8,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "A User Study on Explainable Online Reinforcement L",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "人机交互与普适计算"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.7033333333333333,
+    "novelty_score": 2.0,
+    "rigor_score": 2.2,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.3,
+    "clarity_score": 2.3
+  },
+  {
+    "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.68,
+    "novelty_score": 2.0,
+    "rigor_score": 2.2,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.1,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Generative AI for Self-Adaptive Systems: State of ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言",
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.6616666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.2,
+    "clarity_score": 2.2
+  }
+]

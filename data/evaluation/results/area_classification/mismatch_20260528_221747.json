@@ -1,0 +1,584 @@
+[
+  {
+    "title": "Generative AI for Self-Adaptive Systems: State of ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言",
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.5666666666666665,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Trade-off topology design for hierarchical network",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机网络"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6083333333333333,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "A User Study on Explainable Online Reinforcement L",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6433333333333333,
+    "novelty_score": 1.8,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.8,
+    "significance_score": 2.0,
+    "clarity_score": 2.2
+  },
+  {
+    "title": "LNNIDS: A Hybrid Liquid Neural Network based IDS f",
+    "metadata_area": "计算机网络",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Resilient Collaborative Caching for Multi-Edge Sys",
+    "metadata_area": "计算机网络",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "交叉/综合/新兴"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Zero trust-based authentication for Inter-Satellit",
+    "metadata_area": "计算机网络",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6,
+    "novelty_score": 2.0,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "IoT Firmware Version Identification Using Transfer",
+    "metadata_area": "计算机网络",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6166666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "A new hybrid approach combining GCN and LSTM for r",
+    "metadata_area": "计算机网络",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "C",
+    "level_match": false,
+    "paper_strength": 0.5166666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 1.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "A High-Throughput and Secure Coded Blockchain for ",
+    "metadata_area": "网络与信息安全",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "交叉/综合/新兴"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5916666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Distinguishing Natural and Computer-Generated Imag",
+    "metadata_area": "网络与信息安全",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.7000000000000001,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 2.0,
+    "significance_score": 2.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "RC-NVM: Recovery-Aware Reliability-Security Co-Des",
+    "metadata_area": "网络与信息安全",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6166666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Proactive–reactive microservice architecture globa",
+    "metadata_area": "软件工程/系统软件/程序设计语言",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6833333333333335,
+    "novelty_score": 2.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Locally Abstract, Globally Concrete Semantics of C",
+    "metadata_area": "软件工程/系统软件/程序设计语言",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机科学理论"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": true,
+    "paper_strength": 0.7833333333333333,
+    "novelty_score": 2.5,
+    "rigor_score": 2.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Unifying Large Language Models and Knowledge Graph",
+    "metadata_area": "数据库/数据挖掘/内容检索",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.65,
+    "novelty_score": 2.0,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Optimisation of multiple clustering based undersam",
+    "metadata_area": "数据库/数据挖掘/内容检索",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "网络与信息安全"
+    ],
+    "area_match": false,
+    "quality_level": "C",
+    "level_match": false,
+    "paper_strength": 0.5166666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 1.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "hIPPYlib-MUQ: A Bayesian Inference Software Framew",
+    "metadata_area": "计算机科学理论",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "交叉/综合/新兴"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.7166666666666668,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 2.0,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Peeling Close to the Orientability Threshold Spati",
+    "metadata_area": "计算机科学理论",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6833333333333335,
+    "novelty_score": 2.0,
+    "rigor_score": 2.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Generative artificial intelligence: a systematic r",
+    "metadata_area": "计算机图形学与多媒体",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5499999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Exploring the Effects of User-Agent and User-Desig",
+    "metadata_area": "人工智能",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "人机交互与普适计算"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.5499999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "GazeFusion: Saliency-Guided Image Generation",
+    "metadata_area": "人工智能",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.8083333333333332,
+    "novelty_score": 2.5,
+    "rigor_score": 2.5,
+    "reproducibility_score": 2.0,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Performance analysis of subsampled LiDAR point clo",
+    "metadata_area": "人工智能",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Discovering top-k periodic and high-utility patter",
+    "metadata_area": "人工智能",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "数据库/数据挖掘/内容检索"
+    ],
+    "area_match": false,
+    "quality_level": "C",
+    "level_match": true,
+    "paper_strength": 0.5166666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 1.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "From classification to landmark-aware identificati",
+    "metadata_area": "人工智能",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "C",
+    "level_match": true,
+    "paper_strength": 0.5166666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 1.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "On-device indoor place prediction using WiFi-RTT a",
+    "metadata_area": "人机交互与普适计算",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机网络"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5499999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Edge computing and 5G network integration for mobi",
+    "metadata_area": "人机交互与普适计算",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统",
+      "计算机网络"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5499999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Understanding user intent modeling for conversatio",
+    "metadata_area": "人机交互与普适计算",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "交叉/综合/新兴",
+      "人工智能"
+    ],
+    "area_match": false,
+    "quality_level": "A",
+    "level_match": false,
+    "paper_strength": 0.7583333333333334,
+    "novelty_score": 2.0,
+    "rigor_score": 2.5,
+    "reproducibility_score": 2.0,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Adaptive and Fair Transformation for Recoverable M",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666667,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "A Survey on Stream-Based Architectures: From Accel",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6249999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "A Review of Safe Reinforcement Learning Methods fo",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "A",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.6416666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.5
+  },
+  {
+    "title": "Robust graph structure learning to improve multi-o",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "数据库/数据挖掘/内容检索"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5916666666666666,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "EarthGPT: A Universal Multimodal Large Language Mo",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "人工智能",
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.6749999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 2.0,
+    "reproducibility_score": 2.5,
+    "significance_score": 2.5,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "Rotation Equivariant Convolution-based Network for",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "C",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": false,
+    "paper_strength": 0.5499999999999999,
+    "novelty_score": 1.5,
+    "rigor_score": 1.5,
+    "reproducibility_score": 1.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.0
+  },
+  {
+    "title": "ChangeMamba: Remote Sensing Change Detection With ",
+    "metadata_area": "交叉/综合/新兴",
+    "metadata_ccf_level": "B",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ],
+    "area_match": false,
+    "quality_level": "B",
+    "level_match": true,
+    "paper_strength": 0.7083333333333334,
+    "novelty_score": 2.0,
+    "rigor_score": 2.0,
+    "reproducibility_score": 2.5,
+    "significance_score": 2.0,
+    "clarity_score": 2.5
+  }
+]

@@ -20,10 +20,16 @@ from ..recommender.pipeline import RecommenderPipeline
 from ..papers.paper_parser import PaperParser, PaperParserError
 from ..papers.paper_model import PaperInput, PaperProfile
 from ..journals.journal_store import JournalStore
+from ..journals.typical_abstract_store import TypicalAbstractStore
 from ..journals.vector_searcher import VectorSearcher, FaissIndex
 from ..retriever.bm25_retriever import BM25Retriever
 from ..retriever.embedding_retriever import EmbeddingRetriever
 from ..retriever.candidate_generator import CandidateGenerator
+from ..retriever.typical_abstract_retriever import (
+    TypicalAbstractBM25Retriever,
+    TypicalAbstractEmbeddingRetriever,
+    TypicalAbstractTextRetriever,
+)
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
 from ..utils.text import quality_adjustment_factor
@@ -114,11 +120,13 @@ def get_pipeline() -> RecommenderPipeline:
         if _store.has_vector_search():
             embedding_retriever = EmbeddingRetriever(_store, embedding_client)
 
-        # 读取召回权重配置
-        retrieval_config = app_config.get("candidate_generator", {})
-        merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
-
-        generator = CandidateGenerator(_store, bm25, embedding_retriever, merge_weights=merge_weights)
+        generator = _build_candidate_generator(
+            store=_store,
+            bm25=bm25,
+            embedding_retriever=embedding_retriever,
+            embedding_client=embedding_client,
+            app_config=app_config,
+        )
         scorer = RuleScorer(journals=_store.journals)
 
         llm_ranker = LLMRanker(
@@ -143,6 +151,61 @@ def get_pipeline() -> RecommenderPipeline:
         _pipeline.parser = parser
 
     return _pipeline
+
+
+def _build_candidate_generator(
+    store: JournalStore,
+    bm25: BM25Retriever,
+    embedding_retriever: Optional[EmbeddingRetriever],
+    embedding_client: OllamaEmbedding,
+    app_config: dict,
+) -> CandidateGenerator:
+    """Create the configured candidate generator, including semantic-anchor retrieval."""
+    retrieval_config = app_config.get("candidate_generator", {})
+    data_config = app_config.get("data", {})
+
+    retrieval_target = retrieval_config.get("retrieval_target", "scope_text")
+    merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
+
+    typical_bm25 = None
+    typical_embedding = None
+    typical_text = None
+
+    if retrieval_target in {"typical_abstracts", "semantic_anchors"}:
+        abstract_store = TypicalAbstractStore(
+            data_config.get("typical_abstracts_dir", "data/typical_abstracts")
+        )
+        abstract_store.load()
+        if abstract_store.count == 0:
+            raise RuntimeError("已配置典型摘要召回，但未加载到任何典型摘要")
+
+        typical_bm25 = TypicalAbstractBM25Retriever(abstract_store, store)
+        typical_bm25.build_index()
+        typical_text = TypicalAbstractTextRetriever(abstract_store, store)
+        typical_embedding = TypicalAbstractEmbeddingRetriever(
+            abstract_store=abstract_store,
+            journal_store=store,
+            embedding_client=embedding_client,
+            faiss_path=data_config.get(
+                "typical_abstracts_faiss_path",
+                "data/processed/typical_abstracts_index.faiss",
+            ),
+            metadata_path=data_config.get(
+                "typical_abstracts_metadata_path",
+                "data/processed/typical_abstracts_metadata.parquet",
+            ),
+        )
+
+    return CandidateGenerator(
+        store,
+        bm25,
+        embedding_retriever,
+        merge_weights=merge_weights,
+        retrieval_target=retrieval_target,
+        typical_bm25_retriever=typical_bm25,
+        typical_embedding_retriever=typical_embedding,
+        typical_text_retriever=typical_text,
+    )
 
 
 @router.post("/recommend", response_model=RecommendResponse)

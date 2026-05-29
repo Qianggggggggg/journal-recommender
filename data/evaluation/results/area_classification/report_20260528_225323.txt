@@ -1,0 +1,53 @@
+======================================================================
+                         测试报告                          
+======================================================================
+
+测试时间: 2026-05-28 22:53:23
+测试论文数: 10
+并行线程数: 4
+
+📊 总体准确率
+   领域匹配: 6/10 (60.0%)
+   等级匹配: 4/10 (40.0%)
+
+📋 按领域统计
+   领域                                                  匹配     总数      匹配率
+   ----------------------------------------------------------------------
+   计算机体系结构/并行与分布计算/存储系统                               6/10     ██████░░░░   60.0%
+
+📋 按CCF等级统计
+       等级       匹配     总数      匹配率
+   ------------------------------
+   CCF-A         4/4      ██████████  100.0%
+   CCF-B         0/3      ░░░░░░░░░░    0.0%
+   CCF-C         0/3      ░░░░░░░░░░    0.0%
+
+
+======================================================================
+                         详细评分报告                          
+======================================================================
+
+
+## CCF-A 级论文 (4 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Enhancing Neural Network Reliability: Insights Fro A        ✓    0.660   2.2  1.8  1.6  2.0  2.3
+KLNK: Expanding Page Boundaries in a Distributed S A        ✓    0.637   2.0  1.8  1.6  2.0  2.2
+Fair Coflow Scheduling via Controlled Slowdown A        ✓    0.637   2.0  1.8  1.6  2.0  2.2
+Polyhedral Specification and Code Generation of Sp A        ✓    0.625   2.0  1.8  1.5  2.0  2.0
+
+## CCF-B 级论文 (3 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+A User Study on Explainable Online Reinforcement L A        ✗    0.703   2.0  2.2  1.8  2.3  2.3
+Leakage-Suppressed Encrypted Keyword Queries over  A        ✗    0.680   2.0  2.2  1.8  2.1  2.0
+Generative AI for Self-Adaptive Systems: State of  A        ✗    0.662   2.0  2.0  1.5  2.2  2.2
+
+## CCF-C 级论文 (3 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Dynamic Reliability Management in Neuromorphic Com A        ✗    0.690   2.1  2.0  1.8  2.2  2.3
+Trade-off topology design for hierarchical network A        ✗    0.605   1.8  1.8  1.5  2.0  2.0
+NORM: An FPGA-based Non-volatile Memory Emulation  B        ✗    0.575   1.8  1.6  1.5  1.8  2.0
+
+📄 详细评分: data/evaluation/results/area_classification/detail_20260528_225323.json
