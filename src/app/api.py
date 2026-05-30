@@ -581,6 +581,7 @@ async def recommend_stream(request: Request):
 
     async def event_generator():
         import asyncio
+
         def sse_event(event_type: str, data: dict) -> str:
             return f"event: {event_type}\ndata: {json.dumps(data)}\n\n"
 
@@ -591,7 +592,7 @@ async def recommend_stream(request: Request):
                 "percent": 10,
                 "message": "正在解析论文特征..."
             })
-            await asyncio.sleep(0)  # 让出控制权，确保事件立即发送
+            await asyncio.sleep(0)
 
             paper_input = PaperInput(
                 title=title,
@@ -600,11 +601,14 @@ async def recommend_stream(request: Request):
                 mode=mode,
             )
 
-            with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
-                prompts = yaml.safe_load(f)
+            prompts = _load_prompts()
 
             parser = pipeline.parser
-            profile = parser.parse(paper_input, prompts["paper_profile_system"], prompts["paper_profile_user"])
+            profile = parser.parse(
+                paper_input,
+                prompts["paper_profile_system"],
+                prompts["paper_profile_user"],
+            )
 
             yield sse_event("progress", {
                 "stage": "parsing",
@@ -653,57 +657,23 @@ async def recommend_stream(request: Request):
             })
             await asyncio.sleep(0)
 
-            query_text = title
-            if abstract:
-                query_text += " " + abstract
-            if full_text:
-                query_text += " " + full_text[:5000]  # 限制长度避免过长
-
-            candidates = pipeline.candidate_generator.generate(
-                query_text, profile, top_k=50, mode=mode
-            )
-
-            if not candidates:
-                yield sse_event("error", {"message": "未找到合适的候选期刊"})
-                return
-
-            yield sse_event("progress", {
-                "stage": "retrieval",
-                "percent": 50,
-                "message": f"候选召回完成，找到 {len(candidates)} 个候选期刊"
-            })
-            await asyncio.sleep(0)
-
-            # 阶段 3: 规则排序 (50-60%)
+            # 阶段 3: 规则排序 & LLM精排 (50-80%) - 由 pipeline.recommend() 统一处理
             yield sse_event("progress", {
                 "stage": "ranking",
-                "percent": 55,
-                "message": "正在进行规则排序..."
+                "percent": 40,
+                "message": "正在进行候选召回与排序..."
             })
             await asyncio.sleep(0)
 
-            rule_ranked = pipeline.rule_scorer.rank(
-                candidates, profile, oa_preference=oa_preference, top_k=20
+            # 调用统一 pipeline（包含检索、粗排、精排）
+            rec_result = pipeline.recommend(
+                paper_input,
+                profile,
+                top_k=top_k,
+                mode=mode,
+                oa_preference=oa_preference,
+                quality_prompts=quality_prompts,
             )
-
-            # 应用质量软权重调整（解耦）
-            rule_ranked = _apply_quality_adjustment(rule_ranked, profile)
-
-            # 阶段 4: LLM 精排 (60-80%)
-            rank_method = "rule"
-            llm_ranked = rule_ranked
-
-            if pipeline.llm_ranker:
-                yield sse_event("progress", {
-                    "stage": "ranking",
-                    "percent": 65,
-                    "message": "正在进行 AI 智能排序..."
-                })
-                await asyncio.sleep(0)
-                llm_ranked, rank_method = pipeline.llm_ranker.rank(rule_ranked, profile, top_k=top_k)
-            else:
-                # 无 LLM ranker 时，使用规则排序结果（补充 confidence）
-                llm_ranked = [(j, s, r, 0.5) for j, s, r in rule_ranked[:top_k]]
 
             yield sse_event("progress", {
                 "stage": "ranking",
@@ -712,7 +682,7 @@ async def recommend_stream(request: Request):
             })
             await asyncio.sleep(0)
 
-            # 阶段 5: 构建推荐结果（直接使用 LLMRanker 输出的 reasons）
+            # 阶段 5: 构建推荐结果并流式推送 (80-100%)
             yield sse_event("progress", {
                 "stage": "building",
                 "percent": 85,
@@ -720,35 +690,38 @@ async def recommend_stream(request: Request):
             })
             await asyncio.sleep(0)
 
+            recommendations_list = rec_result.get("recommendations", [])
+            rank_method = rec_result.get("rank_method", "rule")
+
             recommendations = []
-            for idx, (journal, score, reasons, confidence) in enumerate(llm_ranked):
-                rec = {
-                    "journal_id": journal.journal_id,
-                    "journal_name": journal.journal_name,
-                    "score": score,
-                    "confidence": confidence,
-                    "match_reasons": reasons if reasons else [],
-                    "matched_fields": ["research_area", "method_type"],
-                    "tags": journal.subject_tags,
-                    "oa_type": journal.oa_type,
-                    "submission_url": journal.submission_url or "",
-                    "homepage_url": journal.homepage_url or "",
-                    "publisher": journal.publisher or "",
-                    "ccf_rating": journal.ccf_rating or "",
-                    "impact_like_score": journal.impact_like_score,
-                    "review_time": journal.review_time or "",
-                    "apc": journal.apc,
+            for idx, rec in enumerate(recommendations_list):
+                rec_dict = {
+                    "journal_id": rec.journal.journal_id,
+                    "journal_name": rec.journal.journal_name,
+                    "score": rec.score,
+                    "confidence": rec.confidence,
+                    "match_reasons": rec.match_reasons or [],
+                    "matched_fields": rec.matched_fields or ["research_area", "method_type"],
+                    "tags": rec.journal.subject_tags,
+                    "oa_type": rec.journal.oa_type,
+                    "submission_url": rec.journal.submission_url or "",
+                    "homepage_url": rec.journal.homepage_url or "",
+                    "publisher": rec.journal.publisher or "",
+                    "ccf_rating": rec.journal.ccf_rating or "",
+                    "impact_like_score": rec.journal.impact_like_score,
+                    "review_time": rec.journal.review_time or "",
+                    "apc": rec.journal.apc,
                     "rank_method": rank_method,
                 }
-                recommendations.append(rec)
+                recommendations.append(rec_dict)
 
                 # 推送每个推荐结果
-                progress_percent = 85 + (idx * 10 // max(len(llm_ranked), 1))
-                yield sse_event("recommendation", rec)
+                progress_percent = 85 + (idx * 10 // max(len(recommendations_list), 1))
+                yield sse_event("recommendation", rec_dict)
                 yield sse_event("progress", {
                     "stage": "streaming",
                     "percent": progress_percent,
-                    "message": f"正在推送第 {idx + 1}/{len(llm_ranked)} 条结果"
+                    "message": f"正在推送第 {idx + 1}/{len(recommendations_list)} 条结果"
                 })
                 await asyncio.sleep(0)
 
@@ -756,7 +729,7 @@ async def recommend_stream(request: Request):
             done_data = {
                 "total": len(recommendations),
                 "rank_method": rank_method,
-                "mode_used": mode,
+                "mode_used": rec_result.get("mode_used", mode),
             }
             if profile.quality_level:
                 done_data["quality"] = {

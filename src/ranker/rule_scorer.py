@@ -1,5 +1,5 @@
 """规则打分（阶段一）"""
-from typing import List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional
 
 from rank_bm25 import BM25Plus
 
@@ -26,6 +26,9 @@ class RuleScorer:
             "metric_match": 0.8,
             "novelty_match": 0.7,
             "oa_preference_match": 0.3,
+            "scope_boundary_evidence": 0.35,
+            "typical_scope_synergy": 0.08,
+            "typical_only_penalty": 0.05,
             # 领域仲裁信号（权重为0，不参与计分，仅作为理由传递给LLM）
             "research_area_match": 0.0,
         }
@@ -124,6 +127,74 @@ class RuleScorer:
         # 匹配：期刊名词中的词是否出现在论文关键词/技术词中
         overlap = journal_name_words & paper_terms
         return 1.0 if overlap else 0.0
+
+    def _retrieval_strengths(self, trace: Optional[dict]) -> Tuple[float, float, bool, bool]:
+        """返回 scope 边界强度与 typical 扩展强度。"""
+        if not trace:
+            return 0.0, 0.0, False, False
+
+        routes = trace.get("routes", {})
+        scope_scores = [
+            float(data.get("weighted_score") or 0.0)
+            for route, data in routes.items()
+            if route.startswith("scope_")
+        ]
+        typical_scores = []
+        for route, data in routes.items():
+            score = float(data.get("weighted_score") or 0.0)
+            if route.startswith("typical_"):
+                typical_scores.append(score)
+            elif route == "identity_anchor":
+                # identity_anchor 作为补召回证据，强度略低于 typical 摘要语义。
+                typical_scores.append(score * 0.5)
+        has_scope = bool(scope_scores)
+        has_typical = bool(typical_scores)
+
+        # 单路结果只有一个候选时 min-max 会归零，保留“出现过”的边界证据。
+        scope_strength = sum(scope_scores) if has_scope else 0.0
+        typical_strength = sum(typical_scores) if has_typical else 0.0
+        if has_scope and scope_strength == 0.0:
+            scope_strength = 0.03
+        if has_typical and typical_strength == 0.0:
+            typical_strength = 0.02
+
+        return scope_strength, typical_strength, has_scope, has_typical
+
+    def _apply_retrieval_evidence(
+        self,
+        score: float,
+        reasons: List[str],
+        trace: Optional[dict],
+    ) -> Tuple[float, List[str]]:
+        """把召回证据作为软信号带入规则排序。"""
+        scope_strength, typical_strength, has_scope, has_typical = self._retrieval_strengths(trace)
+        adjusted_score = score
+        adjusted_reasons = reasons.copy()
+
+        if has_scope:
+            bonus = min(
+                self.weights["scope_boundary_evidence"],
+                scope_strength * self.weights["scope_boundary_evidence"],
+            )
+            adjusted_score += bonus
+            adjusted_reasons.append("期刊范围文本提供边界匹配证据")
+
+        if has_scope and has_typical:
+            bonus = min(
+                self.weights["typical_scope_synergy"],
+                typical_strength * self.weights["typical_scope_synergy"],
+            )
+            adjusted_score += bonus
+            adjusted_reasons.append("补充语义证据与期刊范围互相支持")
+        elif has_typical and not has_scope:
+            penalty = min(
+                self.weights["typical_only_penalty"],
+                max(typical_strength, 0.02) * self.weights["typical_only_penalty"],
+            )
+            adjusted_score -= penalty
+            adjusted_reasons.append("仅有补充语义证据，缺少期刊范围边界支撑")
+
+        return adjusted_score, adjusted_reasons
 
     def score(
         self, journal: Journal, paper_profile: PaperProfile, oa_preference: str = "any"
@@ -316,11 +387,18 @@ class RuleScorer:
         paper_profile: PaperProfile,
         oa_preference: str = "any",
         top_k: int = 10,
+        retrieval_trace: Optional[Dict[str, dict]] = None,
     ) -> List[Tuple[Journal, float, List[str]]]:
         """排序候选期刊"""
         scored = []
         for journal in journals:
             score, reasons = self.score(journal, paper_profile, oa_preference)
+            if retrieval_trace is not None:
+                score, reasons = self._apply_retrieval_evidence(
+                    score,
+                    reasons,
+                    retrieval_trace.get(journal.journal_id),
+                )
             scored.append((journal, score, reasons))
 
         # 按分数排序

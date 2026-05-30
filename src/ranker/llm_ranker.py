@@ -2,7 +2,7 @@
 import json
 import logging
 import tenacity
-from typing import List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from ..journals.journal_model import Journal
 from ..papers.paper_model import PaperProfile
@@ -35,11 +35,14 @@ class LLMRanker:
         candidates: List[Tuple[Journal, float, List[str]]],
         paper_profile: PaperProfile,
         top_k: int = 5,
+        retrieval_trace: Optional[Dict[str, dict]] = None,
     ) -> Tuple[List[Tuple[Journal, float, List[str], float]], str]:
         """LLM 精排（LLM驱动，重试3次）"""
         # 构建期刊信息（精简字段，含 RuleScorer 参考信息）
         journals_info = []
         for idx, (journal, rule_score, reasons) in enumerate(candidates):
+            trace = retrieval_trace.get(journal.journal_id, {}) if retrieval_trace else {}
+            retrieval_summary, scope_strength, typical_strength = self._summarize_retrieval_trace(trace)
             journals_info.append({
                 "journal_id": journal.journal_id,
                 "journal_name": journal.journal_name,
@@ -49,7 +52,11 @@ class LLMRanker:
                 "subject_tags": journal.subject_tags[:5],  # 限制标签数量
                 "keywords": journal.keywords[:5],  # 限制关键词数量
                 "rule_rank": idx + 1,                         # 粗排排名（1-based）
+                "rule_score": round(float(rule_score), 4),
                 "rule_reasons": reasons if reasons else [],  # 粗排匹配理由（参考）
+                "retrieval_sources_summary": retrieval_summary,
+                "scope_boundary_strength": round(scope_strength, 4),
+                "typical_expansion_strength": round(typical_strength, 4),
             })
 
         # 填充 prompt
@@ -105,3 +112,33 @@ class LLMRanker:
         # 按 LLM 分数排序
         results.sort(key=lambda x: x[1], reverse=True)
         return results[:top_k], "llm"
+
+    def _summarize_retrieval_trace(self, trace: dict) -> Tuple[List[str], float, float]:
+        routes = trace.get("routes", {}) if trace else {}
+        scope_strength = sum(
+            float(data.get("weighted_score") or 0.0)
+            for route, data in routes.items()
+            if route.startswith("scope_")
+        )
+        typical_strength = 0.0
+        for route, data in routes.items():
+            score = float(data.get("weighted_score") or 0.0)
+            if route.startswith("typical_"):
+                typical_strength += score
+            elif route == "identity_anchor":
+                # identity_anchor 是扩展证据，不作为 scope 边界证据。
+                typical_strength += score * 0.5
+        has_scope = any(route.startswith("scope_") for route in routes)
+        has_typical = any(route.startswith("typical_") or route == "identity_anchor" for route in routes)
+
+        summary = []
+        if has_scope:
+            summary.append("scope_boundary")
+        if has_typical:
+            summary.append("typical_expansion")
+
+        if has_scope and scope_strength == 0.0:
+            scope_strength = 0.03
+        if has_typical and typical_strength == 0.0:
+            typical_strength = 0.02
+        return summary, scope_strength, typical_strength

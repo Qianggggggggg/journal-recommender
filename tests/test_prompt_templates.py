@@ -57,4 +57,7 @@ def test_llm_ranker_reasons_are_not_forced_to_fixed_labels():
 
     assert "不要机械地以\"Scope对齐：\"" in ranker_user
     assert "推荐理由（2-4条" in ranker_user
+    assert "不要出现内部证据字段名" in ranker_user
+    assert "强候选保护" in ranker_user
+    assert "network" in ranker_user or "网络协议" in ranker_user
     assert "推荐理由必须以\"类型标签：\"开头" not in ranker_user

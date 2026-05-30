@@ -90,8 +90,9 @@ def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
     assert generator.typical_text_retriever is not None
 
     profile = PaperProfile(title="Graph neural recommendation", keywords=["graph", "recommendation"])
-    candidates = generator.generate("graph neural recommendation", profile, top_k=3)
-    assert candidates[0].journal_id == "target"
+    candidates, trace = generator.generate_with_trace("graph neural recommendation", profile, top_k=3)
+    assert "target" in [journal.journal_id for journal in candidates]
+    assert any(route.startswith("typical_") for route in trace["target"]["routes"])
 
 
 def test_journals_endpoint(client):

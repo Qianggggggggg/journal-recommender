@@ -38,6 +38,12 @@ from src.journals.vector_searcher import VectorSearcher, FaissIndex
 from src.retriever.bm25_retriever import BM25Retriever
 from src.retriever.embedding_retriever import EmbeddingRetriever
 from src.retriever.candidate_generator import CandidateGenerator
+from src.retriever.typical_abstract_retriever import (
+    TypicalAbstractBM25Retriever,
+    TypicalAbstractEmbeddingRetriever,
+    TypicalAbstractTextRetriever,
+)
+from src.journals.typical_abstract_store import TypicalAbstractStore
 from src.ranker.rule_scorer import RuleScorer
 from src.ranker.llm_ranker import LLMRanker
 from src.utils.llm import MiniMaxLLM
@@ -233,8 +239,34 @@ def init_pipeline() -> RecommenderPipeline:
 
     retrieval_config = app_config.get("candidate_generator", {})
     merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
+    retrieval_target = retrieval_config.get("retrieval_target", "scope_text")
 
-    generator = CandidateGenerator(store, bm25, embedding_retriever, merge_weights=merge_weights)
+    typical_bm25_retriever = None
+    typical_text_retriever = None
+    typical_embedding_retriever = None
+    if retrieval_target in {"typical_abstracts", "semantic_anchors"}:
+        typical_store = TypicalAbstractStore(abstracts_dir=app_config["data"]["typical_abstracts_dir"])
+        typical_store.load()
+
+        typical_bm25_retriever = TypicalAbstractBM25Retriever(typical_store, store)
+        typical_bm25_retriever.build_index()
+        typical_text_retriever = TypicalAbstractTextRetriever(typical_store, store)
+
+        if store.has_vector_search():
+            typical_embedding_retriever = TypicalAbstractEmbeddingRetriever(
+                typical_store, store, embedding_client,
+                faiss_path=app_config["data"]["typical_abstracts_faiss_path"],
+                metadata_path=app_config["data"]["typical_abstracts_metadata_path"],
+            )
+
+    generator = CandidateGenerator(
+        store, bm25, embedding_retriever,
+        merge_weights=merge_weights,
+        retrieval_target=retrieval_target,
+        typical_bm25_retriever=typical_bm25_retriever,
+        typical_embedding_retriever=typical_embedding_retriever,
+        typical_text_retriever=typical_text_retriever,
+    )
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
     scorer = RuleScorer(journals=store.journals)
     llm_ranker = LLMRanker(llm, prompts["llm_ranker_system"], prompts["llm_ranker_user"])
@@ -269,6 +301,20 @@ def evaluate_single_paper(
     research_area = paper.get("research_area", [""])[0] if paper.get("research_area") else ""
     arxiv_id = paper.get("external_ids", {}).get("arXiv", "")
     pdf_path = paper.get("pdf_path", "")
+
+    def _normalize_venue(venue: str) -> str:
+        """标准化期刊名用于比较（去除首尾空格，转小写）"""
+        return venue.strip().lower() if venue else ""
+
+    def _find_journal_by_venue(venue_name: str):
+        store = getattr(getattr(pipeline, "candidate_generator", None), "store", None)
+        venue_normalized = _normalize_venue(venue_name)
+        for journal in getattr(store, "journals", []):
+            if _normalize_venue(journal.journal_name) == venue_normalized:
+                return journal
+        return None
+
+    target_journal = _find_journal_by_venue(venue)
 
     # 获取全文（如果需要）
     full_text = ""
@@ -306,6 +352,7 @@ def evaluate_single_paper(
             paper_input, profile,
             top_k=top_k,
             mode=mode,
+            diagnostic_journal_ids=[target_journal.journal_id] if target_journal else None,
             quality_prompts={
                 "system": prompts.get("paper_quality_assessor_system", ""),
                 "user": prompts.get("paper_quality_assessor_user", ""),
@@ -315,13 +362,12 @@ def evaluate_single_paper(
         print(f"\n推荐失败: {title[:30]}... - {e}")
         return None
 
-    def _normalize_venue(venue: str) -> str:
-        """标准化期刊名用于比较（去除首尾空格，转小写）"""
-        return venue.strip().lower() if venue else ""
-
     recommendations = rec_result.get("recommendations", [])
     candidates = rec_result.get("candidates", [])
     rule_ranked = rec_result.get("rule_ranked", [])
+    llm_candidates = rec_result.get("llm_candidates", [])
+    llm_candidate_ids = set(rec_result.get("llm_candidate_ids", []))
+    retrieval_trace = rec_result.get("retrieval_trace", {})
     recommended_journals = [rec.journal.journal_name for rec in recommendations]
     candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
     rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
@@ -331,11 +377,20 @@ def evaluate_single_paper(
     candidate_journal_names_norm = [j.lower() for j in candidate_journal_names]
     rule_ranked_names_norm = [j.lower() for j in rule_ranked_names]
     recommended_journals_norm = [j.lower() for j in recommended_journals]
+    candidate_by_name = {
+        _normalize_venue(j.journal_name): (i + 1, j)
+        for i, j in enumerate(candidates)
+    }
+    rule_by_name = {
+        _normalize_venue(j.journal_name): (i + 1, j, s)
+        for i, (j, s, r) in enumerate(rule_ranked)
+    }
+    llm_candidate_ids.update(j.journal_id for j, s, r in llm_candidates)
 
     # 计算 Hit@K（真正跑10个）
-    hit_1 = venue_normalized in recommended_journals_norm[:1] if len(recommended_journals) >= 1 else False
-    hit_3 = venue_normalized in recommended_journals_norm[:3] if len(recommended_journals) >= 3 else False
-    hit_5 = venue_normalized in recommended_journals_norm[:5] if len(recommended_journals) >= 5 else False
+    hit_1 = venue_normalized in recommended_journals_norm[:1] if recommended_journals else False
+    hit_3 = venue_normalized in recommended_journals_norm[:3] if recommended_journals else False
+    hit_5 = venue_normalized in recommended_journals_norm[:5] if recommended_journals else False
     hit_10 = venue_normalized in recommended_journals_norm[:10] if venue else False
 
     # 粗排是否命中（实际发表的期刊在 top 50 候选中）
@@ -377,6 +432,116 @@ def evaluate_single_paper(
                 level_hit_10 = True
                 break
 
+    def _retrieval_info(journal_id: str) -> dict:
+        trace = retrieval_trace.get(journal_id, {})
+        routes = trace.get("routes", {})
+        wide_routes = trace.get("wide_routes", {})
+        return {
+            "retrieval_score": trace.get("total_score"),
+            "retrieval_rank": trace.get("retrieval_rank"),
+            "retrieval_sources": trace.get("primary_routes", []),
+            "retrieval_route_scores": {
+                route: {
+                    "rank": data.get("rank"),
+                    "raw_score": data.get("raw_score"),
+                    "weighted_score": data.get("weighted_score"),
+                    "normalized_score": data.get("normalized_score"),
+                }
+                for route, data in routes.items()
+            },
+            "wide_retrieval_rank": trace.get("wide_retrieval_rank"),
+            "wide_retrieval_route_scores": {
+                route: {
+                    "rank": data.get("rank"),
+                    "raw_score": data.get("raw_score"),
+                    "weighted_score": data.get("weighted_score"),
+                    "normalized_score": data.get("normalized_score"),
+                }
+                for route, data in wide_routes.items()
+            },
+        }
+
+    def _find_venue_journal():
+        candidate_match = candidate_by_name.get(venue_normalized)
+        if candidate_match:
+            _, journal = candidate_match
+            return journal
+
+        rule_match = rule_by_name.get(venue_normalized)
+        if rule_match:
+            _, journal, _ = rule_match
+            return journal
+
+        store = getattr(getattr(pipeline, "candidate_generator", None), "store", None)
+        for journal in getattr(store, "journals", []):
+            if _normalize_venue(journal.journal_name) == venue_normalized:
+                return journal
+        return None
+
+    venue_journal = target_journal or _find_venue_journal()
+    venue_retrieval = _retrieval_info(venue_journal.journal_id) if venue_journal else {
+        "retrieval_score": None,
+        "retrieval_rank": None,
+        "retrieval_sources": [],
+        "retrieval_route_scores": {},
+        "wide_retrieval_rank": None,
+        "wide_retrieval_route_scores": {},
+    }
+    venue_rule = rule_by_name.get(venue_normalized)
+    wide_route_scores = venue_retrieval["wide_retrieval_route_scores"]
+
+    def _miss_stage() -> str:
+        if hit_5:
+            return "final_hit"
+        if not venue_journal:
+            return "target_not_in_store"
+        if not wide_route_scores and venue_retrieval.get("wide_retrieval_rank") is None:
+            return "not_in_wide_recall"
+        if venue_retrieval.get("retrieval_rank") is None:
+            return "wide_recalled_but_not_top50"
+        if not venue_rule or (venue_rule[0] or 9999) > 20:
+            if bool(venue_journal.journal_id in llm_candidate_ids):
+                return "in_llm_but_lost"
+            return "rule_suppressed"
+        if bool(venue_journal.journal_id in llm_candidate_ids):
+            return "in_llm_but_lost"
+        return "rule_suppressed"
+
+    venue_diagnostic = {
+        "journal_id": venue_journal.journal_id if venue_journal else None,
+        "target_journal_id": venue_journal.journal_id if venue_journal else None,
+        "target_scope_text_preview": (venue_journal.scope_text[:300] if venue_journal else ""),
+        "target_keywords": venue_journal.keywords[:12] if venue_journal else [],
+        "target_subject_tags": venue_journal.subject_tags[:5] if venue_journal else [],
+        "retrieval_sources": venue_retrieval["retrieval_sources"],
+        "retrieval_rank": venue_retrieval["retrieval_rank"],
+        "wide_retrieval_rank": venue_retrieval["wide_retrieval_rank"],
+        "retrieval_score": venue_retrieval["retrieval_score"],
+        "retrieval_route_scores": venue_retrieval["retrieval_route_scores"],
+        "wide_retrieval_route_scores": wide_route_scores,
+        "coarse_rank": candidate_by_name.get(venue_normalized, (None, None))[0],
+        "rule_rank": venue_rule[0] if venue_rule else None,
+        "rule_score": venue_rule[2] if venue_rule else None,
+        "in_llm_pool": bool(venue_journal and venue_journal.journal_id in llm_candidate_ids),
+        "miss_stage": _miss_stage(),
+    }
+    paper_profile_snapshot = {
+        "title": profile.title,
+        "research_area": profile.research_area,
+        "ccf_research_area": profile.ccf_research_area,
+        "method_type": profile.method_type,
+        "paper_type": profile.paper_type,
+        "keywords": profile.keywords,
+        "techniques": profile.techniques,
+        "datasets": profile.datasets,
+        "evaluation_metrics": profile.evaluation_metrics,
+        "application_domain": profile.application_domain,
+        "novelty_type": profile.novelty_type,
+        "quality_level": profile.quality_level,
+        "paper_strength": profile.paper_strength,
+        "readiness": profile.readiness,
+    }
+
     return {
         "arxiv": arxiv_id,
         "title": title[:80],
@@ -396,6 +561,7 @@ def evaluate_single_paper(
         "paper_strength": profile.paper_strength,
         "quality_level": q_level,
         "ccf_research_area": profile.ccf_research_area,
+        "paper_profile_snapshot": paper_profile_snapshot,
         "area_match": bool(
             profile.ccf_research_area and research_area in profile.ccf_research_area
         ) if research_area else False,
@@ -412,6 +578,7 @@ def evaluate_single_paper(
         "area_hit_10": area_hit_10,
         "level_hit_5": level_hit_5,
         "level_hit_10": level_hit_10,
+        "venue_diagnostic": venue_diagnostic,
         # 每篇论文的详细推荐信息（用于定位问题）
         "recommendations_detail": [
             {
@@ -425,6 +592,7 @@ def evaluate_single_paper(
                 "llm_score": rec.score,
                 "confidence": rec.confidence,
                 "match_reasons": rec.match_reasons[:5] if rec.match_reasons else [],
+                **_retrieval_info(rec.journal.journal_id),
             }
             for i, rec in enumerate(recommendations[:top_k])
         ],
@@ -578,14 +746,12 @@ def run_evaluation(
                 hit_k = getattr(result, f"hit_at_{top_k}", 0)
                 mrr_val = result.mrr / n
                 ndcg5_val = result.ndcg_at_5 / n
-                ndcg10_val = result.ndcg_at_10 / n
                 pbar.set_postfix({
                     f"Hit@{top_k}": f"{hit_k}/{n}({hit_k*100/n:.1f}%)",
                     "MRR": f"{mrr_val:.3f}",
                     "NDCG@5": f"{ndcg5_val:.3f}",
-                    "NDCG@10": f"{ndcg10_val:.3f}",
                     "Area@5": f"{result.area_hit_at_5}/{n}",
-                    "Lvl@5": f"{result.level_hit_at_5}/{n}",
+                    "level_match": f"{result.level_match_count}/{n}",
                 })
 
     return result

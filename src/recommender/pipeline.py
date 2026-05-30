@@ -34,6 +34,7 @@ class RecommenderPipeline:
         mode: str = "abstract",
         oa_preference: str = "any",
         quality_prompts: Optional[Dict[str, str]] = None,
+        diagnostic_journal_ids: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """执行推荐流程"""
         # 0. 评估论文质量
@@ -56,25 +57,43 @@ class RecommenderPipeline:
         if paper_input.abstract:
             query_text += " " + paper_input.abstract
 
-        candidates = self.candidate_generator.generate(
-            query_text, paper_profile, top_k=50, mode=mode
+        candidates, retrieval_trace = self.candidate_generator.generate_with_trace(
+            query_text,
+            paper_profile,
+            top_k=50,
+            mode=mode,
+            diagnostic_journal_ids=diagnostic_journal_ids,
         )
 
         if not candidates:
             return {"recommendations": [], "warning": "未找到合适的候选期刊"}
 
         # 2. 阶段一：规则打分（只做主题匹配，不含质量调整）
-        # 扩大候选集到 40，确保不漏掉同领域高召回期刊
+        # 覆盖完整粗召回池，便于评估定位真实 venue 在规则排序中的位置。
         rule_ranked_all = self.rule_scorer.rank(
-            candidates, paper_profile, oa_preference=oa_preference, top_k=40
+            candidates,
+            paper_profile,
+            oa_preference=oa_preference,
+            top_k=len(candidates),
+            retrieval_trace=retrieval_trace,
         )
 
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
         rule_ranked_all = self._apply_quality_adjustment(rule_ranked_all, paper_profile)
 
-        # 构建 LLM 候选集：top20 + 同领域高召回候选 + subject_tags 匹配候选
+        # 构建 LLM 候选集：top20 + scope 边界强候选 + 同领域参考候选 + 受控 typical-only 候选
         llm_candidates = rule_ranked_all[:20]  # top20 必选
         seen_ids = {j.journal_id for j, _, _ in llm_candidates}
+        top20_floor = llm_candidates[-1][1] if llm_candidates else 0.0
+
+        # 优先补入 scope 边界证据强、但被规则分压到 top20 外的候选。
+        for journal, score, reasons in rule_ranked_all[20:]:
+            if journal.journal_id in seen_ids:
+                continue
+            if self._has_scope_boundary_evidence(retrieval_trace.get(journal.journal_id)):
+                if len(llm_candidates) < 30:
+                    llm_candidates.append((journal, score, reasons))
+                    seen_ids.add(journal.journal_id)
 
         # 同领域但未入选的高分候选（从 top20 之后找）
         if paper_profile.research_area:
@@ -96,11 +115,26 @@ class RecommenderPipeline:
                         llm_candidates.append((journal, score, reasons))
                         seen_ids.add(journal.journal_id)
 
+        # 最后才允许 pure typical 候选补位，且要求规则分接近 top20 门槛。
+        for journal, score, reasons in rule_ranked_all[20:]:
+            if journal.journal_id in seen_ids:
+                continue
+            if not self._is_typical_only(retrieval_trace.get(journal.journal_id)):
+                continue
+            if score >= top20_floor * 0.8 and len(llm_candidates) < 30:
+                llm_candidates.append((journal, score, reasons))
+                seen_ids.add(journal.journal_id)
+
         # 3. 阶段二：LLM 精排（如失败则抛出明确错误，不再降级）
         rank_method = "rule"
         if self.llm_ranker:
             try:
-                llm_ranked, rank_method = self.llm_ranker.rank(llm_candidates, paper_profile, top_k=top_k)
+                llm_ranked, rank_method = self.llm_ranker.rank(
+                    llm_candidates,
+                    paper_profile,
+                    top_k=top_k,
+                    retrieval_trace=retrieval_trace,
+                )
             except LLMRankerError as e:
                 raise LLMRankerError(f"LLM精排失败: {e}")
         else:
@@ -122,6 +156,9 @@ class RecommenderPipeline:
             "recommendations": recommendations,
             "candidates": candidates,  # 粗排候选（用于调试分析）
             "rule_ranked": rule_ranked_all,  # RuleScorer 排序结果（用于调试分析）
+            "llm_candidates": llm_candidates,  # LLM 精排候选池（用于评估诊断）
+            "llm_candidate_ids": [j.journal_id for j, _, _ in llm_candidates],
+            "retrieval_trace": retrieval_trace,  # 候选召回来源（用于评估噪声定位）
             "paper_profile": paper_profile,
             "mode_used": mode,
             "rank_method": rank_method,
@@ -132,6 +169,31 @@ class RecommenderPipeline:
             result["warning"] = "置信度较低，建议补充摘要以获得更精确的推荐"
 
         return result
+
+    def _has_scope_boundary_evidence(self, trace: Optional[dict]) -> bool:
+        if not trace:
+            return False
+        routes = trace.get("routes", {})
+        scope_routes = [
+            data
+            for route, data in routes.items()
+            if route.startswith("scope_")
+        ]
+        if not scope_routes:
+            return False
+        return any(
+            float(data.get("weighted_score") or 0.0) > 0.0
+            or int(data.get("rank") or 9999) <= 12
+            for data in scope_routes
+        )
+
+    def _is_typical_only(self, trace: Optional[dict]) -> bool:
+        if not trace:
+            return False
+        routes = trace.get("routes", {})
+        has_scope = any(route.startswith("scope_") for route in routes)
+        has_typical = any(route.startswith("typical_") or route == "identity_anchor" for route in routes)
+        return has_typical and not has_scope
 
     def _apply_quality_adjustment(
         self,

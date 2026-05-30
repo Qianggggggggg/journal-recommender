@@ -123,6 +123,7 @@ llm_ranker_system: |
   如果某期刊的 subject_tags 与论文 research_area 一致，且 scope/keywords 明确覆盖论文主题，即使 rule_rank 较低，也应提升。
   如果某期刊只是泛泛覆盖 AI、machine learning、computer science，但不覆盖论文具体问题，应降低。
   不要因为 CCF 等级高就提升主题不精确的期刊。
+  候选信息中的 scope_boundary_strength 表示期刊自身范围文本对论文主题的边界支撑，typical_expansion_strength 表示典型论文语义近邻的补充支撑。典型论文语义只能帮助发现候选，不能替代期刊 scope/keywords/subject_tags 对投稿边界的确认。
 
   评分依据：
   - 主题与 scope 精确匹配：50%
@@ -141,7 +142,9 @@ llm_ranker_system: |
   重要原则：
   - 候选期刊已按粗排规则初排（rule_rank 1=最匹配），你的主要任务是在此基础上做小幅微调，而非重新独立打分。
   - 最终分数应与 topic/scope fit 保持一致：如果 scope 明确覆盖论文主题，即使 rule_rank 较高，也应给高分。
+  - 强候选保护：如果某期刊同时具备清晰 scope 边界、较高 rule_score 或靠前 rule_rank，不要仅因为相邻领域期刊更热门、更宽泛或看似更专门就把它降出前列；除非你能指出它的 scope/keywords/subject_tags 与论文核心问题不符。
   - 如果 LLM 发现 rule_rank 与实际 topic/scope 匹配严重不符，应果断调整分数（不受 ±0.15 限制）。
+  - 邻域区分要严格：computer networks 不等于 cybersecurity/IoT，software systems 不等于 services computing，theory of computing 不等于 general optimization 或 applied mathematics，general AI 不等于 applied intelligence/neural computing。只有论文核心问题确实落在邻域期刊的 scope 内时，才可用邻域期刊替代强候选。
 
   === 泛强刊抢位惩罚机制 ===
 
@@ -169,6 +172,7 @@ llm_ranker_system: |
   5. 禁止使用以下内部术语：
      - "研究领域标签对齐"、"规则理由支撑"、"粗排理由"、"锚点"
      - "rule_rank"、"粗排"、"领域仲裁"等算法相关词汇
+     - "retrieval_sources_summary"、"scope_boundary_strength"、"typical_expansion_strength"等内部字段名
 
   6. 涉及质量信号时，只能使用 journal 信息中提供的真实 ccf_rating、审稿周期、OA 类型等字段，不要臆测影响因子或分区。
 
@@ -193,6 +197,13 @@ llm_ranker_user: |
   候选期刊（已按规则初排，每本期刊包含粗排排名 rule_rank 和粗排理由 rule_reasons）：
   {journals_info}
 
+  召回证据说明：
+  - scope_boundary_strength：来自期刊自身 scope/profile 的边界证据，代表期刊定位本身是否支持这篇论文。
+  - typical_expansion_strength：来自典型论文语义的扩展证据，代表语义近邻是否提示该刊可能相关。
+  - 如果某候选主要依赖 typical_expansion_strength，但 scope、keywords、subject_tags 不能明确支撑论文主题，不应压过 scope 边界更清楚的候选。
+  - 如果 C 刊的 scope 更精确，可以排在 A/B 刊前；但理由必须说明它的主题定位为什么更贴近论文，而不是忽略论文质量或期刊等级信号。
+  - 若你选择邻近领域期刊替代一个 scope 边界强、rule_score 高或 rule_rank 靠前的候选，reasons 必须说明具体边界差异，例如论文到底更偏网络协议、安全攻防、IoT系统、服务计算、理论算法还是优化应用；不要只写"更相关"。
+
   === 重要：粗排锚点机制 ===
 
   粗排阶段已基于以下特征对候选期刊做了初步排序（rule_rank）：
@@ -208,6 +219,7 @@ llm_ranker_user: |
   2. **参考而非盲从**：rule_rank 是重要的初始排序，但你拥有最终决定权。大多数情况下，调整幅度在 ±5 位内是合理的，但如果你确信某期刊的匹配度远高于或远低于其 rule_rank（例如，一篇"计算机视觉"论文在 Top 20 内发现了一本完美的 CV 期刊，但它被规则排在靠后位置），你可以并且应该将其大幅提升或降低。
   3. **举证大幅调整**：如果你将某期刊的排名上调或下调超过 5 位，必须在 reasons 中详细说明调整原因，并引用具体的匹配证据。
   4. **领域信号**：如果期刊的 subject_tags 与论文的 {research_area} 研究领域分类一致，应作为强匹配信号，在理由中强调。
+  5. **强候选保护**：rule_rank 靠前且 scope 边界清楚的候选，只有在论文主题边界明显不属于该刊时才应被邻近领域期刊替代。
 
   请为每个期刊给出：
   1. 匹配度分数（0-1，精确到小数点后两位，参考 rule_rank 做相对排序）
@@ -219,6 +231,7 @@ llm_ranker_user: |
   - 每条理由都要把"论文中的具体内容"和"期刊的发表范围/读者/定位"连起来。
   - 可以适度给投稿策略建议，例如这本期刊更适合突出方法、系统、应用或实证贡献中的哪一面。
   - 不要出现内部排序词汇，如 rule_rank、粗排、规则理由、锚点。
+  - 不要出现内部证据字段名，如 retrieval_sources_summary、scope_boundary_strength、typical_expansion_strength。
   - 不要臆测期刊指标；若引用 CCF 等级，只使用候选信息中的 ccf_rating。
 
   输出格式：

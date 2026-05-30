@@ -1,7 +1,7 @@
 """混合召回"""
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
-from ..journals.journal_model import Journal, JournalMatch
+from ..journals.journal_model import Journal
 from ..journals.journal_store import JournalStore
 from ..papers.paper_model import PaperProfile
 from .bm25_retriever import BM25Retriever
@@ -48,42 +48,52 @@ class CandidateGenerator:
         mode: str = "abstract",
     ) -> List[Journal]:
         """生成候选期刊"""
+        candidates, _ = self.generate_with_trace(query_text, paper_profile, top_k=top_k, mode=mode)
+        return candidates
+
+    def generate_with_trace(
+        self,
+        query_text: str,
+        paper_profile: PaperProfile,
+        top_k: int = 40,
+        mode: str = "abstract",
+        diagnostic_journal_ids: Optional[Iterable[str]] = None,
+    ) -> Tuple[List[Journal], Dict[str, dict]]:
+        """生成候选期刊，并返回每本期刊的召回来源。"""
         # 各路召回数量配置
         config = {
             "title": {"bm25": 22, "vector": 22, "text": 16},
             "abstract": {"bm25": 28, "vector": 28, "text": 14},
             "full": {"bm25": 32, "vector": 32, "text": 16},
         }
-        cfg = config.get(mode, config["abstract"])
+        cfg = config.get(mode, config["abstract"]).copy()
+        diagnostic_ids = set(diagnostic_journal_ids or [])
 
         # 构建丰富的检索 query，包含 paper_profile 的所有关键字段
         rich_query = self._build_rich_query(query_text, paper_profile)
 
         weights = self._weights_for_profile(paper_profile)
 
-        # 1. BM25 召回
-        bm25 = self._active_bm25_retriever()
-        bm25_results = bm25.retrieve(rich_query, top_k=cfg["bm25"])
+        if self._use_typical_abstracts():
+            route_results = self._hybrid_route_results(rich_query, paper_profile, cfg, weights)
+        else:
+            route_results = self._scope_route_results(rich_query, paper_profile, cfg, weights)
 
-        # 2. 向量检索召回
-        vector_results = []
-        vector = self._active_embedding_retriever()
-        if vector:
-            vector_results = vector.retrieve(rich_query, top_k=cfg["vector"])
+        candidates, trace = self._merge_route_results(
+            route_results,
+            top_k=top_k,
+        )
+        if diagnostic_ids:
+            wide_cfg = {key: value * 4 for key, value in cfg.items()}
+            if self._use_typical_abstracts():
+                wide_route_results = self._hybrid_route_results(rich_query, paper_profile, wide_cfg, weights)
+            else:
+                wide_route_results = self._scope_route_results(rich_query, paper_profile, wide_cfg, weights)
+            self._attach_diagnostic_trace(trace, wide_route_results, diagnostic_ids)
+        return candidates, trace
 
-        # 3. 文本搜索（关键词交集）
-        text_results = self._text_search(paper_profile, rich_query=rich_query, top_k=cfg["text"])
-
-        # 4. 合并去重
-        candidates = self._merge_results(bm25_results, vector_results, text_results, top_k=top_k, weights=weights)
-
-        return candidates
-
-    def _text_search(self, paper_profile: PaperProfile, rich_query: str = "", top_k: int = 10) -> List[Tuple[Journal, float]]:
-        """基于关键词交集的文本搜索"""
-        if self._use_typical_abstracts() and self.typical_text_retriever:
-            return self.typical_text_retriever.retrieve(rich_query, top_k=top_k)
-
+    def _scope_text_search(self, paper_profile: PaperProfile, top_k: int = 10) -> List[Tuple[Journal, float]]:
+        """基于 scope/profile 的关键词交集文本搜索。"""
         # 构建检索文本：从 paper_profile 的多个字段提取关键词
         query_parts = [paper_profile.title]
         if paper_profile.abstract:
@@ -98,11 +108,89 @@ class CandidateGenerator:
         query_text = " ".join(query_parts)
         return self.store.search_by_text(query_text, top_k=top_k)
 
+    def _text_search(
+        self,
+        paper_profile: PaperProfile,
+        rich_query: str = "",
+        top_k: int = 10,
+    ) -> List[Tuple[Journal, float]]:
+        """兼容旧实验脚本：返回当前目标对应的文本召回路由。"""
+        if self._use_typical_abstracts() and self.typical_text_retriever:
+            return self.typical_text_retriever.retrieve(rich_query, top_k=top_k)
+        return self._scope_text_search(paper_profile, top_k=top_k)
+
+    def _scope_route_results(
+        self,
+        rich_query: str,
+        paper_profile: PaperProfile,
+        cfg: Dict[str, int],
+        weights: Dict[str, float],
+    ) -> Dict[str, Tuple[List[Tuple[Journal, float]], float]]:
+        """scope_text 模式保持原有三路召回。"""
+        route_results: Dict[str, Tuple[List[Tuple[Journal, float]], float]] = {
+            "scope_bm25": (self.bm25_retriever.retrieve(rich_query, top_k=cfg["bm25"]), weights["bm25"]),
+        }
+        if self.embedding_retriever:
+            route_results["scope_vector"] = (
+                self.embedding_retriever.retrieve(rich_query, top_k=cfg["vector"]),
+                weights["vector"],
+            )
+        route_results["scope_text"] = (self._scope_text_search(paper_profile, top_k=cfg["text"]), weights["text"])
+        return route_results
+
+    def _hybrid_route_results(
+        self,
+        rich_query: str,
+        paper_profile: PaperProfile,
+        cfg: Dict[str, int],
+        weights: Dict[str, float],
+    ) -> Dict[str, Tuple[List[Tuple[Journal, float]], float]]:
+        """典型摘要模式：scope 作为身份边界，typical 作为语义扩展。"""
+        scope_weight = 0.75
+        typical_weight = 0.25
+        route_results = self._scope_route_results(
+            rich_query,
+            paper_profile,
+            cfg,
+            {key: value * scope_weight for key, value in weights.items()},
+        )
+
+        if self.typical_bm25_retriever:
+            route_results["typical_bm25"] = (
+                self.typical_bm25_retriever.retrieve(rich_query, top_k=cfg["bm25"]),
+                weights["bm25"] * typical_weight,
+            )
+        if self.typical_embedding_retriever:
+            route_results["typical_vector"] = (
+                self.typical_embedding_retriever.retrieve(rich_query, top_k=cfg["vector"]),
+                weights["vector"] * typical_weight,
+            )
+        if self.typical_text_retriever:
+            route_results["typical_text"] = (
+                self.typical_text_retriever.retrieve(rich_query, top_k=cfg["text"]),
+                weights["text"] * typical_weight,
+            )
+        route_results["identity_anchor"] = (
+            self._identity_anchor_search(rich_query, paper_profile, top_k=max(cfg.values())),
+            0.03,
+        )
+        return route_results
+
     def _build_rich_query(self, query_text: str, paper_profile: PaperProfile) -> str:
         """构建丰富的检索 query，整合 paper_profile 的所有关键字段"""
+        core_terms = " ".join([
+            " ".join(paper_profile.keywords),
+            " ".join(paper_profile.techniques),
+            " ".join(paper_profile.application_domain),
+            " ".join(paper_profile.datasets),
+        ])
         parts = [
             query_text,  # 论文标题+摘要
             query_text,  # 重复一次以提升权重
+            paper_profile.title,
+            paper_profile.title,
+            core_terms,
+            core_terms,
             " ".join(paper_profile.keywords),
             " ".join(paper_profile.techniques),
             " ".join(paper_profile.application_domain),
@@ -113,6 +201,51 @@ class CandidateGenerator:
             paper_profile.novelty_type or "",
         ]
         return " ".join(parts)
+
+    def _identity_anchor_search(
+        self,
+        query_text: str,
+        paper_profile: PaperProfile,
+        top_k: int = 30,
+    ) -> List[Tuple[Journal, float]]:
+        """使用期刊自身身份文本做 deterministic anchor 召回。"""
+        query_terms = self._token_set(" ".join([
+            query_text,
+            paper_profile.title,
+            " ".join(paper_profile.keywords),
+            " ".join(paper_profile.techniques),
+            " ".join(paper_profile.application_domain),
+        ]))
+        if not query_terms:
+            return []
+
+        scored: List[Tuple[Journal, float]] = []
+        for journal in self.store.journals:
+            identity_text = " ".join([
+                journal.journal_name,
+                journal.scope_text,
+                " ".join(journal.keywords),
+                " ".join(journal.subject_tags),
+                journal.journal_profile,
+            ])
+            identity_terms = self._token_set(identity_text)
+            if not identity_terms:
+                continue
+            overlap = query_terms & identity_terms
+            if not overlap:
+                continue
+            score = len(overlap) / max(len(query_terms), 1)
+            scored.append((journal, score))
+
+        scored.sort(key=lambda x: x[1], reverse=True)
+        return scored[:top_k]
+
+    def _token_set(self, text: str) -> set[str]:
+        return {
+            token.lower()
+            for token in text.replace("-", " ").replace("/", " ").split()
+            if len(token) > 2
+        }
 
     def _normalize_scores(self, results: List[Tuple[Journal, float]]) -> List[Tuple[Journal, float]]:
         """对单路结果做 min-max 归一化到 [0,1]"""
@@ -130,51 +263,113 @@ class CandidateGenerator:
         normalized = [(journal, (score - min_score) / (max_score - min_score)) for journal, score in results]
         return normalized
 
-    def _merge_results(
+    def _merge_route_results(
         self,
-        bm25_results: List[Tuple[Journal, float]],
-        vector_results: List[Tuple[Journal, float]],
-        text_results: Optional[List[Tuple[Journal, float]]] = None,
-        top_k: int = 50,
-        weights: Optional[Dict[str, float]] = None,
-    ) -> List[Journal]:
-        """合并去重（各路分数归一化后加权合并）"""
-        weights = weights or self.merge_weights
-        # 先对每路做 min-max 归一化
-        bm25_norm = self._normalize_scores(bm25_results)
-        vector_norm = self._normalize_scores(vector_results)
-        text_norm = self._normalize_scores(text_results) if text_results else []
+        route_results: Dict[str, Tuple[List[Tuple[Journal, float]], float]],
+        top_k: int,
+    ) -> Tuple[List[Journal], Dict[str, dict]]:
+        """合并任意数量召回路由，并记录来源贡献。"""
+        trace, sorted_all_ids = self._collect_route_trace(route_results)
+        sorted_ids = sorted_all_ids[:top_k]
+        for retrieval_rank, jid in enumerate(sorted_ids, start=1):
+            if jid in trace:
+                trace[jid]["retrieval_rank"] = retrieval_rank
 
-        score_map: Dict[str, float] = {}
-
-        # BM25 结果（已归一化）
-        for journal, score in bm25_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["bm25"]
-
-        # 向量结果（已归一化）
-        for journal, score in vector_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["vector"]
-
-        # 文本搜索结果（已归一化）
-        for journal, score in text_norm:
-            score_map[journal.journal_id] = score_map.get(journal.journal_id, 0) + score * weights["text"]
-
-        # 排序取 top_k
-        sorted_ids = sorted(score_map.keys(), key=lambda x: score_map[x], reverse=True)[:top_k]
-
-        # 返回 Journal 对象列表
         journal_map = {j.journal_id: j for j in self.store._journals}
-        return [journal_map[jid] for jid in sorted_ids if jid in journal_map]
+        candidates = [journal_map[jid] for jid in sorted_ids if jid in journal_map]
+        candidate_ids = {journal.journal_id for journal in candidates}
+        return candidates, {
+            jid: trace[jid]
+            for jid in candidate_ids
+            if jid in trace
+        }
+
+    def _collect_route_trace(
+        self,
+        route_results: Dict[str, Tuple[List[Tuple[Journal, float]], float]],
+    ) -> Tuple[Dict[str, dict], List[str]]:
+        """收集完整路由 trace，不裁剪候选。"""
+        score_map: Dict[str, float] = {}
+        trace: Dict[str, dict] = {}
+
+        for route_name, (results, route_weight) in route_results.items():
+            normalized = self._normalize_scores(results)
+            for rank, ((journal, raw_score), (_, normalized_score)) in enumerate(
+                zip(results, normalized),
+                start=1,
+            ):
+                weighted_score = normalized_score * route_weight
+                jid = journal.journal_id
+                score_map[jid] = score_map.get(jid, 0.0) + weighted_score
+                item = trace.setdefault(jid, {"total_score": 0.0, "routes": {}})
+                item["routes"][route_name] = {
+                    "rank": rank,
+                    "raw_score": raw_score,
+                    "normalized_score": normalized_score,
+                    "weighted_score": weighted_score,
+                }
+
+        for jid, total_score in score_map.items():
+            item = trace.setdefault(jid, {"routes": {}})
+            routes = item.get("routes", {})
+            has_scope_boundary = any(route.startswith("scope_") for route in routes)
+            has_typical = any(route.startswith("typical_") for route in routes)
+            boundary_bonus = 0.04 if has_scope_boundary and has_typical else 0.0
+            item["base_score"] = total_score
+            item["boundary_bonus"] = boundary_bonus
+            item["total_score"] = total_score + boundary_bonus
+            item["primary_routes"] = [
+                route
+                for route, _ in sorted(
+                    item["routes"].items(),
+                    key=lambda kv: kv[1]["weighted_score"],
+                    reverse=True,
+                )
+            ]
+
+        sorted_all_ids = sorted(
+            trace.keys(),
+            key=lambda x: trace[x].get("total_score", 0.0),
+            reverse=True,
+        )
+        return trace, sorted_all_ids
+
+    def _attach_diagnostic_trace(
+        self,
+        trace: Dict[str, dict],
+        wide_route_results: Dict[str, Tuple[List[Tuple[Journal, float]], float]],
+        diagnostic_ids: set[str],
+    ) -> None:
+        """把宽召回诊断信息附加到 trace，不影响真实候选排序。"""
+        wide_trace, wide_sorted_ids = self._collect_route_trace(wide_route_results)
+        for wide_rank, jid in enumerate(wide_sorted_ids, start=1):
+            if jid not in diagnostic_ids:
+                continue
+            wide_item = wide_trace.get(jid, {})
+            item = trace.setdefault(
+                jid,
+                {
+                    "total_score": None,
+                    "primary_routes": [],
+                    "routes": {},
+                },
+            )
+            item["wide_retrieval_rank"] = wide_rank
+            item["wide_total_score"] = wide_item.get("total_score")
+            item["wide_primary_routes"] = wide_item.get("primary_routes", [])
+            item["wide_routes"] = wide_item.get("routes", {})
 
     def _use_typical_abstracts(self) -> bool:
         return self.retrieval_target in {"typical_abstracts", "semantic_anchors"}
 
     def _active_bm25_retriever(self):
+        """兼容旧实验脚本：返回当前目标的主 BM25 召回器。"""
         if self._use_typical_abstracts() and self.typical_bm25_retriever:
             return self.typical_bm25_retriever
         return self.bm25_retriever
 
     def _active_embedding_retriever(self):
+        """兼容旧实验脚本：返回当前目标的主向量召回器。"""
         if self._use_typical_abstracts() and self.typical_embedding_retriever:
             return self.typical_embedding_retriever
         return self.embedding_retriever
