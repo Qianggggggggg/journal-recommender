@@ -1,11 +1,12 @@
 """API 测试"""
 import json
+import time
 import pytest
 from unittest.mock import patch, MagicMock
 from starlette.testclient import TestClient
 
 from src.app.main import app
-from src.app.api import _build_candidate_generator
+from src.app.api import _build_candidate_generator, _build_rule_scorer
 from src.journals.journal_model import Journal
 from src.journals.journal_store import JournalStore
 from src.papers.paper_model import PaperProfile
@@ -68,6 +69,13 @@ def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
         "candidate_generator": {
             "retrieval_target": "typical_abstracts",
             "merge_weights": {"bm25": 0.45, "vector": 0.35, "text": 0.20},
+            "fusion_strategy": "weighted_minmax",
+            "hybrid_scope_weight": 0.65,
+            "hybrid_typical_weight": 0.35,
+            "identity_anchor_weight": 0.10,
+            "route_top_k": {
+                "abstract": {"bm25": 28, "vector": 56, "text": 14},
+            },
         },
         "data": {
             "typical_abstracts_dir": str(abstracts_dir),
@@ -85,6 +93,11 @@ def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
     )
 
     assert generator.retrieval_target == "typical_abstracts"
+    assert generator.hybrid_scope_weight == 0.65
+    assert generator.hybrid_typical_weight == 0.35
+    assert generator.identity_anchor_weight == 0.10
+    assert generator.fusion_strategy == "weighted_minmax"
+    assert generator.route_top_k["abstract"]["vector"] == 56
     assert generator.typical_bm25_retriever is not None
     assert generator.typical_embedding_retriever is not None
     assert generator.typical_text_retriever is not None
@@ -93,6 +106,26 @@ def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
     candidates, trace = generator.generate_with_trace("graph neural recommendation", profile, top_k=3)
     assert "target" in [journal.journal_id for journal in candidates]
     assert any(route.startswith("typical_") for route in trace["target"]["routes"])
+
+
+def test_build_rule_scorer_uses_ranking_config():
+    store = JournalStore()
+    store.add_journal(Journal(journal_id="target", journal_name="Target Journal"))
+    app_config = {
+        "ranking": {
+            "rule_scorer": {
+                "retrieval_rank_prior": 0.9,
+                "strong_scope_rank_bonus": 0.7,
+                "research_area_match": 0.4,
+            }
+        }
+    }
+
+    scorer = _build_rule_scorer(store, app_config)
+
+    assert scorer.weights["retrieval_rank_prior"] == 0.9
+    assert scorer.weights["strong_scope_rank_bonus"] == 0.7
+    assert scorer.weights["research_area_match"] == 0.4
 
 
 def test_journals_endpoint(client):
@@ -181,3 +214,56 @@ def test_recommend_stream_endpoint_with_mock(mock_llm):
         else:
             assert response.status_code == 200
             assert response.headers["content-type"].startswith("text/event-stream")
+
+
+def test_recommend_stream_emits_live_ranking_progress(monkeypatch, client):
+    """候选召回与排序耗时时，SSE 应继续推送进度，避免前端进度条停住。"""
+    from src.app import api as api_module
+    from src.journals.journal_model import JournalMatch
+
+    journal = Journal(journal_id="target", journal_name="Target Journal")
+
+    class DummyParser:
+        def parse(self, paper_input, system_prompt, user_prompt):
+            return PaperProfile(title=paper_input.title, abstract=paper_input.abstract)
+
+    class DummyPipeline:
+        parser = DummyParser()
+        quality_assessor = None
+
+        def recommend(self, *args, **kwargs):
+            time.sleep(0.08)
+            return {
+                "recommendations": [
+                    JournalMatch(
+                        journal=journal,
+                        score=0.9,
+                        confidence=0.8,
+                        match_reasons=["匹配"],
+                    )
+                ],
+                "rank_method": "llm",
+                "mode_used": "abstract",
+            }
+
+    monkeypatch.setattr(api_module, "get_pipeline", lambda: DummyPipeline())
+    monkeypatch.setattr(api_module, "STREAM_PROGRESS_INTERVAL_SECONDS", 0.01, raising=False)
+
+    response = client.get(
+        "/api/recommend/stream",
+        params={
+            "title": "Deep Learning for Image Recognition",
+            "abstract": "This paper proposes a new method.",
+            "mode": "abstract",
+            "top_k": 1,
+        },
+    )
+
+    assert response.status_code == 200
+    ranking_progress = [
+        json.loads(block.split("data: ", 1)[1])
+        for block in response.text.split("\n\n")
+        if "event: progress" in block and '"stage": "ranking"' in block
+    ]
+
+    assert any(40 < item["percent"] < 80 for item in ranking_progress)

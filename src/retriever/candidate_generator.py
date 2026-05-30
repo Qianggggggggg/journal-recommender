@@ -28,6 +28,12 @@ class CandidateGenerator:
         typical_text_retriever: Optional[TypicalAbstractTextRetriever] = None,
         weight_gater: Optional[object] = None,
         use_gating: bool = False,
+        hybrid_scope_weight: float = 0.75,
+        hybrid_typical_weight: float = 0.25,
+        identity_anchor_weight: float = 0.03,
+        fusion_strategy: str = "weighted_minmax",
+        rrf_k: int = 60,
+        route_top_k: Optional[Dict[str, Dict[str, int]]] = None,
     ):
         self.store = store
         self.bm25_retriever = bm25_retriever
@@ -39,6 +45,12 @@ class CandidateGenerator:
         self.typical_text_retriever = typical_text_retriever
         self.weight_gater = weight_gater
         self.use_gating = use_gating
+        self.hybrid_scope_weight = hybrid_scope_weight
+        self.hybrid_typical_weight = hybrid_typical_weight
+        self.identity_anchor_weight = identity_anchor_weight
+        self.fusion_strategy = fusion_strategy
+        self.rrf_k = rrf_k
+        self.route_top_k = self._merge_route_top_k(route_top_k)
 
     def generate(
         self,
@@ -60,13 +72,7 @@ class CandidateGenerator:
         diagnostic_journal_ids: Optional[Iterable[str]] = None,
     ) -> Tuple[List[Journal], Dict[str, dict]]:
         """生成候选期刊，并返回每本期刊的召回来源。"""
-        # 各路召回数量配置
-        config = {
-            "title": {"bm25": 22, "vector": 22, "text": 16},
-            "abstract": {"bm25": 28, "vector": 28, "text": 14},
-            "full": {"bm25": 32, "vector": 32, "text": 16},
-        }
-        cfg = config.get(mode, config["abstract"]).copy()
+        cfg = self._route_config_for_mode(mode)
         diagnostic_ids = set(diagnostic_journal_ids or [])
 
         # 构建丰富的检索 query，包含 paper_profile 的所有关键字段
@@ -146,33 +152,31 @@ class CandidateGenerator:
         weights: Dict[str, float],
     ) -> Dict[str, Tuple[List[Tuple[Journal, float]], float]]:
         """典型摘要模式：scope 作为身份边界，typical 作为语义扩展。"""
-        scope_weight = 0.75
-        typical_weight = 0.25
         route_results = self._scope_route_results(
             rich_query,
             paper_profile,
             cfg,
-            {key: value * scope_weight for key, value in weights.items()},
+            {key: value * self.hybrid_scope_weight for key, value in weights.items()},
         )
 
         if self.typical_bm25_retriever:
             route_results["typical_bm25"] = (
                 self.typical_bm25_retriever.retrieve(rich_query, top_k=cfg["bm25"]),
-                weights["bm25"] * typical_weight,
+                weights["bm25"] * self.hybrid_typical_weight,
             )
         if self.typical_embedding_retriever:
             route_results["typical_vector"] = (
                 self.typical_embedding_retriever.retrieve(rich_query, top_k=cfg["vector"]),
-                weights["vector"] * typical_weight,
+                weights["vector"] * self.hybrid_typical_weight,
             )
         if self.typical_text_retriever:
             route_results["typical_text"] = (
                 self.typical_text_retriever.retrieve(rich_query, top_k=cfg["text"]),
-                weights["text"] * typical_weight,
+                weights["text"] * self.hybrid_typical_weight,
             )
         route_results["identity_anchor"] = (
             self._identity_anchor_search(rich_query, paper_profile, top_k=max(cfg.values())),
-            0.03,
+            self.identity_anchor_weight,
         )
         return route_results
 
@@ -298,7 +302,11 @@ class CandidateGenerator:
                 zip(results, normalized),
                 start=1,
             ):
-                weighted_score = normalized_score * route_weight
+                weighted_score = self._route_contribution(
+                    normalized_score=normalized_score,
+                    route_weight=route_weight,
+                    rank=rank,
+                )
                 jid = journal.journal_id
                 score_map[jid] = score_map.get(jid, 0.0) + weighted_score
                 item = trace.setdefault(jid, {"total_score": 0.0, "routes": {}})
@@ -333,6 +341,18 @@ class CandidateGenerator:
             reverse=True,
         )
         return trace, sorted_all_ids
+
+    def _route_contribution(
+        self,
+        normalized_score: float,
+        route_weight: float,
+        rank: int,
+    ) -> float:
+        if self.fusion_strategy == "rrf":
+            return 1.0 / (self.rrf_k + rank)
+        if self.fusion_strategy == "weighted_rrf":
+            return route_weight / (self.rrf_k + rank)
+        return normalized_score * route_weight
 
     def _attach_diagnostic_trace(
         self,
@@ -373,6 +393,30 @@ class CandidateGenerator:
         if self._use_typical_abstracts() and self.typical_embedding_retriever:
             return self.typical_embedding_retriever
         return self.embedding_retriever
+
+    def _merge_route_top_k(
+        self,
+        route_top_k: Optional[Dict[str, Dict[str, int]]],
+    ) -> Dict[str, Dict[str, int]]:
+        defaults = {
+            "title": {"bm25": 22, "vector": 22, "text": 16},
+            "abstract": {"bm25": 28, "vector": 28, "text": 14},
+            "full": {"bm25": 32, "vector": 32, "text": 16},
+        }
+        if not route_top_k:
+            return defaults
+        merged = {mode: cfg.copy() for mode, cfg in defaults.items()}
+        for mode, overrides in route_top_k.items():
+            if not isinstance(overrides, dict):
+                continue
+            base = merged.setdefault(mode, defaults["abstract"].copy())
+            for key in ("bm25", "vector", "text"):
+                if key in overrides:
+                    base[key] = int(overrides[key])
+        return merged
+
+    def _route_config_for_mode(self, mode: str) -> Dict[str, int]:
+        return self.route_top_k.get(mode, self.route_top_k["abstract"]).copy()
 
     def _weights_for_profile(self, paper_profile: PaperProfile) -> Dict[str, float]:
         if self.use_gating and self.weight_gater:

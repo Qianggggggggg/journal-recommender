@@ -86,6 +86,7 @@ class EvaluationResult:
     area_hit_at_10: int = 0  # 同领域命中 top10
     level_hit_at_5: int = 0   # 同CCF档位命中（top5中有同CCF等级期刊）
     level_hit_at_10: int = 0  # 同CCF档位命中 top10
+    acceptable_journal_hit_at_5: int = 0  # exact hit 或同领域且同CCF档位
 
     # 粗排命中统计
     coarse_hit_count: int = 0  # 粗排命中（实际期刊在 top 50 候选中）
@@ -164,6 +165,7 @@ def calculate_metrics(result: EvaluationResult) -> dict:
         "同领域命中@10": f"{result.area_hit_at_10}/{total} ({result.area_hit_at_10*100/total:.1f}%)",
         "同CCF档位@5": f"{result.level_hit_at_5}/{total} ({result.level_hit_at_5*100/total:.1f}%)",
         "同CCF档位@10": f"{result.level_hit_at_10}/{total} ({result.level_hit_at_10*100/total:.1f}%)",
+        "可接受期刊命中@5": f"{result.acceptable_journal_hit_at_5}/{total} ({result.acceptable_journal_hit_at_5*100/total:.1f}%)",
     }
 
     # 分质量等级
@@ -240,6 +242,12 @@ def init_pipeline() -> RecommenderPipeline:
     retrieval_config = app_config.get("candidate_generator", {})
     merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
     retrieval_target = retrieval_config.get("retrieval_target", "scope_text")
+    fusion_strategy = retrieval_config.get("fusion_strategy", "weighted_minmax")
+    hybrid_scope_weight = retrieval_config.get("hybrid_scope_weight", 0.75)
+    hybrid_typical_weight = retrieval_config.get("hybrid_typical_weight", 0.25)
+    identity_anchor_weight = retrieval_config.get("identity_anchor_weight", 0.03)
+    rrf_k = retrieval_config.get("rrf_k", 60)
+    route_top_k = retrieval_config.get("route_top_k")
 
     typical_bm25_retriever = None
     typical_text_retriever = None
@@ -266,9 +274,16 @@ def init_pipeline() -> RecommenderPipeline:
         typical_bm25_retriever=typical_bm25_retriever,
         typical_embedding_retriever=typical_embedding_retriever,
         typical_text_retriever=typical_text_retriever,
+        hybrid_scope_weight=hybrid_scope_weight,
+        hybrid_typical_weight=hybrid_typical_weight,
+        identity_anchor_weight=identity_anchor_weight,
+        fusion_strategy=fusion_strategy,
+        rrf_k=rrf_k,
+        route_top_k=route_top_k,
     )
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
-    scorer = RuleScorer(journals=store.journals)
+    rule_weights = app_config.get("ranking", {}).get("rule_scorer", {})
+    scorer = RuleScorer(journals=store.journals, weights=rule_weights)
     llm_ranker = LLMRanker(llm, prompts["llm_ranker_system"], prompts["llm_ranker_user"])
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
@@ -278,6 +293,7 @@ def init_pipeline() -> RecommenderPipeline:
         rule_scorer=scorer,
         llm_ranker=llm_ranker,
         quality_assessor=quality_assessor,
+        llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
     )
     pipeline.parser = parser
 
@@ -424,6 +440,7 @@ def evaluate_single_paper(
     # 同 CCF 档位命中（ccf_level 匹配期刊 ccf_rating）
     level_hit_5 = False
     level_hit_10 = False
+    acceptable_journal_hit_5 = False
     for i, rec in enumerate(recommendations[:10]):
         if rec.journal.ccf_rating and ccf_level:
             if rec.journal.ccf_rating.upper() == ccf_level.upper():
@@ -431,6 +448,8 @@ def evaluate_single_paper(
                     level_hit_5 = True
                 level_hit_10 = True
                 break
+
+    acceptable_journal_hit_5 = bool(hit_5 or (area_hit_5 and level_hit_5))
 
     def _retrieval_info(journal_id: str) -> dict:
         trace = retrieval_trace.get(journal_id, {})
@@ -510,6 +529,10 @@ def evaluate_single_paper(
     venue_diagnostic = {
         "journal_id": venue_journal.journal_id if venue_journal else None,
         "target_journal_id": venue_journal.journal_id if venue_journal else None,
+        "gold_area": research_area,
+        "parsed_ccf_area": profile.ccf_research_area,
+        "area_mismatch": bool(research_area and research_area not in profile.ccf_research_area),
+        "abstract_len": len(abstract or ""),
         "target_scope_text_preview": (venue_journal.scope_text[:300] if venue_journal else ""),
         "target_keywords": venue_journal.keywords[:12] if venue_journal else [],
         "target_subject_tags": venue_journal.subject_tags[:5] if venue_journal else [],
@@ -527,6 +550,8 @@ def evaluate_single_paper(
     }
     paper_profile_snapshot = {
         "title": profile.title,
+        "abstract_len": len(abstract or ""),
+        "abstract_preview": (abstract or "")[:500],
         "research_area": profile.research_area,
         "ccf_research_area": profile.ccf_research_area,
         "method_type": profile.method_type,
@@ -544,10 +569,14 @@ def evaluate_single_paper(
 
     return {
         "arxiv": arxiv_id,
-        "title": title[:80],
+        "title": title,
+        "abstract_len": len(abstract or ""),
         "venue": venue,
         "ccf_level": ccf_level,
         "research_area": research_area,
+        "gold_area": research_area,
+        "parsed_ccf_area": profile.ccf_research_area,
+        "area_mismatch": bool(research_area and research_area not in profile.ccf_research_area),
         "recommended_journals": recommended_journals[:top_k],
         "hit_1": hit_1,
         "hit_3": hit_3,
@@ -578,6 +607,11 @@ def evaluate_single_paper(
         "area_hit_10": area_hit_10,
         "level_hit_5": level_hit_5,
         "level_hit_10": level_hit_10,
+        "same_area_hit_5": area_hit_5,
+        "same_area_hit_10": area_hit_10,
+        "same_ccf_level_hit_5": level_hit_5,
+        "same_ccf_level_hit_10": level_hit_10,
+        "acceptable_journal_hit_5": acceptable_journal_hit_5,
         "venue_diagnostic": venue_diagnostic,
         # 每篇论文的详细推荐信息（用于定位问题）
         "recommendations_detail": [
@@ -621,6 +655,7 @@ def run_evaluation(
         ndcg_at_10=0.0,
         area_hit_at_5=0, area_hit_at_10=0,
         level_hit_at_5=0, level_hit_at_10=0,
+        acceptable_journal_hit_at_5=0,
         coarse_hit_count=0,
         coarse_hit_in_rule_top10_count=0,
         coarse_hit_in_rule_top20_count=0,
@@ -680,6 +715,8 @@ def run_evaluation(
                 result.level_hit_at_5 += 1
             if paper_result.get("level_hit_10"):
                 result.level_hit_at_10 += 1
+            if paper_result.get("acceptable_journal_hit_5"):
+                result.acceptable_journal_hit_at_5 += 1
 
             # 粗排命中统计
             if paper_result.get("coarse_hit"):
@@ -785,6 +822,7 @@ def print_report(result: EvaluationResult):
     print(f"  同领域命中@10: {metrics['同领域命中@10']}")
     print(f"  同CCF档位@5: {metrics['同CCF档位@5']}")
     print(f"  同CCF档位@10: {metrics['同CCF档位@10']}")
+    print(f"  可接受期刊命中@5: {metrics['可接受期刊命中@5']}")
 
     # 粗排命中分析
     print(f"\n--- 粗排命中分析 ---")
@@ -857,6 +895,7 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
             "area_hit_at_10": result.area_hit_at_10,
             "level_hit_at_5": result.level_hit_at_5,
             "level_hit_at_10": result.level_hit_at_10,
+            "acceptable_journal_hit_at_5": result.acceptable_journal_hit_at_5,
         },
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),
@@ -876,7 +915,7 @@ def main():
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
     parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata.jsonl",
                         help="论文元数据路径")
-    parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="full",
+    parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="abstract",
                         help="推荐模式")
     parser.add_argument("--top-k", "-k", type=int, nargs="+", default=[5],
                         help="Top-K 值，可指定多个如: --top-k 3 5 10")

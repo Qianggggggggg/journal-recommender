@@ -56,6 +56,13 @@ router = APIRouter()
 # 全局组件（实际应通过依赖注入）
 _pipeline: Optional[RecommenderPipeline] = None
 _store: Optional[JournalStore] = None
+STREAM_PROGRESS_INTERVAL_SECONDS = 1.0
+STREAM_RANKING_PROGRESS_MESSAGES = [
+    "正在召回候选期刊...",
+    "正在进行规则排序...",
+    "正在进行 LLM 精排...",
+    "正在整理排序证据...",
+]
 
 
 @lru_cache(maxsize=1)
@@ -127,7 +134,7 @@ def get_pipeline() -> RecommenderPipeline:
             embedding_client=embedding_client,
             app_config=app_config,
         )
-        scorer = RuleScorer(journals=_store.journals)
+        scorer = _build_rule_scorer(_store, app_config)
 
         llm_ranker = LLMRanker(
             llm,
@@ -145,6 +152,7 @@ def get_pipeline() -> RecommenderPipeline:
             rule_scorer=scorer,
             llm_ranker=llm_ranker,
             quality_assessor=quality_assessor,
+            llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
         )
 
         # 将 parser 附加到 pipeline 以便在 API 中使用
@@ -166,6 +174,12 @@ def _build_candidate_generator(
 
     retrieval_target = retrieval_config.get("retrieval_target", "scope_text")
     merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
+    fusion_strategy = retrieval_config.get("fusion_strategy", "weighted_minmax")
+    hybrid_scope_weight = retrieval_config.get("hybrid_scope_weight", 0.75)
+    hybrid_typical_weight = retrieval_config.get("hybrid_typical_weight", 0.25)
+    identity_anchor_weight = retrieval_config.get("identity_anchor_weight", 0.03)
+    rrf_k = retrieval_config.get("rrf_k", 60)
+    route_top_k = retrieval_config.get("route_top_k")
 
     typical_bm25 = None
     typical_embedding = None
@@ -205,7 +219,20 @@ def _build_candidate_generator(
         typical_bm25_retriever=typical_bm25,
         typical_embedding_retriever=typical_embedding,
         typical_text_retriever=typical_text,
+        hybrid_scope_weight=hybrid_scope_weight,
+        hybrid_typical_weight=hybrid_typical_weight,
+        identity_anchor_weight=identity_anchor_weight,
+        fusion_strategy=fusion_strategy,
+        rrf_k=rrf_k,
+        route_top_k=route_top_k,
     )
+
+
+def _build_rule_scorer(store: JournalStore, app_config: dict) -> RuleScorer:
+    """Create RuleScorer with ranking.rule_scorer weight overrides."""
+    ranking_config = app_config.get("ranking", {})
+    rule_weights = ranking_config.get("rule_scorer", {})
+    return RuleScorer(journals=store.journals, weights=rule_weights)
 
 
 @router.post("/recommend", response_model=RecommendResponse)
@@ -665,15 +692,35 @@ async def recommend_stream(request: Request):
             })
             await asyncio.sleep(0)
 
-            # 调用统一 pipeline（包含检索、粗排、精排）
-            rec_result = pipeline.recommend(
+            # 调用统一 pipeline（包含检索、粗排、精排）。
+            # 这一步包含向量召回和 LLM 精排，可能耗时较长；放入后台线程并持续推送
+            # SSE 心跳进度，避免前端进度条停在 40% 后直接跳到结果。
+            recommend_task = asyncio.create_task(asyncio.to_thread(
+                pipeline.recommend,
                 paper_input,
                 profile,
                 top_k=top_k,
                 mode=mode,
                 oa_preference=oa_preference,
                 quality_prompts=quality_prompts,
-            )
+            ))
+            heartbeat_count = 0
+            while not recommend_task.done():
+                await asyncio.sleep(STREAM_PROGRESS_INTERVAL_SECONDS)
+                if recommend_task.done():
+                    break
+                heartbeat_count += 1
+                percent = min(79.0, round(79.0 - 34.0 / (heartbeat_count + 1), 1))
+                message = STREAM_RANKING_PROGRESS_MESSAGES[
+                    (heartbeat_count - 1) % len(STREAM_RANKING_PROGRESS_MESSAGES)
+                ]
+                yield sse_event("progress", {
+                    "stage": "ranking",
+                    "percent": percent,
+                    "message": message
+                })
+
+            rec_result = await recommend_task
 
             yield sse_event("progress", {
                 "stage": "ranking",

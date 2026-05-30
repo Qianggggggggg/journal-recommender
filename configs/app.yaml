@@ -17,6 +17,24 @@ candidate_generator:
   retrieval_target: "typical_abstracts"  # scope_text | typical_abstracts
   weighting_strategy: "fixed"            # fixed | gating
   gating_model_path: "data/models/gating_network.pt"
+  fusion_strategy: "weighted_minmax"     # weighted_minmax | rrf | weighted_rrf
+  hybrid_scope_weight: 0.65
+  hybrid_typical_weight: 0.35
+  identity_anchor_weight: 0.10
+  rrf_k: 60
+  route_top_k:
+    title:
+      bm25: 22
+      vector: 22
+      text: 16
+    abstract:
+      bm25: 28
+      vector: 56
+      text: 14
+    full:
+      bm25: 32
+      vector: 32
+      text: 16
   merge_weights:
     bm25: 0.45
     vector: 0.35
@@ -36,3 +54,18 @@ ranking:
   use_cross_encoder: false      # ablation switch
   two_tower_model_path: "data/models/two_tower_ranker.pt"
   cross_encoder_model_path: "data/models/cross_ranker.pt"
+  llm_anchor_guard:
+    enabled: true
+    protect_rule_rank: 5
+    max_score_gap: 0.08
+  rule_scorer:
+    scope_boundary_evidence: 0.35
+    typical_scope_synergy: 0.08
+    typical_only_penalty: 0.08
+    retrieval_rank_prior: 1.80
+    strong_scope_rank_bonus: 1.00
+    strong_typical_rank_bonus: 0.00
+    scope_typical_confirm_bonus: 0.60
+    multi_route_bonus: 0.40
+    research_area_match: 0.50
+    ccf_research_area_match: 0.50

@@ -11,8 +11,10 @@ from src.papers.paper_model import PaperProfile
 class DummyRetriever:
     def __init__(self, results):
         self.results = results
+        self.calls = []
 
     def retrieve(self, query, top_k=30):
+        self.calls.append({"query": query, "top_k": top_k})
         return self.results[:top_k]
 
 
@@ -139,6 +141,33 @@ def test_typical_mode_mixes_scope_and_typical_routes_with_trace():
     assert "typical_text" in trace["typical"]["routes"]
     assert "identity_anchor" in trace["typical"]["routes"]
     assert all("retrieval_rank" in trace[journal_id] for journal_id in candidate_ids)
+
+
+def test_candidate_generator_uses_configured_route_top_k():
+    """正式粗排参数应能从配置覆盖每路召回数量。"""
+    store = JournalStore()
+    journal = Journal(journal_id="target", journal_name="Target Journal", journal_profile="target")
+    store.add_journal(journal)
+    bm25 = DummyRetriever([(journal, 1.0)])
+    typical_bm25 = DummyRetriever([(journal, 1.0)])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=bm25,
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=typical_bm25,
+        route_top_k={"abstract": {"bm25": 40, "vector": 56, "text": 14}},
+    )
+
+    generator.generate_with_trace(
+        "target",
+        PaperProfile(title="target"),
+        mode="abstract",
+        top_k=10,
+    )
+
+    assert bm25.calls[0]["top_k"] == 40
+    assert typical_bm25.calls[0]["top_k"] == 40
 
 
 def test_diagnostic_journal_trace_keeps_wide_rank_outside_top_k():

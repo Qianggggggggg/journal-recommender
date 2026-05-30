@@ -2,7 +2,24 @@
 import pytest
 from src.journals.journal_model import Journal
 from src.papers.paper_model import PaperProfile
+from src.ranker.llm_ranker import LLMRanker
 from src.ranker.rule_scorer import RuleScorer
+
+
+class _FakeLLMResponse:
+    def __init__(self, content):
+        self.content = content
+
+
+class _RecordingLLM:
+    def __init__(self):
+        self.user_prompt = ""
+
+    def chat_auto(self, system_prompt, user_prompt, timeout=200):
+        self.user_prompt = user_prompt
+        return _FakeLLMResponse(
+            '{"rankings":[{"journal_id":"target","score":0.9,"reasons":["ok"],"confidence":0.8}]}'
+        )
 
 
 def test_rule_scorer():
@@ -119,3 +136,136 @@ def test_rule_scorer_does_not_score_research_area_directly():
 
     assert score == 0
     assert any("领域标签对齐" in reason for reason in reasons)
+
+
+def test_rule_scorer_can_use_configured_retrieval_rank_prior():
+    """配置 retrieval_rank_prior 后，强粗排证据应能进入规则排序。"""
+    scorer = RuleScorer(
+        weights={
+            "scope_boundary_evidence": 0.0,
+            "typical_scope_synergy": 0.0,
+            "retrieval_rank_prior": 1.0,
+        }
+    )
+    target = Journal(journal_id="target", journal_name="Target Journal")
+    distractor = Journal(journal_id="distractor", journal_name="Distractor Journal")
+    profile = PaperProfile(title="Neutral Title")
+    retrieval_trace = {
+        "target": {
+            "retrieval_rank": 1,
+            "routes": {
+                "scope_vector": {"rank": 12, "weighted_score": 0.0},
+            },
+        },
+        "distractor": {
+            "retrieval_rank": 50,
+            "routes": {},
+        },
+    }
+
+    ranked = scorer.rank(
+        [distractor, target],
+        profile,
+        top_k=2,
+        retrieval_trace=retrieval_trace,
+    )
+
+    assert ranked[0][0].journal_id == "target"
+    assert any("粗排排名证据" in reason for reason in ranked[0][2])
+
+
+def test_rule_scorer_can_use_configured_strong_typical_rank_bonus():
+    """典型摘要强命中可作为可配置软信号，补足 scope 边界较弱的召回。"""
+    scorer = RuleScorer(
+        weights={
+            "scope_boundary_evidence": 0.0,
+            "typical_scope_synergy": 0.0,
+            "retrieval_rank_prior": 0.0,
+            "strong_scope_rank_bonus": 0.0,
+            "strong_typical_rank_bonus": 1.0,
+        }
+    )
+    target = Journal(journal_id="target", journal_name="Target Journal")
+    distractor = Journal(journal_id="distractor", journal_name="Distractor Journal")
+    profile = PaperProfile(title="Neutral Title")
+    retrieval_trace = {
+        "target": {
+            "retrieval_rank": 11,
+            "routes": {
+                "scope_vector": {"rank": 29, "weighted_score": 0.04},
+                "typical_vector": {"rank": 2, "weighted_score": 0.08},
+                "typical_bm25": {"rank": 3, "weighted_score": 0.05},
+            },
+        },
+        "distractor": {
+            "retrieval_rank": 20,
+            "routes": {},
+        },
+    }
+
+    ranked = scorer.rank(
+        [distractor, target],
+        profile,
+        top_k=2,
+        retrieval_trace=retrieval_trace,
+    )
+
+    assert ranked[0][0].journal_id == "target"
+    assert any("强典型摘要召回证据" in reason for reason in ranked[0][2])
+
+
+def test_rule_scorer_research_area_weight_is_positive_only():
+    """领域对齐配置为正向软信号，不命中时不扣分。"""
+    scorer = RuleScorer(weights={"research_area_match": 0.5})
+    profile = PaperProfile(title="Neutral Title", research_area=["人工智能"])
+    matched = Journal(
+        journal_id="matched",
+        journal_name="Matched Journal",
+        subject_tags=["人工智能"],
+    )
+    unmatched = Journal(
+        journal_id="unmatched",
+        journal_name="Unmatched Journal",
+        subject_tags=["网络与信息安全"],
+    )
+
+    matched_score, matched_reasons = scorer.score(matched, profile)
+    unmatched_score, unmatched_reasons = scorer.score(unmatched, profile)
+
+    assert matched_score == 0.5
+    assert unmatched_score == 0
+    assert any("领域标签对齐" in reason for reason in matched_reasons)
+    assert not unmatched_reasons
+
+
+def test_llm_ranker_does_not_expose_internal_retrieval_fields():
+    """LLM 精排输入不应暴露内部召回强度字段，避免模型被诊断字段牵引。"""
+    llm = _RecordingLLM()
+    ranker = LLMRanker(
+        llm,
+        "system",
+        "候选期刊：{journals_info}\n论文：{title}\n总数：{total_candidates}",
+    )
+    journal = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        scope_text="database systems and entity linking",
+    )
+
+    ranker.rank(
+        [(journal, 1.0, ["scope matched"])],
+        PaperProfile(title="Entity linking"),
+        retrieval_trace={
+            "target": {
+                "routes": {
+                    "scope_vector": {"weighted_score": 0.2},
+                    "typical_vector": {"weighted_score": 0.1},
+                }
+            }
+        },
+    )
+
+    assert "retrieval_sources_summary" not in llm.user_prompt
+    assert "scope_boundary_strength" not in llm.user_prompt
+    assert "typical_expansion_strength" not in llm.user_prompt
+    assert "rule_score" not in llm.user_prompt

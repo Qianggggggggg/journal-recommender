@@ -7,7 +7,11 @@ from src.papers.paper_model import PaperProfile
 
 class DummyParser:
     def parse(self, paper_input, system_prompt, user_prompt):
-        return PaperProfile(title=paper_input.title)
+        return PaperProfile(
+            title=paper_input.title,
+            abstract=paper_input.abstract or "",
+            ccf_research_area=["人工智能"],
+        )
 
 
 class DummyPipeline:
@@ -116,7 +120,7 @@ def test_evaluate_single_paper_writes_venue_diagnostic():
     )
     result = evaluate_single_paper(
         {
-            "title": "Test Paper",
+            "title": "Test Paper With A Long Enough Title That Must Not Be Truncated In Evaluation Diagnostics",
             "abstract": "A short abstract.",
             "venue": "Target Journal",
             "ccf_level": "B",
@@ -130,6 +134,11 @@ def test_evaluate_single_paper_writes_venue_diagnostic():
     )
 
     diagnostic = result["venue_diagnostic"]
+    assert result["title"] == "Test Paper With A Long Enough Title That Must Not Be Truncated In Evaluation Diagnostics"
+    assert result["abstract_len"] == len("A short abstract.")
+    assert result["gold_area"] == "人工智能"
+    assert result["parsed_ccf_area"] == ["人工智能"]
+    assert result["area_mismatch"] is False
     assert diagnostic["journal_id"] == "target"
     assert diagnostic["retrieval_rank"] == 1
     assert diagnostic["retrieval_score"] == 0.42
@@ -138,8 +147,14 @@ def test_evaluate_single_paper_writes_venue_diagnostic():
     assert diagnostic["in_llm_pool"] is True
     assert diagnostic["retrieval_sources"] == ["scope_bm25", "typical_bm25"]
     assert diagnostic["target_journal_id"] == "target"
+    assert diagnostic["gold_area"] == "人工智能"
+    assert diagnostic["parsed_ccf_area"] == ["人工智能"]
+    assert diagnostic["area_mismatch"] is False
+    assert diagnostic["abstract_len"] == len("A short abstract.")
     assert diagnostic["miss_stage"] == "final_hit"
-    assert result["paper_profile_snapshot"]["title"] == "Test Paper"
+    assert result["paper_profile_snapshot"]["title"] == "Test Paper With A Long Enough Title That Must Not Be Truncated In Evaluation Diagnostics"
+    assert result["paper_profile_snapshot"]["abstract_len"] == len("A short abstract.")
+    assert result["paper_profile_snapshot"]["abstract_preview"] == "A short abstract."
 
 
 def test_evaluate_single_paper_marks_wide_recalled_not_top50():
@@ -167,3 +182,38 @@ def test_evaluate_single_paper_marks_wide_recalled_not_top50():
     assert diagnostic["retrieval_rank"] is None
     assert diagnostic["wide_retrieval_route_scores"]["scope_bm25"]["rank"] == 3
     assert diagnostic["miss_stage"] == "wide_recalled_but_not_top50"
+
+
+def test_evaluate_single_paper_writes_auxiliary_acceptability_metrics():
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        ccf_rating="B",
+        subject_tags=["人工智能"],
+    )
+    recommended = Journal(
+        journal_id="other",
+        journal_name="Other Journal",
+        ccf_rating="B",
+        subject_tags=["人工智能"],
+    )
+
+    result = evaluate_single_paper(
+        {
+            "title": "Test Paper",
+            "abstract": "A short abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+            "external_ids": {"arXiv": "1234.5678"},
+        },
+        WideMissPipeline(target, recommended),
+        {"paper_profile_system": "", "paper_profile_user": ""},
+        mode="abstract",
+        top_k=5,
+    )
+
+    assert result["hit_5"] is False
+    assert result["same_area_hit_5"] is True
+    assert result["same_ccf_level_hit_5"] is True
+    assert result["acceptable_journal_hit_5"] is True

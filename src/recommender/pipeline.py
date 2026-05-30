@@ -20,11 +20,13 @@ class RecommenderPipeline:
         rule_scorer: RuleScorer,
         llm_ranker: Optional[LLMRanker] = None,
         quality_assessor: Optional[PaperQualityAssessor] = None,
+        llm_anchor_guard: Optional[Dict[str, Any]] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
         self.llm_ranker = llm_ranker
         self.quality_assessor = quality_assessor
+        self.llm_anchor_guard = llm_anchor_guard or {}
 
     def recommend(
         self,
@@ -129,14 +131,15 @@ class RecommenderPipeline:
         rank_method = "rule"
         if self.llm_ranker:
             try:
-                llm_ranked, rank_method = self.llm_ranker.rank(
+                llm_ranked_all, rank_method = self.llm_ranker.rank(
                     llm_candidates,
                     paper_profile,
-                    top_k=top_k,
+                    top_k=len(llm_candidates),
                     retrieval_trace=retrieval_trace,
                 )
             except LLMRankerError as e:
                 raise LLMRankerError(f"LLM精排失败: {e}")
+            llm_ranked = self._select_final_llm_ranked(llm_ranked_all, llm_candidates, top_k)
         else:
             llm_ranked = [(j, s, r, 0.5) for j, s, r in llm_candidates[:top_k]]
 
@@ -225,6 +228,60 @@ class RecommenderPipeline:
         # 重新排序
         adjusted.sort(key=lambda x: x[1], reverse=True)
         return adjusted
+
+    def _select_final_llm_ranked(
+        self,
+        llm_ranked: List[Tuple[Journal, float, List[str], float]],
+        llm_candidates: List[Tuple[Journal, float, List[str]]],
+        top_k: int,
+    ) -> List[Tuple[Journal, float, List[str], float]]:
+        """Select final Top-K while preserving close high-rule-rank anchors."""
+        selected = list(llm_ranked[:top_k])
+        guard = self.llm_anchor_guard or {}
+        if not guard.get("enabled", False) or top_k <= 0:
+            return selected
+
+        protect_rule_rank = int(guard.get("protect_rule_rank", 5))
+        max_score_gap = float(guard.get("max_score_gap", 0.08))
+        rule_rank_by_id = {
+            journal.journal_id: idx + 1
+            for idx, (journal, _, _) in enumerate(llm_candidates)
+        }
+        llm_by_id = {item[0].journal_id: item for item in llm_ranked}
+        selected_ids = {journal.journal_id for journal, _, _, _ in selected}
+
+        protected_ids = [
+            journal.journal_id
+            for journal, _, _ in llm_candidates[:protect_rule_rank]
+            if journal.journal_id not in selected_ids
+        ]
+
+        for journal_id in protected_ids:
+            protected = llm_by_id.get(journal_id)
+            if not protected:
+                continue
+            if len(selected) < top_k:
+                selected.append(protected)
+                selected_ids.add(journal_id)
+                continue
+
+            replaceable = [
+                idx
+                for idx, (journal, _, _, _) in enumerate(selected)
+                if rule_rank_by_id.get(journal.journal_id, 9999) > protect_rule_rank
+            ]
+            if not replaceable:
+                replaceable = list(range(len(selected)))
+
+            replace_idx = min(replaceable, key=lambda idx: selected[idx][1])
+            if selected[replace_idx][1] - protected[1] <= max_score_gap:
+                removed_id = selected[replace_idx][0].journal_id
+                selected[replace_idx] = protected
+                selected_ids.discard(removed_id)
+                selected_ids.add(journal_id)
+
+        selected.sort(key=lambda item: item[1], reverse=True)
+        return selected[:top_k]
 
     @classmethod
     def from_config(cls, config_path: str = "configs/app.yaml") -> "RecommenderPipeline":

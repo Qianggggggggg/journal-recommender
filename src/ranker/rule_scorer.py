@@ -10,9 +10,7 @@ from ..papers.paper_model import PaperProfile
 class RuleScorer:
     """规则打分器"""
 
-    def __init__(self, journals: Optional[List[Journal]] = None):
-        # 权重配置
-        self.weights = {
+    DEFAULT_WEIGHTS = {
             # 文本匹配特征（新增/调整）
             "bm25_title_scope": 3.0,    # BM25 标题-scope 相似度（归一化）
             "title_journal_name": 1.5,   # 标题词在期刊名中匹配（权重提升）
@@ -29,9 +27,25 @@ class RuleScorer:
             "scope_boundary_evidence": 0.35,
             "typical_scope_synergy": 0.08,
             "typical_only_penalty": 0.05,
+            "retrieval_rank_prior": 0.0,
+            "strong_scope_rank_bonus": 0.0,
+            "strong_typical_rank_bonus": 0.0,
+            "scope_typical_confirm_bonus": 0.0,
+            "multi_route_bonus": 0.0,
             # 领域仲裁信号（权重为0，不参与计分，仅作为理由传递给LLM）
             "research_area_match": 0.0,
-        }
+            "ccf_research_area_match": 0.0,
+    }
+
+    def __init__(
+        self,
+        journals: Optional[List[Journal]] = None,
+        weights: Optional[Dict[str, float]] = None,
+    ):
+        # 权重配置
+        self.weights = self.DEFAULT_WEIGHTS.copy()
+        if weights:
+            self.weights.update(weights)
 
         # 预建 BM25 索引（期刊 scope）
         self._bm25_index: Optional[BM25Plus] = None
@@ -170,6 +184,7 @@ class RuleScorer:
         scope_strength, typical_strength, has_scope, has_typical = self._retrieval_strengths(trace)
         adjusted_score = score
         adjusted_reasons = reasons.copy()
+        routes = trace.get("routes", {}) if trace else {}
 
         if has_scope:
             bonus = min(
@@ -193,6 +208,51 @@ class RuleScorer:
             )
             adjusted_score -= penalty
             adjusted_reasons.append("仅有补充语义证据，缺少期刊范围边界支撑")
+
+        retrieval_rank = trace.get("retrieval_rank") if trace else None
+        rank_prior_weight = float(self.weights.get("retrieval_rank_prior", 0.0) or 0.0)
+        if retrieval_rank and rank_prior_weight > 0:
+            rank_bonus = rank_prior_weight * max(0.0, (51 - int(retrieval_rank)) / 50)
+            adjusted_score += rank_bonus
+            adjusted_reasons.append(f"粗排排名证据: top{int(retrieval_rank)}")
+
+        scope_ranks = [
+            int(data.get("rank"))
+            for route, data in routes.items()
+            if route.startswith("scope_") and data.get("rank")
+        ]
+        strong_scope_weight = float(self.weights.get("strong_scope_rank_bonus", 0.0) or 0.0)
+        if scope_ranks and strong_scope_weight > 0:
+            best_scope_rank = min(scope_ranks)
+            if best_scope_rank <= 20:
+                scope_rank_bonus = strong_scope_weight * max(0.0, (21 - best_scope_rank) / 20)
+                adjusted_score += scope_rank_bonus
+                adjusted_reasons.append(f"强scope召回证据: top{best_scope_rank}")
+
+        typical_ranks = [
+            int(data.get("rank"))
+            for route, data in routes.items()
+            if route.startswith("typical_") and data.get("rank")
+        ]
+        strong_typical_weight = float(self.weights.get("strong_typical_rank_bonus", 0.0) or 0.0)
+        if has_scope and typical_ranks and strong_typical_weight > 0:
+            best_typical_rank = min(typical_ranks)
+            if best_typical_rank <= 10:
+                typical_rank_bonus = strong_typical_weight * max(0.0, (11 - best_typical_rank) / 10)
+                adjusted_score += typical_rank_bonus
+                adjusted_reasons.append(f"强典型摘要召回证据: top{best_typical_rank}")
+
+        confirm_weight = float(self.weights.get("scope_typical_confirm_bonus", 0.0) or 0.0)
+        if has_scope and has_typical and confirm_weight > 0:
+            confirm_strength = min(1.0, 0.5 + scope_strength + typical_strength)
+            adjusted_score += confirm_weight * confirm_strength
+            adjusted_reasons.append("scope与典型摘要召回互相确认")
+
+        multi_route_weight = float(self.weights.get("multi_route_bonus", 0.0) or 0.0)
+        if len(routes) >= 3 and multi_route_weight > 0:
+            route_bonus = multi_route_weight * min(1.0, (len(routes) - 2) / 3)
+            adjusted_score += route_bonus
+            adjusted_reasons.append(f"多路召回一致: {len(routes)}条证据")
 
         return adjusted_score, adjusted_reasons
 
@@ -366,11 +426,25 @@ class RuleScorer:
                         reasons.append(f"创新类型契合: {normalized_type}")
                         break
 
-        # 领域仲裁信号（research_area 与 subject_tags 精确匹配，不加分仅作理由）
+        # 领域仲裁信号：默认只作理由；配置权重后作为正向软信号，不命中不扣分。
+        matched_area_labels = []
         if paper_profile.research_area and journal.subject_tags:
-            matched_areas = [ra for ra in paper_profile.research_area if ra in journal.subject_tags]
-            if matched_areas:
-                reasons.append(f"领域标签对齐: {', '.join(matched_areas)}")
+            matched_area_labels.extend(
+                ra for ra in paper_profile.research_area if ra in journal.subject_tags
+            )
+        if paper_profile.ccf_research_area and journal.subject_tags:
+            matched_area_labels.extend(
+                ra for ra in paper_profile.ccf_research_area if ra in journal.subject_tags
+            )
+        matched_area_labels = list(dict.fromkeys(matched_area_labels))
+        if matched_area_labels:
+            area_weight = max(
+                float(self.weights.get("research_area_match", 0.0) or 0.0),
+                float(self.weights.get("ccf_research_area_match", 0.0) or 0.0),
+            )
+            if area_weight:
+                score += area_weight
+            reasons.append(f"领域标签对齐: {', '.join(matched_area_labels)}")
 
         # OA 偏好匹配
         if oa_preference != "any":

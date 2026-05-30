@@ -35,6 +35,19 @@ class FixedRuleScorer:
         return [item for item in self.ranked if item[0].journal_id in journal_ids][:top_k]
 
 
+class FixedLLMRanker:
+    def __init__(self, ranked):
+        self.ranked = ranked
+        self.received_top_k = None
+
+    def rank(self, candidates, paper_profile, top_k=5, retrieval_trace=None):
+        self.received_top_k = top_k
+        candidate_ids = {journal.journal_id for journal, _, _ in candidates}
+        return [
+            item for item in self.ranked if item[0].journal_id in candidate_ids
+        ][:top_k], "llm"
+
+
 def test_pipeline_integration():
     """测试完整流程（不含 LLM）"""
     from src.journals.journal_store import JournalStore
@@ -138,3 +151,79 @@ def test_pipeline_returns_llm_pool_and_prefers_scope_supplements():
     assert "scope-late" in result["llm_candidate_ids"]
     assert "typical-late" not in result["llm_candidate_ids"]
     assert "identity-late" not in result["llm_candidate_ids"]
+
+
+def test_pipeline_keeps_full_llm_ranking_and_restores_close_rule_anchor():
+    """LLM Top5 边缘结果应允许靠前 Rule 候选在分差很小时回到最终列表。"""
+    protected = Journal(journal_id="protected", journal_name="Protected Journal")
+    llm_top = [
+        Journal(journal_id=f"llm-{i}", journal_name=f"LLM Journal {i}")
+        for i in range(5)
+    ]
+    journals = [protected] + llm_top
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [
+        (journal, 1.0 - i * 0.05, [])
+        for i, journal in enumerate(journals)
+    ]
+    llm_ranked = [
+        (llm_top[0], 0.95, ["llm"], 0.8),
+        (llm_top[1], 0.94, ["llm"], 0.8),
+        (llm_top[2], 0.93, ["llm"], 0.8),
+        (llm_top[3], 0.92, ["llm"], 0.8),
+        (llm_top[4], 0.90, ["llm"], 0.8),
+        (protected, 0.84, ["rule anchor"], 0.7),
+    ]
+    llm_ranker = FixedLLMRanker(llm_ranked)
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=llm_ranker,
+        llm_anchor_guard={
+            "enabled": True,
+            "protect_rule_rank": 5,
+            "max_score_gap": 0.08,
+        },
+    )
+
+    result = pipeline.recommend(PaperInput(title="Test"), PaperProfile(title="Test"), top_k=5)
+
+    assert llm_ranker.received_top_k == len(journals)
+    assert "protected" in [rec.journal.journal_id for rec in result["recommendations"]]
+
+
+def test_pipeline_does_not_restore_rule_anchor_when_llm_score_gap_is_large():
+    """LLM 明显判低的靠前 Rule 候选不应被硬塞进 Top5。"""
+    protected = Journal(journal_id="protected", journal_name="Protected Journal")
+    llm_top = [
+        Journal(journal_id=f"llm-{i}", journal_name=f"LLM Journal {i}")
+        for i in range(5)
+    ]
+    journals = [protected] + llm_top
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [
+        (journal, 1.0 - i * 0.05, [])
+        for i, journal in enumerate(journals)
+    ]
+    llm_ranked = [
+        (llm_top[0], 0.95, ["llm"], 0.8),
+        (llm_top[1], 0.94, ["llm"], 0.8),
+        (llm_top[2], 0.93, ["llm"], 0.8),
+        (llm_top[3], 0.92, ["llm"], 0.8),
+        (llm_top[4], 0.90, ["llm"], 0.8),
+        (protected, 0.70, ["rule anchor"], 0.7),
+    ]
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        llm_anchor_guard={
+            "enabled": True,
+            "protect_rule_rank": 5,
+            "max_score_gap": 0.08,
+        },
+    )
+
+    result = pipeline.recommend(PaperInput(title="Test"), PaperProfile(title="Test"), top_k=5)
+
+    assert "protected" not in [rec.journal.journal_id for rec in result["recommendations"]]
