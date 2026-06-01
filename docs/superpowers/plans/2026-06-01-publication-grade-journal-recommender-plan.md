@@ -140,11 +140,14 @@ python scripts/run_evaluation.py \
 - 新建： `scripts/register_baseline_result.py`
 - 测试： `tests/test_benchmark_manifest.py`
 
-- [ ] 新增脚本：读取一个 evaluation JSON，向 baseline registry 追加精简记录。
-- [ ] 记录字段：`label`、`result_path`、`input_path`、`hit_at_5`、`mrr`、`coarse_hit_count`、`coarse_hit_in_rule_top20_count`、`acceptable_journal_hit_at_5`、`app_config_hash`、`prompt_hash`。
-- [ ] 用当前 full-v2 结果和 light30 结果各登记一次。
-- [ ] 如果 label 重复，默认拒绝；只有传 `--replace` 才允许覆盖。
-- [ ] 提交：`chore: register current recommender baseline`
+- [x] 新增脚本：读取一个 evaluation JSON，向 baseline registry 追加精简记录。
+- [x] 记录字段：`label`、`result_path`、`input_path`、`hit_at_5`、`mrr`、`coarse_hit_count`、`coarse_hit_in_rule_top20_count`、`acceptable_journal_hit_at_5`、`app_config_hash`、`prompt_hash`、`minimax_model`。
+- [x] 用当前 light30 结果登记一次：
+  - `light30_m27_default`（默认 M2.7 baseline，结果 `eval_abstract_top5_20260601_191336.json`）。
+  - `light30_m3_llm_ablation`（M3 直接 LLM ranking 消融，结果 `eval_abstract_top5_20260601_200359.json`）。
+- [ ] 用当前 full-v2 结果登记一次：待用户后续跑完带 `benchmark_manifest` 的 full-v2 评测后，使用 `scripts/register_baseline_result.py --label full_v2_m27_default` 登记。
+- [x] 如果 label 重复，默认拒绝；只有传 `--replace` 才允许覆盖。
+- [x] 提交：`chore: register current recommender baseline`
 
 ---
 

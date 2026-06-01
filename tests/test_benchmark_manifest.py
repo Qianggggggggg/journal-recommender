@@ -94,3 +94,86 @@ def test_save_results_writes_benchmark_manifest(tmp_path):
 
     data = json.loads(Path(saved_path).read_text(encoding="utf-8"))
     assert data["benchmark_manifest"] == manifest
+
+
+def test_build_baseline_record_extracts_manifest_and_metrics(tmp_path):
+    from scripts.register_baseline_result import build_baseline_record
+
+    result_path = tmp_path / "eval.json"
+    result_path.write_text(
+        json.dumps(
+            {
+                "benchmark_manifest": {
+                    "input_path": "data/evaluation/papers_metadata_light_30.jsonl",
+                    "app_config_hash": "app-hash",
+                    "prompt_hash": "prompt-hash",
+                    "minimax_model": "MiniMax-M2.7",
+                },
+                "metrics": {
+                    "hit_at_5": 14,
+                    "mrr": 0.2589,
+                    "coarse_hit_count": 28,
+                    "coarse_hit_in_rule_top20_count": 24,
+                    "acceptable_journal_hit_at_5": 24,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    record = build_baseline_record(result_path, label="light30_m27_default")
+
+    assert record == {
+        "label": "light30_m27_default",
+        "result_path": str(result_path),
+        "input_path": "data/evaluation/papers_metadata_light_30.jsonl",
+        "hit_at_5": 14,
+        "mrr": 0.2589,
+        "coarse_hit_count": 28,
+        "coarse_hit_in_rule_top20_count": 24,
+        "acceptable_journal_hit_at_5": 24,
+        "app_config_hash": "app-hash",
+        "prompt_hash": "prompt-hash",
+        "minimax_model": "MiniMax-M2.7",
+    }
+
+
+def test_register_baseline_result_rejects_duplicate_label(tmp_path):
+    from scripts.register_baseline_result import register_baseline_record
+
+    registry_path = tmp_path / "baseline_registry.json"
+    existing = {
+        "baselines": [
+            {
+                "label": "light30_m27_default",
+                "result_path": "old.json",
+            }
+        ]
+    }
+    registry_path.write_text(json.dumps(existing), encoding="utf-8")
+    record = {
+        "label": "light30_m27_default",
+        "result_path": "new.json",
+    }
+
+    with pytest.raises(ValueError, match="already exists"):
+        register_baseline_record(record, registry_path=registry_path, replace=False)
+
+
+def test_register_baseline_result_can_replace_duplicate_label(tmp_path):
+    from scripts.register_baseline_result import register_baseline_record
+
+    registry_path = tmp_path / "baseline_registry.json"
+    registry_path.write_text(
+        json.dumps({"baselines": [{"label": "light30_m27_default", "result_path": "old.json"}]}),
+        encoding="utf-8",
+    )
+    record = {
+        "label": "light30_m27_default",
+        "result_path": "new.json",
+    }
+
+    register_baseline_record(record, registry_path=registry_path, replace=True)
+
+    data = json.loads(registry_path.read_text(encoding="utf-8"))
+    assert data["baselines"] == [record]
