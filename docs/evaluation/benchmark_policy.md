@@ -12,7 +12,7 @@
 |------|----------|------|------|----------|
 | `light30-dev` | `data/evaluation/papers_metadata_light_30.jsonl` | 30 篇 (按 `(research_area, ccf_level)` 各取 1 篇) | 快速迭代：prompt 调优、reranker 草稿、parser 改动 | 高频；LLM 可自由重跑；不进入论文表格 |
 | `full-v2-dev` | `data/evaluation/papers_metadata_v2.jsonl` | 全量 v2 评测集 | 参数选择：特征消融、reranker 训练数据生成、阈值确定 | 中频；可多次 LLM 调用，但应复用 `paper_profile_snapshot` |
-| `heldout-final` | `data/evaluation/papers_metadata_heldout*.jsonl` (TBD；后续阶段生成) | TBD | 仅用于最终论文表格 | **冻结**；仅允许 1 次正式 run，任何重跑必须公开记录 |
+| `heldout-final` | `data/evaluation/papers_metadata_heldout*.jsonl` (TBD) | TBD | 仅用于最终论文表格 | **冻结**；仅允许 1 次正式 run，任何重跑必须公开记录 |
 
 `heldout-final` 的具体文件路径在后续 plan 阶段确定之前，本文件保持 forward-looking；`run_evaluation.py` 的 `--benchmark-profile` 接入以 `heldout-final` 命名即可。
 
@@ -22,6 +22,8 @@
 
 允许：prompt 调优、reranker 草稿、parser 改动、embedding 切换、多次 LLM 调用、删除/补全样本。
 禁止：写入正式论文表格、作为最终数字被引用。
+
+进入 light30 benchmark 前必须先通过 `python scripts/build_lightweight_eval_set.py --validate-only` 校验（30 篇数量与 `(research_area, ccf_level)` 各 1 篇的分布）。
 
 ### `full-v2-dev` —— 参数选择
 
@@ -33,13 +35,17 @@
 
 允许：单次正式 run、产出最终论文表格数字。
 禁止：任何形式的调参、特征筛选、reranker 选择、候选重排筛选；不得基于 `heldout-final` 反馈修改算法并再次运行。
-例外：若发现 run 异常（如 pipeline crash、配置错误），允许 1 次 rerun，但必须在 paper 中公开声明 rerun 原因与日期。
+例外：若发现 run 异常（如 pipeline crash、配置错误），允许 1 次 rerun，但必须在论文中公开声明 rerun 原因与日期。例外仅限于以下客观条件之一：
+  - (a) 流水线 crash 且未产出完整结果；
+  - (b) 已保存的 `benchmark_manifest` 与运行配置不一致（由 manifest 自检发现）；
+  - (c) LLM / embedding 服务 5xx 错误率超过 5% 且无法补救。
+  数字偏低、Top-1 翻转率突增、acceptable@5 数值不理想等不构成 rerun 理由。
 
 ## 泄漏规则 (Leakage Rule)
 
-正式实验开始前，必须对 `data/typical_abstracts/` 与 `data/accepted_papers/` 跑一次 `scripts/clean_benchmark.py`，且报告 `summary` 中 `typical_abstract` 与 `accepted_paper` 命中数均为 0。具体规则：
+正式实验开始前，必须对 `data/typical_abstracts/` 与 `data/accepted_papers/` 跑一次 `scripts/clean_benchmark.py`，且报告 `summary.leaked_typical_entry_count == 0` 与 `summary.leaked_accepted_paper_entry_count == 0`（`summary.match_count == 0` 为其别名）。具体规则：
 
-- 测试论文 `title` 不得出现在 `data/typical_abstracts/*.json` 的扫描字段（whichever are present）：`title` / `paper_title` / `source_title` / `abstract` / `text`。
+- 测试论文 `title` 不得出现在 `data/typical_abstracts/*.json` 的扫描字段：`title` / `paper_title` / `source_title` / `abstract` / `text`（五字段均参与拼接，缺失字段视为空串）。
 - 测试论文 `abstract` 不得作为整体或 **≥ 160 字符片段** 出现在 typical abstracts 中。
 - 测试论文 `title` 不得出现在 `data/accepted_papers/*.json` 的 `papers[*].title` 字段。
 - 测试论文 `abstract` 不得作为整体或 **≥ 160 字符片段** 出现在 accepted papers 中。
@@ -58,7 +64,7 @@ python scripts/clean_benchmark.py \
 
 注：`data/accepted_papers/` 目录在阶段 2 才正式构建；本阶段的检测在目录缺失时静默跳过，文档中其它示例均按 forward-looking 写法。
 
-报告 `matches` 数组必须为空（`summary.total_matches == 0`）才能进入正式实验；否则应先清理 typical/accepted-paper 库再重新生成干净库。
+报告 `matches` 数组必须为空（`summary.leaked_entry_count == 0`）才能进入正式实验；否则应先清理 typical/accepted-paper 库再重新生成干净库。
 
 ## Profile Snapshot 规则
 
@@ -72,10 +78,12 @@ python scripts/clean_benchmark.py \
 
 snapshot 内容由 `src/evaluation/benchmark_manifest.py` 在保存结果时记录；任何 `manifest.profile_snapshot_reused == false` 的结果不能进入论文表格。
 
+语料侧 snapshot（`data/typical_abstracts/` 清理后的目录路径与 `data/accepted_papers/` 选定的版本）同样属于可复现契约：typical 侧的 clean 目录在 `clean_benchmark.py` 报告中以 `summary.clean_typical_dir` 字段记录；accepted-paper 侧的 snapshot 路径在阶段 2 完成后由 `benchmark_manifest` 记录（当前 forward-looking）。
+
 ## 违反与处理
 
 - 在 `heldout-final` 上发现调参、重新选择候选、基于反馈修改算法：视为泄漏 holdout，对应结果作废，`heldout-final` 集合应保持冻结；新实验必须更换 holdout 集。
-- 在 `light30-dev` / `full-v2-dev` 上发现泄漏：立即用 `scripts/clean_benchmark.py` 清理 `data/typical_abstracts/` 与 `data/accepted_papers/`，重新生成干净库，并重跑相应 benchmark。
+- 在 `light30-dev` / `full-v2-dev` 上发现泄漏：对 `data/typical_abstracts/`，使用 `scripts/clean_benchmark.py` 的快照模式重写干净库；对 `data/accepted_papers/`，当前仅产出报告（阶段 2 才完成 accepted-paper 清理能力），需人工从源头重新构建。两边修复后重跑相应 benchmark。
 - 任何例外（如 `heldout-final` 必要的 1 次 rerun）必须以 ADR (`docs/adr/`) 或 issue 形式记录原因、日期、操作人，不允许在 commit message 之外单独留痕。
 
 ## 相关文件
@@ -84,4 +92,4 @@ snapshot 内容由 `src/evaluation/benchmark_manifest.py` 在保存结果时记�
 - 扫描脚本：`scripts/clean_benchmark.py`
 - 实现：`src/evaluation/clean_benchmark.py`、`src/evaluation/benchmark_manifest.py`
 - 数据：`data/typical_abstracts/*.json`、`data/accepted_papers/*.json`
-- 评测入口：`scripts/run_evaluation.py`（参数 `--benchmark-profile light30|full-v2|custom`）
+- 评测入口：`scripts/run_evaluation.py`（参数 `--benchmark-profile light30|full-v2|custom`；`custom` 需显式给 `--input`，可指向任意 jsonl）
