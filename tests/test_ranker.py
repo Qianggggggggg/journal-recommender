@@ -14,9 +14,11 @@ class _FakeLLMResponse:
 class _RecordingLLM:
     def __init__(self):
         self.user_prompt = ""
+        self.timeout = None
 
     def chat_auto(self, system_prompt, user_prompt, timeout=200):
         self.user_prompt = user_prompt
+        self.timeout = timeout
         return _FakeLLMResponse(
             '{"rankings":[{"journal_id":"target","score":0.9,"reasons":["ok"],"confidence":0.8}]}'
         )
@@ -269,3 +271,18 @@ def test_llm_ranker_does_not_expose_internal_retrieval_fields():
     assert "scope_boundary_strength" not in llm.user_prompt
     assert "typical_expansion_strength" not in llm.user_prompt
     assert "rule_score" not in llm.user_prompt
+
+
+def test_llm_ranker_uses_configured_timeout():
+    llm = _RecordingLLM()
+    ranker = LLMRanker(
+        llm,
+        "system",
+        "候选期刊：{journals_info}\n论文：{title}\n总数：{total_candidates}",
+        timeout_seconds=420,
+    )
+    journal = Journal(journal_id="target", journal_name="Target Journal")
+
+    ranker.rank([(journal, 1.0, ["ok"])], PaperProfile(title="Entity linking"))
+
+    assert llm.timeout == 420

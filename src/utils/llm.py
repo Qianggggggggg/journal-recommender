@@ -54,38 +54,40 @@ def parse_json_response(content: str) -> dict[str, Any] | None:
         return ''.join(c for c in s if ord(c) >= 0x20 or c in '\t\n\r')
     cleaned = remove_invalid_controls(cleaned)
 
-    # 策略3：尝试解析数组（优先），使用 raw_decode 处理尾部多余文本
-    first_bracket = cleaned.find("[")
-    if first_bracket >= 0:
-        try:
-            result, end_idx = json.JSONDecoder().raw_decode(cleaned[first_bracket:])
-            # 检查 remainder：如果有实质内容残留（不是单纯的 ] 结尾），说明不是纯数组，是对象内的数组
-            remainder = cleaned[first_bracket + end_idx:].strip()
-            if remainder and not remainder.startswith("]"):
-                # 有实质内容残留，回退到策略4解析对象
-                pass
-            else:
-                return result
-        except json.JSONDecodeError:
-            pass
-
-    # 策略4：尝试解析对象
-    first_brace = cleaned.find("{")
-    if first_brace >= 0:
-        try:
-            result, _ = json.JSONDecoder().raw_decode(cleaned[first_brace:])
-            # 兼容处理：如果是包装格式 {"rankings": [...]}，提取内层数组
-            if isinstance(result, dict):
-                for key in ["rankings", "results", "items", "papers", "journals"]:
-                    if key in result and isinstance(result[key], list):
-                        inner = result[key]
-                        if len(inner) > 0:
-                            return inner
-            return result
-        except json.JSONDecodeError:
-            pass
+    # 策略3：扫描所有可能的 JSON 起点。LLM 有时会先输出分析，
+    # 分析文本里也可能包含非 JSON 的 {集合} 或 [标注]。
+    for result in _iter_json_candidates(cleaned):
+        normalized = _normalize_parsed_json(result)
+        if normalized is not None:
+            return normalized
 
     logger.warning(f"无法解析 JSON 响应: {content[:100]}...")
+    return None
+
+
+def _iter_json_candidates(content: str):
+    decoder = json.JSONDecoder()
+    for idx, char in enumerate(content):
+        if char not in "{[":
+            continue
+        try:
+            result, _ = decoder.raw_decode(content[idx:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(result, (dict, list)):
+            yield result
+
+
+def _normalize_parsed_json(result: Any) -> dict[str, Any] | list[Any] | None:
+    if isinstance(result, dict):
+        for key in ["rankings", "results", "items", "papers", "journals"]:
+            if key in result and isinstance(result[key], list):
+                inner = result[key]
+                if len(inner) > 0:
+                    return inner
+        return result
+    if isinstance(result, list):
+        return result
     return None
 
 

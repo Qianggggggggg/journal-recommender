@@ -1,6 +1,7 @@
 // 论文投稿期刊推荐系统 - 前端逻辑
 
 const API_BASE = '/api';
+let latestProgressPercent = 0;
 
 // 模式切换
 document.querySelectorAll('.mode-btn').forEach(btn => {
@@ -55,7 +56,11 @@ function showEmptyState() {
 function updateProgress(data) {
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
-    if (progressFill) progressFill.style.width = `${data.percent}%`;
+    const nextPercent = Number.isFinite(Number(data.percent))
+        ? Math.max(latestProgressPercent, Math.min(100, Number(data.percent)))
+        : latestProgressPercent;
+    latestProgressPercent = nextPercent;
+    if (progressFill) progressFill.style.width = `${nextPercent}%`;
     if (progressText) progressText.textContent = data.message || `处理中 ${data.percent}%`;
 }
 
@@ -71,6 +76,7 @@ function showLoading() {
     resetStates();
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
+    latestProgressPercent = 0;
     if (progressFill) progressFill.style.width = '0%';
     if (progressText) progressText.textContent = '准备中...';
     document.getElementById('loading').classList.remove('hidden');

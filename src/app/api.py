@@ -34,7 +34,7 @@ from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
 from ..utils.text import quality_adjustment_factor
 from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
-from ..utils.llm import MiniMaxLLM
+from ..utils.llm_config import build_minimax_llm
 from ..utils.embedding import OllamaEmbedding
 from ..utils.file_parser import extract_text_from_file, extract_layout_blocks
 from ..papers.section_splitter import build_paper_ast
@@ -57,12 +57,6 @@ router = APIRouter()
 _pipeline: Optional[RecommenderPipeline] = None
 _store: Optional[JournalStore] = None
 STREAM_PROGRESS_INTERVAL_SECONDS = 1.0
-STREAM_RANKING_PROGRESS_MESSAGES = [
-    "正在召回候选期刊...",
-    "正在进行规则排序...",
-    "正在进行 LLM 精排...",
-    "正在整理排序证据...",
-]
 
 
 @lru_cache(maxsize=1)
@@ -105,21 +99,12 @@ def get_pipeline() -> RecommenderPipeline:
         bm25.build_index()
 
         # 初始化 LLM（必须配置 API key）
-        api_key = app_config["minimax"]["api_key"]
-        if api_key.startswith("${") and api_key.endswith("}"):
-            env_var = api_key[2:-1]
-            api_key = os.getenv(env_var)
-        if not api_key:
-            raise RuntimeError("MINIMAX_API_KEY 未配置，请设置环境变量")
-        llm = MiniMaxLLM(
-            api_key=api_key,
-            base_url=app_config["minimax"]["base_url"],
-            model=app_config["minimax"]["model"],
-        )
+        llm = build_minimax_llm(app_config)
 
         embedding_client = OllamaEmbedding(
             base_url=app_config["ollama"]["base_url"],
             model=app_config["ollama"]["embedding_model"],
+            timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
         )
 
         # 只有向量搜索可用时才创建 embedding retriever
@@ -140,6 +125,7 @@ def get_pipeline() -> RecommenderPipeline:
             llm,
             prompts["llm_ranker_system"],
             prompts["llm_ranker_user"],
+            timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
         )
 
         quality_assessor = PaperQualityAssessor(llm)
@@ -684,17 +670,22 @@ async def recommend_stream(request: Request):
             })
             await asyncio.sleep(0)
 
-            # 阶段 3: 规则排序 & LLM精排 (50-80%) - 由 pipeline.recommend() 统一处理
+            # 阶段 3: 召回、规则排序与 LLM 精排由 pipeline 内部进度回调实时上报。
             yield sse_event("progress", {
                 "stage": "ranking",
-                "percent": 40,
-                "message": "正在进行候选召回与排序..."
+                "percent": 28,
+                "message": "正在启动推荐流程..."
             })
             await asyncio.sleep(0)
 
-            # 调用统一 pipeline（包含检索、粗排、精排）。
-            # 这一步包含向量召回和 LLM 精排，可能耗时较长；放入后台线程并持续推送
-            # SSE 心跳进度，避免前端进度条停在 40% 后直接跳到结果。
+            progress_queue = asyncio.Queue()
+            loop = asyncio.get_running_loop()
+
+            def emit_pipeline_progress(payload: dict) -> None:
+                loop.call_soon_threadsafe(progress_queue.put_nowait, payload)
+
+            # 调用统一 pipeline（包含检索、规则排序、LLM 精排）。
+            # 这一步可能耗时较长；放入后台线程，并把 pipeline 内部阶段进度转发为 SSE。
             recommend_task = asyncio.create_task(asyncio.to_thread(
                 pipeline.recommend,
                 paper_input,
@@ -702,22 +693,51 @@ async def recommend_stream(request: Request):
                 top_k=top_k,
                 mode=mode,
                 oa_preference=oa_preference,
-                quality_prompts=quality_prompts,
+                # stream endpoint 已在前面完成质量评估，避免在 pipeline 内重复调用一次 LLM。
+                quality_prompts=None,
+                progress_callback=emit_pipeline_progress,
             ))
             heartbeat_count = 0
-            while not recommend_task.done():
-                await asyncio.sleep(STREAM_PROGRESS_INTERVAL_SECONDS)
-                if recommend_task.done():
-                    break
-                heartbeat_count += 1
-                percent = min(79.0, round(79.0 - 34.0 / (heartbeat_count + 1), 1))
-                message = STREAM_RANKING_PROGRESS_MESSAGES[
-                    (heartbeat_count - 1) % len(STREAM_RANKING_PROGRESS_MESSAGES)
-                ]
-                yield sse_event("progress", {
-                    "stage": "ranking",
+            last_pipeline_percent = 28.0
+            current_progress = {
+                "stage": "ranking",
+                "percent": last_pipeline_percent,
+                "message": "正在启动推荐流程...",
+            }
+            while not recommend_task.done() or not progress_queue.empty():
+                try:
+                    payload = await asyncio.wait_for(
+                        progress_queue.get(),
+                        timeout=STREAM_PROGRESS_INTERVAL_SECONDS,
+                    )
+                except asyncio.TimeoutError:
+                    if recommend_task.done():
+                        continue
+                    heartbeat_count += 1
+                    percent = min(
+                        79.0,
+                        max(last_pipeline_percent + 0.5, round(79.0 - 34.0 / (heartbeat_count + 1), 1)),
+                    )
+                    current_progress = {
+                        **current_progress,
+                        "percent": percent,
+                    }
+                    yield sse_event("progress", {
+                        **current_progress,
+                        "heartbeat": True,
+                    })
+                    last_pipeline_percent = percent
+                    continue
+
+                percent = float(payload.get("percent", last_pipeline_percent))
+                percent = max(last_pipeline_percent, min(percent, 82.0))
+                last_pipeline_percent = percent
+                current_progress = {
+                    **payload,
                     "percent": percent,
-                    "message": message
+                }
+                yield sse_event("progress", {
+                    **current_progress,
                 })
 
             rec_result = await recommend_task

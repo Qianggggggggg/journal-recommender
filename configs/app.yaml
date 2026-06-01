@@ -6,12 +6,13 @@ app:
 minimax:
   api_key: "${MINIMAX_API_KEY}"
   base_url: "https://api.minimax.chat"
-  model: "MiniMax-M2.7"
-  temperature: 0.7
+  model: "MiniMax-M3"
+  temperature: 0.2
 
 ollama:
   base_url: "http://localhost:11434"
   embedding_model: "qwen3-embedding:4b"
+  timeout_seconds: 180
 
 candidate_generator:
   retrieval_target: "typical_abstracts"  # scope_text | typical_abstracts
@@ -50,6 +51,7 @@ data:
 
 ranking:
   strategy: "llm"               # llm | two_tower | two_stage
+  llm_ranker_timeout_seconds: 420
   use_two_tower: false          # ablation switch
   use_cross_encoder: false      # ablation switch
   two_tower_model_path: "data/models/two_tower_ranker.pt"

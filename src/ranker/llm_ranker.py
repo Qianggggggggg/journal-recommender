@@ -19,10 +19,26 @@ class LLMRankerError(Exception):
 class LLMRanker:
     """LLM 排序器（仅LLM，无规则降级）"""
 
-    def __init__(self, llm: MiniMaxLLM, system_prompt: str, user_prompt_template: str):
+    JSON_OUTPUT_CONTRACT = """
+
+【输出格式硬约束】
+只输出一个合法 JSON 对象，不要输出 Markdown，不要输出分析过程，不要使用 ```json 代码块。
+JSON 对象必须形如：
+{"rankings":[{"journal_id":"...","score":0.92,"reasons":["Scope对齐：..."],"confidence":0.88}]}
+除该 JSON 对象外不要添加任何额外文本。
+"""
+
+    def __init__(
+        self,
+        llm: MiniMaxLLM,
+        system_prompt: str,
+        user_prompt_template: str,
+        timeout_seconds: float = 200,
+    ):
         self.llm = llm
         self.system_prompt = system_prompt
         self.user_prompt_template = user_prompt_template
+        self.timeout_seconds = timeout_seconds
 
     @tenacity.retry(
         wait=tenacity.wait_exponential(multiplier=2, min=2, max=8),
@@ -74,11 +90,19 @@ class LLMRanker:
 
         # 调用 LLM（超时 200s，自动调整max_tokens）
         try:
-            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=200)
+            response = self.llm.chat_auto(
+                self._system_prompt(),
+                user_prompt,
+                timeout=self.timeout_seconds,
+            )
         except Exception as e:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 
         # 解析结果
+        if not response.content or not response.content.strip():
+            usage = getattr(response, "usage", {}) or {}
+            raise LLMRankerError(f"LLM返回空响应，无法解析 JSON。usage={usage}")
+
         data = parse_json_response(response.content)
         if not data:
             raise LLMRankerError(f"LLM响应格式错误，无法解析: {response.content}")
@@ -107,3 +131,8 @@ class LLMRanker:
         # 按 LLM 分数排序
         results.sort(key=lambda x: x[1], reverse=True)
         return results[:top_k], "llm"
+
+    def _system_prompt(self) -> str:
+        if "【输出格式硬约束】" in self.system_prompt:
+            return self.system_prompt
+        return f"{self.system_prompt.rstrip()}{self.JSON_OUTPUT_CONTRACT}"

@@ -1,6 +1,6 @@
 """推荐流程编排"""
 import yaml
-from typing import List, Optional, Dict, Any, Tuple
+from typing import Callable, List, Optional, Dict, Any, Tuple
 
 from ..utils.text import quality_adjustment_factor
 from ..journals.journal_model import Journal, JournalMatch
@@ -37,10 +37,17 @@ class RecommenderPipeline:
         oa_preference: str = "any",
         quality_prompts: Optional[Dict[str, str]] = None,
         diagnostic_journal_ids: Optional[List[str]] = None,
+        progress_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
     ) -> Dict[str, Any]:
         """执行推荐流程"""
         # 0. 评估论文质量
         if self.quality_assessor and quality_prompts:
+            self._emit_progress(
+                progress_callback,
+                stage="quality",
+                percent=22,
+                message="正在评估论文质量...",
+            )
             quality = self.quality_assessor.assess(
                 paper_input,
                 paper_profile,
@@ -53,12 +60,26 @@ class RecommenderPipeline:
             paper_profile.quality_confidence = quality.confidence
             paper_profile.quality_reasons = quality.reasons
             paper_profile.ccf_research_area = quality.ccf_research_area
+            self._emit_progress(
+                progress_callback,
+                stage="quality",
+                percent=25,
+                message=f"论文质量评估完成: {quality.quality_level}",
+                quality_level=quality.quality_level,
+                paper_strength=quality.paper_strength,
+            )
 
         # 1. 候选召回
         query_text = paper_input.title
         if paper_input.abstract:
             query_text += " " + paper_input.abstract
 
+        self._emit_progress(
+            progress_callback,
+            stage="retrieval",
+            percent=30,
+            message="正在召回候选期刊...",
+        )
         candidates, retrieval_trace = self.candidate_generator.generate_with_trace(
             query_text,
             paper_profile,
@@ -66,12 +87,26 @@ class RecommenderPipeline:
             mode=mode,
             diagnostic_journal_ids=diagnostic_journal_ids,
         )
+        self._emit_progress(
+            progress_callback,
+            stage="retrieval",
+            percent=45,
+            message=f"候选召回完成: {len(candidates)} 个候选",
+            candidate_count=len(candidates),
+        )
 
         if not candidates:
             return {"recommendations": [], "warning": "未找到合适的候选期刊"}
 
         # 2. 阶段一：规则打分（只做主题匹配，不含质量调整）
         # 覆盖完整粗召回池，便于评估定位真实 venue 在规则排序中的位置。
+        self._emit_progress(
+            progress_callback,
+            stage="rule_ranking",
+            percent=52,
+            message="正在进行规则排序...",
+            candidate_count=len(candidates),
+        )
         rule_ranked_all = self.rule_scorer.rank(
             candidates,
             paper_profile,
@@ -82,6 +117,13 @@ class RecommenderPipeline:
 
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
         rule_ranked_all = self._apply_quality_adjustment(rule_ranked_all, paper_profile)
+        self._emit_progress(
+            progress_callback,
+            stage="rule_ranking",
+            percent=62,
+            message=f"规则排序完成: {len(rule_ranked_all)} 个候选",
+            rule_candidate_count=len(rule_ranked_all),
+        )
 
         # 构建 LLM 候选集：top20 + scope 边界强候选 + 同领域参考候选 + 受控 typical-only 候选
         llm_candidates = rule_ranked_all[:20]  # top20 必选
@@ -131,6 +173,13 @@ class RecommenderPipeline:
         rank_method = "rule"
         if self.llm_ranker:
             try:
+                self._emit_progress(
+                    progress_callback,
+                    stage="llm_ranking",
+                    percent=68,
+                    message=f"正在进行 LLM 精排: {len(llm_candidates)} 个候选",
+                    llm_candidate_count=len(llm_candidates),
+                )
                 llm_ranked_all, rank_method = self.llm_ranker.rank(
                     llm_candidates,
                     paper_profile,
@@ -140,10 +189,24 @@ class RecommenderPipeline:
             except LLMRankerError as e:
                 raise LLMRankerError(f"LLM精排失败: {e}")
             llm_ranked = self._select_final_llm_ranked(llm_ranked_all, llm_candidates, top_k)
+            self._emit_progress(
+                progress_callback,
+                stage="llm_ranking",
+                percent=78,
+                message="LLM 精排完成",
+                llm_candidate_count=len(llm_candidates),
+            )
         else:
             llm_ranked = [(j, s, r, 0.5) for j, s, r in llm_candidates[:top_k]]
 
         # 4. 构建推荐结果（直接使用 LLMRanker 输出的 reasons，不再单独调用 Explainer）
+        self._emit_progress(
+            progress_callback,
+            stage="finalizing",
+            percent=82,
+            message="正在整理推荐结果...",
+            recommendation_count=len(llm_ranked),
+        )
         recommendations = []
         for journal, score, reasons, confidence in llm_ranked:
             recommendations.append(JournalMatch(
@@ -172,6 +235,19 @@ class RecommenderPipeline:
             result["warning"] = "置信度较低，建议补充摘要以获得更精确的推荐"
 
         return result
+
+    def _emit_progress(
+        self,
+        progress_callback: Optional[Callable[[Dict[str, Any]], None]],
+        **payload: Any,
+    ) -> None:
+        """Emit a best-effort progress event without affecting recommendation results."""
+        if not progress_callback:
+            return
+        try:
+            progress_callback(payload)
+        except Exception:
+            return
 
     def _has_scope_boundary_evidence(self, trace: Optional[dict]) -> bool:
         if not trace:

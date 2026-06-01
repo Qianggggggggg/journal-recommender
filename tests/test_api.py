@@ -139,7 +139,7 @@ def test_journals_endpoint(client):
 
 def test_recommend_endpoint_with_mock(mock_llm):
     """测试推荐接口（使用 mock LLM）"""
-    with patch("src.app.api.MiniMaxLLM", return_value=mock_llm):
+    with patch("src.app.api.build_minimax_llm", return_value=mock_llm):
         with patch("src.app.api.PaperParser") as MockParser:
             mock_profile = MagicMock()
             mock_profile.research_area = ["AI", "CV"]
@@ -193,7 +193,7 @@ def test_recommend_endpoint_with_mock(mock_llm):
 
 def test_recommend_stream_endpoint_with_mock(mock_llm):
     """测试 SSE 流式推荐接口（使用 mock LLM）"""
-    with patch("src.app.api.MiniMaxLLM", return_value=mock_llm):
+    with patch("src.app.api.build_minimax_llm", return_value=mock_llm):
         client = TestClient(app)
 
         # 由于流式接口较复杂，如果 LLM 不可用则只检查结构

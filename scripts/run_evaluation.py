@@ -46,11 +46,12 @@ from src.retriever.typical_abstract_retriever import (
 from src.journals.typical_abstract_store import TypicalAbstractStore
 from src.ranker.rule_scorer import RuleScorer
 from src.ranker.llm_ranker import LLMRanker
-from src.utils.llm import MiniMaxLLM
+from src.utils.llm_config import build_minimax_llm
 from src.utils.embedding import OllamaEmbedding
 from src.utils.text import clean_text
 from src.utils.file_parser import extract_layout_blocks
 from src.papers.section_splitter import build_paper_ast
+from src.evaluation.benchmark_manifest import build_benchmark_manifest
 
 
 @dataclass
@@ -220,19 +221,12 @@ def init_pipeline() -> RecommenderPipeline:
     bm25.build_index()
 
     # LLM
-    api_key = os.getenv("MINIMAX_API_KEY")
-    if not api_key:
-        raise RuntimeError("MINIMAX_API_KEY 未配置")
-
-    llm = MiniMaxLLM(
-        api_key=api_key,
-        base_url=app_config["minimax"]["base_url"],
-        model=app_config["minimax"]["model"],
-    )
+    llm = build_minimax_llm(app_config)
 
     embedding_client = OllamaEmbedding(
         base_url=app_config["ollama"]["base_url"],
         model=app_config["ollama"]["embedding_model"],
+        timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
     )
 
     embedding_retriever = None
@@ -284,7 +278,12 @@ def init_pipeline() -> RecommenderPipeline:
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
     rule_weights = app_config.get("ranking", {}).get("rule_scorer", {})
     scorer = RuleScorer(journals=store.journals, weights=rule_weights)
-    llm_ranker = LLMRanker(llm, prompts["llm_ranker_system"], prompts["llm_ranker_user"])
+    llm_ranker = LLMRanker(
+        llm,
+        prompts["llm_ranker_system"],
+        prompts["llm_ranker_user"],
+        timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+    )
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
 
@@ -855,7 +854,11 @@ def print_report(result: EvaluationResult):
     print("=" * 70)
 
 
-def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/results"):
+def save_results(
+    result: EvaluationResult,
+    output_dir: str = "data/evaluation/results",
+    benchmark_manifest: dict | None = None,
+):
     """保存评估结果"""
     os.makedirs(output_dir, exist_ok=True)
 
@@ -901,6 +904,8 @@ def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/re
         "by_level": dict(result.by_level),
         "paper_results": result.paper_results,
     }
+    if benchmark_manifest is not None:
+        result_dict["benchmark_manifest"] = benchmark_manifest
 
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(result_dict, f, ensure_ascii=False, indent=2)
@@ -913,7 +918,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
-    parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata.jsonl",
+    parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata_light_30.jsonl",
                         help="论文元数据路径")
     parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="abstract",
                         help="推荐模式")
@@ -957,7 +962,14 @@ def main():
 
         # 保存结果
         if not args.no_save:
-            save_results(result)
+            manifest = build_benchmark_manifest(
+                input_path=args.input,
+                mode=args.mode,
+                top_k=top_k,
+                clean_benchmark=False,
+                profile_snapshot_reused=False,
+            )
+            save_results(result, benchmark_manifest=manifest)
 
     print("\n评估完成!")
 
