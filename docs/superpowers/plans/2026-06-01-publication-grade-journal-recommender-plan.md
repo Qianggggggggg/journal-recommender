@@ -109,18 +109,18 @@
 - 测试： `tests/test_benchmark_manifest.py`
 - 修改： `scripts/run_evaluation.py`
 
-- [ ] 写测试：从 `configs/app.yaml`、`configs/prompts.yaml`、输入文件路径、mode、top-k、MiniMax 模型名生成 manifest。
-- [ ] manifest 字段必须包含：`timestamp`、`input_path`、`mode`、`top_k`、`app_config_hash`、`prompt_hash`、`minimax_model`、`embedding_model`、`clean_benchmark`、`profile_snapshot_reused`。
-- [ ] 实现 `hash_file(path: str) -> str`，使用 SHA256。
-- [ ] 实现 `build_benchmark_manifest(...) -> dict`。
-- [ ] 在保存的 evaluation JSON 顶层加入 `benchmark_manifest`。
-- [ ] 运行：
+- [x] 写测试：从 `configs/app.yaml`、`configs/prompts.yaml`、输入文件路径、mode、top-k、MiniMax 模型名生成 manifest。
+- [x] manifest 字段必须包含：`timestamp`、`input_path`、`mode`、`top_k`、`app_config_hash`、`prompt_hash`、`minimax_model`、`embedding_model`、`clean_benchmark`、`profile_snapshot_reused`。
+- [x] 实现 `hash_file(path: str) -> str`，使用 SHA256。
+- [x] 实现 `build_benchmark_manifest(...) -> dict`。
+- [x] 在保存的 evaluation JSON 顶层加入 `benchmark_manifest`。
+- [x] 运行：
 
 ```bash
 pytest tests/test_benchmark_manifest.py tests/test_run_evaluation_diagnostics.py -q
 ```
 
-- [ ] 跑一次 light benchmark：
+- [x] 跑一次 light benchmark：
 
 ```bash
 python scripts/run_evaluation.py \
@@ -130,7 +130,7 @@ python scripts/run_evaluation.py \
   --workers 1
 ```
 
-- [ ] 确认输出 JSON 中包含 `benchmark_manifest`。
+- [x] 确认输出 JSON 中包含 `benchmark_manifest`。
 - [ ] 提交：`test: add benchmark manifest for reproducible evaluation`
 
 ### 任务 0.2：记录当前 Baseline 指标
@@ -157,17 +157,17 @@ python scripts/run_evaluation.py \
 - 修改： `scripts/run_evaluation.py`
 - 测试： `tests/test_lightweight_eval_set.py`
 
-- [ ] 给 `scripts/build_lightweight_eval_set.py` 增加 `--validate-only` 参数。
-- [ ] 校验逻辑必须确认：正好 30 篇，且每个 `(research_area, ccf_level)` 组合正好一篇。
-- [ ] 给 `run_evaluation.py` 增加 `--benchmark-profile light30|full-v2|custom`。
-- [ ] 当选择 `light30` 时，默认输入为 `data/evaluation/papers_metadata_light_30.jsonl`。
-- [ ] 运行：
+- [x] 给 `scripts/build_lightweight_eval_set.py` 增加 `--validate-only` 参数。
+- [x] 校验逻辑必须确认：正好 30 篇，且每个 `(research_area, ccf_level)` 组合正好一篇。
+- [x] 给 `run_evaluation.py` 增加 `--benchmark-profile light30|full-v2|custom`。
+- [x] 当选择 `light30` 时，默认输入为 `data/evaluation/papers_metadata_light_30.jsonl`。
+- [x] 运行：
 
 ```bash
 pytest tests/test_lightweight_eval_set.py -q
 ```
 
-- [ ] 运行：
+- [x] 运行：
 
 ```bash
 python scripts/build_lightweight_eval_set.py --validate-only
@@ -182,11 +182,11 @@ python scripts/build_lightweight_eval_set.py --validate-only
 - 修改： `scripts/clean_benchmark.py`
 - 测试： `tests/test_clean_benchmark.py`
 
-- [ ] 扩展泄漏检测，使其同时扫描 `data/typical_abstracts` 和未来的 `data/accepted_papers`。
-- [ ] 匹配方式：规范化 title 精确匹配；abstract 至少 160 字符片段匹配。
-- [ ] 报告字段 `source_type`，取值为 `typical_abstract` 或 `accepted_paper`。
-- [ ] 保持当前 typical snapshot 生成逻辑不变。
-- [ ] 增加 report-only 命令：
+- [x] 扩展泄漏检测，使其同时扫描 `data/typical_abstracts` 和未来的 `data/accepted_papers`。
+- [x] 匹配方式：规范化 title 精确匹配；abstract 至少 160 字符片段匹配。
+- [x] 报告字段 `source_type`，取值为 `typical_abstract` 或 `accepted_paper`。
+- [x] 保持当前 typical snapshot 生成逻辑不变。
+- [x] 增加 report-only 命令：
 
 ```bash
 python scripts/clean_benchmark.py \
@@ -196,26 +196,26 @@ python scripts/clean_benchmark.py \
   --report data/evaluation/results/light30_leakage_report.json
 ```
 
-- [ ] 运行：
+- [x] 运行：
 
 ```bash
 pytest tests/test_clean_benchmark.py -q
 ```
 
-- [ ] 提交：`test: extend leakage checks to accepted-paper profiles`
+- [x] 提交：`test: extend leakage checks to accepted-paper profiles`
 
 ### 任务 1.3：制定 Held-Out Benchmark 使用规则
 
 **文件：**
 - 新建： `docs/evaluation/benchmark_policy.md`
 
-- [ ] 文档中定义三层 benchmark：`light30-dev`、`full-v2-dev`、`heldout-final`。
-- [ ] 说明 `light30-dev` 只用于快速迭代。
-- [ ] 说明 `full-v2-dev` 用于参数选择。
-- [ ] 说明 `heldout-final` 必须冻结，只能用于最终论文表格。
-- [ ] 写明泄漏规则：测试论文 title/abstract 不得出现在 typical 或 accepted-paper journal profiles 中。
-- [ ] 写明正式论文结果必须使用固定 `paper_profile_snapshot`；如果不固定，必须单独报告 parser 随机性。
-- [ ] 提交：`docs: define benchmark governance policy`
+- [x] 文档中定义三层 benchmark：`light30-dev`、`full-v2-dev`、`heldout-final`。
+- [x] 说明 `light30-dev` 只用于快速迭代。
+- [x] 说明 `full-v2-dev` 用于参数选择。
+- [x] 说明 `heldout-final` 必须冻结，只能用于最终论文表格。
+- [x] 写明泄漏规则：测试论文 title/abstract 不得出现在 typical 或 accepted-paper journal profiles 中。
+- [x] 写明正式论文结果必须使用固定 `paper_profile_snapshot`；如果不固定，必须单独报告 parser 随机性。
+- [x] 提交：`docs: define benchmark governance policy`
 
 ---
 
