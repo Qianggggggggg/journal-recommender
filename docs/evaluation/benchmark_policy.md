@@ -39,7 +39,7 @@
 
 正式实验开始前，必须对 `data/typical_abstracts/` 与 `data/accepted_papers/` 跑一次 `scripts/clean_benchmark.py`，且报告 `summary` 中 `typical_abstract` 与 `accepted_paper` 命中数均为 0。具体规则：
 
-- 测试论文 `title` 不得出现在 `data/typical_abstracts/*.json` 的 `abstracts[*].title` / `paper_title` / `source_title` 字段。
+- 测试论文 `title` 不得出现在 `data/typical_abstracts/*.json` 的扫描字段（whichever are present）：`title` / `paper_title` / `source_title` / `abstract` / `text`。
 - 测试论文 `abstract` 不得作为整体或 **≥ 160 字符片段** 出现在 typical abstracts 中。
 - 测试论文 `title` 不得出现在 `data/accepted_papers/*.json` 的 `papers[*].title` 字段。
 - 测试论文 `abstract` 不得作为整体或 **≥ 160 字符片段** 出现在 accepted papers 中。
@@ -50,11 +50,13 @@
 
 ```bash
 python scripts/clean_benchmark.py \
-  --papers-jsonl data/evaluation/papers_metadata_light_30.jsonl \
+  --input data/evaluation/papers_metadata_light_30.jsonl \
   --typical-dir data/typical_abstracts \
   --accepted-paper-dir data/accepted_papers \
   --report data/evaluation/results/light30_leakage_report.json
 ```
+
+注：`data/accepted_papers/` 目录在阶段 2 才正式构建；本阶段的检测在目录缺失时静默跳过，文档中其它示例均按 forward-looking 写法。
 
 报告 `matches` 数组必须为空（`summary.total_matches == 0`）才能进入正式实验；否则应先清理 typical/accepted-paper 库再重新生成干净库。
 
