@@ -231,8 +231,8 @@ pytest tests/test_clean_benchmark.py -q
 - 测试： `tests/test_accepted_paper_store.py`
 - 新建目录： `data/accepted_papers/`
 
-- [ ] 写测试：每本期刊一个 JSON 文件，可以被正确加载。
-- [ ] 文件格式：
+- [x] 写测试：每本期刊一个 JSON 文件，可以被正确加载。
+- [x] 文件格式：
 
 ```json
 {
@@ -251,17 +251,17 @@ pytest tests/test_clean_benchmark.py -q
 }
 ```
 
-- [ ] 实现 `AcceptedPaperStore.load()`。
-- [ ] 实现 `get_papers(journal_id: str) -> list[dict]`。
-- [ ] 实现 `iter_records() -> Iterable[AcceptedPaperRecord]`。
-- [ ] title/abstract 缺失的记录应该跳过，不能让整个加载失败。
-- [ ] 运行：
+- [x] 实现 `AcceptedPaperStore.load()`。
+- [x] 实现 `get_papers(journal_id: str) -> list[dict]`。
+- [x] 实现 `iter_records() -> Iterable[AcceptedPaperRecord]`。
+- [x] title/abstract 缺失的记录应该跳过，不能让整个加载失败。
+- [x] 运行：
 
 ```bash
 pytest tests/test_accepted_paper_store.py -q
 ```
 
-- [ ] 提交：`feat: add accepted paper store`
+- [x] 提交：`feat: add accepted paper store`
 
 ### 任务 2.2：从本地评测元数据生成初始 Accepted-Paper Corpus
 
