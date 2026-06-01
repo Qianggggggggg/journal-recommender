@@ -1,11 +1,11 @@
-"""Leakage checks and clean typical-abstract snapshots for fair evaluation."""
+"""Leakage checks across typical abstracts and accepted-paper profiles, plus clean typical-abstract snapshots."""
 import json
 import re
 import shutil
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Callable, Iterable, Sequence
 
 
 # Default snippet length used when scanning typical abstracts and accepted papers.
@@ -34,26 +34,6 @@ def load_papers_jsonl(path: str | Path) -> list[dict]:
     return papers
 
 
-def detect_typical_leakage(
-    papers: Sequence[dict],
-    typical_dir: str | Path,
-    *,
-    min_title_chars: int = 24,
-    min_abstract_chars: int = DEFAULT_MIN_ABSTRACT_CHARS,
-) -> LeakageReport:
-    """Find test paper text that appears inside typical abstracts.
-
-    Backward-compatible thin wrapper around :func:`detect_leakage`.
-    """
-    return detect_leakage(
-        papers,
-        typical_dir=typical_dir,
-        accepted_paper_dir=None,
-        min_title_chars=min_title_chars,
-        min_abstract_chars=min_abstract_chars,
-    )
-
-
 def detect_leakage(
     papers: Sequence[dict],
     *,
@@ -74,81 +54,63 @@ def detect_leakage(
         min_abstract_chars=min_abstract_chars,
     )
 
-    matches: list[dict] = []
-    leaked_typical_entries: set[tuple[str, int]] = set()
-    leaked_accepted_entries: set[tuple[str, int]] = set()
-    leaked_papers: set[int] = set()
-    typical_file_count = 0
-    accepted_file_count = 0
+    typical_files = (
+        list(_iter_typical_files(typical_dir)) if typical_dir is not None else []
+    )
+    accepted_files = (
+        list(_iter_accepted_files(accepted_paper_dir))
+        if accepted_paper_dir is not None
+        else []
+    )
 
-    if typical_dir is not None:
-        typical_files = list(_iter_typical_files(typical_dir))
-        typical_file_count = len(typical_files)
-        for path in typical_files:
-            data = _read_json(path)
-            for idx, item in enumerate(data.get("abstracts", [])):
-                haystack = _normalize_text(_entry_text(item))
-                if not haystack:
-                    continue
-                for needle in paper_needles:
-                    if needle["text"] in haystack:
-                        leaked_typical_entries.add((path.name, idx))
-                        leaked_papers.add(needle["paper_index"])
-                        matches.append(
-                            {
-                                "source_type": "typical_abstract",
-                                "paper_index": needle["paper_index"],
-                                "paper_title": needle["paper_title"],
-                                "paper_venue": needle["paper_venue"],
-                                "match_type": needle["match_type"],
-                                "typical_file": path.name,
-                                "journal_id": data.get("journal_id") or path.stem,
-                                "entry_index": idx,
-                                "method_type": item.get("method_type", ""),
-                                "novelty_level": item.get("novelty_level", ""),
-                            }
-                        )
-                        break
+    leaked_typical_entries, _, typical_matches = _scan_source_files(
+        typical_files,
+        data_key="abstracts",
+        entry_text_fn=_entry_text,
+        build_match=lambda path, data, item, idx, needle: {
+            "source_type": "typical_abstract",
+            "paper_index": needle["paper_index"],
+            "paper_title": needle["paper_title"],
+            "paper_venue": needle["paper_venue"],
+            "match_type": needle["match_type"],
+            "typical_file": path.name,
+            "journal_id": data.get("journal_id") or path.stem,
+            "entry_index": idx,
+            "method_type": item.get("method_type", ""),
+            "novelty_level": item.get("novelty_level", ""),
+        },
+        needles=paper_needles,
+    )
+    leaked_accepted_entries, _, accepted_matches = _scan_source_files(
+        accepted_files,
+        data_key="papers",
+        entry_text_fn=_accepted_entry_text,
+        build_match=lambda path, data, item, idx, needle: {
+            "source_type": "accepted_paper",
+            "paper_index": needle["paper_index"],
+            "paper_title": needle["paper_title"],
+            "paper_venue": needle["paper_venue"],
+            "match_type": needle["match_type"],
+            "accepted_paper_file": path.name,
+            "journal_id": data.get("journal_id") or path.stem,
+            "entry_index": idx,
+            "year": item.get("year", ""),
+            "source": item.get("source", ""),
+        },
+        needles=paper_needles,
+    )
 
-    if accepted_paper_dir is not None:
-        accepted_files = list(_iter_accepted_files(accepted_paper_dir))
-        accepted_file_count = len(accepted_files)
-        for path in accepted_files:
-            data = _read_json(path)
-            journal_id = data.get("journal_id") or path.stem
-            for idx, item in enumerate(data.get("papers", [])):
-                haystack = _normalize_text(_accepted_entry_text(item))
-                if not haystack:
-                    continue
-                for needle in paper_needles:
-                    if needle["text"] in haystack:
-                        leaked_accepted_entries.add((path.name, idx))
-                        leaked_papers.add(needle["paper_index"])
-                        matches.append(
-                            {
-                                "source_type": "accepted_paper",
-                                "paper_index": needle["paper_index"],
-                                "paper_title": needle["paper_title"],
-                                "paper_venue": needle["paper_venue"],
-                                "match_type": needle["match_type"],
-                                "accepted_paper_file": path.name,
-                                "journal_id": journal_id,
-                                "entry_index": idx,
-                                "year": item.get("year", ""),
-                                "source": item.get("source", ""),
-                            }
-                        )
-                        break
-
+    matches: list[dict] = [*typical_matches, *accepted_matches]
     leaked_entry_count = len(leaked_typical_entries) + len(leaked_accepted_entries)
+    leaked_paper_count = len({m["paper_index"] for m in matches})
 
     summary = {
         "paper_count": len(papers),
-        "typical_file_count": typical_file_count,
-        "accepted_paper_file_count": accepted_file_count,
+        "typical_file_count": len(typical_files),
+        "accepted_paper_file_count": len(accepted_files),
         "match_count": len(matches),
         "leaked_entry_count": leaked_entry_count,
-        "leaked_paper_count": len(leaked_papers),
+        "leaked_paper_count": leaked_paper_count,
         "leaked_typical_entry_count": len(leaked_typical_entries),
         "leaked_accepted_paper_entry_count": len(leaked_accepted_entries),
     }
@@ -172,15 +134,19 @@ def build_clean_typical_snapshot(
     """
     typical_dir = Path(typical_dir)
     output_dir = Path(output_dir)
-    report = detect_typical_leakage(
+    report = detect_leakage(
         papers,
-        typical_dir,
+        typical_dir=typical_dir,
+        accepted_paper_dir=None,
         min_title_chars=min_title_chars,
         min_abstract_chars=min_abstract_chars,
     )
     leaked_entries = {
         (match["typical_file"], match["entry_index"])
         for match in report.matches
+        # Forward-compatibility default: callers may pass matches from
+        # detect_leakage() directly; an absent source_type is treated as
+        # typical_abstract (the only source this snapshot filters).
         if match.get("source_type", "typical_abstract") == "typical_abstract"
     }
 
@@ -280,6 +246,38 @@ def _iter_accepted_files(accepted_paper_dir: str | Path) -> Iterable[Path]:
 
 def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _scan_source_files(
+    files: Iterable[Path],
+    *,
+    data_key: str,
+    entry_text_fn: Callable[[dict], str],
+    build_match: Callable[[Path, dict, dict, int, dict], dict],
+    needles: list[dict],
+) -> tuple[set[tuple[str, int]], set[int], list[dict]]:
+    """Scan a list of source files for leaked paper text.
+
+    Returns ``(leaked_entries, leaked_paper_indices, matches)``. The helper is
+    shared between the typical-abstract and accepted-paper scans; per-source
+    field shape is owned by the caller's ``build_match`` closure.
+    """
+    leaked_entries: set[tuple[str, int]] = set()
+    leaked_paper_indices: set[int] = set()
+    matches: list[dict] = []
+    for path in files:
+        data = _read_json(path)
+        for idx, item in enumerate(data.get(data_key, [])):
+            haystack = _normalize_text(entry_text_fn(item))
+            if not haystack:
+                continue
+            for needle in needles:
+                if needle["text"] in haystack:
+                    leaked_entries.add((path.name, idx))
+                    leaked_paper_indices.add(needle["paper_index"])
+                    matches.append(build_match(path, data, item, idx, needle))
+                    break
+    return leaked_entries, leaked_paper_indices, matches
 
 
 def _entry_text(item: dict) -> str:

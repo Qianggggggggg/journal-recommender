@@ -6,7 +6,6 @@ from pathlib import Path
 from src.evaluation.clean_benchmark import (
     build_clean_typical_snapshot,
     detect_leakage,
-    detect_typical_leakage,
 )
 
 
@@ -41,7 +40,7 @@ def _write_accepted(path: Path, journal_id: str, papers: list[dict]) -> None:
     )
 
 
-def test_detect_typical_leakage_finds_title_overlap(tmp_path):
+def test_detect_leakage_finds_title_overlap_in_typical(tmp_path):
     typical_dir = tmp_path / "typical"
     typical_dir.mkdir()
     _write_typical(
@@ -68,7 +67,7 @@ def test_detect_typical_leakage_finds_title_overlap(tmp_path):
         }
     ]
 
-    report = detect_typical_leakage(papers, typical_dir)
+    report = detect_leakage(papers, typical_dir=typical_dir)
 
     assert report.summary["paper_count"] == 1
     assert report.summary["leaked_entry_count"] == 1

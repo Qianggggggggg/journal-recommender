@@ -17,7 +17,7 @@ from src.evaluation.clean_benchmark import (
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Detect test leakage in typical abstracts.")
+    parser = argparse.ArgumentParser(description="Detect test leakage in typical abstracts and accepted-paper profiles.")
     parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata.jsonl")
     parser.add_argument("--typical-dir", default="data/typical_abstracts")
     parser.add_argument(
@@ -46,8 +46,11 @@ def main() -> None:
 
     papers = load_papers_jsonl(args.input)
     accepted_dir = args.accepted_paper_dir
-    if accepted_dir is not None and not Path(accepted_dir).exists():
-        # Silently skip missing accepted-paper directory (e.g. not yet provisioned).
+    if accepted_dir and not Path(accepted_dir).exists():
+        print(
+            f"warning: accepted-paper dir does not exist: {accepted_dir}",
+            file=sys.stderr,
+        )
         accepted_dir = None
 
     if args.output_dir:
