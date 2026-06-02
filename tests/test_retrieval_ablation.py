@@ -276,6 +276,103 @@ def test_evaluate_variant_reports_retrieval_and_rule_metrics():
     assert result["paper_results"][0]["retrieval_rank"] == 1
 
 
+def test_evaluate_variant_persists_features_per_candidate():
+    """evaluate_variant 输出 JSON 必须包含 feature_names + 每篇 paper 的 candidate_features。
+
+    这是 4.1.e 的核心:features 必须能落到磁盘,4.1.f 才能拿 ablation JSON 转 LTR 训练数据。
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES
+
+    store = JournalStore()
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        subject_tags=["ai"],
+        journal_profile="semantic target ai",
+    )
+    distractor = Journal(
+        journal_id="distractor",
+        journal_name="Distractor Journal",
+        journal_profile="other",
+    )
+    store.add_journals([target, distractor])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(distractor, 1.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(target, 1.0)]),
+    )
+    scorer = RuleScorer(journals=store.journals)
+    papers = [
+        {
+            "title": "Semantic target",
+            "abstract": "AI method",
+            "venue": "Target Journal",
+            "research_area": ["ai"],
+        }
+    ]
+    journal_name_to_id = {"target journal": "target"}
+
+    result = evaluate_variant(
+        papers=papers,
+        generator=generator,
+        scorer=scorer,
+        journal_name_to_id=journal_name_to_id,
+        variant="typical",
+        mode="abstract",
+        candidate_top_k=10,
+    )
+
+    # 1. feature_names 出现在 variant 顶层
+    assert result.get("feature_names") == FEATURE_NAMES
+    # 2. 每篇 paper 的 candidate_features 是 {jid: [floats]} 字典
+    pr = result["paper_results"][0]
+    assert "candidate_features" in pr
+    cf = pr["candidate_features"]
+    assert isinstance(cf, dict)
+    # 3. 至少 target 期刊有 features 列表
+    assert "target" in cf
+    assert isinstance(cf["target"], list)
+    assert len(cf["target"]) == len(FEATURE_NAMES)
+    assert all(isinstance(v, float) for v in cf["target"])
+
+
+def test_evaluate_variant_persists_features_even_without_accepted_store():
+    """accepted_paper_store 缺省时,features 也要落地(candidate_in_accepted_corpus=0.0)。"""
+    from src.ranker.feature_builder import FEATURE_NAMES
+
+    store = JournalStore()
+    target = Journal(journal_id="target", journal_name="Target Journal", journal_profile="x")
+    store.add_journal(target)
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(target, 1.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(target, 1.0)]),
+    )
+    scorer = RuleScorer(journals=store.journals)
+    papers = [{"title": "T", "abstract": "A", "venue": "Target Journal", "research_area": []}]
+    journal_name_to_id = {"target journal": "target"}
+
+    result = evaluate_variant(
+        papers=papers,
+        generator=generator,
+        scorer=scorer,
+        journal_name_to_id=journal_name_to_id,
+        variant="typical",
+        mode="abstract",
+        candidate_top_k=5,
+    )
+
+    pr = result["paper_results"][0]
+    corpus_idx = FEATURE_NAMES.index("candidate_in_accepted_corpus")
+    # accepted store 缺省 → 全部候选 candidate_in_accepted_corpus=0.0
+    for jid, feats in pr["candidate_features"].items():
+        assert feats[corpus_idx] == 0.0
+
+
 def test_evaluate_rule_trial_reuses_snapshots_without_llm():
     store = JournalStore()
     target = Journal(

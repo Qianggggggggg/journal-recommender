@@ -1,9 +1,11 @@
 """混合召回"""
 from typing import Dict, Iterable, List, Optional, Tuple
 
+from ..journals.accepted_paper_store import AcceptedPaperStore
 from ..journals.journal_model import Journal
 from ..journals.journal_store import JournalStore
 from ..papers.paper_model import PaperProfile
+from ..ranker.feature_builder import attach_features_to_trace
 from .accepted_paper_retriever import (
     AcceptedPaperBM25Retriever,
     AcceptedPaperEmbeddingRetriever,
@@ -72,6 +74,31 @@ class CandidateGenerator:
         """生成候选期刊"""
         candidates, _ = self.generate_with_trace(query_text, paper_profile, top_k=top_k, mode=mode)
         return candidates
+
+    def attach_features(
+        self,
+        trace: Dict[str, dict],
+        paper_profile: PaperProfile,
+        rule_ranks: Optional[Dict[str, int]],
+        rule_scores: Optional[Dict[str, float]],
+        accepted_paper_store: Optional[AcceptedPaperStore] = None,
+    ) -> None:
+        """把 LTR 训练特征注入 trace(per Task 4.1.d + ADR 0001)。
+
+        必须在 rule_scorer.rank(...) 之后调用,因为 features 需要 rule_rank/rule_score。
+        ``accepted_paper_store`` 可为 None(此时 candidate_in_accepted_corpus 全为 0)。
+
+        原地修改 trace:每本期刊 entry 增加 ``features`` (list[float]) 与
+        ``feature_names`` (list[str])。
+        """
+        attach_features_to_trace(
+            trace=trace,
+            paper_profile=paper_profile,
+            journal_store=self.store,
+            rule_ranks=rule_ranks,
+            rule_scores=rule_scores,
+            accepted_paper_store=accepted_paper_store,
+        )
 
     def generate_with_trace(
         self,

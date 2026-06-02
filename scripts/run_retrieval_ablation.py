@@ -19,7 +19,9 @@ sys.path.insert(0, str(project_root))
 from src.journals.journal_store import JournalStore
 from src.journals.typical_abstract_store import TypicalAbstractStore
 from src.journals.vector_searcher import FaissIndex, VectorSearcher
+from src.journals.accepted_paper_store import AcceptedPaperStore
 from src.papers.paper_model import PaperProfile
+from src.ranker.feature_builder import FEATURE_NAMES
 from src.ranker.rule_scorer import RuleScorer
 from src.retriever.bm25_retriever import BM25Retriever
 from src.retriever.candidate_generator import CandidateGenerator
@@ -181,6 +183,7 @@ def evaluate_variant(
     candidate_top_k: int = 50,
     show_progress: bool = False,
     route_config: dict[str, int] | None = None,
+    accepted_paper_store: AcceptedPaperStore | None = None,
 ) -> dict:
     retrieval = _new_metric_accumulator()
     rule = _new_metric_accumulator()
@@ -255,6 +258,37 @@ def evaluate_variant(
                 rule_rank=rule_rank,
             )
 
+            # 4.1.e:把 LTR 训练特征注入 trace,再把每条候选的 features
+            # 落到 paper_result["candidate_features"]。caller 在 4.1.f
+            # 会拿这个 JSON 转成 LTR 训练数据。
+            rule_ranks_map = {
+                jid: idx + 1 for idx, (jid, *_) in enumerate(
+                    ((j.journal_id, j) for j, _, _ in rule_ranked)
+                )
+            }
+            rule_scores_map = {
+                jid: float(score) for jid, (_, score, _) in (
+                    (j.journal_id, (j, s, _)) for j, s, _ in rule_ranked
+                )
+            }
+            try:
+                generator.attach_features(
+                    trace=retrieval_trace,
+                    paper_profile=profile,
+                    rule_ranks=rule_ranks_map,
+                    rule_scores=rule_scores_map,
+                    accepted_paper_store=accepted_paper_store,
+                )
+            except Exception as exc:  # noqa: BLE001
+                # features 注入失败不能让 ablation 整体失败
+                print(f"[warn] attach_features failed for paper {paper.get('title', '')}: {exc}", file=sys.stderr)
+                candidate_features = {}
+            else:
+                candidate_features = {
+                    jid: entry.get("features", [])
+                    for jid, entry in retrieval_trace.items()
+                }
+
             paper_results.append({
                 "title": paper.get("title", ""),
                 "venue": paper.get("venue", ""),
@@ -266,6 +300,7 @@ def evaluate_variant(
                 "target_route_attribution": target_attribution,
                 "retrieval_top5": candidate_ids[:5],
                 "rule_top5": rule_ids[:5],
+                "candidate_features": candidate_features,
             })
             progress_bar.update(1)
             progress_bar.set_postfix(
@@ -295,6 +330,7 @@ def evaluate_variant(
         "route_attribution": route_attribution,
         "retrieval": finalized_retrieval,
         "rule": finalized_rule,
+        "feature_names": list(FEATURE_NAMES),
         "paper_results": paper_results,
     }
 
