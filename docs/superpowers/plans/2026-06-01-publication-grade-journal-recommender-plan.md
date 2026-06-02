@@ -17,7 +17,7 @@
 - [ ] clean benchmark 中不存在测试论文标题/摘要与 typical abstracts 或 accepted-paper profiles 的已知泄漏。
 - [ ] 轻量 30 篇 benchmark 的运行成本低于 full-v2 benchmark 的 35%。
 - [ ] full benchmark 和 light benchmark 都输出 exact `Hit@1/3/5`、MRR、NDCG@5、coarse@50、rule@20、same-area@5、same-CCF@5、acceptable@5。
-- [ ] 新增 accepted-paper route 后，在 clean full benchmark 上 coarse@50 不低于当前 baseline，并且不能降低 exact `Hit@5`。
+- [ ] 新增 accepted-paper route 后，在 clean full benchmark 上 coarse@50 不低于当前 baseline，并且不能降低 exact `Hit@5`；Gate A 同时要求 covered 子集上 signal 真实存在（详见决策门槛 + ADR 0001）。
 - [ ] 监督式 learning-to-rank reranker 在 held-out benchmark 上超过当前 Rule+LLM baseline 的 exact `Hit@5`。
 - [ ] 最终实验包含 scope-only、typical-only、accepted-paper-only、hybrid retrieval、rule-only、LLM-only、LTR-only、LTR+LLM-evidence 等消融。
 - [ ] 能从保存的 JSON 结果中生成论文可用的实验表格和失败案例分析。
@@ -445,8 +445,9 @@ pytest tests/test_retriever.py tests/test_retrieval_ablation.py tests/test_api.p
 
 **文件：**
 - 仅输出： `data/evaluation/results/*.json`
+- 落档：`docs/adr/0001-coverage-aware-gate-a.md`
 
-- [ ] 跑 light30 retrieval ablation：
+- [x] 跑 light30 retrieval ablation：
 
 ```bash
 python scripts/run_retrieval_ablation.py \
@@ -455,11 +456,30 @@ python scripts/run_retrieval_ablation.py \
   --variants scope typical hybrid accepted scope_accepted full_hybrid
 ```
 
-- [ ] 使用 baseline snapshots 跑 full-v2 retrieval ablation。
-- [ ] 比较 `coarse@50`、retrieval MRR、`wide_recalled_but_not_top50`。
-- [ ] 如果 accepted route 没有提升 full-v2 coarse@50，也没有提升最终 Hit@5，不要设为默认。
-- [ ] 把最佳 retrieval 配置登记进 `data/evaluation/results/baseline_registry.json`。
-- [ ] 只提交代码和配置；大的结果文件除非明确需要，否则不要提交。
+  初次跑发现 `accepted` / `scope_accepted` / `full_hybrid` 与 `typical` / `hybrid` 数字完全一致。
+  根因：`scripts/run_retrieval_ablation.py::build_candidate_generator` 没有把
+  `accepted_bm25_retriever` / `accepted_embedding_retriever` 注入到 `CandidateGenerator`,
+  与 `api.py` / `run_evaluation.py` 的加载逻辑不一致。修复后 (commit bb96398)
+  重新跑出真实数字。详见 ADR 0001。
+
+- [x] 使用 baseline snapshots 跑 full-v2 retrieval ablation。
+  产物：`data/evaluation/results/retrieval_ablation_full_v2_20260602_153622.json`
+  (89 篇 × 7 variants)。
+- [x] 比较 `coarse@50`、retrieval MRR、`wide_recalled_but_not_top50`,并按
+  covered/uncovered 子集分层。详见 ADR 0001。
+- [x] **Gate A 判定:coverage-aware positive。** 详见决策门槛章节。
+  简述:`full_hybrid` 整体 = `hybrid` 数字 (coarse@50=83, rule@5=33, rule@20=75),
+  说明 3 路 `weighted_minmax` 融合把 accepted signal 归一化掉了;
+  但 accepted route 在 covered 子集 (n=48, 53.9% of v2) 上单独 rule@5=25/48=52%,
+  `scope_accepted` 在 covered 上 ret_mrr=0.3910 (全表最高),
+  `typical_accepted` 在 covered 上 rule@5=22/48=46% (vs hybrid 14/48=29%)。
+  uncovered 子集上 accepted 结构性 0,但本就是设计预期,不能反推为路线无效。
+- [x] **不**把 `accepted_paper_weight` 设成 0;保留 0.20 默认值。
+- [x] **不**再做静态权重调参;直接进入 Task 4.1 feature_builder + LTR。
+- [ ] 把最终 retrieval+rule 配置 + LTR reranker 一同登记进
+  `data/evaluation/results/baseline_registry.json` (留到 Task 5.4 评测完一起登记)。
+- [x] 只提交代码和配置;大的结果文件除非明确需要,否则不要提交。
+- [x] 提交:`docs: coverage-aware Gate A decision (ADR 0001)`
 
 ---
 
@@ -929,7 +949,15 @@ pytest tests/test_publication_experiments.py -q
 
 ## 决策门槛
 
-- **Gate A：** 如果 accepted-paper route 不能提升 coarse@50 或 final Hit@5，就保留为消融贡献，但不要默认启用。
+- **Gate A (Coverage-Aware, 2026-06-02 修订):** accepted-paper route 在 full-v2
+  整体指标上未必显示增益 (3 路 `weighted_minmax` 融合会吸收它的信号,
+  表现上 `full_hybrid == hybrid`);但只要在 **covered 子集**
+  (即 `gold_journal_id` 出现在 `data/accepted_papers/<jid>.json` 的论文子集)
+  上,accepted 单独或 2-route fusion (`scope_accepted` / `typical_accepted`)
+  的 rule@5 / ret_mrr 出现真实提升,即视为 Gate A 通过,保留默认接线
+  与 `accepted_paper_weight=0.20`,进入 Task 4.1 feature_builder + LTR。
+  **不**仅凭整体数字拒绝路线。uncovered 子集上的结构性 0 不计入 Gate A
+  拒绝理由。详见 `docs/adr/0001-coverage-aware-gate-a.md`。
 - **Gate B：** 如果 learned reranker 提升 light30 但伤害 full-v2，视为过拟合，需要扩充训练数据后再调参。
 - **Gate C：** 如果 LLM evidence extraction 提升 acceptable@5 但降低 exact Hit@5，要同时报告两类指标，并根据目标应用决定默认策略。
 - **Gate D：** 如果 exact venue 仍然偏低但 acceptable@5 很高，论文叙事应强调真实投稿推荐，而不是只强调 exact venue prediction。

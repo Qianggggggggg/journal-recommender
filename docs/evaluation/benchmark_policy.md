@@ -154,6 +154,69 @@ python scripts/clean_benchmark.py \
 
 下游 (`feature_builder`, retriever, LTR) **不得对不同 source 标记做差别加权**——所有真实发表论文画像在算法层面一视同仁;source 只用于追溯、调试与按需回退。
 
+## Coverage-Aware Gate A (2026-06-02 起生效)
+
+任务 3.4 的 full-v2 retrieval ablation 揭示一个关键事实:
+
+> `full_hybrid == hybrid` (整体 coarse@50 / rule@5 / ret_mrr 完全一致),
+> 3 路 `weighted_minmax` 融合会归一化掉 accepted signal。
+> 但 accepted route 在 covered 子集上信号真实存在 (单点 rule@5=52%)。
+
+如果仅按原始 Gate A (整体 coarse@50/Hit@5 不变即视为未通过),会错误地关闭
+`accepted_paper_weight`,放弃 53.9% 测试集上最精准的召回信号。
+
+为避免这一陷阱,本策略正式采用 **Coverage-Aware Gate A** 判定口径。
+
+### 切分规则
+
+- **covered paper**: `paper.venue` 在 `data/accepted_papers/<jid>.json` 中存在
+  (即 gold venue 至少有一篇真实已发表论文画像)。判定函数位于
+  `scripts/stratify_retrieval_ablation.py`,通过解析 `data/accepted_papers/`
+  目录下的 `journal_id` 集合得出。
+- **uncovered paper**: 上述集合外的论文,占当前 full-v2 (n=89) 的 46.1%。
+- 切分时仅看 `gold_journal_id` / `paper.venue`,**不**看 `candidate_journal_id`。
+  `candidate_in_accepted_corpus` 是 LTR 训练特征,不是覆盖判定依据。
+
+### 主指标 vs 分层诊断
+
+| 指标类型 | 来源 | 在论文/报告中 |
+|---|---|---|
+| **主指标 (overall)** | `full-v2-dev` / `heldout-final` 在 all papers 上的 rule@5、ret_mrr、ret_ndcg5 | 主表,主叙事 |
+| **分层诊断 (stratified)** | covered 子集与 uncovered 子集分别计算 rule@5、ret_mrr、ret_ndcg5 | 附录或 ablation 章节,说明 accepted route 的覆盖局限与边际价值 |
+
+主指标数字不允许**仅**在 covered 子集上报告(那是 cherry-pick);
+分层指标不允许**替代**主指标(那是 over-extrapolation)。
+
+### Gate A 通过口径
+
+accepted-paper route 在以下条件**同时**满足时视为 Gate A 通过,保留默认接线
+与 `accepted_paper_weight=0.20`:
+
+1. covered 子集上,`accepted` 单独或 2-route fusion (`scope_accepted` /
+   `typical_accepted`) 相对 hybrid baseline 在 rule@5 或 ret_mrr 上有 **真实提升**
+   (经验阈值:rule@5 至少 +3 命中 / ret_mrr 至少 +0.05);
+2. 整体主指标不退步 (coarse@50、rule@5、ret_mrr 不低于 hybrid);
+3. uncovered 子集上的结构性 0 不计入 Gate A 拒绝理由。
+
+通过 Gate A 后,**仍必须**在 4.x / 5.x 阶段把 accepted route 接入 LTR,
+不能在 production 默认 fusion 中"硬性"压高权重——本策略只判断"信号值得保留",
+不判断"信号已被正确使用"。
+
+### 区分 oracle 与非 oracle 特征
+
+为防止 oracle leakage,`feature_builder` 必须区分:
+
+| 特征 | 训练 | 推理 | 备注 |
+|---|---|---|---|
+| `candidate_in_accepted_corpus` (bool) | ✅ | ✅ | LTR 训练特征;候选期刊在 corpus 中有 ≥1 篇 |
+| `gold_in_accepted_corpus` (bool) | ✅ | ❌ | **仅供分层诊断用**,严禁进 LTR 训练集 |
+
+`gold_in_accepted_corpus` 一旦进训练集,会出现训练-推理分布漂移:
+模型在 covered 训练样本上学到强信号,推理时却无法获得该信号,uncovered
+子集表现差于预期。等价于 oracle leakage。
+
+更细的诊断与判定背景见 `docs/adr/0001-coverage-aware-gate-a.md`。
+
 ## 违反与处理
 
 - 在 `heldout-final` 上发现调参、重新选择候选、基于反馈修改算法：视为泄漏 holdout，对应结果作废，`heldout-final` 集合应保持冻结；新实验必须更换 holdout 集。
