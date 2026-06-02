@@ -36,12 +36,10 @@
     "typical_bm25+typical_vector": 2,
     "scope_bm25+typical_bm25+typical_vector+accepted_bm25": 1
   },
-  "input_ablation_json": "data/evaluation/results/retrieval_ablation_full_v2_20260602_181652.json",
+  "input_ablation_json": "data/evaluation/results/retrieval_ablation_full_v2_20260602_185401.json",
   "output_jsonl": "data/training/ranker_train_full_v2.jsonl",
   "max_negatives": 10,
   "negatives_by_type": {
-    "hard_rule_top20": 412,
-    "same_area": 343,
-    "easy_other": 135
+    "hard_rule_top20": 890
   }
 }
