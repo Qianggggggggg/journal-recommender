@@ -1,4 +1,6 @@
 """推荐流程编排"""
+import logging
+
 import yaml
 from typing import Callable, List, Optional, Dict, Any, Tuple
 
@@ -9,6 +11,9 @@ from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
+from ..ranker.ltr_adapter import LTRAdapter  # 5.3
+
+logger = logging.getLogger(__name__)
 
 
 class RecommenderPipeline:
@@ -21,12 +26,14 @@ class RecommenderPipeline:
         llm_ranker: Optional[LLMRanker] = None,
         quality_assessor: Optional[PaperQualityAssessor] = None,
         llm_anchor_guard: Optional[Dict[str, Any]] = None,
+        learned_reranker: Optional[LTRAdapter] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
         self.llm_ranker = llm_ranker
         self.quality_assessor = quality_assessor
         self.llm_anchor_guard = llm_anchor_guard or {}
+        self.learned_reranker = learned_reranker  # 5.3: 默认 None ⇒ 完全跳过 LTR 路径
 
     def recommend(
         self,
@@ -169,6 +176,38 @@ class RecommenderPipeline:
                 llm_candidates.append((journal, score, reasons))
                 seen_ids.add(journal.journal_id)
 
+        # 2.7 (5.3) LTR 纯 rerank:在 llm_candidates 内部重排,不改 score 语义。
+        # 默认 OFF (learned_reranker=None) → 整个 if 块跳过,llm_candidates 顺序不变。
+        learned_diag: Dict[str, Any] = {
+            "learned_score": {},
+            "learned_rank": {},
+            "status": "fallback_disabled",
+        }
+        if self.learned_reranker and self.learned_reranker.enabled:
+            try:
+                rule_ranks_map = {
+                    j.journal_id: i + 1
+                    for i, (j, _, _) in enumerate(rule_ranked_all)
+                }
+                rule_scores_map = {
+                    j.journal_id: float(s) for j, s, _ in rule_ranked_all
+                }
+                reranked, learned_diag = self.learned_reranker.compute_scores(
+                    paper_profile=paper_profile,
+                    llm_candidates=llm_candidates,
+                    retrieval_trace=retrieval_trace,
+                    rule_ranks=rule_ranks_map,
+                    rule_scores=rule_scores_map,
+                )
+                llm_candidates = reranked  # 纯 rerank:替换候选顺序,集合不变
+            except Exception as e:  # 防御:LTR 任何异常都不能破坏推荐主流程
+                logger.warning("LTR rerank skipped: %s", e)
+                learned_diag = {
+                    "learned_score": {},
+                    "learned_rank": {},
+                    "status": "fallback_pipeline_error",
+                }
+
         # 3. 阶段二：LLM 精排（如失败则抛出明确错误，不再降级）
         rank_method = "rule"
         if self.llm_ranker:
@@ -198,6 +237,21 @@ class RecommenderPipeline:
             )
         else:
             llm_ranked = [(j, s, r, 0.5) for j, s, r in llm_candidates[:top_k]]
+
+        # 5.3: final_rank_source 记录最终 Top5 由哪一层决定。
+        # v1 纯 rerank:LTR 只重排 llm_candidates 输入,最终选择仍由 LLM score + anchor guard 完成。
+        # 故 LTR ON 但 LLM 正常时记为 "llm_after_learned_rerank"(而不是 "learned")。
+        final_rank_source = "llm"
+        if not self.llm_ranker:
+            final_rank_source = "rule"
+        elif rank_method != "llm":
+            final_rank_source = "rule_fallback"
+        if (
+            self.learned_reranker
+            and self.learned_reranker.enabled
+            and learned_diag.get("status") == "ok"
+        ):
+            final_rank_source = "llm_after_learned_rerank"
 
         # 4. 构建推荐结果（直接使用 LLMRanker 输出的 reasons，不再单独调用 Explainer）
         self._emit_progress(
@@ -229,6 +283,15 @@ class RecommenderPipeline:
             "mode_used": mode,
             "rank_method": rank_method,
         }
+
+        # 5.3: 默认 OFF 时**完全不写**新 key（bit-equal baseline 强约束）。
+        if (
+            self.learned_reranker
+            and self.learned_reranker.enabled
+            and learned_diag.get("status") == "ok"
+        ):
+            result["learned_diagnostics"] = learned_diag
+            result["final_rank_source"] = final_rank_source
 
         # 标题模式加警告
         if mode == "title":

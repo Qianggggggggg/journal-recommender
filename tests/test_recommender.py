@@ -227,3 +227,141 @@ def test_pipeline_does_not_restore_rule_anchor_when_llm_score_gap_is_large():
     result = pipeline.recommend(PaperInput(title="Test"), PaperProfile(title="Test"), top_k=5)
 
     assert "protected" not in [rec.journal.journal_id for rec in result["recommendations"]]
+
+
+# ---------------------------------------------------------------------------
+# Task 5.3 — LTR 接入 + 默认 OFF bit-equal
+# ---------------------------------------------------------------------------
+
+
+class _StubLTRAdapter:
+    """Test double for LTRAdapter,只实现 pipeline 用到的 enabled + compute_scores。"""
+
+    def __init__(self, enabled: bool, compute_scores_fn=None, disable_reason=None):
+        self._enabled = enabled
+        self._compute_scores_fn = compute_scores_fn
+        self._disable_reason = disable_reason
+
+    @property
+    def enabled(self):
+        return self._enabled
+
+    @property
+    def disable_reason(self):
+        return self._disable_reason
+
+    def compute_scores(self, paper_profile, llm_candidates, retrieval_trace, rule_ranks, rule_scores):
+        if self._compute_scores_fn is not None:
+            return self._compute_scores_fn(llm_candidates)
+        return list(llm_candidates), {
+            "learned_score": {},
+            "learned_rank": {},
+            "status": "fallback_disabled",
+        }
+
+
+def test_pipeline_default_off_omits_ltr_fields():
+    """5.3 强不变量:learned_reranker=None 时 result 字典**完全不写**新 key。
+
+    baseline 5.2 的 result schema 必须 bit-equal,确保默认关闭时零回归。
+    """
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(5)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(5)]
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        # 关键:learned_reranker 不传,默认 None
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    assert result["rank_method"] == "llm"
+    assert "learned_diagnostics" not in result
+    assert "final_rank_source" not in result
+
+
+def test_pipeline_with_ltr_reranks_llm_candidates():
+    """LTR 启用且 compute_scores 成功时,result 写 learned_diagnostics + final_rank_source。"""
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(5)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(5)]
+
+    def _stub_rerank(candidates):
+        diag = {
+            "learned_score": {c[0].journal_id: 0.5 + i * 0.1 for i, c in enumerate(candidates)},
+            "learned_rank": {c[0].journal_id: i + 1 for i, c in enumerate(candidates)},
+            "status": "ok",
+        }
+        return list(candidates), diag
+
+    ltr = _StubLTRAdapter(enabled=True, compute_scores_fn=_stub_rerank)
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        learned_reranker=ltr,
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    assert result["final_rank_source"] == "llm_after_learned_rerank"
+    assert result["learned_diagnostics"]["status"] == "ok"
+    # 5 本 learned_rank 都 1..5
+    ranks = sorted(result["learned_diagnostics"]["learned_rank"].values())
+    assert ranks == [1, 2, 3, 4, 5]
+
+
+def test_pipeline_with_ltr_disabled_falls_back():
+    """LTRAdapter.enabled=False → 跳过 LTR 路径,baseline 路径走原样。"""
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(5)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(5)]
+
+    ltr = _StubLTRAdapter(enabled=False, disable_reason="disabled in config")
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        learned_reranker=ltr,
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    assert result["rank_method"] == "llm"
+    assert "learned_diagnostics" not in result
+    assert "final_rank_source" not in result
+
+
+def test_pipeline_with_ltr_missing_model_falls_back():
+    """LTRAdapter.enabled=False 因为 model 缺失 → 走原 LLM 路径。"""
+    from src.ranker.ltr_adapter import LTRAdapter
+
+    ltr = LTRAdapter(
+        config={"enabled": True, "model_path": "/nonexistent/learning_to_ranker.json"},
+        journal_store=None,
+    )
+    assert ltr.enabled is False
+    assert ltr.disable_reason is not None
+    assert "not found" in ltr.disable_reason.lower()
+
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(5)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(5)]
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        learned_reranker=ltr,
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    assert result["rank_method"] == "llm"
+    assert "learned_diagnostics" not in result
+    assert "final_rank_source" not in result

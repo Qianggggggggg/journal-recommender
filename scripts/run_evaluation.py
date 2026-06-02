@@ -340,12 +340,24 @@ def init_pipeline() -> RecommenderPipeline:
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
 
+    # 5.3: LTR adapter(默认 OFF 时 LTRAdapter.enabled=False,pipeline 走原路径)
+    from src.ranker.ltr_adapter import LTRAdapter
+    ltr_config = (app_config.get("ranking", {}).get("learned_reranker", {}) or {})
+    # accepted_paper_store 引用:仅当 retrieval_target 包含 typical / accepted 时才有
+    accepted_paper_store_ref = accepted_store if (retrieval_target in {"typical_abstracts", "semantic_anchors"} and "accepted_store" in locals()) else None
+    learned_reranker = LTRAdapter(
+        config=ltr_config,
+        journal_store=store,
+        accepted_paper_store=accepted_paper_store_ref,
+    )
+
     pipeline = RecommenderPipeline(
         candidate_generator=generator,
         rule_scorer=scorer,
         llm_ranker=llm_ranker,
         quality_assessor=quality_assessor,
         llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
+        learned_reranker=learned_reranker,
     )
     pipeline.parser = parser
 
@@ -436,6 +448,10 @@ def evaluate_single_paper(
     llm_candidates = rec_result.get("llm_candidates", [])
     llm_candidate_ids = set(rec_result.get("llm_candidate_ids", []))
     retrieval_trace = rec_result.get("retrieval_trace", {})
+    # 5.3: 透传 LTR 诊断字段(默认 OFF 时 rec_result 里没有这些 key,learned_enabled=False)
+    learned_diag = rec_result.get("learned_diagnostics") or {}
+    final_rank_source = rec_result.get("final_rank_source")
+    learned_enabled = bool(learned_diag.get("status") == "ok")
     recommended_journals = [rec.journal.journal_name for rec in recommendations]
     candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
     rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
@@ -600,6 +616,12 @@ def evaluate_single_paper(
         "in_llm_pool": bool(venue_journal and venue_journal.journal_id in llm_candidate_ids),
         "miss_stage": _miss_stage(),
     }
+    # 5.3: LTR 启用且 status='ok' 时把 learned_score / learned_rank 写到 gold venue 诊断
+    if learned_enabled and venue_journal is not None:
+        learned_score_map = learned_diag.get("learned_score") or {}
+        learned_rank_map = learned_diag.get("learned_rank") or {}
+        venue_diagnostic["learned_score"] = learned_score_map.get(venue_journal.journal_id)
+        venue_diagnostic["learned_rank"] = learned_rank_map.get(venue_journal.journal_id)
     paper_profile_snapshot = {
         "title": profile.title,
         "abstract_len": len(abstract or ""),
@@ -679,9 +701,16 @@ def evaluate_single_paper(
                 "confidence": rec.confidence,
                 "match_reasons": rec.match_reasons[:5] if rec.match_reasons else [],
                 **_retrieval_info(rec.journal.journal_id),
+                # 5.3: LTR 启用时给每条推荐加 learned_score
+                **(
+                    {"learned_score": (learned_diag.get("learned_score") or {}).get(rec.journal.journal_id)}
+                    if learned_enabled else {}
+                ),
             }
             for i, rec in enumerate(recommendations[:top_k])
         ],
+        # 5.3: LTR 启用时 per-paper 顶层加 final_rank_source
+        **({"final_rank_source": final_rank_source} if learned_enabled else {}),
     }
 
 

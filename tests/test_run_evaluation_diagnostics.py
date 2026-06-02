@@ -217,3 +217,97 @@ def test_evaluate_single_paper_writes_auxiliary_acceptability_metrics():
     assert result["same_area_hit_5"] is True
     assert result["same_ccf_level_hit_5"] is True
     assert result["acceptable_journal_hit_5"] is True
+
+
+# ---------------------------------------------------------------------------
+# Task 5.3 — LTR diagnostics
+# ---------------------------------------------------------------------------
+
+
+class LTREnabledDummyPipeline(DummyPipeline):
+    """Dummy pipeline 注入 LTR 成功状态,用于测试 evaluate_single_paper 透传诊断字段。"""
+
+    def recommend(self, paper_input, profile, top_k=5, mode="abstract", quality_prompts=None, diagnostic_journal_ids=None):
+        result = super().recommend(paper_input, profile, top_k=top_k, mode=mode, quality_prompts=quality_prompts, diagnostic_journal_ids=diagnostic_journal_ids)
+        jid = self.journal.journal_id
+        result["learned_diagnostics"] = {
+            "learned_score": {jid: 0.73},
+            "learned_rank": {jid: 1},
+            "status": "ok",
+        }
+        result["final_rank_source"] = "llm_after_learned_rerank"
+        return result
+
+
+def test_evaluate_single_paper_default_off_omits_learned_fields():
+    """OFF (现有 DummyPipeline 无 LTR):venue_diagnostic / recommendations_detail / per-paper 顶层
+    **全部不含** learned_* 字段。bit-equal baseline 强约束。
+    """
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        ccf_rating="B",
+        ccf_research_area=["人工智能"],
+        subject_tags=["人工智能"],
+    )
+    result = evaluate_single_paper(
+        {
+            "title": "Test Paper With A Long Enough Title",
+            "abstract": "A short abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+            "external_ids": {"arXiv": "1234.5678"},
+        },
+        DummyPipeline(target),
+        {"paper_profile_system": "", "paper_profile_user": ""},
+        mode="abstract",
+        top_k=5,
+    )
+
+    # per-paper 顶层:无 final_rank_source
+    assert "final_rank_source" not in result
+    # venue_diagnostic:无 learned_score/learned_rank
+    diag = result["venue_diagnostic"]
+    assert "learned_score" not in diag
+    assert "learned_rank" not in diag
+    # recommendations_detail:无 learned_score
+    for detail in result["recommendations_detail"]:
+        assert "learned_score" not in detail
+
+
+def test_evaluate_single_paper_with_ltr_populates_learned_fields():
+    """ON (LTREnabledDummyPipeline 注入 learned_diagnostics.status='ok') →
+    venue_diagnostic / recommendations_detail / per-paper 顶层都填上 learned_* 字段。
+    """
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        ccf_rating="B",
+        ccf_research_area=["人工智能"],
+        subject_tags=["人工智能"],
+    )
+    result = evaluate_single_paper(
+        {
+            "title": "Test Paper With A Long Enough Title",
+            "abstract": "A short abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+            "external_ids": {"arXiv": "1234.5678"},
+        },
+        LTREnabledDummyPipeline(target),
+        {"paper_profile_system": "", "paper_profile_user": ""},
+        mode="abstract",
+        top_k=5,
+    )
+
+    # per-paper 顶层
+    assert result["final_rank_source"] == "llm_after_learned_rerank"
+    # venue_diagnostic
+    diag = result["venue_diagnostic"]
+    assert "learned_score" in diag
+    assert "learned_rank" in diag
+    # recommendations_detail
+    for detail in result["recommendations_detail"]:
+        assert "learned_score" in detail

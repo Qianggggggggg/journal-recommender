@@ -271,3 +271,26 @@ def test_recommend_stream_emits_live_ranking_progress(monkeypatch, client):
     ]
 
     assert any(40 < item["percent"] < 80 for item in ranking_progress)
+
+
+# ---------------------------------------------------------------------------
+# Task 5.3 — LTR 接入
+# ---------------------------------------------------------------------------
+
+
+def test_get_pipeline_constructs_ltr_adapter_in_disabled_state_by_default(monkeypatch):
+    """默认 OFF 时(get_pipeline 不修改 yaml),LTRAdapter 实例化但 enabled=False,
+    pipeline 走 baseline 路径,bit-equal。
+    """
+    from src.app.api import get_pipeline
+    import src.app.api as api_module
+
+    # 强制 reset 缓存的 pipeline,让 get_pipeline 重新构造
+    api_module._pipeline = None
+
+    pipeline = get_pipeline()
+    assert hasattr(pipeline, "learned_reranker")
+    assert pipeline.learned_reranker is not None
+    # 默认 yaml enabled=False
+    assert pipeline.learned_reranker.enabled is False
+    assert "disabled" in (pipeline.learned_reranker.disable_reason or "").lower()

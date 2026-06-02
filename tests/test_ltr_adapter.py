@@ -1,0 +1,303 @@
+"""Tests for src/ranker/ltr_adapter.py (Task 5.3)."""
+from __future__ import annotations
+
+import json
+import logging
+import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from src.ranker.ltr_adapter import LTRAdapter  # noqa: E402
+from src.papers.paper_model import PaperProfile  # noqa: E402
+
+# 测试用的最小有效 journal store 桩
+# 不依赖真实 JournalStore/AcceptedPaperStore,直接 mock 调用接口
+class _StubJournal:
+    def __init__(self, jid: str) -> None:
+        self.journal_id = jid
+        self.journal_name = jid
+        self.ccf_rating = "B"
+        self.ccf_research_area: List[str] = []
+        self.research_area: List[str] = []
+        self.subject_tags: List[str] = []
+        self.scope_text = ""
+        self.keywords: List[str] = []
+
+
+class _StubJournalStore:
+    def get_journal(self, jid: str) -> Optional[_StubJournal]:
+        if jid.startswith("J"):
+            return _StubJournal(jid)
+        return None
+
+
+def _make_paper_profile() -> PaperProfile:
+    """构造一个最小可用的 PaperProfile(paper_strength=None 让 build_features 取 0.0)。"""
+    return PaperProfile(title="test", paper_strength=None)
+
+
+def _make_stub_candidates(n: int) -> List[Tuple[Any, float, List[str]]]:
+    """构造 N 本桩候选期刊,rule_score 顺序为 n, n-1, ..., 1。"""
+    candidates = []
+    for i in range(n):
+        jid = f"J{i+1}"
+        candidates.append((_StubJournal(jid), float(n - i), [f"reason-{i}"]))
+    return candidates
+
+
+def _make_trace_for_candidates(candidates: List[Tuple[Any, float, List[str]]]) -> Dict[str, dict]:
+    """构造一个最简单的 trace,retrieval_rank 按候选顺序。"""
+    trace: Dict[str, dict] = {}
+    for i, (j, _, _) in enumerate(candidates):
+        trace[j.journal_id] = {
+            "retrieval_rank": i + 1,
+            "routes": {},
+            "primary_routes": [],
+        }
+    return trace
+
+
+# ---------------------------------------------------------------------------
+# 初始化 / 失败降级
+# ---------------------------------------------------------------------------
+
+
+def test_disabled_when_enabled_false_in_config():
+    """config.enabled=False → LTRAdapter 永远禁用。"""
+    adapter = LTRAdapter(config={"enabled": False, "model_path": "/tmp/whatever"}, journal_store=_StubJournalStore())
+    assert adapter.enabled is False
+    assert adapter.disable_reason is not None
+    # compute_scores 立即返回原 list
+    candidates = _make_stub_candidates(3)
+    out, diag = adapter.compute_scores(
+        paper_profile=None,
+        llm_candidates=candidates,
+        retrieval_trace=_make_trace_for_candidates(candidates),
+        rule_ranks={},
+        rule_scores={},
+    )
+    assert out == candidates
+    assert diag["status"] == "fallback_disabled"
+
+
+def test_disabled_when_model_path_missing(tmp_path: Path):
+    """model_path 指向不存在的文件 → 禁用,disable_reason 含 'not found'。"""
+    cfg = {"enabled": True, "model_path": str(tmp_path / "no_such_model.json")}
+    adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
+    assert adapter.enabled is False
+    assert adapter.disable_reason is not None
+    assert "not found" in adapter.disable_reason.lower()
+
+
+def test_disabled_when_model_corrupt_json(tmp_path: Path):
+    """model 存在但 JSON 无效 → 禁用,disable_reason 含 'load' 或 'json'。"""
+    bad = tmp_path / "bad.json"
+    bad.write_text("not a valid json {{{", encoding="utf-8")
+    cfg = {"enabled": True, "model_path": str(bad)}
+    adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
+    assert adapter.enabled is False
+    assert adapter.disable_reason is not None
+    assert any(k in adapter.disable_reason.lower() for k in ("load", "json", "schema", "key"))
+
+
+def test_disabled_when_model_missing_required_fields(tmp_path: Path):
+    """model JSON 缺 coef/feature_dim 等关键字段 → 禁用。"""
+    bad = tmp_path / "incomplete.json"
+    bad.write_text(json.dumps({"schema_version": 1, "coef": []}), encoding="utf-8")
+    cfg = {"enabled": True, "model_path": str(bad)}
+    adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
+    assert adapter.enabled is False
+    assert adapter.disable_reason is not None
+
+
+def test_disabled_when_model_unconverged(tmp_path: Path):
+    """model.convergence_info.converged=False → 禁用,disable_reason 含 'converge'。"""
+    unconverged = {
+        "schema_version": 1,
+        "model_type": "logistic_regression",
+        "backend": "sklearn",
+        "feature_dim": 20,
+        "coef": [0.0] * 20,
+        "intercept": 0.0,
+        "use_standardization": False,
+        "scaler_mean": None,
+        "scaler_scale": None,
+        "convergence_info": {
+            "converged": False,
+            "n_iter": 5000,
+            "max_iter": 5000,
+            "warning_message": "TOTAL NO. of ITERATIONS REACHED LIMIT",
+        },
+        "seed": 42,
+    }
+    p = tmp_path / "unconv.json"
+    p.write_text(json.dumps(unconverged), encoding="utf-8")
+    cfg = {"enabled": True, "model_path": str(p)}
+    adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
+    assert adapter.enabled is False
+    assert adapter.disable_reason is not None
+    assert "converge" in adapter.disable_reason.lower()
+
+
+def test_enabled_with_real_model_file():
+    """用 data/models/learning_to_ranker.json(5.2 训练产物)能成功初始化。"""
+    model_path = (
+        Path(__file__).resolve().parent.parent
+        / "data" / "models" / "learning_to_ranker.json"
+    )
+    if not model_path.exists():
+        pytest.skip("real model file not present")
+    cfg = {"enabled": True, "model_path": str(model_path)}
+    adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
+    assert adapter.enabled is True
+    assert adapter.feature_dim == 20
+    assert adapter.disable_reason is None
+
+
+# ---------------------------------------------------------------------------
+# compute_scores 行为契约
+# ---------------------------------------------------------------------------
+
+
+def _write_minimal_converged_model(tmp_path: Path, feature_dim: int = 20) -> Path:
+    """写一个最小可用的 converged 模型文件(系数全 0,scaler None,无 journal 依赖)。"""
+    payload = {
+        "schema_version": 1,
+        "model_type": "logistic_regression",
+        "backend": "sklearn",
+        "feature_dim": feature_dim,
+        "coef": [0.0] * feature_dim,
+        "intercept": 0.0,
+        "use_standardization": False,
+        "scaler_mean": None,
+        "scaler_scale": None,
+        "convergence_info": {
+            "converged": True,
+            "n_iter": 1,
+            "max_iter": 100,
+            "warning_message": None,
+        },
+        "seed": 42,
+    }
+    p = tmp_path / "stub_model.json"
+    p.write_text(json.dumps(payload), encoding="utf-8")
+    return p
+
+
+def test_compute_scores_returns_empty_diag_on_empty_candidates(tmp_path: Path):
+    """llm_candidates=[] → 返回 [],diag 字段为空 dict。"""
+    p = _write_minimal_converged_model(tmp_path)
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(p)},
+        journal_store=_StubJournalStore(),
+    )
+    assert adapter.enabled
+    out, diag = adapter.compute_scores(
+        paper_profile=None,
+        llm_candidates=[],
+        retrieval_trace={},
+        rule_ranks={},
+        rule_scores={},
+    )
+    assert out == []
+    assert diag["learned_score"] == {}
+    assert diag["learned_rank"] == {}
+    assert diag["status"] == "ok"
+
+
+def test_compute_scores_reranks_and_provides_diagnostics(tmp_path: Path):
+    """3 本期刊 + valid trace + valid store → reranked 长度==3,learned_score/rank 1..N,status='ok'。
+
+    注:模型系数全 0,所以所有候选的 LTR 分数相等,rerank 应该是 stable sort
+    (按输入顺序 tiebreak),输出顺序应当和输入一致。
+    """
+    p = _write_minimal_converged_model(tmp_path)
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(p)},
+        journal_store=_StubJournalStore(),
+    )
+    candidates = _make_stub_candidates(3)
+    trace = _make_trace_for_candidates(candidates)
+
+    out, diag = adapter.compute_scores(
+        paper_profile=_make_paper_profile(),
+        llm_candidates=candidates,
+        retrieval_trace=trace,
+        rule_ranks=None,
+        rule_scores=None,
+    )
+
+    assert len(out) == 3
+    assert diag["status"] == "ok", f"expected ok, got {diag}"
+    # learned_score 是 dict, key 是 jid
+    assert isinstance(diag["learned_score"], dict)
+    assert isinstance(diag["learned_rank"], dict)
+    # learned_rank 应当是 1..N
+    ranks = sorted(diag["learned_rank"].values())
+    assert ranks == [1, 2, 3]
+
+
+def test_compute_scores_falls_back_on_feature_dim_mismatch(tmp_path: Path):
+    """特征缺失 / 维度不对 → 降级回原序,status 含 'feature_dim'。
+
+    实现:用空 journal store(对所有 jid 返回 None),让 attach_features_to_trace
+    在每本期刊的 entry 上跳过(features 不会被注入)。adapter 拿到 None → 触发 fallback。
+    """
+    p = _write_minimal_converged_model(tmp_path, feature_dim=20)
+    empty_store = _EmptyJournalStore()  # get_journal 永远返回 None
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(p)},
+        journal_store=empty_store,
+    )
+    candidates = _make_stub_candidates(2)
+    trace = _make_trace_for_candidates(candidates)
+
+    out, diag = adapter.compute_scores(
+        paper_profile=_make_paper_profile(),
+        llm_candidates=candidates,
+        retrieval_trace=trace,
+        rule_ranks=None,
+        rule_scores=None,
+    )
+    # 应当 fallback 到原序
+    assert out == candidates
+    assert "feature_dim" in diag["status"]
+
+
+class _EmptyJournalStore:
+    """永远返回 None 的 journal store,用来模拟 feature build 失败的场景。"""
+
+    def get_journal(self, jid: str) -> None:
+        return None
+
+
+def test_compute_scores_does_not_mutate_caller_trace(tmp_path: Path):
+    """compute_scores 不得修改 caller 的 trace(防止污染 evaluation diagnostics)。"""
+    p = _write_minimal_converged_model(tmp_path)
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(p)},
+        journal_store=_StubJournalStore(),
+    )
+    candidates = _make_stub_candidates(2)
+    trace = _make_trace_for_candidates(candidates)
+    # 保存原始 trace 快照
+    original_trace = {jid: dict(entry) for jid, entry in trace.items()}
+
+    out, diag = adapter.compute_scores(
+        paper_profile=_make_paper_profile(),
+        llm_candidates=candidates,
+        retrieval_trace=trace,
+        rule_ranks=None,
+        rule_scores=None,
+    )
+
+    # caller 的 trace 不应被加 features/feature_names
+    for jid, entry in trace.items():
+        assert "features" not in entry, f"caller trace[{jid}] was mutated to include features"
+        assert "feature_names" not in entry
+    # 应当与原 snapshot 一致
+    assert trace == original_trace

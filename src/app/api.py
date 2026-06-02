@@ -133,12 +133,22 @@ def get_pipeline() -> RecommenderPipeline:
         # 初始化论文解析器
         parser = PaperParser(llm)
 
+        # 5.3: LTR adapter(默认 OFF 时 LTRAdapter.enabled=False,pipeline 走原路径)
+        from src.ranker.ltr_adapter import LTRAdapter
+        ltr_config = (app_config.get("ranking", {}).get("learned_reranker", {}) or {})
+        learned_reranker = LTRAdapter(
+            config=ltr_config,
+            journal_store=_store,
+            accepted_paper_store=None,  # API 路径不依赖 accepted_paper_store
+        )
+
         _pipeline = RecommenderPipeline(
             candidate_generator=generator,
             rule_scorer=scorer,
             llm_ranker=llm_ranker,
             quality_assessor=quality_assessor,
             llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
+            learned_reranker=learned_reranker,
         )
 
         # 将 parser 附加到 pipeline 以便在 API 中使用

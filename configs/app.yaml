@@ -77,3 +77,11 @@ ranking:
     multi_route_bonus: 0.40
     research_area_match: 0.50
     ccf_research_area_match: 0.50
+  # 5.3 — learned reranker (Task 5.3 baseline). Default OFF.
+  # v1 = pure rerank within llm_candidates (no score blend).
+  # blend_with_* fields are reserved for 5.4 ablation; not consumed in 5.3.
+  learned_reranker:
+    enabled: false
+    model_path: "data/models/learning_to_ranker.json"
+    blend_with_rule_score: 0.30  # reserved; not consumed by 5.3 v1
+    blend_with_llm_score: 0.20   # reserved; not consumed by 5.3 v1
