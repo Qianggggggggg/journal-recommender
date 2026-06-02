@@ -4,6 +4,8 @@ from src.papers.paper_model import PaperProfile
 from src.ranker.rule_scorer import RuleScorer
 from src.retriever.candidate_generator import CandidateGenerator
 
+import pytest
+
 from scripts.run_retrieval_ablation import (
     _progress_snapshot,
     build_route_results_for_variant,
@@ -96,6 +98,76 @@ def test_build_route_results_for_accepted_paper_variants():
 
     full_hybrid = build_route_results_for_variant(generator, "full_hybrid", "x", profile, cfg, weights)
     assert {"scope_bm25", "typical_bm25", "accepted_bm25", "identity_anchor"} <= set(full_hybrid)
+
+
+def test_ablation_runner_wires_accepted_retrievers_when_corpus_present(tmp_path):
+    """回归测试:run_retrieval_ablation.build_candidate_generator 必须把 accepted
+    retrievers 接进 CandidateGenerator。任务 3.3 commit 3515949 漏了这步,
+    导致 light30 ablation 中 accepted / scope_accepted / full_hybrid 全部静默
+    退化 (accepted variant coarse@50=0,scope_accepted == scope,
+    full_hybrid == hybrid)。"""
+    import json
+
+    from scripts.run_retrieval_ablation import build_candidate_generator
+
+    # 准备 minimal 但完整的 fixture
+    accepted_dir = tmp_path / "accepted_papers"
+    accepted_dir.mkdir()
+    (accepted_dir / "ai.json").write_text(
+        json.dumps({
+            "journal_id": "ai",
+            "journal_name": "Artificial Intelligence",
+            "papers": [
+                {"title": "P1", "abstract": "reasoning framework"},
+                {"title": "P2", "abstract": "graph reasoning"},
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    typical_dir = tmp_path / "typical_abstracts"
+    typical_dir.mkdir()
+    (typical_dir / "ai.json").write_text(
+        json.dumps({
+            "journal_id": "ai",
+            "journal_name": "Artificial Intelligence",
+            "abstracts": [{"abstract": "AI typical abstract", "method_type": "x", "novelty_level": "y"}],
+        }),
+        encoding="utf-8",
+    )
+
+    journal_store_path = tmp_path / "journals.jsonl"
+    journal_store_path.write_text(
+        json.dumps({"journal_id": "ai", "journal_name": "Artificial Intelligence", "scope_text": "AI"}) + "\n",
+        encoding="utf-8",
+    )
+
+    app_config = {
+        "data": {
+            "journal_store_path": str(journal_store_path),
+            "typical_abstracts_dir": str(typical_dir),
+            "accepted_papers_dir": str(accepted_dir),
+            # 索引文件不存在,embedding retriever 应自动 None,
+            # 但 BM25 必须被构建并注入
+            "accepted_papers_faiss_path": str(tmp_path / "no.faiss"),
+            "accepted_papers_metadata_path": str(tmp_path / "no.parquet"),
+        },
+        "candidate_generator": {
+            "retrieval_target": "typical_abstracts",
+        },
+        "ollama": {"base_url": "http://localhost:11434", "embedding_model": "qwen3-embedding:4b"},
+    }
+
+    # include_vector=False 避免依赖 Ollama 在线
+    generator = build_candidate_generator(app_config, include_vector=False)
+
+    assert generator.accepted_bm25_retriever is not None, (
+        "ablation runner 必须把 accepted_bm25_retriever 接进 CandidateGenerator"
+    )
+    # embedding 索引不存在,vector retriever 应为 None (graceful)
+    assert generator.accepted_embedding_retriever is None
+    # 默认 accepted_paper_weight 应从 config 透传 (默认 0.20)
+    assert generator.accepted_paper_weight == pytest.approx(0.20)
 
 
 def test_hybrid_route_weights_are_configurable_for_experiments():

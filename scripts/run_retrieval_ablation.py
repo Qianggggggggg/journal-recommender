@@ -452,6 +452,40 @@ def build_candidate_generator(app_config: dict, include_vector: bool = False) ->
             ),
         )
 
+    # accepted-paper 路由 (任务 3.3 修复:这里之前漏了接线,
+    # 导致 accepted / scope_accepted / full_hybrid variant 全部静默退化)
+    from src.journals.accepted_paper_store import AcceptedPaperStore
+    from src.retriever.accepted_paper_retriever import (
+        AcceptedPaperBM25Retriever,
+        AcceptedPaperEmbeddingRetriever,
+    )
+
+    accepted_bm25 = None
+    accepted_embedding = None
+    accepted_store = AcceptedPaperStore(
+        accepted_dir=data_config.get("accepted_papers_dir", "data/accepted_papers")
+    )
+    accepted_store.load()
+    if accepted_store.count > 0:
+        accepted_bm25 = AcceptedPaperBM25Retriever(accepted_store, store)
+        accepted_bm25.build_index()
+        if include_vector and embedding_client:
+            accepted_embedding = AcceptedPaperEmbeddingRetriever(
+                accepted_store=accepted_store,
+                journal_store=store,
+                embedding_client=embedding_client,
+                faiss_path=data_config.get(
+                    "accepted_papers_faiss_path",
+                    "data/processed/accepted_papers_index.faiss",
+                ),
+                metadata_path=data_config.get(
+                    "accepted_papers_metadata_path",
+                    "data/processed/accepted_papers_metadata.parquet",
+                ),
+            )
+            if not accepted_embedding.is_available:
+                accepted_embedding = None
+
     return CandidateGenerator(
         store,
         bm25,
@@ -461,9 +495,12 @@ def build_candidate_generator(app_config: dict, include_vector: bool = False) ->
         typical_bm25_retriever=typical_bm25,
         typical_embedding_retriever=typical_embedding,
         typical_text_retriever=typical_text,
+        accepted_bm25_retriever=accepted_bm25,
+        accepted_embedding_retriever=accepted_embedding,
         hybrid_scope_weight=retrieval_config.get("hybrid_scope_weight", 0.75),
         hybrid_typical_weight=retrieval_config.get("hybrid_typical_weight", 0.25),
         identity_anchor_weight=retrieval_config.get("identity_anchor_weight", 0.03),
+        accepted_paper_weight=retrieval_config.get("accepted_paper_weight", 0.20),
         fusion_strategy=retrieval_config.get("fusion_strategy", "weighted_minmax"),
         rrf_k=retrieval_config.get("rrf_k", 60),
         route_top_k=retrieval_config.get("route_top_k"),
