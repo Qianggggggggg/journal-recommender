@@ -489,12 +489,18 @@ python scripts/run_retrieval_ablation.py \
 
 **文件：**
 - 新建： `src/ranker/feature_builder.py`
-- 测试： `tests/test_feature_builder.py`
+- 测试： `tests/test_feature_builder.py`、`tests/test_candidate_generator_features.py`
 
-- [ ] 定义稳定特征表：
+- [x] 定义稳定特征表：
+
+实际实现 `FEATURE_NAMES` 共 **20 维** (plan 原写 19 维,
+**新增 `candidate_in_accepted_corpus`**,per ADR 0001 显式拒绝
+oracle 特征 `gold_in_accepted_corpus` 的替代;详见 ADR 0001
+"区分 oracle 与非 oracle 特征"):
 
 ```python
 FEATURE_NAMES = [
+    # plan 原文 19 维
     "retrieval_rank",
     "rule_rank",
     "rule_score",
@@ -514,20 +520,59 @@ FEATURE_NAMES = [
     "same_ccf_level",
     "journal_ccf_numeric",
     "paper_strength",
+    # ADR 0001 新增:候选级覆盖率信号(可推理,不是 oracle)
+    "candidate_in_accepted_corpus",
 ]
 ```
 
-- [ ] 缺失 rank 使用大哨兵值，例如 `999`。
-- [ ] Boolean 特征转成 `0.0` 或 `1.0`。
-- [ ] CCF 映射：`A=3`、`B=2`、`C=1`、unknown `0`。
-- [ ] 测试缺失 route score 和 CCF 转换。
-- [ ] 运行：
+- [x] 缺失 rank 使用大哨兵值,例如 `999`。
+  - `MISSING_RANK_SENTINEL = 999.0` 模块级常量;
+  - 实现:`_route_rank_or_sentinel` (route 级) + `_trace_top_level_rank` (trace 顶层);
+  - 任何缺失/非法(0/负数/None)都退化为 999。
+
+- [x] Boolean 特征转成 `0.0` 或 `1.0`。
+  - 8 个二元特征:route_count(虽然是数值但被当 0/1 处理时也能用),
+    has_scope_route / has_typical_route / has_accepted_route /
+    has_identity_anchor / same_gold_area / same_parsed_ccf_area /
+    same_ccf_level / candidate_in_accepted_corpus。
+
+- [x] CCF 映射:`A=3`、`B=2`、`C=1`、unknown `0`。
+  - `ccf_level_to_numeric()` helper,大小写不敏感。
+
+- [x] 测试缺失 route score 和 CCF 转换。
+  - 24 个 tests (test_feature_builder.py) + 2 个 (test_candidate_generator_features.py):
+    schema 锁定、oracle 拒绝、缺失 rank、非法值、CCF 转换、
+    per-route 抽取、CandidateGenerator.attach_features 接口。
+
+- [x] 4.1.d 接入 CandidateGenerator:
+  - `CandidateGenerator.attach_features(trace, paper_profile, rule_ranks,
+    rule_scores, accepted_paper_store)` 原地修改 trace,每本期刊
+    entry 增加 `features` 与 `feature_names`。
+
+- [x] 4.1.e 持久化到 ablation 输出 JSON:
+  - `evaluate_variant` 加 `accepted_paper_store` 参数,跑完 rule_scorer
+    后调 `attach_features`,落 `paper_results[i].candidate_features`
+    + variant 顶层 `feature_names`。
+
+- [x] 修复 retrieval_rank 写入 bug (per 2026-06-02 用户反馈):
+  - 旧实现把 `retrieval_rank` 写死成 999,削弱 LTR(检索排名是
+    最重要的排序特征之一);83/83 positives 全部 999。
+  - 新实现:`CandidateGenerator._merge_route_results` 已经在
+    trace 顶层写 `retrieval_rank`,build_features 用
+    `_trace_top_level_rank` 读取,缺失/非法值兜底用 999。
+  - 验证:83/83 positives retrieval_rank 非 999,分布 37/37/9/0
+    (top-5/6-20/21-50/50+)。
+
+- [x] 运行:
 
 ```bash
-pytest tests/test_feature_builder.py -q
+pytest tests/test_feature_builder.py tests/test_candidate_generator_features.py -q
+# 26 passed
 ```
 
-- [ ] 提交：`feat: add ranker feature builder`
+- [x] 提交:
+  - `feat(4.1): LTR feature builder + ablation persistence`
+  - `fix(4.1+4.2): retrieval_rank from trace, rule_top20, ADR 0002`
 
 ### 任务 4.2：从 Ablation Pipeline 导出训练样本
 
