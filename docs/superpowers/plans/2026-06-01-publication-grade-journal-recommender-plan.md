@@ -318,12 +318,20 @@ python scripts/collect_accepted_papers.py \
 - 修改： `scripts/collect_accepted_papers.py`
 - 测试： `tests/test_accepted_paper_store.py`
 
-- [ ] 增加未来外部数据源参数：`--source semantic-scholar|openalex|local`。
-- [ ] 本阶段只实现 `local`。
-- [ ] 如果用户选择外部 source，脚本应清楚退出并提示：`external collection source is not enabled in this plan phase`。
-- [ ] 在 `docs/evaluation/benchmark_policy.md` 中记录未来外部数据源需要的字段。
-- [ ] 这样可以避免核心算法还没稳定时，被联网采集流程拖住。
-- [ ] 提交：`docs: define external accepted-paper collection contract`
+- [x] 增加未来外部数据源参数：`--source semantic-scholar|openalex|local`。
+  实现于 `scripts/collect_accepted_papers.py` (CLI `--source`,choices 受限,
+  默认 `local`)。
+- [x] 本阶段只实现 `local`。
+- [x] 如果用户选择外部 source，脚本应清楚退出并提示：`external collection source is not enabled in this plan phase`。
+  退出码 `2`,stderr 输出文案含 `external collection source is not enabled in this plan phase`,
+  并附带具体 source 名 (semantic-scholar / openalex)。pytest 覆盖
+  `test_main_external_source_exits_with_stub_message` 锁住该行为。
+- [x] 在 `docs/evaluation/benchmark_policy.md` 中记录未来外部数据源需要的字段。
+  新增章节 `Accepted-Paper 外部数据源契约 (External Source Contract)`,
+  覆盖启用前置 (Gate A)、必填字段、venue 模糊匹配、限速与缓存、强制泄漏检测、
+  source 字段命名表。
+- [x] 这样可以避免核心算法还没稳定时，被联网采集流程拖住。
+- [x] 提交：`docs: define external accepted-paper collection contract`
 
 ---
 

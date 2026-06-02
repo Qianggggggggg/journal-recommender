@@ -681,3 +681,50 @@ def test_collect_excludes_by_abstract_snippet_when_title_diverges(tmp_path):
     assert not (out_dir / "talg.json").exists()
     assert summary["excluded_count"] == 1
 
+
+# ---------------------------------------------------------------------------
+# 任务 2.3:外部数据源 stub 行为测试。
+# 当前只实现 local;semantic-scholar / openalex 选项必须清晰退出而不是静默无效。
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("source_name", ["semantic-scholar", "openalex"])
+def test_main_external_source_exits_with_stub_message(source_name, tmp_path, capsys):
+    """CLI 选了非 local 数据源时,必须非零退出码 + 显式 stub 文案,
+    不能静默走 local 路径。"""
+    from scripts.collect_accepted_papers import main
+
+    rc = main([
+        "--eval-input", str(tmp_path / "fake.jsonl"),
+        "--exclude-eval-input", str(tmp_path / "exclude.jsonl"),
+        "--output-dir", str(tmp_path / "out"),
+        "--source", source_name,
+        "--journal-store-path", str(tmp_path / "journals.jsonl"),
+    ])
+    captured = capsys.readouterr()
+
+    assert rc != 0, "外部 source 必须非零退出码"
+    assert "external collection source is not enabled in this plan phase" in captured.err
+    assert source_name in captured.err
+    # 不能误产出 corpus
+    assert not (tmp_path / "out").exists() or not list((tmp_path / "out").glob("*.json"))
+
+
+def test_main_local_source_is_accepted():
+    """CLI 显式传 --source local 时,不能被 stub 拦截 (要走完整 local 路径,
+    可能因 journal store 缺失或输入缺失而失败,但不应是 stub 文案)。"""
+    from scripts.collect_accepted_papers import main
+
+    # 指向一个不存在的 journal store -> 应当返回非零 (因 store 为空),
+    # 但不应该是外部 source stub 的错误信息。
+    rc = main([
+        "--eval-input", "/tmp/__not_exist__.jsonl",
+        "--exclude-eval-input", "/tmp/__not_exist__.jsonl",
+        "--output-dir", "/tmp/__accepted_papers_test_out__",
+        "--source", "local",
+        "--journal-store-path", "/tmp/__not_exist_journals__.jsonl",
+    ])
+    # 这次的失败必须来自空 store,而不是外部 source stub。
+    # rc 是 1 (空 store) 或 0 (空 corpus 也可能算成功),不应是 2 (stub)。
+    assert rc != 2
+

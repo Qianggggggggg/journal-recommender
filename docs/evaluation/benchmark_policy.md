@@ -80,6 +80,80 @@ snapshot 内容由 `src/evaluation/benchmark_manifest.py` 在保存结果时记�
 
 语料侧 snapshot（`data/typical_abstracts/` 清理后的目录路径与 `data/accepted_papers/` 选定的版本）同样属于可复现契约：typical 侧的 clean 目录在 `clean_benchmark.py` 报告中以 `summary.clean_typical_dir` 字段记录；accepted-paper 侧的 snapshot 路径在阶段 2 完成后由 `benchmark_manifest` 记录（当前 forward-looking）。
 
+## Accepted-Paper 外部数据源契约 (External Source Contract)
+
+任务 2.2 完成后,`data/accepted_papers/` 仅由本地 evaluation metadata 灌出 63 本期刊画像;剩下 232 本期刊 (`typical_abstracts/` 覆盖 295 本,差额 232) 无 accepted-paper 信号。任务 2.3 把这个数据缺口正式定义成一份契约,使任何后续接入外部数据源的工作都以该契约为准。
+
+### 启用前置 (Gate A)
+
+外部数据源 (`semantic-scholar`、`openalex`) 当前 **预留接口、暂未启用**。`scripts/collect_accepted_papers.py --source semantic-scholar|openalex` 会立刻退出并返回 `external collection source is not enabled in this plan phase` 文案。启用必须同时满足:
+
+1. 阶段 3.4 的 retrieval ablation 已经在 light30 / full-v2 上证明 accepted-paper route 对 `coarse@50` 或 `exact Hit@5` 有正贡献 (Gate A)。
+2. 接入方案有显式 ADR (`docs/adr/`) 记录,说明数据源选择、字段映射、限速策略。
+3. 第一次抓取必须用 `--exclude-eval-input` 同时排除 `papers_metadata_light_30.jsonl` 和 `papers_metadata_v2.jsonl`,以及未来 `heldout-final` 的输入文件。
+
+在 Gate A 未达成之前,即便有同事提议"先抓数据备着",也应当拒绝——避免数据准备早于算法验证,导致 sunk-cost 偏置。
+
+### 必填字段 (与本地源对齐)
+
+每条外部源抓回来的论文,在写入 `data/accepted_papers/<journal_id>.json` 时必须满足与 `AcceptedPaperStore` 的契约一致 (见 `src/journals/accepted_paper_store.py`):
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `title` | ✅ | 论文标题,空白/None 直接弃用 |
+| `abstract` | ✅ | 论文摘要,长度过短 (< 50 字符) 视作脏数据弃用 |
+| `year` | 可选 | 发表年份,整数或可转 int 的字符串,否则 `null` |
+| `source` | ✅ | 必须是 `semantic_scholar` 或 `openalex`,**禁止与本地源混用同一 `journal_id` 文件下的 source 标记** |
+| `doi` | 可选 | 字符串;若为空字符串则视为缺失 |
+| `url` | 可选 | 论文原文 / pdf 链接 |
+
+### Venue → journal_id 解析
+
+外部源返回的 venue 名通常更脏 (缩写、变体、大小写不一致)。模糊匹配规则:
+
+1. 先做与本地源一致的规范化 (`_normalize_venue`: lowercase + 折叠空白)。
+2. 若一击命中 `JournalStore.journal_name`,接收。
+3. 否则进入二次匹配:
+   - NFKD + 去非字母数字后比对 (`_normalize_text` 风格)。
+   - ISSN 字段交叉确认 (Semantic Scholar / OpenAlex 都返回 ISSN,可与 `journals_ccf.jsonl` 或 `journals_v1.jsonl` 中 ISSN 字段对照)。
+4. 仍不命中,记录到 `summary.unresolved_venues`,**禁止猜测匹配**;后续可人工补 alias 后重跑。
+
+### 限速与缓存
+
+- **Semantic Scholar API**: 公共端点 100 req/5min;批量端点 5000 paper/req。每个抓取脚本必须显式 sleep,把单 host 的并发降到 1。
+- **OpenAlex API**: 100k req/day,推荐使用 `mailto` 参数提升优先级。
+- 抓取必须落到 `data/raw/external_papers/<source>/<journal_id>.json` 作为缓存层 (raw 响应原样存档),再由 collect 脚本转换成 `data/accepted_papers/<journal_id>.json`。raw 缓存允许 commit 进仓库以加速复现。
+
+### 泄漏检测 (强制)
+
+外部源接入后,**每次抓取完成必须重跑 leakage 检测**:
+
+```bash
+python scripts/clean_benchmark.py \
+  --input data/evaluation/papers_metadata_light_30.jsonl \
+  --typical-dir data/typical_abstracts \
+  --accepted-paper-dir data/accepted_papers \
+  --report data/evaluation/results/leakage_after_external_<timestamp>.json
+
+python scripts/clean_benchmark.py \
+  --input data/evaluation/papers_metadata_v2.jsonl \
+  --typical-dir data/typical_abstracts \
+  --accepted-paper-dir data/accepted_papers \
+  --report data/evaluation/results/leakage_after_external_v2_<timestamp>.json
+```
+
+两份报告必须同时满足 `summary.leaked_accepted_paper_entry_count == 0`。若任一非零,该批抓取作废,不允许进入正式实验。
+
+### source 字段命名表
+
+| source 值 | 含义 | 引入阶段 |
+|-----------|------|---------|
+| `local_evaluation_metadata` | 来自 `papers_metadata*.jsonl` | 阶段 2.2 |
+| `semantic_scholar` | 来自 Semantic Scholar API | 阶段 2.3 启用后 |
+| `openalex` | 来自 OpenAlex API | 阶段 2.3 启用后 |
+
+下游 (`feature_builder`, retriever, LTR) **不得对不同 source 标记做差别加权**——所有真实发表论文画像在算法层面一视同仁;source 只用于追溯、调试与按需回退。
+
 ## 违反与处理
 
 - 在 `heldout-final` 上发现调参、重新选择候选、基于反馈修改算法：视为泄漏 holdout，对应结果作废，`heldout-final` 集合应保持冻结；新实验必须更换 holdout 集。
