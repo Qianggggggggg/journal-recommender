@@ -129,6 +129,20 @@ def _route_rank_or_sentinel(routes: Dict[str, Any], route_name: str) -> float:
     return float(rank)
 
 
+def _trace_top_level_rank(trace_entry: Dict[str, Any]) -> float:
+    """从 trace 顶层抽 retrieval_rank;缺失用哨兵 999.0。
+
+    retrieval_rank 是 CandidateGenerator._merge_route_results 写入的"在
+    top_k 候选列表中的位置",是 LTR 最重要的排序特征之一(per plan 4.1)。
+    """
+    if not isinstance(trace_entry, dict):
+        return MISSING_RANK_SENTINEL
+    rank = trace_entry.get("retrieval_rank")
+    if not isinstance(rank, (int, float)) or rank <= 0:
+        return MISSING_RANK_SENTINEL
+    return float(rank)
+
+
 def _has_route(routes: Dict[str, Any], prefix: str) -> float:
     """trace 中是否存在以 prefix 开头的 route(0.0/1.0)。"""
     return 1.0 if any(name.startswith(prefix) for name in routes) else 0.0
@@ -157,8 +171,9 @@ def build_features(
     rank_by_route = {name: _route_rank_or_sentinel(routes, name) for name in ROUTE_RANK_FIELDS}
 
     return PaperCandidateFeatures(
-        # retrieval_rank 暂用哨兵(由 caller 注入;trace 没有总排名)
-        retrieval_rank=MISSING_RANK_SENTINEL,
+        # retrieval_rank 从 trace 顶层读(CandidateGenerator._merge_route_results 写入)
+        # trace 缺该字段时退化为哨兵 999(防御性,理论上不会发生)
+        retrieval_rank=_trace_top_level_rank(trace_entry),
         # rule_rank:None → 哨兵
         rule_rank=float(rule_rank) if isinstance(rule_rank, (int, float)) and rule_rank > 0 else MISSING_RANK_SENTINEL,
         rule_score=float(rule_score or 0.0),

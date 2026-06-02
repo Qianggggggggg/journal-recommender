@@ -373,6 +373,41 @@ def test_evaluate_variant_persists_features_even_without_accepted_store():
         assert feats[corpus_idx] == 0.0
 
 
+def test_evaluate_variant_persists_rule_top20_for_hard_negative_mining():
+    """paper_result 必须含 rule_top20(完整 20 名),供硬负样本分类用(per plan 4.2)。"""
+    store = JournalStore()
+    target = Journal(journal_id="target", journal_name="Target Journal", journal_profile="x")
+    distractor = Journal(journal_id="distractor", journal_name="Distractor", journal_profile="y")
+    store.add_journals([target, distractor])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(distractor, 1.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(target, 1.0)]),
+    )
+    scorer = RuleScorer(journals=store.journals)
+    papers = [{"title": "T", "abstract": "A", "venue": "Target Journal", "research_area": []}]
+    journal_name_to_id = {"target journal": "target"}
+
+    result = evaluate_variant(
+        papers=papers,
+        generator=generator,
+        scorer=scorer,
+        journal_name_to_id=journal_name_to_id,
+        variant="typical",
+        mode="abstract",
+        candidate_top_k=5,
+    )
+
+    pr = result["paper_results"][0]
+    assert "rule_top20" in pr
+    assert isinstance(pr["rule_top20"], list)
+    # rule_top20 至少要包含 rule_top5(向后兼容)
+    assert "rule_top5" in pr
+    assert set(pr["rule_top5"]).issubset(set(pr["rule_top20"]))
+
+
 def test_evaluate_rule_trial_reuses_snapshots_without_llm():
     store = JournalStore()
     target = Journal(

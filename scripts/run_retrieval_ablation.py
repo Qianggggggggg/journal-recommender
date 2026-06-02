@@ -300,6 +300,7 @@ def evaluate_variant(
                 "target_route_attribution": target_attribution,
                 "retrieval_top5": candidate_ids[:5],
                 "rule_top5": rule_ids[:5],
+                "rule_top20": rule_ids[:20],  # per plan 4.2:hard negative 用 Rule Top20,不是 top5
                 "candidate_features": candidate_features,
             })
             progress_bar.update(1)

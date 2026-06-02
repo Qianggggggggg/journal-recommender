@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Build LTR training data from retrieval ablation output (Task 4.1.f + 4.3).
 
+注意:本脚本走 ``--ablation-json`` 入口,不是 plan 原文写的 ``--eval-json`` 入口。
+该改线由 ADR 0002 (`docs/adr/0002-ltr-v1-ablation-input.md`) 决定:
+LTR v1 不学 LLM 介入后的信号,evaluation 路径延期到阶段 6。
+"""
+
 输入:``data/evaluation/results/<ablation>.json``(由 ``run_retrieval_ablation.py`` 产出,
 含 ``feature_names`` 与 ``paper_results[i].candidate_features``)。
 输出:JSONL,每行一个 paper-candidate pair,字段::
@@ -133,7 +138,8 @@ def build_training_rows(
                 }
 
             # 2. 负样本
-            rule_top20 = paper_result.get("rule_top5") or []  # ablation 只存 top5;近似硬负样本
+            # 优先用 paper_result["rule_top20"](per plan 4.2);缺省时回退到 rule_top5。
+            rule_top20 = paper_result.get("rule_top20") or paper_result.get("rule_top5") or []
             neg_list = _build_negatives(
                 candidate_jids=list(candidate_features.keys()),
                 target_jid=target_jid,

@@ -529,40 +529,53 @@ pytest tests/test_feature_builder.py -q
 
 - [ ] 提交：`feat: add ranker feature builder`
 
-### 任务 4.2：从 Evaluation Pipeline 导出训练样本
+### 任务 4.2：从 Ablation Pipeline 导出训练样本
+
+> **2026-06-02 修订**:plan 原写从 `run_evaluation.py` evaluation JSON 入口;
+> LTR v1 改从 `run_retrieval_ablation.py` ablation JSON 入口。evaluation 路径
+> 延期到阶段 6 (LLM evidence 训练)。详见 `docs/adr/0002-ltr-v1-ablation-input.md`。
 
 **文件：**
 - 新建： `scripts/build_ranking_training_data.py`
-- 测试： `tests/test_feature_builder.py`
+- 测试： `tests/test_build_ranking_training_data.py`
 
-- [ ] 输入：包含 `paper_results`、`llm_candidates_detail`、`recommendations_detail`、`venue_diagnostic` 的 evaluation JSON。
-- [ ] 输出：JSONL，每行包含 `paper_id`、`journal_id`、`label`、`features`、`feature_names`、`negative_type`。
-- [ ] 正样本：exact gold journal，label 为 `1`。
-- [ ] Hard negative：同领域，或出现在 Rule Top20 但不是 gold 的期刊。
-- [ ] Easy negative：不同领域且 retrieval score 低的期刊。
-- [ ] 每篇论文保留 1 个正样本和最多 10 个负样本。
-- [ ] CLI：
+- [x] 输入：`run_retrieval_ablation.py` 输出的 ablation JSON(含 `feature_names`
+  与 `paper_results[i].candidate_features`)。**不使用** evaluation JSON。
+- [x] 输出：JSONL，每行包含 `paper_id`、`journal_id`、`label`、`features`、
+  `feature_names`、`negative_type`。
+- [x] 正样本：exact gold journal，label 为 `1`。
+- [x] Hard negative：出现在 `paper_result["rule_top20"]` 但不是 gold 的期刊
+  (per plan 4.2 原意)。`rule_top20` 由 `run_retrieval_ablation.py` 落盘
+  (2026-06-02 加的字段),不是 `rule_top5` 近似。
+- [x] Same-area negative：subject_tags 与 gold venue 重叠、但不在 rule_top20。
+- [x] Easy negative：其他候选期刊。
+- [x] 每篇论文保留 1 个正样本和最多 10 个负样本，按 hard > same_area > easy 优先级。
+- [x] CLI：
 
 ```bash
 python scripts/build_ranking_training_data.py \
-  --eval-json data/evaluation/results/<baseline>.json \
-  --output data/training/ranker_train.jsonl
+  --ablation-json data/evaluation/results/<ablation>.json \
+  --journals-jsonl data/journals_ccf.jsonl \
+  --output data/training/ranker_train.jsonl \
+  --variants full_hybrid \
+  --max-negatives 10 \
+  --report data/training/ranker_train_report.json
 ```
 
-- [ ] 在最新 full-v2 结果上运行脚本。
-- [ ] 提交：`feat: export learning-to-rank training data`
+- [x] 在最新 full-v2 结果上运行脚本。
+- [x] 提交：`feat: export learning-to-rank training data`
 
 ### 任务 4.3：增加训练数据 Route Attribution 诊断
 
 **文件：**
 - 修改： `scripts/build_ranking_training_data.py`
-- 测试： `tests/test_feature_builder.py`
+- 测试： `tests/test_build_ranking_training_data.py`
 
-- [ ] 增加 route combination 的统计。
-- [ ] 统计正样本缺失 route 特征的数量。
-- [ ] 如果少于 80% 的正样本满足 `retrieval_rank <= 50`，输出 warning。
-- [ ] 保存 sidecar report：`data/training/ranker_train_report.json`。
-- [ ] 提交：`test: add training data diagnostics`
+- [x] 增加 route combination 的统计(per positive sample 出现哪些 route)。
+- [x] 统计正样本缺失 route 特征的数量(每个 route 字段一个计数)。
+- [x] 如果少于 80% 的正样本满足 `retrieval_rank <= 50`，输出 warning 到 stderr。
+- [x] 保存 sidecar report：`data/training/ranker_train_<name>_report.json`。
+- [x] 提交：`test: add training data diagnostics`
 
 ---
 

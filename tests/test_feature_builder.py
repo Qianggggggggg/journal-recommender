@@ -219,6 +219,48 @@ def test_build_features_paper_strength_none_defaults_to_0():
     assert f.paper_strength == 0.0
 
 
+def test_build_features_retrieval_rank_is_read_from_trace_top_level():
+    """retrieval_rank 是 LTR 最重要的排序特征之一;必须从 trace 顶层读,不是哨兵。"""
+    f = build_features(
+        paper_profile=_make_paper_profile(),
+        journal=_make_journal(),
+        trace_entry={"routes": {}, "retrieval_rank": 5},
+        rule_rank=None,
+        rule_score=0.0,
+        candidate_in_accepted_corpus=False,
+    )
+    assert f.retrieval_rank == 5.0
+    # vector 里也能取到
+    assert f.to_vector()[FEATURE_NAMES.index("retrieval_rank")] == 5.0
+
+
+def test_build_features_retrieval_rank_missing_uses_sentinel_999():
+    """trace 没有 retrieval_rank 字段时(防御性兜底),仍用哨兵 999(不能默认 0)。"""
+    f = build_features(
+        paper_profile=_make_paper_profile(),
+        journal=_make_journal(),
+        trace_entry={"routes": {}},  # 没有 retrieval_rank
+        rule_rank=None,
+        rule_score=0.0,
+        candidate_in_accepted_corpus=False,
+    )
+    assert f.retrieval_rank == 999.0
+
+
+def test_build_features_retrieval_rank_zero_or_negative_uses_sentinel():
+    """retrieval_rank 非法值(0、负数、None)→ 哨兵 999,不能误读成"排名第一"。"""
+    for bad in [0, -1, None, "abc"]:
+        f = build_features(
+            paper_profile=_make_paper_profile(),
+            journal=_make_journal(),
+            trace_entry={"routes": {}, "retrieval_rank": bad},
+            rule_rank=None,
+            rule_score=0.0,
+            candidate_in_accepted_corpus=False,
+        )
+        assert f.retrieval_rank == 999.0, f"failed for bad value {bad!r}"
+
+
 def test_build_features_detects_has_identity_anchor_route():
     """trace 中存在 identity_anchor → has_identity_anchor=1.0。"""
     f = build_features(
