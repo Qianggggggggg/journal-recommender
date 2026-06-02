@@ -660,9 +660,9 @@ pytest tests/test_learning_to_rank.py -q
 **文件：**
 - 新建： `scripts/train_learning_to_rank.py`
 - 输出： `data/models/learning_to_ranker.json`
-- 测试： `tests/test_learning_to_rank.py`
+- 测试： `tests/test_learning_to_rank.py` + `tests/test_train_learning_to_rank.py`
 
-- [ ] CLI：
+- [x] CLI：
 
 ```bash
 python scripts/train_learning_to_rank.py \
@@ -671,9 +671,15 @@ python scripts/train_learning_to_rank.py \
   --seed 42
 ```
 
-- [ ] 保存 feature names 和模型参数。
-- [ ] 保存训练指标：pairwise accuracy、positive mean score、hard-negative mean score。
-- [ ] 提交：`feat: train baseline learning-to-rank model`
+- [x] 保存 feature names 和模型参数。
+- [x] 保存训练指标：pairwise accuracy、positive mean score、hard-negative mean score。
+- [x] **真实数据收敛问题(plan 5.2 重点)**:LearningToRanker 暴露
+  `max_iter` / `use_standardization` 开关,fit 时捕获 sklearn
+  ConvergenceWarning,收敛状态写入 `convergence_info` 持久化到产物。
+  真实 `ranker_train_full_v2.jsonl`:不标准化必报 ConvergenceWarning;
+  标准化 + max_iter=5000 内 35 iter 收敛,pairwise_accuracy=0.988,
+  positive_mean=0.151, hard_neg_mean=0.079, margin=+0.072。
+- [x] 提交:`feat(5.2): train baseline learning-to-rank model`
 
 ### 任务 5.3：把 Learned Reranker 接入 Pipeline，但默认关闭
 
