@@ -25,14 +25,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s00224-025-10222-1",
       "url": ""
-    },
-    {
-      "title": "A local search algorithm for the radius-constrained k-median problem",
-      "abstract": "We study the radius-constrained k-median problem, a variant of the classic k-median clustering where each cluster is required to have radius at most a given threshold R. The goal is to select k centers to minimize the sum of distances from each point to its assigned center, subject to the constraint that no point is assigned to a center farther than R. We present a local search algorithm that achieves a constant-factor approximation for this problem, improving upon previous results that either had worse approximation guarantees or required R to be large. Our analysis introduces a new charging scheme based on distance layers, which may be of independent interest for other constrained clustering problems.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1007/s00224-025-10217-4",
-      "url": ""
     }
   ]
 }

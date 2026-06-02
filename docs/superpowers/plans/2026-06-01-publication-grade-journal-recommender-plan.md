@@ -283,17 +283,33 @@ pytest tests/test_accepted_paper_store.py -q
 
 ```bash
 python scripts/collect_accepted_papers.py \
+  --eval-input data/evaluation/papers_metadata.jsonl \
   --exclude-eval-input data/evaluation/papers_metadata_light_30.jsonl \
+  --exclude-eval-input data/evaluation/papers_metadata_v2.jsonl \
   --output-dir data/accepted_papers
 ```
 
-  本轮产物:90 个期刊 / 156 篇真实论文 / 63 条 light30 论文被正确排除 / 2 条跨文件去重。
-  `jiis` 和 `algorithmica` 等期刊在本地数据里只在 light30 中有论文,被 exclude 后缺画论,
-  留待任务 2.3 的外部数据源 stub 后续补齐。
+  **命令演进**:plan 原命令只 `--exclude-eval-input light30`,执行后发现
+  v2 仍有 60/89 篇泄漏到 corpus。这违反 docs/evaluation/benchmark_policy.md
+  "测试论文不得出现在 typical 或 accepted-paper journal profiles 中" 的纪律。
+  修订后:同时 exclude light30 和 v2,且只用 v1 (papers_metadata.jsonl) 作为
+  来源(因为 v2 / light30 一旦 exclude 后没有论文剩下,作为输入意义不大)。
+
+  本轮产物:63 个期刊 / 95 篇真实论文 / 7 条 (v1 ∩ {light30 ∪ v2}) 被正确排除。
+  `algorithmica`、`jiis`、`ase` 等期刊在本地数据里只在 v2/light30 中有论文,
+  被 exclude 后没有画像,留待任务 2.3 的外部数据源 stub 后续补齐。
+
+  泄漏加固:collect 脚本的 title 规范化原本只做 lowercase+折叠空白,无法把
+  Unicode `√log n` 和 ASCII `sqrt(log n)` 当成同一篇论文,导致单条
+  ACM TALG 的论文 (Sparsest Cut O(√log n)) 漏排。修订:接入与
+  `clean_benchmark.py::_normalize_text` 一致的 NFKD + 去非字母数字规范化,
+  并把 abstract 前 160 字符片段加入 exclude 维度,口径与 leakage 工具完全
+  一致。
 
 - [x] 确认 light30 的泄漏报告干净；如果有泄漏，报告中必须明确列出。
-  报告 `data/evaluation/results/light30_leakage_report_after_2_2.json`:
-  `leaked_papers=0, leaked_accepted_paper_entries=0`。
+  报告 `data/evaluation/results/{light30,full_v2}_leakage_after_v2_fix.json`:
+  light30: `leaked_papers=0, leaked_accepted_paper_entries=0`
+  full-v2: `leaked_papers=0, leaked_accepted_paper_entries=0`
 - [x] 提交：`feat: build local accepted-paper journal corpus`
 
 ### 任务 2.3：预留外部数据源接口，但当前不依赖外部数据

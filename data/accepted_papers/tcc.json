@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1109/TCC.2024.3364008",
       "url": ""
-    },
-    {
-      "title": "RLDR: Reinforcement Learning-Based Fast Data Recovery in Cloud-of-Clouds Storage Systems",
-      "abstract": "Cloud-of-clouds storage systems are widely used in online applications, where user data are encrypted, encoded, and stored in multiple clouds. When some cloud nodes fail, the storage systems can reconstruct the lost data and store it in the substitute nodes. It is a challenge to reduce the latency of data recovery to ensure data reliability. In this paper, we adopt a Reinforcement Learning-based Data Recovery (RLDR) approach to reduce the regeneration time. By employing the Monte-Carlo method, our approach can construct the tree-topology-based regeneration process, a.k.a. regeneration tree, to effectively reduce the regeneration time. Through rigorous analysis, we apply the information flow graph to optimize the inter-cloud traffic for a given regeneration tree. To verify the merit of RLDR, we conduct extensive experiments on real-world traces. Experiments demonstrate that RLDR can significantly accelerate the regeneration process. Specifically, RLDR can reduce the regeneration time by up to 92% and increase the throughput by up to twelve-fold, compared to the prior art.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1109/TCC.2025.10506789",
-      "url": ""
     }
   ]
 }

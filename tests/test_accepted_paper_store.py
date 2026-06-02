@@ -632,3 +632,52 @@ def test_collect_excludes_pair_by_title_and_venue_not_just_title(tmp_path):
     assert [p["title"] for p in ton["papers"]] == ["Survey of X"]
     assert not (out_dir / "ai.json").exists()  # AI 这条被 exclude 掉了
 
+
+def test_collect_excludes_by_abstract_snippet_when_title_diverges(tmp_path):
+    """同一篇论文 title 因 unicode/ascii 写法不同 (例如 √ vs sqrt) 时,
+    必须通过 abstract 前缀片段匹配兜底,口径与 clean_benchmark.py 一致。"""
+    from scripts.collect_accepted_papers import collect_accepted_papers
+
+    journal_store = _make_journal_store([("talg", "ACM Transactions on Algorithms")])
+    abstract = (
+        "Currently, the best known tradeoff between approximation ratio and complexity for "
+        "the Sparsest Cut problem is achieved by Sherman 2009. We present an alternative "
+        "approach with the same approximation guarantee but improved parallelism and a much "
+        "simpler analysis based on multiplicative weights."
+    )
+    primary = tmp_path / "primary.jsonl"
+    excluded = tmp_path / "ex.jsonl"
+    _write_jsonl(
+        primary,
+        [
+            {
+                "title": "A Simpler and Parallelizable O(sqrt(log n))-Approximation Algorithm",
+                "abstract": abstract,
+                "venue": "ACM Transactions on Algorithms",
+            },
+        ],
+    )
+    _write_jsonl(
+        excluded,
+        [
+            {
+                # Unicode √ 版本,title 规范化不会和 sqrt 版本相等
+                "title": "A Simpler and Parallelizable O(√log n)-Approximation Algorithm",
+                "abstract": abstract,
+                "venue": "ACM Transactions on Algorithms",
+            },
+        ],
+    )
+    out_dir = tmp_path / "out"
+    summary = collect_accepted_papers(
+        eval_inputs=[primary],
+        exclude_inputs=[excluded],
+        journal_store=journal_store,
+        output_dir=out_dir,
+        source="local_evaluation_metadata",
+    )
+
+    # primary 中那一篇必须被 exclude 掉,即使 title 字符串不同
+    assert not (out_dir / "talg.json").exists()
+    assert summary["excluded_count"] == 1
+

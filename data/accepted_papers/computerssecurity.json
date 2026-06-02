@@ -17,14 +17,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1016/j.cose.2025.104121",
       "url": ""
-    },
-    {
-      "title": "Detection of cyberattack in Industrial Control Networks using multiple adaptive local kernel learning",
-      "abstract": "The data of Industrial Control Networks presents high-dimensional and nonlinear characteristics, making cyberattack detection a challenging problem. Multiple kernel learning (MKL) provided an attractive performance in dealing with the problem through the kernel trick. However, each kernel in traditional MKL usually adopts global features for high-dimensional space mapping. The local-related feature whereas, is ignored, resulting in the missing of the local implicit information. To tackle this problem, this article proposes an MKL-based cyberattack detection method combining both global and local kernels. First, information theory-based feature selection is used for local feature grouping. After that, different kinds of deep neural networks are used to generate local kernels for each group. Moreover, an adaptive method is designed for ensembling the local kernels into the global kernel during the learning process. Extensive experiments are conducted on diverse datasets and the performances are comprehensively evaluated. The results indicate that our proposed method is outstanding in the cyberattack detection of Industrial Control Networks.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1016/j.cose.2024.104152",
-      "url": ""
     }
   ]
 }

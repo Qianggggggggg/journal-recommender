@@ -32,6 +32,7 @@ import json
 import logging
 import re
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Any, Iterable, List, Optional, Sequence
 
@@ -51,8 +52,11 @@ DEFAULT_EVAL_INPUTS = [
 ]
 DEFAULT_OUTPUT_DIR = Path("data/accepted_papers")
 DEFAULT_SOURCE = "local_evaluation_metadata"
+# 与 src/evaluation/clean_benchmark.py 的 abstract_snippet 匹配口径保持一致
+ABSTRACT_SNIPPET_LENGTH = 160
 
 _WHITESPACE_RE = re.compile(r"\s+")
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
 
 
 # ---------------------------------------------------------------------------
@@ -67,11 +71,28 @@ def _normalize_venue(venue: str) -> str:
     return _WHITESPACE_RE.sub(" ", venue.strip()).lower()
 
 
+def _normalize_text(text: str) -> str:
+    """与 ``src/evaluation/clean_benchmark.py::_normalize_text`` 严格一致:
+    NFKD + lowercase + 去掉所有非字母数字字符 + 折叠空白。
+
+    这是 title 比对与 abstract 片段比对的统一口径。任何对其中一处的修改
+    必须同步另一处,以保证 ``--exclude-eval-input`` 与 leakage 报告匹配
+    的论文集合完全相同。
+    """
+    text = unicodedata.normalize("NFKD", str(text)).lower()
+    text = _NON_ALNUM_RE.sub(" ", text)
+    return _WHITESPACE_RE.sub(" ", text).strip()
+
+
 def _normalize_title(title: str) -> str:
-    """title 规范化:lowercase + 折叠空白。用于跨文件去重和 exclude 匹配。"""
-    if not title:
-        return ""
-    return _WHITESPACE_RE.sub(" ", title.strip()).lower()
+    """title 规范化 (与 _normalize_text 同口径)。用于跨文件去重和 exclude 匹配。"""
+    return _normalize_text(title)
+
+
+def _abstract_snippet_key(abstract: str) -> str:
+    """abstract 前 ``ABSTRACT_SNIPPET_LENGTH`` 字符的规范化片段。"""
+    norm = _normalize_text(abstract)
+    return norm[:ABSTRACT_SNIPPET_LENGTH]
 
 
 def _build_venue_index(journal_store: Any) -> tuple[dict[str, str], dict[str, str]]:
@@ -111,23 +132,36 @@ def _iter_jsonl(path: Path) -> Iterable[dict]:
 
 def _build_exclude_keys(
     exclude_inputs: Sequence[Path], venue_index: dict[str, str]
-) -> set[tuple[str, str]]:
-    """收集 (normalized_title, journal_id) 排除键集合。
+) -> tuple[set[tuple[str, str]], set[tuple[str, str]]]:
+    """收集两类 exclude key 集合,任一命中即算 exclude:
 
-    解析不到 journal_id 的条目不构成有效 exclude key (因为它们不可能落进
-    output corpus,自然不需要 exclude)。
+    - title_keys: ``(normalized_title, journal_id)``
+    - abstract_keys: ``(abstract_snippet, journal_id)``,abstract 前 160 字符
+
+    一篇 paper 同时会塞进两个集合,collect 主流程只要 title 或 abstract 任一
+    匹配就视为已在 exclude 文件中出现。abstract 片段维度兜底了 title 字符串
+    差异 (例如 unicode ``√`` vs ASCII ``sqrt``) 这类无法通过 title 规范化
+    解决的情况。
     """
-    keys: set[tuple[str, str]] = set()
+    title_keys: set[tuple[str, str]] = set()
+    abstract_keys: set[tuple[str, str]] = set()
     for path in exclude_inputs:
         for row in _iter_jsonl(path):
-            title_norm = _normalize_title(str(row.get("title", "")))
             venue_norm = _normalize_venue(str(row.get("venue", "")))
-            if not title_norm or not venue_norm:
+            if not venue_norm:
                 continue
             journal_id = venue_index.get(venue_norm)
-            if journal_id:
-                keys.add((title_norm, journal_id))
-    return keys
+            if not journal_id:
+                continue
+
+            title_norm = _normalize_title(str(row.get("title", "")))
+            if title_norm:
+                title_keys.add((title_norm, journal_id))
+
+            abstract_snippet = _abstract_snippet_key(str(row.get("abstract", "")))
+            if len(abstract_snippet) >= ABSTRACT_SNIPPET_LENGTH:
+                abstract_keys.add((abstract_snippet, journal_id))
+    return title_keys, abstract_keys
 
 
 # ---------------------------------------------------------------------------
@@ -180,7 +214,9 @@ def collect_accepted_papers(
     """
     output_dir = Path(output_dir)
     venue_index, id_to_name = _build_venue_index(journal_store)
-    exclude_keys = _build_exclude_keys([Path(p) for p in exclude_inputs], venue_index)
+    title_exclude_keys, abstract_exclude_keys = _build_exclude_keys(
+        [Path(p) for p in exclude_inputs], venue_index
+    )
 
     grouped: dict[str, dict] = {}
     seen_keys: set[tuple[str, str]] = set()
@@ -207,9 +243,15 @@ def collect_accepted_papers(
                 continue
 
             title_norm = _normalize_title(title)
+            abstract_snippet = _abstract_snippet_key(abstract)
             key = (title_norm, journal_id)
 
-            if key in exclude_keys:
+            title_hit = key in title_exclude_keys
+            abstract_hit = (
+                len(abstract_snippet) >= ABSTRACT_SNIPPET_LENGTH
+                and (abstract_snippet, journal_id) in abstract_exclude_keys
+            )
+            if title_hit or abstract_hit:
                 excluded += 1
                 continue
             if key in seen_keys:

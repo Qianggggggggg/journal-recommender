@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "",
       "url": ""
-    },
-    {
-      "title": "Predicting Available Bandwidth in Ad Hoc Networks Using Neural Networks",
-      "abstract": "Ad hoc networks are self-organizing wireless networks that do not rely on fixed infrastructure. They are easy and fast to set up, unrestricted by time and space, and can be widely used in battlefields, emergency rescue operations, hazardous environments, and other scenarios. The available bandwidth of links in Ad hoc networks changes with the channel conditions. If the available bandwidth can be predicted and the transmission rate adjusted accordingly, the channel utilization can be significantly improved. In this paper, neural network models such as CNN, LSTM, Transformer, TCN, and KAN are applied to predict the available channel bandwidth based on measured data. The experimental results indicate that among those models, the CNN model converges more rapidly, while the TCN and TCN-GRU models exhibit superior fitting performance.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1016/j.adhoc.2025.103951",
-      "url": ""
     }
   ]
 }

@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s10664-024-10582-1",
       "url": ""
-    },
-    {
-      "title": "Shaky structures: The wobbly world of causal graphs in software analytics",
-      "abstract": "Causal graphs are widely used in software engineering to document and explore causal relationships. Though widely used, they may also be wildly misleading. Causal structures generated from SE data can be highly variable. This instability is so significant that conclusions drawn from one graph may be totally reversed in another, even when both graphs are learned from the same or very similar project data. To document this problem, this paper examines causal graphs found by four causal graph generators (PC, FCI, GES, and LiNGAM) when applied to 23 data sets, relating to three different SE tasks: (a) learning how configuration options are selected for different properties; (b) understanding how management choices affect software projects; and (c) defect prediction. Graphs were compared between (a) different projects exploring the same task; (b) version i and  of a system; (c) different 90% samples of the data; and (d) small variations in the causal graph generator. Measured in terms of the Jaccard index of the number of edges shared by two different graphs, over half the edges were changed by these treatments. Hence, we conclude two things. Firstly, specific conclusions found by causal graph generators about how two specific variables affect each other may not generalize since those conclusions could be reversed by minor changes in how those graphs are generated. Secondly, before researchers can report supposedly general conclusions from causal graphs (e.g., “long functions cause more defects”), they should test that such conclusions hold over the numerous causal graphs that might be generated from the same data.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1007/s10664-025-10690-6",
-      "url": ""
     }
   ]
 }

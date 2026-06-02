@@ -11,35 +11,11 @@
       "url": ""
     },
     {
-      "title": "A Simpler and Parallelizable O(sqrt(log n))-Approximation Algorithm for Sparsest Cut",
-      "abstract": "Currently, the best known tradeoff between approximation ratio and complexity for the Sparsest Cut problem is achieved by the algorithm in Sherman [FOCS, 2009]. We present an alternative approach that avoids solving the multicommodity flow problem and instead computes violating paths. This simplifies Sherman's algorithm by removing a need for a nested application of MW and also allows parallelization. We also revisit Sherman's chaining algorithm and present a simpler version together with a new analysis.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3748723",
-      "url": ""
-    },
-    {
       "title": "Peeling Close to the Orientability Threshold Spatial Coupling in Hashing-Based Data Structures",
       "abstract": "In multiple-choice data structures each element x is associated with a set e(x) ⊆ [n] of size ℓ ≥ 1, and one considers the hypergraph H = ([n],{e(x) | x∈ S}). In many applications, it is desirable that H admits a peeling sequence, i.e. an ordering of the edges such that every edge has a vertex of degree 1 at the time it is removed. Many hypergraphs exhibit sharp density thresholds with respect to the property of ℓ-orientability and peeling. We propose a new kind of distribution for hyperedges that results in hypergraphs which are orientable and peelable all the way up to the orientability threshold. Our construction is simple: The hypergraph H consists of nk (slightly overlapping) copies of a hypergraph H0 of constant size. We demonstrate the usefulness of our construction using our hypergraphs as a drop-in replacement in a retrieval data structure by Botelho et al. This reduces memory usage from ≈1.23m to ≈1.12m for m entries and any k > 3.",
       "year": 2025,
       "source": "local_evaluation_metadata",
       "doi": "10.1145/3711822",
-      "url": ""
-    },
-    {
-      "title": "A Simpler and Parallelizable O(√log n)-Approximation Algorithm for Sparsest Cut",
-      "abstract": "Currently, the best known tradeoff between approximation ratio and complexity for the Sparsest Cut problem is achieved by the algorithm in Sherman [FOCS, 2009]. We present an alternative approach that avoids solving the multicommodity flow problem and instead computes “violating paths.” This simplifies Sherman’s algorithm by removing a need for a nested application of MW and also allows parallelization. We also revisit Sherman’s chaining algorithm and present a simpler version together with a new analysis.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3748723",
-      "url": ""
-    },
-    {
-      "title": "Conditional Lower Bounds for Dynamic Geometric Measure Problems",
-      "abstract": "We give new polynomial lower bounds for a number of dynamic measure problems in computational geometry. These lower bounds hold in the Word RAM model, conditioned on the hardness of 3SUM, APSP, or the Online Matrix-Vector Multiplication problem [Henzinger et al., STOC 2015]. In particular, we get lower bounds in the incremental and fully dynamic settings for counting maximal or extremal points in ℝ³, different variants of Klee's Measure problem, and the hypervolume indicator in ℝ³.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3727878",
       "url": ""
     }
   ]

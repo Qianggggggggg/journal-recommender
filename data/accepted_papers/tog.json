@@ -25,22 +25,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1145/3659577",
       "url": ""
-    },
-    {
-      "title": "Complex-Valued Holographic Radiance Fields",
-      "abstract": "Modeling wave properties of light is an important milestone for advancing physically-based rendering. In this paper, we propose complex-valued holographic radiance fields, a method that optimizes scenes without relying on intensity-based intermediaries. By leveraging multi-view images, our method directly optimizes a scene representation using complex-valued Gaussian primitives representing amplitude and phase values aligned with the scene geometry. Our approach eliminates the need for computationally expensive holographic rendering that typically utilizes a single view of a given scene. This accelerates holographic rendering speed by 30x-10,000x while achieving on-par image quality with state-of-the-art holography methods, representing a promising step towards bridging the representation gap between modeling wave properties of light and 3D geometry of scenes.",
-      "year": 2026,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3804450",
-      "url": ""
-    },
-    {
-      "title": "Learning Sparse Singularities for Cross Field Design",
-      "abstract": "Designing a quad mesh that meets aesthetic, anatomical, and numerical requirements often requires meticulous manual effort in conventional methods, making quadrilateral remeshing an 'art of design'. Neural networks hold significant promise for automating this process. However, current approaches that directly predict cross fields cannot properly handle the discontinuous behavior of smooth cross fields: minor shape variations can lead to substantial changes in the cross field, even when singularities remain largely unchanged. Therefore, such methods often result in non-smooth outputs when combining multiple singularity instances. To avoid such discontinuity, we propose to learn the sparse singularities, including their locations and indices, then let the non-neural conventional method to smoothly connect them. The imbalanced ratio of singular and regular vertices poses a significant challenge for learning. We convert them into a geodesic distance field and an over-sampled index field to address it. This carefully designed two-stage strategy satisfies several key requirements, such as coordinate invariance and tessellation insensitivity, while enabling the generation of smooth cross fields with varying topologies. By shifting the focus from directly learning the cross field to learning singularities, we also simplify the dataset preparation process by requiring only sparse annotations.",
-      "year": 2026,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3787520",
-      "url": ""
     }
   ]
 }

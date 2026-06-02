@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1186/s12859-025-06567-6",
       "url": ""
-    },
-    {
-      "title": "Robust phylogenetic tree-based microbiome association test using repeatedly measured data for composition bias",
-      "abstract": "Microbiome studies increasingly collect longitudinal data to understand how microbial communities change over time. However, existing methods often fail to account for the compositional nature of microbiome data and the phylogenetic relationships among taxa. We propose a robust phylogenetic tree-based association test for repeatedly measured microbiome data that accounts for composition bias. The proposed method integrates a tree-based weighting scheme to incorporate phylogenetic information while using a bias-corrected approach to handle compositionality. Through extensive simulations, we demonstrate that our method controls type I error well and achieves higher statistical power than existing approaches. Analysis of a real longitudinal dataset reveals associations between microbial dynamics and host health outcomes that were not detected by conventional methods.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1186/s12859-024-06002-2",
-      "url": ""
     }
   ]
 }

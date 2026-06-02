@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1145/3744236",
       "url": ""
-    },
-    {
-      "title": "Topological Characterization of Consensus in Distributed Systems",
-      "abstract": "We provide a complete characterization of both uniform and non-uniform deterministic consensus solvability in distributed systems with benign process and communication faults using point-set topology. More specifically, we non-trivially extend the approach introduced by Alpern and Schneider in 1985, by introducing novel fault-aware topologies on the space of infinite executions: the process-view topology, induced by a distance function that relies on the local view of a given process in an execution, and the minimum topology, which is induced by a distance function that focuses on the local view of the process that is the last to distinguish two executions. Consensus is solvable in a given model if and only if the sets of admissible executions leading to different decision values is disconnected in these topologies. By applying our approach to a wide range of different applications, we provide a topological explanation of a number of existing algorithms and impossibility results and develop several new ones, including a general equivalence of the strong and weak validity conditions.",
-      "year": 2024,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3687302",
-      "url": ""
     }
   ]
 }

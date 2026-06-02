@@ -9,14 +9,6 @@
       "source": "local_evaluation_metadata",
       "doi": "",
       "url": "https://arxiv.org/pdf/2208.11858.pdf"
-    },
-    {
-      "title": "Address/Data Instruction Steering in Clustered General Purpose Processors",
-      "abstract": "Although they differentiate between integer and floating-point datum, modern Instruction Set Architectures and their implementations do not differentiate integer datum used to address memory from integer datum used in purely arithmetic and logical computations. This is a perfectly reasonable choice as addresses are, in fact, integral quantities. However, in many cases, there is already a fundamental difference between addresses and integer data: Their width. As computer systems moved from 16 to 32, then to 64-bit pointers, with a potential future where 128-bit might be used for specific systems, the data width required to compute a given output with a given algorithm has remained the same, e.g., an ASCII character is still represented on a byte. This work aims to leverage this dichotomy to revisit hardware clustering, a well known microarchitectural technique used to mitigate the cost of scaling processor backend structures by dividing the backend into several mostly independent execution clusters. We show that by treating instructions as manipulating addresses or data and steering them to a 'data' or an 'address' cluster accordingly, reasonable cluster load balancing can be achieved without the need for complex steering policies that can lead to performance on par with the baseline with limited hardware overhead. Moreover, we highlight two possible optimizations stemming from this distribution. First, the registers of the 'address' cluster can easily be compressed thanks to address spatial and temporal locality. Second, if a processor requires a large address space but only processes narrow data (e.g., 32-bit data with 64-bit pointers or 64-bit data with 128-bit pointers), the 'data' cluster datapath can be kept narrower than the 'address' cluster datapath.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3744908",
-      "url": ""
     }
   ]
 }

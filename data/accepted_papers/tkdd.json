@@ -17,14 +17,6 @@
       "source": "local_evaluation_metadata",
       "doi": "",
       "url": "https://arxiv.org/pdf/2408.02456.pdf"
-    },
-    {
-      "title": "Latent Representation Learning for Attribute Graph Anomaly Detection",
-      "abstract": "Attribute graph anomaly detection aims to identify anomalies from attributed graphs. However, existing methods often fail to effectively learn latent representations that capture both structural and attribute information simultaneously, limiting their detection performance. In this paper, we propose a novel latent representation learning framework for attribute graph anomaly detection. Our method learns low-dimensional representations that preserve both the graph topology and node attributes, enabling effective identification of anomalies that deviate from normal patterns. Extensive experiments on real-world datasets demonstrate that our approach significantly outperforms state-of-the-art methods in terms of detection accuracy and robustness.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1145/3733604",
-      "url": ""
     }
   ]
 }

@@ -17,22 +17,6 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1016/j.jss.2024.112301",
       "url": ""
-    },
-    {
-      "title": "Integrating neural mutation into mutation-based fault localization: A hybrid approach",
-      "abstract": "Fault localization is an important part of software testing and debugging, helping improve the process of fixing faults. Mutation-Based Fault Localization (MBFL) is widely used, but the reliance of Traditional-MBFL on syntactical mutants often limits its accuracy. To address this, we propose Neural-MBFL, which introduces neural mutation to generate semantically richer mutants using deep learning to better mimic real faults. Additionally, we present NeuraIntegra-MBFL, which combines neural and traditional mutation strategies through mutant combination and suspiciousness aggregation. Experiments on 835 faulty programs from the Defects4J benchmark show that Neural-MBFL improves fault localization compared to Traditional-MBFL, with a 35.50% relative improvement in MAP and 127 more faults localized at TOP-5, while maintaining acceptable computational cost. Compared to Neural-MBFL, NeuraIntegra-MBFL further enhances performance, particularly with suspiciousness aggregation, achieving an additional 11.96% MAP improvement and localizes 45 more faults at TOP-5, demonstrating the effectiveness of integrating suspiciousness scores. Using overlap and correlation analyses, we confirmed the complementarity between Neural-MBFL and Traditional-MBFL. Neural-MBFL is more effective at localizing faults that require understanding deep code semantics, while Traditional-MBFL performs better at handling rule-based modifications. NeuraIntegra-MBFL successfully integrates the strengths of both methods, offering better performance than either approach alone.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1016/j.jss.2024.112281",
-      "url": ""
-    },
-    {
-      "title": "Security discussions in quantum software projects on GitHub",
-      "abstract": "The integration of quantum computing with software engineering introduces new security challenges that are not yet fully understood. This paper presents an empirical study of security discussions in open-source quantum software projects hosted on GitHub. We analyze over 5,000 issues and pull request comments across 150 quantum software repositories, focusing on how developers discuss security concerns related to quantum algorithms, libraries, and toolchains. Our study reveals that security discussions in quantum software projects are still in their infancy, with most conversations centered around general cryptographic concerns rather than quantum-specific vulnerabilities. We identify key themes, including post-quantum cryptography adoption, side-channel attack mitigation, and secure implementation of quantum algorithms. Our findings provide a foundation for future research on security engineering for quantum software systems.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "10.1016/j.jss.2025.112585",
-      "url": ""
     }
   ]
 }
