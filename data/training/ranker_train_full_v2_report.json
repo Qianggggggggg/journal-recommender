@@ -1,0 +1,47 @@
+{
+  "positives_total": 83,
+  "positives_by_variant": {
+    "full_hybrid": 83
+  },
+  "positives_with_target_in_top50_count": 83,
+  "positives_with_target_in_top50_ratio": 1.0,
+  "retrieval_topk_80_warning": false,
+  "retrieval_topk_80_threshold": 0.8,
+  "positives_missing_route_features": {
+    "scope_bm25_rank": 38,
+    "scope_vector_rank": 8,
+    "typical_bm25_rank": 28,
+    "typical_vector_rank": 1,
+    "accepted_bm25_rank": 45,
+    "accepted_vector_rank": 39
+  },
+  "route_combination_counts": {
+    "scope_vector+typical_vector+accepted_bm25+accepted_vector": 10,
+    "scope_vector+typical_vector": 6,
+    "scope_vector+typical_vector+accepted_vector": 3,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector": 18,
+    "scope_bm25+scope_vector+typical_vector": 5,
+    "scope_bm25+typical_bm25+typical_vector": 1,
+    "scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 8,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25": 1,
+    "scope_bm25+scope_vector+typical_vector+accepted_bm25+accepted_vector": 2,
+    "scope_vector+typical_bm25+typical_vector+accepted_vector": 2,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 13,
+    "scope_bm25+typical_bm25+typical_vector+accepted_vector": 1,
+    "scope_vector+typical_bm25+typical_vector": 5,
+    "scope_vector+accepted_bm25+accepted_vector": 1,
+    "scope_bm25+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 2,
+    "scope_bm25+scope_vector+typical_vector+accepted_vector": 1,
+    "typical_bm25+typical_vector+accepted_vector": 1,
+    "typical_bm25+typical_vector": 2,
+    "scope_bm25+typical_bm25+typical_vector+accepted_bm25": 1
+  },
+  "input_ablation_json": "data/evaluation/results/retrieval_ablation_full_v2_20260602_181652.json",
+  "output_jsonl": "data/training/ranker_train_full_v2.jsonl",
+  "max_negatives": 10,
+  "negatives_by_type": {
+    "hard_rule_top20": 412,
+    "same_area": 343,
+    "easy_other": 135
+  }
+}

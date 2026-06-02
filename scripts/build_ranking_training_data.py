@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build LTR training data from retrieval ablation output (Task 4.1.f).
+"""Build LTR training data from retrieval ablation output (Task 4.1.f + 4.3).
 
 输入:``data/evaluation/results/<ablation>.json``(由 ``run_retrieval_ablation.py`` 产出,
 含 ``feature_names`` 与 ``paper_results[i].candidate_features``)。
@@ -17,6 +17,11 @@
 
 每篇 paper 保留 1 个正样本(若 gold 期刊在 candidate_features 中)与至多
 ``max_negatives`` 个负样本(按优先级:hard > same_area > easy)。
+
+sidecar report(4.3):
+- 正样本缺失 route 特征的数量
+- < 80% 正样本 retrieval_rank ≤ 50 时输出 warning
+- route combination 分布
 """
 from __future__ import annotations
 
@@ -29,11 +34,24 @@ from typing import Dict, Iterable, List, Optional
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.ranker.feature_builder import FEATURE_NAMES
+from src.ranker.feature_builder import FEATURE_NAMES, MISSING_RANK_SENTINEL
 
 
 # 负样本类型优先级(从前到后填,直到达到 max_negatives)
 NEGATIVE_PRIORITY: tuple = ("hard_rule_top20", "same_area", "easy_other")
+
+# 80% warning 阈值(per plan 4.3):< 该比例的 positive 在 retrieval_top50 内时报警
+RETRIEVAL_TOPK_80_THRESHOLD: float = 0.8
+
+# route 名称:对应的 features 中的 rank 字段名(必须以 _rank 结尾、与 FEATURE_NAMES 对齐)
+ROUTE_RANK_FEATURES: tuple = (
+    "scope_bm25_rank",
+    "scope_vector_rank",
+    "typical_bm25_rank",
+    "typical_vector_rank",
+    "accepted_bm25_rank",
+    "accepted_vector_rank",
+)
 
 
 def _classify_negative(
@@ -135,6 +153,108 @@ def build_training_rows(
                 }
 
 
+def _extract_route_combination(features: List[float]) -> str:
+    """从 features 向量中提取"实际出现"(rank != 哨兵)的 route 集合。
+
+    返回 sorted 后用 + 连接的字符串。例如 ``"scope_bm25+typical_bm25"``。
+    全缺失时返回空字符串。
+    """
+    if not features:
+        return ""
+    present: List[str] = []
+    for route_field in ROUTE_RANK_FEATURES:
+        if route_field not in FEATURE_NAMES:
+            continue
+        idx = FEATURE_NAMES.index(route_field)
+        if idx >= len(features):
+            continue
+        if features[idx] != MISSING_RANK_SENTINEL:
+            # 字段名去掉 _rank 后缀,即 "scope_bm25"
+            present.append(route_field[: -len("_rank")])
+    return "+".join(present)
+
+
+def _build_lookup_for_retrieval_rank(
+    ablation_data: dict, only_variants: Optional[Iterable[str]] = None
+) -> Dict[tuple, Optional[int]]:
+    """构造 (variant, paper_id) → retrieval_rank 的查找表。
+
+    paper_id = paper_result["title"] (与 build_training_rows 一致)。
+    """
+    lookup: Dict[tuple, Optional[int]] = {}
+    variants = ablation_data.get("variants") or {}
+    for variant_name, variant_data in variants.items():
+        if only_variants is not None and variant_name not in set(only_variants):
+            continue
+        for paper_idx, paper_result in enumerate(variant_data.get("paper_results") or []):
+            paper_id = paper_result.get("title") or f"paper_{paper_idx}"
+            lookup[(variant_name, paper_id)] = paper_result.get("retrieval_rank")
+    return lookup
+
+
+def build_training_report(
+    ablation_data: dict,
+    positive_rows: List[dict],
+    only_variants: Optional[Iterable[str]] = None,
+) -> dict:
+    """为训练数据生成 sidecar report(per plan 4.3)。
+
+    包含:
+    - ``positives_total`` / ``positives_by_variant``
+    - ``positives_with_target_in_top50_count`` / ``positives_with_target_in_top50_ratio``
+    - ``retrieval_topk_80_warning``(< RETRIEVAL_TOPK_80_THRESHOLD 触发)
+    - ``positives_missing_route_features``:每个 route 字段在正样本中为哨兵的次数
+    - ``route_combination_counts``:route 组合分布
+    """
+    if only_variants is not None:
+        only_variants_set = set(only_variants)
+    else:
+        only_variants_set = None
+
+    retrieval_lookup = _build_lookup_for_retrieval_rank(ablation_data, only_variants=only_variants_set)
+
+    positives_by_variant: Dict[str, int] = {}
+    positives_in_top50 = 0
+    positives_total = 0
+    missing_per_feature: Dict[str, int] = {f: 0 for f in ROUTE_RANK_FEATURES}
+    combination_counts: Dict[str, int] = {}
+
+    for row in positive_rows:
+        positives_total += 1
+        variant = row.get("variant", "")
+        positives_by_variant[variant] = positives_by_variant.get(variant, 0) + 1
+        paper_id = row.get("paper_id", "")
+        rank = retrieval_lookup.get((variant, paper_id))
+        if rank is not None and isinstance(rank, (int, float)) and 0 < rank <= 50:
+            positives_in_top50 += 1
+        # 统计缺失的 route 特征
+        feats = row.get("features") or []
+        for route_field in ROUTE_RANK_FEATURES:
+            if route_field not in FEATURE_NAMES:
+                continue
+            idx = FEATURE_NAMES.index(route_field)
+            if idx < len(feats) and feats[idx] == MISSING_RANK_SENTINEL:
+                missing_per_feature[route_field] += 1
+        # 统计 route combination
+        combination = _extract_route_combination(feats)
+        if combination:
+            combination_counts[combination] = combination_counts.get(combination, 0) + 1
+
+    ratio = (positives_in_top50 / positives_total) if positives_total else 0.0
+    warning = positives_total > 0 and ratio < RETRIEVAL_TOPK_80_THRESHOLD
+
+    return {
+        "positives_total": positives_total,
+        "positives_by_variant": positives_by_variant,
+        "positives_with_target_in_top50_count": positives_in_top50,
+        "positives_with_target_in_top50_ratio": round(ratio, 6),
+        "retrieval_topk_80_warning": warning,
+        "retrieval_topk_80_threshold": RETRIEVAL_TOPK_80_THRESHOLD,
+        "positives_missing_route_features": missing_per_feature,
+        "route_combination_counts": combination_counts,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ablation-json", required=True, help="run_retrieval_ablation.py 产出")
@@ -146,6 +266,11 @@ def main() -> None:
         nargs="+",
         default=None,
         help="只处理指定 variant (默认:所有);例如 --variants full_hybrid",
+    )
+    parser.add_argument(
+        "--report",
+        default=None,
+        help="可选:sidecar report JSON 路径 (per plan 4.3)",
     )
     args = parser.parse_args()
 
@@ -181,6 +306,29 @@ def main() -> None:
     print(f"Wrote {len(rows)} rows to {args.output}")
     print(f"  positives: {pos}, negatives: {neg}")
     print(f"  negatives by type: {by_type}")
+
+    # 4.3 sidecar report
+    if args.report:
+        report = build_training_report(
+            ablation_data=ablation_data,
+            positive_rows=[r for r in rows if r["label"] == 1],
+            only_variants=args.variants,
+        )
+        # 加一些元信息
+        report["input_ablation_json"] = str(args.ablation_json)
+        report["output_jsonl"] = str(args.output)
+        report["max_negatives"] = args.max_negatives
+        report["negatives_by_type"] = by_type
+        Path(args.report).write_text(
+            json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        if report["retrieval_topk_80_warning"]:
+            print(
+                f"[warn] {report['positives_with_target_in_top50_ratio']:.1%} positives have "
+                f"retrieval_rank <= 50 (below {RETRIEVAL_TOPK_80_THRESHOLD:.0%}); see {args.report}",
+                file=sys.stderr,
+            )
+        print(f"Wrote sidecar report to {args.report}")
 
 
 if __name__ == "__main__":
