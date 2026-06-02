@@ -370,7 +370,7 @@ pytest tests/test_accepted_paper_retriever.py -q
 - 修改： `configs/app.yaml`
 - 测试： `tests/test_accepted_paper_retriever.py`
 
-- [ ] 增加配置路径：
+- [x] 增加配置路径：
 
 ```yaml
 data:
@@ -379,11 +379,21 @@ data:
   accepted_papers_metadata_path: "data/processed/accepted_papers_metadata.parquet"
 ```
 
-- [ ] 使用 `OllamaEmbedding` 实现 index builder。
-- [ ] metadata 必须包含：`journal_id`、`journal_name`、`title`、`year`、`source`。
-- [ ] 增加 `--limit` 和 `--resume` 参数。
-- [ ] 在本地 accepted-paper corpus 上运行 builder。
-- [ ] 提交：`feat: build accepted-paper vector index`
+- [x] 使用 `OllamaEmbedding` 实现 index builder。
+  脚本位于 `scripts/build_accepted_paper_index.py`,核心函数
+  `build_accepted_paper_index(...)` 可独立测试 (允许注入 stub embedding)。
+- [x] metadata 必须包含：`journal_id`、`journal_name`、`title`、`year`、`source`。
+  pytest `test_builder_writes_faiss_and_metadata_with_required_fields` 锁住该契约。
+- [x] 增加 `--limit` 和 `--resume` 参数。
+  pytest 覆盖:`test_builder_respects_limit_parameter`、
+  `test_builder_resume_appends_only_new_records` (resume 时只 embed 剩余 records,
+  追加到已有 FAISS)。
+- [x] 在本地 accepted-paper corpus 上运行 builder。
+  产物:`data/processed/accepted_papers_index.faiss` (950KB) +
+  `accepted_papers_metadata.parquet` (12KB),95 vectors × 63 journals。
+  真实 sanity check:网络拥塞 query 召回 TPDS / TNSM / TON / SCN / TDSC,
+  TON 进 top-3 (BM25 阶段它没进 top-5,embedding 信号更覆盖)。
+- [x] 提交：`feat: build accepted-paper vector index`
 
 ### 任务 3.3：把 Accepted-Paper Route 接入 CandidateGenerator
 

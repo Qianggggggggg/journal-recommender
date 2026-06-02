@@ -307,3 +307,286 @@ def test_build_index_auto_called_by_retrieve(tmp_path):
     # 不调 build_index,直接 retrieve
     results = retriever.retrieve("reasoning", top_k=3)
     assert len(results) == 1
+
+
+# ---------------------------------------------------------------------------
+# 任务 3.2:AcceptedPaperEmbeddingRetriever + builder 行为测试
+# ---------------------------------------------------------------------------
+
+
+def _stub_embedding_client(vectors_by_text, default_dim=4):
+    """构造一个 stub embedding 客户端,按 text 查表返回固定向量,避免依赖 Ollama。
+
+    若 ``vectors_by_text`` 为空,fall back 到 ``default_dim`` 的零向量。
+    """
+
+    class _StubClient:
+        def __init__(self):
+            self.calls = []
+
+        def _dim(self):
+            if vectors_by_text:
+                return len(next(iter(vectors_by_text.values())))
+            return default_dim
+
+        def embed(self, text):
+            self.calls.append(text)
+            import numpy as np
+
+            vec = vectors_by_text.get(text)
+            if vec is None:
+                return np.zeros(self._dim(), dtype=np.float32)
+            return np.array(vec, dtype=np.float32)
+
+        def embed_batch(self, texts, concurrency=1, timeout=None):
+            return [self.embed(t) for t in texts]
+
+    return _StubClient()
+
+
+def _build_real_faiss_index(tmp_path, payloads, vectors_by_text):
+    """直接调用 builder 脚本,生成真实 FAISS + parquet 文件,供 retriever 测试使用。"""
+    from src.journals.accepted_paper_store import AcceptedPaperStore
+    from scripts.build_accepted_paper_index import build_accepted_paper_index
+
+    corpus_dir = tmp_path / "corpus"
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+    for jid, jname, papers in payloads:
+        _write_corpus(
+            corpus_dir,
+            jid,
+            jname,
+            [{"title": t, "abstract": a, "year": 2025, "source": "local_evaluation_metadata"}
+             for t, a in papers],
+        )
+
+    accepted = AcceptedPaperStore(accepted_dir=str(corpus_dir))
+    accepted.load()
+    client = _stub_embedding_client(vectors_by_text)
+
+    faiss_path = tmp_path / "index.faiss"
+    metadata_path = tmp_path / "metadata.parquet"
+
+    summary = build_accepted_paper_index(
+        accepted_store=accepted,
+        embedding_client=client,
+        faiss_path=str(faiss_path),
+        metadata_path=str(metadata_path),
+    )
+
+    return accepted, faiss_path, metadata_path, summary, client
+
+
+def test_builder_writes_faiss_and_metadata_with_required_fields(tmp_path):
+    """plan 明文要求:metadata 必须包含 journal_id / journal_name / title / year / source。"""
+    payloads = [
+        ("ton", "IEEE/ACM Transactions on Networking",
+         [("Net A", "abstract net a"), ("Net B", "abstract net b")]),
+        ("ai", "Artificial Intelligence",
+         [("AI A", "abstract ai a")]),
+    ]
+    # 每个 search_text (title + abstract) 给个唯一向量
+    vectors = {
+        f"{t} {a}": [1.0 if i == idx else 0.0 for i in range(4)]
+        for idx, (t, a) in enumerate(
+            [("Net A", "abstract net a"),
+             ("Net B", "abstract net b"),
+             ("AI A", "abstract ai a")]
+        )
+    }
+    # search_text 在 AcceptedPaperRecord 是 "title abstract" 拼接
+    accepted, faiss_path, metadata_path, summary, _ = _build_real_faiss_index(
+        tmp_path, payloads, vectors
+    )
+
+    assert faiss_path.exists()
+    assert metadata_path.exists()
+    assert summary["vector_count"] == 3
+    assert summary["journal_count"] == 2
+
+    import pandas as pd
+
+    df = pd.read_parquet(metadata_path)
+    required = {"journal_id", "journal_name", "title", "year", "source"}
+    assert required.issubset(set(df.columns))
+    assert sorted(df["journal_id"].tolist()) == ["ai", "ton", "ton"]
+    assert all(df["source"] == "local_evaluation_metadata")
+
+
+def test_builder_respects_limit_parameter(tmp_path):
+    """--limit 应该截取前 N 条 records,而非全量。"""
+    from scripts.build_accepted_paper_index import build_accepted_paper_index
+    from src.journals.accepted_paper_store import AcceptedPaperStore
+
+    corpus_dir = tmp_path / "corpus"
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+    _write_corpus(
+        corpus_dir, "ai", "Artificial Intelligence",
+        [{"title": f"P{i}", "abstract": f"abstract {i}"} for i in range(10)],
+    )
+    accepted = AcceptedPaperStore(accepted_dir=str(corpus_dir))
+    accepted.load()
+    client = _stub_embedding_client({})  # 全 0 向量,只测数量
+
+    summary = build_accepted_paper_index(
+        accepted_store=accepted,
+        embedding_client=client,
+        faiss_path=str(tmp_path / "index.faiss"),
+        metadata_path=str(tmp_path / "metadata.parquet"),
+        limit=3,
+    )
+
+    assert summary["vector_count"] == 3
+
+
+def test_builder_resume_appends_only_new_records(tmp_path):
+    """--resume:若已有 FAISS 索引,只 embed 剩余的 records 并追加,不重新算已嵌入的。"""
+    from scripts.build_accepted_paper_index import build_accepted_paper_index
+    from src.journals.accepted_paper_store import AcceptedPaperStore
+
+    corpus_dir = tmp_path / "corpus"
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+    _write_corpus(
+        corpus_dir, "ai", "Artificial Intelligence",
+        [{"title": f"P{i}", "abstract": f"abstract {i}"} for i in range(5)],
+    )
+    accepted = AcceptedPaperStore(accepted_dir=str(corpus_dir))
+    accepted.load()
+    client = _stub_embedding_client({})  # 零向量
+
+    # 第一次:limit=3 只编码前 3 条
+    faiss_path = tmp_path / "index.faiss"
+    metadata_path = tmp_path / "metadata.parquet"
+    build_accepted_paper_index(
+        accepted_store=accepted, embedding_client=client,
+        faiss_path=str(faiss_path), metadata_path=str(metadata_path),
+        limit=3,
+    )
+    first_call_count = len(client.calls)
+    assert first_call_count == 3
+
+    # 第二次:resume=True,应该只编码剩余 2 条(P3、P4)
+    summary = build_accepted_paper_index(
+        accepted_store=accepted, embedding_client=client,
+        faiss_path=str(faiss_path), metadata_path=str(metadata_path),
+        resume=True,
+    )
+
+    second_call_count = len(client.calls) - first_call_count
+    assert second_call_count == 2, (
+        f"resume should only embed remaining 2, got {second_call_count}"
+    )
+    assert summary["vector_count"] == 5  # FAISS 总共 5 条
+
+
+def test_embedding_retriever_recalls_correct_journal_via_index(tmp_path):
+    """端到端:builder 写出来的 FAISS + metadata 必须能被
+    AcceptedPaperEmbeddingRetriever 加载并产出正确召回。"""
+    from src.retriever.accepted_paper_retriever import AcceptedPaperEmbeddingRetriever
+
+    # 给三篇画像 (ton 1 / ai 1 / ai 1),用不同向量
+    payloads = [
+        ("ton", "IEEE/ACM Transactions on Networking",
+         [("Net Paper", "network protocol research")]),
+        ("ai", "Artificial Intelligence",
+         [("AI Paper One", "machine learning research")]),
+        ("ai_again", "Artificial Intelligence (twin)",
+         [("AI Paper Two", "knowledge graph research")]),
+    ]
+    vectors = {
+        "Net Paper network protocol research": [1.0, 0.0, 0.0, 0.0],
+        "AI Paper One machine learning research": [0.0, 1.0, 0.0, 0.0],
+        "AI Paper Two knowledge graph research": [0.0, 0.0, 1.0, 0.0],
+    }
+    accepted, faiss_path, metadata_path, _, _ = _build_real_faiss_index(
+        tmp_path, payloads, vectors
+    )
+
+    journals = _make_journal_store(
+        [(jid, jname) for jid, jname, _ in payloads]
+    )
+    # 查询向量与 ton 那篇相同 → ton 应该排第一
+    query_client = _stub_embedding_client(
+        {"network protocol query": [1.0, 0.0, 0.0, 0.0]}
+    )
+
+    retriever = AcceptedPaperEmbeddingRetriever(
+        accepted_store=accepted,
+        journal_store=journals,
+        embedding_client=query_client,
+        faiss_path=str(faiss_path),
+        metadata_path=str(metadata_path),
+    )
+    assert retriever.is_available
+
+    results = retriever.retrieve("network protocol query", top_k=3)
+    assert len(results) >= 1
+    top_journal, top_score = results[0]
+    assert top_journal.journal_id == "ton"
+
+
+def test_embedding_retriever_returns_empty_when_index_missing(tmp_path):
+    """索引缺失时,retriever 应 graceful 处理,不抛异常。"""
+    from src.journals.accepted_paper_store import AcceptedPaperStore
+    from src.retriever.accepted_paper_retriever import AcceptedPaperEmbeddingRetriever
+
+    accepted = AcceptedPaperStore(accepted_dir=str(tmp_path))
+    accepted.load()
+    journals = _make_journal_store([])
+    client = _stub_embedding_client({})
+
+    retriever = AcceptedPaperEmbeddingRetriever(
+        accepted_store=accepted,
+        journal_store=journals,
+        embedding_client=client,
+        faiss_path=str(tmp_path / "nonexistent.faiss"),
+        metadata_path=str(tmp_path / "nonexistent.parquet"),
+    )
+    assert not retriever.is_available
+    assert retriever.retrieve("anything", top_k=5) == []
+
+
+def test_embedding_retriever_aggregates_with_max_plus_count_bonus(tmp_path):
+    """与 BM25 retriever 一致的聚合规则:max + min(0.05*count, cap)。"""
+    from src.retriever.accepted_paper_retriever import AcceptedPaperEmbeddingRetriever
+
+    payloads = [
+        ("ai", "Artificial Intelligence",
+         [
+             ("Paper One", "knowledge graph one"),
+             ("Paper Two", "knowledge graph two"),
+             ("Paper Three", "knowledge graph three"),
+         ]),
+        ("ton", "IEEE/ACM Transactions on Networking",
+         [("Single Paper", "network research single")]),
+    ]
+    # 让 ai 三篇都与查询非常接近,ton 一篇与查询不那么接近
+    vectors = {
+        "Paper One knowledge graph one": [1.0, 0.0, 0.0],
+        "Paper Two knowledge graph two": [0.95, 0.05, 0.0],
+        "Paper Three knowledge graph three": [0.9, 0.1, 0.0],
+        "Single Paper network research single": [0.6, 0.4, 0.0],
+    }
+    accepted, faiss_path, metadata_path, _, _ = _build_real_faiss_index(
+        tmp_path, payloads, vectors
+    )
+    journals = _make_journal_store(
+        [(jid, jname) for jid, jname, _ in payloads]
+    )
+    query_client = _stub_embedding_client({"query": [1.0, 0.0, 0.0]})
+
+    retriever = AcceptedPaperEmbeddingRetriever(
+        accepted_store=accepted,
+        journal_store=journals,
+        embedding_client=query_client,
+        faiss_path=str(faiss_path),
+        metadata_path=str(metadata_path),
+        paper_count_bonus=0.05,
+        bonus_cap=0.3,
+    )
+    retriever.retrieve("query", top_k=5)
+    detail = retriever.last_route_details["ai"]
+    assert detail["matching_paper_count"] >= 2  # 至少 2 篇 ai 论文被命中
+    assert detail["bonus"] == pytest.approx(
+        min(0.05 * detail["matching_paper_count"], 0.3), rel=1e-6
+    )

@@ -6,7 +6,7 @@ app:
 minimax:
   api_key: "${MINIMAX_API_KEY}"
   base_url: "https://api.minimax.chat"
-  model: "MiniMax-M3"
+  model: "MiniMax-M2.7"
   temperature: 0.2
 
 ollama:
@@ -48,6 +48,9 @@ data:
   typical_abstracts_dir: "data/typical_abstracts"
   typical_abstracts_faiss_path: "data/processed/typical_abstracts_index.faiss"
   typical_abstracts_metadata_path: "data/processed/typical_abstracts_metadata.parquet"
+  accepted_papers_dir: "data/accepted_papers"
+  accepted_papers_faiss_path: "data/processed/accepted_papers_index.faiss"
+  accepted_papers_metadata_path: "data/processed/accepted_papers_metadata.parquet"
 
 ranking:
   strategy: "llm"               # llm | two_tower | two_stage
