@@ -129,6 +129,11 @@ class AcceptedPaperStore:
     def journal_count(self) -> int:
         return len(self._by_journal)
 
+    @property
+    def records(self) -> List[AcceptedPaperRecord]:
+        """所有真实论文记录,顺序与 iter_records() 一致。"""
+        return self._records
+
     def get_papers(self, journal_id: str) -> List[Dict[str, Any]]:
         return self._by_journal.get(journal_id, [])
 

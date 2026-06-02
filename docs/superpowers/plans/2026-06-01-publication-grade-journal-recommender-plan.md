@@ -343,18 +343,25 @@ python scripts/collect_accepted_papers.py \
 - 新建： `src/retriever/accepted_paper_retriever.py`
 - 测试： `tests/test_accepted_paper_retriever.py`
 
-- [ ] 写测试：网络时延相关 query 能从 accepted papers 中召回正确的网络期刊。
-- [ ] 实现 `AcceptedPaperBM25Retriever`。
-- [ ] 返回 `(Journal, score)`。
-- [ ] 聚合规则：每本期刊取最高 paper score，再加 `0.05 * matching_paper_count` 的小 bonus，并设置上限。
-- [ ] route detail 中记录 top matching paper title 和 score。
-- [ ] 运行：
+- [x] 写测试：网络时延相关 query 能从 accepted papers 中召回正确的网络期刊。
+- [x] 实现 `AcceptedPaperBM25Retriever`。
+- [x] 返回 `(Journal, score)`。
+- [x] 聚合规则：每本期刊取最高 paper score，再加 `0.05 * matching_paper_count` 的小 bonus，并设置上限。
+  实现:``score = top_paper_score + min(0.05 * matching_paper_count, bonus_cap)``,
+  默认 ``bonus_cap=0.3``。
+- [x] route detail 中记录 top matching paper title 和 score。
+  ``retriever.last_route_details[journal_id]`` 暴露 ``top_paper_title`` /
+  ``top_paper_score`` / ``matching_paper_count`` / ``bonus`` / ``final_score``。
+- [x] 运行：
 
 ```bash
 pytest tests/test_accepted_paper_retriever.py -q
 ```
 
-- [ ] 提交：`feat: add accepted-paper BM25 retriever`
+  结果:8 passed (含 8 个行为契约测试)。真实 corpus sanity check:
+  并行计算 query 召回 TPDS 第 1。
+
+- [x] 提交：`feat: add accepted-paper BM25 retriever`
 
 ### 任务 3.2：构建 Accepted-Paper Embedding Index
 
