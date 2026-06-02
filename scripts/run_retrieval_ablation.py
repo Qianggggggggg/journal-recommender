@@ -32,7 +32,16 @@ from src.retriever.typical_abstract_retriever import (
 from src.utils.embedding import OllamaEmbedding
 
 
-VARIANTS = ("scope", "typical", "hybrid")
+VARIANTS = (
+    "scope",
+    "typical",
+    "hybrid",
+    "accepted",
+    "scope_typical",
+    "scope_accepted",
+    "typical_accepted",
+    "full_hybrid",
+)
 
 
 class CachedEmbeddingClient:
@@ -75,11 +84,32 @@ def build_route_results_for_variant(
     """
     if variant == "scope":
         return generator._scope_route_results(rich_query, paper_profile, cfg, weights)
-    if variant == "hybrid":
+    if variant in ("hybrid", "full_hybrid"):
+        # full_hybrid 与 hybrid 在 CandidateGenerator 里语义相同 —— scope + typical
+        # + accepted + identity_anchor 全部 routes,前提是对应 retriever 都注入。
         return generator._hybrid_route_results(rich_query, paper_profile, cfg, weights)
-    if variant != "typical":
-        raise ValueError(f"Unknown ablation variant: {variant}")
 
+    typical_routes = _typical_routes(generator, rich_query, cfg, weights)
+    accepted_routes = _accepted_routes(generator, rich_query, cfg, weights)
+    scope_routes_factory = lambda: generator._scope_route_results(
+        rich_query, paper_profile, cfg, weights
+    )
+
+    if variant == "typical":
+        return typical_routes
+    if variant == "accepted":
+        return accepted_routes
+    if variant == "scope_typical":
+        return {**scope_routes_factory(), **typical_routes}
+    if variant == "scope_accepted":
+        return {**scope_routes_factory(), **accepted_routes}
+    if variant == "typical_accepted":
+        return {**typical_routes, **accepted_routes}
+
+    raise ValueError(f"Unknown ablation variant: {variant}")
+
+
+def _typical_routes(generator, rich_query, cfg, weights):
     route_results = {}
     if generator.typical_bm25_retriever:
         route_results["typical_bm25"] = (
@@ -95,6 +125,25 @@ def build_route_results_for_variant(
         route_results["typical_text"] = (
             generator.typical_text_retriever.retrieve(rich_query, top_k=cfg["text"]),
             weights["text"],
+        )
+    return route_results
+
+
+def _accepted_routes(generator, rich_query, cfg, weights):
+    route_results = {}
+    if generator.accepted_bm25_retriever:
+        route_results["accepted_bm25"] = (
+            generator.accepted_bm25_retriever.retrieve(
+                rich_query, top_k=cfg.get("accepted_bm25", cfg["bm25"]),
+            ),
+            weights["bm25"],
+        )
+    if generator.accepted_embedding_retriever:
+        route_results["accepted_vector"] = (
+            generator.accepted_embedding_retriever.retrieve(
+                rich_query, top_k=cfg.get("accepted_vector", cfg["vector"]),
+            ),
+            weights["vector"],
         )
     return route_results
 

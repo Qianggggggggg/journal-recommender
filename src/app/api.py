@@ -164,12 +164,15 @@ def _build_candidate_generator(
     hybrid_scope_weight = retrieval_config.get("hybrid_scope_weight", 0.75)
     hybrid_typical_weight = retrieval_config.get("hybrid_typical_weight", 0.25)
     identity_anchor_weight = retrieval_config.get("identity_anchor_weight", 0.03)
+    accepted_paper_weight = retrieval_config.get("accepted_paper_weight", 0.20)
     rrf_k = retrieval_config.get("rrf_k", 60)
     route_top_k = retrieval_config.get("route_top_k")
 
     typical_bm25 = None
     typical_embedding = None
     typical_text = None
+    accepted_bm25 = None
+    accepted_embedding = None
 
     if retrieval_target in {"typical_abstracts", "semantic_anchors"}:
         abstract_store = TypicalAbstractStore(
@@ -196,6 +199,37 @@ def _build_candidate_generator(
             ),
         )
 
+        # accepted-paper 路由:语料缺失或索引未构建时自动禁用,不影响主流程
+        from ..journals.accepted_paper_store import AcceptedPaperStore
+        from ..retriever.accepted_paper_retriever import (
+            AcceptedPaperBM25Retriever,
+            AcceptedPaperEmbeddingRetriever,
+        )
+
+        accepted_store = AcceptedPaperStore(
+            accepted_dir=data_config.get("accepted_papers_dir", "data/accepted_papers")
+        )
+        accepted_store.load()
+        if accepted_store.count > 0:
+            accepted_bm25 = AcceptedPaperBM25Retriever(accepted_store, store)
+            accepted_bm25.build_index()
+            accepted_embedding = AcceptedPaperEmbeddingRetriever(
+                accepted_store=accepted_store,
+                journal_store=store,
+                embedding_client=embedding_client,
+                faiss_path=data_config.get(
+                    "accepted_papers_faiss_path",
+                    "data/processed/accepted_papers_index.faiss",
+                ),
+                metadata_path=data_config.get(
+                    "accepted_papers_metadata_path",
+                    "data/processed/accepted_papers_metadata.parquet",
+                ),
+            )
+            if not accepted_embedding.is_available:
+                # 索引文件缺失时把 vector retriever 置 None,BM25 单路保留
+                accepted_embedding = None
+
     return CandidateGenerator(
         store,
         bm25,
@@ -205,9 +239,12 @@ def _build_candidate_generator(
         typical_bm25_retriever=typical_bm25,
         typical_embedding_retriever=typical_embedding,
         typical_text_retriever=typical_text,
+        accepted_bm25_retriever=accepted_bm25,
+        accepted_embedding_retriever=accepted_embedding,
         hybrid_scope_weight=hybrid_scope_weight,
         hybrid_typical_weight=hybrid_typical_weight,
         identity_anchor_weight=identity_anchor_weight,
+        accepted_paper_weight=accepted_paper_weight,
         fusion_strategy=fusion_strategy,
         rrf_k=rrf_k,
         route_top_k=route_top_k,

@@ -81,6 +81,10 @@ def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
             "typical_abstracts_dir": str(abstracts_dir),
             "typical_abstracts_faiss_path": str(tmp_path / "missing.faiss"),
             "typical_abstracts_metadata_path": str(tmp_path / "missing.parquet"),
+            # 显式指向空目录,避免误加载真实仓库 accepted-paper corpus + index
+            "accepted_papers_dir": str(tmp_path / "no_accepted_papers"),
+            "accepted_papers_faiss_path": str(tmp_path / "missing_accepted.faiss"),
+            "accepted_papers_metadata_path": str(tmp_path / "missing_accepted.parquet"),
         },
     }
 

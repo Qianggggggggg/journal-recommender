@@ -54,6 +54,12 @@ from src.papers.section_splitter import build_paper_ast
 from src.evaluation.benchmark_manifest import build_benchmark_manifest
 
 
+BENCHMARK_PROFILE_INPUTS = {
+    "light30": "data/evaluation/papers_metadata_light_30.jsonl",
+    "full-v2": "data/evaluation/papers_metadata_v2.jsonl",
+}
+
+
 @dataclass
 class EvaluationResult:
     """评估结果"""
@@ -191,6 +197,16 @@ def load_papers_metadata(path: str) -> list:
     return papers
 
 
+def resolve_benchmark_input(benchmark_profile: str, input_path: str | None) -> str:
+    if benchmark_profile == "custom":
+        if not input_path:
+            raise ValueError("--input is required when --benchmark-profile custom")
+        return input_path
+    if input_path:
+        return input_path
+    return BENCHMARK_PROFILE_INPUTS[benchmark_profile]
+
+
 def init_pipeline() -> RecommenderPipeline:
     """初始化推荐 pipeline"""
     import yaml
@@ -240,12 +256,15 @@ def init_pipeline() -> RecommenderPipeline:
     hybrid_scope_weight = retrieval_config.get("hybrid_scope_weight", 0.75)
     hybrid_typical_weight = retrieval_config.get("hybrid_typical_weight", 0.25)
     identity_anchor_weight = retrieval_config.get("identity_anchor_weight", 0.03)
+    accepted_paper_weight = retrieval_config.get("accepted_paper_weight", 0.20)
     rrf_k = retrieval_config.get("rrf_k", 60)
     route_top_k = retrieval_config.get("route_top_k")
 
     typical_bm25_retriever = None
     typical_text_retriever = None
     typical_embedding_retriever = None
+    accepted_bm25_retriever = None
+    accepted_embedding_retriever = None
     if retrieval_target in {"typical_abstracts", "semantic_anchors"}:
         typical_store = TypicalAbstractStore(abstracts_dir=app_config["data"]["typical_abstracts_dir"])
         typical_store.load()
@@ -261,6 +280,37 @@ def init_pipeline() -> RecommenderPipeline:
                 metadata_path=app_config["data"]["typical_abstracts_metadata_path"],
             )
 
+        # accepted-paper 路由:本地 corpus + FAISS 索引齐全才启用
+        from src.journals.accepted_paper_store import AcceptedPaperStore
+        from src.retriever.accepted_paper_retriever import (
+            AcceptedPaperBM25Retriever,
+            AcceptedPaperEmbeddingRetriever,
+        )
+
+        accepted_store = AcceptedPaperStore(
+            accepted_dir=app_config["data"].get("accepted_papers_dir", "data/accepted_papers")
+        )
+        accepted_store.load()
+        if accepted_store.count > 0:
+            accepted_bm25_retriever = AcceptedPaperBM25Retriever(accepted_store, store)
+            accepted_bm25_retriever.build_index()
+            if store.has_vector_search():
+                accepted_embedding_retriever = AcceptedPaperEmbeddingRetriever(
+                    accepted_store=accepted_store,
+                    journal_store=store,
+                    embedding_client=embedding_client,
+                    faiss_path=app_config["data"].get(
+                        "accepted_papers_faiss_path",
+                        "data/processed/accepted_papers_index.faiss",
+                    ),
+                    metadata_path=app_config["data"].get(
+                        "accepted_papers_metadata_path",
+                        "data/processed/accepted_papers_metadata.parquet",
+                    ),
+                )
+                if not accepted_embedding_retriever.is_available:
+                    accepted_embedding_retriever = None
+
     generator = CandidateGenerator(
         store, bm25, embedding_retriever,
         merge_weights=merge_weights,
@@ -268,9 +318,12 @@ def init_pipeline() -> RecommenderPipeline:
         typical_bm25_retriever=typical_bm25_retriever,
         typical_embedding_retriever=typical_embedding_retriever,
         typical_text_retriever=typical_text_retriever,
+        accepted_bm25_retriever=accepted_bm25_retriever,
+        accepted_embedding_retriever=accepted_embedding_retriever,
         hybrid_scope_weight=hybrid_scope_weight,
         hybrid_typical_weight=hybrid_typical_weight,
         identity_anchor_weight=identity_anchor_weight,
+        accepted_paper_weight=accepted_paper_weight,
         fusion_strategy=fusion_strategy,
         rrf_k=rrf_k,
         route_top_k=route_top_k,
@@ -918,7 +971,9 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
-    parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata_light_30.jsonl",
+    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "custom"], default="custom",
+                        help="Benchmark profile; light30/full-v2 use default inputs unless --input overrides")
+    parser.add_argument("--input", "-i", default=None,
                         help="论文元数据路径")
     parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="abstract",
                         help="推荐模式")
@@ -932,6 +987,7 @@ def main():
                         help="并行线程数（默认4）")
 
     args = parser.parse_args()
+    args.input = resolve_benchmark_input(args.benchmark_profile, args.input)
 
     # 加载论文
     print(f"加载论文数据: {args.input}")

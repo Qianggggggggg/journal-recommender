@@ -405,7 +405,7 @@ data:
 - 测试： `tests/test_retriever.py`
 - 测试： `tests/test_retrieval_ablation.py`
 
-- [ ] 增加配置：
+- [x] 增加配置：
 
 ```yaml
 candidate_generator:
@@ -416,16 +416,30 @@ candidate_generator:
       accepted_vector: 56
 ```
 
-- [ ] 在 retrieval trace 中增加 route：`accepted_bm25` 和 `accepted_vector`。
-- [ ] 如果 index 缺失，accepted-paper route 自动禁用，不能导致推荐失败。
-- [ ] 增加消融变体：`accepted`、`scope_typical`、`scope_accepted`、`typical_accepted`、`full_hybrid`。
-- [ ] 运行：
+  `configs/app.yaml` 的 candidate_generator 段加入 `accepted_paper_weight: 0.20`
+  和 `route_top_k.abstract.{accepted_bm25, accepted_vector}` 键。
+- [x] 在 retrieval trace 中增加 route：`accepted_bm25` 和 `accepted_vector`。
+  `CandidateGenerator._hybrid_route_results` 在两条新路由对应 retriever 被
+  注入时,把它们追加进 route_results,trace 由 `_collect_route_trace` 自动收录。
+- [x] 如果 index 缺失，accepted-paper route 自动禁用，不能导致推荐失败。
+  api.py / run_evaluation.py 都做 `AcceptedPaperStore.load()` 后判断
+  `count > 0` 才构建 retriever;`AcceptedPaperEmbeddingRetriever.is_available`
+  判 FAISS 文件是否存在,缺失时 retriever 置 None。pytest
+  `test_accepted_routes_disabled_when_no_retriever_injected` 锁住。
+- [x] 增加消融变体：`accepted`、`scope_typical`、`scope_accepted`、`typical_accepted`、`full_hybrid`。
+  `scripts/run_retrieval_ablation.py` 的 `VARIANTS` 从 3 个扩展到 8 个;
+  `build_route_results_for_variant` 把组合解构为 `_typical_routes` /
+  `_accepted_routes` 两个辅助函数 + scope_routes 拼装。pytest
+  `test_build_route_results_for_accepted_paper_variants` 验证每个变体的路由集合。
+- [x] 运行：
 
 ```bash
 pytest tests/test_retriever.py tests/test_retrieval_ablation.py tests/test_api.py -q
 ```
 
-- [ ] 提交：`feat: add accepted-paper retrieval route`
+  结果:64 passed (含 5 个新 retriever 测试 + 1 个新 ablation 测试)。
+
+- [x] 提交：`feat: add accepted-paper retrieval route`
 
 ### 任务 3.4：运行 Retrieval Route 消融
 

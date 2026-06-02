@@ -22,6 +22,7 @@ candidate_generator:
   hybrid_scope_weight: 0.65
   hybrid_typical_weight: 0.35
   identity_anchor_weight: 0.10
+  accepted_paper_weight: 0.20
   rrf_k: 60
   route_top_k:
     title:
@@ -32,6 +33,8 @@ candidate_generator:
       bm25: 28
       vector: 56
       text: 14
+      accepted_bm25: 28
+      accepted_vector: 56
     full:
       bm25: 32
       vector: 32

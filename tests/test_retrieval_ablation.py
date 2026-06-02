@@ -55,6 +55,49 @@ def test_build_route_results_for_variant_keeps_ablation_routes_isolated():
     assert "identity_anchor" in hybrid_routes
 
 
+def test_build_route_results_for_accepted_paper_variants():
+    """任务 3.3 新增 5 个变体:accepted / scope_typical / scope_accepted /
+    typical_accepted / full_hybrid 必须各自只包含正确的路由集合。"""
+    store = JournalStore()
+    scope_journal = Journal(journal_id="scope", journal_name="Scope J", journal_profile="scope")
+    typical_journal = Journal(journal_id="typ", journal_name="Typical J", journal_profile="typical")
+    accepted_journal = Journal(journal_id="acc", journal_name="Accepted J", journal_profile="accepted")
+    store.add_journals([scope_journal, typical_journal, accepted_journal])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(scope_journal, 1.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(typical_journal, 1.0)]),
+        accepted_bm25_retriever=DummyRetriever([(accepted_journal, 1.0)]),
+        accepted_embedding_retriever=DummyRetriever([(accepted_journal, 0.9)]),
+    )
+    profile = PaperProfile(title="x")
+    cfg = {"bm25": 5, "vector": 5, "text": 5, "accepted_bm25": 5, "accepted_vector": 5}
+    weights = {"bm25": 0.45, "vector": 0.35, "text": 0.20}
+
+    accepted = build_route_results_for_variant(generator, "accepted", "x", profile, cfg, weights)
+    assert set(accepted) == {"accepted_bm25", "accepted_vector"}
+
+    scope_typical = build_route_results_for_variant(generator, "scope_typical", "x", profile, cfg, weights)
+    assert "scope_bm25" in scope_typical
+    assert "typical_bm25" in scope_typical
+    assert "accepted_bm25" not in scope_typical
+
+    scope_accepted = build_route_results_for_variant(generator, "scope_accepted", "x", profile, cfg, weights)
+    assert "scope_bm25" in scope_accepted
+    assert "accepted_bm25" in scope_accepted
+    assert "typical_bm25" not in scope_accepted
+
+    typical_accepted = build_route_results_for_variant(generator, "typical_accepted", "x", profile, cfg, weights)
+    assert "typical_bm25" in typical_accepted
+    assert "accepted_bm25" in typical_accepted
+    assert "scope_bm25" not in typical_accepted
+
+    full_hybrid = build_route_results_for_variant(generator, "full_hybrid", "x", profile, cfg, weights)
+    assert {"scope_bm25", "typical_bm25", "accepted_bm25", "identity_anchor"} <= set(full_hybrid)
+
+
 def test_hybrid_route_weights_are_configurable_for_experiments():
     store = JournalStore()
     scope_journal = Journal(journal_id="scope", journal_name="Scope Journal", journal_profile="scope")

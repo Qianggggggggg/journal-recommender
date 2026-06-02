@@ -4,6 +4,10 @@ from typing import Dict, Iterable, List, Optional, Tuple
 from ..journals.journal_model import Journal
 from ..journals.journal_store import JournalStore
 from ..papers.paper_model import PaperProfile
+from .accepted_paper_retriever import (
+    AcceptedPaperBM25Retriever,
+    AcceptedPaperEmbeddingRetriever,
+)
 from .bm25_retriever import BM25Retriever
 from .embedding_retriever import EmbeddingRetriever
 from .typical_abstract_retriever import (
@@ -26,11 +30,14 @@ class CandidateGenerator:
         typical_bm25_retriever: Optional[TypicalAbstractBM25Retriever] = None,
         typical_embedding_retriever: Optional[TypicalAbstractEmbeddingRetriever] = None,
         typical_text_retriever: Optional[TypicalAbstractTextRetriever] = None,
+        accepted_bm25_retriever: Optional[AcceptedPaperBM25Retriever] = None,
+        accepted_embedding_retriever: Optional[AcceptedPaperEmbeddingRetriever] = None,
         weight_gater: Optional[object] = None,
         use_gating: bool = False,
         hybrid_scope_weight: float = 0.75,
         hybrid_typical_weight: float = 0.25,
         identity_anchor_weight: float = 0.03,
+        accepted_paper_weight: float = 0.20,
         fusion_strategy: str = "weighted_minmax",
         rrf_k: int = 60,
         route_top_k: Optional[Dict[str, Dict[str, int]]] = None,
@@ -43,11 +50,14 @@ class CandidateGenerator:
         self.typical_bm25_retriever = typical_bm25_retriever
         self.typical_embedding_retriever = typical_embedding_retriever
         self.typical_text_retriever = typical_text_retriever
+        self.accepted_bm25_retriever = accepted_bm25_retriever
+        self.accepted_embedding_retriever = accepted_embedding_retriever
         self.weight_gater = weight_gater
         self.use_gating = use_gating
         self.hybrid_scope_weight = hybrid_scope_weight
         self.hybrid_typical_weight = hybrid_typical_weight
         self.identity_anchor_weight = identity_anchor_weight
+        self.accepted_paper_weight = accepted_paper_weight
         self.fusion_strategy = fusion_strategy
         self.rrf_k = rrf_k
         self.route_top_k = self._merge_route_top_k(route_top_k)
@@ -178,6 +188,20 @@ class CandidateGenerator:
             self._identity_anchor_search(rich_query, paper_profile, top_k=max(cfg.values())),
             self.identity_anchor_weight,
         )
+        # accepted-paper route:基于真实发表论文画像的 BM25/向量召回。
+        # 若对应 retriever 未注入 (例如索引未构建),自动跳过,不影响其他路由。
+        if self.accepted_bm25_retriever:
+            accepted_bm25_top_k = cfg.get("accepted_bm25", cfg.get("bm25", 28))
+            route_results["accepted_bm25"] = (
+                self.accepted_bm25_retriever.retrieve(rich_query, top_k=accepted_bm25_top_k),
+                weights["bm25"] * self.accepted_paper_weight,
+            )
+        if self.accepted_embedding_retriever:
+            accepted_vector_top_k = cfg.get("accepted_vector", cfg.get("vector", 28))
+            route_results["accepted_vector"] = (
+                self.accepted_embedding_retriever.retrieve(rich_query, top_k=accepted_vector_top_k),
+                weights["vector"] * self.accepted_paper_weight,
+            )
         return route_results
 
     def _build_rich_query(self, query_text: str, paper_profile: PaperProfile) -> str:
@@ -399,9 +423,9 @@ class CandidateGenerator:
         route_top_k: Optional[Dict[str, Dict[str, int]]],
     ) -> Dict[str, Dict[str, int]]:
         defaults = {
-            "title": {"bm25": 22, "vector": 22, "text": 16},
-            "abstract": {"bm25": 28, "vector": 28, "text": 14},
-            "full": {"bm25": 32, "vector": 32, "text": 16},
+            "title": {"bm25": 22, "vector": 22, "text": 16, "accepted_bm25": 22, "accepted_vector": 44},
+            "abstract": {"bm25": 28, "vector": 28, "text": 14, "accepted_bm25": 28, "accepted_vector": 56},
+            "full": {"bm25": 32, "vector": 32, "text": 16, "accepted_bm25": 32, "accepted_vector": 64},
         }
         if not route_top_k:
             return defaults
@@ -410,7 +434,7 @@ class CandidateGenerator:
             if not isinstance(overrides, dict):
                 continue
             base = merged.setdefault(mode, defaults["abstract"].copy())
-            for key in ("bm25", "vector", "text"):
+            for key in ("bm25", "vector", "text", "accepted_bm25", "accepted_vector"):
                 if key in overrides:
                     base[key] = int(overrides[key])
         return merged
