@@ -1,0 +1,14 @@
+{
+  "journal_id": "tc",
+  "journal_name": "IEEE Transactions on Computers",
+  "papers": [
+    {
+      "title": "Enhancing Neural Network Reliability: Insights From Hardware/Software Collaboration With Neuron Vulnerability Quantization",
+      "abstract": "Ensuring the reliability of deep neural networks (DNNs) is paramount in safety-critical applications. Although introducing supplementary fault-tolerant mechanisms can augment the reliability of DNNs, an efficiency tradeoff may be introduced. This study reveals the inherent fault tolerance of neural networks, where individual neurons exhibit varying degrees of fault tolerance, by thoroughly exploring the structural attributes of DNNs. We thereby develop a hardware/software collaborative method that guarantees the reliability of DNNs while minimizing performance degradation. We introduce the neuron vulnerability factor (NVF) to quantify the susceptibility to soft errors. We propose two efficient methods that leverage the NVF to minimize the negative effects of soft errors on neurons. First, we present a novel computational scheduling scheme. By prioritizing error-prone neurons, the expedited completion of their computations is facilitated to mitigate the risk of neural computing errors that arise from soft errors without sacrificing efficiency. Second, we propose the NVF-guided heterogeneous memory system. We employ variable-strength error-correcting codes and tailor their error-correction mechanisms to the vulnerability profile of specific neurons to ensure a highly targeted approach for error mitigation. Our experimental results demonstrate that the proposed scheme enhances the neural network accuracy by 18% on average, while significantly reducing the fault-tolerance overhead.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TC.2024.3399052",
+      "url": ""
+    }
+  ]
+}

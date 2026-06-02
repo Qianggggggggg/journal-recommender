@@ -1,0 +1,14 @@
+{
+  "journal_id": "toit",
+  "journal_name": "ACM Transactions on Internet Technology",
+  "papers": [
+    {
+      "title": "IoT Firmware Version Identification Using Transfer Learning with Twin Neural Networks",
+      "abstract": "As the Internet of Things (IoT) becomes more embedded within our daily lives, there is growing concern about the risk ‘smart’ devices pose to network security. To address this, one avenue of research has focused on automated IoT device identification. This research is broadly motivated by the idea that the more we can know about our devices, the more secure the networks they are on can be. Research has however largely neglected the identification of IoT device firmware versions. There is strong evidence that IoT security relies on devices being on the latest version patched for known vulnerabilities. Identifying when a device has updated (has changed version) or not (is on a stable version) is therefore useful for IoT security. Version identification involves challenges beyond those for identifying the model, type, and manufacturer of IoT devices. Most obviously, the differences between versions are more subtle and therefore harder to detect. Moreover, because there has been relatively little research in this area, there are no widely available datasets that track devices’ version changes over time. Consequently, traditional machine learning algorithms are ill-suited for effective version identification due to being limited by the availability of data for training. In this paper, we introduce an effective technique for identifying IoT device versions based on transfer learning. This technique relies on the idea that we can use a Twin Neural Network (TNN) — trained at distinguishing devices — to detect differences between a device on different versions. This facilitates real-world implementation by requiring relatively little training data. In more detail, we extract statistical features from on-wire packet flows, convert these features into greyscale images, pass these images into a TNN to output similarity scores, and determine version changes based on the Hedges’ g effect size of the similarity scores. This allows us to detect the subtle changes present in on-wire traffic when a device changes version. To evaluate our technique, we set up a lab containing 12 IoT devices and recorded their on-wire packet captures for 11 days across multiple firmware versions. For testing data held out from training, our best performing model is shown to be 95.83% and 84.38% accurate at identifying stable versions and version changes respectively.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2501.06033.pdf"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "journal_id": "tip",
+  "journal_name": "IEEE Transactions on Image Processing",
+  "papers": [
+    {
+      "title": "Low-Light Phase Retrieval With Implicit Generative Priors",
+      "abstract": "Phase retrieval (PR) is fundamentally important in scientific imaging and is crucial for nanoscale techniques like coherent diffractive imaging (CDI). Low radiation dose imaging is essential for applications involving radiation-sensitive samples. However, most PR methods struggle in low-dose scenarios due to high shot noise. Recent advancements in optical data acquisition setups, such as in-situ CDI, have shown promise for low-dose imaging, but they rely on a time series of measurements, making them unsuitable for single-image applications. Similarly, data-driven phase retrieval techniques are not easily adaptable to data-scarce situations. Zero-shot deep learning methods based on pre-trained and implicit generative priors have been effective in various imaging tasks but have shown limited success in PR. In this work, we propose low-dose deep image prior (LoDIP), which combines in-situ CDI with the power of implicit generative priors to address single-image low-dose phase retrieval. Quantitative evaluations demonstrate LoDIP's superior performance in this task and its applicability to real experimental scenarios.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "High-Similarity-Pass Attention for Single Image Super-Resolution",
+      "abstract": "Recent developments in the field of non-local attention (NLA) have led to a renewed interest in self-similarity-based single image super-resolution (SISR). Researchers usually use the NLA to explore non-local self-similarity (NSS) in SISR and achieve satisfactory reconstruction results. However, a surprising phenomenon that the reconstruction performance of the standard NLA is similar to that of the NLA with randomly selected regions prompted us to revisit NLA. In this paper, we first analyzed the attention map of the standard NLA from different perspectives and discovered that the resulting probability distribution always has full support for every local feature, which implies a statistical waste of assigning values to irrelevant non-local features, especially for SISR which needs to model long-range dependence with a large number of redundant non-local features. Based on these findings, we introduced a concise yet effective soft thresholding operation to obtain high-similarity-pass attention (HSPA), which is beneficial for generating a more compact and interpretable distribution. Furthermore, we derived some key properties of the soft thresholding operation that enable training our HSPA in an end-to-end manner. The HSPA can be integrated into existing deep SISR models as an efficient general building block. In addition, to demonstrate the effectiveness of the HSPA, we constructed a deep high-similarity-pass attention network (HSPAN) by integrating a few HSPAs in a simple backbone. Extensive experimental results demonstrate that HSPAN outperforms state-of-the-art approaches on both quantitative and qualitative evaluations.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TIP.2023.3348293",
+      "url": ""
+    }
+  ]
+}

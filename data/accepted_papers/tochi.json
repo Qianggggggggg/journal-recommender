@@ -1,0 +1,30 @@
+{
+  "journal_id": "tochi",
+  "journal_name": "ACM Transactions on Computer-Human Interaction",
+  "papers": [
+    {
+      "title": "Cognitive Spillover in Human-AI Teams",
+      "abstract": "AI is not only a neutral tool in team settings; it influence the social and cognitive fabric of collaboration. Across two randomized experiments, we demonstrate that AI exposure produces causal spillover into human-human interaction—affecting shared language, collective attention, shared mental models, and social cohesion. These spillover effects occur robustly across settings, modalities, tasks, and AI qualities, suggesting that mere exposure to AI drives the influence. AI functions as an implicit “social forcefield,” influencing not only how people speak, but also how they think, what they attend to, and how they relate to each other. We argue for shifting the design paradigm from optimizing “AI as a tool” to understanding AI as a socially influential actor whose effects extend beyond the human-AI interface.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2407.17489.pdf"
+    },
+    {
+      "title": "GUI Behaviors to Minimize Pointing-based Interaction Interferences",
+      "abstract": "Pointing-based interaction interferences are situations wherein GUI elements appear, disappear, or change shortly before being selected, and too late for the user to inhibit their movement. Their cause lays in the design of most GUIs, for which any user event on an interactive element unquestionably reflects the user's intention—even one millisecond after that element has changed. Previous work indicate that interferences can cause frustration and sometimes severe consequences. This paper investigates new default behaviors for GUI elements that aim to prevent the occurrences of interferences or to mitigate their consequences. We present a design space of the advantages and technical requirements of these behaviors, and demonstrate in a controlled study how simple rules can reduce the occurrences of so-called \"Pop-up-style\" interferences, and user frustration. We then discuss their application to various forms of interaction interferences. We conclude by addressing the feasibility and trade-offs of implementing these behaviors in existing systems.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3660338",
+      "url": ""
+    },
+    {
+      "title": "Achieving Symmetry in Synchronous Interaction in Hybrid Work is Impossible",
+      "abstract": "Designing new technologies to support synchronous interaction across distance has for many years focused on creating symmetry for participation between geographically distributed actors. Symmetry in synchronous interaction has, to some extent, been achieved technologically (while multiple social, historical, political, and hierarchical concerns continue to exist) and proven empirically in the increased use of remote-work technologies that were used during the pandemic. However, synchronous interaction in hybrid work is achieved differently, since the asymmetry produced by some participants being collocated while others geographically distributed introduces increased complexities for such interactions. Focusing on this challenge, we ask: To what extent can symmetry in cooperative work engagements be achieved in hybrid work contexts? We explore this question by interrogating multiple different empirical examples of synchronous hybrid interaction collected across different organizations, activities, and events. We found that the effort required to accomplish hybrid work includes additional articulation work necessary for bounding multiple intertwined artefacts across sites, devices, and applications. Further, the multiple artefacts setup across sites, combined with asymmetric collocation across participants, produce incongruence in technological frames of reference for each participant. All participants in hybrid work have only partial access to the hybrid setup, and no single person has access to the complete setup. The incongruence in technological frames produces insurmountable gaps in collaboration, causing all hybrid work situations to be characterized fundamentally by asymmetric relationships. We argue that symmetry in hybrid synchronous interaction is impossible to attain in attempts to solve this problem through design. Instead, we propose that designers of cooperative technologies for hybrid work shift towards developing artefact-ecologies supporting hybrid work, focusing on asymmetry as a necessary feature. Fundamentally, the design strategy should explore novel ways of taking advantage of the multiple different artefact-ecologies which serve as the foundation for the hybrid collaboration. Instead of striving for symmetry, we propose to feature asymmetric conditions in future technology designs for hybrid interaction.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3648617",
+      "url": ""
+    }
+  ]
+}

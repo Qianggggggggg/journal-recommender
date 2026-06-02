@@ -1,0 +1,14 @@
+{
+  "journal_id": "fcs",
+  "journal_name": "Frontiers of Computer Science",
+  "papers": [
+    {
+      "title": "An exact algorithm with a new upper bound and reductions for maximum edge weighted clique in massive sparse graphs",
+      "abstract": "The Maximum Edge Weighted Clique (MEWC) problem is a classic NP-hard combinatorial optimization problem with applications in network analysis, bioinformatics, and social network mining. This paper presents a novel exact algorithm that incorporates a new upper bound and reduction rules specifically designed for massive sparse graphs. The proposed algorithm leverages a divide-and-conquer strategy combined with branch-and-bound techniques that utilize the new upper bound to prune unpromising search subspaces effectively. Extensive computational experiments on large-scale real-world sparse graphs demonstrate that the algorithm significantly outperforms existing state-of-the-art methods, solving instances with up to millions of vertices that were previously intractable.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11704-025-50356-6",
+      "url": ""
+    }
+  ]
+}

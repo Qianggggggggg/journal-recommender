@@ -1,0 +1,14 @@
+{
+  "journal_id": "iot",
+  "journal_name": "IEEE Internet of Things Journal",
+  "papers": [
+    {
+      "title": "Cooperative Edge Inferences With Online Learning",
+      "abstract": "The efficient execution of inferences at the edge is becoming increasingly critical for communication systems that are expected to provide users with fast and accurate mobile data analytics. These inference tasks are inherently latency-sensitive and computationally demanding, whereas edge nodes are limited by energy budgets and heterogeneous resources. This article studies how a set of edge nodes can collaborate in executing demanding streaming inference tasks to optimize their aggregate performance. Such collaborative task exchange schemes enable the sharing of scarce computing resources and machine learning (ML) models (which perform the inferences) and constitute a scalable approach to this intricate problem. We formulate this exchange process as an online convex optimization (OCO) problem and design a dynamic task assignment algorithm, which is proven to have optimality guarantees even when the network and service parameters (resources and task properties) are unknown and vary arbitrarily over time. The algorithm aims to maximize inference accuracy while minimizing overall task latency and energy (including for data transfers) and simultaneously ensures that collaborating nodes do not suffer imbalanced energy costs. Through a series of data-driven experiments, we quantify the cooperation benefits under different weight combinations and validate the convergence and adaptability of the proposed learning algorithm across diverse conditions, including variations of system parameters, as well as heterogeneity across nodes and tasks.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/JIOT.2025.3610695",
+      "url": ""
+    }
+  ]
+}

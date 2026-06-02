@@ -1,0 +1,38 @@
+{
+  "journal_id": "tse",
+  "journal_name": "IEEE Transactions on Software Engineering",
+  "papers": [
+    {
+      "title": "Socio-Technical Grounded Theory for Software Engineering",
+      "abstract": "Grounded Theory (GT), a sociological research method designed to study social phenomena, is increasingly being used to investigate the human and social aspects of software engineering (SE). However, being written by and for sociologists, GT is often challenging for a majority of SE researchers to understand and apply. Additionally, SE researchers attempting ad hoc adaptations of traditional GT guidelines for modern socio-technical (ST) contexts often struggle in the absence of clear and relevant guidelines to do so, resulting in poor quality studies. To overcome these research community challenges and leverage modern research opportunities, this paper presents Socio-Technical Grounded Theory (STGT) designed to ease application and achieve quality outcomes. It defines what exactly is meant by an ST research context and presents the STGT guidelines that expand GT's philosophical foundations, provide increased clarity and flexibility in its methodological steps and procedures, define possible scope and contexts of application, encourage frequent reporting of a variety of interim, preliminary, and mature outcomes, and introduce nuanced evaluation guidelines for different outcomes. It is hoped that the SE research community and related ST disciplines such as computer science, data science, artificial intelligence, information systems, human computer/robot/AI interaction, human-centered emerging technologies (and increasingly other disciplines being transformed by rapid digitalisation and AI-based augmentation), will benefit from applying STGT to conduct quality research studies and systematically produce rich findings and mature theories with confidence.",
+      "year": 2021,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2103.14235.pdf"
+    },
+    {
+      "title": "Mitigating Noise in Quantum Software Testing Using Machine Learning",
+      "abstract": "Quantum Computing (QC) promises computational speedup over classic computing. However, noise exists in near-term quantum computers. Quantum software testing (for gaining confidence in quantum software's correctness) is inevitably impacted by noise, i.e., it is impossible to know if a test case failed due to noise or real faults. Existing testing techniques test quantum programs without considering noise, i.e., by executing tests on ideal quantum computer simulators. Consequently, they are not directly applicable to test quantum software on real quantum computers or noisy simulators. Thus, we propose a noise-aware approach (named QOIN) to alleviate the noise effect on test results of quantum programs. QOIN employs machine learning techniques (e.g., transfer learning) to learn the noise effect of a quantum computer and filter it from a program's outputs. Such filtered outputs are then used as the input to perform test case assessments (determining the passing or failing of a test case execution against a test oracle). We evaluated QOIN on IBM's 23 noise models, Google's two available noise models, and Rigetti's Quantum Virtual Machine, with six real-world and 800 artificial programs. We also generated faulty versions of these programs to check if a failing test case execution can be determined under noise. Results show that QOIN can reduce the noise effect by more than 80% on most noise models. We used an existing test oracle to evaluate QOIN's effectiveness in quantum software testing. The results showed that QOIN attained scores of 99%, 75%, and 86% for precision, recall, and F1-score, respectively, for the test oracle across six real-world programs. For artificial programs, QOIN achieved scores of 93%, 79%, and 86% for precision, recall, and F1-score respectively. This highlights QOIN's effectiveness in learning noise patterns for noise-aware quantum softwar...",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TSE.2024.3462974",
+      "url": ""
+    },
+    {
+      "title": "ArchHypo: Managing Software Architecture Uncertainty Using Hypotheses Engineering",
+      "abstract": "Uncertainty is present in software architecture decisions due to a lack of knowledge about the requirements and the solutions involved. However, this uncertainty is usually not made explicit, and decisions can be made based on unproven premises or false assumptions. This paper focuses on a technique called ArchHypo that uses hypotheses engineering to manage uncertainties related to software architecture. It proposes formulating a technical plan based on each hypothesis' assessment, incorporating measures able to mitigate its impact and reduce uncertainty. To evaluate the proposed technique, this paper reports an application of the technique in a mission-critical project that faced several technical challenges. Conclusions were based on data extracted from the project documentation and a questionnaire answered by all team members. As a result, the application of ArchHypo provided a structured approach to dividing the architectural work through iterations, which facilitated architectural decision-making. However, further research is needed to fully understand its impact across different contexts. On the other hand, the team identified the learning curve and process adjustments required for ArchHypo's adoption as significant challenges that could hinder its widespread adoption. In conclusion, the evidence found in this study indicates that the technique has the potential to provide a suitable way to manage the uncertainties related to software architecture, facilitating the strategic postponement of decisions while addressing their potential impact.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TSE.2024.3520477",
+      "url": ""
+    },
+    {
+      "title": "Deobfuscation of Control Flow Flattening Based on Abstract Interpretation",
+      "abstract": "The proliferation of malicious software has become a serious threat, as attackers often employ code obfuscation techniques to bypass detection. Control Flow Flattening (CFF) is one of the widely-used techniques. In this work, we propose an approach to deobfuscate the control flow flattening based on abstract interpretation. Our approach recovers the original control flow graph by analyzing the dispatcher variables using abstract interpretation. This approach can effectively deobfuscate CFF without prior knowledge of the obfuscation structure or the underlying compiler. We implement our approach as a prototype tool named ASLEEP and evaluate it on both synthetic benchmarks and real-world malware. The experimental results show that our approach achieves an average of 95.7% edge recovery and 94.2% basic block recovery accuracy, outperforming existing state-of-the-art methods by a substantial margin.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TSE.2026.3659437",
+      "url": ""
+    }
+  ]
+}

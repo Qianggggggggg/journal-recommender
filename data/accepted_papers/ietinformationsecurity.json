@@ -1,0 +1,14 @@
+{
+  "journal_id": "ietinformationsecurity",
+  "journal_name": "IET Information Security",
+  "papers": [
+    {
+      "title": "NoLIEM: A Novel Lightweight Image Encryption Method for Resource-Constrained IoT Devices",
+      "abstract": "The expanded use of Internet of Things (IoT) devices in smart homes, industrial automation, healthcare, and smart cities has increased the risk of unauthorized access, data breaches, and man-in-the-middle attacks. Traditional encryption methods like AES and RSA are too energy- and processing-intensive for IoT devices. Therefore, it is essential to develop efficient, lightweight encryption methods to improve security while maintaining the longevity and functionality of IoT devices. This article proposes a novel lightweight image encryption method (NoLIEM) for resource-constrained IoT devices. NoLIEM uses a key-dependent and substitution layer at the same time. These key-dependent transformations protect the fundamental structure of the cipher algorithm, rendering it resistant to cryptanalysis while applying one-round encryption. The suggested NoLIEM uses a substitution box (S‑box) and Feistel structures. We also conduct numerous security analysis tests using the proposed NoLIEM. The efficiency and effectiveness of pseudo‑random number generators (PRNGs) of the suggested NoLIEM are demonstrated, and their performance is compared with existing lightweight cipher algorithms using correlation coefficients, information entropy, encryption quality, encryption duration, randomness, and attack analysis tests. According to the acquired results, the proposed NoLIEM works well in terms of security, complexity, and real‑time cryptography applications. We compare the proposed NoLIEM with both known lightweight ciphering algorithms, SPECK and SIMON. The proposed NoLIEM outperforms the SPECK and SIMON, and PRESENT algorithms in terms of throughput by a ratio of 6.29 and 19.61, and 1319.36, respectively.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1049/ise2/9976924",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "journal_id": "theoryofcomputingsystems",
+  "journal_name": "Theory of Computing Systems",
+  "papers": [
+    {
+      "title": "Average-Case Rigidity Lower Bounds",
+      "abstract": "It is shown that there exists f: {0,1}^{n/2} × {0,1}^{n/2} → {0,1} in E^NP such that for every 2^{n/2} × 2^{n/2} matrix M of rank ≤ ρ we have P_{x,y}[f(x,y) ≠ M_{x,y}] ≥ 1/2 - 2^{-Ω(k)}, whenever log ρ ≤ δ n/k (log n + k) for a sufficiently small δ > 0, and n is large enough. This generalizes recent results which bound below the probability by 1/2 - Ω(1) or apply to constant-depth circuits.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00224-026-10268-9",
+      "url": ""
+    },
+    {
+      "title": "Improved Online Scheduling with Restarts on a Single Machine",
+      "abstract": "We consider the problem of minimizing the total completion time on a single online machine using restarts. Although restarts can potentially be very beneficial in the context of online scheduling, there has been relatively little research on this topic up until now. We present a very simple online algorithm which is better than 1.4568-competitive. The basic rule of the algorithm is to run jobs in order of increasing size. For possible restarts, the algorithm only considers whether the completion time of an incoming job is more than a factor of 1.4568 higher if we first let the running job finish compared to the case where we start the new job immediately. If this is the case, we interrupt the running job and start running the new job. All other existing or past jobs are ignored for this decision. The analysis of the algorithm has become significantly easier and shorter than for the previous best result which was 3/2. We hope that this result can lead to further research in this interesting topic.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00224-026-10267-w",
+      "url": ""
+    },
+    {
+      "title": "Control Structures in Computable Numberings and the Completion Operator",
+      "abstract": "This paper investigates non-extensional control structures such as effective composition, s-m-n theorem, Kleene's recursion theorem, among others, in computable numberings of families of partial recursive functions and their invariance under the completion operator. Additionally, we introduce a method for constructing complete non-principal numberings, which is then used to analyze the effectivity degrees of control structures in universal complete numberings.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00224-025-10222-1",
+      "url": ""
+    },
+    {
+      "title": "A local search algorithm for the radius-constrained k-median problem",
+      "abstract": "We study the radius-constrained k-median problem, a variant of the classic k-median clustering where each cluster is required to have radius at most a given threshold R. The goal is to select k centers to minimize the sum of distances from each point to its assigned center, subject to the constraint that no point is assigned to a center farther than R. We present a local search algorithm that achieves a constant-factor approximation for this problem, improving upon previous results that either had worse approximation guarantees or required R to be large. Our analysis introduces a new charging scheme based on distance layers, which may be of independent interest for other constrained clustering problems.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00224-025-10217-4",
+      "url": ""
+    }
+  ]
+}

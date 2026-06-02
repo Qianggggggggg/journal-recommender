@@ -1,0 +1,14 @@
+{
+  "journal_id": "jsac",
+  "journal_name": "IEEE Journal on Selected Areas in Communications",
+  "papers": [
+    {
+      "title": "Aligning Task- and Reconstruction-Oriented Communications for Edge Intelligence",
+      "abstract": "Existing communication systems aim to reconstruct the information at the receiver side, and are known as reconstruction-oriented communications. This approach often falls short in meeting the real-time, task-specific demands of modern AI-driven applications such as autonomous driving and semantic segmentation. As a new design principle, task-oriented communications have been developed. However, it typically requires joint optimization of encoder, decoder, and modified inference neural networks, resulting in extensive cross-system redesigns and compatibility issues. This paper proposes a novel communication framework that aligns reconstruction-oriented and task-oriented communications for edge intelligence. The idea is to extend the Information Bottleneck (IB) theory to optimize data transmission by minimizing task-relevant loss function, while maintaining the structure of the original data by an information reshaper. Such an approach integrates task-oriented communications with reconstruction-oriented communications, where a variational approach is designed to handle the intractability of mutual information in high-dimensional neural network features. We also introduce a joint source-channel coding (JSCC) modulation scheme compatible with classical modulation techniques, enabling the deployment of AI technologies within existing digital infrastructures. The proposed framework is particularly effective in edge-based autonomous driving scenarios. Our evaluation in the Car Learning to Act (CARLA) simulator demonstrates that the proposed framework significantly reduces bits per service by 99.19% compared to existing methods, such as JPEG, JPEG2000, and BPG, without compromising the effectiveness of task execution.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    }
+  ]
+}

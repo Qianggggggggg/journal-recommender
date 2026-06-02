@@ -1,0 +1,22 @@
+{
+  "journal_id": "taas",
+  "journal_name": "ACM Transactions on Autonomous and Adaptive Systems",
+  "papers": [
+    {
+      "title": "Generative AI for Self-Adaptive Systems: State of the Art and Research Roadmap",
+      "abstract": "Self-adaptive systems (SASs) are designed to handle changes and uncertainties through a feedback loop with four core functionalities: monitoring, analyzing, planning, and execution. Recently, generative artificial intelligence (GenAI), especially the area of large language models, has shown impressive performance in data comprehension and logical reasoning. These capabilities are highly aligned with the functionalities required in SASs, suggesting a strong potential to employ GenAI to enhance SASs. However, the specific benefits and challenges of employing GenAI in SASs remain unclear. Yet, providing a comprehensive understanding of these benefits and challenges is complex due to several reasons: limited publications in the SAS field, the technological and application diversity within SASs, and the rapid evolution of GenAI technologies. To that end, this article aims to provide researchers and practitioners a comprehensive snapshot that outlines the potential benefits and challenges of employing GenAI’s within SAS. Specifically, we gather, filter, and analyze literature from four distinct research fields and organize them into two main categories to potential benefits: (i) enhancements to the autonomy of SASs centered around the specific functions of the MAPE-K feedback loop, and (ii) improvements in the interaction between humans and SASs within human-on-the-loop settings. From our study, we outline a research roadmap that highlights the challenges of integrating GenAI into SASs. The roadmap starts with outlining key research challenges that need to be tackled to exploit the potential for applying GenAI in the field of SAS. The roadmap concludes with a practical reflection, elaborating on current shortcomings of GenAI and proposing possible mitigation strategies.†",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2512.04680.pdf"
+    },
+    {
+      "title": "A User Study on Explainable Online Reinforcement Learning for Adaptive Systems",
+      "abstract": "Online reinforcement learning (RL) is increasingly used for realizing adaptive systems in the presence of design time uncertainty because Online RL can leverage data only available at run time. With Deep RL gaining interest, the learned knowledge is no longer represented explicitly but hidden in the parameterization of the underlying artificial neural network. For a human, it thus becomes practically impossible to understand the decision-making of Deep RL, which makes it difficult for (1) software engineers to perform debugging, (2) system providers to comply with relevant legal frameworks, and (3) system users to build trust. The explainable RL technique XRL-DINE, introduced in earlier work, provides insights into why certain decisions were made at important time steps. Here, we perform an empirical user study concerning XRL-DINE involving 73 software engineers split into treatment and control groups. The treatment group is given access to XRL-DINE, while the control group is not. We analyze (1) the participants’ performance in answering concrete questions related to the decision-making of Deep RL, (2) the participants’ self-assessed confidence in giving the right answers, (3) the perceived usefulness and ease of use of XRL-DINE, and (4) the concrete usage of the XRL-DINE dashboard.",
+      "year": 2023,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2307.04098.pdf"
+    }
+  ]
+}

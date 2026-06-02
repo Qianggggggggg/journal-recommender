@@ -1,0 +1,30 @@
+{
+  "journal_id": "pmc",
+  "journal_name": "Pervasive and Mobile Computing",
+  "papers": [
+    {
+      "title": "On-device indoor place prediction using WiFi-RTT and inertial sensors",
+      "abstract": "High-accuracy and low-latency indoor place prediction for mobile users can enable a wide range of applications for domains such as assisted living and smart homes. In this paper, we propose GoPlaces, a practical indoor place prediction system that works on mobile devices without requiring any new infrastructure. GoPlaces does not rely on servers or specialized localization infrastructure, except for a single cheap off-the-shelf WiFi access point that supports ranging with Round Trip Time (RTT) protocol. GoPlaces enables personalized place naming and prediction, and it protects users' location privacy. It fuses inertial sensor data with distances estimated using the WiFi-RTT protocol to predict the indoor places a user will visit. GoPlaces employs an attention-based BiLSTM model to detect user's current trajectory, which is then used together with historical information stored in a prediction tree to infer user's future places. We implemented GoPlaces in Android and evaluated it in several indoor spaces. The experimental results demonstrate prediction accuracy as high as 86%. Furthermore, they show GoPlaces is feasible in real life because it has low latency and low resource consumption on the phones.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.pmcj.2025.102118",
+      "url": ""
+    },
+    {
+      "title": "Edge computing and 5G network integration for mobility-aware service deployments",
+      "abstract": "The integration of edge computing and 5G networks enables mobility-aware service deployments. This paper presents a comprehensive solution for deploying services in mobility scenarios, leveraging edge computing capabilities and 5G network features. We propose a framework that dynamically adapts service placement based on user mobility patterns and network conditions, ensuring low-latency access and seamless service continuity. The proposed approach is evaluated through extensive simulations, demonstrating significant improvements in service response time and handover performance compared to traditional cloud-based solutions.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.pmcj.2025.102134",
+      "url": ""
+    },
+    {
+      "title": "In-bed gesture recognition to support the communication of people with Aphasia",
+      "abstract": "People with language impairments can have difficulties expressing themselves to others, leading to major limitations to their safety, independence, and quality of life in general. Aphasia is an example of an acquired language impairment that affects many people (around 2 million in the United States), being commonly caused by stroke, but also by other brain injuries. Several augmentative and alternative communication solutions are available to help people with communication difficulties, but they are generally not suitable for all contexts of use (e.g., lying in bed). In the scope of the “APH-ALARM” project, which aimed at developing solutions to support people with Aphasia, we envision a system for the bedroom that enables conveying messages to be sent to a caregiver or relative, for example. Focusing on gesture input, in this contribution, we investigated if smartwatch sensors and machine learning (ML) can be used to recognise arm gestures executed while lying. We explored different factors, namely the feature set, size of the sliding window used for feature extraction, and ML classifier. The results obtained with data gathered from ten subjects are promising, with the best factor combinations for the user-independent solution leading to a mean macro F1 score of 94% or 95%. They demonstrate the potential of using wearables to develop a gesture input modality for the in-bed scenario, which can also potentially be extended to other contexts (e.g., sitting in a bed, chair, or sofa, or standing). This research also provides useful insights that inform future work, including the development and deployment of communication support systems that can benefit not only people with communication difficulties (e.g., more independence), but also those caring for them (e.g., more peace of mind).",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.pmcj.2024.102029",
+      "url": ""
+    }
+  ]
+}

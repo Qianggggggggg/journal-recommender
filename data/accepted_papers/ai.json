@@ -1,0 +1,22 @@
+{
+  "journal_id": "ai",
+  "journal_name": "Artificial Intelligence",
+  "papers": [
+    {
+      "title": "Explanation in Artificial Intelligence: Insights from the Social Sciences",
+      "abstract": "There has been a recent resurgence in the area of explainable artificial intelligence as researchers and practitioners seek to make their algorithms more understandable. Much of this research is focused on explicitly explaining decisions or actions to a human observer, and it should not be controversial to say that looking at how humans explain to each other can serve as a useful starting point for explanation in artificial intelligence. However, it is fair to say that most work in explainable artificial intelligence uses only the researchers' intuition of what constitutes a `good' explanation. There exists vast and valuable bodies of research in philosophy, psychology, and cognitive science of how people define, generate, select, evaluate, and present explanations, which argues that people employ certain cognitive biases and social expectations towards the explanation process. This paper argues that the field of explainable artificial intelligence should build on this existing research, and reviews relevant papers from philosophy, cognitive psychology/science, and social psychology, which study these topics. It draws out some important findings, and discusses ways that these can be infused with work on explainable artificial intelligence.",
+      "year": 2017,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/1706.07269.pdf"
+    },
+    {
+      "title": "Acquiring and modeling abstract commonsense knowledge via conceptualization",
+      "abstract": "Conceptualization, or viewing entities and situations as instances of abstract concepts in mind and making inferences based on that, is a vital component in human intelligence for commonsense reasoning. Despite recent progress in artificial intelligence to acquire and model commonsense attributed to neural language models and commonsense knowledge graphs (CKGs), conceptualization is yet to be introduced thoroughly, making current approaches ineffective to cover knowledge about countless diverse entities and situations in the real world. To address the problem, we thoroughly study the role of conceptualization in commonsense reasoning, and formulate a framework to replicate human conceptual induction by acquiring abstract knowledge about events regarding abstract concepts, as well as higher-level triples or inferences upon them. We then apply the framework to ATOMIC, a large-scale human-annotated CKG, aided by the taxonomy Probase. We annotate a dataset on the validity of contextualized conceptualizations from ATOMIC on both event and triple levels, develop a series of heuristic rules based on linguistic features, and train a set of neural models to generate and verify abstract knowledge. Based on these components, a pipeline to acquire abstract knowledge is built. A large abstract CKG upon ATOMIC is then induced, ready to be instantiated to infer about unseen entities or situations. Finally, we empirically show the benefits of augmenting CKGs with abstract knowledge in downstream tasks like commonsense inference and zero-shot commonsense QA. © 2024 Elsevier B.V.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.artint.2024.104149",
+      "url": ""
+    }
+  ]
+}

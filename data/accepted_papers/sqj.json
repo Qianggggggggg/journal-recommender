@@ -1,0 +1,14 @@
+{
+  "journal_id": "sqj",
+  "journal_name": "Software Quality Journal",
+  "papers": [
+    {
+      "title": "On the correlation between architectural smells and static analysis warnings",
+      "abstract": "Software quality assurance is essential during software development and maintenance. Static Analysis Tools (SAT) are widely used for assessing code quality. Architectural smells are becoming more daunting to address and evaluate among quality issues. We aim to understand the relationships between Static Analysis Warnings (\"warnings\") and Architectural Smells (\"smell\") to guide developers/maintainers in focusing their effort on warnings more prone to co-occurring with smell. We performed an empirical study on 103 Java projects totaling 72 million LOC belonging to projects from a vast set of domains, and 785 warnings were detected by three SAT, Checkstyle, Findbugs, PMD, SonarQube, and 4 architectural smells were detected by the ARCAN tool. We analyzed how warnings influence smell presence. Finally, we proposed a smell remediation effort prioritization based on warning severity and warning proneness to specific smells. Our study reveals a moderate correlation between warnings and smells. Different combinations of SATs and warnings significantly affect smell occurrence, with certain warnings more Likely to co-occur with specific smells. Conversely, 33.79% of warnings are \"non-co-occurring\" with any of the smells in our dataset. This provides an early indicator for potential architectural concerns before resource-intensive architectural analysis is performed. Practitioners can ignore about a third of warnings and focus on those most likely to be associated with smells. Prioritizing smell remediation based on warning severity or warning proneness to specific smells results in effective rankings like those based on smell severity. While not a substitute for specialized tools like ARCAN, warning-based prioritization provides a pragmatic bridge between low-level warnings and high-level architectural issues, particularly useful in contexts lacking full architectural visibility.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11219-025-09730-7",
+      "url": ""
+    }
+  ]
+}

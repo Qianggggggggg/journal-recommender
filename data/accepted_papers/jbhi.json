@@ -1,0 +1,14 @@
+{
+  "journal_id": "jbhi",
+  "journal_name": "IEEE Journal of Biomedical and Health Informatics",
+  "papers": [
+    {
+      "title": "Multi-modal Representation Learning Enables Accurate Protein Function Prediction in Low-Data Setting",
+      "abstract": "In this study, we propose HOPER (HOlistic ProtEin Representation), a novel multimodal learning framework designed to enhance protein function prediction (PFP) in low-data settings. The challenge of predicting protein functions is compounded by the limited availability of labeled data. Traditional machine learning models already struggle in such cases, and while deep learning models excel with abundant data, they also face difficulties when data is scarce. HOPER addresses this issue by integrating three distinct modalities - protein sequences, biomedical text, and protein-protein interaction (PPI) networks - to create a comprehensive protein representation. The model utilizes autoencoders to generate holistic embeddings, which are then employed for PFP tasks using transfer learning. HOPER outperforms existing methods on a benchmark dataset across all Gene Ontology categories, i.e., molecular function, biological process, and cellular component. Additionally, we demonstrate its practical utility by identifying new immune-escape proteins in lung adenocarcinoma, offering insights into potential therapeutic targets. Our results highlight the effectiveness of multimodal representation learning for overcoming data limitations in biological research, potentially enabling more accurate and scalable protein function prediction. HOPER source code and datasets are available at https://github.com/kansil/HOPER",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2412.08649.pdf"
+    }
+  ]
+}

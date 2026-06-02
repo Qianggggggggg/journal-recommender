@@ -1,0 +1,22 @@
+{
+  "journal_id": "informationsciences",
+  "journal_name": "Information Sciences",
+  "papers": [
+    {
+      "title": "Order, subset construction and sequential pattern mining",
+      "abstract": "Sequential Pattern Mining (SPM) is a basic task in data mining. It aims to extract the most occurring sequences in a dataset, which turns out to be instrumental in many fields. In [1] we initiated an attempt to formally unify leading pattern mining approaches. This paper builds upon our previous work to first extend the polynomial model to SPM. Next, we devise an efficient implementation termed WASMA that enhances the standard subset construction method. To do so, we first partition the set of states into independent sets based on their labels, and then define three different state ordering. The first is a global id-based order which we use in global exploration. The second is local and used in itemset extension. A geometric ordering is lastly exploited to avoid redundant computations. To handle the memory bottleneck of the determinization, we propose two variants: WASMA-wsc and WASMA-ssc that rely or not on the state existence check clause. Unlike existing approaches that overlook the appearance of repetitive computation paths, the first variant introduces a novel feature, since it avoids recomputing previously explored sub-branches of the problem space. Besides, we refine for the SPM setting the well-known theoretical upper-bound by establishing new complexities in function of the geometric-order topology. Evaluations demonstrate that our solution outperforms existing approaches for SPM instances with very low support thresholds, persisting sole to yield the result while its competitors hit the time limit.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ins.2025.122348",
+      "url": ""
+    },
+    {
+      "title": "Optimisation of multiple clustering based undersampling using artificial bee colony: Application to improved detection of obfuscated patterns without adversarial training",
+      "abstract": "Attack detection is one of the main features required in modern defence systems. Despite the ongoing research, it remains challenging for a typical mechanism like network-based intrusion detection system (NIDS) to catch up with evolving adversarial attacks. They specifically aim to confuse a machine-learning based predictor. Without the knowledge of adversarial patterns, the best approach is generalising signatures learned from a dataset of legitimate connections and known intrusions. This work focuses on analysing non-payload traffics so that the resulting techniques can be exploited to a range of network-based applications. It investigates a novel means to deal with the problem of imbalanced classes. An optimised undersampling method is introduced to select a subset of majority-class representatives initially created through an ensemble clustering procedure. A weighted combination of criteria representing distributions within and between classes is proposed as the objective function for a global optimisation using the artificial bee colony (ABC). This approach usually outperforms its baselines and other state-of-the-art undersampling models, with ABC being more effective using the global best strategy than a random selection of solutions or an iterative greedy search. The paper also details the parameter analysis offering a heuristic guide for potential taking up of the proposed techniques.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ins.2025.121407",
+      "url": ""
+    }
+  ]
+}

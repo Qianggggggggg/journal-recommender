@@ -1,0 +1,22 @@
+{
+  "journal_id": "ijhcs",
+  "journal_name": "International Journal of Human-Computer Studies",
+  "papers": [
+    {
+      "title": "Investigating crossmodal correspondences between vibrotactile stimuli, colour, and emotions",
+      "abstract": "There is an increasing interest in Human–computer Interaction in multisensory interactive systems, creating a need to deepen our understanding of how multiple sensory modalities relate to and affect each other. We extend prior research on crossmodal correspondences by investigating colour and emotional associations with pure vibrotactile stimuli. We asked 32 participants to assign colour properties (hue and brightness) and emotional categories (pleasure, arousal, and dominance) to stimuli of varying amplitude and angular frequency. We found that perceptions of pleasure and arousal increased with amplitude and angular frequency, but negative and relaxing emotional states were not able to convey. We also found associations between vibrotactile stimuli and colour properties. High amplitude stimuli were linked to warm colours and darker shades, while low amplitude was associated with brighter shades and greater variance in hue. We finish by discussing the causal mechanisms of crossmodal correspondences and contribute a design space for creating multisensory experiences.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ijhcs.2025.103459",
+      "url": ""
+    },
+    {
+      "title": "Demographics do not matter?: Exploring the impact of gender and ethnicity on users' identification with AI-generated personas",
+      "abstract": "Demographics are considered foundational information in most persona profiles. However, the effect of persona ethnicity and gender on designers' identification with the persona has limited evaluation in the human-computer interaction literature. We conducted a study with 64 professional designers from the United States, Indian, Korean, and Mexican nationalities to investigate the effects of AI-generated persona ethnicity and gender on persona identification. The personas were created using Generative AI in the persona narratives and the persona video creation. The contribution of this work is that, against assumptions, neither persona ethnicity nor gender play a major role in persona identification among designers with different ethnic backgrounds. While there were some insinuations of ethnicity and gender in the open-ended feedback from the designers, the emergent qualitative themes describing persona identification were overwhelmingly universal and applicable regardless of ethnicity or gender. This implies that professional designers can effectively use personas with different demographic backgrounds, and effects of demographic attributes in personas leading to stereotyping are less impactful than presumed.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ijhcs.2025.103548",
+      "url": ""
+    }
+  ]
+}

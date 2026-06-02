@@ -1,0 +1,14 @@
+{
+  "journal_id": "tmc",
+  "journal_name": "IEEE Transactions on Mobile Computing",
+  "papers": [
+    {
+      "title": "Multi-Objective Optimization for Multi-UAV-Assisted Mobile Edge Computing",
+      "abstract": "Recent developments in unmanned aerial vehicles (UAVs) and mobile edge computing (MEC) have provided users with flexible and resilient computing services. However, meeting the computation-intensive and delay-sensitive demands of users poses a significant challenge due to the limited resources of UAVs. To address this challenge, we consider a multi-UAV-assisted MEC system. Based on this system, we formulate a multi-objective optimization problem aiming at minimizing the total task completion delay, reducing the total UAV energy consumption, and maximizing the total number of offloaded tasks. Since the problem is a mixed-integer non-linear programming (MINLP) and NP-hard problem, we propose a joint task offloading, computation resource allocation, and UAV trajectory control (JTORATC) approach. The problem is split into three components to cope with the coupling of these decision variables, and then solved individually to obtain the corresponding decisions. Specifically, the sub-problem of task offloading is solved by using distributed splitting and threshold rounding methods, the sub-problem of computation resource allocation is solved by adopting the Karush-Kuhn-Tucker (KKT) method, and the sub-problem of UAV trajectory control is solved by employing the successive convex approximation (SCA) method. Simulation results show that the proposed JTORATC has superior performance compared with the other benchmark methods.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2404.15292.pdf"
+    }
+  ]
+}

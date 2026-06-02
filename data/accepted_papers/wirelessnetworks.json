@@ -1,0 +1,14 @@
+{
+  "journal_id": "wirelessnetworks",
+  "journal_name": "Wireless Networks",
+  "papers": [
+    {
+      "title": "A novel model for optimal selection of relay bus with maximum link reliability in VANET using hybrid fuzzy niching grey wolf optimization",
+      "abstract": "Enhancing the reliability of Vehicular Ad-hoc Networks (VANETs) is a challenging objective due to the dynamic topology, high mobility, and frequent disconnections. This paper introduces a novel Fuzzy-based Grey Wolf Optimization (FGWO) algorithm to solve the optimal relay bus selection problem in VANETs to maximize link reliability. A hybrid Fuzzy-Niching Grey Wolf Optimization (FNGWO) is developed to select the optimal cluster head and relay bus. The link reliability is ensured by considering the optimal relay bus based on a fitness function that includes the distance between vehicles, the speed difference, the direction of movement, and the received signal strength. The performance of the proposed FGWO algorithm is compared with existing algorithms, including particle swarm optimization (PSO), ant colony optimization (ACO), and genetic algorithm (GA). The simulation results demonstrate that the proposed FGWO algorithm achieves higher reliability and lower delay compared to existing algorithms.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11276-024-03860-9",
+      "url": ""
+    }
+  ]
+}

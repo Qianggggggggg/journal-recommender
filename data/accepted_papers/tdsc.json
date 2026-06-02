@@ -1,0 +1,30 @@
+{
+  "journal_id": "tdsc",
+  "journal_name": "IEEE Transactions on Dependable and Secure Computing",
+  "papers": [
+    {
+      "title": "A High-Throughput and Secure Coded Blockchain for IoT",
+      "abstract": "We propose a new coded blockchain scheme suitable for the Internet-of-Things (IoT) network. In contrast to existing works for coded blockchains, especially blockchain-of-things, the proposed scheme is more realistic, practical, and secure while achieving high throughput. This is accomplished by: 1) modeling the variety of transactions using a reward model, based on which an optimization problem is solved to select transactions that are more accessible and cheaper computational-wise to be processed together; 2) a transaction-based and lightweight consensus algorithm that emphasizes on using the minimum possible number of miners for processing the transactions; and 3) employing the raptor codes with linear-time encoding and decoding which results in requiring lower storage to maintain the blockchain and having a higher throughput. We provide detailed analysis and simulation results on the proposed scheme and compare it with the state-of-the-art coded IoT blockchain schemes including Polyshard and LCB, to show the advantages of our proposed scheme in terms of security, storage, decentralization, and throughput.",
+      "year": 2023,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2310.08822.pdf"
+    },
+    {
+      "title": "RC-NVM: Recovery-Aware Reliability-Security Co-Design for Non-Volatile Memories",
+      "abstract": "Non-Volatile Memory (NVM) technologies are now available in the form of byte-addressable and fast main memory. Despite their benefits, such memories require secure and reliable memory management to prevent malicious and spontaneous data alteration. However, in NVM security, it is still a major challenge to maintain crash consistency and reliable system recovery. In particular, Message Authentication Codes (MAC) are rarely discussed in recent recovery-aware NVM studies since they are generally not cached. MACs have outstanding sensitivity to memory errors and hence they can be used for reliability enhancement alongside their mainstream use to detect malicious tampering. However, persisting MACs is challenging and requires 2x writes and reads in a conventional secure NVM system. It is possible to cache MACs in a MAC-assisted reliability scheme; however, this brings many challenges related to crash consistency and reliability. In this article, we present the difficulties associated with MAC recovery if they are cached, and solutions to guarantee reliable system recovery. Finally, we propose a novel scheme, Recoverable and Chipkill capable NVM, RC-NVM, which can effectively use a volatile write-back cache for MACs as well as recover them quickly after a system crash. Our scheme reduces 27% of the writes and allows 18.2% performance improvement compared to the state-of-the-art, while preserving the ability to recover from a system crash.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TDSC.2023.3279031",
+      "url": ""
+    },
+    {
+      "title": "Leakage-Resilient and Carbon-Neutral Aggregation Featuring the Federated AI-Enabled Critical Infrastructure",
+      "abstract": "AI-enabled critical infrastructures (ACIs) integrate artificial intelligence (AI) technologies into various essential systems and services that are vital to the functioning of society, offering significant implications for efficiency, security and resilience. While adopting decentralized AI approaches (such as federated learning technology) in ACIs is plausible, private and sensitive data are still susceptible to data reconstruction attacks through gradient optimization. In this work, we propose Compressed Differentially Private Aggregation (CDPA), a leakage-resilient, communication-efficient, and carbon-neutral approach for ACI networks. Specifically, CDPA has introduced a novel random bit-flipping mechanism as its primary innovation. This mechanism first converts gradients into a specific binary representation and then selectively flips masked bits with a certain probability. The proposed bit-flipping introduces a larger variance to the noise while providing differentially private protection and commendable efforts in energy savings while applying vector quantization techniques within the context of federated learning. The experimental evaluation indicates that CDPA can reduce communication cost by half while preserving model utility. Moreover, we demonstrate that CDPA can effectively defend against state-of-the-art data reconstruction attacks in both computer vision and natural language processing tasks. We highlight existing benchmarks that generate 2.6x to over 100x more carbon emissions than CDPA. We hope that the CDPA developed in this paper can inform the federated AI-enabled critical infrastructure of a more balanced trade-off between utility and privacy, resilience protection, as well as a better carbon offset with less communication overhead.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TDSC.2025.3532957",
+      "url": ""
+    }
+  ]
+}

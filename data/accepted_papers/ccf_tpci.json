@@ -1,0 +1,14 @@
+{
+  "journal_id": "ccf_tpci",
+  "journal_name": "CCF Transactions on Pervasive Computing and Interaction",
+  "papers": [
+    {
+      "title": "Synthesizing mmWave range-doppler data from videos for privacy-preserving human activity recognition",
+      "abstract": "Millimeter-wave radar has shown significant potential in privacy-preserving human activity recognition. However, the lack of diverse radar datasets across various scenarios poses a challenge to the robustness and generalization of deep learning models. To address this limitation, existing works mainly focus on synthesizing micro-doppler data from video, range-doppler data, which provides an extra dimension, has been overlooked due to challenges caused by signal offsets. In this paper, we propose a comprehensive approach for synthesizing range-doppler data from videos by leveraging computer vision techniques and principles of camera imaging. Furthermore, we implement a map enhancement and classification model to facilitate human activity recognition. Our approach is validated on a custom dataset, where the proposed range-doppler synthesis method and classification model achieve an accuracy of 97.3% for activity recognition tasks. This performance is comparable to that of vision-based HAR methods, demonstrating the effectiveness of our proposed scheme in achieving privacy-preserving human activity recognition.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s42486-025-00205-z",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "tkdd",
+  "journal_name": "ACM Transactions on Knowledge Discovery from Data",
+  "papers": [
+    {
+      "title": "Fair-RGNN: Mitigating Relational Bias on Knowledge Graphs",
+      "abstract": "Knowledge graph data are prevalent in real-world applications, and knowledge graph neural networks (KGNNs) are essential techniques for knowledge graph representation learning. Although KGNN effectively models the structural information from knowledge graphs, these frameworks amplify the underlying data bias that leads to discrimination towards certain groups or individuals in resulting applications. Additionally, as existing debiasing approaches mainly focus on entity-wise bias, eliminating the multi-hop relational bias that pervasively exists in knowledge graphs remains an open question. However, it is very challenging to eliminate relational bias due to the sparsity of the paths that generate the bias and the non-linear proximity structure of knowledge graphs. To tackle the challenges, we propose Fair-KGNN, a KGNN framework that simultaneously alleviates multi-hop bias and preserves the proximity information of entity-to-relation in knowledge graphs. The proposed framework is generalizable to mitigate relational bias for all types of KGNN. Fair-KGNN is applicable to incorporate two state-of-the-art KGNN models, RGCN and CompGCN, to mitigate gender-occupation and nationality-salary bias. The experiments carried out on three benchmark knowledge graph datasets demonstrate that Fair-KGNN can effectively mitigate unfair situations during representation learning while preserving the predictive performance of KGNN models. The source code of the proposed method is available at: https://github.com/ynchuang/Mitigating-Relational-Bias-on-Knowledge-Graphs.",
+      "year": 2022,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2211.14489.pdf"
+    },
+    {
+      "title": "Enhancing Heterogeneous Knowledge Graph Completion with a Novel GAT-based Approach",
+      "abstract": "Knowledge graphs (KGs) play a vital role in enhancing search results and recommendation systems. With the rapid increase in the size of KGs, they are becoming inaccurate and incomplete. This problem can be solved by the KG completion methods, of which graph attention network (GAT)-based methods stand out because of their superior performance. However, existing GAT-based KG completion methods often suffer from overfitting issues when dealing with heterogeneous KGs, primarily due to the unbalanced number of samples. Additionally, these methods demonstrate poor performance in predicting the tail (head) entity that shares the same relation and head (tail) entity with others. To solve these problems, we propose GATH, a novel GAT-based method designed for Heterogeneous KGs. GATH incorporates two separate attention network modules that work synergistically to predict the missing entities. We also introduce novel encoding and feature transformation approaches, enabling the robust performance of GATH in scenarios with imbalanced samples. Comprehensive experiments are conducted to evaluate GATH’s performance. Compared with the existing state-of-the-art GAT-based model on Hits@10 and MRR metrics, our model improves performance by 5.2% and 5.2% on the FB15K-237 dataset and by 4.5% and 14.6% on the WN18RR dataset, respectively.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2408.02456.pdf"
+    },
+    {
+      "title": "Latent Representation Learning for Attribute Graph Anomaly Detection",
+      "abstract": "Attribute graph anomaly detection aims to identify anomalies from attributed graphs. However, existing methods often fail to effectively learn latent representations that capture both structural and attribute information simultaneously, limiting their detection performance. In this paper, we propose a novel latent representation learning framework for attribute graph anomaly detection. Our method learns low-dimensional representations that preserve both the graph topology and node attributes, enabling effective identification of anomalies that deviate from normal patterns. Extensive experiments on real-world datasets demonstrate that our approach significantly outperforms state-of-the-art methods in terms of detection accuracy and robustness.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3733604",
+      "url": ""
+    }
+  ]
+}

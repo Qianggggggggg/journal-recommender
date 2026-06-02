@@ -1,0 +1,30 @@
+{
+  "journal_id": "cgf",
+  "journal_name": "Computer Graphics Forum",
+  "papers": [
+    {
+      "title": "Neurosymbolic Models for Computer Graphics",
+      "abstract": "Procedural models (i.e. symbolic programs that output visual data) are a historically‐popular method for representing graphics content: vegetation, buildings, textures, etc. They offer many advantages: interpretable design parameters, stochastic variations, high‐quality outputs, compact representation, and more. But they also have some limitations, such as the difficulty of authoring a procedural model from scratch. More recently, AI‐based methods, and especially neural networks, have become popular for creating graphic content. These techniques allow users to directly specify desired properties of the artifact they want to create (via examples, constraints, or objectives), while a search, optimization, or learning algorithm takes care of the details. However, this ease of use comes at a cost, as it's often hard to interpret or manipulate these representations. In this state‐of‐the‐art report, we summarize research on neurosymbolic models in computer graphics: methods that combine the strengths of both AI and symbolic programs to represent, generate, and manipulate visual data. We survey recent work applying these techniques to represent 2D shapes, 3D shapes, and materials & textures. Along the way, we situate each prior work in a unified design space for neurosymbolic models, which helps reveal underexplored areas and opportunities for future research.",
+      "year": 2023,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2304.10320.pdf"
+    },
+    {
+      "title": "Generalized Lipschitz Tracing of Implicit Surfaces",
+      "abstract": "We present a versatile and robust framework to render implicit surfaces defined by black‐box functions that only provide function value queries. We assume that the input function is locally Lipschitz continuous; however, we presume no prior knowledge of its Lipschitz constants. Our pre‐processing step generates a discrete acceleration structure, a Lipschitz field, that provides data to infer local and directional Lipschitz upper bounds. These bounds are used to compute safe step sizes along rays during rendering. The Lipschitz field is constructed by generating local polynomial approximations to the input function, then bounding the derivatives of the approximating polynomials. The accuracy of the approximation is controlled by the polynomial degree and the granularity of the spatial resolution used during fitting, which is independent from the resolution of the Lipschitz field. We demonstrate that our process can be implemented in a massively parallel way, enabling straightforward integration into interactive and real‐time modelling workflows. Since the construction only requires function value evaluations, the input surface may be represented either procedurally or as an arbitrarily filtered grid of function samples. We query the original implicit representation upon ray trace, as such, we preserve the geometric and topological details of the input as long as the Lipschitz field supplies conservative estimates. We demonstrate our method on both procedural and discrete implicit surfaces and compare its exact and approximate variants.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1111/cgf.15202",
+      "url": ""
+    },
+    {
+      "title": "SPaGS: Fast and Accurate 3D Gaussian Splatting for Spherical Panoramas",
+      "abstract": "In this paper we propose SPaGS, a high‐quality, real‐time free‐viewpoint rendering approach from 360‐degree panoramic images. While existing methods building on Neural Radiance Fields or 3D Gaussian Splatting have difficulties to achieve real‐time frame rates and high‐quality results at the same time, SPaGS combines the advantages of an explicit 3D Gaussian‐based scene representation and ray casting‐based rendering to attain fast and accurate results. Central to our new approach is the exact calculation of axis‐aligned bounding boxes for spherical images that significantly accelerates omnidirectional ray casting of 3D Gaussians. We also present a new dataset consisting of ten real‐world scenes recorded with a drone that incorporates both calibrated 360‐degree panoramic images as well as perspective images captured simultaneously, i.e., with the same flight trajectory. Our evaluation on this new dataset as well as established benchmarks demonstrates that SPaGS excels over state‐of‐the‐art methods in terms of both rendering quality and speed.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1111/cgf.70001",
+      "url": ""
+    }
+  ]
+}

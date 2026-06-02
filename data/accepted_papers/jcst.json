@@ -1,0 +1,14 @@
+{
+  "journal_id": "jcst",
+  "journal_name": "Journal of Computer Science and Technology",
+  "papers": [
+    {
+      "title": "Serverless Computing: A Technological and Architectural Review",
+      "abstract": "Serverless computing has emerged as a transformative cloud computing paradigm that enables developers to focus on code without the complexities of infrastructure management. This comprehensive review examines the evolution of serverless computing from its origins in Function-as-a-Service (FaaS) to its current state as a mature architectural pattern supporting diverse application workloads. We analyze the core technologies underlying serverless platforms, including containerization, microservices, event-driven architectures, and cloud-native design principles. The article also explores performance optimization techniques, pricing models, security considerations, and the integration of serverless with edge computing, AI workloads, and data processing pipelines. Drawing on both academic literature and industry practices, we identify key research challenges and propose future directions for serverless computing, including improved cold-start mitigation, enhanced observability, and standardization efforts. This review serves as a foundational resource for researchers and practitioners seeking to understand and leverage serverless architectures in modern cloud systems.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11390-024-4522-8",
+      "url": ""
+    }
+  ]
+}

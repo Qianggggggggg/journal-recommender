@@ -1,0 +1,14 @@
+{
+  "journal_id": "sicomp",
+  "journal_name": "SIAM Journal on Computing",
+  "papers": [
+    {
+      "title": "NP-Hardness of Approximating Meta-Complexity: A Cryptographic Approach",
+      "abstract": "It is a longstanding open problem whether the Minimum Circuit Size Problem (MCSP) and related meta-complexity problems are NP-complete and hard to approximate. In this work, we show that under plausible cryptographic assumptions, the problem of approximating the circuit complexity of a truth table is NP-hard. Our approach uses a novel connection between meta-complexity and the security of pseudorandom generators. We develop a framework for reducing approximation problems in meta-complexity to cryptographic hardness assumptions, yielding the first hardness results for approximating MCSP. Our results also have implications for the complexity of learning and the existence of one-way functions.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1137/23M1608483",
+      "url": ""
+    }
+  ]
+}

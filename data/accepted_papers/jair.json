@@ -1,0 +1,14 @@
+{
+  "journal_id": "jair",
+  "journal_name": "Journal of Artificial Intelligence Research",
+  "papers": [
+    {
+      "title": "Incremental Learning Methodologies for Addressing Catastrophic Forgetting: Analysis and Experimental Evaluation",
+      "abstract": "Artificial neural networks have been reported to exhibit, and in some cases surpass, human level performance on individual rigid tasks. However, these networks remain static entities of knowledge for those specific tasks, which can lead to catastrophic forgetting - i.e., forgetting old tasks - when attempting to learn new tasks. The main objective of Incremental Learning (IL) is to address this issue. In order to tackle catastrophic forgetting, various approaches have been proposed so far. We survey those approaches and organize them in nine categories: regularization-based methods, exemplar replay-based methods, variational continual learning-based methods, parameter isolation-based methods, dynamic architectures-based methods, distillation-based methods, generative methods, data-free methods and unsupervised methods. Moreover, this review distinguishes between two scenarios, Task Incremental Learning (Task-IL) and Class Incremental Learning (Class-IL), and reports on the results obtained for a number of experiments that compare the performance achieved by a selection of diverse methods for both scenarios on the datasets most used by the related research community.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1613/jair.1.18405",
+      "url": ""
+    }
+  ]
+}

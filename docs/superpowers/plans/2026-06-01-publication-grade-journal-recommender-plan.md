@@ -270,16 +270,16 @@ pytest tests/test_accepted_paper_store.py -q
 - 测试： `tests/test_accepted_paper_store.py`
 - 输出： `data/accepted_papers/*.json`
 
-- [ ] 实现 local-only 模式，读取：
+- [x] 实现 local-only 模式，读取：
   - `data/evaluation/papers_metadata.jsonl`
   - `data/evaluation/papers_metadata_v2.jsonl`
   - `data/evaluation/papers_metadata_light_30.jsonl`
-- [ ] 按 exact `venue` 分组。
-- [ ] 通过 `JournalStore` 把 venue 解析到 `journal_id`。
-- [ ] 每本期刊输出一个 accepted-paper JSON。
-- [ ] `source` 字段写成 `local_evaluation_metadata`。
-- [ ] 增加 `--exclude-eval-input`，用于从画像生成中排除某个 benchmark 文件。
-- [ ] 运行：
+- [x] 按 exact `venue` 分组。
+- [x] 通过 `JournalStore` 把 venue 解析到 `journal_id`。
+- [x] 每本期刊输出一个 accepted-paper JSON。
+- [x] `source` 字段写成 `local_evaluation_metadata`。
+- [x] 增加 `--exclude-eval-input`，用于从画像生成中排除某个 benchmark 文件。
+- [x] 运行：
 
 ```bash
 python scripts/collect_accepted_papers.py \
@@ -287,8 +287,14 @@ python scripts/collect_accepted_papers.py \
   --output-dir data/accepted_papers
 ```
 
-- [ ] 确认 light30 的泄漏报告干净；如果有泄漏，报告中必须明确列出。
-- [ ] 提交：`feat: build local accepted-paper journal corpus`
+  本轮产物:90 个期刊 / 156 篇真实论文 / 63 条 light30 论文被正确排除 / 2 条跨文件去重。
+  `jiis` 和 `algorithmica` 等期刊在本地数据里只在 light30 中有论文,被 exclude 后缺画论,
+  留待任务 2.3 的外部数据源 stub 后续补齐。
+
+- [x] 确认 light30 的泄漏报告干净；如果有泄漏，报告中必须明确列出。
+  报告 `data/evaluation/results/light30_leakage_report_after_2_2.json`:
+  `leaked_papers=0, leaked_accepted_paper_entries=0`。
+- [x] 提交：`feat: build local accepted-paper journal corpus`
 
 ### 任务 2.3：预留外部数据源接口，但当前不依赖外部数据
 

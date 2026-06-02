@@ -1,0 +1,14 @@
+{
+  "journal_id": "ieeegeoscienceandremotesensingletters",
+  "journal_name": "IEEE Geoscience and Remote Sensing Letters",
+  "papers": [
+    {
+      "title": "Rotation Equivariant Convolution-based Network for Semantic Segmentation of High Spatial Resolution Remote Sensing Imagery",
+      "abstract": "Rotation equivariant convolution-based network for semantic segmentation of high spatial resolution remote sensing imagery. This paper proposes a novel rotation-equivariant convolutional network specifically designed for semantic segmentation of high spatial resolution remote sensing imagery. The proposed architecture incorporates rotational equivariance as an inductive bias, enabling the model to maintain consistent representations across arbitrary rotations of input images. This property is particularly beneficial for remote sensing applications where objects and land cover types may appear in arbitrary orientations. The network leverages group-equivariant convolutions based on the cyclic group C4 to achieve rotation equivariance while maintaining computational efficiency. Extensive experiments on benchmark remote sensing datasets demonstrate that the proposed method achieves superior segmentation accuracy compared to conventional CNN-based approaches, with particular advantages in handling rotated instances and maintaining boundary precision. The results indicate that incorporating geometric prior knowledge through equivariant representations significantly improves generalization performance in remote sensing image analysis tasks.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/LGRS.2026.3662255",
+      "url": ""
+    }
+  ]
+}

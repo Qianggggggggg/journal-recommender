@@ -1,0 +1,14 @@
+{
+  "journal_id": "ijcv",
+  "journal_name": "International Journal of Computer Vision",
+  "papers": [
+    {
+      "title": "Beyond MACs: Hardware Efficient Architecture Design for Vision Backbones",
+      "abstract": "Vision backbone networks play a central role in modern computer vision. Enhancing their efficiency directly benefits a wide range of downstream applications. To measure efficiency, many publications rely on MACs (Multiply Accumulate operations) as a predictor of execution time. In this paper, we experimentally demonstrate the shortcomings of such a metric, especially in the context of edge devices. By contrasting the MAC count and execution time of common architectural design elements, we identify key factors for efficient execution and provide insights to optimize backbone design. Based on these insights, we present LowFormer, a novel vision backbone family. LowFormer features a streamlined macro and micro design that includes Lowtention, a lightweight alternative to Multi-Head Self-Attention. Lowtention not only proves more efficient, but also enables superior results on ImageNet. Additionally, we present an edge GPU version of LowFormer, that can further improve upon its baseline’s speed on edge GPU and desktop GPU. We demonstrate the LowFormer’s wide applicability by evaluating it on smaller image classification datasets, as well as adapting it to several downstream tasks, such as object detection, semantic segmentation, image retrieval, and visual object tracking. LowFormer models consistently achieve remarkable speed-ups across various hardware platforms compared to recent state-of-the-art backbones. Code and models are publicly available at https://github.com/altair199797/LowFormer.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11263-026-02873-5",
+      "url": ""
+    }
+  ]
+}

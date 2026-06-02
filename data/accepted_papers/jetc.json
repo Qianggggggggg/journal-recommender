@@ -1,0 +1,22 @@
+{
+  "journal_id": "jetc",
+  "journal_name": "ACM Journal on Emerging Technologies in Computing Systems",
+  "papers": [
+    {
+      "title": "Dynamic Reliability Management in Neuromorphic Computing",
+      "abstract": "Neuromorphic computing systems execute machine learning tasks designed with spiking neural networks. These systems are embracing non-volatile memory to implement high-density and low-energy synaptic storage. Elevated voltages and currents needed to operate non-volatile memories cause aging of CMOS-based transistors in each neuron and synapse circuit in the hardware, drifting the transistor’s parameters from their nominal values. If these circuits are used continuously for too long, the parameter drifts cannot be reversed, resulting in permanent degradation of circuit performance over time, eventually leading to hardware faults. Aggressive device scaling increases power density and temperature, which further accelerates the aging, challenging the reliable operation of neuromorphic systems. Existing reliability-oriented techniques periodically de-stress all neuron and synapse circuits in the hardware at fixed intervals, assuming worst-case operating conditions, without actually tracking their aging at run-time. To de-stress these circuits, normal operation must be interrupted, which introduces latency in spike generation and propagation, impacting the inter-spike interval and hence, performance (e.g., accuracy). We observe that in contrast to long-term aging, which permanently damages the hardware, short-term aging in scaled CMOS transistors is mostly due to bias temperature instability. The latter is heavily workload-dependent and, more importantly, partially reversible. We propose a new architectural technique to mitigate the aging-related reliability problems in neuromorphic systems by designing an intelligent run-time manager (NCRTM), which dynamically de-stresses neuron and synapse circuits in response to the short-term aging in their CMOS transistors during the execution of machine learning workloads, with the objective of meeting a reliability target. NCRTM de-stresses these circuits only when it is absolutely necessary to do so, otherwise reducing the performance impact by scheduling de-stress operations off the critical path. We evaluate NCRTM with state-of-the-art machine learning workloads on a neuromorphic hardware. Our results demonstrate that NCRTM significantly improves the reliability of neuromorphic hardware, with marginal impact on performance.",
+      "year": 2021,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2105.02038.pdf"
+    },
+    {
+      "title": "NORM: An FPGA-based Non-volatile Memory Emulation Framework for Intermittent Computing",
+      "abstract": "Today’s intermittent computing systems operate by relying only on harvested energy accumulated in their tiny energy reservoirs, typically capacitors. An intermittent device dies due to a power failure when there is no energy in its capacitor and boots again when the harvested energy is sufficient to power its hardware components. Power failures prevent the forward progress of computation due to the frequent loss of computational state. To remedy this problem, intermittent computing systems comprise built-in fast non-volatile memories with high write endurance to store information that persists despite frequent power failures. However, the lack of design tools makes fast-prototyping these systems difficult. Even though FPGAs are common platforms for fast prototyping and behavioral verification of continuously powered architectures, they do not target prototyping intermittent computing systems. This article introduces a new FPGA-based framework, named NORM (Non-volatile memORy eMulator), to emulate and verify the behavior of any intermittent computing system that exploits fast non-volatile memories. Our evaluation showed that NORM can be used to emulate and validate FeRAM-based transiently powered hardware architectures successfully.",
+      "year": 2022,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2202.07948.pdf"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "journal_id": "tgars",
+  "journal_name": "IEEE Transactions on Geoscience and Remote Sensing",
+  "papers": [
+    {
+      "title": "ChangeMamba: Remote Sensing Change Detection With Spatiotemporal State Space Model",
+      "abstract": "Convolutional neural networks (CNNs) and Transformers have made impressive progress in the field of remote sensing change detection (CD). However, both architectures have inherent shortcomings: CNN is constrained by a limited receptive field that may hinder their ability to capture broader spatial contexts, while Transformers are computationally intensive, making them costly to train and deploy on large datasets. Recently, the Mamba architecture, based on state space models (SSMs), has shown remarkable performance in a series of natural language processing tasks, which can effectively compensate for the shortcomings of the above two architectures. In this article, we explore for the first time the potential of the Mamba architecture for remote sensing CD tasks. We tailor the corresponding frameworks, called MambaBCD, MambaSCD, and MambaBDA, for binary CD (BCD), semantic CD (SCD), and building damage assessment (BDA), respectively. All three frameworks adopt the cutting-edge Visual Mamba architecture as the encoder, which allows full learning of global spatial contextual information from the input images. For the change decoder, which is available in all three architectures, we propose three spatiotemporal relationship modeling mechanisms, which can be naturally combined with the Mamba architecture and fully utilize its attribute to achieve spatiotemporal interaction of multitemporal features, thereby obtaining accurate change information. On five benchmark datasets, our proposed frameworks outperform current CNN- and Transformer-based approaches without using any complex training strategies or tricks, fully demonstrating the potential of the Mamba architecture in CD tasks. Further experiments show that our architecture is quite robust to degraded data. The source code is available at: https://github.com/ChenHongruixuan/MambaCD.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2404.03425.pdf"
+    },
+    {
+      "title": "EarthGPT: A Universal Multimodal Large Language Model for Multisensor Image Comprehension in Remote Sensing Domain",
+      "abstract": "Multimodal large language models (MLLMs) have demonstrated remarkable success in vision and visual-language tasks within the natural image domain. Owing to the significant domain gap between natural and remote sensing (RS) images, the development of MLLMs in the RS domain is still in the infant stage. To fill the gap, a pioneer MLLM named EarthGPT integrating various multisensor RS interpretation tasks uniformly is proposed in this article for universal RS image comprehension. First, a visual-enhanced perception mechanism is constructed to refine and incorporate coarse-scale semantic perception information and fine-scale detailed perception information. Second, a cross-modal mutual comprehension approach is proposed, aiming at enhancing the interplay between visual perception and language comprehension and deepening the comprehension of both visual and language content. Finally, a unified instruction tuning method for multisensor multitasking in the RS domain is proposed to unify a wide range of tasks including scene classification, image captioning, region-level captioning, visual question answering (VQA), visual grounding, and object detection. More importantly, a dataset named MMRS-1M featuring large-scale multisensor multimodal RS instruction-following is constructed, comprising over 1M image-text pairs based on 34 existing diverse RS datasets and including multisensor images such as optical, synthetic aperture radar (SAR), and infrared. The MMRS-1M dataset addresses the drawback of MLLMs on RS expert knowledge and stimulates the development of MLLMs in the RS domain. Extensive experiments are conducted, demonstrating the EarthGPT’s superior performance in various RS visual interpretation tasks compared with the other specialist models and MLLMs, proving the effectiveness of the proposed EarthGPT and offering a versatile paradigm for open-set reasoning tasks. Our code and dataset are available at https://github.com/wivizhang/EarthGPT.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2401.16822.pdf"
+    }
+  ]
+}

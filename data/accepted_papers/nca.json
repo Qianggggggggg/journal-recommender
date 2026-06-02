@@ -1,0 +1,22 @@
+{
+  "journal_id": "nca",
+  "journal_name": "Neural Computing and Applications",
+  "papers": [
+    {
+      "title": "From classification to landmark-aware identification: a multi-task multilabel approach for fetal brain ultrasound planes",
+      "abstract": "Standard plane acquisition in fetal neurosonography is essential for prenatal diagnosis, yet remains highly operator-dependent due to the need to identify subtle anatomical landmarks that define each imaging plane. Current automated approaches either treat the problem as plane-level image classification—without explicitly verifying landmark visibility—or employ computationally expensive object detection methods that may not be suitable for real-time clinical integration. To address these limitations, we propose a novel multitask learning framework that combines detection-based spatial awareness during training with efficient multilabel classification at inference. Validated on a public dataset collected at BCNatal center, the method was compared against a standard ResNet-101 multilabel baseline. Results demonstrate that the proposed framework achieves an average F1-score of 0.92, significantly outperforming the baseline, particularly for the challenging Cavum Septi Pellucidi where precision improves from 0.76 to 0.93. Grad-CAM visualizations reveal substantially more focused and anatomically precise attention maps compared to baseline approaches, with activations concentrated on clinically relevant substructures such as the cerebellar vermis. These findings confirm that, by discarding the auxiliary detection head at inference, the model retains the spatial features learned during training while minimizing computational overhead.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00521-026-12115-x",
+      "url": ""
+    },
+    {
+      "title": "M-Ghost YOLOv8: a novel lightweight architecture for real-time multilingual traffic sign detection and classification",
+      "abstract": "Accurately detecting multilingual, distant, and small traffic signs in real time remains a major challenge for autonomous vehicles operating in diverse and dynamic environments. This study introduces M-Ghost YOLOv8, a lightweight and efficient model designed for multilingual traffic sign recognition. The model integrates GhostConv and C3Ghost modules to reduce parameters and computation while preserving detection accuracy. A Selective Pyramid Pooling and Efficient Lateral Aggregation Network (SPPELAN) is incorporated to enhance multi-scale feature fusion, improving recognition of small and partially occluded signs. Furthermore, an additional detection head is introduced to enhance performance on extra-small objects, which are commonly encountered in real-world driving scenarios. To support multilingual adaptability, we present TT100k-G, a bilingual version of the TT100k dataset that combines Chinese and globally interpretable traffic sign annotations. Experimental results on the TT100k, GTSDB, and TSDY datasets show that M-Ghost YOLOv8 achieves mean average precision mAP(0.50) scores of 90.5%, 98.5%, and 97.1%, respectively, outperforming recent models such as YOLOv12. Compared with YOLOv8, our model reduces parameters by 76.5%, GFLOPs by 57.5%, and doubles inference speed (up to 60 FPS). Real-world tests on the Wheeltec autonomous platform confirm reliable performance under multilingual and multi-scale conditions. M-Ghost YOLOv8 offers a scalable, edge-ready solution for intelligent transportation systems, balancing efficiency, accuracy, and language adaptability to enable safer, real-time decision-making in autonomous driving applications.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s00521-026-12135-7",
+      "url": ""
+    }
+  ]
+}

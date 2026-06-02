@@ -1,0 +1,46 @@
+{
+  "journal_id": "tog",
+  "journal_name": "ACM Transactions on Graphics",
+  "papers": [
+    {
+      "title": "Instant neural graphics primitives with a multiresolution hash encoding",
+      "abstract": "Neural graphics primitives, parameterized by fully connected neural networks, can be costly to train and evaluate. We reduce this cost with a versatile new input encoding that permits the use of a smaller network without sacrificing quality, thus significantly reducing the number of floating point and memory access operations: a small neural network is augmented by a multiresolution hash table of trainable feature vectors whose values are optimized through stochastic gradient descent. The multiresolution structure allows the network to disambiguate hash collisions, making for a simple architecture that is trivial to parallelize on modern GPUs. We leverage this parallelism by implementing the whole system using fully-fused CUDA kernels with a focus on minimizing wasted bandwidth and compute operations. We achieve a combined speedup of several orders of magnitude, enabling training of high-quality neural graphics primitives in a matter of seconds, and rendering in tens of milliseconds at a resolution of 1920×1080.",
+      "year": 2022,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2201.05989.pdf"
+    },
+    {
+      "title": "MoVer: Motion Verification for Motion Graphics Animations",
+      "abstract": "While large vision-language models can generate motion graphics animations from text prompts, they regularly fail to include all spatio-temporal properties described in the prompt. We introduce MoVer, a motion verification DSL based on first-order logic that can check spatio-temporal properties of a motion graphics animation. We identify a general set of such properties that people commonly use to describe animations (e.g., the direction and timing of motions, the relative positioning of objects, etc.). We implement these properties as predicates in MoVer and provide an execution engine that can apply a MoVer program to any input SVG-based motion graphics animation. We then demonstrate how MoVer can be used in an LLM-based synthesis and verification pipeline for iteratively refining motion graphics animations. Given a text prompt, our pipeline synthesizes a motion graphics animation and a corresponding MoVer program. Executing the verification program on the animation yields a report of the predicates that failed and the report can be automatically fed back to LLM to iteratively correct the animation. To evaluate our pipeline, we build a synthetic dataset of 5600 text prompts paired with ground truth MoVer verification programs. We find that while our LLM-based pipeline is able to automatically generate a correct motion graphics animation for 58.8% of the test prompts without any iteration, this number raises to 93.6% with up to 50 correction iterations. Our code and dataset are at https://mover-dsl.github.io.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2502.13372.pdf"
+    },
+    {
+      "title": "Real-time Neural Appearance Models",
+      "abstract": "We present a complete system for real-time rendering of scenes with complex appearance previously reserved for offline use. This is achieved with a combination of algorithmic and system level innovations. Our appearance model utilizes learned hierarchical textures that are interpreted using neural decoders, which produce reflectance values and importance-sampled directions. To best utilize the modeling capacity of the decoders, we equip the decoders with two graphics priors. The first prior—transformation of directions into learned shading frames—facilitates accurate reconstruction of mesoscale effects. The second prior—a microfacet sampling distribution—allows the neural decoder to perform importance sampling efficiently. The resulting appearance model supports anisotropic sampling and level-of-detail rendering, and allows baking deeply layered material graphs into a compact unified neural representation. By exposing hardware accelerated tensor operations to ray tracing shaders, we show that it is possible to inline and execute the neural decoders efficiently inside a real-time path tracer. We analyze scalability with increasing number of neural materials and propose to improve performance using code optimized for coherent and divergent execution. Our neural material shaders can be over an order of magnitude faster than non-neural layered materials. This opens up the door for using film-quality visuals in real-time applications such as games and live previews.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3659577",
+      "url": ""
+    },
+    {
+      "title": "Complex-Valued Holographic Radiance Fields",
+      "abstract": "Modeling wave properties of light is an important milestone for advancing physically-based rendering. In this paper, we propose complex-valued holographic radiance fields, a method that optimizes scenes without relying on intensity-based intermediaries. By leveraging multi-view images, our method directly optimizes a scene representation using complex-valued Gaussian primitives representing amplitude and phase values aligned with the scene geometry. Our approach eliminates the need for computationally expensive holographic rendering that typically utilizes a single view of a given scene. This accelerates holographic rendering speed by 30x-10,000x while achieving on-par image quality with state-of-the-art holography methods, representing a promising step towards bridging the representation gap between modeling wave properties of light and 3D geometry of scenes.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3804450",
+      "url": ""
+    },
+    {
+      "title": "Learning Sparse Singularities for Cross Field Design",
+      "abstract": "Designing a quad mesh that meets aesthetic, anatomical, and numerical requirements often requires meticulous manual effort in conventional methods, making quadrilateral remeshing an 'art of design'. Neural networks hold significant promise for automating this process. However, current approaches that directly predict cross fields cannot properly handle the discontinuous behavior of smooth cross fields: minor shape variations can lead to substantial changes in the cross field, even when singularities remain largely unchanged. Therefore, such methods often result in non-smooth outputs when combining multiple singularity instances. To avoid such discontinuity, we propose to learn the sparse singularities, including their locations and indices, then let the non-neural conventional method to smoothly connect them. The imbalanced ratio of singular and regular vertices poses a significant challenge for learning. We convert them into a geodesic distance field and an over-sampled index field to address it. This carefully designed two-stage strategy satisfies several key requirements, such as coordinate invariance and tessellation insensitivity, while enabling the generation of smooth cross fields with varying topologies. By shifting the focus from directly learning the cross field to learning singularities, we also simplify the dataset preparation process by requiring only sparse annotations.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3787520",
+      "url": ""
+    }
+  ]
+}

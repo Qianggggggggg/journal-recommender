@@ -1,0 +1,22 @@
+{
+  "journal_id": "jacm",
+  "journal_name": "Journal of the ACM",
+  "papers": [
+    {
+      "title": "Adaptive and Fair Transformation for Recoverable Mutual Exclusion",
+      "abstract": "Mutual exclusion is one of the most commonly used techniques to handle contention in concurrent systems. Traditionally, mutual exclusion algorithms have been designed under the assumption that a process does not fail while acquiring/releasing a lock or while executing its critical section. However, failures do occur in real life, potentially leaving the lock in an inconsistent state. This gives rise to the problem of recoverable mutual exclusion (RME), which involves designing a mutual exclusion (ME) algorithm that can tolerate failures while maintaining required safety and liveness properties. In this work, we present a framework that transforms any algorithm that solves the RME problem into an algorithm that can also simultaneously adapt to (i) the number of processes concurrently competing for the lock, as well as (ii) the number of unresolved failures in the system, while maintaining the correctness properties and performance characteristics of the underlying RME algorithm. Additionally, the algorithm constructed as a result of this transformation adds certain desirable properties such as bounded recovery and fairness. One of the important performance measures of any ME algorithm, including an RME algorithm, is the number of remote memory references (RMRs) made by a process—to acquire and release a lock, as well as to recover the lock structure after a failure. Let R(n) denote the RMR complexity of a critical section request in the underlying RME algorithm, where n denotes the number of processes in the system. Then, our framework yields an RME algorithm for which the RMR complexity of a critical section request is given by O(min{č,√(F+1), R(n)}), where č denotes the point contention of the request and F denotes the failure-density of the request. We further extend our framework by presenting a novel memory reclamation algorithm to bound the space complexity of the RME algorithm. Our memory reclamation algorithm maintains the correctness, performance, and fairness properties of our transformation. Our approach is general enough that it may also be used to bound the space complexity of other RME algorithms. In addition to read and write instructions, our algorithm uses compare-and-swap (CAS) and fetch-and-store (FAS) hardware instructions, both of which are commonly available in most modern processors.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3744236",
+      "url": ""
+    },
+    {
+      "title": "Topological Characterization of Consensus in Distributed Systems",
+      "abstract": "We provide a complete characterization of both uniform and non-uniform deterministic consensus solvability in distributed systems with benign process and communication faults using point-set topology. More specifically, we non-trivially extend the approach introduced by Alpern and Schneider in 1985, by introducing novel fault-aware topologies on the space of infinite executions: the process-view topology, induced by a distance function that relies on the local view of a given process in an execution, and the minimum topology, which is induced by a distance function that focuses on the local view of the process that is the last to distinguish two executions. Consensus is solvable in a given model if and only if the sets of admissible executions leading to different decision values is disconnected in these topologies. By applying our approach to a wide range of different applications, we provide a topological explanation of a number of existing algorithms and impossibility results and develop several new ones, including a general equivalence of the strong and weak validity conditions.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3687302",
+      "url": ""
+    }
+  ]
+}

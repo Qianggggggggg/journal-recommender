@@ -1,0 +1,22 @@
+{
+  "journal_id": "jmlr",
+  "journal_name": "Journal of Machine Learning Research",
+  "papers": [
+    {
+      "title": "Policy Gradient Methods in the Presence of Symmetries and State Abstractions",
+      "abstract": "We present a new policy gradient method, called Symplectic Policy Optimization (SPO), which exploits symmetries and state abstractions. We study the problem of exploiting symmetry in the context of reinforcement learning. We show that the presence of symmetries can be used to reduce the dimension of the state space. We then use this reduction to design a policy gradient algorithm that can learn a policy that is invariant under the symmetry. We show that our algorithm can learn a policy that is optimal in the reduced space and we provide a convergence analysis. We also show that the algorithm can be used to learn a policy that is robust to small perturbations. We demonstrate the effectiveness of the algorithm on a set of benchmark tasks.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "Localisation of Regularised and Multiview Support Vector Machine Learning",
+      "abstract": "We prove some representer theorems for a localised version of a semisupervised, manifold regularised and multiview support vector machine learning problem introduced by H.Q. Minh, L. Bazzani, and V. Murino, Journal of Machine Learning Research, 17(2016) 1-72, that involves operator valued positive semidefinite kernels and their reproducing kernel Hilbert spaces. The results concern general cases when convex or nonconvex lossfunctions and finite or infinite dimensional underlying Hilbert spaces are considered. We show that the general framework allows infinite dimensional Hilbert spaces and nonconvex loss functions for some special cases, in particular in case the loss functions are Gâteaux differentiable. Detailed calculations are provided for the exponential least squares loss functions that lead to systems of partially nonlinear equations for which some Newton's approximation methods based on the interior point method can be used. Some numerical experiments are performed on a toy model that illustratethe tractability of the methods that we propose.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    }
+  ]
+}

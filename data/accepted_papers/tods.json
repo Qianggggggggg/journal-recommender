@@ -1,0 +1,30 @@
+{
+  "journal_id": "tods",
+  "journal_name": "ACM Transactions on Database Systems",
+  "papers": [
+    {
+      "title": "Database Repairing with Soft Functional Dependencies",
+      "abstract": "A common interpretation of soft constraints penalizes the database for every violation of every constraint, where the penalty is the cost (weight) of the constraint. A computational challenge is that of finding an optimal subset: a collection of database tuples that minimizes the total penalty when each tuple has a cost of being excluded. When the constraints are strict (i.e., have an infinite cost), this subset is a \"cardinality repair\" of an inconsistent database; in soft interpretations, this subset corresponds to a \"most probable world\" of a probabilistic database, a \"most likely intention\" of a probabilistic unclean database, and so on. Within the class of functional dependencies, the complexity of finding a cardinality repair is thoroughly understood. Yet, very little is known about the complexity of finding an optimal subset for the more general soft semantics. The work described in this manuscript makes significant progress in that direction. In addition to general insights about the hardness and approximability of the problem, we present algorithms for two special cases (and some generalizations thereof): a single functional dependency, and a bipartite matching. The latter is the problem of finding an optimal \"almost matching\" of a bipartite graph where a penalty is paid for every lost edge and every violation of monogamy. For these special cases, we also investigate the complexity of additional computational tasks that arise when the soft constraints are used as a means to represent a probabilistic database in the case of a probabilistic unclean database.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3651156",
+      "url": ""
+    },
+    {
+      "title": "The Ring: Worst-case Optimal Joins in Graph Databases using (Almost) No Extra Space",
+      "abstract": "We present an indexing scheme for triple-based graphs that supports join queries in worst-case optimal (wco) time within compact space. This scheme, called a ring, regards each triple as a cyclic string of length 3. Each rotation of the triples is lexicographically sorted and the values of the last attribute are stored as a column, so we obtain the order of the next column by stably re-sorting the triples by its attribute. We show that, by representing the columns with a compact data structure called a wavelet tree, this ordering enables forward and backward navigation between columns without needing pointers. These wavelet trees further support wco join algorithms and cardinality estimations for query planning. While traditional data structures such as B-Trees, tries, and so on, require 6 index orders to support all possible wco joins over triples, we can use one ring to index them all. This ring replaces the graph and uses only sublinear extra space, thus supporting wco joins in almost no space beyond storing the graph itself. Experiments querying a large graph (Wikidata) in memory show that the ring offers nearly the best overall query times while using the least space among all the indexes considered.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3644824",
+      "url": ""
+    },
+    {
+      "title": "Linking Entities across Relations and Graphs",
+      "abstract": "This article proposes a notion of parametric simulation to link entities across a relational database and a graph G. Taking functions and thresholds for measuring vertex closeness, path associations, and important properties as parameters, parametric simulation identifies tuples t in and vertices v in G that refer to the same real-world entity, based on both topological and semantic matching. We develop machine learning methods to learn the parameter functions and thresholds. We show that parametric simulation is in quadratic-time by providing such an algorithm. Moreover, we develop an incremental algorithm for parametric simulation; we show that the incremental algorithm is bounded relative to its batch counterpart, i.e., it incurs the minimum cost for incrementalizing the batch algorithm. Putting these together, we develop HER, a parallel system to check whether (t, v) makes a match, find all vertex matches of t in G, and compute all matches across and G, all in quadratic-time; moreover, HER supports incremental computation of these in response to updates to and G. Using real-life and synthetic data, we empirically verify that HER is accurate with F-measure of 0.94 on average, and is able to scale with database and graph G for both batch and incremental computations.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3639363",
+      "url": ""
+    }
+  ]
+}

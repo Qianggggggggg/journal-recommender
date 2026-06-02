@@ -1,0 +1,22 @@
+{
+  "journal_id": "adhocnetworks",
+  "journal_name": "Ad hoc Networks",
+  "papers": [
+    {
+      "title": "Zero trust-based authentication for Inter-Satellite Links in NextGen Low Earth Orbit networks",
+      "abstract": "Next Generation (NextGen) Low Earth Orbit satellite networks are rapidly expanding to support global communication and 6G technology transition. However, these networks face critical security challenges due to their dynamic topologies and expanding attack surfaces. Traditional perimeter-based security models are inadequate for such environments. We address these challenges by developing a Zero Trust Authentication Protocol for Inter-Satellite Link (ISL) communication. Our protocol implements a novel verification process that leverages orbital signals to authenticate ISLs, mitigating threats from eavesdropping, signal spoofing, impersonation, and replay attacks. The zero trust approach ensures that no entity is implicitly trusted, and every communication request is continuously verified. We evaluate the proposed protocol through extensive simulations, demonstrating its effectiveness in providing secure, low-latency communication while maintaining high authentication accuracy even under adversarial conditions. The results show that our protocol outperforms existing authentication mechanisms in terms of security resilience and operational efficiency for LEO satellite networks.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "Predicting Available Bandwidth in Ad Hoc Networks Using Neural Networks",
+      "abstract": "Ad hoc networks are self-organizing wireless networks that do not rely on fixed infrastructure. They are easy and fast to set up, unrestricted by time and space, and can be widely used in battlefields, emergency rescue operations, hazardous environments, and other scenarios. The available bandwidth of links in Ad hoc networks changes with the channel conditions. If the available bandwidth can be predicted and the transmission rate adjusted accordingly, the channel utilization can be significantly improved. In this paper, neural network models such as CNN, LSTM, Transformer, TCN, and KAN are applied to predict the available channel bandwidth based on measured data. The experimental results indicate that among those models, the CNN model converges more rapidly, while the TCN and TCN-GRU models exhibit superior fitting performance.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.adhoc.2025.103951",
+      "url": ""
+    }
+  ]
+}

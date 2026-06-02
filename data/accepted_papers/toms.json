@@ -1,0 +1,14 @@
+{
+  "journal_id": "toms",
+  "journal_name": "ACM Transactions on Mathematical Software",
+  "papers": [
+    {
+      "title": "hIPPYlib-MUQ: A Bayesian Inference Software Framework for Integration of Data with Complex Predictive Models under Uncertainty",
+      "abstract": "Bayesian inference provides a systematic framework for integration of data with mathematical models to quantify the uncertainty in the solution of the inverse problem. However, the solution of Bayesian inverse problems governed by complex forward models described by partial differential equations (PDEs) remains prohibitive with black-box Markov chain Monte Carlo (MCMC) methods. We present hIPPYlib-MUQ, an extensible and scalable software framework that contains implementations of state-of-the art algorithms aimed to overcome the challenges of high-dimensional, PDE-constrained Bayesian inverse problems. These algorithms accelerate MCMC sampling by exploiting the geometry and intrinsic low-dimensionality of parameter space via derivative information and low rank approximation. The software integrates two complementary open-source software packages, hIPPYlib and MUQ. hIPPYlib solves PDE-constrained inverse problems using automatically-generated adjoint-based derivatives, but it lacks full Bayesian capabilities. MUQ provides a spectrum of powerful Bayesian inversion models and algorithms, but expects forward models to come equipped with gradients and Hessians to permit large-scale solution. By combining these two complementary libraries, we created a robust, scalable, and efficient software framework that realizes the benefits of each and allows us to tackle complex large-scale Bayesian inverse problems across a broad spectrum of scientific and engineering disciplines. To illustrate the capabilities of hIPPYlib-MUQ, we present a comparison of a number of MCMC methods available in the integrated software on several high-dimensional Bayesian inverse problems. These include problems characterized by both linear and nonlinear PDEs, various noise models, and different parameter dimensions. The results demonstrate that large (∼ 50×) speedups over conventional black box and gradient-based MCMC algorithms can be obtained by exploiting Hessian information (from the log-posterior), underscoring the power of the integrated hIPPYlib-MUQ framework.",
+      "year": 2021,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2112.00713.pdf"
+    }
+  ]
+}

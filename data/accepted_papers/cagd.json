@@ -1,0 +1,22 @@
+{
+  "journal_id": "cagd",
+  "journal_name": "Computer Aided Geometric Design",
+  "papers": [
+    {
+      "title": "A point-normal interpolatory subdivision scheme preserving conics",
+      "abstract": "The use of subdivision schemes in applied and real-world contexts requires the development of conceptually simple algorithms that can be converted into fast and efficient implementation procedures. In the domain of interpolatory subdivision schemes, there is a demand for developing an algorithm capable of (i) reproducing all types of conic sections whenever the input data (in our case point-normal pairs) are arbitrarily sampled from them, (ii) generating a visually pleasing limit curve without creating unwanted oscillations, and (iii) having the potential to be naturally and easily extended to the bivariate case. In this paper we focus on the construction of an interpolatory subdivision scheme that meets all these conditions simultaneously. At the centre of our construction lies a conic fitting algorithm that requires as few as four point-normal pairs for finding new edge points (and associated normals) in a subdivision step. Several numerical results are included to showcase the validity of our algorithm. • We construct a univariate interpolatory subdivision scheme that reproduces conic sections. • It is a geometric subdivision scheme based on point-normal pairs. • We demonstrate our new scheme on several examples.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cagd.2024.102347",
+      "url": ""
+    },
+    {
+      "title": "Reducing shape-graph complexity with application to classification of retinal blood vessels and neurons",
+      "abstract": "Shape graphs are complex geometrical structures commonly found in biological and anatomical systems. A shape graph is a collection of nodes, some connected by curvilinear edges with arbitrary shapes. Their high complexity stems from the large number of nodes and edges and the complex shapes of edges. With an eye toward statistical analysis, one seeks low-complexity representations that retain as much of the global structure of the original shape graphs as possible. This paper develops a framework for reducing shape graph complexity using hierarchical clustering procedures that replace groups of nodes and edges with simpler representatives. It demonstrates this framework using graphs of retinal blood vessels in two dimensions and neurons in three dimensions. The paper also presents experiments on the classification of shape graphs using progressively reduced levels of graph complexity. The accuracy of disease detection in retinal blood vessels appears to be particularly sensitive to discarding terminal edges. Accuracy in identifying neural cell types remains stable with complexity reduction.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cagd.2026.102540",
+      "url": ""
+    }
+  ]
+}

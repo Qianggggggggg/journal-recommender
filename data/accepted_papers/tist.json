@@ -1,0 +1,14 @@
+{
+  "journal_id": "tist",
+  "journal_name": "ACM Transactions on Intelligent Systems and Technology",
+  "papers": [
+    {
+      "title": "Fairness and Diversity in Recommender Systems: A Survey",
+      "abstract": "Recommender systems (RS) are effective tools for mitigating information overload and have seen extensive applications across various domains. However, the single focus on utility goals proves to be inadequate in addressing real-world concerns, leading to increasing attention to fairness-aware and diversity-aware RS. While most existing studies explore fairness and diversity independently, we identify strong connections between these two domains. In this survey, we first discuss each of them individually and then dive into their connections. Additionally, motivated by the concepts of user-level and item-level fairness, we broaden the understanding of diversity to encompass not only the item level but also the user level. With this expanded perspective on user and item-level diversity, we re-interpret fairness studies from the viewpoint of diversity. This fresh perspective enhances our understanding of fairness-related work and paves the way for potential future research directions. Articles discussed in this survey along with public code links are available at: https://github.com/YuyingZhao/Awesome-Fairness-and-Diversity-Papers-in-Recommender-Systems",
+      "year": 2023,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2307.04644.pdf"
+    }
+  ]
+}

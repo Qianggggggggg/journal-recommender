@@ -1,0 +1,14 @@
+{
+  "journal_id": "scn",
+  "journal_name": "Security and Communication Networks",
+  "papers": [
+    {
+      "title": "Analysis and Mitigation of Covert Timing Communication Channels Using Active Warden Mechanism for Enhancing Network Security",
+      "abstract": "Covert communication channels (CCC) are very powerful challenges to the network security since they allow for unauthorized data transfer through different ways of mediation, usually avoiding traditional protections. In this study, we study and mitigate such channels through an innovative adaptive warden mechanism. Network traffic is dynamically normalized by the adaptive warden to disrupt covert signals while minimizing its effects on normal traffic data transmission. The mechanisms are evaluated to understand their effectiveness in detecting and blocking covert timing channels while preserving legitimate communication quality. Experimental results demonstrate that the proposed adaptive warden mechanism significantly reduces the bandwidth of covert timing channels by up to 85% while maintaining normal throughput degradation below 5%, providing an effective defense against this class of network attacks.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.22399/ijcesen.1484",
+      "url": ""
+    }
+  ]
+}

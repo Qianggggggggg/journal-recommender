@@ -1,0 +1,22 @@
+{
+  "journal_id": "c&g",
+  "journal_name": "Computers & Graphics",
+  "papers": [
+    {
+      "title": "Rendering piecewise approximations of SDFs through analytic intersections",
+      "abstract": "Signed distance fields (SDFs) have emerged as an alternative shape representation for real-time collision detection and lighting effects. Computing these for complex models can be expensive, so one popular approach is to prepare an approximation via sampling and interpolation. Then, these may be rendered using sphere marching, which gets close to the surface quickly, but needs several iterations to converge to it. In this paper, we propose an alternative that computes the intersection of a given ray and the surface analytically at a narrow band. This may be combined with other enhancements like having variable error for the approximation depending on the distance to the surface and skipping regions that do not contain the surface to accelerate the outer band ray traversal while reducing the required memory. To achieve smoother representations with minimal computational cost, we propose a method for computing surface intersections and normals from separate interpolants. We evaluate all these to find the optimal combination improving the rendering performance and memory consumption of these SDF approximations.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cag.2024.103981",
+      "url": ""
+    },
+    {
+      "title": "Virtual memory for 3D Gaussian Splatting",
+      "abstract": "3D Gaussian Splatting represents a breakthrough in the field of novel view synthesis. It establishes Gaussians as core rendering primitives for highly accurate real-world environment reconstruction. Recent advances have drastically increased the size of scenes that can be created. In this work, we present a method for rendering large and complex 3D Gaussian Splatting scenes using virtual memory. By leveraging well-established virtual memory and virtual texturing techniques, our approach efficiently identifies visible Gaussians and dynamically streams them to the GPU just in time for real-time rendering. Selecting only the necessary Gaussians for both storage and rendering results in reduced memory usage and effectively accelerates rendering, especially for highly complex scenes. Furthermore, we demonstrate how level of detail can be integrated into our proposed method to further enhance rendering speed for large-scale scenes. With an optimized implementation, we highlight key practical considerations and thoroughly evaluate the proposed technique and its impact on desktop and mobile devices.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cag.2026.104598",
+      "url": ""
+    }
+  ]
+}

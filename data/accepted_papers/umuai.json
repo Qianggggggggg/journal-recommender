@@ -1,0 +1,14 @@
+{
+  "journal_id": "umuai",
+  "journal_name": "User Modeling and User-Adapted Interaction",
+  "papers": [
+    {
+      "title": "Understanding user intent modeling for conversational recommender systems: a systematic literature review",
+      "abstract": "User intent modeling in natural language processing deciphers user requests to allow for personalized responses. The substantial volume of research (exceeding 13,000 publications in the last decade) underscores the significance of understanding prevalent models in AI systems, with a focus on conversational recommender systems. We conducted a systematic literature review to identify models frequently employed for intent modeling in conversational recommender systems. From the collected data, we developed a decision model to assist researchers in selecting the most suitable models for their systems. Furthermore, we conducted two case studies to assess the utility of our proposed decision model in guiding research modelers in selecting user intent modeling models for developing their conversational recommender systems. Our study analyzed 59 distinct models and identified 74 commonly used features. We provided insights into potential model combinations, trends in model selection, quality concerns, evaluation measures, and frequently used datasets for training and evaluating these models. The study offers practical insights into the domain of user intent modeling, specifically enhancing the development of conversational recommender systems. The introduced decision model provides a structured framework, enabling researchers to navigate the selection of the most apt intent modeling methods for conversational recommender systems.",
+      "year": 2023,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2308.08496.pdf"
+    }
+  ]
+}

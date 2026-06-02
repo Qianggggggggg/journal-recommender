@@ -1,0 +1,30 @@
+{
+  "journal_id": "computerssecurity",
+  "journal_name": "Computers & Security",
+  "papers": [
+    {
+      "title": "LTL-based runtime verification framework for cyber-attack anomaly prediction in cyber–physical systems",
+      "abstract": "Cyber-physical systems (CPS) are increasingly targeted by sophisticated cyber-attacks that exploit the tight integration of computational and physical components. Traditional intrusion detection methods often fail to capture the temporal and sequential nature of attacks in CPS environments. This paper presents a novel runtime verification framework based on Linear Temporal Logic (LTL) for predicting cyber-attack anomalies in cyber-physical systems. The proposed framework continuously monitors system execution traces and checks them against formally specified LTL properties that capture normal system behavior and known attack patterns. When deviations from expected behavior are detected, the framework raises alerts and provides predictive information about potential attack progression. The framework incorporates a lightweight monitoring algorithm that operates efficiently in real-time, making it suitable for deployment in resource-constrained CPS environments. Extensive experiments on benchmark CPS datasets demonstrate that our approach achieves high detection accuracy with low false positive rates, significantly outperforming existing anomaly detection methods. The formal foundation provided by LTL enables rigorous specification of security properties and guarantees about the monitoring process, enhancing the overall reliability of CPS security monitoring.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cose.2025.104455",
+      "url": ""
+    },
+    {
+      "title": "CDDA-MD: An efficient malicious traffic detection method based on concept drift detection and adaptation technique",
+      "abstract": "Network traffic patterns in real-world environments are not static; they evolve over time due to changes in user behavior, application updates, and adversarial activities. This phenomenon, known as concept drift, poses a significant challenge to traditional malicious traffic detection systems that rely on static models trained on historical data. As concept drift occurs, the performance of these models degrades rapidly, leading to increased false negatives and missed detections. This paper proposes CDDA-MD, a novel malicious traffic detection method that integrates concept drift detection and adaptive model updating to maintain high detection accuracy over time. The framework employs a drift detection module that continuously monitors the performance of the detection model and triggers adaptation when significant drift is detected. Upon drift detection, the framework retrains the model using a combination of recent labeled data and selectively stored historical samples to preserve knowledge of past attack patterns while adapting to new ones. Extensive experiments on multiple real-world network traffic datasets demonstrate that CDDA-MD maintains robust detection performance across varying drift scenarios, achieving up to 35% improvement in sustained accuracy compared to static models and outperforming existing drift-adaptive approaches.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cose.2025.104121",
+      "url": ""
+    },
+    {
+      "title": "Detection of cyberattack in Industrial Control Networks using multiple adaptive local kernel learning",
+      "abstract": "The data of Industrial Control Networks presents high-dimensional and nonlinear characteristics, making cyberattack detection a challenging problem. Multiple kernel learning (MKL) provided an attractive performance in dealing with the problem through the kernel trick. However, each kernel in traditional MKL usually adopts global features for high-dimensional space mapping. The local-related feature whereas, is ignored, resulting in the missing of the local implicit information. To tackle this problem, this article proposes an MKL-based cyberattack detection method combining both global and local kernels. First, information theory-based feature selection is used for local feature grouping. After that, different kinds of deep neural networks are used to generate local kernels for each group. Moreover, an adaptive method is designed for ensembling the local kernels into the global kernel during the learning process. Extensive experiments are conducted on diverse datasets and the performances are comprehensively evaluated. The results indicate that our proposed method is outstanding in the cyberattack detection of Industrial Control Networks.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.cose.2024.104152",
+      "url": ""
+    }
+  ]
+}

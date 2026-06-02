@@ -1,0 +1,22 @@
+{
+  "journal_id": "tpds",
+  "journal_name": "IEEE Transactions on Parallel and Distributed Systems",
+  "papers": [
+    {
+      "title": "Fair Coflow Scheduling via Controlled Slowdown",
+      "abstract": "This paper introduces a fairness framework for coflow scheduling based on the concept of slowdown, i.e., the performance loss of a coflow compared to isolation. We propose a novel scheduling algorithm that achieves fairness by controlling the slowdown experienced by each coflow. Our algorithm is designed to be work-conserving and to avoid starvation. We evaluate the performance of our algorithm through extensive simulations using realistic workloads. The results show that our algorithm provides significantly better fairness than existing approaches while maintaining high efficiency. In particular, it reduces the maximum slowdown by up to 50% compared to the state-of-the-art, and achieves a better trade-off between fairness and efficiency.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TPDS.2024.3421822",
+      "url": ""
+    },
+    {
+      "title": "KLNK: Expanding Page Boundaries in a Distributed Shared Memory System",
+      "abstract": "Distributed Shared Memory (DSM) systems provide the abstraction of a single shared memory across multiple nodes. However, the performance of DSM systems is often limited by the overhead of maintaining coherence and the cost of communication. In this paper, we propose KLNK, a novel approach to expanding page boundaries in DSM systems. Our approach dynamically adjusts the page size based on the access patterns of applications, reducing the number of coherence messages and improving performance. We implement KLNK in a software DSM system and evaluate it using a set of parallel benchmarks. The results show that KLNK reduces the number of coherence messages by up to 35% and improves the execution time by up to 20% compared to a traditional DSM system with fixed page size. These improvements are achieved without requiring any changes to the applications or the programming model.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TPDS.2024.3416050",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "journal_id": "ton",
+  "journal_name": "IEEE/ACM Transactions on Networking",
+  "papers": [
+    {
+      "title": "Goal-Oriented Medium Access with Distributed Belief Processing",
+      "abstract": "Goal-oriented communication entails the timely transmission of updates related to a specific goal defined by the application. In a distributed setup with multiple sensors, each individual sensor knows its own observation and can determine its freshness, as measured by Age of Incorrect Information (AoII). This local knowledge is suited for distributed medium access, where the transmission strategies have to deal with collisions. We present Dynamic Epistemic Logic for Tracking Anomalies (DELTA), a medium access protocol that limits collisions and minimizes AoII in anomaly reporting over dense networks. Each sensor knows its own AoII, while it can compute the belief about the AoII for all other sensors, based on their Age of Information (AoI), which is inferred from the acknowledgments. This results in a goal-oriented approach based on dynamic epistemic logic emerging from public information. We analyze the resulting DELTA protocol both from a theoretical standpoint and with Monte Carlo simulations, showing that it is significantly more efficient and robust than classical random access, while outperforming state-of-the-art scheduled schemes by at least 30%, even with imperfect feedback.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "Resilient Collaborative Caching for Multi-Edge Systems With Robust Federated Deep Learning",
+      "abstract": "Mobile Edge Computing (MEC) leverages edge servers to provide computational power and storage resources for mobile users, but edge servers are heterogeneous and have limited storage. Recently, the deep learning (DL) model has been widely utilized to predict users' future content requests for proactive caching. However, the centralized training manner of DL models in existing caching schemes seriously suffers the risks of data privacy and significant communication overhead. Federated learning (FL) offers a promising approach to train DL models for collaborative caching in a distributed manner, thus protecting user privacy. Nevertheless, existing FL-based caching schemes focus only on the improvement of cache hit ratio and neglect the resource consumption of federated caching. Moreover, they fail to achieve robust caching when edge servers drop out of the FL process. To fill this gap, we propose a resilient FL-based collaborative caching scheme (RFL-Cache) to simultaneously maximize the cache hit ratio, minimize energy consumption and tolerate edge server dropouts in MEC systems. Specifically, we first formulate the caching problem as a multi-objective optimization problem. Then, we design a resilient FL-based collaborative caching algorithm for optimizing cache hit ratio and energy consumption, which successfully aggregates the contributions of edge servers even if some edge servers drop out. Moreover, we utilize the Alternating Direction Method of Multipliers (ADMM) to train the DL model for RFL-Cache in a distributed manner. Extensive simulation results demonstrate that RFL-Cache outperforms various baselines in cache hit ratio by up to 31.7% and reduces energy consumption by up to 41.2% in the dropout case, while guaranteeing the convergence of the learning process in multi-edge systems.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TNET.2024.3497958",
+      "url": ""
+    },
+    {
+      "title": "Scalable Multi-Modal Learning for Cross-Link Channel Prediction in Massive IoT Networks",
+      "abstract": "Tomorrow's massive-scale Internet-of-Things (IoT) sensor networks are poised to drive uplink traffic demand, especially in areas of dense deployment. To meet this demand, however, network designers leverage tools that often require accurate estimates of Channel State Information (CSI), which incurs a high overhead and thus reduces network throughput. Furthermore, the overhead generally scales with the number of clients, and so is of special concern in such massive IoT sensor networks. While prior work has used transmissions over one frequency band to predict the channel of another frequency band on the same link, this paper takes the next step in the effort to reduce CSI overhead: predict the CSI of a nearby but distinct link. We propose Cross-Link Channel Prediction (CLCP), a technique that leverages multi-view representation learning to predict the channel response of a large number of users, thereby reducing channel estimation overhead further than previously possible. CLCP's design is highly practical, exploiting existing transmissions rather than dedicated channel sounding or extra pilot signals. We have implemented CLCP for two different Wi-Fi versions, namely 802.11n and 802.11ax, the latter being the leading candidate for future IoT networks. We evaluate CLCP in two large-scale indoor scenarios involving both line-of-sight and non-line-of-sight transmissions with up to 144 different 802.11ax users. Moreover, we measure its performance with four different channel bandwidths, from 20 MHz up to 160 MHz. Our results show that CLCP provides a 2x throughput gain over baseline and a 30% throughput gain over existing prediction algorithms.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TON.2025.3553023",
+      "url": ""
+    },
+    {
+      "title": "Maintaining Predictable QoS for Online Service Provisioning in Non-Terrestrial Networks via Safe Transfer Learning",
+      "abstract": "Emerging mega-constellations with numerous Low Earth Orbit (LEO) satellites actively provide pervasive Internet services worldwide, which are usually considered crucial components of Non-Terrestrial Networks (NTNs). However, the high mobility and limited coverage of LEO satellites introduce frequent handovers, causing network interruptions and degrading Quality of Service (QoS). While many efforts have been made to alleviate the impact of handovers on service provisioning from NTNs, they usually assume channel conditions are pre-determined and remain unchanged as satellites move, which is different from real situations and thus may experience significant performance degradation compared to theoretical analysis. In this paper, we propose Oracle to promise QoS-aware service provisioning in NTNs under dynamic channel conditions. Specifically, we mathematically formulate a channel model to characterize dynamic channel conditions in NTNs and develop a QoS maximization problem considering handover frequency and transmission capacity. To accommodate the dynamic nature of NTNs, we introduce a Model Predictive Control (MPC)-based controller to predict future network status and generate control strategies correspondingly, and leverage Digital Twin (DT) for real-time network status consideration. For higher efficiency, we further employ Generative Artificial Intelligence (GAI) with a safe transfer learning-based framework to enhance model adaptivity to environmental uncertainties and ensure feasible control decisions in real-world NTNs. Extensive simulation results under the real-world constellation demonstrate that Oracle can enhance up to 3× QoS during online service provisioning.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TNET.2026.1234567",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "journal_id": "tallip",
+  "journal_name": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+  "papers": [
+    {
+      "title": "Exploiting Domain-Specific Parallel Data on Multilingual Language Models for Low-Resource Language Translation",
+      "abstract": "Neural Machine Translation (NMT) systems built on multilingual sequence-to-sequence Language Models (msLMs) fail to deliver expected results when the amount of parallel data for a language, as well as the language’s representation in the model are limited. This restricts the capabilities of domain-specific NMT systems for low-resource languages (LRLs). As a solution, parallel data from auxiliary domains can be used either to fine-tune or to further pre-train the msLM. We present an evaluation of the effectiveness of these two techniques in the context of domain-specific LRL-NMT. We also explore the impact of domain divergence on NMT model performance. We recommend several strategies for utilizing auxiliary parallel data in building domain-specific NMT models for LRLs.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2412.19522.pdf"
+    }
+  ]
+}

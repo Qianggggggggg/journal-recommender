@@ -1,0 +1,14 @@
+{
+  "journal_id": "neuralnetworks",
+  "journal_name": "Neural Networks",
+  "papers": [
+    {
+      "title": "Conformable Fractional Gradient Descent: A Local Optimizer for Neural Network Training",
+      "abstract": "This paper proposes Conformable Fractional Gradient Descent (CFGD) for neural network training. CFGD is local and avoids the history-dependent cost of Caputo and Riemann-Liouville methods. It rescales the current gradient using a conformable factor. We study constant-order CFGD and a variable-order version with αk↑1 for stability. We test the methods on oscillatory function approximation using a one-hidden-layer tanh network. CFGD improves accuracy over standard gradient descent and a Caputo-based baseline. Its per-iteration cost is comparable to gradient descent. The variable-order scheme further improves stability and reduces error.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.neunet.2026.108656",
+      "url": ""
+    }
+  ]
+}

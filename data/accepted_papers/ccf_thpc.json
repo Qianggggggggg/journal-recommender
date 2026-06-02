@@ -1,0 +1,14 @@
+{
+  "journal_id": "ccf_thpc",
+  "journal_name": "CCF Transactions on High Performance Computing",
+  "papers": [
+    {
+      "title": "Trade-off topology design for hierarchical network based on job characteristics",
+      "abstract": "Supercomputers rely on the job scheduling and resource management (JSRM) system to allocate compute nodes for jobs. To reduce the job's communication overhead, the JSRM system relies on its detailed internal topology design to allocate closely-connected compute nodes. However, over-complicated topology designs are laborious for the JSRM system to parse, causing excessive scheduling overheads. The optimal node allocation and scheduling overhead cannot be reconciled, especially in ultra-scale supercomputers with increasingly sophisticated network topology. We perform a study on the production supercomputer with a two-dimensional fat-tree network, systematically analyze the underlying correlation among the node allocation, topology design and job characteristics, and present multiple trade-off designs to adapt to different scenarios. Our methods and insights about the topology design can be generalized to a large family of different topologies or even deployed directly in the systems using similar hierarchical networks. We propose three topology design guidelines based on the load of JSRM system, job size and communication characteristic, achieving a trade-off between the communication cost and the scheduling overhead. This study reveals that full topology details are not always necessary and a holistic investigation of the system and job characteristics is required when designing the topology.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s42514-024-00193-z",
+      "url": ""
+    }
+  ]
+}

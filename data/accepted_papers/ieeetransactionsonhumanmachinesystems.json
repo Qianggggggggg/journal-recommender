@@ -1,0 +1,14 @@
+{
+  "journal_id": "ieeetransactionsonhumanmachinesystems",
+  "journal_name": "IEEE Transactions on Human-Machine Systems",
+  "papers": [
+    {
+      "title": "Why Highly Reliable Decision Support Systems Often Lead to Suboptimal Performance and What We Can Do About it",
+      "abstract": "In a growing number of application domains, human decision-making is being supported by automated systems. While previous research has focused extensively on the negative consequences of automation support in terms of an overuse of such systems, we argue that this focus has largely overlooked another crucial issue: Humans often deteriorate the performance of automation. Specifically, human–automation dyads commonly perform worse than the system alone because humans, in an attempt to improve decisions, unfortunately interfere with correct system recommendations. This problem will only grow as systems based on artificial intelligence (AI) become more reliable and the gap between human-only and system-only performance continues to widen. We therefore outline the need for research that addresses this persisting and increasingly relevant issue. One approach to counteract this problem is to make systems more transparent and give humans more information on the system. However, while numerous explainability approaches have been brought forward, only very few show convincing effects. To be truly useful, we argue that systems need to be explainable in terms of effective behavioral guidance. Furthermore, beyond just thinking about how to enable humans to better adapt to the system (as is the case with explainability approaches), systems should be more human-centric, taking into account human strengths and weaknesses, and ultimately adapting to humans to enable synergy between humans and AI.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/THMS.2025.3572732",
+      "url": ""
+    }
+  ]
+}

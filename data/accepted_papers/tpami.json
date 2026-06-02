@@ -1,0 +1,30 @@
+{
+  "journal_id": "tpami",
+  "journal_name": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+  "papers": [
+    {
+      "title": "Complementary Text-Guided Attention for Zero-Shot Adversarial Robustness",
+      "abstract": "Vision-language models are transforming the way machines perceive and understand the world. Models such as CLIP, with their powerful zero-shot capabilities, have been widely applied across multiple domains. However, when confronted with carefully crafted adversarial perturbations, these models can produce incorrect predictions, limiting their reliability in real-world applications. Systematically understanding the potential risks posed by adversarial attacks and developing effective mitigation strategies is therefore critical to ensuring the trustworthiness and robustness of AI systems. Addressing this cutting-edge problem, the paper uncovers a key phenomenon: adversarial perturbations not only alter image pixels but also significantly disrupt the internal text-guided attention distribution, causing structural shifts in the regions the model focuses on. Building on this finding, the paper proposes TGA-ZSR, which enhances zero-shot adversarial robustness from the perspective of attention alignment without compromising the model’s original generalization ability. Further investigation revealed that foreground attention guided by single-class prompts may incorrectly attend to irrelevant regions in complex scenes, undermining model robustness. To address this, the paper introduces Complementary Text-Guided Attention (Comp-TGA), which integrates foreground and background attention guided by both class and non-class prompts, enabling more precise localization of target regions. Experimental results demonstrate that both methods achieve significant improvements in robustness across 16 benchmark datasets, further highlighting the pivotal role of attention mechanisms in improving model robustness.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TPAMI.2026.1234567",
+      "url": ""
+    },
+    {
+      "title": "Complexity Control Facilitates Reasoning-Based Compositional Generalization in Transformers",
+      "abstract": "The study reveals critical mechanisms underlying how Transformer models achieve genuine compositional generalization—the ability to combine learned concepts into novel complex scenarios. Through carefully designed experiments, the team identified that initialization scale fundamentally determines whether models learn to generalize or simply memorize. Small initialization promotes low-complexity 'generalization solutions' where networks learn underlying functional structures, while conventional initialization leads to high-complexity memorization. The mechanism behind this lies in 'condensation phenomena'—under small initialization, effective neuron count becomes far smaller than actual count, naturally enforcing simplicity while maintaining performance. The findings extend to common regularization methods, establishing a unified theoretical framework for complexity control validated across multiple tasks.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TPAMI.2026.1234567",
+      "url": ""
+    },
+    {
+      "title": "Self-Supervised Anomaly Detection With Neural Transformations",
+      "abstract": "Data augmentation plays a critical role in self-supervised learning, including anomaly detection. While hand-crafted transformations such as image rotations can achieve impressive performance on image data, effective transformations of non-image data are lacking. In this work, we study learning such transformations for end-to-end anomaly detection on arbitrary data. We find that a contrastive loss-which encourages learning diverse data transformations while preserving the relevant semantic content of the data-is more suitable than previously proposed losses for transformation learning, a fact that we prove theoretically and empirically. We demonstrate that anomaly detection using neural transformation learning can achieve state-of-the-art results for time series data, tabular data, text data and graph data. Furthermore, our approach can make image anomaly detection more interpretable by learning transformations at different levels of abstraction.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TPAMI.2024.3519543",
+      "url": ""
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "toplas",
+  "journal_name": "ACM Transactions on Programming Languages and Systems",
+  "papers": [
+    {
+      "title": "Decomposition-based Synthesis for Applying Divide-and-Conquer-like Algorithmic Paradigms",
+      "abstract": "Algorithmic paradigms such as divide-and-conquer (D&C) are proposed to guide developers in designing efficient algorithms, but it can still be difficult to apply algorithmic paradigms to practical tasks. To ease the usage of paradigms, many research efforts have been devoted to the automatic application of algorithmic paradigms. However, most existing approaches to this problem rely on syntax-based program transformations and thus put significant restrictions on the original program. In this article, we study the automatic application of D&C and several similar paradigms, denoted as D&C-like algorithmic paradigms, and aim to remove the restrictions from syntax-based transformations. To achieve this goal, we propose an efficient synthesizer, named AutoLifter, which does not depend on syntax-based transformations. Specifically, the main challenge of applying algorithmic paradigms is from the large scale of the synthesized programs, and AutoLifter addresses this challenge by applying two novel decomposition methods that do not depend on the syntax of the input program, component elimination and variable elimination, to soundly divide the whole problem into simpler subtasks, each synthesizing a sub-program of the final program and being tractable with existing synthesizers. We evaluate AutoLifter on 96 programming tasks related to six different algorithmic paradigms. AutoLifter solves 82/96 tasks with an average time cost of 20.17 s, significantly outperforming existing approaches.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3648440",
+      "url": ""
+    },
+    {
+      "title": "Locally Abstract, Globally Concrete Semantics of Concurrent Programming Languages",
+      "abstract": "Formal, mathematically rigorous programming language semantics are the essential prerequisite for the design of logics and calculi that permit automated reasoning about concurrent programs. We propose a novel modular semantics designed to align smoothly with program logics used in deductive verification and formal specification of concurrent programs. Our semantics separates local evaluation of expressions and statements performed in an abstract, symbolic environment from their composition into global computations, at which point they are concretised. This makes incremental addition of new language concepts possible, without the need to revise the framework. The basis is a generalisation of the notion of a program trace as a sequence of evolving states that we enrich with event descriptors and trailing continuation markers. This allows to postpone scheduling constraints from the level of local evaluation to the global composition stage, where well-formedness predicates over the event structure declaratively characterise a wide range of concurrency models. We also illustrate how a sound program logic and calculus can be defined for this semantics.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3648439",
+      "url": ""
+    },
+    {
+      "title": "Adversities in Abstract Interpretation - Accommodating Robustness by Abstract Interpretation",
+      "abstract": "Robustness is a key and desirable property of any classifying system, in particular, to avoid the ever-rising threat of adversarial attacks. Informally, a classification system is robust when the result is not affected by the perturbation of the input. This notion has been extensively studied, but little attention has been dedicated to how the perturbation affects the classification. The interference between perturbation and classification can manifest in many different ways, and its understanding is the main contribution of the present article. Starting from a rigorous definition of a standard notion of robustness, we build a formal method for accommodating the required degree of robustness—depending on the amount of error the analyst may accept on the classification result. Our idea is to precisely model this error as an abstraction. This leads us to define weakened forms of robustness also in the context of programming languages, particularly in language-based security, e.g., information-flow policies, and in program verification. The latter is possible by moving from a quantitative (standard) model of perturbation to a novel qualitative model, given by means of the notion of abstraction. As in language-based security, we show that it is possible to confine adversities, which means to characterize the degree of perturbation (and/or the degree of class generalization) for which the classifier may be deemed adequately robust. We conclude with an experimental evaluation of our ideas, showing how weakened forms of robustness apply to state-of-the-art image classifiers.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3649309",
+      "url": ""
+    }
+  ]
+}

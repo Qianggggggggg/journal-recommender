@@ -1,0 +1,14 @@
+{
+  "journal_id": "ijhci",
+  "journal_name": "International Journal of Human-Computer Interaction",
+  "papers": [
+    {
+      "title": "Ironies of Generative AI: Understanding and Mitigating Productivity Loss in Human-AI Interaction",
+      "abstract": "Generative AI (GenAI) systems offer opportunities to increase user productivity in many tasks, such as programming and writing. However, while they boost productivity in some studies, research from related fields suggests that their integration into work may sometimes decrease productivity. This paradox is what we term the ironies of generative AI. Drawing on decades of research from human-computer interaction, computer-supported cooperative work, and science and technology studies, we argue that these ironies are not unexpected failures but rather predictable outcomes of how AI systems are designed and integrated into work practices. We draw on this extensive research alongside recent GenAI user studies to outline four key reasons for productivity loss with GenAI systems: a shift in users' roles from production to evaluation, unhelpful restructuring of workflows, interruptions that disrupt cognitive flow, and the introduction of new error types that require additional verification effort. For each irony, we identify specific design choices that contribute to the problem and propose mitigation strategies. We conclude by discussing how these insights can inform the design of future AI systems that truly enhance rather than hinder human productivity.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1080/10447318.2024.2432776",
+      "url": ""
+    }
+  ]
+}

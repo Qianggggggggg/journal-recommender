@@ -1,0 +1,14 @@
+{
+  "journal_id": "iet_ipr",
+  "journal_name": "IET Image Processing",
+  "papers": [
+    {
+      "title": "Research on a multi‐scale degradation fusion network in all‐in‐one image restoration",
+      "abstract": "Image restoration aims to recover high‐quality clean images from degraded low‐quality ones. Deep learning‐based approaches have been a focal point in the field of image restoration. However, most methods focus solely on a single type of degradation and may not extend well to real‐world scenarios with unknown degradation. For this purpose, the present study introduces an all‐in‐one image restoration approach by designing a multi‐scale feature fusion UNet structure (MdfUNet). In summary, the proposed method exhibits two significant advantages. For starters, it implicitly fuses degradation information across multiple scales, enabling the network to extract rich hierarchical features and enhancing its generalization ability towards unknown degradations. Secondly, MdfUnet possesses strong image reconstruction capabilities. It utilizes a simple non‐linear feature optimizer to enhance skip connections, providing rich feature representations for the image reconstruction process, and ultimately generating high‐quality restored images. Extensive experimental results show the proposed method outperforms multiple baselines on deraining, dehazing, and denoising datasets.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1049/ipr2.13237",
+      "url": ""
+    }
+  ]
+}

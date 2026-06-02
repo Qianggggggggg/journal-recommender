@@ -1,0 +1,14 @@
+{
+  "journal_id": "ijseke",
+  "journal_name": "International Journal of Software Engineering and Knowledge Engineering",
+  "papers": [
+    {
+      "title": "Knowledge Management Strategies and Processes in Agile Software Development: A Systematic Literature Review",
+      "abstract": "Knowledge-intensive companies that adopt Agile Software Development (ASD) rely on efficient implementation of Knowledge Management (KM) strategies to promote different Knowledge Processes (KPs) to gain competitive advantage. This study aims to explore how companies that adopt ASD implement KM strategies utilizing practices that promote the KPs in the different organizational layers. Through a systematic literature review, we analyzed 32 primary studies, selected by automated search and snowballing in the extant literature. To analyze the data, we applied narrative synthesis. Most of the identified KM practices implement personalization strategies (81%), supported by codification (19%). Our review shows that the primary studies do not report KM practices in the strategic layer and two of them in the product portfolio layer; on the other hand, in the project layer, the studies report 33 practices that implement personalization strategy, and seven practices that implement codification. KM strategies in ASD promote mainly the knowledge transfer process with practices that stimulates social interaction to share tacit knowledge in the project layer. As a result of using informal communication, a significant amount of knowledge can be lost or not properly transferred to other individuals and, instead of propagating the knowledge, it remains inside a few individuals’ minds.",
+      "year": 2018,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/1807.04962.pdf"
+    }
+  ]
+}
