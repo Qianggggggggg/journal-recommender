@@ -1,0 +1,30 @@
+{
+  "journal_id": "ieeetransactionsonhumanmachinesystems",
+  "journal_name": "IEEE Transactions on Human-Machine Systems",
+  "papers": [
+    {
+      "title": "2020 Index IEEE Transactions on Human-Machine Systems Vol. 50",
+      "abstract": "This index covers all technical items—papers, correspondence, reviews, etc.—that appeared in this periodical during 2020, and items from previous years that were commented upon or corrected in 2020. Departments and other items may also be covered if they have been judged to have archival value. The Author Index contains the primary entry for each item, listed under the first author’s name. The primary entry includes the coauthors’ names, the title of the paper or other item, and its location, specified by the publication abbreviation, year, month, and inclusive pagination. The Subject Index contains entries describing the item under all appropriate subject headings, plus the first author’s name, the publication abbreviation, month, and year, and inclusive pages. Note that the item title is found only under the primary entry in the Author Index.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/thms.2020.3033957",
+      "url": "https://www.semanticscholar.org/paper/0c0e24fd954004f492afd125614c860231ff4ce4"
+    },
+    {
+      "title": "Machine Learning for Human–Machine Systems With Advanced Persistent Threats",
+      "abstract": "This article conducts a thorough exploration of the implications of machine learning (ML) in conjunction with human–machine systems within the military domain. It scrutinizes the strategic development efforts of ML by pertinent institutions, particularly in the context of military applications and the domain of advanced persistent threats. Prominent nations have delineated a technical trajectory for the integration of ML into their military frameworks. To bolster the structure and efficacy of their various military branches and units, there has been a concentrated deployment of numerous ML research endeavors. These initiatives encompass the study of sophisticated ML algorithms and the acceleration of artificial intelligence technology adaptation for intelligence processing, autonomous platforms, command and control infrastructures, and weapons systems. Forces across the globe are actively embedding ML technologies into a range of platforms-terrestrial, naval, aerial, space-faring, and cybernetic. This integration spans weaponry, networks, cognitive operations, and additional systems. Furthermore, this article reviews the incorporation within the sphere of military human–machine interaction in the Russia–Ukraine conflict. In this war, cyber human–machine interaction has become a pivotal arena of contention between Russia and Ukraine, with key levers that influence the conflict's course. In addition, the article examines the adoption of ML in prospective military functions such as, operations, intelligence gathering, networking, logistics, identification protocols, healthcare, data analysis trends, and other critical areas marked by current developments and trajectories. It also proffers a series of recommendations for the future integration of ML to inform strategic direction and research.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/THMS.2024.3439625",
+      "url": "https://www.semanticscholar.org/paper/13ed8126f80e330f198837fdbcd1ae7e35f0cc05"
+    },
+    {
+      "title": "Multiobjective Control Design for Human–Machine Systems With Safety Performance Constraints",
+      "abstract": "This article studies the problem of multiobjective control design for a class of human–machine systems (HMSs) with safety performance constraints containing state constraints and input constraints. The HMSs under consideration not only monitor the human but also need to take proper actions to both the human and machine. A model of controlled hidden Markov jump system (CHMJS) is applied to represent the HMSs. Based on the CHMJS model, a sufficient condition for the practical mean square stability of the unconstrained HMSs is first derived using a stochastic Lyapunov functional. A sufficient condition for ensuring the safety performance constraints of the HMSs is also deduced by employing reachability analysis and set invariance theory. Subsequently, a bilinear matrix inequality-based control design is presented to guarantee both the practical mean square stability and safety performance constraints of the HMSs. A multiobjective optimization problem (MOP) is then formulated to determine a feedback controller for the human and a human-assistance controller for the machine such that both the practical mean square stability and safety performance constraints as well as the less human intervention can be satisfied. An algorithm that mixes the multiobjective particle swarm optimization and linear matrix inequality technique is developed to solve this MOP. Finally, a lane departure example is given to illustrate its effectiveness.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/thms.2021.3116123",
+      "url": "https://www.semanticscholar.org/paper/c1b8c2fc23778e2c6b4f6ff787415c58d0d62d0f"
+    }
+  ]
+}

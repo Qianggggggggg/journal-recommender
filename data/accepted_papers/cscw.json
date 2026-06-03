@@ -1,0 +1,14 @@
+{
+  "journal_id": "cscw",
+  "journal_name": "Computer Supported Cooperative Work",
+  "papers": [
+    {
+      "title": "Examining Discursive Features in Crowdsourced Deliberation: Idea Generation through Elaboration",
+      "abstract": "Civic technologies such as participatory budgeting and crowdsourced policymaking increasingly provide spaces for crowdsourced deliberation, an asynchronous, distributed, and self-selected form of deliberation. To understand the dynamics of crowdsourced deliberation, we examined deliberative quality, dis/agreement, and elaboration (rationale-sharing), and their association with idea generation in crowdsourced deliberation within a crowdsourced policymaking process led by a national government. The deliberative quality of the crowdsourced deliberation was high and positively associated with idea generation. Elaboration of perspectives was a key feature contributing to idea generation. We present considerations for the design of processes and platforms used in civic technologies to foster high deliberative quality, elaboration, and a balance of disagreement and agreement, which in turn can support idea generation in crowdsourced deliberation.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10606-025-09535-z",
+      "url": "https://www.semanticscholar.org/paper/ed498fb2f5fe941e6bda5dd9c047c9ba4b5b5ce8"
+    }
+  ]
+}

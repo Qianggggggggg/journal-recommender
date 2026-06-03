@@ -1,0 +1,30 @@
+{
+  "journal_id": "tcps",
+  "journal_name": "ACM Transactions on Cyber-Physical Systems",
+  "papers": [
+    {
+      "title": "Autonomous and Adaptive Cyber Incident Detection and Response in Industrial Cyber-Physical Systems Using Hierarchical Reinforcement Learning",
+      "abstract": "Cyber-Physical Systems (CPSs) are the backbone of many critical infrastructures. However, they have introduced an uncharted territory of security vulnerabilities and attack vectors, mainly due to the deeply integrated physical and cyber spaces. Moreover, in industrial CPS settings, network openness exposes the system to the outside world and renders it vulnerable to cyber threats. The security of industrial CPS significantly relies on the cyber incident detection and response systems which are fundamental to ensure the continuous and proper operation of cyber-physical processes. Among the key configuration parameters of these defense systems is the detection threshold. However, finding the optimal threshold that strikes the right balance between missed detection and false-positive rates remains a challenging problem. In this article, we propose a novel approach that leverages a Hierarchical Reinforcement Learning (HRL) architecture to autonomously detect the dynamic instability in an industrial CPS network and respond by adapting the cyber incident detection and response threshold range to minimize the effects of possible incidents. We developed and tested four HRL algorithmic variants, each offering potential avenues for optimization with its own strengths and limitations. Our agents dynamically select these ranges by assessing the expected risk and potential damage over time. In addition, the agent’s selection process aims to minimize false positives and reduce the cost associated with changing the selected range. All four algorithmic adaptations show the effectiveness of HRL for designing adaptive cyber-physical defense compared to static approaches. Our experimental results indicate that our proposed technique is effective for building autonomous cyber incident detection systems in industrial CPS.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3765622",
+      "url": "https://www.semanticscholar.org/paper/13bed62fb41e2f511bf4be28268db5629ed0db1a"
+    },
+    {
+      "title": "PerceptiSync: Trustworthy Object Detection using Crowds-in-the-Loop for Cyber-Physical Systems",
+      "abstract": "Establishing reliable object detection in distributed environments is challenging, particularly when trust depends on results from multiple computer vision systems. In this manuscript, we introduce PerceptiSync, a novel and trustworthy Embodied-AI (EAI) framework. It is designed for shared perception across distributed Cyber-Physical Systems (CPS) that utilize object detection. This includes applications in Connected Autonomous Vehicles, drone swarms, and CCTV camera networks. PerceptiSync is designed around a Crowds-in-the-Loop (CITL) concept to enhance system reliability by incorporating four individual user configurations and the Dirichlet-Categorical trust model. PerceptiSync undergoes a two-stage evaluation. First, it is assessed using a benchmark Computer Vision (CV) dataset to track performance over time. Second, it is tested with integrated user configurations to evaluate trust accuracy and mitigation capabilities against false positives. The results show that PerceptiSync outperforms existing AI-only trust frameworks, achieving a higher mean Kendall’s Tau coefficient of 0.228 compared to 0.051, demonstrating successful performance over time.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3746644",
+      "url": "https://www.semanticscholar.org/paper/30b3c2dd6d0182de46681c7eb5c89b2d53ffd119"
+    },
+    {
+      "title": "Generative Vulnerability Assessment for Cyber-Physical Systems",
+      "abstract": "Cyber-physical systems (CPS) are highly susceptible to malicious attacks due to their complex dynamics and interconnectivity. A comprehensive understanding of their vulnerabilities is essential for designing effective resilience measures. This article presents a data-driven attack generative system for evaluating the vulnerability of CPS. The proposed approach formulates the vulnerability assessment problem as determining the feasibility of a specific attack set based on two boundary functions that represent the effectiveness and stealthiness of attacks. The attack generative model is trained using a custom loss function, with two universal approximators designed to learn the effectiveness and stealthiness functions simultaneously. Theoretical results for successful generation and asymptotic convergence of the resulting training algorithm are given. The proposed approach is evaluated via numerical simulation of an IEEE 14-bus system and gas pipeline systems, demonstrating its viability in learning how to attack nonlinear CPS and identify potential vulnerabilities.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3776543",
+      "url": "https://www.semanticscholar.org/paper/33b7d092bdc2f4d06b0c18763dbaa1cbf33bfbbb"
+    }
+  ]
+}

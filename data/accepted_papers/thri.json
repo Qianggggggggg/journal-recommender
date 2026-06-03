@@ -1,0 +1,30 @@
+{
+  "journal_id": "thri",
+  "journal_name": "ACM Transactions on Human-Robot Interaction",
+  "papers": [
+    {
+      "title": "Trust(worthiness) Issues with Trust in Human-Robot Interaction",
+      "abstract": "Trust is a very popular concept in human-robot interaction (HRI) to explain why and how people interact with robots. However, the definition of trust and the methods used to study the concept vary widely, often leading to confusion instead of insight. In this position paper, we discuss possible reasons for the confusion and disagreement by reviewing theory and methods. Our main criticism is that HRI researchers have recently taken an oversimplified approach by not adhering to the process model of trust. Instead, we have primarily measured perceived trustworthiness (often as a proxy for trust) and assumed that it accurately predicts behavior or is satisfactory as an end goal. In addition, many experimental paradigms fail to account for the critical elements of risk and vulnerability that are essential for trust to guide behavior. With this position paper, we aim to shed light on these ”trust issues” in HRI and to improve the HRI community’s approach by providing suggestions for enhancing the quality of future research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3778865",
+      "url": "https://www.semanticscholar.org/paper/96318221a9159563ed387013643bd3a5a77e1c3d"
+    },
+    {
+      "title": "DiG-Net: Enhancing Human–Robot Interaction through Hyper-Range Dynamic Gesture Recognition in Assistive Robotics",
+      "abstract": "Dynamic hand gestures play a pivotal role in assistive human-robot interaction (HRI), facilitating intuitive, non-verbal communication, particularly for individuals with mobility constraints or those operating robots remotely. Current gesture recognition methods are mostly limited to short-range interactions, reducing their utility in scenarios demanding robust assistive communication from afar. In this paper, we present DiG-Net, the first dynamic gesture recognition framework enabling robust operation at hyper-range distances of up to 30 meters, specifically designed for assistive robotics to enhance accessibility and improve quality of life. Our proposed Distance-aware Gesture Network (DiG-Net) effectively combines Depth-Conditioned Deformable Alignment (DADA) blocks with Spatio-Temporal Graph modules, enabling robust processing and classification of gesture sequences captured under challenging conditions, including significant physical attenuation, reduced resolution, and dynamic gesture variations commonly experienced in real-world assistive environments. We further introduce the Radiometric Spatio‐Temporal Depth Attenuation Loss (RSTDAL), shown to enhance learning and strengthen model robustness across varying distances. Our model demonstrates significant performance improvement over state-of-the-art gesture recognition frameworks, achieving a recognition accuracy of 97.3% on a diverse dataset with challenging hyper-range gestures. By effectively interpreting gestures from considerable distances, DiG-Net significantly enhances the usability of assistive robots in home healthcare, industrial safety, and remote assistance scenarios, enabling seamless and intuitive interactions for users regardless of physical limitations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3803864",
+      "url": "https://www.semanticscholar.org/paper/2f47926d0dd720dd204e2548dbf9b19e0140ef6d"
+    },
+    {
+      "title": "Influence-Based Reward Modulation for Implicit Communication in Human-Robot Interaction",
+      "abstract": "Communication is essential for successful interaction. In human-robot interaction, implicit communication holds the potential to enhance robots’ understanding of human needs, emotions, and intentions. This paper introduces a method to foster implicit communication in HRI without explicitly modelling human intentions or relying on pre-existing knowledge. Leveraging Transfer Entropy, we modulate influence between agents in social interactions in scenarios involving either collaboration or competition. By integrating influence into agents’ rewards within a partially observable Markov decision process, we demonstrate that boosting influence enhances collaboration and interaction, while resisting influence promotes social independence and diminishes performance in certain scenarios. Our findings are validated through simulations and real-world experiments with human participants in social navigation and autonomous driving settings.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3800955",
+      "url": "https://www.semanticscholar.org/paper/1245d16efe297d0f3fc270fa7ee4773272c9af56"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "scis",
+  "journal_name": "Science China Information Sciences",
+  "papers": [
+    {
+      "title": "Two-dimensional materials for future information technology: status and prospects",
+      "abstract": "Over the past 70 years, the semiconductor industry has undergone transformative changes, largely driven by the miniaturization of devices and the integration of innovative structures and materials. Two-dimensional (2D) materials like transition metal dichalcogenides (TMDs) and graphene are pivotal in overcoming the limitations of silicon-based technologies, offering innovative approaches in transistor design and functionality, enabling atomic-thin channel transistors and monolithic 3D integration. We review the important progress in the application of 2D materials in future information technology, focusing in particular on microelectronics and optoelectronics. We comprehensively summarize the key advancements across material production, characterization metrology, electronic devices, optoelectronic devices, and heterogeneous integration on silicon. A strategic roadmap and key challenges for the transition of 2D materials from basic research to industrial development are outlined. To facilitate such a transition, key technologies and tools dedicated to 2D materials must be developed to meet industrial standards, and the employment of AI in material growth, characterizations, and circuit design will be essential. It is time for academia to actively engage with industry to drive the next 10 years of 2D material research.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11432-024-4033-8",
+      "url": "https://www.semanticscholar.org/paper/67af16327ffbd6039b06a7040e49efb2b2df221f"
+    },
+    {
+      "title": "Distributed satellite information networks: architecture, enabling technologies, and trends",
+      "abstract": "Driven by the vision of ubiquitous connectivity and wireless intelligence, the evolution of ultra-dense constellation-based satellite-integrated Internet is underway, now taking preliminary shape. Nevertheless, the entrenched institutional silos and limited, nonrenewable heterogeneous network resources leave current satellite systems struggling to accommodate the escalating demands of next-generation intelligent applications. In this context, the distributed satellite information networks (DSIN), exemplified by the cohesive clustered satellites (CCS) system, have emerged as an innovative architecture, bridging information gaps across diverse satellite systems, such as communication, navigation, and remote sensing, and establishing a unified, open information network paradigm to support resilient space information services. This survey first provides a profound discussion about innovative network architectures of DSIN, encompassing distributed regenerative satellite network architecture, distributed satellite computing network architecture, and reconfigurable satellite formation flying, to enable flexible and scalable communication, computing and control, fundamentally enhancing network resilience. The DSIN faces challenges from network heterogeneity, unpredictable channel dynamics, sparse resources, and decentralized collaboration frameworks. To address these issues, a series of enabling technologies is identified, including channel modeling and estimation, cloud-native distributed MIMO cooperation, new waveform design, grant-free massive access, nonorthogonal multicast, distributed phased array antennas, high-speed inter-satellite communication, network routing, and the proper combination of all these diversity techniques. Furthermore, to heighten the overall resource efficiency, the cross-layer optimization techniques are further developed to meet upper-layer deterministic, adaptive and secure information services requirements. In addition, emerging research directions and new opportunities are highlighted on the way to achieving the DSIN vision.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11432-024-4408-1",
+      "url": "https://www.semanticscholar.org/paper/a3ed9876b782beefb20b3c78c5b78d99863b4fcf"
+    },
+    {
+      "title": "How far are we to GPT-4V? Closing the gap to commercial multimodal models with open-source suites",
+      "abstract": "In this paper, we introduce InternVL 1.5, an open-source multimodal large language model (MLLM) to bridge the capability gap between open-source and proprietary commercial models in multimodal understanding. We introduce three simple improvements. (1) Strong vision encoder: we explored a continuous learning strategy for the large-scale vision foundation model — InternViT-6B, boosting its visual understanding capabilities, and making it can be transferred and reused in different LLMs. (2) Dynamic high-resolution: we divide images into tiles ranging from 1 to 40 of 448×448 pixels according to the aspect ratio and resolution of the input images, which supports up to 4K resolution input. (3) High-quality bilingual dataset: we carefully collected a high-quality bilingual dataset that covers common scenes, document images, and annotated them with English and Chinese question-answer pairs, significantly enhancing performance in optical character recognition (OCR) and Chinese-related tasks. We evaluate InternVL 1.5 through a series of benchmarks and comparative studies. Compared to both open-source and proprietary commercial models, InternVL 1.5 shows competitive performance, achieving state-of-the-art results in 8 of 18 multimodal benchmarks. Code and models are available at https://github.com/OpenGVLab/InternVL.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11432-024-4231-5",
+      "url": "https://www.semanticscholar.org/paper/887306ee7ebd9eebd7faea24106ec8e8f1a50987"
+    }
+  ]
+}

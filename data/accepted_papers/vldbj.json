@@ -1,0 +1,30 @@
+{
+  "journal_id": "vldbj",
+  "journal_name": "The VLDB Journal",
+  "papers": [
+    {
+      "title": "Hu-Fu: efficient and secure spatial queries over data federation",
+      "abstract": "Data isolation has become an obstacle to scale up query processing over big data, since sharing raw data among data owners is often prohibitive due to security concerns. A promising solution is to perform secure queries over a federation of multiple data owners leveraging secure multi-party computation (SMC) techniques, as evidenced by recent federation studies on relational data. However, existing solutions are highly inefficient on spatial queries due to excessive secure distance operations for query processing and their usage of general-purpose SMC libraries for secure operation implementation. In this paper, we propose Hu-Fu, the first system for efficient and secure spatial query processing on a data federation. Hu-Fu seamlessly supports five mainstream spatial queries at scale, while ensuring both data and query privacy (i.e., sensitive spatial information of data owners and query users). The idea is to decompose the secure processing of a spatial query into as many plaintext operations and as few secure operations as possible, where fewer secure operators are involved and all of them are implemented dedicatedly. As a working system, Hu-Fu supports not only query input in native SQL, but also heterogeneous spatial databases (e.g., PostGIS, GeoMesa, and SpatialHadoop) at the backend. Extensive experiments show that Hu-Fu usually outperforms the state-of-the-arts in running time and communication cost while guaranteeing security.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00778-024-00896-3",
+      "url": "https://www.semanticscholar.org/paper/ef51d20936fac828d93406167e590b72d850b1c7"
+    },
+    {
+      "title": "VUS: effective and efficient accuracy measures for time-series anomaly detection",
+      "abstract": "Anomaly detection (AD) is a fundamental task for time-series analytics with important implications for the downstream performance of many applications. In contrast to other domains where AD mainly focuses on point-based anomalies (i.e., outliers in standalone observations), AD for time series is also concerned with range-based anomalies (i.e., outliers spanning multiple observations). Nevertheless, it is common to use traditional point-based information retrieval measures, such as Precision, Recall, and F-score, to assess the quality of methods by thresholding the anomaly score to mark each point as an anomaly or not. However, mapping discrete labels into continuous data introduces unavoidable shortcomings, complicating the evaluation of range-based anomalies. Notably, the choice of evaluation measure may significantly bias the experimental outcome. Despite over six decades of attention, there has never been a large-scale systematic quantitative and qualitative analysis of time-series AD evaluation measures. This paper extensively evaluates quality measures for time-series AD to assess their robustness under noise, misalignments, and different anomaly cardinality ratios. Our results indicate that measures producing quality values independently of a threshold (i.e., AUC-ROC and AUC-PR) are more suitable for time-series AD. Motivated by this observation, we first extend the AUC-based measures to account for range-based anomalies. Then, we introduce a new family of parameter-free and threshold-independent measures, volume under the surface (VUS), to evaluate methods while varying parameters. We also introduce two optimized implementations for VUS that reduce significantly the execution time of the initial implementation. Our findings demonstrate that our four measures are significantly more robust in assessing the quality of time-series AD methods.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00778-025-00907-x",
+      "url": "https://www.semanticscholar.org/paper/a02e79b9e82a9afa056e4126835e86e695f03a6e"
+    },
+    {
+      "title": "How good are multi-dimensional learned indexes? An experimental survey",
+      "abstract": "Efficient indexing is fundamental to managing and analyzing multi-dimensional data. A growing trend is to directly learn the storage layout of multi-dimensional data using simple machine learning models, leading to the concept of Learned Index. Compared to conventional indexing methods that have been used for decades (e.g., kd-tree and R-tree variants), learned indexes have demonstrated empirical advantages in both space and time efficiency on modern architectures. However, there is a lack of comprehensive evaluation across existing multi-dimensional learned indexes under a standardized benchmark, making it challenging to identify the most suitable index for specific data types and query patterns. This gap also hinders the widespread adoption of learned indexes in practical applications. In this paper, we present the first in-depth empirical study to answer the question: how good are multi-dimensional learned indexes? We evaluate ten recently published indexes under a unified experimental framework, which includes standardized implementations, datasets, query workloads, and evaluation metrics. We thoroughly investigate the evaluation results and discuss the findings that may provide insights for future learned index design.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00778-024-00893-6",
+      "url": "https://www.semanticscholar.org/paper/185805d689615f3193d3737691da7a7ed5cd72bd"
+    }
+  ]
+}

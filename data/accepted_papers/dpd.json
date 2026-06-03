@@ -1,0 +1,30 @@
+{
+  "journal_id": "dpd",
+  "journal_name": "Distributed and Parallel Databases",
+  "papers": [
+    {
+      "title": "PatchIndex: exploiting approximate constraints in distributed databases",
+      "abstract": "Cloud data warehouse systems lower the barrier to access data analytics. These applications often lack a database administrator and integrate data from various sources, potentially leading to data not satisfying strict constraints. Automatic schema optimization in self-managing databases is difficult in these environments without prior data cleaning steps. In this paper, we focus on constraint discovery as a subtask of schema optimization. Perfect constraints might not exist in these unclean datasets due to a small set of values violating the constraints. Therefore, we introduce the concept of a generic PatchIndex structure, which handles exceptions to given constraints and enables database systems to define these approximate constraints. We apply the concept to the environment of distributed databases, providing parallel index creation approaches and optimization techniques for parallel queries using PatchIndexes. Furthermore, we describe heuristics for automatic discovery of PatchIndex candidate columns and prove the performance benefit of using PatchIndexes in our evaluation.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-021-07326-1",
+      "url": "https://www.semanticscholar.org/paper/b5aa5f8d048b8419cada7f9bc0e111a8a6d3ad97"
+    },
+    {
+      "title": "Optimization strategies for parallel computation of skylines",
+      "abstract": "Skyline queries are one of the most widely adopted tools for Multi-Criteria Analysis, with applications covering diverse domains, including, e.g., Database Systems, Data Mining, and Decision Making. Skylines indeed offer a useful overview of the most suitable alternatives in a dataset, while discarding all the options that are dominated by (i.e., worse than) others. The intrinsically quadratic complexity associated with skyline computation has pushed researchers to identify strategies for parallelizing the task, particularly by partitioning the dataset at hand. In this paper, after reviewing the main partitioning approaches available in the relevant literature, we propose two orthogonal optimization strategies for reducing the computational overhead, and compare them experimentally in a multi-core environment equipped with PySpark.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-025-07454-y",
+      "url": "https://www.semanticscholar.org/paper/7eab24bdf1869079d237798fa619ebe16bf97152"
+    },
+    {
+      "title": "S3QLRDF: distributed SPARQL query processing using Apache Spark—a comparative performance study",
+      "abstract": "The proliferation of semantic data in the form of Resource Description Framework (RDF) triples demands an efficient, scalable, and distributed storage along with a highly available and fault-tolerant parallel processing strategy. There are three open issues with distributed RDF data management systems that are not well addressed altogether in existing work. First is the querying efficiency, second is that solutions are optimized for certain types of query patterns and don’t necessarily work well for all types, and third is concerned with reducing pre-processing cost. More precisely, the rapid growth of RDF data raises the need for an efficient partitioning strategy over distributed data management systems to improve SPARQL (SPARQL Protocol and RDF Query Language) query performance regardless of its pattern shape with minimized pre-processing time. In distributed RDF systems, both the data and the query processing are highly distributed. On the other hand, SPARQL workloads are dynamic and structurally diverse that can have different degrees of complexity. A complex SPARQL query over a large RDF graph in distributed systems requires combining a lot of distributed pieces of data through join operations. Therefore, designing an efficient data-partitioning schema and join strategy to minimize data transfer is the fundamental challenge in distributed RDF data management systems. In this context, we propose a new relational partitioning schema called Property Table Partitioning (PTP) for RDF data, that further partitions existing Property Table into multiple tables based on distinct properties (comprising of all subjects with non-null values for those distinct properties) in order to minimize input size and number of join operations of a query. This paper proposed a distributed RDF data management system called S3QLRDF, which is built on top of Spark and utilizes SQL to execute SPARQL queries over PTP schema. The experimental analysis with respect to preprocessing costs and query performance, using synthetic and real datasets shows that S3QLRDF outperforms state-of-the-art distributed RDF management systems.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-023-07422-4",
+      "url": "https://www.semanticscholar.org/paper/68cee58a53d152cb19d8a9c4ae54a691e6c9c213"
+    }
+  ]
+}

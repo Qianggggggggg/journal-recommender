@@ -1,0 +1,30 @@
+{
+  "journal_id": "aamas",
+  "journal_name": "Autonomous Agents and Multi-Agent Systems",
+  "papers": [
+    {
+      "title": "Investigating the impact of direct punishment on the emergence of cooperation in multi-agent reinforcement learning systems",
+      "abstract": "Solving the problem of cooperation is fundamentally important for the creation and maintenance of functional societies. Problems of cooperation are omnipresent within human society, with examples ranging from navigating busy road junctions to negotiating treaties. As the use of AI becomes more pervasive throughout society, the need for socially intelligent agents capable of navigating these complex cooperative dilemmas is becoming increasingly evident. Direct punishment is a ubiquitous social mechanism that has been shown to foster the emergence of cooperation in both humans and non-humans. In the natural world, direct punishment is often strongly coupled with partner selection and reputation and used in conjunction with third-party punishment. The interactions between these mechanisms could potentially enhance the emergence of cooperation within populations. However, no previous work has evaluated the learning dynamics and outcomes emerging from multi-agent reinforcement learning populations that combine these mechanisms. This paper addresses this gap. It presents a comprehensive analysis and evaluation of the behaviors and learning dynamics associated with direct punishment, third-party punishment, partner selection, and reputation. Finally, we discuss the implications of using these mechanisms on the design of cooperative AI systems.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-025-09698-5",
+      "url": "https://www.semanticscholar.org/paper/ffb8353dfb48d7a6b1d0c5bda2a9a054cb77713b"
+    },
+    {
+      "title": "Testing BDI-based Multi-Agent Systems using Discrete Event Simulation",
+      "abstract": "Multi-agent systems are designed to deal with open, distributed systems with unpredictable dynamics, which makes them inherently hard to test. The value of using simulation for this purpose is recognized in the literature, although achieving sufficient fidelity (i.e., the degree of similarity between the simulation and the real-world system) remains a challenging task. This is exacerbated when dealing with cognitive agent models, such as the Belief Desire Intention (BDI) model, where the agent codebase is not suitable to run unchanged in simulation environments, thus increasing the reality gap between the deployed and simulated systems. We argue that BDI developers should be able to test in simulation the same specification that will be later deployed, with no surrogate representations. Thus, in this paper, we discuss how the control flow of BDI agents can be mapped onto a Discrete Event Simulation (DES), showing that such integration is possible at different degrees of granularity. We substantiate our claims by producing an open-source prototype integration between two pre-existing tools (JaKtA and Alchemist), showing that it is possible to produce a simulation-based testing environment for distributed BDI} agents, and that different granularities in mapping BDI agents over DESs may lead to different degrees of fidelity.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2602.13878",
+      "url": "https://www.semanticscholar.org/paper/064db39f93420de070ddcae5e3504907697b5a5e"
+    },
+    {
+      "title": "Generating and choosing organisations for multi-agent systems",
+      "abstract": "The design of organisations is a complex and laborious task. It is the subject of recent studies, which define models to automatically perform this task. However, existing models constrain the space of possible solutions by requiring a priori definitions of organisational roles and usually are not suitable for planning resource use. This paper presents GoOrg, a model that uses as input a set of goals and a set of available agents to generate different arrangements of organisational structures made up of synthesised organisational positions. The most distinguishing characteristics of GoOrg are the use of organisational positions instead of roles and that positions are automatically synthesised rather than required as a priori defined inputs. These characteristics facilitate the parametrisation, the use for resource planning and the chance of finding feasible solutions. This paper also introduces two model extensions, which define processes and constraints that illustrate how GoOrg suits different domains. Among aspects that surround an organisation design, this paper discusses models’ input, agents’ abstractions and resource planning.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-023-09623-8",
+      "url": "https://www.semanticscholar.org/paper/7ef46587e6797b2cb4fac28c102fe402a6cbbbee"
+    }
+  ]
+}

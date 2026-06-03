@@ -1,0 +1,30 @@
+{
+  "journal_id": "jiis",
+  "journal_name": "Journal of Intelligent Information Systems",
+  "papers": [
+    {
+      "title": "Advancing diversity in recommender systems: a model for enhancing societal well-being",
+      "abstract": "Abstract Recommender systems are central to digital platforms, where they personalize information flows and influence user engagement. While these mechanisms improve convenience and satisfaction, they increasingly raise concerns about unintended consequences, such as reinforcing echo chambers, amplifying polarized viewpoints, and fostering patterns of overconsumption that resemble addictive behaviors. These effects can contribute to societal challenges, including reduced creativity, weakened critical thinking, and entrenched algorithmic biases. This article introduces an AI-based recommender model that addresses these risks by embedding diversity directly into the recommendation process. The approach incorporates three complementary dimensions of heterogeneity: variation in emotional tone, coverage across distinct content categories, and the balancing of political or ideological perspectives. The recommendation score is recalibrated using a weighted similarity method in which each dimension is assigned explicit parameters, allowing for flexible adjustment between accuracy and exposure to diversity. Experimental evaluations demonstrate that the model increases the variety of recommendations without significantly lowering predictive accuracy or user satisfaction. Compared with baseline approaches, including collaborative filtering, content-based filtering, and diversity-augmented re-ranking methods, the proposed model achieves substantially higher diversity (ILD = 0.60 vs. 0.30–0.50) and coverage (0.80 vs. 0.45–0.70) while maintaining comparable accuracy (MAP = 0.73 vs. 0.72–0.75). By broadening the scope of suggested content, the system fosters discovery of new interests while maintaining user engagement. Beyond performance outcomes, the method aligns with ethical design principles by promoting fairness, offering transparency through interpretable weighting schemes, and supporting autonomy by enabling users to adjust their diversity preferences. The results suggest that recommender systems can simultaneously serve personal relevance and societal well-being when diversity is treated as an integral design objective rather than a secondary constraint.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10844-026-01056-5",
+      "url": "https://openalex.org/W7162671787"
+    },
+    {
+      "title": "FuDGE: Modeling full dynamic graph evolution",
+      "abstract": "Research in neural generative models for dynamic networks is constantly evolving, and sophisticated solutions have been exploited to characterize the long-term evolution of temporal graphs. Despite the efforts in the literature, state-of-the-art models face the problem of handling changes in the graph structure by relying on prior knowledge, compromising the model's flexibility. In this paper, we propose a graph-size invariant probabilistic generative model, named FUDGE, Fully Dynamic Graph Evolution, for predicting the graph evolution through step-wise changes in the graph structure. FUDGE can generate evolving graphs by exploring the whole node space, thus ensuring fast and effective generation. We evaluate FUDGE on real and synthetic benchmark datasets and compare its performance against state-of-the-art competitors. The results demonstrate that our approach offers a competitive advantage in generation and prediction quality compared to existing literature. The code is publicly available at https://github.com/FuDGE2023/fudge.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10844-026-01040-z",
+      "url": "https://openalex.org/W7160055218"
+    },
+    {
+      "title": "Sustainability-aware evaluation metrics for recommender systems",
+      "abstract": "Traditional evaluation metrics for recommender systems such as accuracy, precision, recall, and user satisfaction primarily focus on system performance from a technical or user-centric perspective. These metrics are essential, however, they often overlook broader implications of recommender systems on society and the environment. Sustainability-aware evaluation metrics address this gap by offering a more holistic assessment framework that takes into account long-term impacts and aligns with the United Nations’ Sustainable Development Goals (SDGs). By incorporating environmental, social, and economic dimensions, sustainability-aware metrics enable researchers and practitioners to evaluate how recommender systems influence areas such as resource consumption, social equity, and economic resilience. This broader perspective is crucial as recommender systems increasingly shape consumer behavior, information exposure, and market dynamics. In this article, we discuss basic sustainability-focused evaluation metrics specifically designed for recommender systems. To evaluate their applicability, we present a case study in which these metrics are applied to a real-world product dataset. With this, we highlight their potential to uncover insights that conventional metrics may miss.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10844-026-01045-8",
+      "url": "https://openalex.org/W7155179235"
+    }
+  ]
+}

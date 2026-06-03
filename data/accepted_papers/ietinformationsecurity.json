@@ -1,0 +1,30 @@
+{
+  "journal_id": "ietinformationsecurity",
+  "journal_name": "IET Information Security",
+  "papers": [
+    {
+      "title": "A Systematic Literature Review of Information Security Practices in Higher Education Contexts",
+      "abstract": "Information security in institutions of higher learning is a persistent challenge that requires immediate attention. The plethora of reported information security breaches in higher education institutions (HEIs) corroborates this. This study reviews 358 articles from reputable journals and databases, synthesized following the preferred reporting items for systematic reviews and meta‐analyses framework, to examine the information security practices of HEIs in the last 5 years. This study reveals that information security in HEIs is best advanced through a holistic strategy that integrates adaptive policy frameworks, continuous and context‐specific training, resilient organizational culture, and judicious deployment of technological innovations. While existing approaches have improved compliance and risk mitigation, persistent gaps in implementation, resource allocation, and cultural alignment limit their overall impact. By synthesizing insights from policy, training, cultural, and technological perspectives, this research underscores the need for socio‐technical approaches that recognize human behavior as a pivotal determinant of institutional resilience. Furthermore, the analysis highlights how emerging technologies, such as AI‐driven threat detection and blockchain, can only achieve their transformative potential when embedded within inclusive governance structures and culturally supportive environments. The contribution of this study lies in demonstrating that sustainable cybersecurity in higher education requires a shift from fragmented interventions toward integrated, system‐wide frameworks that harmonize people, processes, and technology. Such an approach not only strengthens protection of academic and research assets but also provides a foundation for long‐term adaptability in the face of evolving cyber threats. The study advances an information security conceptual model and identifies gaps for areas of further research.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1049/ise2/6324508",
+      "url": "https://www.semanticscholar.org/paper/0e59b72ce0099425cf76f58d00c567c9dcaae7c5"
+    },
+    {
+      "title": "Deep Learning for Campus Pedestrian Volume Prediction: A Two‐Stage Approach to Enhancing Information Security",
+      "abstract": "In recent years, the development of advanced smart campus systems, accurately predicting and managing pedestrian volumes in public areas has become a crucial task for enhancing campus safety and information security. This critical task forms the foundation for essential decisions in areas like campus safety, event coordination, and resource allocation and more. University administrations have set higher expectations for accurately forecasting and controlling pedestrian volume in these public areas. However, the distinct spatiotemporal patterns and inherent intricacies of pedestrian volume on campuses, combined with the frequent collection of data as sparse trajectories, make traditional forecasting techniques struggle with both precision and computational efficiency in these areas. To address these challenges, this study introduces a two‐stage algorithmic framework. Furthermore, this research underscores the potential of accurate pedestrian volume forecasts in bolstering campus information security measures. By enabling more strategic deployment of security resources and facilitating informed decision‐making, our model contributes to the creation of safer campus environments. In the first step, we use the geospatial encoding algorithm “Geohash” to transform the sparse trajectory data from the campus into pedestrian volume information for public areas. Subsequently, we introduce the GPVP‐transformer (generalized pedestrian volume prediction transformer), a modified algorithm derived from the transformer’s encoder–decoder structure. In parallel, we compare our approach with traditional statistical methods, machine learning algorithms, and state‐of‐the‐art (SOTA) techniques in time series forecasting as our baseline comparisons. The findings demonstrate the robustness of our model in all evaluation results.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1049/ise2/5895979",
+      "url": "https://www.semanticscholar.org/paper/8ec1869529e53ed88407a618c1603fbf7bfeca27"
+    },
+    {
+      "title": "A Thorough Review of Security in Information‐Centric Networking",
+      "abstract": "The rapid evolution of technology has revealed the limitations of host‐centric or IP address–based networks. To overcome these limitations, a new communication paradigm has emerged: the information‐centric networking (ICN), which focuses on content (data) regardless of its location in the network. This new vision of networking addresses issues such as security and address space limitations inherent in the traditional IP address‐centric paradigm. Unlike its predecessor, ICN is based on content naming rather than IP addresses. ICN offers advantages such as improved quality of service, reduced data delivery time, enhanced data availability, and strengthened security. However, with these benefits come new vulnerabilities, particularly in content naming and caching. It is, therefore, crucial to understand the attacks specific to ICN. In this study, we first present an overview of the two network paradigms and fundamental security concepts, then, examine the various attacks in the ICN paradigm. We propose a taxonomy of these attacks and outline future research directions to address emerging security challenges.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/ise2/5178335",
+      "url": "https://www.semanticscholar.org/paper/b42cd0d813ed0d0682093dc046b6a296d01094f1"
+    }
+  ]
+}

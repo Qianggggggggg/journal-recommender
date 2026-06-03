@@ -1,0 +1,30 @@
+{
+  "journal_id": "parallelcomputing",
+  "journal_name": "Parallel Computing",
+  "papers": [
+    {
+      "title": "Heterogeneous computing",
+      "abstract": "Heterogeneous computing is a set of techniques enabling the use of diverse computational capabilities for the execution of a meta-task [2, 4, 7]. A meta-task is an arbitrary collection of independent (non-communicating) tasks with a variety of computational needs, which are to be executed during a given interval of time (e.g., a day). Some tasks may be decomposable into one or more communicating subtasks (subtasks may, in turn, have diverse computational needs). There are many types of heterogeneous computing systems [2]. This article focuses on mixed-machine systems, where a heterogeneous suite of independent machines is interconnected by high-speed links to function as a meta-computer (see Meta-Computer) or as part of a computational grid (see Computational Grid) [3]. The user of a heterogeneous suite has the illusion of working on a single virtual machine.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.parco.2005.04.001",
+      "url": "https://www.semanticscholar.org/paper/2554e68da210a33718bd13ec89aa1600feb81a89"
+    },
+    {
+      "title": "Parallel and scalable Dunn Index for the validation of big data clusters",
+      "abstract": "Abstract Parallelizing data clustering algorithms has attracted the interest of many researchers over the past few years. Many efficient parallel algorithms were proposed to build partitioning over a huge volume of data. The effectiveness of these algorithms is attributed to the distribution of data among a cluster of nodes and to the parallel computation models. Although the effectiveness of parallel models to deal with increasing volume of data little work is done on the validation of big clusters. To deal with this issue, we propose a parallel and scalable model, referred to as S-DI (Scalable Dunn Index), to compute the Dunn Index measure for an internal validation of clustering results. Rather than computing the Dunn Index on a single machine in the clustering validation process, the new proposed measure is computed by distributing the partitioning among a cluster of nodes using a customized parallel model under Apache Spark framework. The proposed S-DI is also enhanced by a Sketch and Validate sampling technique which aims to approximate the Dunn Index value by using a small representative data-sample. Different experiments on simulated and real datasets showed a good scalability of our proposed measure and a reliable validation compared to other existing measures when handling large scale data.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.parco.2021.102751",
+      "url": "https://www.semanticscholar.org/paper/83c1808e4875488fdabe9e5858fa42b03e1826f4"
+    },
+    {
+      "title": "A survey of software techniques to emulate heterogeneous memory systems in high-performance computing",
+      "abstract": "—Heterogeneous memory will be involved in several upcoming platforms on the way to exascale. Combining technologies such as HBM, DRAM and/or NVDIMM allows to tackle the needs of different applications in terms of bandwidth, latency or capacity. And new memory interconnects such as CXL bring easy ways to attach these technologies to the processors. High-performance computing developers must prepare their runtimes and applications for these architectures, even before they are actually available. Hence, we survey software solutions for emulating them. First, we list many ways to modify the performance of platforms so that developers may test their code under different memory performance profiles. This is required to identify kernels and data buffers that are sensitive to memory performance. Then,wepresent several techniques for exposing fake heterogeneous memory information to the software stack. This is useful for adapting runtimes and applications to heterogeneous memory so that different kinds of memory are detected at runtime and so that buffers are allocated in the appropriate one.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.parco.2023.103023",
+      "url": "https://www.semanticscholar.org/paper/40445416a16166bc1466f99e7921e8511d727764"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "neuralnetworks",
+  "journal_name": "Neural Networks",
+  "papers": [
+    {
+      "title": "Towards parameter-free attentional spiking neural networks",
+      "abstract": "Brain-inspired spiking neural networks (SNNs) are increasingly explored for their potential in spatiotemporal information modeling and energy efficiency on emerging neuromorphic hardware. Recent works incorporate attentional modules into SNNs, greatly enhancing their capabilities in handling sequential data. However, these parameterized attentional modules have placed a huge burden on memory consumption, a factor that is constrained on neuromorphic chips. To address this issue, we propose a parameter-free attention (PfA) mechanism that establishes a parameter-free linear space to bolster feature representation. The proposed PfA approach can be seamlessly integrated into the spiking neuron, resulting in enhanced performance without any increase in parameters. The experimental results on the SHD, BAE-TIDIGITS, SSC, DVS-Gesture, DVS-Cifar10, Cifar10, and Cifar100 datasets well demonstrate its competitive or superior classification accuracy compared with other state-of-the-art models. Furthermore, our model exhibits stronger noise robustness than conventional SNNs and those with parameterized attentional mechanisms. Our codes can be accessible at https://github.com/sunpengfei1122/PfA-SNN.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107154",
+      "url": "https://www.semanticscholar.org/paper/4d3e492deae6d230179172bd1b77d23074483301"
+    },
+    {
+      "title": "Spiking neural networks on FPGA: A survey of methodologies and recent advancements",
+      "abstract": "The mimicry of the biological brain's structure in information processing enables spiking neural networks (SNNs) to exhibit significantly reduced power consumption compared to conventional systems. Consequently, these networks have garnered heightened attention and spurred extensive research endeavors in recent years, proposing various structures to achieve low power consumption, high speed, and improved recognition ability. However, researchers are still in the early stages of developing more efficient neural networks that more closely resemble the biological brain. This development and research require suitable hardware for execution with appropriate capabilities, and field-programmable gate array (FPGA) serves as a highly qualified candidate compared to existing hardware such as central processing unit (CPU) and graphics processing unit (GPU). FPGA, with parallel processing capabilities similar to the brain, lower latency and power consumption, and higher throughput, is highly eligible hardware for assisting in the development of spiking neural networks. In this review, an attempt has been made to facilitate researchers' path to further develop this field by collecting and examining recent works and the challenges that hinder the implementation of these networks on FPGA.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107256",
+      "url": "https://www.semanticscholar.org/paper/31375f872b2b2acc22a0d5e362e29808d8e6d1dd"
+    },
+    {
+      "title": "Study of fractional order epidemic compartmental model by using artificial deep neural networks",
+      "abstract": "This paper aims to study a compartmental mathematical model of rotavirus disease with fractals fractional order differential equations. In addition, we employ the deep neural networks (DNN) to investigate the aforementioned dynamical system. Recently, DNNs approach has attracted more attention from researchers. The concerned tool has been used very well in investigating various dynamical systems of infectious diseases. This is because the aforementioned field has many applications and is useful in many scientific and engineering research fields. Additionally, a growing number of mathematical methods are being used to study the mathematical modelling of epidemiological diseases. A model that explains the kinetics of rotavirus induced gastroenteritis transmission with vaccinated class is examined in this study. We use the fractal fractional derivative with exponential kernel (FFE) in the Caputo Fabrizio sense. Appropriate results regarding the existence of solutions are obtained for the given model using the traditional fixed point method. The Euler numerical technique is expanded to interpret the results numerically. Several graphical presentations are used to discuss the transmission dynamics of the model under consideration using different fractals fractional orders. Using DNNs technique, we analyze the considered model. One of the algorithms based on Levenberg- Marquardt training algorithm is used in designed DNNs model for the deep learning and training performance. Hence, training, learning and prediction accuracies of the DNNs were examined and verified by using 9 neurons and maximum of 1000 epoches to deduce the regression R, mean square error (MSE) and root mean square error (RMSE). In addition, the predictions deduced from the multilayer artificial DNNs model developed with 9 neurons in the hidden layer have been compared with the numerical results also. The mentioned results have been presented graphically.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107944",
+      "url": "https://www.semanticscholar.org/paper/fbdd50e8a22843994ee8022f27345d518d6cb699"
+    }
+  ]
+}

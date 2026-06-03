@@ -1,0 +1,30 @@
+{
+  "journal_id": "ieeetransactionsoncybernetics",
+  "journal_name": "IEEE Transactions on Cybernetics",
+  "papers": [
+    {
+      "title": "Enhancing Geometric Factors in Model Learning and Inference for Object Detection and Instance Segmentation",
+      "abstract": "Deep learning-based object detection and instance segmentation have achieved unprecedented progress. In this article, we propose complete-IoU (CIoU) loss and Cluster-NMS for enhancing geometric factors in both bounding-box regression and nonmaximum suppression (NMS), leading to notable gains of average precision (AP) and average recall (AR), without the sacrifice of inference efficiency. In particular, we consider three geometric factors, that is: 1) overlap area; 2) normalized central-point distance; and 3) aspect ratio, which are crucial for measuring bounding-box regression in object detection and instance segmentation. The three geometric factors are then incorporated into CIoU loss for better distinguishing difficult regression cases. The training of deep models using CIoU loss results in consistent AP and AR improvements in comparison to widely adopted $\\ell _{n}$ -norm loss and IoU-based loss. Furthermore, we propose Cluster-NMS, where NMS during inference is done by implicitly clustering detected boxes and usually requires fewer iterations. Cluster-NMS is very efficient due to its pure GPU implementation, and geometric factors can be incorporated to improve both AP and AR. In the experiments, CIoU loss and Cluster-NMS have been applied to state-of-the-art instance segmentation (e.g., YOLACT and BlendMask-RT), and object detection (e.g., YOLO v3, SSD, and Faster R-CNN) models. Taking YOLACT on MS COCO as an example, our method achieves performance gains as +1.7 AP and +6.2 AR100 for object detection, and +1.1 AP and +3.5 AR100 for instance segmentation, with 27.1 FPS on one NVIDIA GTX 1080Ti GPU. All the source code and trained models are available at https://github.com/Zzh-tju/CIoU.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCYB.2021.3095305",
+      "url": "https://www.semanticscholar.org/paper/63a06bd5f65a8d822a84905c370260e223cc78b2"
+    },
+    {
+      "title": "Constructing Multiscroll Memristive Neural Network With Local Activity Memristor and Application in Image Encryption",
+      "abstract": "Memristor possesses synapse-like properties that can mimic excitation and inhibition between neurons. This article introduces the Sigmoid functions to the memristor and constructs a new memristive Hopfield neural network (HNN). Its most distinctive feature is the simple topology, which contains only unidirectional connections in neurons. The equilibrium points analysis reveals the mechanism of its multiscroll attractors generation. Homogeneous and heterogeneous coexisting attractors are observed with the variation of the network parameters. Note that the state equation of memristor can affect the number of coexisting attractors. A hardware implementation is designed for it, and the multiscroll attractors are captured in the oscilloscope. Finally, it is also applied to developing an image encryption algorithm with excellent performance.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCYB.2024.3377011",
+      "url": "https://www.semanticscholar.org/paper/d6a044766aa609fbc8aaf9b1eb9799d0db8f8a15"
+    },
+    {
+      "title": "A Survey of Imitation Learning: Algorithms, Recent Developments, and Challenges",
+      "abstract": "In recent years, the development of robotics and artificial intelligence (AI) systems has been nothing short of remarkable. As these systems continue to evolve, they are being utilized in increasingly complex and unstructured environments, such as autonomous driving, aerial robotics, and natural language processing. As a consequence, programming their behaviors manually or defining their behavior through the reward functions [as done in reinforcement learning (RL)] has become exceedingly difficult. This is because such environments require a high degree of flexibility and adaptability, making it challenging to specify an optimal set of rules or reward signals that can account for all the possible situations. In such environments, learning from an expert’s behavior through imitation is often more appealing. This is where imitation learning (IL) comes into play - a process where desired behavior is learned by imitating an expert’s behavior, which is provided through demonstrations.This article aims to provide an introduction to IL and an overview of its underlying assumptions and approaches. It also offers a detailed description of recent advances and emerging areas of research in the field. Additionally, this article discusses how researchers have addressed common challenges associated with IL and provides potential directions for future research. Overall, the goal of this article is to provide a comprehensive guide to the growing field of IL in robotics and AI.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCYB.2024.3395626",
+      "url": "https://www.semanticscholar.org/paper/7689b2ecb90070ea7d6781c2a88f2acad8b13bba"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "tjsc",
+  "journal_name": "The Journal of Supercomputing",
+  "papers": [
+    {
+      "title": "L2GT: a line loss analysis method for medium and low-voltage distribution networks",
+      "abstract": "The integration of renewable energy sources and the increasing complexity of distribution networks have created not only accuracy challenges but also substantial computational demands for real-time line loss analysis across large numbers of feeders. To address these issues, this paper proposes the line loss graph transformer (L2GT), which combines graph convolutional networks (GCNs) and transformer-based multi-head attention to jointly model local topology-aware interactions and long-range dependencies on graph-structured power-grid data. From a computational perspective, the proposed framework leverages sparse graph operations and GPU-parallel attention computation to support high-throughput inference for operational deployment. Experimental results on real distribution network data and large-scale synthetic topologies demonstrate that L2GT significantly outperforms existing methods in prediction accuracy and robustness, while maintaining millisecond-level inference latency and scalable performance up to 5000 nodes. These results indicate that L2GT is not only an accurate line loss prediction model but also a high-performance computing-oriented framework for real-time monitoring and analysis in modern distribution networks.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s11227-026-08574-7",
+      "url": "https://openalex.org/W7163144415"
+    },
+    {
+      "title": "A Novel deep learning model to improve electric energy consumption forecasting accuracy for lighting, residential, and commercial loads in the mediterranean region",
+      "abstract": "Abstract Accurate electricity load forecasting (ELF) is essential for ensuring efficient energy management and grid stability. This study aims to improve forecasting accuracy for sectoral electricity consumption in the Mediterranean region, specifically in Adana, Mersin, and Antalya. To achieve this, deep learning (DL) models including long short-term memory (LSTM), convolutional neural network (CNN), and a hybrid CNN-LSTM model are developed using monthly data from 2016 to 2023. A grid search approach is employed to optimize key hyperparameters such as batch size, lookback window, dropout rate, and network structure. The performance of the models is evaluated using root-mean-squared error (RMSE), mean absolute error (MAE), mean absolute percentage error (MAPE), and coefficient of determination (R 2 ) metrics. The results indicate that the hybrid CNN-LSTM model outperforms standalone CNN and LSTM models across all load types, achieving higher accuracy and better generalization. Furthermore, a MATLAB/Simulink-based dynamic power system model is developed to analyze the interaction between power generation and load demand. The findings demonstrate that the proposed approach provides a reliable and effective framework for sector-based ELF and supports improved decision-making in energy management and planning.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s11227-026-08595-2",
+      "url": "https://openalex.org/W7161812650"
+    },
+    {
+      "title": "Characterization of machine learning compilers for LLM inference on NVIDIA GPUs",
+      "abstract": "Abstract AI inference is conflicted between Performance, developer Productivity, and device Portability–the P3 problem. Machine learning compilers (MLCs) aim to address this, but their ecosystem is fragmented, with tools that each prioritize a different issue. This paper evaluates the deployment trade-offs of PyTorch-based LLMs on NVIDIA GPUs using four intertwined prominent MLC tools: , TensorRT, XLA, and ONNX Runtime. A dual methodology is used, leveraging synthetic PyTorch models to isolate optimizations and end-to-end benchmarks with State-of-the-Art (SOTA) models (TinyLlama-1.1B, Llama-2-7B) to measure real-world performance. Findings reveal that the peak performance of Ahead-Of-Time (AOT) compilation requires architecture-specific tools such as TensorRT-LLM, which are necessary for SOTA LLMs but are unusable for PyTorch models. As for Just-In-Time (JIT) solutions such as and its backends, they are flexible and portable, compatible with all tested models, but they do not consistently accelerate LLMs; therefore, the choice of MLC depends on P3 considerations and model architecture.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s11227-026-08559-6",
+      "url": "https://openalex.org/W7161232358"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "iandc",
+  "journal_name": "Information and Computation",
+  "papers": [
+    {
+      "title": "Weighted models for higher-order computation",
+      "abstract": "Abstract We study a class of quantitative models for higher-order computation: Lafont categories with (infinite) biproducts. These are models of intuitionistic linear type theory with a canonical enrichment over the modules of a internal complete semiring: we give a semantics of non-deterministic PCF weighted over the elements of this semiring. The fixed points in our model are obtained by constructing a bifree algebra for the comonad which gives its exponential structure. By characterizing these fixed points more concretely as infinite sums of finitary approximants indexed over the nested finite multisets, we prove computational adequacy with respect to an operational semantics which evaluates a term by taking a weighted sum of the residues of its terminating reduction paths. We investigate the construction of Lafont categories with biproducts by weighting intensional models such as categories of games over a complete semiring. This transition from a qualitative semantics to a quantitative one is characterized as a “change of base” of enriched categories: it is induced by a monoidal functor from the category of coherence spaces to the category of free modules over a complete semiring. Using the properties of this functor, we characterise some requirements for the change of base to preserve the structure of a Lafont category. As an example, we show that the game semantics of Idealized Algol bears a natural enrichment over the category of coherence spaces, and thus gives rise by change of base to a semiring weighted model, which is fully abstract. We relate this to existing categories of probabilistic games and slot games.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ic.2020.104645",
+      "url": "https://www.semanticscholar.org/paper/26ea58b26049c5574a315c1c5ed1976768668553"
+    },
+    {
+      "title": "Weighted automata computation of edit distances with consolidations and fragmentations",
+      "abstract": "We study edit distances between strings, based of based on operations of character substitutions, insertions, deletions and additionally consolidations and fragmentations. The two latter operations transform a sequence of characters into one character and vice-versa. They correspond to the compression and expansion in Dynamic Time-Warping algorithms for speech recognition and are also used for the formal analysis of written music. Such edit distances are not computable in general. We propose weighted automaton constructions to compute in polynomial time an edit distance taking into account both consolidations and deletions, or both fragmentations and insertions. We finally show that the optimal weight of sequences made of consolidations chained with fragmenta-tions, in that order, is computable in polynomial time, and not computable if we reverse the order of fragmentations and consolidations.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.IC.2020.104652",
+      "url": "https://www.semanticscholar.org/paper/2c886ff4907cfd411a558ac72563de4a38f30280"
+    },
+    {
+      "title": "Seven kinds of equivalent models for generalized coalition logics",
+      "abstract": "Coalition Logic is an important logic in logical research on strategic reasoning. In two recent papers, Li and Ju argued that generally, concurrent game models, models of Coalition Logic, have three too strong assumptions: seriality, independence of agents, and determinism. They presented eight coalition logics based on eight classes of general concurrent game models, determined by which of the three assumptions are met. In this paper, we show that each of the eight sets of valid formulas of the eight logics is determined by six other kinds of models, that is, single-coalition-first action models, single-coalition-first actual neighborhood models, clear grand-coalition-first action models, clear single-coalition-first actual neighborhood models, tree-like grand-coalition-first action models, and tree-like single-coalition-first actual neighborhood models.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ic.2026.105419",
+      "url": "https://www.semanticscholar.org/paper/6949ccb8a46f181616c8540acc84147023594f82"
+    }
+  ]
+}

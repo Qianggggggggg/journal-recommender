@@ -1,0 +1,30 @@
+{
+  "journal_id": "tit",
+  "journal_name": "IEEE Transactions on Information Theory",
+  "papers": [
+    {
+      "title": "2019 IEEE Communications Society and Information Theory Society Joint Paper Award",
+      "abstract": "THE recipients of the 2019 IEEE Communications Society and Information Theory Society Joint Paper Award are Yuyi Mao, Jun Zhang, and Khaled B. Letaief for the article “Dynamic computation offloading for mobile-edge computing with energy harvesting devices” which appeared in the IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS, vol. 34, no. 12, pp. 3590–3605, December 2016. The IEEE Communications Society and Information Theory Society Joint Paper Award, which consists of a plaque and an honorarium, is given annually for outstanding papers relevant to both societies published in any publication of either society in the previous three calendar years.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tit.2019.2955608",
+      "url": "https://www.semanticscholar.org/paper/a716510594bad53de70dce7498b27cfd12ce5d80"
+    },
+    {
+      "title": "2019 IEEE Information Theory Society Paper Award",
+      "abstract": "THE recipients of the 2019 IEEE Information Theory Society Paper Award are Emmanuel J. Candès, Xiaodong Li, and Mahdi Soltanolkotabi for the article “Phase Retrieval via Wirtinger Flow: Theory and Algorithms,” which appeared in the IEEE TRANSACTIONS ON INFORMATION THEORY, vol. 61, no. 4, pp. 1985–2007, April 2015. The IEEE Information Theory Society Paper Award, consisting of a plaque and an honorarium, is given annually for an outstanding publication in the fields of interest to the Society and appearing anywhere during the preceding four calendar years. Its purpose is to recognize exceptional publications and to stimulate interest in, and encourage contributions to, fields of interest of the Society.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tit.2019.2955580",
+      "url": "https://www.semanticscholar.org/paper/5e3c060dde6af0ba19dac2a12f80045cb7d3af50"
+    },
+    {
+      "title": "Electromagnetic Information Theory-Based Statistical Channel Model for Improved Channel Estimation",
+      "abstract": "Electromagnetic information theory (EIT) is an emerging interdisciplinary subject that integrates classical Maxwell electromagnetics and Shannon information theory. The goal of EIT is to uncover the information transmission mechanisms from an electromagnetic (EM) perspective in wireless systems. Existing works on EIT are mainly focused on the analysis of EM channel characteristics, degrees-of-freedom, and system capacity. However, these works do not clarify how to integrate EIT knowledge into the design and optimization of wireless systems. To fill in this gap, in this paper, we propose an EIT-based statistical channel model with simplified parameterization. Thanks to the simplified closed-form expression of the EMCF, it can be readily applied to various channel modeling and inference tasks. Specifically, by averaging the solutions of Maxwell’s equations over a tunable von Mises distribution, we obtain a spatio-temporal correlation function (STCF) model of the EM channel, which we name as the EMCF. Furthermore, by tuning the parameters of the EMCF, we propose an EIT-based covariance estimator (EIT-Cov) to accurately capture the channel covariance. Since classical MMSE estimators can exploit prior information contained in the channel covariance matrix, we further propose the EIT-MMSE channel estimator by substituting EMCF for the covariance matrix. Simulation results show that both the proposed EIT-Cov covariance estimator and the EIT-MMSE channel estimator outperform their baseline algorithms, thus proving that EIT is beneficial to wireless communication systems.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIT.2025.3526689",
+      "url": "https://www.semanticscholar.org/paper/1d25108b04349c8c895692af78a9056a45680e6d"
+    }
+  ]
+}

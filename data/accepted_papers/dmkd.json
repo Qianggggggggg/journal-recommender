@@ -1,0 +1,30 @@
+{
+  "journal_id": "dmkd",
+  "journal_name": "Data Mining and Knowledge Discovery",
+  "papers": [
+    {
+      "title": "Explainable and interpretable machine learning and data mining",
+      "abstract": "The growing number of applications of machine learning and data mining in many domains—from agriculture to business, education, industrial manufacturing, and medicine—gave rise to new requirements for how to inspect and control the learned models. The research domain of explainable artificial intelligence (XAI) has been newly established with a strong focus on methods being applied post-hoc on black-box models. As an alternative, the use of interpretable machine learning methods has been considered—where the learned models are white-box ones. Black-box models can be characterized as representing implicit knowledge—typically resulting from statistical and neural approaches of machine learning, while white-box models are explicit representations of knowledge—typically resulting from rule-learning approaches. In this introduction to the special issue on ‘Explainable and Interpretable Machine Learning and Data Mining’ we propose to bring together both perspectives, pointing out commonalities and discussing possibilities to integrate them.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01041-y",
+      "url": "https://www.semanticscholar.org/paper/bb5e0284219cb6b5aa283eb734c1bd0202c4d7a7"
+    },
+    {
+      "title": "A practical approach to novel class discovery in tabular data",
+      "abstract": "The problem of novel class discovery (NCD) consists in extracting knowledge from a labeled set of known classes to accurately partition an unlabeled set of novel classes. While NCD has recently received a lot of attention from the community, it is often solved on computer vision problems and under unrealistic conditions. In particular, the number of novel classes is usually assumed to be known in advance, and their labels are sometimes used to tune hyperparameters. Methods that rely on these assumptions are not applicable in real-world scenarios. In this work, we focus on solving NCD in tabular data when no prior knowledge of the novel classes is available. To this end, we propose to tune the hyperparameters of NCD methods by adapting the k-fold cross-validation process and hiding some of the known classes in each fold. Since we have found that methods with too many hyperparameters are likely to overfit these hidden classes, we define a simple deep NCD model. This method is composed of only the essential elements necessary for the NCD problem and shows robust performance under realistic conditions. Furthermore, we find that the latent space of this method can be used to reliably estimate the number of novel classes. Additionally, we adapt two unsupervised clustering algorithms (k-means and Spectral Clustering) to leverage the knowledge of the known classes. Extensive experiments are conducted on 7 tabular datasets and demonstrate the effectiveness of the proposed method and hyperparameter tuning process, and show that the NCD problem can be solved without relying on knowledge from the novel classes.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01025-y",
+      "url": "https://www.semanticscholar.org/paper/67719978b3bbfb631b4388f591b500948a7b929b"
+    },
+    {
+      "title": "Recommending the right academic programs: an interest mining approach using BERTopic",
+      "abstract": "Prospective students face the challenging task of selecting a university program that will shape their academic and professional careers. For decision-makers and support services, it is often time-consuming and extremely difficult to match personal interests with suitable programs due to the vast and complex catalogue information available. This paper presents the first information system that provides students with efficient recommendations based on both program content and personal preferences. BERTopic, a powerful topic modeling algorithm, is used that leverages text embedding techniques to generate topic representations. It enables us to mine interest topics from all course descriptions, representing the full body of knowledge taught at the institution. Underpinned by the student’s individual choice of topics, a shortlist of the most relevant programs is computed through statistical backtracking in the knowledge map, a novel characterization of the program-course relationship. This approach can be applied to a wide range of educational settings, including professional and vocational training. A case study at a post-secondary school with 80 programs and over 5,000 courses shows that the system provides immediate and effective decision support. The presented interest topics are meaningful, leading to positive effects such as serendipity, personalization, and fairness, as revealed by a qualitative study involving 65 students. Over 98% of users indicated that the recommendations aligned with their interests, and about 94% stated they would use the tool in the future. Quantitative analysis shows the system can be configured to ensure fairness, achieving 98% program coverage while maintaining a personalization score of 0.77. These findings suggest that universities could expand student support services by implementing this real-time, user-centered, data-driven system to improve the program selection process.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01087-y",
+      "url": "https://www.semanticscholar.org/paper/13d71fcf7468d6b5eb8763f454d0e10bedc34a55"
+    }
+  ]
+}

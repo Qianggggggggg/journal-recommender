@@ -1,0 +1,30 @@
+{
+  "journal_id": "neurocomputing",
+  "journal_name": "Neurocomputing",
+  "papers": [
+    {
+      "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+      "abstract": "Position encoding recently has shown effective in the transformer architecture. It enables valuable supervision for dependency modeling between elements at different positions of the sequence. In this paper, we first investigate various methods to integrate positional information into the learning process of transformer-based language models. Then, we propose a novel method named Rotary Position Embedding(RoPE) to effectively leverage the positional information. Specifically, the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation. Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding. Finally, we evaluate the enhanced transformer with rotary position embedding, also called RoFormer, on various long text classification benchmark datasets. Our experiments show that it consistently overcomes its alternatives. Furthermore, we provide a theoretical analysis to explain some experimental results. RoFormer is already integrated into Huggingface: \\url{https://huggingface.co/docs/transformers/model_doc/roformer}.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neucom.2023.127063",
+      "url": "https://www.semanticscholar.org/paper/66c10bf1f11bc1b2d92204d8f8391d087f6de1c4"
+    },
+    {
+      "title": "CLIP4Clip: An Empirical Study of CLIP for End to End Video Clip Retrieval",
+      "abstract": "Video-text retrieval plays an essential role in multi-modal research and has been widely used in many real-world web applications. The CLIP (Contrastive Language-Image Pre-training), an image-language pre-training model, has demonstrated the power of visual concepts learning from web collected image-text datasets. In this paper, we propose a CLIP4Clip model to transfer the knowledge of the CLIP model to video-language retrieval in an end-to-end manner. Several questions are investigated via empirical studies: 1) Whether image feature is enough for video-text retrieval? 2) How a post-pretraining on a large-scale video-text dataset based on the CLIP affect the performance? 3) What is the practical mechanism to model temporal dependency between video frames? And 4) The Hyper-parameters sensitivity of the model on video-text retrieval task. Extensive experimental results present that the CLIP4Clip model transferred from the CLIP can achieve SOTA results on various video-text retrieval datasets, including MSR-VTT, MSVC, LSMDC, ActivityNet, and DiDeMo. We release our code at https://github.com/ArrowLuo/CLIP4Clip.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neucom.2022.07.028",
+      "url": "https://www.semanticscholar.org/paper/281ad83e06d731d5d686acf07cd701576f1188c4"
+    },
+    {
+      "title": "Focal and Efficient IOU Loss for Accurate Bounding Box Regression",
+      "abstract": "In object detection, bounding box regression (BBR) is a crucial step that determines the object localization performance. However, we find that most previous loss functions for BBR have two main drawbacks: (i) Both $\\ell_n$-norm and IOU-based loss functions are inefficient to depict the objective of BBR, which leads to slow convergence and inaccurate regression results. (ii) Most of the loss functions ignore the imbalance problem in BBR that the large number of anchor boxes which have small overlaps with the target boxes contribute most to the optimization of BBR. To mitigate the adverse effects caused thereby, we perform thorough studies to exploit the potential of BBR losses in this paper. Firstly, an Efficient Intersection over Union (EIOU) loss is proposed, which explicitly measures the discrepancies of three geometric factors in BBR, i.e., the overlap area, the central point and the side length. After that, we state the Effective Example Mining (EEM) problem and propose a regression version of focal loss to make the regression process focus on high-quality anchor boxes. Finally, the above two parts are combined to obtain a new loss function, namely Focal-EIOU loss. Extensive experiments on both synthetic and real datasets are performed. Notable superiorities on both the convergence speed and the localization accuracy can be achieved over other BBR losses.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neucom.2022.07.042",
+      "url": "https://www.semanticscholar.org/paper/eb20c617dc1b6e5b979f830fc38af37e7f1c9d3c"
+    }
+  ]
+}

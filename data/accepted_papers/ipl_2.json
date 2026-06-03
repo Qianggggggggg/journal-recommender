@@ -1,0 +1,30 @@
+{
+  "journal_id": "ipl_2",
+  "journal_name": "Information Processing Letters",
+  "papers": [
+    {
+      "title": "Representations of stably continuous semi-lattices by information systems and abstract bases",
+      "abstract": "Abstract In this paper, we introduce two new notions of S-continuous information systems and S-abstract bases which provide concrete representations of stably continuous semi-lattices. We shed light on how the states of an S-continuous information system and the round ideal completion of an S-abstract basis form a stably continuous semi-lattice, respectively. Then we obtain two representation theorems for stably continuous semi-lattices. What is more, we show the equivalence of the categories corresponding to these three structures.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ipl.2020.106036",
+      "url": "https://www.semanticscholar.org/paper/a85d7f068ecf2ac03e947e9a51e2b1d82b0e872a"
+    },
+    {
+      "title": "A simple supercritical tradeoff between size and height in resolution",
+      "abstract": "We describe CNFs in n variables which, over a range of parameters, have small resolution refutations but are such that any small refutation must have height larger than n (even exponential in n ), where the height of a refutation is the length of the longest path in it. This is called a supercritical tradeoff between size and height because, if we do not care about size, every CNF is refutable in height n . A similar result appeared in [Fleming, Pitassi and Robere, ITCS ’22], for different formulas using a more complicated construction. Small refutations of our formula are necessarily highly irregular, making it a plausible candidate to separate resolution from pool resolution, which amounts to separating CDCL with restarts from CDCL without. We are not able to show this, but we show that a simpler version of our formula, with a similar irregularity property, does have polynomial size pool resolution refutations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ipl.2025.106589",
+      "url": "https://www.semanticscholar.org/paper/ed9d46885c2c0a17327487594987a41b95e3fba3"
+    },
+    {
+      "title": "Luby's MIS algorithms made self-stabilizing",
+      "abstract": "We reconsider two well-known distributed randomized algorithms computing a maximal independent set, proposed in the seminal work of Luby (1986). We enhance these algorithms such that they become self-stabilizing without sacrificing their run-time, i.e., both stabilize in O (log n ) synchronous rounds w.h.p. on any n -node graph. The first algorithm gets along with three states, but needs to know an upper bound on the maximum degree. The second does not need any information about the graph, but uses a number of states that is linear in the node degree. Both algorithms use messages of logarithmic size.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ipl.2024.106531",
+      "url": "https://www.semanticscholar.org/paper/4e8eb05bbd7fbe3a5d689f09f501eda34d57114f"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "jdm",
+  "journal_name": "Journal of Database Management",
+  "papers": [
+    {
+      "title": "AI and Database Management for Organizational Transformation With Insights From Twitter Data",
+      "abstract": "This paper explores the role of AI and database management in organizational transformation using insights from Twitter data. By analyzing 30,000 English-language tweets with methods such as word analysis, topic modeling, network analysis, sentiment analysis, and emotion analysis, the study reveals a strong correlation between AI and digital transformation. The findings show positive sentiment and optimism about AI's potential. This research highlights the importance of social influence, perceived trust, and awareness in AI adoption, offering valuable insights for researchers and practitioners. Despite relying on Twitter data, the study provides practical guidance for leveraging AI in digital transformation efforts.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.359335",
+      "url": "https://www.semanticscholar.org/paper/5995832a591bebe1c4959793d98b3138a53dad58"
+    },
+    {
+      "title": "A Hybrid Deep Learning Framework for Intrusion Detection in Database Systems Using Brown-Bear Optimization and Tunicate Swarm Algorithm",
+      "abstract": "Protection of networks from changing cyberthreats depends critically on intrusion detection. This article presents a hybrid deep learning framework using a tunicate swarm algorithm and brown-bear optimization for intrusion detection. The Tunicate Swarm Algorithm (TSA) was utilized for hyperparameter tuning; the Brown-Bear Optimization Algorithm (BBOA) was employed for feature selection, therefore lowering the dataset from 41 to 25 features. After five epochs, the model tested on the NSL-KDD dataset achieves 98% accuracy. Comparative study using conventional models showed that the suggested framework improved accuracy and loss reduction, therefore stressing its possibilities to improve intrusion detection systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.388847",
+      "url": "https://www.semanticscholar.org/paper/135acc7ba1d72d3bc770c406e2c8d60c9555d040"
+    },
+    {
+      "title": "A Sample-Aware Database Tuning System With Deep Reinforcement Learning",
+      "abstract": "Based on the relationship between client load and overall system performance, the authors propose a sample-aware deep deterministic policy gradient model. Specifically, they improve sample quality by filtering out sample noise caused by the fluctuations of client load, which accelerates the model convergence speed of the intelligent tuning system and improves the tuning effect. Also, the hardware resources and client load consumed by the database in the working process are added to the model for training. This can enhance the performance characterization ability of the model and improve the recommended parameters of the algorithm. Meanwhile, they propose an improved closed-loop distributed comprehensive training architecture of online and offline training to quickly obtain high-quality samples and improve the efficiency of parameter tuning. Experimental results show that the configuration parameters can make the performance of the database system better and shorten the tuning time.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.333519",
+      "url": "https://www.semanticscholar.org/paper/1648da99ff6edff5e7c60aaf36b2e5d4f4822eb4"
+    }
+  ]
+}

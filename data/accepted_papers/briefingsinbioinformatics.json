@@ -1,0 +1,30 @@
+{
+  "journal_id": "briefingsinbioinformatics",
+  "journal_name": "Briefings in Bioinformatics",
+  "papers": [
+    {
+      "title": "Celebrating 25 years of briefings in bioinformatics: a comprehensive bibliometric analysis",
+      "abstract": "Abstract Over the past 25 years, Briefings in Bioinformatics (BIB) has been the leading journal in the bioinformatics field. To commemorate this milestone and trace the journal’s academic trajectory, we conducted a comprehensive bibliometric analysis of 4185 BIB publications published between 2000 and 2024. The publications were retrieved from Elsevier’s Scopus. Since 2021, the annual number of citations has increased prominently, peaking in 2024 (n = 30 729). These publications have accumulated a total of 183 911 citations, including 364 publications that have received more than 100 citations. The most cited article was published by Kumar et al. (2004) and it has received 10 750 citations. The 4185 publications were contributed by 4140 authors from 79 countries/regions, reflecting BIB’s international characteristics. In terms of the total number of publications (TP) and the total number of citations (TC), China (TP = 2085; TC = 58 851), the United States (TP = 1120; TC = 67 000), and the United Kingdom (TP = 329; TC = 16 581) were the leading countries. The Chinese Academy of Sciences (TP = 216; TC = 6200), Central South University (TP = 112; TC = 3079), and Zhejiang University (TP = 105; TC = 3503) were the leading affiliations. Zou, Quan (TP = 64; TC = 3023), Song, Jiangning (TP = 58; TC = 2652), and Wu, Rongling (TP = 35; TC = 633) were the leading authors. Collaboration has intensified over time, with the median number of authors per publication rising from two in 2000–2004 to five in 2020–2024. The research focus of BIB has shifted from foundational bioinformatics and database development to integrative multi-omics analysis and AI-driven biomedical research. As BIB develops, its international impact will continue to grow, solidifying its pivotal role in shaping the future of bioinformatics research.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bib/bbag117",
+      "url": "https://www.semanticscholar.org/paper/0782a4c0bc20605e058f7bbb679606b6236d53b5"
+    },
+    {
+      "title": "A comprehensive survey of genome language models in bioinformatics",
+      "abstract": "Abstract Large language models have revolutionized natural language processing by effectively modeling complex semantics and capturing long-range contextual relationships. Inspired by these advancements, genome language models (gLMs) have recently emerged, conceptualizing DNA and RNA sequences as biological texts and enabling the identification of intricate genomic grammar and distant regulatory interactions. This review examines the need for gLMs, emphasizing their capacity to overcome the limitations of traditional deep learning approaches in genomic sequence characterization. We comprehensively survey contemporary gLM architectures, including Transformer models, Hyena convolutions, and state space models, as well as various sequence tokenization strategies, assessing their applicability, and effectiveness across diverse genomic applications. Additionally, we discuss foundational pretraining strategies and provide an overview of genomic pretraining datasets spanning multiple species and functional domains. We critically analyze evaluation methodologies, including supervised, zero-shot, and few-shot learning paradigms, as well as fine-tuning approaches. An extensive taxonomy of downstream tasks is presented, alongside a summary of existing benchmarks and emerging trends. Finally, we contemplate key challenges such as data scarcity, interpretability, and the computational demands of genomic modeling, and propose a roadmap to guide future advances in genome language modeling.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bib/bbaf724",
+      "url": "https://www.semanticscholar.org/paper/aa0831758cd9079526a822c8df0a0514217f872b"
+    },
+    {
+      "title": "MCPmed: a call for Model Context Protocol-enabled bioinformatics web services for LLM-driven discovery.",
+      "abstract": "Bioinformatics web servers are critical resources in modern biomedical research, facilitating interactive exploration of datasets through custom-built interfaces with rich visualization capabilities. However, this mostly human-centric design limits machine readability for large language models (LLMs) and deep research agents. We address this gap by adapting model context protocol (MCP) to bioinformatics web server backends, a standardized, machine-actionable layer that explicitly associates web service endpoints with scientific concepts and detailed metadata. Our implementations across widely used databases (GEO, STRING, and UCSC Cell Browser) demonstrate enhanced exploration capabilities through MCP-enabled LLMs. To accelerate adoption, we propose MCPmed, a community effort supplemented by lightweight breadcrumbs for services not yet fully MCP-enabled and templates for setting up new servers. This structured transition aims to significantly enhance automation, reproducibility, and interoperability, preparing bioinformatics web services for next-generation research agents.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bib/bbag076",
+      "url": "https://www.semanticscholar.org/paper/50953759497b3889ef0def05ef0be8c5615e0de7"
+    }
+  ]
+}

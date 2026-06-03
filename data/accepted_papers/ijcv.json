@@ -1,0 +1,30 @@
+{
+  "journal_id": "ijcv",
+  "journal_name": "International Journal of Computer Vision",
+  "papers": [
+    {
+      "title": "Synthetic Data for Video Surveillance Applications of Computer Vision: A Review",
+      "abstract": "In recent years, there has been a growing interest in synthetic data for several computer vision applications, such as automotive, detection and tracking, surveillance, medical image analysis and robotics. Early use of synthetic data was aimed at performing controlled experiments under the analysis by synthesis approach. Currently, synthetic data are mainly used for training computer vision models, especially deep learning ones, to address well-known issues of real data, such as manual annotation effort, data imbalance and bias, and privacy-related restrictions. In this work, we survey the use of synthetic training data focusing on applications related to video surveillance, whose relevance has rapidly increased in the past few years due to their connection to security: crowd counting, object and pedestrian detection and tracking, behaviour analysis, person re-identification and face recognition. Synthetic training data are even more interesting in this kind of application, to address further, specific issues arising, e.g., from typically unconstrained image or video acquisition conditions and cross-scene application scenarios. We categorise and discuss the existing methods for creating synthetic data, analyse the synthetic data sets proposed in the literature for each of the considered applications, and provide an overview of their effectiveness as training data. We finally discuss whether and to what extent the existing synthetic data sets mitigate the issues of real data, highlight existing open issues, and suggest future research directions in this field.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11263-024-02102-x",
+      "url": "https://www.semanticscholar.org/paper/bc8af969d549420423abf9448a529746205629c4"
+    },
+    {
+      "title": "Going Deeper than Tracking: A Survey of Computer-Vision Based Recognition of Animal Pain and Emotions",
+      "abstract": "Advances in animal motion tracking and pose recognition have been a game changer in the study of animal behavior. Recently, an increasing number of works go ‘deeper’ than tracking, and address automated recognition of animals’ internal states such as emotions and pain with the aim of improving animal welfare, making this a timely moment for a systematization of the field. This paper provides a comprehensive survey of computer vision-based research on recognition of pain and emotional states in animals, addressing both facial and bodily behavior analysis. We summarize the efforts that have been presented so far within this topic—classifying them across different dimensions, highlight challenges and research gaps, and provide best practice recommendations for advancing the field, and some future directions for research.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11263-022-01716-3",
+      "url": "https://www.semanticscholar.org/paper/5925c1b1f77d96ad6ed04e6ce2553e0a139c08ce"
+    },
+    {
+      "title": "Hyperbolic Deep Learning in Computer Vision: A Survey",
+      "abstract": "Deep representation learning is a ubiquitous part of modern computer vision. While Euclidean space has been the de facto standard manifold for learning visual representations, hyperbolic space has recently gained rapid traction for learning in computer vision. Specifically, hyperbolic learning has shown a strong potential to embed hierarchical structures, learn from limited samples, quantify uncertainty, add robustness, limit error severity, and more. In this paper, we provide a categorization and in-depth overview of current literature on hyperbolic learning for computer vision. We research both supervised and unsupervised literature and identify three main research themes in each direction. We outline how hyperbolic learning is performed in all themes and discuss the main research problems that benefit from current advances in hyperbolic learning for computer vision. Moreover, we provide a high-level intuition behind hyperbolic geometry and outline open research questions to further advance research in this direction.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11263-024-02043-5",
+      "url": "https://www.semanticscholar.org/paper/c6f331f7f6ae81efcc114b011539cf224f88465b"
+    }
+  ]
+}

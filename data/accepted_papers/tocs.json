@@ -1,0 +1,30 @@
+{
+  "journal_id": "tocs",
+  "journal_name": "ACM Transactions on Computer Systems",
+  "papers": [
+    {
+      "title": "Analyzing Configuration Dependencies of File Systems",
+      "abstract": "File systems play an essential role in modern society for managing precious data. To meet diverse needs, they often support many configuration parameters. Such flexibility comes at the price of additional complexity which can lead to subtle configuration-related issues. To address this challenge, we study the configuration-related issues of two major file systems (i.e., Ext4 and XFS) in depth, and identify a prevalent pattern called multilevel configuration dependencies. Based on the study, we build an extensible tool called ConfD to extract the dependencies automatically, and create a set of plugins to address different configuration-related issues. Our experiments on Ext4, XFS and a modern copy-on-write file system (i.e., ZFS) show that ConfD was able to extract 160 configuration dependencies for the file systems with a low false positive rate. Moreover, the dependency-guided plugins can identify various configuration issues (e.g., mishandling of configurations, regression test failures induced by valid configurations). In addition, we also explore the applicability of ConfD on a popular storage engine (i.e., WiredTiger). We hope that this comprehensive analysis of configuration dependencies of storage systems can shed light on addressing configuration-related challenges for the system community in general.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3747177",
+      "url": "https://www.semanticscholar.org/paper/7971ccd1f021c01c82a893ec566f20ae21311813"
+    },
+    {
+      "title": "Filesystem Fragmentation on Modern Storage Systems",
+      "abstract": "Filesystem fragmentation has been one of the primary reasons for computer systems to get slower over time. However, there have been rapid changes in modern storage systems over the past decades, and modern storage devices such as solid state drives have different mechanisms to access data, compared with traditional rotational ones. In this article, we revisit filesystem fragmentation on modern computer systems from both performance and fairness perspectives. According to our extensive experiments, filesystem fragmentation not only degrades I/O performance of modern storage devices, but also incurs various problems related to I/O fairness, such as performance interference. Unfortunately, conventional defragmentation tools are designed primarily for hard disk drives and thus generate an unnecessarily large amount of I/Os for data migration. To mitigate such problems, this article present FragPicker, a new defragmentation tool for modern storage devices. FragPicker analyzes the I/O behaviors of each target application and defragments only necessary pieces of data whose migration can contribute to performance improvement, thereby effectively minimizing the I/O amount for defragmentation. Our evaluation with YCSB workload-C shows FragPicker reduces the total amount of I/O for defragmentation by around 66% and the elapsed time by around 84%, while showing a similar level of defragmentation effect.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3611386",
+      "url": "https://www.semanticscholar.org/paper/96ec2b6c6bca778836e9151afd10d42afb5767b3"
+    },
+    {
+      "title": "RAGCache: Efficient Knowledge Caching for Retrieval-Augmented Generation",
+      "abstract": "Retrieval-Augmented Generation (RAG) has demonstrated substantial advancements in various natural language processing tasks by integrating the strengths of large language models (LLMs) and external knowledge databases. However, the retrieval step introduces long sequence generation and extra data dependency, resulting in long end-to-end latency. Our analysis benchmarks current RAG systems and reveals that, while the retrieval step poses performance challenges, it also offers optimization opportunities through its retrieval pattern and streaming search behavior. We propose RAGCache, a latency-optimized serving system tailored for RAG. RAGCache leverages the retrieval pattern to organize and cache the intermediate states of retrieved knowledge in a knowledge tree across the GPU and host memory hierarchy, reducing LLM generation time. RAGCache employs dynamic speculative pipelining to exploit the streaming search behavior, overlapping retrieval with LLM generation to minimize end-to-end latency. We implement RAGCache based on vLLM and Faiss, and evaluate it on both open-source and production datasets. Experimental results demonstrate that RAGCache reduces the time to first token (TTFT) by up to 4× and improves the throughput by up to 2.1× compared to vLLM integrated with Faiss.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3768628",
+      "url": "https://www.semanticscholar.org/paper/7326329c09c11aac423ef4910222a16952bb01dc"
+    }
+  ]
+}

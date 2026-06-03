@@ -1,0 +1,30 @@
+{
+  "journal_id": "eurasipjournaloninformationsecurity",
+  "journal_name": "EURASIP Journal on Information Security",
+  "papers": [
+    {
+      "title": "Research on gray correlation analysis and situation prediction of network information security",
+      "abstract": "In order to further improve the accuracy and efficiency of network information security situation prediction, this study used the dynamic equal-dimensional method based on gray correlation analysis to improve the GM (1, N) model and carried out an experiment on the designed network security situation prediction (NSSP) model in a simulated network environment. It was found that the predicted result of the improved GM (1, N) model was closer to the actual value. Taking the 11th hour as an example, the predicted value of the improved GM (1, N) model was 28.1524, which was only 0.8983 larger than the actual value; compared with neural network and Markov models, the error of the improved GM (1, N) model was smaller: the average error was only 2.3811, which was 67.88% and 70.31% smaller than the other two models. The improved GM (1, N) model had a time complexity that was 49.99% and 39.53% lower than neural network and Markov models; thus, it had high computational efficiency. The experimental results verify the effectiveness of the improved GM (1, N) model in solving the NSSP problem. The improved GM (1, N) model can be further promoted and applied in practice and deployed in the network of schools and enterprises to achieve network information security.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s13635-021-00118-1",
+      "url": "https://www.semanticscholar.org/paper/cfc3f041d2fc3be0c12d97d408b87000f06838c4"
+    },
+    {
+      "title": "A comparative analysis of DNN-based white-box explainable AI methods in network security",
+      "abstract": "New research focuses on creating artificial intelligence (AI) solutions for network intrusion detection systems (NIDS), drawing its inspiration from the ever-growing number of intrusions on networked systems, increasing its complexity and intelligibility. Hence, the use of explainable AI (XAI) techniques in real-world intrusion detection systems comes from the requirement to comprehend and elucidate black-box AI models to security analysts. In an effort to meet such requirements, this paper focuses on applying and evaluating white-box XAI techniques (particularly LRP, IG, and DeepLift) for NIDS via an end-to-end framework for neural network models, using three widely used network intrusion datasets (NSL-KDD, CICIDS-2017, and RoEduNet-SIMARGL2021), assessing its global and local scopes, and examining six distinct assessment measures (descriptive accuracy, sparsity, stability, robustness, efficiency, and completeness). We also compare the performance of white-box XAI methods with black-box XAI methods. The results show that using white-box XAI techniques scores high in robustness and completeness, which are crucial metrics for IDS. Moreover, the source codes for the programs developed for our XAI evaluation framework are available to be improved and used by the research community.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s13635-025-00201-x",
+      "url": "https://www.semanticscholar.org/paper/06655dda63852f2488ed059d220f6bbab5f2932e"
+    },
+    {
+      "title": "Machine learning security and privacy: a review of threats and countermeasures",
+      "abstract": "Machine learning has become prevalent in transforming diverse aspects of our daily lives through intelligent digital solutions. Advanced disease diagnosis, autonomous vehicular systems, and automated threat detection and triage are some prominent use cases. Furthermore, the increasing use of machine learning in critical national infrastructures such as smart grids, transport, and natural resources makes it an attractive target for adversaries. The threat to machine learning systems is aggravated due to the ability of mal-actors to reverse engineer publicly available models, gaining insight into the algorithms underpinning these models. Focusing on the threat landscape for machine learning systems, we have conducted an in-depth analysis to critically examine the security and privacy threats to machine learning and the factors involved in developing these adversarial attacks. Our analysis highlighted that feature engineering, model architecture, and targeted system knowledge are crucial aspects in formulating these attacks. Furthermore, one successful attack can lead to other attacks; for instance, poisoning attacks can lead to membership inference and backdoor attacks. We have also reviewed the literature concerning methods and techniques to mitigate these threats whilst identifying their limitations including data sanitization, adversarial training, and differential privacy. Cleaning and sanitizing datasets may lead to other challenges, including underfitting and affecting model performance, whereas differential privacy does not completely preserve model’s privacy. Leveraging the analysis of attack surfaces and mitigation techniques, we identify potential research directions to improve the trustworthiness of machine learning systems.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s13635-024-00158-3",
+      "url": "https://www.semanticscholar.org/paper/e45f10ee11eebf7284cfff2479e78dfb366f39be"
+    }
+  ]
+}

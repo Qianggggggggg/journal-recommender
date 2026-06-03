@@ -1,0 +1,30 @@
+{
+  "journal_id": "fcs",
+  "journal_name": "Frontiers of Computer Science",
+  "papers": [
+    {
+      "title": "Educational games as a tool for teaching programming in digital extracurricular computer science education",
+      "abstract": "This study explores how university students experience learning programming through educational games in extracurricular computer science education. A qualitative phenomenological design was employed to interpret the meanings students attribute to game-based learning rather than to evaluate instructional effectiveness. Data were collected through semi-structured interviews with 60 undergraduate students who participated in supervised extracurricular programming activities involving educational coding games. The analysis revealed that educational games transform programming from a formal academic subject into an exploratory problem-solving activity supported by immediate feedback. Students described a reduction of anxiety and perceived the environment as psychologically safe for experimentation. However, gameplay alone produced an intuitive yet fragmented understanding, requiring instructor explanation for conceptual structuring. The experience of learning was therefore characterized as a transition from experiential discovery to reflective comprehension. The findings indicate that educational games function as an experiential entry point through which students begin to interpret programming as a meaningful activity, while instruction supports conceptual articulation. This study contributes to understanding the pedagogical role of educational games not as substitutes for teaching but as mediating environments shaping students' perception of programming.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.3389/fcomp.2026.1766830",
+      "url": "https://www.semanticscholar.org/paper/b3dd7340a6d8e940f1506a4bf7f557b7c3cb7d0a"
+    },
+    {
+      "title": "Editorial: 2021 editors' pick: Computer science",
+      "abstract": "COPYRIGHT © 2022 Lukowicz, Nijholt, Siddiqi, Pelillo, Laerhoven, Viganò and Zannone. This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY). The use, distribution or reproduction in other forums is permitted, provided the original author(s) and the copyright owner(s) are credited and that the original publication in this journal is cited, in accordance with accepted academic practice. No use, distribution or reproduction is permitted which does not comply with these terms. Editorial: 2021 editors’ pick: Computer science",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.3389/fcomp.2022.1062066",
+      "url": "https://www.semanticscholar.org/paper/07f6b332e914b4c16502b1ffc2d1fdfc2c3b4262"
+    },
+    {
+      "title": "On the Frontiers of Software Science and Software Engineering",
+      "abstract": "Advances in software engineering, software science, computational intelligence, and intelligent mathematics have led to the establishment of Frontiers in Computer Science—Software (FCSS). FCSS aims to promote transdisciplinary research on software science and engineering (SSE), autonomous systems, and computational intelligence. FCSS covers not only classical empirical software engineering and industrial processes, but also contemporary topics of software science, intelligent programming languages, autonomous code generation, mathematical foundations of software, and programming knowledge bases. FCSS reports empirical studies and emerging topics in software engineering including tools, development platforms, industrial processes, management infrastructures, quality assurance schemes, big data systems, and software migrations across languages and platforms.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.3389/fcomp.2021.766053",
+      "url": "https://www.semanticscholar.org/paper/8afab76a0c94ab7ace7ec7371273cad085485e98"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "journal_id": "kais",
+  "journal_name": "Knowledge and Information Systems",
+  "papers": [
+    {
+      "title": "Information extraction pipelines for knowledge graphs",
+      "abstract": "In the last decade, a large number of knowledge graph (KG) completion approaches were proposed. Albeit effective, these efforts are disjoint, and their collective strengths and weaknesses in effective KG completion have not been studied in the literature. We extend Plumber , a framework that brings together the research community’s disjoint efforts on KG completion. We include more components into the architecture of Plumber   to comprise 40 reusable components for various KG completion subtasks, such as coreference resolution, entity linking, and relation extraction. Using these components, Plumber dynamically generates suitable knowledge extraction pipelines and offers overall 432 distinct pipelines. We study the optimization problem of choosing optimal pipelines based on input sentences. To do so, we train a transformer-based classification model that extracts contextual embeddings from the input and finds an appropriate pipeline. We study the efficacy of Plumber for extracting the KG triples using standard datasets over three KGs: DBpedia, Wikidata, and Open Research Knowledge Graph. Our results demonstrate the effectiveness of Plumber in dynamically generating KG completion pipelines, outperforming all baselines agnostic of the underlying KG. Furthermore, we provide an analysis of collective failure cases, study the similarities and synergies among integrated components and discuss their limitations.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-022-01826-x",
+      "url": "https://www.semanticscholar.org/paper/6ceb65a6e2f58376412f0abb8e83e1b3ae517ae3"
+    },
+    {
+      "title": "A graph-based approach for minimising the knowledge requirement of explainable recommender systems",
+      "abstract": "Traditionally, recommender systems use collaborative filtering or content-based approaches based on ratings and item descriptions. However, this information is unavailable in many domains and applications, and recommender systems can only tackle the problem using information about interactions or implicit knowledge. Within this scenario, this work proposes a novel approach based on link prediction techniques over graph structures that exclusively considers interactions between users and items to provide recommendations. We present and evaluate two alternative recommendation methods: one item-based and one user-based that apply the edge weight , common neighbours , Jaccard neighbours , Adar/Adamic , and Preferential Attachment link prediction techniques. This approach has two significant advantages, which are the novelty of our proposal. First, it is suitable for minimal knowledge scenarios where explicit data such as ratings or preferences are not available. However, as our evaluation demonstrates, this approach outperforms state-of-the-art techniques using a similar level of interaction knowledge. Second, our approach has another relevant feature regarding one of the most significant concerns in current artificial intelligence research: the recommendation methods presented in this paper are easily interpretable for the users, improving their trust in the recommendations.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-023-01903-9",
+      "url": "https://www.semanticscholar.org/paper/5bb0150f1a73e174642675610038cc89bd4b3ca6"
+    },
+    {
+      "title": "Implicit knowledge-augmented prompting for commonsense explanation generation",
+      "abstract": "Commonsense explanation generation refers to reasoning and explaining why a commonsense statement contradicts commonsense knowledge, such as why the statement “My dad grew volleyballs in his garden” is nonsensical. While such reasoning is trivial for humans, it remains a challenge for AI systems. Despite their notable performance in tasks like text generation and reasoning, large language models (LLMs) often fall short of consistently generating coherent and accurate commonsense explanations. To bridge this gap, we propose a novel Two-stage Identification and Prompting (TIP) framework for enhancing LLMs’ ability to handle the task of commonsense explanation generation. Specifically, in the first stage, TIP identifies the nonsensical concept in the given statement, pinpointing the specific element that contradicts commonsense knowledge. In the second stage, TIP generates implicit knowledge based on the identified nonsensical concept and then leverages this implicit knowledge to guide the adopted LLMs in generating explanations. In order to demonstrate the effectiveness of the proposed TIP framework for commonsense explanation generation, we conducted extensive experiments based on the ComVE dataset and a newly constructed CSE dataset, where a variety of LLMs are evaluated. The experimental results show that TIP consistently outperforms all baseline methods across multiple metrics, demonstrating its effectiveness in improving LLMs’ commonsense reasoning and explanation generation capabilities.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-024-02326-w",
+      "url": "https://www.semanticscholar.org/paper/4a7021bbfccf27196873e47fac2e5bd901e78290"
+    }
+  ]
+}

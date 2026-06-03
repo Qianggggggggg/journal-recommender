@@ -1,0 +1,30 @@
+{
+  "journal_id": "iot",
+  "journal_name": "IEEE Internet of Things Journal",
+  "papers": [
+    {
+      "title": "IEEE Internet of Things Journal",
+      "abstract": "LEILA DE FLORIANI, 2020 President FORREST J. SHULL, 2021 President CECILIA METRA, 2019 President RICCARDO MARIANI, First VP, Standards Activities SY-YEN KUO, Second VP, Professional & Educational Activities YERVANT ZORIAN, VP, Member & Geographic Activities FABRIZIO LOMBARDI, VP, Publications WILLIAM D. GROPP, VP, Technical & Conference Activities THOMAS M. CONTE, 2020–2021 IEEE Division V Director ELIZABETH L. BURD, 2019–2020 Division VIII Director CHRISTINA M. SCHOBER, 2020 IEEE Division VIII Director-Elect MELISSA A. RUSSELL, Executive Director",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/jiot.2022.3154639",
+      "url": "https://www.semanticscholar.org/paper/8b5f1812a930e5fed27c584cb1a18445b37c13df"
+    },
+    {
+      "title": "MAC Protocols for IEEE 802.11ah-Based Internet of Things: A Survey",
+      "abstract": "The IEEE 802.11ah, also known as WiFi HaLow, is a scalable solution for medium-range communication in Internet of Things (IoT). While provisioning support for the IoT and machine-to-machine (M2M) communication, IEEE 802.11ah leverages various innovative medium access control (MAC) layer concepts, such as restricted access window (RAW), hierarchical association identification (AID), traffic indication map (TIM) segmentation, etc. This article presents a survey on various MAC protocols for IEEE 802.11ah. While discussing the essential features of IEEE 802.11ah, this survey points out various issues and limitations of such MAC protocols. Although there are some surveys available for MAC protocols of IEEE 802.11ah, they do not include a large number of schemes that have been recently proposed to solve different standardization and implementation-based issues. This article individually surveys issues and challenges in the different problem domains of the IEEE 802.11ah MAC protocol and analyzes the recently proposed solutions. Moreover, this article identifies various factors for further improvement of these protocols. Compared to other relevant surveys, this article emphasizes the issues and challenges to enable researchers to easily identify the problem domain.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/jiot.2021.3104388",
+      "url": "https://www.semanticscholar.org/paper/7104061ef4fb2a180407642b04ef7c8df5dd06cf"
+    },
+    {
+      "title": "Healthcare Internet of Things: Security Threats, Challenges, and Future Research Directions",
+      "abstract": "Internet of Things (IoT) applications are switching from general to precise in different industries, e.g., healthcare, automation, military, maritime, smart cities, transportation, logistics, and many more. In the healthcare domain, these applications have demonstrated an incredible improvement in patient assessment, monitoring, prescription, etc., with ease of access through the Internet. Despite its benefits, this technology also offers several security challenges for the research community and healthcare stakeholders, because of its wireless communication and open-area deployment. To explore, patient wearable devices and other networking entities follow unstructured communication format to share their accumulated data in the network, which makes them susceptible to manifold security threats. Considering the significance of these applications, data acquisition, processing, storage, and assessment on client and remote sides need a high standard of secure communication infrastructure. Therefore, security of these applications is one of the major obstacles that prevent their widespread use in different healthcare domains. To discuss different security constraints, in this article, we present a comprehensive survey of the theoretical literature from 2015 to 2023 to highlight the unresolved security problems of this emerging technology. Based on the evaluated literature pros and cons, we determine the security requirements and challenges of Healthcare-IoT (HC-IoT) applications. Following this, we demonstrate future research directions that could be useful for the researchers and industry stakeholders working in this domain. To demonstrate the uniqueness of this work and claim its contribution, we compare our work section-wise with previously published papers to answer the question of reviewers, editors, students, and readers, why this review article is required in the presence of already published review articles.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/JIOT.2024.3360289",
+      "url": "https://www.semanticscholar.org/paper/4d909538b093d43124c29d7caba28e6f6845854e"
+    }
+  ]
+}

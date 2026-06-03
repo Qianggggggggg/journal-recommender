@@ -1,0 +1,30 @@
+{
+  "journal_id": "cc",
+  "journal_name": "Computer Communications",
+  "papers": [
+    {
+      "title": "A systematic review on experimental evaluation of L4S architecture",
+      "abstract": "The rise of interactive real-time applications has exposed the latency limitations that current networks experience. Recently, the Low Latency, Low Loss, and Scalable Throughput (L4S) architecture emerged to address this problem across the Internet. This paper is the first to systematically review existing L4S experimental development efforts. It synthesizes the current state of research and identifies and outlines several remaining challenges. This analysis maps the primary research themes, dominant algorithms, and common evaluation methodologies, confirming that L4S can deliver on its promise for low-latency in controlled settings. Concurrently, the review summarizes the critical challenges and limitations reported in the literature, particularly concerning partial deployment, real-world wireless performance, and implementation robustness. By providing a structured overview of the technology’s maturity and key open questions, it serves as a guide for future work toward a robust, at-scale deployment of low-latency internet services.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.comcom.2026.108578",
+      "url": "https://openalex.org/W7162761241"
+    },
+    {
+      "title": "AI-powered node positioning and data synthesis for advanced simulation in 5G/6G mmWave Integrated Access and Backhaul networks",
+      "abstract": "Integrated Access and Backhaul (IAB) is a cost-effective and adaptable solution for deploying ultra-dense next-generation (5G and 6G) cellular networks to increase the likelihood of Line-of-Sight (LOS) coverage. This technology allows wireless backhaul connections to be established using the same technology and specifications as available in the access links. However, the absence of a physical testbed or a dataset that can be used for simulation in the millimeter wave (mmWave) band prevents researchers’ validation of the proposed algorithms in the IAB scenario. In this paper, we propose a novel data generator based on a Generative Adversarial Network (GAN), trained on a real dataset from a mobile network that operates in Europe, and maintains a significant market share that returns accurate traffic data for an IAB network. Also, we introduce IAB-CNPos, an intelligent IAB node positioning framework using Density-Based Spatial Clustering of Applications with Noise (DBSCAN) that indicates IAB node positions to increase the coverage network with minimal deployment cost. Furthermore, we integrate this data generator with the SeBaSi simulator (an IAB simulator based on Sionna), which obtains accurate, data-consistent, and realistic end-to-end IAB simulation results. The performance results indicate that the data generator successfully passes the Kolmogorov–Smirnov (KS) criterion, so, it could operate as a verified data generator. Furthermore, we use the SeBaSi simulator, integrated with the data generator, to evaluate the performance of an IAB network in the London City scenario.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.comcom.2026.108555",
+      "url": "https://openalex.org/W7161595773"
+    },
+    {
+      "title": "Enabling 6G digital twin ecosystems through middleware-based synchronization and management",
+      "abstract": "The vision of 6G goes beyond incremental improvements in network performance, representing a paradigm shift toward a programmable, intelligent “network of networks.” In this context, digital twins (DTs) emerge as key enabling technologies for 6G, providing virtual replicas of physical, virtual, and logical infrastructures. The capabilities of 6G, such as ultra-high-speed transmission, massive connectivity, and integration with Artificial Intelligence, are essential for enabling accurate, real-time, and synchronized DTs. However, developing DT systems poses significant challenges, including integrating heterogeneous data sources, ensuring real-time synchronization, and ensuring interoperability across distributed environments. This article presents MidDiTS, a middleware solution that supports the modeling, synchronization, and management of DT systems. MidDiTS provides a comprehensive set of services, including physical entity connection, model and instance management, data ingestion, API integration, and device management. By abstracting away system complexities and promoting interoperability, MidDiTS enables developers to focus on higher-level business logic and accelerates the development of robust, synchronized DT systems for next-generation networked environments. We validated MidDiTS in a 6G-based scenario, demonstrating significant improvements in timeliness, reliability, and operational stability. The results highlight the role of advanced network capabilities in sustaining real-time DT synchronization and confirm the suitability of MidDiTS for supporting DT systems under next-generation network conditions.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.comcom.2026.108554",
+      "url": "https://openalex.org/W7161243739"
+    }
+  ]
+}
