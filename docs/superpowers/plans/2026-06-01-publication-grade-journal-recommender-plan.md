@@ -721,14 +721,50 @@ pytest tests/test_recommender.py tests/test_api.py tests/test_run_evaluation_dia
 
 **文件：**
 - 仅输出： `data/evaluation/results/*.json`
+- 修改： `scripts/run_evaluation.py`（加 environment 块 + *_rate 字段 + 静默失败 print）
+- 修改： `data/evaluation/results/baseline_registry.json`（4 个新 baseline）
 
-- [ ] 在 light30 上跑 baseline。
-- [ ] 在 light30 上跑 learned reranker。
-- [ ] 在 full-v2 上跑 baseline。
-- [ ] 在 full-v2 上跑 learned reranker。
-- [ ] 比较 exact Hit@5、MRR、same-area@5、acceptable@5。
-- [ ] 如果 learned reranker 只提升 light30 但伤害 full-v2，视为过拟合，不设为默认。
-- [ ] 如果 learned reranker 提升 full-v2 但严重伤害 acceptable@5，必须先做失败案例分析。
+- [x] 在 light30 上跑 baseline。
+- [x] 在 light30 上跑 learned reranker。
+- [x] 在 full-v2-90 上跑 baseline。
+- [x] 在 full-v2-90 上跑 learned reranker。
+- [x] 比较 exact Hit@5、MRR、same-area@5、acceptable@5。
+- [x] 如果 learned reranker 只提升 light30 但伤害 full-v2，视为过拟合，不设为默认。
+- [x] 如果 learned reranker 提升 full-v2 但严重伤害 acceptable@5，必须先做失败案例分析。
+
+**5.4 评测结果 (M2.7 模型, workers=1 串行, full-v2-90 = 90 篇均匀分布)**：
+
+| 配置 | hit@5 | mrr | acc@5 |
+|---|---|---|---|
+| light30 LTR OFF | 12/30 (40.0%) | 0.2550 | 22/30 (73.3%) |
+| light30 LTR ON | 17/30 (56.7%) | 0.2878 | 23/30 (76.7%) |
+| full-v2-90 LTR OFF | 44/90 (48.9%) | 0.2848 | 68/90 (75.6%) |
+| full-v2-90 LTR ON | 50/90 (55.6%) | 0.3130 | 74/90 (82.2%) |
+
+**LTR 收益 (M2.7)**：
+- light30: hit@5 +5 (40% → 56.7%), acc@5 +1
+- full-v2-90: hit@5 +6 (48.9% → 55.6%), acc@5 +6 (75.6% → 82.2%)
+
+**accepted_paper 维度分析**：
+- full-v2-90 中 44-45/90 paper 的 gold venue 在 accepted corpus (covered)
+- LTR 在 covered 子集 hit@5: 72.7% → 84.4% (+11.7%) ← 显著
+- LTR 在 uncovered 子集 hit@5: 80.0% → 80.0% (无变化)
+- **结论**: LTR 主要利用 `candidate_in_accepted_corpus` 特征帮助 covered paper
+
+**Gate B 决策**: ✅ **LTR 通过**。可在 M2.7 体系下默认开启。
+
+**M3 失败案例**: M3 + LTR ON 触发 5 篇 paper 推荐崩溃（LLM 静默返回空 rankings）+ 1 篇因 `can't multiply sequence by non-int of type 'float'` 异常失败。**M3 + LTR 不通过 Gate B**，需 plan 5.5+ 处理。
+
+**5.4 调试发现**:
+- `LLMRanker.rank()` 在 LLM 返回 `{"rankings": []}` 时**不抛异常**,静默返回空列表。`evaluate_single_paper` 拿不到 print 提示。
+- 修复 (5.4 已加): 在 line 446 后增加 `if not recomendaciones` 检查,打印"推荐结果为空 (静默)" 警告。
+- 字段名: `aceptable_journal_hit_5` (a-c-c-e-p-t-able, 24 字符) 是正确英式拼写。
+
+**baseline_registry.json 已登记**:
+- `light30_ltr_off_v2` (新 light30 OFF)
+- `light30_ltr_on_v2` (新 light30 ON)
+- `full_v2_90_ltr_off` (full-v2-90 OFF)
+- `full_v2_90_ltr_on` (full-v2-90 ON)
 
 ### 任务 5.5：可选 LightGBM/LambdaMART 升级
 

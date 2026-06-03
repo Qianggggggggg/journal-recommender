@@ -57,6 +57,7 @@ from src.evaluation.benchmark_manifest import build_benchmark_manifest
 BENCHMARK_PROFILE_INPUTS = {
     "light30": "data/evaluation/papers_metadata_light_30.jsonl",
     "full-v2": "data/evaluation/papers_metadata_v2.jsonl",
+    "full-v2-90": "data/evaluation/papers_metadata_full_v2_90.jsonl",
 }
 
 
@@ -443,6 +444,16 @@ def evaluate_single_paper(
         return None
 
     recommendations = rec_result.get("recommendations", [])
+    # 5.4 调试:LLM 静默返回 {"rankings": []} 时不抛异常但结果为空
+    # (与 "推荐失败" 异常路径区分,见 line 442-444)
+    if not recommendations:
+        rank_method = rec_result.get("rank_method", "unknown")
+        llm_pool_size = len(rec_result.get("llm_candidates", []))
+        print(
+            f"\n推荐结果为空 (静默): {title[:30]}... | "
+            f"rank_method={rank_method} | llm_pool={llm_pool_size} | "
+            f"这通常说明 LLM 返回了空 rankings (没 raise 异常)"
+        )
     candidates = rec_result.get("candidates", [])
     rule_ranked = rec_result.get("rule_ranked", [])
     llm_candidates = rec_result.get("llm_candidates", [])
@@ -940,13 +951,28 @@ def save_results(
     result: EvaluationResult,
     output_dir: str = "data/evaluation/results",
     benchmark_manifest: dict | None = None,
+    benchmark_profile: str = "custom",
+    benchmark_path: str = "",
+    app_config: dict | None = None,
+    ltr_info: dict | None = None,
 ):
-    """保存评估结果"""
+    """保存评估结果。
+
+    顶层除原有的 timestamp / mode / top_k / total_count / metrics / paper_results 外,
+    5.4.e 新增:
+    - environment: 评测环境元信息 (benchmark profile, path, ltr 状态, model, hash 等)
+    - metrics 内每个 count 字段旁加 _rate (0~1 小数) 字段
+    """
     os.makedirs(output_dir, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"eval_{result.mode}_top{result.top_k}_{timestamp}.json"
     filepath = os.path.join(output_dir, filename)
+
+    total = result.total_count if result.total_count > 0 else 1
+
+    def _rate(num: int) -> float:
+        return round(num / total, 4) if total > 0 else 0.0
 
     # 转换为可序列化的dict
     result_dict = {
@@ -954,33 +980,73 @@ def save_results(
         "mode": result.mode,
         "top_k": result.top_k,
         "total_count": result.total_count,
+        "environment": {
+            "benchmark_profile": benchmark_profile,
+            "benchmark_path": benchmark_path,
+            "paper_count": result.total_count,
+            "ltr_enabled": (ltr_info or {}).get("enabled", False),
+            "ltr_model_path": (ltr_info or {}).get("model_path"),
+            "ltr_model_converged": (ltr_info or {}).get("model_converged"),
+            "ltr_disable_reason": (ltr_info or {}).get("disable_reason"),
+            "minimax_model": (app_config or {}).get("minimax", {}).get("model"),
+            "embedding_model": (app_config or {}).get("ollama", {}).get("embedding_model"),
+            "retrieval_target": (app_config or {}).get("candidate_generator", {}).get("retrieval_target"),
+            "candidate_generator": {
+                "hybrid_scope_weight": (app_config or {}).get("candidate_generator", {}).get("hybrid_scope_weight"),
+                "hybrid_typical_weight": (app_config or {}).get("candidate_generator", {}).get("hybrid_typical_weight"),
+                "accepted_paper_weight": (app_config or {}).get("candidate_generator", {}).get("accepted_paper_weight"),
+                "identity_anchor_weight": (app_config or {}).get("candidate_generator", {}).get("identity_anchor_weight"),
+            },
+            "ranking": {
+                "llm_anchor_guard_enabled": (app_config or {}).get("ranking", {}).get("llm_anchor_guard", {}).get("enabled"),
+                "rule_scorer": (app_config or {}).get("ranking", {}).get("rule_scorer", {}),
+            },
+            "benchmark_manifest_hash": (benchmark_manifest or {}).get("app_config_hash"),
+            "prompt_hash": (benchmark_manifest or {}).get("prompt_hash"),
+        },
         "metrics": {
             "hit_at_1": result.hit_at_1,
+            "hit_at_1_rate": _rate(result.hit_at_1),
             "hit_at_3": result.hit_at_3,
+            "hit_at_3_rate": _rate(result.hit_at_3),
             "hit_at_5": result.hit_at_5,
+            "hit_at_5_rate": _rate(result.hit_at_5),
             "hit_at_10": result.hit_at_10,
+            "hit_at_10_rate": _rate(result.hit_at_10),
             "area_match_count": result.area_match_count,
+            "area_match_rate": _rate(result.area_match_count),
             "level_match_count": result.level_match_count,
-            "mrr": result.mrr / result.total_count if result.total_count > 0 else 0.0,
-            "ndcg_at_5": result.ndcg_at_5 / result.total_count if result.total_count > 0 else 0.0,
+            "level_match_rate": _rate(result.level_match_count),
+            "mrr": result.mrr / total if total > 0 else 0.0,
+            "ndcg_at_5": result.ndcg_at_5 / total if total > 0 else 0.0,
             "coarse_hit_count": result.coarse_hit_count,
+            "coarse_hit_rate": _rate(result.coarse_hit_count),
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
             "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
             "area_subject_tag_match_count": result.area_subject_tag_match_count,
+            "area_subject_tag_match_rate": _rate(result.area_subject_tag_match_count),
             "level_a_count": result.level_a_count,
             "level_a_hit_at_5": result.level_a_hit_at_5,
+            "level_a_hit_at_5_rate": _rate(result.level_a_hit_at_5) if result.level_a_count > 0 else 0.0,
             "level_b_count": result.level_b_count,
             "level_b_hit_at_5": result.level_b_hit_at_5,
+            "level_b_hit_at_5_rate": _rate(result.level_b_hit_at_5) if result.level_b_count > 0 else 0.0,
             "level_c_count": result.level_c_count,
             "level_c_hit_at_5": result.level_c_hit_at_5,
+            "level_c_hit_at_5_rate": _rate(result.level_c_hit_at_5) if result.level_c_count > 0 else 0.0,
             "level_d_count": result.level_d_count,
             "level_d_hit_at_5": result.level_d_hit_at_5,
-            # 同领域/同CCF档位命中
+            "level_d_hit_at_5_rate": _rate(result.level_d_hit_at_5) if result.level_d_count > 0 else 0.0,
             "area_hit_at_5": result.area_hit_at_5,
+            "area_hit_at_5_rate": _rate(result.area_hit_at_5),
             "area_hit_at_10": result.area_hit_at_10,
+            "area_hit_at_10_rate": _rate(result.area_hit_at_10),
             "level_hit_at_5": result.level_hit_at_5,
+            "level_hit_at_5_rate": _rate(result.level_hit_at_5),
             "level_hit_at_10": result.level_hit_at_10,
+            "level_hit_at_10_rate": _rate(result.level_hit_at_10),
             "acceptable_journal_hit_at_5": result.acceptable_journal_hit_at_5,
+            "acceptable_journal_hit_at_5_rate": _rate(result.acceptable_journal_hit_at_5),
         },
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),
@@ -1000,7 +1066,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
-    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "custom"], default="custom",
+    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "full-v2-90", "custom"], default="custom",
                         help="Benchmark profile; light30/full-v2 use default inputs unless --input overrides")
     parser.add_argument("--input", "-i", default=None,
                         help="论文元数据路径")
@@ -1029,10 +1095,22 @@ def main():
     print("\n初始化推荐系统...")
     pipeline = init_pipeline()
 
-    # 加载 prompts
+    # 加载 prompts + app_config (5.4.e: 报告里要写 environment 块)
     import yaml
     with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
+    with open("configs/app.yaml", "r", encoding="utf-8") as f:
+        app_config = yaml.safe_load(f)
+
+    # LTR 状态 (从 pipeline 拿)
+    ltr_info = {"enabled": False, "model_path": None, "model_converged": None, "disable_reason": None}
+    ltr_cfg = app_config.get("ranking", {}).get("learned_reranker", {}) or {}
+    ltr_info["model_path"] = ltr_cfg.get("model_path")
+    ltr = getattr(pipeline, "learned_reranker", None)
+    if ltr is not None:
+        ltr_info["enabled"] = bool(getattr(ltr, "enabled", False))
+        ltr_info["disable_reason"] = getattr(ltr, "disable_reason", None)
+        ltr_info["model_converged"] = getattr(ltr, "model_converged", None)
 
     # 运行评估
     for top_k in args.top_k:
@@ -1045,7 +1123,7 @@ def main():
         # 打印报告
         print_report(result)
 
-        # 保存结果
+        # 保存结果 (5.4.e 加 environment + *_rate 字段)
         if not args.no_save:
             manifest = build_benchmark_manifest(
                 input_path=args.input,
@@ -1054,7 +1132,14 @@ def main():
                 clean_benchmark=False,
                 profile_snapshot_reused=False,
             )
-            save_results(result, benchmark_manifest=manifest)
+            save_results(
+                result,
+                benchmark_manifest=manifest,
+                benchmark_profile=args.benchmark_profile,
+                benchmark_path=args.input,
+                app_config=app_config,
+                ltr_info=ltr_info,
+            )
 
     print("\n评估完成!")
 
