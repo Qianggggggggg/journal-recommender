@@ -1,5 +1,5 @@
 """混合召回"""
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from ..journals.accepted_paper_store import AcceptedPaperStore
 from ..journals.journal_model import Journal
@@ -82,11 +82,17 @@ class CandidateGenerator:
         rule_ranks: Optional[Dict[str, int]],
         rule_scores: Optional[Dict[str, float]],
         accepted_paper_store: Optional[AcceptedPaperStore] = None,
+        feature_names: Optional[List[str]] = None,
+        llm_evidence_by_journal: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> None:
         """把 LTR 训练特征注入 trace(per Task 4.1.d + ADR 0001)。
 
         必须在 rule_scorer.rank(...) 之后调用,因为 features 需要 rule_rank/rule_score。
         ``accepted_paper_store`` 可为 None(此时 candidate_in_accepted_corpus 全为 0)。
+
+        显式传入 ``feature_names``(例如 ``FEATURE_NAMES_WITH_LLM_EVIDENCE``)
+        与 ``llm_evidence_by_journal`` 时,会输出对应的 schema(20/26 维)。
+        不传则保持默认 20 维 ``FEATURE_NAMES``。
 
         原地修改 trace:每本期刊 entry 增加 ``features`` (list[float]) 与
         ``feature_names`` (list[str])。
@@ -98,6 +104,8 @@ class CandidateGenerator:
             rule_ranks=rule_ranks,
             rule_scores=rule_scores,
             accepted_paper_store=accepted_paper_store,
+            llm_evidence_by_journal=llm_evidence_by_journal,
+            feature_names=feature_names,
         )
 
     def generate_with_trace(

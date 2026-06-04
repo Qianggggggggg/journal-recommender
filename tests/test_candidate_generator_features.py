@@ -81,3 +81,66 @@ def test_candidate_generator_attach_features_marks_corpus_membership(tmp_path: P
     corpus_idx = FEATURE_NAMES.index("candidate_in_accepted_corpus")
     assert trace["a"]["features"][corpus_idx] == 1.0
     assert trace["b"]["features"][corpus_idx] == 0.0
+
+
+def test_attach_features_supports_26_dim_schema():
+    """When feature_names=FEATURE_NAMES_WITH_LLM_EVIDENCE and evidence is
+    supplied, each trace entry's features array must be 26 long."""
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    journals = [_journal("j1"), _journal("j2")]
+    store = StubJournalStore(journals)
+    cg = CandidateGenerator(
+        store=store,
+        bm25_retriever=_DummyRetriever([]),
+        retrieval_target="scope_text",
+    )
+    trace = {
+        "j1": {"retrieval_rank": 1, "routes": {}},
+        "j2": {"retrieval_rank": 2, "routes": {}},
+    }
+    paper_evidence = {
+        "j1": {"scope_fit": 0.9, "method_fit": 0.8, "application_fit": 0.7,
+               "journal_position_fit": 0.85, "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05},
+        "j2": {"scope_fit": 0.4, "method_fit": 0.3, "application_fit": 0.5,
+               "journal_position_fit": 0.2, "too_broad_penalty": 0.0, "too_narrow_penalty": 0.0},
+    }
+    profile = PaperProfile(title="P1")
+
+    cg.attach_features(
+        trace=trace,
+        paper_profile=profile,
+        rule_ranks={"j1": 1, "j2": 2},
+        rule_scores={"j1": 0.9, "j2": 0.8},
+        feature_names=FEATURE_NAMES_WITH_LLM_EVIDENCE,
+        llm_evidence_by_journal=paper_evidence,
+    )
+
+    assert len(trace["j1"]["features"]) == 26
+    assert trace["j1"]["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
+    # Last 6 entries should be the evidence values
+    assert trace["j1"]["features"][20:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    assert len(trace["j2"]["features"]) == 26
+    assert trace["j2"]["features"][20:] == [0.4, 0.3, 0.5, 0.2, 0.0, 0.0]
+
+
+def _journal(jid: str) -> Journal:
+    """小工具:创建一个只设 jid/name 的 Journal 实例。"""
+    return Journal(journal_id=jid, journal_name=jid.upper())
+
+
+class StubJournalStore:
+    """最小可用的 JournalStore stub,提供 get_journal 与 journals。"""
+
+    def __init__(self, journals):
+        self._journals = list(journals)
+
+    def get_journal(self, journal_id):
+        for journal in self._journals:
+            if journal.journal_id == journal_id:
+                return journal
+        return None
+
+    @property
+    def journals(self):
+        return list(self._journals)
