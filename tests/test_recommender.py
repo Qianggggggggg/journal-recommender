@@ -84,6 +84,7 @@ class UnexpectedFailingLLMRanker:
 class DiagnosticLLMRanker:
     def __init__(self):
         self.received_learned_ranks = None
+        self.received_learned_scores = None
 
     def rank_with_diagnostics(
         self,
@@ -94,8 +95,10 @@ class DiagnosticLLMRanker:
         rule_ranks=None,
         rule_scores=None,
         learned_ranks=None,
+        learned_scores=None,
     ):
         self.received_learned_ranks = learned_ranks
+        self.received_learned_scores = learned_scores
         ranked = [
             (journal, 0.9 - index * 0.1, ["evidence"], 0.8)
             for index, (journal, _score, _reasons) in enumerate(candidates)
@@ -472,6 +475,11 @@ def test_pipeline_passes_learned_ranks_to_diagnostic_ranker():
     pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=2)
 
     assert diagnostic_ranker.received_learned_ranks == learned_ranks
+    # 6.4: learned_scores must flow through the pipeline to the role ranker
+    # so LLMEvidenceRoleRanker can use it as a 3rd formula component.
+    assert diagnostic_ranker.received_learned_scores == {
+        jid: 0.5 for jid in learned_ranks
+    }
 
 
 def test_pipeline_with_ltr_disabled_falls_back():

@@ -283,6 +283,7 @@ def configure_pipeline_for_variant(
         prior_source=str(variant.prior_source),
         evidence_weight=0.8,
         prior_weight=0.2,
+        ltr_score_weight=args.ltr_score_weight,  # 6.4: LTR score as 3rd formula component
         evidence_snapshot=evidence_snapshot,
     )
     if not variant.ltr_enabled:
@@ -390,6 +391,17 @@ def parse_args() -> argparse.Namespace:
             "swap between 20-dim v4 and 26-dim evidence LTR for ablation "
             "comparisons without editing the config. The model file's "
             "feature_dim must match what the LTR adapter expects (20 or 26)."
+        ),
+    )
+    parser.add_argument(
+        "--ltr-score-weight",
+        type=float,
+        default=0.0,
+        help=(
+            "Weight for the actual LTR score in the role ranker's final formula. "
+            "When > 0, the role ranker uses (1-rank/N), (ltr_score), and "
+            "evidence_composite with these weights renormalized to sum=1. "
+            "Default 0 = use only evidence and rank (legacy 6.3 formula)."
         ),
     )
     return parser.parse_args()

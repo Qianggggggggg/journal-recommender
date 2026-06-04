@@ -36,6 +36,10 @@ class DirectLLMRoleRanker:
         rule_ranks: Optional[Dict[str, int]] = None,
         rule_scores: Optional[Dict[str, float]] = None,
         learned_ranks: Optional[Dict[str, int]] = None,
+        # 6.4: accepted for signature parity with LLMEvidenceRoleRanker so the
+        # pipeline can pass learned_scores unconditionally. The direct role
+        # does not use learned_scores in its formula.
+        learned_scores: Optional[Dict[str, float]] = None,
     ) -> Tuple[List[EvidenceRankedCandidate], str, Dict[str, Any]]:
         ranked, method = self.direct_ranker.rank(
             candidates,

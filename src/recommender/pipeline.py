@@ -271,6 +271,10 @@ class RecommenderPipeline:
                             rule_ranks=rule_ranks_map,
                             rule_scores=rule_scores_map,
                             learned_ranks=learned_diag.get("learned_rank") or {},
+                            # 6.4: thread the actual LTR score so the role ranker
+                            # can use it as a 3rd formula component when
+                            # ltr_score_weight > 0.
+                            learned_scores=learned_diag.get("learned_score") or {},
                         )
                     )
                 else:
