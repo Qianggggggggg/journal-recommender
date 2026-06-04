@@ -118,6 +118,15 @@ def _extract_evidence_for_paper(
         mode="abstract",
     )
 
+    # Fix A: precompute vs ablation candidate-set alignment.
+    # run_evaluation.py passes ``diagnostic_journal_ids=[target_journal.jid]``
+    # so the gold venue is force-included in candidates. Mirror that here so
+    # the snapshot's candidate set is bit-identical to the ablation runner's.
+    target_journal = _find_journal_by_venue(venue, pipeline)
+    diagnostic_ids = (
+        [target_journal.journal_id] if target_journal is not None else None
+    )
+
     # LLM ranker is not needed here; we only need candidate gen + rule scoring.
     # Temporarily disable the LLM ranker so recommend() returns at the rule step.
     saved_ranker = pipeline.llm_ranker
@@ -128,6 +137,7 @@ def _extract_evidence_for_paper(
             profile,
             top_k=5,
             mode="abstract",
+            diagnostic_journal_ids=diagnostic_ids,
         )
     finally:
         pipeline.llm_ranker = saved_ranker
@@ -222,6 +232,20 @@ def _extract_evidence_for_paper(
         "status": status,
         "fallback_reason": fallback_reason,
     }
+
+
+def _find_journal_by_venue(venue_name: str, pipeline) -> "Journal | None":
+    """Mirror of run_evaluation._find_journal_by_venue: lookup the gold journal
+    by name so we can pass ``diagnostic_journal_ids`` to ``recommend()`` and
+    keep the candidate set aligned with the ablation runner."""
+    store = getattr(getattr(pipeline, "candidate_generator", None), "store", None)
+    if store is None or not venue_name:
+        return None
+    venue_normalized = venue_name.strip().lower()
+    for journal in getattr(store, "journals", []):
+        if (journal.journal_name or "").strip().lower() == venue_normalized:
+            return journal
+    return None
 
 
 def _build_focused_candidates(entry, missing_journal_ids, pipeline):
