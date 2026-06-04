@@ -427,3 +427,100 @@ paper_quality_assessor_user: |
     "uncertainty_reasons": [],
     "quality_level": "B"
   }}
+
+llm_evidence_extractor_system: |
+  你是学术期刊匹配证据分析器。你的任务不是决定最终排序，而是为每本候选期刊独立提取结构化匹配证据。
+
+  对每本候选期刊输出以下六个 0 到 1 之间的分数：
+  - scope_fit：期刊 scope 对论文具体研究问题的覆盖程度。
+  - method_fit：论文方法、技术路线与期刊常见方法类型的匹配程度。
+  - application_fit：论文应用场景与期刊关注应用领域的匹配程度。
+  - journal_position_fit：论文类型、贡献形式与期刊定位宽窄的匹配程度。
+  - too_broad_penalty：期刊仅泛泛相关、缺少具体主题覆盖时的惩罚。
+  - too_narrow_penalty：论文超出期刊狭窄定位时的惩罚。
+
+  重要原则：
+  - 对每本候选独立判断，不直接给出最终排序。
+  - rule_rank 和 CCF 等级只能作为上下文，不能单独提高 fit 分数。
+  - evidence 必须引用论文主题、方法、应用场景或期刊 scope 中的具体匹配点。
+  - 缺乏充分证据时使用中等或较低分数，不要臆测。
+  - 只输出合法 JSON，不要输出 Markdown 或分析过程。
+
+llm_evidence_extractor_user: |
+  论文信息：
+  - 标题：{title}
+  - 摘要：{abstract}
+  - 研究领域：{research_area}
+  - CCF研究领域：{ccf_research_area}
+  - 方法类型：{method_type}
+  - 论文类型：{paper_type}
+  - 关键词：{keywords}
+  - 创新点：{novelty}
+  - 应用领域：{application_domain}
+  - 具体技术：{techniques}
+  - 数据集：{datasets}
+  - 评估指标：{evaluation_metrics}
+  - 创新类型：{novelty_type}
+
+  候选期刊共 {total_candidates} 本：
+  {journals_info}
+
+  请为每本候选期刊独立提取结构化证据。输出格式：
+  {{
+    "evidence": [
+      {{
+        "journal_id": "...",
+        "scope_fit": 0.87,
+        "method_fit": 0.73,
+        "application_fit": 0.62,
+        "journal_position_fit": 0.81,
+        "too_broad_penalty": 0.12,
+        "too_narrow_penalty": 0.05,
+        "evidence": ["期刊 scope 明确覆盖论文的具体研究问题"]
+      }}
+    ]
+  }}
+
+# Task 6.3 incremental repair: focused re-extraction for missing candidates only.
+# Used by precompute_evidence.py --retry-incomplete-from after a full-pass left
+# some candidates uncovered. The prompt is intentionally narrower than the
+# full user template: it lists only the missing journal_ids and asks the LLM
+# to return evidence for them. Same six 0..1 fields and same JSON shape.
+llm_evidence_extractor_user_focused: |
+  论文信息：
+  - 标题：{title}
+  - 摘要：{abstract}
+  - 研究领域：{research_area}
+  - CCF研究领域：{ccf_research_area}
+  - 方法类型：{method_type}
+  - 论文类型：{paper_type}
+  - 关键词：{keywords}
+  - 创新点：{novelty}
+  - 应用领域：{application_domain}
+  - 具体技术：{techniques}
+  - 数据集：{datasets}
+  - 评估指标：{evaluation_metrics}
+  - 创新类型：{novelty_type}
+
+  在上一次批量抽取中，你已经为以下 {covered_count} 本候选期刊返回了 evidence：
+  {already_covered_ids}
+
+  这次请**只**为以下 {missing_count} 本之前缺失的候选期刊提取 evidence：
+  {missing_journals_info}
+
+  输出格式（与上一次完全一致）：
+  {{
+    "evidence": [
+      {{
+        "journal_id": "...",
+        "scope_fit": 0.87,
+        "method_fit": 0.73,
+        "application_fit": 0.62,
+        "journal_position_fit": 0.81,
+        "too_broad_penalty": 0.12,
+        "too_narrow_penalty": 0.05,
+        "evidence": ["..."]
+      }}
+    ]
+  }}
+  只返回缺失的 {missing_count} 本；不要重复返回已覆盖的期刊。

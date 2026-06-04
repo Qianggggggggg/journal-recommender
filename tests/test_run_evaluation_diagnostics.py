@@ -1,5 +1,13 @@
 """Evaluation diagnostics regression tests."""
-from scripts.run_evaluation import evaluate_single_paper
+import json
+
+import pytest
+
+from scripts.run_evaluation import (
+    attach_baseline_profile_snapshots,
+    evaluate_single_paper,
+    run_evaluation,
+)
 from src.journals.journal_model import Journal, JournalMatch
 from src.journals.journal_store import JournalStore
 from src.papers.paper_model import PaperProfile
@@ -112,6 +120,332 @@ class WideMissPipeline(DummyPipeline):
         }
 
 
+class SnapshotPipeline(DummyPipeline):
+    def __init__(self, journal):
+        super().__init__(journal)
+        self.parser = type(
+            "FailingParser",
+            (),
+            {"parse": lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("parser called"))},
+        )()
+        self.received_profile = None
+        self.received_quality_prompts = "unset"
+
+    def recommend(
+        self,
+        paper_input,
+        profile,
+        top_k=5,
+        mode="abstract",
+        quality_prompts=None,
+        diagnostic_journal_ids=None,
+    ):
+        self.received_profile = profile
+        self.received_quality_prompts = quality_prompts
+        return super().recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            quality_prompts=quality_prompts,
+            diagnostic_journal_ids=diagnostic_journal_ids,
+        )
+
+
+class FallbackPipeline(DummyPipeline):
+    def recommend(
+        self,
+        paper_input,
+        profile,
+        top_k=5,
+        mode="abstract",
+        quality_prompts=None,
+        diagnostic_journal_ids=None,
+    ):
+        result = super().recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            quality_prompts=quality_prompts,
+            diagnostic_journal_ids=diagnostic_journal_ids,
+        )
+        result.update(
+            {
+                "rank_method": "rule_fallback",
+                "fallback_used": True,
+                "fallback_stage": "llm_ranking",
+                "fallback_reason": "rankings 为空",
+            }
+        )
+        return result
+
+
+class EmptyPipeline(DummyPipeline):
+    def recommend(
+        self,
+        paper_input,
+        profile,
+        top_k=5,
+        mode="abstract",
+        quality_prompts=None,
+        diagnostic_journal_ids=None,
+    ):
+        result = super().recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            quality_prompts=quality_prompts,
+            diagnostic_journal_ids=diagnostic_journal_ids,
+        )
+        result["recommendations"] = []
+        result["rank_method"] = "llm"
+        return result
+
+
+class EvidenceDiagnosticPipeline(DummyPipeline):
+    def recommend(
+        self,
+        paper_input,
+        profile,
+        top_k=5,
+        mode="abstract",
+        quality_prompts=None,
+        diagnostic_journal_ids=None,
+    ):
+        result = super().recommend(
+            paper_input,
+            profile,
+            top_k=top_k,
+            mode=mode,
+            quality_prompts=quality_prompts,
+            diagnostic_journal_ids=diagnostic_journal_ids,
+        )
+        jid = self.journal.journal_id
+        result["rank_method"] = "llm_evidence_rule"
+        result["llm_role_diagnostics"] = {
+            "status": "ok",
+            "role": "evidence",
+            "prior_source": "rule",
+            "evidence_coverage": 1.0,
+            "candidates": {
+                jid: {
+                    "input_rank": 1,
+                    "rank_prior": 1.0,
+                    "llm_scope_fit": 0.9,
+                    "llm_method_fit": 0.8,
+                    "llm_application_fit": 0.7,
+                    "llm_journal_position_fit": 0.6,
+                    "llm_too_broad_penalty": 0.1,
+                    "llm_too_narrow_penalty": 0.0,
+                    "evidence": ["specific evidence"],
+                    "evidence_composite": 0.7,
+                    "final_score": 0.76,
+                    "final_rank": 1,
+                    "features_base": [0.0] * 20,
+                    "features_with_llm_evidence": [0.0] * 26,
+                    "feature_names_base": [f"base_{i}" for i in range(20)],
+                    "feature_names_with_llm_evidence": [f"v2_{i}" for i in range(26)],
+                }
+            },
+        }
+        return result
+
+
+def test_evaluate_single_paper_reuses_snapshot_without_parser_or_quality_assessor():
+    journal = Journal(journal_id="target", journal_name="Target Journal", ccf_rating="B")
+    pipeline = SnapshotPipeline(journal)
+    paper = {
+        "title": "Stable Paper",
+        "abstract": "Stable abstract.",
+        "venue": "Target Journal",
+        "ccf_level": "B",
+        "research_area": ["人工智能"],
+        "paper_profile_snapshot": {
+            "title": "Stable Paper",
+            "research_area": ["人工智能"],
+            "ccf_research_area": ["人工智能"],
+            "keywords": ["fixed"],
+            "quality_level": "B",
+            "paper_strength": 0.75,
+        },
+    }
+
+    result = evaluate_single_paper(
+        paper,
+        pipeline,
+        {
+            "paper_profile_system": "",
+            "paper_profile_user": "",
+            "paper_quality_assessor_system": "quality",
+            "paper_quality_assessor_user": "quality",
+        },
+        mode="abstract",
+        top_k=5,
+        reuse_profile_snapshot=True,
+    )
+
+    assert result["paper_profile_snapshot"]["keywords"] == ["fixed"]
+    assert pipeline.received_profile.paper_strength == 0.75
+    assert pipeline.received_quality_prompts is None
+
+
+def test_attach_baseline_profile_snapshots_fails_when_current_paper_is_missing(tmp_path):
+    baseline_path = tmp_path / "baseline.json"
+    baseline_path.write_text(
+        json.dumps(
+            {
+                "paper_results": [
+                    {
+                        "title": "Other Paper",
+                        "venue": "Other Journal",
+                        "paper_profile_snapshot": {"title": "Other Paper"},
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="缺少固定 paper_profile_snapshot"):
+        attach_baseline_profile_snapshots(
+            [{"title": "Current Paper", "venue": "Target Journal"}],
+            str(baseline_path),
+        )
+
+
+def test_attach_baseline_profile_snapshots_preserves_current_order(tmp_path):
+    baseline_path = tmp_path / "baseline.json"
+    baseline_path.write_text(
+        json.dumps(
+            {
+                "paper_results": [
+                    {
+                        "title": "Paper B",
+                        "venue": "Journal B",
+                        "paper_profile_snapshot": {"title": "Snapshot B", "keywords": ["b"]},
+                    },
+                    {
+                        "title": "Paper A",
+                        "venue": "Journal A",
+                        "paper_profile_snapshot": {"title": "Snapshot A", "keywords": ["a"]},
+                    },
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    attached = attach_baseline_profile_snapshots(
+        [
+            {"title": "Paper A", "venue": "Journal A", "abstract": "A"},
+            {"title": "Paper B", "venue": "Journal B", "abstract": "B"},
+        ],
+        str(baseline_path),
+    )
+
+    assert [paper["title"] for paper in attached] == ["Paper A", "Paper B"]
+    assert attached[0]["paper_profile_snapshot"]["keywords"] == ["a"]
+    assert attached[1]["paper_profile_snapshot"]["keywords"] == ["b"]
+
+
+def test_run_evaluation_reuses_snapshots_with_ten_workers():
+    journal = Journal(journal_id="target", journal_name="Target Journal", ccf_rating="B")
+    pipeline = SnapshotPipeline(journal)
+    papers = [
+        {
+            "title": f"Stable Paper {index}",
+            "abstract": "Stable abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+            "paper_profile_snapshot": {
+                "title": f"Stable Paper {index}",
+                "research_area": ["人工智能"],
+                "ccf_research_area": ["人工智能"],
+                "quality_level": "B",
+            },
+        }
+        for index in range(2)
+    ]
+
+    result = run_evaluation(
+        papers,
+        pipeline,
+        mode="abstract",
+        top_k=5,
+        prompts={"paper_profile_system": "", "paper_profile_user": ""},
+        show_progress=False,
+        workers=10,
+        reuse_profile_snapshots=True,
+    )
+
+    assert len(result.paper_results) == 2
+    assert result.hit_at_5 == 2
+
+
+def test_evaluate_single_paper_records_fallback_diagnostics():
+    journal = Journal(journal_id="target", journal_name="Target Journal", ccf_rating="B")
+
+    result = evaluate_single_paper(
+        {
+            "title": "Fallback Paper",
+            "abstract": "Abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+        },
+        FallbackPipeline(journal),
+        {"paper_profile_system": "", "paper_profile_user": ""},
+        mode="abstract",
+        top_k=5,
+    )
+
+    assert result["evaluation_status"] == "fallback"
+    assert result["rank_method"] == "rule_fallback"
+    assert result["fallback_used"] is True
+    assert result["fallback_stage"] == "llm_ranking"
+    assert result["fallback_reason"] == "rankings 为空"
+
+
+def test_run_evaluation_counts_fallback_and_empty_recommendations():
+    journal = Journal(journal_id="target", journal_name="Target Journal", ccf_rating="B")
+    base_paper = {
+        "title": "Paper",
+        "abstract": "Abstract.",
+        "venue": "Target Journal",
+        "ccf_level": "B",
+        "research_area": ["人工智能"],
+    }
+
+    fallback_result = run_evaluation(
+        [base_paper],
+        FallbackPipeline(journal),
+        mode="abstract",
+        top_k=5,
+        prompts={"paper_profile_system": "", "paper_profile_user": ""},
+        show_progress=False,
+        workers=10,
+    )
+    empty_result = run_evaluation(
+        [base_paper],
+        EmptyPipeline(journal),
+        mode="abstract",
+        top_k=5,
+        prompts={"paper_profile_system": "", "paper_profile_user": ""},
+        show_progress=False,
+        workers=10,
+    )
+
+    assert fallback_result.fallback_count == 1
+    assert fallback_result.llm_success_count == 0
+    assert fallback_result.empty_recommendation_count == 0
+    assert empty_result.fallback_count == 0
+    assert empty_result.llm_success_count == 0
+    assert empty_result.empty_recommendation_count == 1
+
+
 def test_evaluate_single_paper_writes_venue_diagnostic():
     journal = Journal(
         journal_id="target",
@@ -217,6 +551,40 @@ def test_evaluate_single_paper_writes_auxiliary_acceptability_metrics():
     assert result["same_area_hit_5"] is True
     assert result["same_ccf_level_hit_5"] is True
     assert result["acceptable_journal_hit_5"] is True
+
+
+def test_evaluate_single_paper_persists_complete_llm_evidence_candidate_diagnostics():
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        ccf_rating="B",
+        subject_tags=["人工智能"],
+    )
+
+    result = evaluate_single_paper(
+        {
+            "title": "Evidence Paper",
+            "abstract": "Abstract.",
+            "venue": "Target Journal",
+            "ccf_level": "B",
+            "research_area": ["人工智能"],
+        },
+        EvidenceDiagnosticPipeline(target),
+        {"paper_profile_system": "", "paper_profile_user": ""},
+        mode="abstract",
+        top_k=5,
+    )
+
+    assert result["llm_evidence_status"] == "ok"
+    assert result["llm_evidence_coverage"] == 1.0
+    assert len(result["llm_candidates_detail"]) == 1
+    detail = result["llm_candidates_detail"][0]
+    assert detail["journal_id"] == "target"
+    assert detail["llm_scope_fit"] == 0.9
+    assert len(detail["features_base"]) == 20
+    assert len(detail["features_with_llm_evidence"]) == 26
+    assert result["venue_diagnostic"]["llm_evidence_rank"] == 1
+    assert result["venue_diagnostic"]["llm_evidence_final_score"] == 0.76
 
 
 # ---------------------------------------------------------------------------

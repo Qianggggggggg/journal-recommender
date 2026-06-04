@@ -57,6 +57,32 @@ def test_hash_file_raises_for_missing_path(tmp_path):
         hash_file(tmp_path / "missing.yaml")
 
 
+def test_build_benchmark_manifest_records_snapshot_source_and_workers(tmp_path):
+    from src.evaluation.benchmark_manifest import build_benchmark_manifest
+
+    input_path = tmp_path / "papers.jsonl"
+    app_config_path = tmp_path / "app.yaml"
+    prompts_path = tmp_path / "prompts.yaml"
+    input_path.write_text('{"title": "paper"}\n', encoding="utf-8")
+    app_config_path.write_text("minimax: {}\nollama: {}\n", encoding="utf-8")
+    prompts_path.write_text("paper_profile_system: test\n", encoding="utf-8")
+
+    manifest = build_benchmark_manifest(
+        input_path=input_path,
+        mode="abstract",
+        top_k=5,
+        app_config_path=app_config_path,
+        prompts_path=prompts_path,
+        profile_snapshot_reused=True,
+        baseline_eval_path="data/evaluation/results/baseline.json",
+        workers=10,
+    )
+
+    assert manifest["profile_snapshot_reused"] is True
+    assert manifest["baseline_eval_path"] == "data/evaluation/results/baseline.json"
+    assert manifest["workers"] == 10
+
+
 def test_save_results_writes_benchmark_manifest(tmp_path):
     result = EvaluationResult(
         total_count=0,
@@ -72,6 +98,9 @@ def test_save_results_writes_benchmark_manifest(tmp_path):
         by_area={},
         by_level={},
         paper_results=[],
+        fallback_count=2,
+        llm_success_count=27,
+        empty_recommendation_count=1,
     )
     manifest = {
         "timestamp": "20260601_120000",
@@ -94,6 +123,9 @@ def test_save_results_writes_benchmark_manifest(tmp_path):
 
     data = json.loads(Path(saved_path).read_text(encoding="utf-8"))
     assert data["benchmark_manifest"] == manifest
+    assert data["metrics"]["fallback_count"] == 2
+    assert data["metrics"]["llm_success_count"] == 27
+    assert data["metrics"]["empty_recommendation_count"] == 1
 
 
 def test_build_baseline_record_extracts_manifest_and_metrics(tmp_path):

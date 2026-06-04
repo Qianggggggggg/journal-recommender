@@ -800,9 +800,9 @@ ml = [
 - 修改： `configs/prompts.yaml`
 - 测试： `tests/test_llm_evidence_extractor.py`
 
-- [ ] 增加 prompt key：`llm_evidence_extractor_system`。
-- [ ] 增加 prompt key：`llm_evidence_extractor_user`。
-- [ ] 要求 JSON 输出：
+- [x] 增加 prompt key：`llm_evidence_extractor_system`。
+- [x] 增加 prompt key：`llm_evidence_extractor_user`。
+- [x] 要求 JSON 输出：
 
 ```json
 {
@@ -817,8 +817,8 @@ ml = [
 }
 ```
 
-- [ ] parser 必须拒绝 markdown；但如果是合法 JSON code fence，可以用现有 `parse_json_response` 修复。
-- [ ] 运行：
+- [x] parser 必须拒绝 markdown；但如果是合法 JSON code fence，可以用现有 `parse_json_response` 修复。
+- [x] 运行：
 
 ```bash
 pytest tests/test_llm_evidence_extractor.py tests/test_llm.py -q
@@ -826,13 +826,19 @@ pytest tests/test_llm_evidence_extractor.py tests/test_llm.py -q
 
 - [ ] 提交：`feat: add structured LLM evidence extractor`
 
+**6.1 完成说明（2026-06-04）：**
+- 使用单次批量调用分析完整候选池，保留 LTR 救回低 Rule 排名候选的能力。
+- Evidence Extractor 为独立组件，尚未接入 pipeline，因此不改变当前线上推荐。
+- 严格接受纯 JSON 或完整合法 JSON code fence；带额外 Markdown/分析文本的响应会触发重试。
+- 定向测试 `tests/test_llm_evidence_extractor.py tests/test_llm.py` 已通过。
+
 ### 任务 6.2：把 Evidence 加入 FeatureBuilder
 
 **文件：**
 - 修改： `src/ranker/feature_builder.py`
 - 测试： `tests/test_feature_builder.py`
 
-- [ ] 增加特征：
+- [x] 增加特征：
 
 ```python
 "llm_scope_fit",
@@ -843,9 +849,9 @@ pytest tests/test_llm_evidence_extractor.py tests/test_llm.py -q
 "llm_too_narrow_penalty"
 ```
 
-- [ ] 缺失 LLM evidence 时使用中性默认值，而不是惩罚性默认值。
-- [ ] 建议默认值：fit score 为 `0.5`，penalty 为 `0.0`。
-- [ ] 运行：
+- [x] 缺失 LLM evidence 时使用中性默认值，而不是惩罚性默认值。
+- [x] 建议默认值：fit score 为 `0.5`，penalty 为 `0.0`。
+- [x] 运行：
 
 ```bash
 pytest tests/test_feature_builder.py -q
@@ -853,20 +859,42 @@ pytest tests/test_feature_builder.py -q
 
 - [ ] 提交：`feat: add LLM evidence ranker features`
 
+**6.2 完成说明（2026-06-04）：**
+- 保留 `FEATURE_NAMES` 为现有 20 维基础 schema，当前线上 LTR 模型继续可用。
+- 新增 `FEATURE_NAMES_WITH_LLM_EVIDENCE` 作为显式 26 维 schema；只有
+  evidence 实验与后续新模型消费。
+- `build_features()` 和 `attach_features_to_trace()` 已支持按候选注入 evidence。
+- 缺失或非法 fit evidence 使用 `0.5`，penalty 使用 `0.0`。
+- 定向测试 `tests/test_feature_builder.py` 已通过。
+
 ### 任务 6.3：对比 LLM 的三种角色
 
 **文件：**
 - 新建： `scripts/run_llm_role_ablation.py`
 - 测试： `tests/test_llm_rerank_ablation.py`
 
-- [ ] 对比：
+- [x] 对比：
   - `llm_ranker_direct`
   - `llm_evidence_plus_rule`
   - `llm_evidence_plus_learned_reranker`
-- [ ] 必须复用固定 `paper_profile_snapshot`。
-- [ ] 公平性检查：各变体的 coarse@50 和 rule@20 必须一致。
-- [ ] 所有变体都保存完整 candidate details。
+- [x] 必须复用固定 `paper_profile_snapshot`。
+- [x] 公平性检查：各变体的 coarse@50 和 rule@20 必须一致。
+- [x] 所有变体都保存完整 candidate details。
 - [ ] 提交：`feat: add LLM role ablation runner`
+
+**6.3 实现说明（2026-06-04）：**
+- `llm_ranker_direct` 关闭 LTR，保留直接 LLM 排序角色。
+- `llm_evidence_plus_rule` 使用结构化 evidence 80% + Rule 顺序先验 20%。
+- `llm_evidence_plus_learned_reranker` 使用结构化 evidence 80% + 当前
+  20 维 LTR 顺序先验 20%；保存 26 维 evidence features，但不声称 LTR
+  已消费这些新特征。
+- `scripts/precompute_evidence.py` 只针对每篇论文的真实 LLM 候选池提取一次
+  evidence；Runner 通过 `--evidence-snapshot` 让 Rule/LTR evidence 变体复用。
+- Rule/LTR prior 使用真实 rank；coverage 只统计当前候选集合，范围固定为
+  `[0, 1]`。
+- Runner 强制要求 `--baseline-eval`，并执行逐论文 denominator、coarse@50、
+  rule@20、完整 evidence coverage 与 evidence bit-equal 公平性检查。
+- 定向 pytest 已通过；真实 Light30/full-v2-90 评测由用户运行。
 
 ---
 

@@ -18,6 +18,7 @@ import json
 import sys
 import os
 import time
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, asdict
 from pathlib import Path
@@ -100,6 +101,9 @@ class EvaluationResult:
     coarse_hit_count: int = 0  # 粗排命中（实际期刊在 top 50 候选中）
     coarse_hit_in_rule_top10_count: int = 0  # 粗排候选在 RuleScorer top10 中
     coarse_hit_in_rule_top20_count: int = 0  # 粗排候选在 RuleScorer top20 中
+    fallback_count: int = 0
+    llm_success_count: int = 0
+    empty_recommendation_count: int = 0
 
     # 分质量等级统计 (A/B/C/D)
     level_a_count: int = 0
@@ -196,6 +200,66 @@ def load_papers_metadata(path: str) -> list:
         for line in f:
             papers.append(json.loads(line))
     return papers
+
+
+def _snapshot_match_key(title: str, venue: str) -> tuple[str, str]:
+    def normalize(value: str) -> str:
+        return " ".join(unicodedata.normalize("NFKC", value or "").casefold().split())
+
+    return normalize(title), normalize(venue)
+
+
+def attach_baseline_profile_snapshots(papers: list, baseline_eval_path: str) -> list:
+    """Attach fixed profiles from a completed evaluation to the current benchmark."""
+    with open(baseline_eval_path, "r", encoding="utf-8") as f:
+        baseline_eval = json.load(f)
+
+    snapshots = {}
+    for result in baseline_eval.get("paper_results", []):
+        snapshot = result.get("paper_profile_snapshot")
+        if isinstance(snapshot, dict) and snapshot:
+            snapshots[_snapshot_match_key(result.get("title", ""), result.get("venue", ""))] = snapshot
+
+    attached = []
+    missing = []
+    for paper in papers:
+        key = _snapshot_match_key(paper.get("title", ""), paper.get("venue", ""))
+        snapshot = snapshots.get(key)
+        if snapshot is None:
+            missing.append(paper.get("title", ""))
+            continue
+        merged = dict(paper)
+        merged["paper_profile_snapshot"] = dict(snapshot)
+        attached.append(merged)
+
+    if missing:
+        preview = ", ".join(title[:60] for title in missing[:3])
+        raise ValueError(
+            f"baseline eval 缺少固定 paper_profile_snapshot: {len(missing)} 篇"
+            f"（示例: {preview}）"
+        )
+    return attached
+
+
+def paper_profile_from_snapshot(snapshot: dict, paper: dict) -> PaperProfile:
+    """Build an isolated PaperProfile from a saved evaluation snapshot."""
+    list_fields = {
+        "research_area",
+        "ccf_research_area",
+        "keywords",
+        "techniques",
+        "datasets",
+        "evaluation_metrics",
+        "application_domain",
+    }
+    values = {
+        key: list(value) if key in list_fields and isinstance(value, list) else value
+        for key, value in snapshot.items()
+        if key in PaperProfile.model_fields
+    }
+    values["title"] = snapshot.get("title") or paper.get("title", "")
+    values["abstract"] = paper.get("abstract", "") or ""
+    return PaperProfile(**values)
 
 
 def resolve_benchmark_input(benchmark_profile: str, input_path: str | None) -> str:
@@ -371,6 +435,7 @@ def evaluate_single_paper(
     prompts: dict,
     mode: str,
     top_k: int,
+    reuse_profile_snapshot: bool = False,
 ) -> dict:
     """
     并行评估单篇论文，返回结果字典（非 EvaluationResult，避免锁竞争）
@@ -416,16 +481,22 @@ def evaluate_single_paper(
         mode=mode,
     )
 
-    # 解析论文
-    try:
-        profile = pipeline.parser.parse(
-            paper_input,
-            prompts["paper_profile_system"],
-            prompts["paper_profile_user"],
-        )
-    except Exception as e:
-        print(f"\n解析失败: {title[:30]}... - {e}")
-        return None
+    # 正式消融可复用固定快照，避免 PaperParser / QualityAssessor 随机性污染排序对比。
+    if reuse_profile_snapshot:
+        snapshot = paper.get("paper_profile_snapshot")
+        if not isinstance(snapshot, dict) or not snapshot:
+            raise ValueError(f"论文缺少固定 paper_profile_snapshot: {title}")
+        profile = paper_profile_from_snapshot(snapshot, paper)
+    else:
+        try:
+            profile = pipeline.parser.parse(
+                paper_input,
+                prompts["paper_profile_system"],
+                prompts["paper_profile_user"],
+            )
+        except Exception as e:
+            print(f"\n解析失败: {title[:30]}... - {e}")
+            return None
 
     # 推荐
     try:
@@ -434,25 +505,28 @@ def evaluate_single_paper(
             top_k=top_k,
             mode=mode,
             diagnostic_journal_ids=[target_journal.journal_id] if target_journal else None,
-            quality_prompts={
-                "system": prompts.get("paper_quality_assessor_system", ""),
-                "user": prompts.get("paper_quality_assessor_user", ""),
-            },
+            quality_prompts=(
+                None
+                if reuse_profile_snapshot
+                else {
+                    "system": prompts.get("paper_quality_assessor_system", ""),
+                    "user": prompts.get("paper_quality_assessor_user", ""),
+                }
+            ),
         )
     except Exception as e:
         print(f"\n推荐失败: {title[:30]}... - {e}")
         return None
 
     recommendations = rec_result.get("recommendations", [])
-    # 5.4 调试:LLM 静默返回 {"rankings": []} 时不抛异常但结果为空
-    # (与 "推荐失败" 异常路径区分,见 line 442-444)
+    rank_method = rec_result.get("rank_method", "unknown")
+    fallback_used = bool(rec_result.get("fallback_used", False))
     if not recommendations:
-        rank_method = rec_result.get("rank_method", "unknown")
         llm_pool_size = len(rec_result.get("llm_candidates", []))
         print(
-            f"\n推荐结果为空 (静默): {title[:30]}... | "
+            f"\n推荐结果为空: {title[:30]}... | "
             f"rank_method={rank_method} | llm_pool={llm_pool_size} | "
-            f"这通常说明 LLM 返回了空 rankings (没 raise 异常)"
+            "请检查候选召回或未处理异常"
         )
     candidates = rec_result.get("candidates", [])
     rule_ranked = rec_result.get("rule_ranked", [])
@@ -463,6 +537,8 @@ def evaluate_single_paper(
     learned_diag = rec_result.get("learned_diagnostics") or {}
     final_rank_source = rec_result.get("final_rank_source")
     learned_enabled = bool(learned_diag.get("status") == "ok")
+    llm_role_diag = rec_result.get("llm_role_diagnostics") or {}
+    llm_role_candidates = llm_role_diag.get("candidates") or {}
     recommended_journals = [rec.journal.journal_name for rec in recommendations]
     candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
     rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
@@ -633,6 +709,18 @@ def evaluate_single_paper(
         learned_rank_map = learned_diag.get("learned_rank") or {}
         venue_diagnostic["learned_score"] = learned_score_map.get(venue_journal.journal_id)
         venue_diagnostic["learned_rank"] = learned_rank_map.get(venue_journal.journal_id)
+    if venue_journal is not None and venue_journal.journal_id in llm_role_candidates:
+        venue_role = llm_role_candidates[venue_journal.journal_id]
+        venue_diagnostic["llm_role_rank"] = venue_role.get("final_rank")
+        venue_diagnostic["llm_role_final_score"] = venue_role.get("final_score")
+        if "evidence_composite" in venue_role:
+            venue_diagnostic["llm_evidence_rank"] = venue_role.get("final_rank")
+            venue_diagnostic["llm_evidence_final_score"] = venue_role.get(
+                "final_score"
+            )
+            venue_diagnostic["llm_evidence_composite"] = venue_role.get(
+                "evidence_composite"
+            )
     paper_profile_snapshot = {
         "title": profile.title,
         "abstract_len": len(abstract or ""),
@@ -642,12 +730,19 @@ def evaluate_single_paper(
         "method_type": profile.method_type,
         "paper_type": profile.paper_type,
         "keywords": profile.keywords,
+        "novelty": profile.novelty,
+        "difficulty_level": profile.difficulty_level,
+        "style": profile.style,
+        "sections_summary": profile.sections_summary,
+        "full_text_summary": profile.full_text_summary,
         "techniques": profile.techniques,
         "datasets": profile.datasets,
         "evaluation_metrics": profile.evaluation_metrics,
         "application_domain": profile.application_domain,
         "novelty_type": profile.novelty_type,
         "quality_level": profile.quality_level,
+        "quality_confidence": profile.quality_confidence,
+        "quality_reasons": profile.quality_reasons,
         "paper_strength": profile.paper_strength,
         "readiness": profile.readiness,
     }
@@ -676,6 +771,13 @@ def evaluate_single_paper(
         "quality_level": q_level,
         "ccf_research_area": profile.ccf_research_area,
         "paper_profile_snapshot": paper_profile_snapshot,
+        "evaluation_status": (
+            "fallback" if fallback_used else ("ok" if recommendations else "empty")
+        ),
+        "rank_method": rank_method,
+        "fallback_used": fallback_used,
+        "fallback_stage": rec_result.get("fallback_stage", ""),
+        "fallback_reason": rec_result.get("fallback_reason", ""),
         "area_match": bool(
             profile.ccf_research_area and research_area in profile.ccf_research_area
         ) if research_area else False,
@@ -720,8 +822,52 @@ def evaluate_single_paper(
             }
             for i, rec in enumerate(recommendations[:top_k])
         ],
+        "llm_candidates_detail": [
+            {
+                "journal_id": journal.journal_id,
+                "journal_name": journal.journal_name,
+                "candidate_input_rank": index + 1,
+                "candidate_rule_score": score,
+                "candidate_reasons": reasons,
+                **_retrieval_info(journal.journal_id),
+                **llm_role_candidates.get(journal.journal_id, {}),
+            }
+            for index, (journal, score, reasons) in enumerate(llm_candidates)
+        ],
+        **(
+            {
+                "llm_role_status": llm_role_diag.get("status"),
+                "llm_role": llm_role_diag.get("role"),
+                "llm_role_prior_source": llm_role_diag.get("prior_source"),
+                "llm_role_fallback_reason": llm_role_diag.get(
+                    "fallback_reason", ""
+                ),
+                **(
+                    {
+                        "llm_evidence_status": llm_role_diag.get("status"),
+                        "llm_evidence_coverage": llm_role_diag.get(
+                            "evidence_coverage", 0.0
+                        ),
+                        "llm_evidence_prior_source": llm_role_diag.get(
+                            "prior_source"
+                        ),
+                        "llm_evidence_fallback_reason": llm_role_diag.get(
+                            "fallback_reason", ""
+                        ),
+                    }
+                    if llm_role_diag.get("role") == "evidence"
+                    else {}
+                ),
+            }
+            if llm_role_diag
+            else {}
+        ),
         # 5.3: LTR 启用时 per-paper 顶层加 final_rank_source
-        **({"final_rank_source": final_rank_source} if learned_enabled else {}),
+        **(
+            {"final_rank_source": final_rank_source}
+            if learned_enabled or llm_role_diag
+            else {}
+        ),
     }
 
 
@@ -733,6 +879,7 @@ def run_evaluation(
     prompts: dict,
     show_progress: bool = True,
     workers: int = 4,
+    reuse_profile_snapshots: bool = False,
 ) -> EvaluationResult:
     """运行评估（并行）"""
 
@@ -751,6 +898,9 @@ def run_evaluation(
         coarse_hit_count=0,
         coarse_hit_in_rule_top10_count=0,
         coarse_hit_in_rule_top20_count=0,
+        fallback_count=0,
+        llm_success_count=0,
+        empty_recommendation_count=0,
         level_a_count=0, level_a_hit_at_5=0,
         level_b_count=0, level_b_hit_at_5=0,
         level_c_count=0, level_c_hit_at_5=0,
@@ -818,6 +968,17 @@ def run_evaluation(
             if paper_result.get("coarse_hit_in_rule_top20"):
                 result.coarse_hit_in_rule_top20_count += 1
 
+            if paper_result.get("fallback_used"):
+                result.fallback_count += 1
+            elif (
+                str(paper_result.get("rank_method", "")).startswith("llm")
+                and paper_result.get("recommended_journals")
+                and paper_result.get("llm_role_status") != "neutral_fallback"
+            ):
+                result.llm_success_count += 1
+            if not paper_result.get("recommended_journals"):
+                result.empty_recommendation_count += 1
+
             # 分质量等级统计
             q_level = paper_result["quality_level"]
             if q_level == "A":
@@ -853,7 +1014,7 @@ def run_evaluation(
         futures = {
             executor.submit(
                 evaluate_single_paper,
-                paper, pipeline, prompts, mode, top_k,
+                paper, pipeline, prompts, mode, top_k, reuse_profile_snapshots,
             ): paper
             for paper in papers
         }
@@ -863,6 +1024,7 @@ def run_evaluation(
             total=len(papers),
             desc=f"评估 [{mode}/top{top_k}/w{workers}]",
             unit="篇",
+            disable=not show_progress,
         )
 
         for future in pbar:
@@ -921,6 +1083,11 @@ def print_report(result: EvaluationResult):
     print(f"  粗排命中（top50候选包含实际期刊）: {result.coarse_hit_count}/{total} ({result.coarse_hit_count*100/total:.1f}%)")
     print(f"  粗排命中且在RuleScorer top10中: {result.coarse_hit_in_rule_top10_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top10_count*100/max(result.coarse_hit_count,1):.1f}%)")
     print(f"  粗排命中且在RuleScorer top20中: {result.coarse_hit_in_rule_top20_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top20_count*100/max(result.coarse_hit_count,1):.1f}%)")
+
+    print(f"\n--- 稳定性诊断 ---")
+    print(f"  LLM 正常完成: {result.llm_success_count}/{total}")
+    print(f"  Rule fallback: {result.fallback_count}/{total}")
+    print(f"  空推荐结果: {result.empty_recommendation_count}/{total}")
 
     print(f"\n--- 分质量等级 Hit@5 ---")
     if result.level_a_count > 0:
@@ -1023,6 +1190,12 @@ def save_results(
             "coarse_hit_rate": _rate(result.coarse_hit_count),
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
             "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
+            "fallback_count": result.fallback_count,
+            "fallback_rate": _rate(result.fallback_count),
+            "llm_success_count": result.llm_success_count,
+            "llm_success_rate": _rate(result.llm_success_count),
+            "empty_recommendation_count": result.empty_recommendation_count,
+            "empty_recommendation_rate": _rate(result.empty_recommendation_count),
             "area_subject_tag_match_count": result.area_subject_tag_match_count,
             "area_subject_tag_match_rate": _rate(result.area_subject_tag_match_count),
             "level_a_count": result.level_a_count,
@@ -1079,7 +1252,12 @@ def main():
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
     parser.add_argument("--workers", "-w", type=int, default=10,
-                        help="并行线程数（默认4）")
+                        help="并行线程数（默认10）")
+    parser.add_argument(
+        "--baseline-eval",
+        default="",
+        help="复用已完成评测中的固定 paper_profile_snapshot，保证排序消融口径一致",
+    )
 
     args = parser.parse_args()
     args.input = resolve_benchmark_input(args.benchmark_profile, args.input)
@@ -1089,6 +1267,9 @@ def main():
     papers = load_papers_metadata(args.input)
     if args.papers:
         papers = papers[:args.papers]
+    if args.baseline_eval:
+        papers = attach_baseline_profile_snapshots(papers, args.baseline_eval)
+        print(f"复用固定 PaperProfile 快照: {args.baseline_eval}")
     print(f"共 {len(papers)} 篇论文")
 
     # 初始化 pipeline
@@ -1118,7 +1299,16 @@ def main():
         print(f"开始评估 | 模式: {args.mode} | Top-{top_k}")
         print(f"{'='*70}")
 
-        result = run_evaluation(papers, pipeline, args.mode, top_k, prompts, show_progress=True, workers=args.workers)
+        result = run_evaluation(
+            papers,
+            pipeline,
+            args.mode,
+            top_k,
+            prompts,
+            show_progress=True,
+            workers=args.workers,
+            reuse_profile_snapshots=bool(args.baseline_eval),
+        )
 
         # 打印报告
         print_report(result)
@@ -1130,7 +1320,9 @@ def main():
                 mode=args.mode,
                 top_k=top_k,
                 clean_benchmark=False,
-                profile_snapshot_reused=False,
+                profile_snapshot_reused=bool(args.baseline_eval),
+                baseline_eval_path=args.baseline_eval or None,
+                workers=args.workers,
             )
             save_results(
                 result,

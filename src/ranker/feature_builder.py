@@ -1,12 +1,14 @@
 """Feature builder for LTR reranker (Task 4.1).
 
-本模块定义 paper-candidate pair 的稳定特征 schema,
+本模块定义 paper-candidate pair 的版本化特征 schema,
 供 LTR 训练与推理使用。
 
 纪律(per ADR 0001):
 
-- ``FEATURE_NAMES`` 是**锁定**的 schema,顺序与名字都不能改,改了会破坏
-  已保存的训练向量。
+- ``FEATURE_NAMES`` 是**锁定**的 20 维基础 schema,顺序与名字都不能改,
+  改了会破坏已保存的训练向量。
+- ``FEATURE_NAMES_WITH_LLM_EVIDENCE`` 是阶段 6.2 的显式 26 维 schema;
+  只有 evidence 实验和对应新模型可以消费。
 - 缺失 rank 用 ``MISSING_RANK_SENTINEL = 999.0``,不能默认成 0
   (0 会被 LTR 误读成"排名第一")。
 - 布尔/二元特征以 ``0.0`` / ``1.0`` 存储。
@@ -68,6 +70,22 @@ FEATURE_NAMES: List[str] = [
 assert len(FEATURE_NAMES) == len(set(FEATURE_NAMES)), "FEATURE_NAMES 出现重复"
 assert "gold_in_accepted_corpus" not in FEATURE_NAMES, "oracle 特征被错误加入"
 
+# 阶段 6.2:LLM Evidence 可选特征。默认路径仍使用上面的 20 维 FEATURE_NAMES。
+LLM_EVIDENCE_FEATURE_NAMES: List[str] = [
+    "llm_scope_fit",
+    "llm_method_fit",
+    "llm_application_fit",
+    "llm_journal_position_fit",
+    "llm_too_broad_penalty",
+    "llm_too_narrow_penalty",
+]
+FEATURE_NAMES_WITH_LLM_EVIDENCE: List[str] = (
+    list(FEATURE_NAMES) + list(LLM_EVIDENCE_FEATURE_NAMES)
+)
+assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == len(
+    set(FEATURE_NAMES_WITH_LLM_EVIDENCE)
+), "FEATURE_NAMES_WITH_LLM_EVIDENCE 出现重复"
+
 
 # trace["routes"] 中的子集,会映射到独立 rank 特征。
 # 列表顺序就是 build_features 抽取的字段顺序。
@@ -88,8 +106,10 @@ ROUTE_RANK_FIELDS: List[str] = [
 class PaperCandidateFeatures:
     """一篇 paper × 一本候选期刊 的结构化特征向量。
 
-    字段顺序与 ``FEATURE_NAMES`` 完全一致,改动请同步修改两边。
+    基础字段顺序与 ``FEATURE_NAMES`` 完全一致,evidence 字段顺序与
+    ``LLM_EVIDENCE_FEATURE_NAMES`` 完全一致。
     缺失字段用 ``MISSING_RANK_SENTINEL`` 或 ``0.0`` 填充。
+    缺失 LLM fit evidence 使用中性值 0.5,penalty 使用 0.0。
     """
 
     retrieval_rank: float = MISSING_RANK_SENTINEL
@@ -112,10 +132,17 @@ class PaperCandidateFeatures:
     journal_ccf_numeric: float = 0.0
     paper_strength: float = 0.0
     candidate_in_accepted_corpus: float = 0.0
+    llm_scope_fit: float = 0.5
+    llm_method_fit: float = 0.5
+    llm_application_fit: float = 0.5
+    llm_journal_position_fit: float = 0.5
+    llm_too_broad_penalty: float = 0.0
+    llm_too_narrow_penalty: float = 0.0
 
-    def to_vector(self) -> List[float]:
-        """按 ``FEATURE_NAMES`` 顺序返回数值向量。"""
-        return [float(getattr(self, name)) for name in FEATURE_NAMES]
+    def to_vector(self, feature_names: Optional[List[str]] = None) -> List[float]:
+        """按显式 schema 返回向量;默认保持现有 20 维 ``FEATURE_NAMES``。"""
+        selected_names = FEATURE_NAMES if feature_names is None else feature_names
+        return [float(getattr(self, name)) for name in selected_names]
 
 
 def _route_rank_or_sentinel(routes: Dict[str, Any], route_name: str) -> float:
@@ -148,6 +175,22 @@ def _has_route(routes: Dict[str, Any], prefix: str) -> float:
     return 1.0 if any(name.startswith(prefix) for name in routes) else 0.0
 
 
+def _llm_evidence_score(
+    llm_evidence: Optional[Dict[str, Any]],
+    field: str,
+    default: float,
+) -> float:
+    """抽取合法 [0,1] evidence 分数;缺失或非法时返回中性默认值。"""
+    if not isinstance(llm_evidence, dict):
+        return default
+    value = llm_evidence.get(field)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return default
+    if not 0 <= value <= 1:
+        return default
+    return float(value)
+
+
 def build_features(
     paper_profile: PaperProfile,
     journal: Journal,
@@ -155,6 +198,7 @@ def build_features(
     rule_rank: Optional[int],
     rule_score: float,
     candidate_in_accepted_corpus: bool,
+    llm_evidence: Optional[Dict[str, Any]] = None,
 ) -> PaperCandidateFeatures:
     """从候选生成器 trace + RuleScorer 结果 + 候选期刊元数据,构建特征向量。
 
@@ -198,6 +242,18 @@ def build_features(
         journal_ccf_numeric=ccf_level_to_numeric(getattr(journal, "ccf_rating", None)),
         paper_strength=float(paper_profile.paper_strength) if paper_profile.paper_strength is not None else 0.0,
         candidate_in_accepted_corpus=1.0 if candidate_in_accepted_corpus else 0.0,
+        llm_scope_fit=_llm_evidence_score(llm_evidence, "scope_fit", 0.5),
+        llm_method_fit=_llm_evidence_score(llm_evidence, "method_fit", 0.5),
+        llm_application_fit=_llm_evidence_score(llm_evidence, "application_fit", 0.5),
+        llm_journal_position_fit=_llm_evidence_score(
+            llm_evidence, "journal_position_fit", 0.5
+        ),
+        llm_too_broad_penalty=_llm_evidence_score(
+            llm_evidence, "too_broad_penalty", 0.0
+        ),
+        llm_too_narrow_penalty=_llm_evidence_score(
+            llm_evidence, "too_narrow_penalty", 0.0
+        ),
     )
 
 
@@ -228,12 +284,14 @@ def attach_features_to_trace(
     rule_ranks: Optional[Dict[str, int]],
     rule_scores: Optional[Dict[str, float]],
     accepted_paper_store: Optional[AcceptedPaperStore],
+    llm_evidence_by_journal: Optional[Dict[str, Dict[str, Any]]] = None,
+    feature_names: Optional[List[str]] = None,
 ) -> None:
     """把 features dict 注入到 trace 中每本期刊的 entry(原地修改)。
 
-    - trace[jid]["features"]:list[float],长度 == len(FEATURE_NAMES)
-    - trace[jid]["feature_names"]:list[str],== FEATURE_NAMES(冗余存,
-      方便 LTR 推理时不依赖外部 schema)
+    - 默认 trace[jid]["features"] 长度 == len(FEATURE_NAMES)。
+    - 显式传入 ``FEATURE_NAMES_WITH_LLM_EVIDENCE`` 时输出 26 维 evidence schema。
+    - trace[jid]["feature_names"] 冗余保存实际 schema,方便 LTR 推理时校验。
 
     缺失的 journal_id(在 journal_store 中找不到)会被**静默跳过**,
     不抛异常,也不污染该 entry。这是防御性策略,理论不会发生。
@@ -242,6 +300,8 @@ def attach_features_to_trace(
     """
     rule_ranks = rule_ranks or {}
     rule_scores = rule_scores or {}
+    llm_evidence_by_journal = llm_evidence_by_journal or {}
+    selected_feature_names = FEATURE_NAMES if feature_names is None else feature_names
 
     jids_in_trace = list(trace.keys())
     in_corpus = _compute_in_corpus_set(accepted_paper_store, jids_in_trace)
@@ -258,6 +318,7 @@ def attach_features_to_trace(
             rule_rank=rule_ranks.get(jid),
             rule_score=rule_scores.get(jid, 0.0),
             candidate_in_accepted_corpus=(jid in in_corpus),
+            llm_evidence=llm_evidence_by_journal.get(jid),
         )
-        entry["features"] = feats.to_vector()
-        entry["feature_names"] = list(FEATURE_NAMES)
+        entry["features"] = feats.to_vector(selected_feature_names)
+        entry["feature_names"] = list(selected_feature_names)

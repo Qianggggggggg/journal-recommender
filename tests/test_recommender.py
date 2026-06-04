@@ -48,6 +48,70 @@ class FixedLLMRanker:
         ][:top_k], "llm"
 
 
+class FailingLLMRanker:
+    def rank(self, candidates, paper_profile, top_k=5, retrieval_trace=None):
+        from src.ranker.llm_ranker import LLMRankerError
+
+        raise LLMRankerError("rankings 为空")
+
+
+class UnexpectedFailingLLMRanker:
+    def rank(self, candidates, paper_profile, top_k=5, retrieval_trace=None):
+        raise TypeError("unexpected score type")
+
+
+class DiagnosticLLMRanker:
+    def __init__(self):
+        self.received_learned_ranks = None
+
+    def rank_with_diagnostics(
+        self,
+        candidates,
+        paper_profile,
+        top_k=5,
+        retrieval_trace=None,
+        rule_ranks=None,
+        rule_scores=None,
+        learned_ranks=None,
+    ):
+        self.received_learned_ranks = learned_ranks
+        ranked = [
+            (journal, 0.9 - index * 0.1, ["evidence"], 0.8)
+            for index, (journal, _score, _reasons) in enumerate(candidates)
+        ]
+        return ranked[:top_k], "llm_evidence_rule", {
+            "status": "ok",
+            "prior_source": "rule",
+            "candidates": {
+                journal.journal_id: {"final_rank": index + 1}
+                for index, (journal, _score, _reasons) in enumerate(candidates)
+            },
+        }
+
+
+def test_pipeline_passes_per_call_evidence_diagnostics_without_changing_direct_ranker_path():
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(3)]
+    trace = {
+        journal.journal_id: {"retrieval_rank": index + 1, "routes": {}}
+        for index, journal in enumerate(journals)
+    }
+    ranked = [(journal, 1.0 - index * 0.1, []) for index, journal in enumerate(journals)]
+    diagnostic_ranker = DiagnosticLLMRanker()
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=diagnostic_ranker,
+        llm_anchor_guard={"enabled": False},
+    )
+
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=2)
+
+    assert result["rank_method"] == "llm_evidence_rule"
+    assert result["llm_role_diagnostics"]["status"] == "ok"
+    assert result["llm_role_diagnostics"]["candidates"]["j1"]["final_rank"] == 2
+    assert diagnostic_ranker.received_learned_ranks == {}
+
+
 def test_pipeline_integration():
     """测试完整流程（不含 LLM）"""
     from src.journals.journal_store import JournalStore
@@ -229,6 +293,53 @@ def test_pipeline_does_not_restore_rule_anchor_when_llm_score_gap_is_large():
     assert "protected" not in [rec.journal.journal_id for rec in result["recommendations"]]
 
 
+def test_pipeline_falls_back_to_rule_top_k_when_llm_ranking_fails():
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(8)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, [f"rule-{i}"]) for i, journal in enumerate(journals)]
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FailingLLMRanker(),
+    )
+
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    assert result["rank_method"] == "rule_fallback"
+    assert result["fallback_used"] is True
+    assert result["fallback_stage"] == "llm_ranking"
+    assert "rankings 为空" in result["fallback_reason"]
+    assert [rec.journal.journal_id for rec in result["recommendations"]] == [
+        "j0",
+        "j1",
+        "j2",
+        "j3",
+        "j4",
+    ]
+    assert [rec.match_reasons for rec in result["recommendations"]] == [
+        ["rule-0"],
+        ["rule-1"],
+        ["rule-2"],
+        ["rule-3"],
+        ["rule-4"],
+    ]
+
+
+def test_pipeline_falls_back_when_llm_stage_raises_unexpected_error():
+    journal = Journal(journal_id="j0", journal_name="J0")
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator([journal], {"j0": {"routes": {}}}),
+        rule_scorer=FixedRuleScorer([(journal, 1.0, ["rule"])]),
+        llm_ranker=UnexpectedFailingLLMRanker(),
+    )
+
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=1)
+
+    assert result["rank_method"] == "rule_fallback"
+    assert result["recommendations"][0].journal.journal_id == "j0"
+    assert "unexpected score type" in result["fallback_reason"]
+
+
 # ---------------------------------------------------------------------------
 # Task 5.3 — LTR 接入 + 默认 OFF bit-equal
 # ---------------------------------------------------------------------------
@@ -313,6 +424,33 @@ def test_pipeline_with_ltr_reranks_llm_candidates():
     # 5 本 learned_rank 都 1..5
     ranks = sorted(result["learned_diagnostics"]["learned_rank"].values())
     assert ranks == [1, 2, 3, 4, 5]
+
+
+def test_pipeline_passes_learned_ranks_to_diagnostic_ranker():
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(3)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    learned_ranks = {"j0": 3, "j1": 1, "j2": 2}
+
+    def _stub_rerank(candidates):
+        return list(candidates), {
+            "learned_score": {jid: 0.5 for jid in learned_ranks},
+            "learned_rank": learned_ranks,
+            "status": "ok",
+        }
+
+    diagnostic_ranker = DiagnosticLLMRanker()
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=diagnostic_ranker,
+        learned_reranker=_StubLTRAdapter(enabled=True, compute_scores_fn=_stub_rerank),
+        llm_anchor_guard={"enabled": False},
+    )
+
+    pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=2)
+
+    assert diagnostic_ranker.received_learned_ranks == learned_ranks
 
 
 def test_pipeline_with_ltr_disabled_falls_back():

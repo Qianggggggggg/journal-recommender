@@ -29,6 +29,8 @@ def build_benchmark_manifest(
     prompts_path: str | Path = "configs/prompts.yaml",
     clean_benchmark: bool = False,
     profile_snapshot_reused: bool = False,
+    baseline_eval_path: str | Path | None = None,
+    workers: int | None = None,
     timestamp: str | None = None,
 ) -> dict[str, Any]:
     """Build a compact manifest that makes an evaluation result reproducible."""
@@ -38,7 +40,7 @@ def build_benchmark_manifest(
     with app_config_path.open("r", encoding="utf-8") as f:
         app_config = yaml.safe_load(f) or {}
 
-    return {
+    manifest = {
         "timestamp": timestamp or datetime.now().strftime("%Y%m%d_%H%M%S"),
         "input_path": str(input_path),
         "mode": mode,
@@ -50,3 +52,8 @@ def build_benchmark_manifest(
         "clean_benchmark": clean_benchmark,
         "profile_snapshot_reused": profile_snapshot_reused,
     }
+    if baseline_eval_path is not None:
+        manifest["baseline_eval_path"] = str(baseline_eval_path)
+    if workers is not None:
+        manifest["workers"] = workers
+    return manifest

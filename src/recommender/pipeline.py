@@ -10,7 +10,7 @@ from ..papers.paper_model import PaperInput, PaperProfile
 from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
 from ..ranker.rule_scorer import RuleScorer
-from ..ranker.llm_ranker import LLMRanker, LLMRankerError
+from ..ranker.llm_ranker import LLMRanker
 from ..ranker.ltr_adapter import LTRAdapter  # 5.3
 
 logger = logging.getLogger(__name__)
@@ -124,6 +124,14 @@ class RecommenderPipeline:
 
         # 2.5 质量调整软权重（在 Pipeline 中统一应用，解耦）
         rule_ranked_all = self._apply_quality_adjustment(rule_ranked_all, paper_profile)
+        rule_ranks_map = {
+            journal.journal_id: index + 1
+            for index, (journal, _score, _reasons) in enumerate(rule_ranked_all)
+        }
+        rule_scores_map = {
+            journal.journal_id: float(score)
+            for journal, score, _reasons in rule_ranked_all
+        }
         self._emit_progress(
             progress_callback,
             stage="rule_ranking",
@@ -185,13 +193,6 @@ class RecommenderPipeline:
         }
         if self.learned_reranker and self.learned_reranker.enabled:
             try:
-                rule_ranks_map = {
-                    j.journal_id: i + 1
-                    for i, (j, _, _) in enumerate(rule_ranked_all)
-                }
-                rule_scores_map = {
-                    j.journal_id: float(s) for j, s, _ in rule_ranked_all
-                }
                 reranked, learned_diag = self.learned_reranker.compute_scores(
                     paper_profile=paper_profile,
                     llm_candidates=llm_candidates,
@@ -208,8 +209,10 @@ class RecommenderPipeline:
                     "status": "fallback_pipeline_error",
                 }
 
-        # 3. 阶段二：LLM 精排（如失败则抛出明确错误，不再降级）
+        # 3. 阶段二：LLM 精排；重试耗尽后使用 Rule TopK，避免返回空结果。
         rank_method = "rule"
+        fallback_reason = ""
+        llm_role_diag: Dict[str, Any] = {}
         if self.llm_ranker:
             try:
                 self._emit_progress(
@@ -219,20 +222,50 @@ class RecommenderPipeline:
                     message=f"正在进行 LLM 精排: {len(llm_candidates)} 个候选",
                     llm_candidate_count=len(llm_candidates),
                 )
-                llm_ranked_all, rank_method = self.llm_ranker.rank(
-                    llm_candidates,
-                    paper_profile,
-                    top_k=len(llm_candidates),
-                    retrieval_trace=retrieval_trace,
+                rank_with_diagnostics = getattr(
+                    self.llm_ranker, "rank_with_diagnostics", None
                 )
-            except LLMRankerError as e:
-                raise LLMRankerError(f"LLM精排失败: {e}")
-            llm_ranked = self._select_final_llm_ranked(llm_ranked_all, llm_candidates, top_k)
+                if callable(rank_with_diagnostics):
+                    llm_ranked_all, rank_method, llm_role_diag = (
+                        rank_with_diagnostics(
+                            llm_candidates,
+                            paper_profile,
+                            top_k=len(llm_candidates),
+                            retrieval_trace=retrieval_trace,
+                            rule_ranks=rule_ranks_map,
+                            rule_scores=rule_scores_map,
+                            learned_ranks=learned_diag.get("learned_rank") or {},
+                        )
+                    )
+                else:
+                    llm_ranked_all, rank_method = self.llm_ranker.rank(
+                        llm_candidates,
+                        paper_profile,
+                        top_k=len(llm_candidates),
+                        retrieval_trace=retrieval_trace,
+                    )
+                llm_ranked = self._select_final_llm_ranked(
+                    llm_ranked_all,
+                    llm_candidates,
+                    top_k,
+                )
+            except Exception as e:
+                logger.warning("LLM ranking failed; using Rule TopK fallback: %s", e)
+                rank_method = "rule_fallback"
+                fallback_reason = f"{type(e).__name__}: {e}"[:500]
+                llm_ranked = [
+                    (journal, score, reasons, 0.5)
+                    for journal, score, reasons in rule_ranked_all[:top_k]
+                ]
             self._emit_progress(
                 progress_callback,
                 stage="llm_ranking",
                 percent=78,
-                message="LLM 精排完成",
+                message=(
+                    "LLM 精排失败，已使用规则排序结果"
+                    if rank_method == "rule_fallback"
+                    else "LLM 精排完成"
+                ),
                 llm_candidate_count=len(llm_candidates),
             )
         else:
@@ -244,14 +277,26 @@ class RecommenderPipeline:
         final_rank_source = "llm"
         if not self.llm_ranker:
             final_rank_source = "rule"
-        elif rank_method != "llm":
+        elif rank_method == "rule_fallback":
             final_rank_source = "rule_fallback"
+        elif rank_method.startswith("llm_evidence_"):
+            final_rank_source = rank_method
         if (
-            self.learned_reranker
+            rank_method == "llm"
+            and self.learned_reranker
             and self.learned_reranker.enabled
             and learned_diag.get("status") == "ok"
         ):
             final_rank_source = "llm_after_learned_rerank"
+
+        if llm_role_diag and learned_diag.get("status") == "ok":
+            learned_scores = learned_diag.get("learned_score") or {}
+            learned_ranks = learned_diag.get("learned_rank") or {}
+            for journal_id, detail in (
+                llm_role_diag.get("candidates") or {}
+            ).items():
+                detail["learned_score"] = learned_scores.get(journal_id)
+                detail["learned_rank"] = learned_ranks.get(journal_id)
 
         # 4. 构建推荐结果（直接使用 LLMRanker 输出的 reasons，不再单独调用 Explainer）
         self._emit_progress(
@@ -283,6 +328,15 @@ class RecommenderPipeline:
             "mode_used": mode,
             "rank_method": rank_method,
         }
+        if rank_method == "rule_fallback":
+            result.update({
+                "fallback_used": True,
+                "fallback_stage": "llm_ranking",
+                "fallback_reason": fallback_reason,
+            })
+        if llm_role_diag:
+            result["llm_role_diagnostics"] = llm_role_diag
+            result["final_rank_source"] = final_rank_source
 
         # 5.3: 默认 OFF 时**完全不写**新 key（bit-equal baseline 强约束）。
         if (

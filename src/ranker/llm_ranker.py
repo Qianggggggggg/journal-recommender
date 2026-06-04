@@ -115,8 +115,29 @@ JSON 对象必须形如：
         else:
             raise LLMRankerError(f"LLM响应格式错误，期望 dict 或 list，实际: {type(data)}")
 
+        if not isinstance(rankings, list) or not rankings:
+            raise LLMRankerError("LLM响应中的 rankings 为空")
+
+        for item in rankings:
+            if not isinstance(item, dict) or not isinstance(item.get("journal_id"), str):
+                raise LLMRankerError("LLM响应包含无效 ranking item")
+            if "score" in item and not isinstance(item["score"], (int, float)):
+                raise LLMRankerError("LLM ranking item 的 score 必须是数值")
+            if "confidence" in item and not isinstance(item["confidence"], (int, float)):
+                raise LLMRankerError("LLM ranking item 的 confidence 必须是数值")
+            if "reasons" in item and not isinstance(item["reasons"], list):
+                raise LLMRankerError("LLM ranking item 的 reasons 必须是列表")
+
         # 构建结果
-        rank_map = {r["journal_id"]: r for r in rankings}
+        candidate_ids = {journal.journal_id for journal, _, _ in candidates}
+        rank_map = {
+            item["journal_id"]: item
+            for item in rankings
+            if item["journal_id"] in candidate_ids
+        }
+        if not rank_map:
+            raise LLMRankerError("LLM rankings 没有匹配任何候选期刊")
+
         results = []
         for journal, rule_score, reasons in candidates:
             if journal.journal_id in rank_map:
