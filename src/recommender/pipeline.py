@@ -9,6 +9,7 @@ from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
 from ..papers.quality_assessor import PaperQualityAssessor
 from ..retriever.candidate_generator import CandidateGenerator
+from ..ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE  # 6.4
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker
 from ..ranker.ltr_adapter import LTRAdapter  # 5.3
@@ -27,6 +28,11 @@ class RecommenderPipeline:
         quality_assessor: Optional[PaperQualityAssessor] = None,
         llm_anchor_guard: Optional[Dict[str, Any]] = None,
         learned_reranker: Optional[LTRAdapter] = None,
+        # 6.4: per-paper LLM evidence snapshot, keyed by normalized title.
+        # When set and the paper title is present, attach_features uses the
+        # 26-dim schema (FEATURE_NAMES_WITH_LLM_EVIDENCE).
+        evidence_lookup: Optional[Dict[str, Dict[str, Dict[str, Any]]]] = None,
+        feature_schema: str = "20_dim_base",  # "20_dim_base" | "26_dim_with_llm_evidence"
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
@@ -34,6 +40,15 @@ class RecommenderPipeline:
         self.quality_assessor = quality_assessor
         self.llm_anchor_guard = llm_anchor_guard or {}
         self.learned_reranker = learned_reranker  # 5.3: 默认 None ⇒ 完全跳过 LTR 路径
+        # 6.4: evidence_lookup + feature_schema
+        self.evidence_lookup = evidence_lookup or {}
+        self.feature_schema = feature_schema
+        # 决定 attach_features 的 expected feature dim
+        # 26-dim 仅在 feature_schema="26_dim_with_llm_evidence" 时启用,
+        # 且 paper 标题必须命中 evidence_lookup(否则回退 20 维,见 recommend())
+        self._expected_feature_dim = (
+            26 if feature_schema == "26_dim_with_llm_evidence" else 20
+        )
 
     def recommend(
         self,
@@ -138,6 +153,27 @@ class RecommenderPipeline:
             percent=62,
             message=f"规则排序完成: {len(rule_ranked_all)} 个候选",
             rule_candidate_count=len(rule_ranked_all),
+        )
+
+        # 2.6 (6.4) 把 LTR 训练特征注入 retrieval_trace(per journal)
+        # 默认 20 维;当 feature_schema="26_dim_with_llm_evidence" 且
+        # paper 标题命中 evidence_lookup 时,输出 26 维 evidence schema。
+        # 缺 paper_evidence 时**自动回退** 20 维(防御性,不破坏 baseline)。
+        paper_title_key = " ".join((paper_profile.title or "").casefold().split())
+        paper_evidence = self.evidence_lookup.get(paper_title_key, {})
+        feature_names: Optional[List[str]] = None
+        if self._expected_feature_dim == 26 and paper_evidence:
+            feature_names = FEATURE_NAMES_WITH_LLM_EVIDENCE
+        # accepted_paper_store 暂未在 pipeline 持有,传 None(attach_features
+        # 内部会按 store=None 处理,candidate_in_accepted_corpus 全 0)。
+        self.candidate_generator.attach_features(
+            trace=retrieval_trace,
+            paper_profile=paper_profile,
+            rule_ranks=rule_ranks_map,
+            rule_scores=rule_scores_map,
+            accepted_paper_store=None,
+            feature_names=feature_names,
+            llm_evidence_by_journal=paper_evidence,
         )
 
         # 构建 LLM 候选集：top20 + scope 边界强候选 + 同领域参考候选 + 受控 typical-only 候选
@@ -339,6 +375,8 @@ class RecommenderPipeline:
             result["final_rank_source"] = final_rank_source
 
         # 5.3: 默认 OFF 时**完全不写**新 key（bit-equal baseline 强约束）。
+        # 6.4: 同时把 learned_score / learned_rank 顶层暴露给下游消费者
+        # (例如 6.4 ablation runner 需要把 learned_score 注入 role ranker)。
         if (
             self.learned_reranker
             and self.learned_reranker.enabled
@@ -346,6 +384,8 @@ class RecommenderPipeline:
         ):
             result["learned_diagnostics"] = learned_diag
             result["final_rank_source"] = final_rank_source
+            result["learned_score"] = learned_diag.get("learned_score", {})
+            result["learned_rank"] = learned_diag.get("learned_rank", {})
 
         # 标题模式加警告
         if mode == "title":

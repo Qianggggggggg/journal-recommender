@@ -12,6 +12,7 @@ class DummyGenerator:
     def __init__(self, candidates, trace):
         self.candidates = candidates
         self.trace = trace
+        self.attach_features_calls: list[dict] = []
 
     def generate_with_trace(
         self,
@@ -22,6 +23,26 @@ class DummyGenerator:
         diagnostic_journal_ids=None,
     ):
         return self.candidates[:top_k], self.trace
+
+    def attach_features(
+        self,
+        trace,
+        paper_profile,
+        rule_ranks,
+        rule_scores,
+        accepted_paper_store=None,
+        feature_names=None,
+        llm_evidence_by_journal=None,
+    ):
+        """6.4: 记录 kwargs。默认 no-op(不写入 features),所以 trace[jid]
+        不会增加 ``features`` 字段。
+        """
+        self.attach_features_calls.append(
+            {
+                "feature_names": feature_names,
+                "llm_evidence_by_journal": llm_evidence_by_journal,
+            }
+        )
 
 
 class FixedRuleScorer:
@@ -503,3 +524,223 @@ def test_pipeline_with_ltr_missing_model_falls_back():
     assert result["rank_method"] == "llm"
     assert "learned_diagnostics" not in result
     assert "final_rank_source" not in result
+
+
+# ---------------------------------------------------------------------------
+# Task 6.4 — Pipeline threads evidence_lookup to 26-dim attach_features
+# ---------------------------------------------------------------------------
+
+
+class _AttachingCandidateGenerator(DummyGenerator):
+    """DummyGenerator that records attach_features() kwargs and writes 26-dim features.
+
+    Mimics the real CandidateGenerator.attach_features contract: it builds a
+    feature vector of length ``len(feature_names)`` per journal id.
+    """
+
+    def __init__(self, candidates, trace, store):
+        super().__init__(candidates, trace)
+        self.store = store
+        self.attach_features_calls: list[dict] = []
+
+    def attach_features(
+        self,
+        trace,
+        paper_profile,
+        rule_ranks,
+        rule_scores,
+        accepted_paper_store=None,
+        feature_names=None,
+        llm_evidence_by_journal=None,
+    ):
+        self.attach_features_calls.append(
+            {
+                "feature_names": feature_names,
+                "llm_evidence_by_journal": llm_evidence_by_journal,
+            }
+        )
+        # Mimic the real attach_features: write a features list of the requested dim.
+        from src.ranker.feature_builder import FEATURE_NAMES, FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+        dim = len(feature_names) if feature_names is not None else len(FEATURE_NAMES)
+        for jid, entry in trace.items():
+            evidence = (llm_evidence_by_journal or {}).get(jid) or {}
+            evidence_values = [
+                evidence.get("scope_fit", 0.5),
+                evidence.get("method_fit", 0.5),
+                evidence.get("application_fit", 0.5),
+                evidence.get("journal_position_fit", 0.5),
+                evidence.get("too_broad_penalty", 0.0),
+                evidence.get("too_narrow_penalty", 0.0),
+            ]
+            # Base 20-dim vector is all zeros; pad with evidence values to hit dim.
+            base = [0.0] * len(FEATURE_NAMES)
+            full = base + evidence_values
+            entry["features"] = full[:dim]
+            entry["feature_names"] = (
+                list(feature_names)
+                if feature_names is not None
+                else list(FEATURE_NAMES)
+            )
+
+
+def test_pipeline_attaches_26_dim_features_when_evidence_supplied():
+    """When evidence_lookup is set on the pipeline and LTR is 26-dim,
+    the trace's per-journal features array is 26 long."""
+    from src.journals.journal_model import Journal
+    from src.journals.journal_store import JournalStore
+
+    journal_a = Journal(journal_id="j1", journal_name="J1")
+    journal_b = Journal(journal_id="j2", journal_name="J2")
+    store = JournalStore()
+    store.add_journal(journal_a)
+    store.add_journal(journal_b)
+
+    trace = {
+        "j1": {"retrieval_rank": 1, "routes": {}},
+        "j2": {"retrieval_rank": 2, "routes": {}},
+    }
+    ranked = [(journal_a, 1.0, []), (journal_b, 0.8, [])]
+    snapshot = {
+        "test paper": {
+            "j1": {
+                "scope_fit": 0.9,
+                "method_fit": 0.8,
+                "application_fit": 0.7,
+                "journal_position_fit": 0.85,
+                "too_broad_penalty": 0.1,
+                "too_narrow_penalty": 0.05,
+            },
+            "j2": {
+                "scope_fit": 0.4,
+                "method_fit": 0.3,
+                "application_fit": 0.5,
+                "journal_position_fit": 0.2,
+                "too_broad_penalty": 0.0,
+                "too_narrow_penalty": 0.0,
+            },
+        }
+    }
+
+    llm_ranked = [
+        (journal_a, 0.9, ["llm"], 0.8),
+        (journal_b, 0.8, ["llm"], 0.8),
+    ]
+    gen = _AttachingCandidateGenerator([journal_a, journal_b], trace, store)
+    pipeline = RecommenderPipeline(
+        candidate_generator=gen,
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        evidence_lookup=snapshot,
+        feature_schema="26_dim_with_llm_evidence",
+    )
+
+    result = pipeline.recommend(
+        PaperInput(title="Test Paper", abstract="...", mode="abstract"),
+        PaperProfile(title="Test Paper"),
+        top_k=5,
+        mode="abstract",
+    )
+
+    # Pipeline called attach_features once, with the 26-dim schema and the
+    # per-paper evidence dict.
+    assert len(gen.attach_features_calls) == 1
+    call = gen.attach_features_calls[0]
+    assert call["feature_names"] is not None
+    assert len(call["feature_names"]) == 26
+    assert call["llm_evidence_by_journal"] == snapshot["test paper"]
+
+    # Per-journal features are now 26 long.
+    retrieval_trace = result["retrieval_trace"]
+    for jid, entry in retrieval_trace.items():
+        if "features" in entry:
+            assert len(entry["features"]) == 26
+    assert len(retrieval_trace["j1"]["features"]) == 26
+    assert len(retrieval_trace["j2"]["features"]) == 26
+
+
+def test_pipeline_omits_evidence_schema_when_paper_not_in_snapshot():
+    """When the paper title isn't in evidence_lookup, pipeline falls back to
+    20-dim base schema (legacy behavior) even if feature_schema='26_dim...'."""
+    from src.journals.journal_model import Journal
+    from src.journals.journal_store import JournalStore
+
+    journal_a = Journal(journal_id="j1", journal_name="J1")
+    store = JournalStore()
+    store.add_journal(journal_a)
+
+    trace = {"j1": {"retrieval_rank": 1, "routes": {}}}
+    ranked = [(journal_a, 1.0, [])]
+    llm_ranked = [(journal_a, 0.9, ["llm"], 0.8)]
+    gen = _AttachingCandidateGenerator([journal_a], trace, store)
+    pipeline = RecommenderPipeline(
+        candidate_generator=gen,
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        evidence_lookup={},  # paper not in snapshot
+        feature_schema="26_dim_with_llm_evidence",
+    )
+
+    result = pipeline.recommend(
+        PaperInput(title="Unseen Paper", abstract="...", mode="abstract"),
+        PaperProfile(title="Unseen Paper"),
+        top_k=5,
+        mode="abstract",
+    )
+
+    assert len(gen.attach_features_calls) == 1
+    call = gen.attach_features_calls[0]
+    # feature_names is None → 20-dim default
+    assert call["feature_names"] is None
+    # features still attached (20-dim)
+    assert len(result["retrieval_trace"]["j1"]["features"]) == 20
+
+
+def test_pipeline_surfaces_learned_score_in_result_when_ltr_enabled():
+    """When LTR is enabled, result dict exposes learned_score / learned_rank."""
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(5)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(5)]
+
+    def _stub_rerank(candidates):
+        diag = {
+            "learned_score": {c[0].journal_id: 0.5 + i * 0.1 for i, c in enumerate(candidates)},
+            "learned_rank": {c[0].journal_id: i + 1 for i, c in enumerate(candidates)},
+            "status": "ok",
+        }
+        return list(candidates), diag
+
+    ltr = _StubLTRAdapter(enabled=True, compute_scores_fn=_stub_rerank)
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+        learned_reranker=ltr,
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=5)
+
+    # learned_score/learned_rank surfaced in result
+    assert "learned_score" in result
+    assert "learned_rank" in result
+    assert set(result["learned_score"].keys()) == {f"j{i}" for i in range(5)}
+    assert sorted(result["learned_rank"].values()) == [1, 2, 3, 4, 5]
+
+
+def test_pipeline_omits_learned_score_when_ltr_off():
+    """Backward compat: when learned_reranker is None, learned_score key is absent."""
+    journals = [Journal(journal_id=f"j{i}", journal_name=f"J{i}") for i in range(3)]
+    trace = {journal.journal_id: {"routes": {}} for journal in journals}
+    ranked = [(journal, 1.0 - i * 0.05, []) for i, journal in enumerate(journals)]
+    llm_ranked = [(journals[i], 0.9 - i * 0.05, ["llm"], 0.8) for i in range(3)]
+
+    pipeline = RecommenderPipeline(
+        candidate_generator=DummyGenerator(journals, trace),
+        rule_scorer=FixedRuleScorer(ranked),
+        llm_ranker=FixedLLMRanker(llm_ranked),
+    )
+    result = pipeline.recommend(PaperInput(title="T"), PaperProfile(title="T"), top_k=3)
+
+    assert "learned_score" not in result
+    assert "learned_rank" not in result
