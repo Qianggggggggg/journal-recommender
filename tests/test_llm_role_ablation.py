@@ -91,6 +91,67 @@ def _trace(journals):
     }
 
 
+def test_evidence_role_ranker_combines_ltr_score_with_evidence_and_rank():
+    """With ltr_score_weight=0.3, the final_score formula uses
+    evidence (0.5*0.8) + rank_prior (0.2*1.0) + ltr_score (0.3*0.7) = 0.81
+    for journal with evidence_composite=0.8, rank=1/1, ltr_score=0.7.
+
+    Weights are renormalized so the 3 components sum to 1.0:
+    0.5/(0.5+0.2+0.3) = 0.50
+    0.2/(0.5+0.2+0.3) = 0.20
+    0.3/(0.5+0.2+0.3) = 0.30
+    """
+    ranker = LLMEvidenceRoleRanker(
+        evidence_extractor=FixedEvidenceExtractor({"j1": _evidence(0.8)}),
+        journal_store=StubJournalStore([_journal("j1")]),
+        prior_source="learned",
+        evidence_weight=0.5,
+        prior_weight=0.2,
+        ltr_score_weight=0.3,
+    )
+    ranked, _m, diag = ranker.rank_with_diagnostics(
+        candidates=[(_journal("j1"), 1.0, [])],
+        paper_profile=PaperProfile(title="P1"),
+        retrieval_trace=_trace([_journal("j1")]),
+        rule_ranks={"j1": 1},
+        rule_scores={"j1": 1.0},
+        learned_ranks={"j1": 1},  # rank 1 of 1 -> prior 1.0
+        learned_scores={"j1": 0.7},
+    )
+    # 0.50*0.8 + 0.20*1.0 + 0.30*0.7 = 0.40 + 0.20 + 0.21 = 0.81
+    assert diag["candidates"]["j1"]["final_score"] == pytest.approx(0.81, abs=0.01)
+    # Diagnostic fields should expose the LTR contribution
+    detail = diag["candidates"]["j1"]
+    assert detail["ltr_score"] == pytest.approx(0.7)
+    assert detail["ltr_score_weight"] == pytest.approx(0.30, abs=0.01)
+
+
+def test_evidence_role_ranker_zero_ltr_score_weight_matches_legacy_formula():
+    """ltr_score_weight=0.0 must reproduce the legacy 2-component formula
+    (evidence*W + rank_prior*(1-W)), and the diagnostic ltr_score must be 0.0
+    when learned_scores is omitted or empty."""
+    ranker = LLMEvidenceRoleRanker(
+        evidence_extractor=FixedEvidenceExtractor({"j1": _evidence(0.6)}),
+        journal_store=StubJournalStore([_journal("j1")]),
+        prior_source="rule",
+        evidence_weight=0.8,
+        prior_weight=0.2,
+        ltr_score_weight=0.0,
+    )
+    _ranked, _m, diag = ranker.rank_with_diagnostics(
+        candidates=[(_journal("j1"), 1.0, [])],
+        paper_profile=PaperProfile(title="P2"),
+        retrieval_trace=_trace([_journal("j1")]),
+        rule_ranks={"j1": 1},
+        rule_scores={"j1": 1.0},
+    )
+    detail = diag["candidates"]["j1"]
+    # Legacy: 0.8*0.6 + 0.2*1.0 = 0.68
+    assert detail["final_score"] == pytest.approx(0.68, abs=0.01)
+    assert detail["ltr_score"] == 0.0
+    assert detail["ltr_score_weight"] == 0.0
+
+
 def test_llm_role_variants_define_direct_rule_and_learned_roles():
     assert set(LLM_ROLE_VARIANTS) == {
         "llm_ranker_direct",

@@ -98,13 +98,20 @@ class LLMEvidenceRoleRanker:
         prior_source: str = "rule",
         evidence_weight: float = 0.8,
         prior_weight: float = 0.2,
+        ltr_score_weight: float = 0.0,
         evidence_snapshot: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> None:
         if prior_source not in {"rule", "learned"}:
             raise ValueError(f"Unsupported prior_source: {prior_source}")
-        if evidence_weight < 0 or prior_weight < 0:
-            raise ValueError("evidence_weight and prior_weight must be non-negative")
-        total_weight = evidence_weight + prior_weight
+        if (
+            evidence_weight < 0
+            or prior_weight < 0
+            or ltr_score_weight < 0
+        ):
+            raise ValueError(
+                "evidence_weight, prior_weight, ltr_score_weight must be non-negative"
+            )
+        total_weight = evidence_weight + prior_weight + ltr_score_weight
         if total_weight <= 0:
             raise ValueError("At least one ranking weight must be positive")
 
@@ -112,8 +119,12 @@ class LLMEvidenceRoleRanker:
         self.journal_store = journal_store
         self.accepted_paper_store = accepted_paper_store
         self.prior_source = prior_source
+        # Renormalize to sum=1.0 so the final_score formula is
+        # evidence*W_e + rank_prior*W_p + ltr_score*W_l and never inflates
+        # beyond 1.0 just because a caller passed unnormalized weights.
         self.evidence_weight = float(evidence_weight / total_weight)
         self.prior_weight = float(prior_weight / total_weight)
+        self.ltr_score_weight = float(ltr_score_weight / total_weight)
         # Fix #1: per-paper evidence snapshot, keyed by normalized title.
         # When a paper's evidence is requested, the ranker looks it up here
         # and skips the LLM extractor call entirely.
@@ -140,6 +151,7 @@ class LLMEvidenceRoleRanker:
         rule_scores: Optional[Dict[str, float]] = None,
         precomputed_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
         learned_ranks: Optional[Dict[str, int]] = None,
+        learned_scores: Optional[Dict[str, float]] = None,
     ) -> Tuple[List[EvidenceRankedCandidate], str, Dict[str, Any]]:
         """Rank candidates and return diagnostics local to this invocation.
 
@@ -153,6 +165,12 @@ class LLMEvidenceRoleRanker:
         learned ranks via the actual LTR model. For ``prior_source="rule"``, the
         prior is taken from ``rule_ranks``. Missing prior ranks are rejected
         instead of silently falling back to input-list position.
+
+        ``learned_scores`` (Task 6.4, LTR score as formula component): when
+        supplied AND the ranker was constructed with ``ltr_score_weight > 0``,
+        the per-candidate LTR score is added as a third weighted component in
+        the final formula. When omitted or empty, the LTR contribution is 0
+        and the formula collapses to the legacy 2-component shape.
         """
         if not candidates:
             return [], self._rank_method(), {
@@ -161,6 +179,7 @@ class LLMEvidenceRoleRanker:
                 "prior_source": self.prior_source,
                 "evidence_weight": self.evidence_weight,
                 "prior_weight": self.prior_weight,
+                "ltr_score_weight": self.ltr_score_weight,
                 "fallback_reason": "",
                 "evidence_coverage": 1.0,
                 "candidates": {},
@@ -170,6 +189,7 @@ class LLMEvidenceRoleRanker:
         rule_ranks = rule_ranks or {}
         rule_scores = rule_scores or {}
         learned_ranks = learned_ranks or {}
+        learned_scores = learned_scores or {}
 
         # Fix #1: snapshot lookup. The pre-pass populated self.evidence_snapshot
         # with a per-paper dict of {journal_id: evidence_item}. Look up by title
@@ -236,9 +256,19 @@ class LLMEvidenceRoleRanker:
             evidence = evidence_by_id.get(journal.journal_id) or {}
             normalized = self._normalized_evidence(evidence)
             evidence_composite = self._evidence_composite(normalized)
+            # Task 6.4: blend in the actual LTR score as a third component when
+            # the ranker was constructed with ltr_score_weight > 0. When the
+            # caller didn't supply learned_scores (e.g. legacy code paths) or
+            # this candidate is missing from the map, the LTR contribution
+            # collapses to 0 and the formula degrades gracefully to the
+            # 2-component (evidence + rank_prior) shape.
+            ltr_score = 0.0
+            if learned_scores:
+                ltr_score = float(learned_scores.get(journal.journal_id, 0.0))
             final_score = (
                 evidence_composite * self.evidence_weight
                 + rank_prior * self.prior_weight
+                + ltr_score * self.ltr_score_weight
             )
             evidence_text = evidence.get("evidence")
             if not isinstance(evidence_text, list):
@@ -276,6 +306,9 @@ class LLMEvidenceRoleRanker:
                 "rule_rank": rule_ranks.get(journal.journal_id),
                 "rule_score": float(rule_scores.get(journal.journal_id, rule_score)),
                 "learned_rank": learned_ranks.get(journal.journal_id),
+                "learned_score": learned_scores.get(journal.journal_id),
+                "ltr_score": ltr_score,
+                "ltr_score_weight": self.ltr_score_weight,
                 "has_evidence": journal.journal_id in covered_ids,
                 **{
                     f"llm_{field}": normalized[field]
@@ -308,6 +341,7 @@ class LLMEvidenceRoleRanker:
             "prior_source": self.prior_source,
             "evidence_weight": self.evidence_weight,
             "prior_weight": self.prior_weight,
+            "ltr_score_weight": self.ltr_score_weight,
             "evidence_coverage": evidence_coverage,
             "fallback_reason": fallback_reason,
             "candidates": details,
