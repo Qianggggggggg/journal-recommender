@@ -694,3 +694,54 @@ def test_evidence_extractor_prompt_uses_supplied_rule_ranks():
     ranks_by_id = {item["journal_id"]: item["rule_rank"] for item in info}
     assert ranks_by_id == {"j1": 5, "j2": 1}, \
         f"prompt rule_ranks should be {ranks_by_id}"
+
+
+# ---------------------------------------------------------------------------
+# Task 3 (eff7b7d) regression coverage — code review follow-ups
+# ---------------------------------------------------------------------------
+
+
+def test_evidence_role_ranker_omitted_learned_scores_does_not_break_formula():
+    """ltr_score_weight > 0 with learned_scores=None must NOT crash;
+    LTR contribution must collapse to 0."""
+    ranker = LLMEvidenceRoleRanker(
+        evidence_extractor=FixedEvidenceExtractor({"j1": _evidence(0.6)}),
+        journal_store=StubJournalStore([_journal("j1")]),
+        prior_source="rule",
+        evidence_weight=0.8,
+        prior_weight=0.2,
+        ltr_score_weight=0.3,  # > 0, but learned_scores will be None
+    )
+    ranked, _m, diag = ranker.rank_with_diagnostics(
+        candidates=[(_journal("j1"), 1.0, [])],
+        paper_profile=PaperProfile(title="P1"),
+        retrieval_trace=_trace([_journal("j1")]),
+        rule_ranks={"j1": 1},
+        rule_scores={"j1": 1.0},
+        # learned_scores omitted on purpose
+    )
+    # Renormalization divides by the full weight sum (0.8 + 0.2 + 0.3 = 1.3)
+    # at construction time, so the stored weights are
+    # (0.8/1.3, 0.2/1.3, 0.3/1.3) = (0.6154, 0.1538, 0.2308).
+    # With learned_scores=None, ltr_score collapses to 0.0, so the LTR
+    # contribution is 0.2308 * 0.0 = 0 and the final score is
+    # 0.6154 * 0.6 + 0.1538 * 1.0 + 0.0 = 0.3692 + 0.1538 ≈ 0.523.
+    assert diag["candidates"]["j1"]["final_score"] == pytest.approx(0.523, abs=0.01)
+    assert diag["candidates"]["j1"]["ltr_score"] == 0.0
+
+
+def test_evidence_role_ranker_renormalizes_unnormalized_weights():
+    """Weights summing to > 1.0 must be renormalized to sum=1.0 at construction."""
+    ranker = LLMEvidenceRoleRanker(
+        evidence_extractor=FixedEvidenceExtractor({}),
+        journal_store=StubJournalStore([]),
+        prior_source="rule",
+        evidence_weight=1.0,
+        prior_weight=0.4,
+        ltr_score_weight=0.6,  # sum=2.0, must renormalize
+    )
+    total = ranker.evidence_weight + ranker.prior_weight + ranker.ltr_score_weight
+    assert total == pytest.approx(1.0)
+    assert ranker.evidence_weight == pytest.approx(0.5)
+    assert ranker.prior_weight == pytest.approx(0.2)
+    assert ranker.ltr_score_weight == pytest.approx(0.3)
