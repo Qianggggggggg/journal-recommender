@@ -38,7 +38,12 @@ from typing import Dict, Iterable, List, Optional
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.ranker.feature_builder import FEATURE_NAMES, MISSING_RANK_SENTINEL
+from src.ranker.feature_builder import (
+    FEATURE_NAMES,
+    FEATURE_NAMES_WITH_LLM_EVIDENCE,
+    LLM_EVIDENCE_FEATURE_NAMES,
+    MISSING_RANK_SENTINEL,
+)
 
 
 # 负样本类型优先级(从前到后填,直到达到 max_negatives)
@@ -56,6 +61,190 @@ ROUTE_RANK_FEATURES: tuple = (
     "accepted_bm25_rank",
     "accepted_vector_rank",
 )
+
+
+# Default values for the 6 LLM evidence fields when the snapshot has no
+# evidence for a (paper, candidate) pair. Keys use the SAME names as the
+# LLM extractor prompt output (no ``llm_`` prefix) so the snapshot JSON
+# can be consumed directly without remapping.
+EVIDENCE_FIT_DEFAULTS = {
+    "scope_fit": 0.5,
+    "method_fit": 0.5,
+    "application_fit": 0.5,
+    "journal_position_fit": 0.5,
+    "too_broad_penalty": 0.0,
+    "too_narrow_penalty": 0.0,
+}
+
+# Map snapshot/raw evidence field name → 26-dim feature vector field name.
+# The LLM extractor returns ``scope_fit`` etc. (per the prompt), but
+# ``LLM_EVIDENCE_FEATURE_NAMES`` uses the ``llm_`` prefix because these
+# features are stored in a single feature vector alongside the 20 base
+# features. Without this remap, the 26-dim vector would have all six
+# new fields at their default values regardless of the snapshot content.
+EVIDENCE_RAW_TO_FEATURE = {
+    "scope_fit": "llm_scope_fit",
+    "method_fit": "llm_method_fit",
+    "application_fit": "llm_application_fit",
+    "journal_position_fit": "llm_journal_position_fit",
+    "too_broad_penalty": "llm_too_broad_penalty",
+    "too_narrow_penalty": "llm_too_narrow_penalty",
+}
+
+
+def _title_key(title: str) -> str:
+    """Normalize a paper title for snapshot lookup.
+
+    Mirrors precompute_evidence._title_key exactly so the same paper
+    resolves to the same key whether we are reading from
+    ``precompute_evidence.py`` output or the ablation runner.
+    """
+    return " ".join(str(title or "").casefold().split())
+
+
+def _snapshot_paper_key(title: str, venue: str) -> str:
+    """Build the exact paper key used by ``precompute_evidence._paper_key``
+    (``title | venue``, both casefold-normalized). This is the only key
+    form stored in the snapshot's ``papers`` dict, so any lookup here
+    must use the same format.
+
+    Note: this differs from ``_title_key`` (which only normalizes the
+    title). Using ``_title_key`` alone to look up in a snapshot would
+    silently miss every paper.
+    """
+    t = " ".join(str(title or "").casefold().split())
+    v = " ".join(str(venue or "").casefold().split())
+    return f"{t} | {v}"
+
+
+def _load_evidence_lookup(snapshot_path: str) -> Dict[str, Dict[str, dict]]:
+    """Load an evidence snapshot JSON and return
+    ``{title_key: {journal_id: evidence_item}}`` for fast per-row lookup.
+    Papers with no evidence (e.g. pre_pass_error) are simply missing
+    from the inner dict; the caller is expected to fall back to neutral
+    defaults via ``_evidence_vector_for_row``.
+    """
+    payload = json.loads(Path(snapshot_path).read_text(encoding="utf-8"))
+    papers = payload.get("papers") or {}
+    lookup: Dict[str, Dict[str, dict]] = {}
+    for paper_key, entry in papers.items():
+        evidence = entry.get("evidence") or {}
+        if evidence:
+            lookup[paper_key] = evidence
+    return lookup
+
+
+def _evidence_vector_for_row(
+    paper_title: str, paper_venue: str, journal_id: str,
+    evidence_lookup: Dict[str, Dict[str, dict]],
+) -> List[float]:
+    """Return the 6-element evidence vector for one training row, ordered
+    to match ``LLM_EVIDENCE_FEATURE_NAMES`` (the 26-dim feature vector
+    schema). Reads raw evidence field names (``scope_fit`` etc.) from
+    the snapshot and maps them to the prefixed feature names.
+
+    Uses ``_snapshot_paper_key`` (title + venue, normalized) so the
+    lookup matches the exact key format written by precompute_evidence.
+    """
+    evidence = evidence_lookup.get(
+        _snapshot_paper_key(paper_title, paper_venue), {}
+    ).get(journal_id)
+    out: List[float] = []
+    for feature_name in LLM_EVIDENCE_FEATURE_NAMES:
+        # Reverse-lookup: feature name like ``llm_scope_fit`` → raw name
+        # like ``scope_fit`` for reading from the snapshot.
+        raw_name = next(
+            (k for k, v in EVIDENCE_RAW_TO_FEATURE.items() if v == feature_name),
+            feature_name,
+        )
+        if not evidence or not isinstance(evidence, dict):
+            out.append(EVIDENCE_FIT_DEFAULTS[raw_name])
+            continue
+        value = evidence.get(raw_name)
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            out.append(EVIDENCE_FIT_DEFAULTS[raw_name])
+        elif not 0 <= value <= 1:
+            out.append(EVIDENCE_FIT_DEFAULTS[raw_name])
+        else:
+            out.append(float(value))
+    return out
+
+
+def build_training_rows(
+    ablation_data: dict,
+    journals_by_id: Dict[str, dict],
+    max_negatives: int = 10,
+    only_variants: Optional[Iterable[str]] = None,
+    evidence_lookup: Optional[Dict[str, Dict[str, dict]]] = None,
+) -> Iterable[dict]:
+    """从 ablation JSON 产出训练样本。
+
+    仅在 paper 的 ``candidate_features[target_jid]`` 存在时产正样本;
+    负样本来自同 paper 的其他候选期刊,按 NEGATIVE_PRIORITY 分类。
+
+    ``evidence_lookup`` (Task 6.4, 26-dim schema): when supplied, each row's
+    20-dim base features are extended with the 6 LLM-evidence fields
+    looked up by (paper title, journal_id) and the row's
+    ``feature_names`` is set to ``FEATURE_NAMES_WITH_LLM_EVIDENCE``
+    (26-dim). When omitted, output is the legacy 20-dim schema.
+    """
+    variants = ablation_data.get("variants") or {}
+    for variant_name, variant_data in variants.items():
+        if only_variants is not None and variant_name not in set(only_variants):
+            continue
+        # Decide feature schema once per variant
+        use_evidence_schema = evidence_lookup is not None
+        feature_names = (
+            list(FEATURE_NAMES_WITH_LLM_EVIDENCE)
+            if use_evidence_schema
+            else (variant_data.get("feature_names") or list(FEATURE_NAMES))
+        )
+        for paper_idx, paper_result in enumerate(variant_data.get("paper_results") or []):
+            target_jid = paper_result.get("target_journal_id")
+            if not target_jid:
+                continue
+            candidate_features = paper_result.get("candidate_features") or {}
+            if not candidate_features:
+                continue
+            paper_id = paper_result.get("title") or f"paper_{paper_idx}"
+
+            # Per-paper venue (for snapshot key lookup). Default to empty
+            # so the snapshot key becomes just the title, which is what
+            # the role ranker does when paper_profile has no venue.
+            paper_venue = paper_result.get("venue", "") or ""
+
+            def _row(label: int, jid: str, neg_type: str) -> dict:
+                feats = candidate_features.get(jid) or []
+                if use_evidence_schema:
+                    feats = list(feats) + _evidence_vector_for_row(
+                        paper_id, paper_venue, jid, evidence_lookup
+                    )
+                return {
+                    "paper_id": paper_id,
+                    "journal_id": jid,
+                    "label": label,
+                    "features": feats,
+                    "feature_names": feature_names,
+                    "negative_type": neg_type,
+                    "variant": variant_name,
+                }
+
+            # 1. 正样本(若 gold 期刊在 candidate_features)
+            if target_jid in candidate_features:
+                yield _row(1, target_jid, "gold")
+
+            # 2. 负样本
+            # 优先用 paper_result["rule_top20"](per plan 4.2);缺省时回退到 rule_top5。
+            rule_top20 = paper_result.get("rule_top20") or paper_result.get("rule_top5") or []
+            neg_list = _build_negatives(
+                candidate_jids=list(candidate_features.keys()),
+                target_jid=target_jid,
+                rule_top20=rule_top20,
+                journals_by_id=journals_by_id,
+                max_negatives=max_negatives,
+            )
+            for jid, neg_type in neg_list:
+                yield _row(0, jid, neg_type)
 
 
 def _classify_negative(
@@ -99,66 +288,8 @@ def _build_negatives(
     return selected
 
 
-def build_training_rows(
-    ablation_data: dict,
-    journals_by_id: Dict[str, dict],
-    max_negatives: int = 10,
-    only_variants: Optional[Iterable[str]] = None,
-) -> Iterable[dict]:
-    """从 ablation JSON 产出训练样本。
 
-    仅在 paper 的 ``candidate_features[target_jid]`` 存在时产正样本;
-    负样本来自同 paper 的其他候选期刊,按 NEGATIVE_PRIORITY 分类。
-    """
-    variants = ablation_data.get("variants") or {}
-    for variant_name, variant_data in variants.items():
-        if only_variants is not None and variant_name not in set(only_variants):
-            continue
-        feature_names = variant_data.get("feature_names") or list(FEATURE_NAMES)
-        for paper_idx, paper_result in enumerate(variant_data.get("paper_results") or []):
-            target_jid = paper_result.get("target_journal_id")
-            if not target_jid:
-                continue
-            candidate_features = paper_result.get("candidate_features") or {}
-            if not candidate_features:
-                continue
-            paper_id = paper_result.get("title") or f"paper_{paper_idx}"
-
-            # 1. 正样本(若 gold 期刊在 candidate_features)
-            if target_jid in candidate_features:
-                yield {
-                    "paper_id": paper_id,
-                    "journal_id": target_jid,
-                    "label": 1,
-                    "features": candidate_features[target_jid],
-                    "feature_names": feature_names,
-                    "negative_type": "gold",
-                    "variant": variant_name,
-                }
-
-            # 2. 负样本
-            # 优先用 paper_result["rule_top20"](per plan 4.2);缺省时回退到 rule_top5。
-            rule_top20 = paper_result.get("rule_top20") or paper_result.get("rule_top5") or []
-            neg_list = _build_negatives(
-                candidate_jids=list(candidate_features.keys()),
-                target_jid=target_jid,
-                rule_top20=rule_top20,
-                journals_by_id=journals_by_id,
-                max_negatives=max_negatives,
-            )
-            for jid, neg_type in neg_list:
-                yield {
-                    "paper_id": paper_id,
-                    "journal_id": jid,
-                    "label": 0,
-                    "features": candidate_features[jid],
-                    "feature_names": feature_names,
-                    "negative_type": neg_type,
-                    "variant": variant_name,
-                }
-
-
-def _extract_route_combination(features: List[float]) -> str:
+def _extract_route_combination(features: List[float]) -> str:  # noqa: F811
     """从 features 向量中提取"实际出现"(rank != 哨兵)的 route 集合。
 
     返回 sorted 后用 + 连接的字符串。例如 ``"scope_bm25+typical_bm25"``。
@@ -277,6 +408,18 @@ def main() -> None:
         default=None,
         help="可选:sidecar report JSON 路径 (per plan 4.3)",
     )
+    parser.add_argument(
+        "--evidence-snapshot",
+        default=None,
+        help=(
+            "Task 6.4 (26-dim LTR retrain): path to a precompute_evidence.py "
+            "snapshot JSON. When supplied, each training row's 20-dim base "
+            "features are extended with the 6 LLM-evidence fields for the "
+            "(paper, journal_id) pair, and feature_names is set to "
+            "FEATURE_NAMES_WITH_LLM_EVIDENCE. Without this flag, output is "
+            "the legacy 20-dim schema."
+        ),
+    )
     args = parser.parse_args()
 
     ablation_data = json.loads(Path(args.ablation_json).read_text(encoding="utf-8"))
@@ -289,12 +432,28 @@ def main() -> None:
         if jid:
             journals_by_id[jid] = rec
 
+    evidence_lookup = None
+    if args.evidence_snapshot:
+        evidence_lookup = _load_evidence_lookup(args.evidence_snapshot)
+        if not evidence_lookup:
+            print(
+                f"[warn] --evidence-snapshot {args.evidence_snapshot} has no "
+                "per-paper evidence; output will use 20-dim defaults."
+            )
+            evidence_lookup = None
+        else:
+            print(
+                f"Loaded evidence lookup for {len(evidence_lookup)} papers "
+                f"from {args.evidence_snapshot}"
+            )
+
     rows = list(
         build_training_rows(
             ablation_data=ablation_data,
             journals_by_id=journals_by_id,
             max_negatives=args.max_negatives,
             only_variants=args.variants,
+            evidence_lookup=evidence_lookup,
         )
     )
     with open(args.output, "w", encoding="utf-8") as f:
@@ -324,6 +483,14 @@ def main() -> None:
         report["output_jsonl"] = str(args.output)
         report["max_negatives"] = args.max_negatives
         report["negatives_by_type"] = by_type
+        report["feature_schema"] = (
+            "26_dim_with_llm_evidence"
+            if evidence_lookup is not None
+            else "20_dim_base"
+        )
+        report["evidence_snapshot"] = (
+            str(args.evidence_snapshot) if args.evidence_snapshot else None
+        )
         Path(args.report).write_text(
             json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )

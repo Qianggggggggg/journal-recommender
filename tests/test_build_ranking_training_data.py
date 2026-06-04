@@ -327,3 +327,169 @@ def test_build_training_report_includes_positive_and_negative_counts():
     report = build_training_report(ablation, pos_rows)
     assert report["positives_total"] == 1
     assert report["positives_by_variant"] == {"hybrid": 1}
+
+
+# ---------------------------------------------------------------------------
+# Task 6.4 — 26-dim schema with LLM evidence lookup
+# ---------------------------------------------------------------------------
+
+
+def test_build_training_rows_outputs_20_dim_by_default():
+    """No evidence_lookup → 20-dim schema, legacy behavior preserved."""
+    papers = [
+        {
+            "title": "P1", "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    rows = list(build_training_rows(ablation, {}))
+    assert all(len(r["features"]) == 20 for r in rows)
+    assert all(r["feature_names"] == FEATURE_NAMES for r in rows)
+
+
+def test_build_training_rows_appends_6_evidence_fields_when_lookup_supplied():
+    """With evidence_lookup, each row's features become 26-dim and
+    feature_names switches to FEATURE_NAMES_WITH_LLM_EVIDENCE.
+
+    The snapshot key is ``title | venue`` (both casefold-normalized),
+    mirroring ``precompute_evidence._paper_key``. Lookup is keyed off
+    the paper's (title, venue) pair, not the title alone.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    papers = [
+        {
+            "title": "Paper One", "venue": "Journal of Foo",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    evidence_lookup = {
+        "paper one | journal of foo": {
+            "g1": {
+                "scope_fit": 0.9, "method_fit": 0.8,
+                "application_fit": 0.7, "journal_position_fit": 0.85,
+                "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+            },
+            "n1": {
+                "scope_fit": 0.2, "method_fit": 0.3,
+                "application_fit": 0.4, "journal_position_fit": 0.25,
+                "too_broad_penalty": 0.0, "too_narrow_penalty": 0.0,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    assert all(len(r["features"]) == 26 for r in rows)
+    assert all(r["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE for r in rows)
+    # The 6 appended evidence values match the snapshot
+    g1_row = next(r for r in rows if r["journal_id"] == "g1" and r["label"] == 1)
+    assert g1_row["features"][20:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    n1_row = next(r for r in rows if r["journal_id"] == "n1")
+    assert n1_row["features"][20:] == [0.2, 0.3, 0.4, 0.25, 0.0, 0.0]
+
+
+def test_build_training_rows_uses_neutral_defaults_for_missing_evidence():
+    """When the snapshot has no entry for (paper, journal_id), the row
+    uses neutral defaults (fit=0.5, penalty=0.0)."""
+    from src.ranker.feature_builder import LLM_EVIDENCE_FEATURE_NAMES
+
+    papers = [
+        {
+            "title": "P1", "venue": "V1",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    # Lookup only has g1, not n1
+    evidence_lookup = {
+        "p1 | v1": {
+            "g1": {
+                "scope_fit": 0.9, "method_fit": 0.8, "application_fit": 0.7,
+                "journal_position_fit": 0.85, "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1_row = next(r for r in rows if r["journal_id"] == "g1")
+    n1_row = next(r for r in rows if r["journal_id"] == "n1")
+    assert g1_row["features"][20:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    # n1 falls back to neutral: 4 fits at 0.5, 2 penalties at 0.0
+    expected_neutral = [
+        0.5, 0.5, 0.5, 0.5,  # fits
+        0.0, 0.0,  # penalties
+    ]
+    assert n1_row["features"][20:] == expected_neutral
+    # Sanity: 6 evidence values in the order declared in LLM_EVIDENCE_FEATURE_NAMES
+    assert len(n1_row["features"][20:]) == len(LLM_EVIDENCE_FEATURE_NAMES)
+
+
+def test_build_training_rows_uses_neutral_defaults_for_invalid_evidence_values():
+    """Out-of-range or non-numeric evidence values must NOT be passed through
+    to training data; they fall back to neutral defaults (matches the
+    ranker's runtime behavior, so train/inference agree on bad-input policy)."""
+    papers = [
+        {
+            "title": "P1", "venue": "V1",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    # scope_fit=1.5 is out of [0,1]; method_fit="bad" is non-numeric
+    evidence_lookup = {
+        "p1 | v1": {
+            "g1": {
+                "scope_fit": 1.5, "method_fit": "bad", "application_fit": 0.6,
+                "journal_position_fit": -0.1, "too_broad_penalty": "x",
+                "too_narrow_penalty": None,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1 = next(r for r in rows if r["journal_id"] == "g1")
+    # All 6 fields fell back to defaults (only application_fit=0.6 was valid)
+    assert g1["features"][20:] == [0.5, 0.5, 0.6, 0.5, 0.0, 0.0]
+
+
+def test_build_training_rows_uses_title_only_key_when_venue_empty():
+    """When ``venue`` is empty, the snapshot's paper_key is ``title | ''
+    (empty venue, trailing separator). The lookup mirrors this exact
+    format so it stays in sync with how precompute_evidence stores keys.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    papers = [
+        {
+            "title": "Standalone Paper", "venue": "",
+            "retrieval_rank": 1,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    evidence_lookup = {
+        "standalone paper | ": {  # mirrors precompute_evidence._paper_key
+            "g1": {
+                "scope_fit": 0.7, "method_fit": 0.6, "application_fit": 0.5,
+                "journal_position_fit": 0.4, "too_broad_penalty": 0.0, "too_narrow_penalty": 0.0,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1 = next(r for r in rows if r["journal_id"] == "g1")
+    assert g1["features"][20:] == [0.7, 0.6, 0.5, 0.4, 0.0, 0.0]
+    # Schema is still 26-dim
+    assert len(g1["features"]) == 26
+    assert g1["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE

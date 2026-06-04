@@ -382,6 +382,16 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Allow evidence snapshot with coverage < 1.0 (debug only).",
     )
+    parser.add_argument(
+        "--model-path",
+        default=None,
+        help=(
+            "Override the LTR model path from configs/app.yaml. Use this to "
+            "swap between 20-dim v4 and 26-dim evidence LTR for ablation "
+            "comparisons without editing the config. The model file's "
+            "feature_dim must match what the LTR adapter expects (20 or 26)."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -395,6 +405,14 @@ def main() -> None:
         raise RuntimeError("No comparable papers loaded from baseline evaluation")
 
     app_config, prompts = _load_config()
+    if args.model_path:
+        # Override the LTR model path before any pipeline is built. The
+        # LTR adapter reads model_path at construction time, so we must
+        # patch the config dict that init_pipeline will consume.
+        app_config.setdefault("ranking", {}).setdefault(
+            "learned_reranker", {}
+        )["model_path"] = args.model_path
+        print(f"Overriding LTR model path → {args.model_path}")
     evidence_snapshot = (
         load_evidence_snapshot(
             args.evidence_snapshot,
