@@ -445,11 +445,13 @@ def init_pipeline() -> RecommenderPipeline:
                     prior_source=evidence_cfg.get("prior_source", "rule"),
                     evidence_weight=float(evidence_cfg.get("evidence_weight", 0.8)),
                     prior_weight=float(evidence_cfg.get("prior_weight", 0.2)),
+                    ltr_score_weight=float(evidence_cfg.get("ltr_score_weight", 0.0)),
                     evidence_snapshot=evidence_snapshot,
                 )
                 print(
                     f"[ok] evidence_role enabled, snapshot={snapshot_path}, "
                     f"prior_source={evidence_cfg.get('prior_source', 'rule')}, "
+                    f"ltr_score_weight={evidence_cfg.get('ltr_score_weight', 0.0)}, "
                     f"papers={len(evidence_snapshot)}"
                 )
             except Exception as exc:
@@ -482,7 +484,6 @@ def init_pipeline() -> RecommenderPipeline:
         accepted_paper_store=accepted_paper_store_ref,
     )
 
-    pipeline_kwargs_evidence_extractor = pipeline_kwargs.pop("evidence_extractor", None)
     pipeline = RecommenderPipeline(
         candidate_generator=generator,
         rule_scorer=scorer,
@@ -491,6 +492,13 @@ def init_pipeline() -> RecommenderPipeline:
         llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
         learned_reranker=learned_reranker,
         evidence_extractor=evidence_extractor,
+        # 6.4: enable 26-dim feature schema when evidence_role is on AND
+        # the snapshot is loaded. attach_features() will fall back to 20
+        # dims per-paper if a paper is missing from the snapshot.
+        evidence_lookup=evidence_snapshot or None,
+        feature_schema=(
+            "26_dim_with_llm_evidence" if evidence_snapshot else "20_dim_base"
+        ),
     )
     pipeline.parser = parser
 

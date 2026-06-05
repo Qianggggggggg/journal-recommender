@@ -130,21 +130,50 @@ class LTRAdapter:
         }
 
         # 2. 在副本上注入 features
-        try:
-            attach_features_to_trace(
-                trace_copy,
-                paper_profile,
-                self._journal_store,
-                rule_ranks,
-                rule_scores,
-                self._accepted_paper_store,
+        # 6.4 fix: detect the schema (20-dim base vs 26-dim with-llm-evidence)
+        # from the existing trace entry's "features" list length. If the
+        # caller (pipeline) already attached features of the correct
+        # schema, reuse them; otherwise re-attach with the right schema.
+        expected_dim = self._ranker._feature_dim  # type: ignore[union-attr]
+        existing_schema_dim = None
+        for entry in trace_copy.values():
+            feats = entry.get("features")
+            if isinstance(feats, list) and feats:
+                existing_schema_dim = len(feats)
+                break
+
+        if existing_schema_dim == expected_dim:
+            # Caller already wrote features at the right dim. Skip re-attach
+            # to avoid silently downgrading 26-dim features to 20-dim.
+            pass
+        else:
+            # Pick feature_names that match expected_dim so re-attach
+            # produces the right shape.
+            from src.ranker.feature_builder import (
+                FEATURE_NAMES,
+                FEATURE_NAMES_WITH_LLM_EVIDENCE,
             )
-        except Exception as e:  # 防御:任何 attach 异常都降级
-            logger.warning("LTRAdapter: attach_features_to_trace failed, fallback to identity: %s", e)
-            return list(llm_candidates), _empty_diag("fallback_feature_build")
+            feature_names = (
+                FEATURE_NAMES_WITH_LLM_EVIDENCE
+                if expected_dim == 26
+                else FEATURE_NAMES
+            )
+            try:
+                attach_features_to_trace(
+                    trace_copy,
+                    paper_profile,
+                    self._journal_store,
+                    rule_ranks,
+                    rule_scores,
+                    self._accepted_paper_store,
+                    feature_names=feature_names,
+                )
+            except Exception as e:  # 防御:任何 attach 异常都降级
+                logger.warning("LTRAdapter: attach_features_to_trace failed, fallback to identity: %s", e)
+                return list(llm_candidates), _empty_diag("fallback_feature_build")
 
         # 3. 抽 feature rows,逐候选校验 feature_dim
-        expected_dim = self._ranker._feature_dim  # type: ignore[union-attr]
+        # (expected_dim was already set above from self._ranker._feature_dim)
         rows: List[Dict[str, Any]] = []
         jids: List[str] = []
         for journal, _score, _reasons in llm_candidates:

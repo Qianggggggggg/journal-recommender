@@ -39,10 +39,17 @@ def load_evidence_snapshot(path: str | Path) -> Dict[str, Dict[str, Any]]:
     payload = json.loads(p.read_text(encoding="utf-8"))
     out: Dict[str, Dict[str, Any]] = {}
     for paper_key, entry in (payload.get("papers") or {}).items():
-        # Use the same title-key the role ranker uses for lookup.
-        key = " ".join(str(paper_key or "").casefold().split())
+        # Use the paper's own title field as the key (not the outer
+        # ``paper_key`` which is ``title | venue``). The role ranker
+        # and pipeline.py both look up by title only.
+        title = entry.get("title") or paper_key
+        key = " ".join(str(title or "").casefold().split())
         if not key:
             continue
+        if key in out:
+            raise ValueError(
+                f"Duplicate normalized title in evidence snapshot: {key}"
+            )
         evidence = entry.get("evidence") or {}
         if evidence:
             out[key] = entry
