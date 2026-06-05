@@ -33,6 +33,12 @@ class RecommenderPipeline:
         # 26-dim schema (FEATURE_NAMES_WITH_LLM_EVIDENCE).
         evidence_lookup: Optional[Dict[str, Dict[str, Dict[str, Any]]]] = None,
         feature_schema: str = "20_dim_base",  # "20_dim_base" | "26_dim_with_llm_evidence"
+        # 6.5: optional LLMEvidenceExtractor for the per-request online
+        # evidence path. The API layer can call extractor.extract() to
+        # backfill the in-memory evidence cache when a paper is not in
+        # the offline snapshot. None by default to keep tests
+        # backwards-compatible.
+        evidence_extractor: Optional["LLMEvidenceExtractor"] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
@@ -49,6 +55,14 @@ class RecommenderPipeline:
         self._expected_feature_dim = (
             26 if feature_schema == "26_dim_with_llm_evidence" else 20
         )
+        # 6.5: optional LLMEvidenceExtractor for the per-request online
+        # evidence path. If set, the API layer can call
+        # ``extractor.extract(candidates, paper_profile)`` to backfill the
+        # in-memory evidence cache when a paper is not in the offline
+        # snapshot. The role ranker itself can also call this directly
+        # (it already does so as the final fallback in
+        # ``rank_with_diagnostics``).
+        self.evidence_extractor = evidence_extractor
 
     def recommend(
         self,
@@ -60,6 +74,7 @@ class RecommenderPipeline:
         quality_prompts: Optional[Dict[str, str]] = None,
         diagnostic_journal_ids: Optional[List[str]] = None,
         progress_callback: Optional[Callable[[Dict[str, Any]], None]] = None,
+        precomputed_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         """执行推荐流程"""
         # 0. 评估论文质量
@@ -262,20 +277,28 @@ class RecommenderPipeline:
                     self.llm_ranker, "rank_with_diagnostics", None
                 )
                 if callable(rank_with_diagnostics):
+                    # 6.5: only thread precomputed_evidence when the ranker
+                    # actually accepts it. Older rankers (and test mocks)
+                    # may not have this kwarg in their signature.
+                    import inspect as _inspect
+                    _rwd_params = _inspect.signature(rank_with_diagnostics).parameters
+                    _rwd_kwargs = {
+                        "candidates": llm_candidates,
+                        "paper_profile": paper_profile,
+                        "top_k": len(llm_candidates),
+                        "retrieval_trace": retrieval_trace,
+                        "rule_ranks": rule_ranks_map,
+                        "rule_scores": rule_scores_map,
+                        "learned_ranks": learned_diag.get("learned_rank") or {},
+                        # 6.4: thread the actual LTR score so the role ranker
+                        # can use it as a 3rd formula component when
+                        # ltr_score_weight > 0.
+                        "learned_scores": learned_diag.get("learned_score") or {},
+                    }
+                    if "precomputed_evidence" in _rwd_params:
+                        _rwd_kwargs["precomputed_evidence"] = precomputed_evidence
                     llm_ranked_all, rank_method, llm_role_diag = (
-                        rank_with_diagnostics(
-                            llm_candidates,
-                            paper_profile,
-                            top_k=len(llm_candidates),
-                            retrieval_trace=retrieval_trace,
-                            rule_ranks=rule_ranks_map,
-                            rule_scores=rule_scores_map,
-                            learned_ranks=learned_diag.get("learned_rank") or {},
-                            # 6.4: thread the actual LTR score so the role ranker
-                            # can use it as a 3rd formula component when
-                            # ltr_score_weight > 0.
-                            learned_scores=learned_diag.get("learned_score") or {},
-                        )
+                        rank_with_diagnostics(**_rwd_kwargs)
                     )
                 else:
                     llm_ranked_all, rank_method = self.llm_ranker.rank(

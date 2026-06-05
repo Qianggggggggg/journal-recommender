@@ -1,8 +1,9 @@
 """API 路由"""
 from functools import lru_cache
-from typing import Optional, Union
+from typing import Any, Dict, Optional, Union
 import json
 import os
+import threading
 import yaml
 from fastapi import APIRouter, HTTPException, Query, UploadFile, File, Form, Body
 from fastapi.requests import Request
@@ -33,6 +34,81 @@ from ..retriever.typical_abstract_retriever import (
 from ..ranker.rule_scorer import RuleScorer
 from ..ranker.llm_ranker import LLMRanker, LLMRankerError
 from ..utils.text import quality_adjustment_factor
+
+
+# 6.5: in-memory evidence cache. Avoids re-extracting the same paper's
+# evidence via the live LLM extractor (which is ~30-60s per call) on
+# repeated recommendations of the same title. The cache is process-local
+# (per FastAPI worker) and unbounded; the API layer is responsible
+# for sizing/eviction if it becomes a memory concern.
+_EVIDENCE_CACHE: Dict[str, Dict[str, Dict[str, Any]]] = {}
+_EVIDENCE_CACHE_LOCK = threading.Lock()
+
+
+def _title_key(title: str) -> str:
+    """Normalize a paper title for cache/snapshot lookup."""
+    return " ".join(str(title or "").casefold().split())
+
+
+def _cache_get(title: str) -> Optional[Dict[str, Dict[str, Any]]]:
+    with _EVIDENCE_CACHE_LOCK:
+        return _EVIDENCE_CACHE.get(_title_key(title))
+
+
+def _cache_put(title: str, evidence: Dict[str, Dict[str, Any]]) -> None:
+    if not evidence:
+        return
+    with _EVIDENCE_CACHE_LOCK:
+        _EVIDENCE_CACHE[_title_key(title)] = dict(evidence)
+
+
+def get_paper_evidence_from_pipeline(
+    pipeline: RecommenderPipeline,
+    paper_title: str,
+    candidates: Any = None,
+    paper_profile: Any = None,
+) -> Dict[str, Dict[str, Any]]:
+    """Resolve per-paper evidence via cache → role-ranker snapshot → online
+    extractor. Returns a ``{journal_id: evidence_item}`` dict (possibly empty).
+
+    - In-memory cache (process-local) is consulted first.
+    - If the pipeline's role ranker has a snapshot and the title is in
+      it, returns the snapshot's per-paper evidence.
+    - Otherwise, if the pipeline has a live ``evidence_extractor`` and
+      candidates + paper_profile are supplied, calls the extractor to
+      fill the gap and caches the result for next time.
+    - Returns ``{}`` if no source has evidence; the role ranker will
+      then fall back to neutral defaults.
+    """
+    cached = _cache_get(paper_title)
+    if cached is not None:
+        return cached
+
+    # Try the role ranker's snapshot (only present when the pipeline is
+    # using LLMEvidenceRoleRanker with a loaded evidence_snapshot).
+    snapshot = getattr(pipeline.llm_ranker, "evidence_snapshot", None)
+    if snapshot:
+        entry = snapshot.get(_title_key(paper_title))
+        if entry and entry.get("evidence"):
+            evidence = dict(entry["evidence"])
+            _cache_put(paper_title, evidence)
+            return evidence
+
+    # Last resort: ask the live extractor to do an online extraction.
+    # This is ~30-60s per call; only used when a paper is not in the
+    # offline snapshot.
+    extractor = getattr(pipeline, "evidence_extractor", None)
+    if extractor is not None and candidates and paper_profile is not None:
+        try:
+            evidence = extractor.extract(candidates, paper_profile)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[warn] online evidence extraction failed: {exc}")
+            evidence = {}
+        if evidence:
+            _cache_put(paper_title, evidence)
+        return evidence
+
+    return {}
 from ..papers.quality_assessor import PaperQualityAssessor, PaperQualityError
 from ..utils.llm_config import build_minimax_llm
 from ..utils.embedding import OllamaEmbedding
@@ -334,6 +410,17 @@ async def recommend(request: Request):
     except PaperParserError as e:
         raise HTTPException(status_code=503, detail=f"论文解析失败: {e}")
 
+    # 6.5: hybrid evidence path. Resolve per-paper evidence from cache →
+    # role-ranker snapshot → live extractor. Doing it here (rather than
+    # relying on the role ranker alone) means repeated requests for the
+    # same paper title hit the cache instead of re-extracting.
+    precomputed_evidence = get_paper_evidence_from_pipeline(
+        pipeline,
+        paper_input.title,
+        candidates=None,            # not yet generated; use cache/snapshot first
+        paper_profile=None,        # only used by the online fallback
+    )
+
     # 执行推荐
     quality_prompts = {
         "system": prompts.get("paper_quality_assessor_system", ""),
@@ -347,6 +434,7 @@ async def recommend(request: Request):
             mode=mode,
             oa_preference=oa_preference,
             quality_prompts=quality_prompts,
+            precomputed_evidence=precomputed_evidence or None,
         )
     except PaperQualityError as e:
         raise HTTPException(status_code=503, detail=f"论文质量评估失败: {e}")

@@ -407,6 +407,10 @@ def init_pipeline() -> RecommenderPipeline:
     use_evidence = bool(evidence_cfg.get("enabled", False))
     snapshot_path = evidence_cfg.get("snapshot_path", "")
     evidence_snapshot = None
+    # Track the extractor so the API layer can use it for the per-request
+    # online path (when a paper isn't in the snapshot). The closure capture
+    # below needs the variable to be bound in the outer scope of init_pipeline.
+    evidence_extractor = None
     if use_evidence:
         from pathlib import Path as _Path
         from src.ranker.llm_evidence_role_ranker import (
@@ -425,7 +429,7 @@ def init_pipeline() -> RecommenderPipeline:
                 # Build a real extractor as required by the constructor even
                 # though we always read from the snapshot (extract() never called).
                 from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor
-                _extractor = LLMEvidenceExtractor(
+                evidence_extractor = LLMEvidenceExtractor(
                     llm=llm,
                     system_prompt=prompts["llm_evidence_extractor_system"],
                     user_prompt_template=prompts["llm_evidence_extractor_user"],
@@ -435,7 +439,7 @@ def init_pipeline() -> RecommenderPipeline:
                 if "accepted_store" in locals():
                     accepted_store = locals()["accepted_store"]
                 llm_ranker = LLMEvidenceRoleRanker(
-                    evidence_extractor=_extractor,
+                    evidence_extractor=evidence_extractor,
                     journal_store=store,
                     accepted_paper_store=accepted_store,
                     prior_source=evidence_cfg.get("prior_source", "rule"),
@@ -478,6 +482,7 @@ def init_pipeline() -> RecommenderPipeline:
         accepted_paper_store=accepted_paper_store_ref,
     )
 
+    pipeline_kwargs_evidence_extractor = pipeline_kwargs.pop("evidence_extractor", None)
     pipeline = RecommenderPipeline(
         candidate_generator=generator,
         rule_scorer=scorer,
@@ -485,6 +490,7 @@ def init_pipeline() -> RecommenderPipeline:
         quality_assessor=quality_assessor,
         llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
         learned_reranker=learned_reranker,
+        evidence_extractor=evidence_extractor,
     )
     pipeline.parser = parser
 
