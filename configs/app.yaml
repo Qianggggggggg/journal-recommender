@@ -62,6 +62,19 @@ ranking:
   use_cross_encoder: false      # ablation switch
   two_tower_model_path: "data/models/two_tower_ranker.pt"
   cross_encoder_model_path: "data/models/cross_ranker.pt"
+  # 6.3: Evidence-based role ranker. When evidence_role.enabled=true and
+  # snapshot_path points to a valid file, the pipeline uses
+  # LLMEvidenceRoleRanker (which reads evidence from the snapshot
+  # instead of calling LLM at recommendation time). When enabled but
+  # snapshot is missing, falls back to llm_direct.
+  llm_direct:
+    enabled: true                # fallback when evidence snapshot is missing
+  evidence_role:
+    enabled: false               # opt-in: turn on to use the new path
+    snapshot_path: "data/evaluation/evidence/light30_evidence_20260604_194946.json"
+    prior_source: "rule"         # rule | learned (learned needs LTR rerank)
+    evidence_weight: 0.8
+    prior_weight: 0.2
   llm_anchor_guard:
     enabled: true
     protect_rule_rank: 5
@@ -81,7 +94,7 @@ ranking:
   # v1 = pure rerank within llm_candidates (no score blend).
   # blend_with_* fields are reserved for 5.4 ablation; not consumed in 5.3.
   learned_reranker:
-    enabled: false
+    enabled: true
     model_path: "data/models/learning_to_ranker.json"
     blend_with_rule_score: 0.30  # reserved; not consumed by 5.3 v1
     blend_with_llm_score: 0.20   # reserved; not consumed by 5.3 v1

@@ -1,7 +1,9 @@
 """Rank journal candidates using structured LLM evidence plus a weak rank prior."""
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from src.journals.accepted_paper_store import AcceptedPaperStore
@@ -19,6 +21,32 @@ logger = logging.getLogger(__name__)
 
 EvidenceRankedCandidate = Tuple[Journal, float, List[str], float]
 InputCandidate = Tuple[Journal, float, List[str]]
+
+
+def load_evidence_snapshot(path: str | Path) -> Dict[str, Dict[str, Any]]:
+    """Load a precompute_evidence.py snapshot JSON into the lookup dict
+    expected by :class:`LLMEvidenceRoleRanker`.
+
+    Returns ``{normalized_title: paper_entry}`` where each ``paper_entry`` is
+    the original dict from the snapshot (containing ``evidence``,
+    ``rule_ranks``, ``learned_ranks``, etc.). Empty papers or papers with
+    empty ``evidence`` dicts are skipped so the role ranker's
+    ``_lookup_snapshot_entry`` returns ``None`` and the caller falls back
+    to neutral defaults (or to the live extractor when no snapshot is
+    available).
+    """
+    p = Path(path)
+    payload = json.loads(p.read_text(encoding="utf-8"))
+    out: Dict[str, Dict[str, Any]] = {}
+    for paper_key, entry in (payload.get("papers") or {}).items():
+        # Use the same title-key the role ranker uses for lookup.
+        key = " ".join(str(paper_key or "").casefold().split())
+        if not key:
+            continue
+        evidence = entry.get("evidence") or {}
+        if evidence:
+            out[key] = entry
+    return out
 
 
 class DirectLLMRoleRanker:

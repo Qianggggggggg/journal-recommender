@@ -59,6 +59,7 @@ BENCHMARK_PROFILE_INPUTS = {
     "light30": "data/evaluation/papers_metadata_light_30.jsonl",
     "full-v2": "data/evaluation/papers_metadata_v2.jsonl",
     "full-v2-90": "data/evaluation/papers_metadata_full_v2_90.jsonl",
+    "holdout240": "data/evaluation/papers_metadata_holdout240.jsonl",
 }
 
 
@@ -396,12 +397,73 @@ def init_pipeline() -> RecommenderPipeline:
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
     rule_weights = app_config.get("ranking", {}).get("rule_scorer", {})
     scorer = RuleScorer(journals=store.journals, weights=rule_weights)
-    llm_ranker = LLMRanker(
-        llm,
-        prompts["llm_ranker_system"],
-        prompts["llm_ranker_user"],
-        timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
-    )
+
+    # 6.3: 6.3 evidence role ranker 接入 production pipeline.
+    # evidence_role 是默认 OFF 的新路径。打开时用 evidence snapshot 喂
+    # LLMEvidenceRoleRanker; 没 snapshot 或 loading 失败则降级到 LLMRanker。
+    ranking_cfg = app_config.get("ranking", {})
+    use_direct_default = ranking_cfg.get("llm_direct", {}).get("enabled", True)
+    evidence_cfg = ranking_cfg.get("evidence_role", {})
+    use_evidence = bool(evidence_cfg.get("enabled", False))
+    snapshot_path = evidence_cfg.get("snapshot_path", "")
+    evidence_snapshot = None
+    if use_evidence:
+        from pathlib import Path as _Path
+        from src.ranker.llm_evidence_role_ranker import (
+            LLMEvidenceRoleRanker,
+            load_evidence_snapshot,
+        )
+        sp = _Path(snapshot_path)
+        if not sp.exists():
+            print(
+                f"[warn] evidence_role.enabled=true but snapshot not found: "
+                f"{snapshot_path}; falling back to llm_direct"
+            )
+        else:
+            try:
+                evidence_snapshot = load_evidence_snapshot(str(sp))
+                # Build a real extractor as required by the constructor even
+                # though we always read from the snapshot (extract() never called).
+                from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor
+                _extractor = LLMEvidenceExtractor(
+                    llm=llm,
+                    system_prompt=prompts["llm_evidence_extractor_system"],
+                    user_prompt_template=prompts["llm_evidence_extractor_user"],
+                    timeout_seconds=ranking_cfg.get("llm_ranker_timeout_seconds", 200),
+                )
+                accepted_store = None
+                if "accepted_store" in locals():
+                    accepted_store = locals()["accepted_store"]
+                llm_ranker = LLMEvidenceRoleRanker(
+                    evidence_extractor=_extractor,
+                    journal_store=store,
+                    accepted_paper_store=accepted_store,
+                    prior_source=evidence_cfg.get("prior_source", "rule"),
+                    evidence_weight=float(evidence_cfg.get("evidence_weight", 0.8)),
+                    prior_weight=float(evidence_cfg.get("prior_weight", 0.2)),
+                    evidence_snapshot=evidence_snapshot,
+                )
+                print(
+                    f"[ok] evidence_role enabled, snapshot={snapshot_path}, "
+                    f"prior_source={evidence_cfg.get('prior_source', 'rule')}, "
+                    f"papers={len(evidence_snapshot)}"
+                )
+            except Exception as exc:
+                print(f"[warn] failed to load evidence snapshot: {exc}; falling back to llm_direct")
+                evidence_snapshot = None
+
+    if "llm_ranker" not in locals():
+        if not use_direct_default:
+            raise RuntimeError(
+                "ranking config has neither llm_direct.enabled=true nor a working "
+                "evidence_role snapshot; cannot build a ranker"
+            )
+        llm_ranker = LLMRanker(
+            llm,
+            prompts["llm_ranker_system"],
+            prompts["llm_ranker_user"],
+            timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+        )
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
 
@@ -1239,7 +1301,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
-    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "full-v2-90", "custom"], default="custom",
+    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "full-v2-90", "holdout240", "custom"], default="custom",
                         help="Benchmark profile; light30/full-v2 use default inputs unless --input overrides")
     parser.add_argument("--input", "-i", default=None,
                         help="论文元数据路径")
