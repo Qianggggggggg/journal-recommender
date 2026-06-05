@@ -60,7 +60,10 @@ import argparse
 import json
 import logging
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Optional
 from datetime import datetime
 from pathlib import Path
 
@@ -95,6 +98,130 @@ def _paper_key(title: str, venue: str) -> str:
 def select_snapshot_candidates(rec_result: dict) -> list:
     """Return the exact candidate pool that the LLM-role variants will rank."""
     return list(rec_result.get("llm_candidates") or [])
+
+
+# Module-level print lock for --workers > 1 to avoid interleaved progress
+# output. (Created lazily in main() to keep this module import-safe.)
+_PRINT_LOCK = None
+
+
+def _safe_print(*args, **kwargs):
+    """Thread-safe print that uses a module-level lock when workers > 1."""
+    if _PRINT_LOCK is not None:
+        with _PRINT_LOCK:
+            print(*args, **kwargs)
+            return
+    print(*args, **kwargs)
+
+
+def _process_one_paper(
+    paper: dict,
+    pkey: str,
+    prior_entry: Optional[dict],
+    pipeline,
+    extractor: LLMEvidenceExtractor,
+    show_progress: bool,
+) -> tuple:
+    """Process a single paper: full extract + up to 2 focused retry rounds.
+
+    Returns (pkey, entry, copied_increment, retried_increment, failed_increment).
+    """
+    title = paper.get("title", "")
+    venue = paper.get("venue", "")
+
+    # Incremental repair: copy complete papers verbatim from prior snapshot.
+    if prior_entry is not None and prior_entry.get("evidence_coverage", 0.0) >= 1.0:
+        if show_progress:
+            _safe_print(
+                f"  ↻ {title[:50]:50s} | copied from prior (coverage=100%)"
+            )
+        return pkey, dict(prior_entry), 1, 0, 0
+
+    # Full extract for the paper (or for the missing subset on retry).
+    try:
+        entry = _extract_evidence_for_paper(
+            paper=paper,
+            pipeline=pipeline,
+            extractor=extractor,
+            show_progress=show_progress,
+        )
+    except Exception as exc:
+        logger.warning(
+            "[%s] evidence pre-pass failed entirely: %s",
+            title[:40], exc,
+        )
+        entry = {
+            "title": title,
+            "venue": venue,
+            "rule_ranks": {},
+            "learned_ranks": None,
+            "candidates": [],
+            "evidence": {},
+            "evidence_coverage": 0.0,
+            "status": "pre_pass_error",
+            "fallback_reason": f"{type(exc).__name__}: {exc}"[:500],
+        }
+        return pkey, entry, 0, 0, 1
+
+    retried_local = 0
+
+    # Incremental repair: merge with prior evidence, then up to 2
+    # focused retry rounds targeting only the still-missing candidates.
+    if prior_entry is not None and prior_entry.get("evidence"):
+        merged = {**prior_entry.get("evidence", {}), **entry["evidence"]}
+        entry["evidence"] = merged
+        cand_ids = {c["journal_id"] for c in entry["candidates"]}
+        entry["evidence_coverage"] = (
+            len(merged) / len(cand_ids) if cand_ids else 1.0
+        )
+
+    # Focused retry rounds: max 2 attempts on the still-missing IDs.
+    for round_idx in (1, 2):
+        if entry.get("evidence_coverage", 0.0) >= 1.0:
+            break
+        cand_ids = {c["journal_id"] for c in entry["candidates"]}
+        missing = sorted(cand_ids - set(entry["evidence"].keys()))
+        if not missing:
+            break
+        try:
+            profile = paper_profile_from_snapshot(
+                paper["paper_profile_snapshot"], paper
+            )
+            focused_candidates = _build_focused_candidates(
+                entry, missing, pipeline
+            )
+            new_ev = extractor.extract_focused(
+                focused_candidates,
+                profile,
+                focus_journal_ids=missing,
+                already_covered_ids=sorted(entry["evidence"].keys()),
+                rule_ranks=entry.get("rule_ranks", {}),
+            )
+            entry["evidence"].update(new_ev)
+            entry["evidence_coverage"] = (
+                len(entry["evidence"]) / len(cand_ids) if cand_ids else 1.0
+            )
+            retried_local += 1
+            if show_progress:
+                _safe_print(
+                    f"     round {round_idx}: +{len(new_ev)} new "
+                    f"→ coverage={entry['evidence_coverage']:.0%}"
+                )
+        except Exception as exc:
+            logger.warning(
+                "[%s] focused round %s failed: %s",
+                title[:40], round_idx, exc,
+            )
+            if show_progress:
+                _safe_print(
+                    f"     round {round_idx}: failed ({type(exc).__name__})"
+                )
+            break  # don't retry if extractor raised
+
+    if entry.get("evidence_coverage", 0.0) >= 1.0:
+        if entry.get("status") not in ("pre_pass_error",):
+            entry["status"] = "ok_repaired" if prior_entry else "ok"
+    return pkey, entry, 0, retried_local, 0
 
 
 def _extract_evidence_for_paper(
@@ -311,9 +438,15 @@ def parse_args() -> argparse.Namespace:
             "copied verbatim (no LLM call). Papers with coverage<1.0 are re-run "
             "with up to 2 focused retry rounds (only the missing journal_ids "
             "are sent to the LLM). Final result is written to --output-dir with "
-            "a new timestamp. Strict coverage=100% gate is enforced unless "
+            "a new timestamp. Strict coverage=100pct gate is enforced unless "
             "--allow-partial is also set."
         ),
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Concurrent papers processed in parallel (default 1, sequential).",
     )
     return parser.parse_args()
 
@@ -370,116 +503,71 @@ def main() -> None:
 
     print(
         f"Pre-pass: benchmark={args.benchmark_profile}, papers={len(papers)}, "
-        f"baseline={args.baseline_eval}"
+        f"baseline={args.baseline_eval}, workers={args.workers}"
     )
+
+    # Set up thread-safe printing when concurrent
+    global _PRINT_LOCK
+    if args.workers > 1:
+        _PRINT_LOCK = threading.Lock()
+    else:
+        _PRINT_LOCK = None
+
+    # Prepare per-paper inputs (paper + pkey + prior_entry) so workers
+    # only need to be called with the resolved inputs.
+    work_items = []
+    for paper in papers:
+        title = paper.get("title", "")
+        venue = paper.get("venue", "")
+        pkey = _paper_key(title, venue)
+        prior_entry = (
+            prior_snapshot.get("papers", {}).get(pkey) if prior_snapshot else None
+        )
+        work_items.append((paper, pkey, prior_entry))
 
     papers_out: dict = {}
     failed = 0
     copied = 0
     retried = 0
     started = time.time()
-    for index, paper in enumerate(papers, start=1):
-        title = paper.get("title", "")
-        venue = paper.get("venue", "")
-        pkey = _paper_key(title, venue)
+    show_progress = not args.no_progress
 
-        # Incremental repair: copy complete papers verbatim from prior snapshot.
-        prior_entry = (
-            prior_snapshot.get("papers", {}).get(pkey) if prior_snapshot else None
-        )
-        if prior_entry is not None and prior_entry.get("evidence_coverage", 0.0) >= 1.0:
-            papers_out[pkey] = dict(prior_entry)
-            copied += 1
-            if not args.no_progress:
-                print(
-                    f"  ↻ {title[:50]:50s} | copied from prior (coverage=100%)"
-                )
-            continue
-
-        # Full extract for the paper (or for the missing subset on retry).
-        try:
-            entry = _extract_evidence_for_paper(
-                paper=paper,
-                pipeline=pipeline,
-                extractor=extractor,
-                show_progress=not args.no_progress,
+    if args.workers <= 1:
+        # Sequential path: same behavior as before
+        for paper, pkey, prior_entry in work_items:
+            key, entry, c_inc, r_inc, f_inc = _process_one_paper(
+                paper, pkey, prior_entry, pipeline, extractor, show_progress
             )
-        except Exception as exc:
-            logger.warning(
-                "[%s] evidence pre-pass failed entirely: %s",
-                paper.get("title", "")[:40],
-                exc,
-            )
-            entry = {
-                "title": paper.get("title", ""),
-                "venue": paper.get("venue", ""),
-                "rule_ranks": {},
-                "learned_ranks": None,
-                "candidates": [],
-                "evidence": {},
-                "evidence_coverage": 0.0,
-                "status": "pre_pass_error",
-                "fallback_reason": f"{type(exc).__name__}: {exc}"[:500],
+            papers_out[key] = entry
+            copied += c_inc
+            retried += r_inc
+            failed += f_inc
+    else:
+        # Concurrent path: each worker gets its own (paper, pkey, prior_entry).
+        # The pipeline + extractor are shared (LLM clients are thread-safe).
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            futures = {
+                pool.submit(
+                    _process_one_paper,
+                    paper, pkey, prior_entry,
+                    pipeline, extractor, show_progress,
+                ): pkey
+                for paper, pkey, prior_entry in work_items
             }
-            failed += 1
-        else:
-            # Incremental repair: merge with prior evidence, then up to 2
-            # focused retry rounds targeting only the still-missing candidates.
-            if prior_entry is not None and prior_entry.get("evidence"):
-                merged = {**prior_entry.get("evidence", {}), **entry["evidence"]}
-                entry["evidence"] = merged
-                cand_ids = {c["journal_id"] for c in entry["candidates"]}
-                entry["evidence_coverage"] = (
-                    len(merged) / len(cand_ids) if cand_ids else 1.0
-                )
-
-            # Focused retry rounds: max 2 attempts on the still-missing IDs.
-            for round_idx in (1, 2):
-                if entry.get("evidence_coverage", 0.0) >= 1.0:
-                    break
-                cand_ids = {c["journal_id"] for c in entry["candidates"]}
-                missing = sorted(cand_ids - set(entry["evidence"].keys()))
-                if not missing:
-                    break
+            for fut in as_completed(futures):
                 try:
-                    profile = paper_profile_from_snapshot(
-                        paper["paper_profile_snapshot"], paper
-                    )
-                    focused_candidates = _build_focused_candidates(
-                        entry, missing, pipeline
-                    )
-                    new_ev = extractor.extract_focused(
-                        focused_candidates,
-                        profile,
-                        focus_journal_ids=missing,
-                        already_covered_ids=sorted(entry["evidence"].keys()),
-                        rule_ranks=entry.get("rule_ranks", {}),
-                    )
-                    entry["evidence"].update(new_ev)
-                    entry["evidence_coverage"] = (
-                        len(entry["evidence"]) / len(cand_ids) if cand_ids else 1.0
-                    )
-                    retried += 1
-                    if not args.no_progress:
-                        print(
-                            f"     round {round_idx}: +{len(new_ev)} new "
-                            f"→ coverage={entry['evidence_coverage']:.0%}"
-                        )
-                except Exception as exc:
+                    key, entry, c_inc, r_inc, f_inc = fut.result()
+                except Exception as exc:  # belt-and-suspenders
                     logger.warning(
-                        "[%s] focused round %s failed: %s",
-                        title[:40], round_idx, exc,
+                        "[%s] worker raised: %s",
+                        futures[fut][:40], exc,
                     )
-                    if not args.no_progress:
-                        print(
-                            f"     round {round_idx}: failed ({type(exc).__name__})"
-                        )
-                    break  # don't retry if extractor raised
-
-            if entry.get("evidence_coverage", 0.0) >= 1.0:
-                if entry.get("status") not in ("pre_pass_error",):
-                    entry["status"] = "ok_repaired" if prior_entry else "ok"
-        papers_out[pkey] = entry
+                    failed += 1
+                    continue
+                papers_out[key] = entry
+                copied += c_inc
+                retried += r_inc
+                failed += f_inc
 
     # Coverage gate.
     partial = [

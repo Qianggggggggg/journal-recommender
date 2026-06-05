@@ -233,6 +233,7 @@ def configure_pipeline_for_variant(
     app_config: dict,
     prompts: dict,
     evidence_snapshot: Optional[dict] = None,
+    ltr_score_weight: float = 0.0,
 ) -> dict:
     """Configure a fresh pipeline for one role-ablation variant.
 
@@ -283,7 +284,7 @@ def configure_pipeline_for_variant(
         prior_source=str(variant.prior_source),
         evidence_weight=0.8,
         prior_weight=0.2,
-        ltr_score_weight=args.ltr_score_weight,  # 6.4: LTR score as 3rd formula component
+        ltr_score_weight=ltr_score_weight,  # 6.4: LTR score as 3rd formula component
         evidence_snapshot=evidence_snapshot,
     )
     if not variant.ltr_enabled:
@@ -465,6 +466,7 @@ def main() -> None:
             app_config,
             prompts,
             evidence_snapshot=evidence_snapshot,
+            ltr_score_weight=args.ltr_score_weight,
         )
         result = run_evaluation(
             papers=papers,
