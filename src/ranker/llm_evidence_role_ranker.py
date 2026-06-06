@@ -62,6 +62,25 @@ class DirectLLMRoleRanker:
     def __init__(self, direct_ranker: Any) -> None:
         self.direct_ranker = direct_ranker
 
+    def rank(
+        self,
+        candidates: List[InputCandidate],
+        paper_profile: PaperProfile,
+        top_k: int = 5,
+        retrieval_trace: Optional[Dict[str, dict]] = None,
+        **kwargs: Any,
+    ) -> Tuple[List[EvidenceRankedCandidate], str]:
+        """Backward-compat shim for callers that use the legacy `.rank()`
+        interface. Returns the ranked list and method name; discards
+        diagnostics."""
+        ranked, method, _diag = self.rank_with_diagnostics(
+            candidates,
+            paper_profile,
+            top_k=top_k,
+            retrieval_trace=retrieval_trace,
+        )
+        return ranked, method
+
     def rank_with_diagnostics(
         self,
         candidates: List[InputCandidate],
@@ -179,6 +198,42 @@ class LLMEvidenceRoleRanker:
         if not self.evidence_snapshot:
             return None
         return self.evidence_snapshot.get(self._title_key(paper_profile.title))
+
+    def rank(
+        self,
+        candidates: List[InputCandidate],
+        paper_profile: PaperProfile,
+        top_k: int = 5,
+        retrieval_trace: Optional[Dict[str, dict]] = None,
+        **kwargs: Any,
+    ) -> Tuple[List[EvidenceRankedCandidate], str]:
+        """Backward-compat shim for callers that use the legacy `.rank()`
+        interface. Returns (ranked, method_name); discards diagnostics.
+
+        For this role ranker, kwargs may include `precomputed_evidence`,
+        `rule_ranks`, `rule_scores`, `learned_ranks`, `learned_scores`
+        which are threaded through to `rank_with_diagnostics` when
+        present in its signature.
+        """
+        import inspect as _inspect
+        _rwd_params = _inspect.signature(self.rank_with_diagnostics).parameters
+        _rwd_kwargs = {
+            "candidates": candidates,
+            "paper_profile": paper_profile,
+            "top_k": top_k,
+            "retrieval_trace": retrieval_trace,
+        }
+        for k in (
+            "precomputed_evidence",
+            "rule_ranks",
+            "rule_scores",
+            "learned_ranks",
+            "learned_scores",
+        ):
+            if k in kwargs and k in _rwd_params:
+                _rwd_kwargs[k] = kwargs[k]
+        ranked, method, _diag = self.rank_with_diagnostics(**_rwd_kwargs)
+        return ranked, method
 
     def rank_with_diagnostics(
         self,

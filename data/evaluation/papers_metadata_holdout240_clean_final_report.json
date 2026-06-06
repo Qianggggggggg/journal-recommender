@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "description": "Final cleaned holdout240: 26 invalid replaced with S2-verified papers from (area, ccf) journal pool.",
+  "original_total": 240,
+  "invalid_removed": 26,
+  "kept_from_original": 214,
+  "replacements_added": 26,
+  "final_total": 240,
+  "cell_distribution": {
+    "交叉/综合/新兴|A": 8,
+    "交叉/综合/新兴|B": 8,
+    "交叉/综合/新兴|C": 8,
+    "人工智能|A": 8,
+    "人工智能|B": 8,
+    "人工智能|C": 8,
+    "人机交互与普适计算|A": 8,
+    "人机交互与普适计算|B": 8,
+    "人机交互与普适计算|C": 8,
+    "数据库/数据挖掘/内容检索|A": 8,
+    "数据库/数据挖掘/内容检索|B": 8,
+    "数据库/数据挖掘/内容检索|C": 8,
+    "网络与信息安全|A": 8,
+    "网络与信息安全|B": 8,
+    "网络与信息安全|C": 8,
+    "计算机体系结构/并行与分布计算/存储系统|A": 8,
+    "计算机体系结构/并行与分布计算/存储系统|B": 8,
+    "计算机体系结构/并行与分布计算/存储系统|C": 8,
+    "计算机图形学与多媒体|A": 8,
+    "计算机图形学与多媒体|B": 8,
+    "计算机图形学与多媒体|C": 8,
+    "计算机科学理论|A": 8,
+    "计算机科学理论|B": 8,
+    "计算机科学理论|C": 8,
+    "计算机网络|A": 8,
+    "计算机网络|B": 8,
+    "计算机网络|C": 8,
+    "软件工程/系统软件/程序设计语言|A": 8,
+    "软件工程/系统软件/程序设计语言|B": 8,
+    "软件工程/系统软件/程序设计语言|C": 8
+  },
+  "venue_distribution": {
+    "Journal of the ACM": 10,
+    "IEEE Transactions on Pattern Analysis and Machine Intelligence": 8,
+    "ACM Transactions on Applied Perception": 8,
+    "ACM Transactions on Asian and Low-Resource Language Information Processing": 8,
+    "IEEE Journal on Selected Areas in Communications": 8,
+    "ACM Transactions on Internet Technology": 8,
+    "IEEE Transactions on Network and Service Management": 8,
+    "IEEE Transactions on Dependable and Secure Computing": 8,
+    "ACM Transactions on Privacy and Security": 8,
+    "EURASIP Journal on Information Security": 8,
+    "ACM Transactions on Autonomous and Adaptive Systems": 8,
+    "ACM Journal on Emerging Technologies in Computing Systems": 8,
+    "ACM Transactions on Database Systems": 8,
+    "ACM Transactions on Knowledge Discovery from Data": 8,
+    "ACM Transactions on Computational Logic": 8,
+    "ACM Transactions on Graphics": 8,
+    "Computer Graphics Forum": 8,
+    "Computers & Graphics": 8,
+    "ACM Transactions on Computer-Human Interaction": 8,
+    "Personal and Ubiquitous Computing": 8,
+    "ACM Transactions on Programming Languages and Systems": 8,
+    "International Journal of Software Engineering and Knowledge Engineering": 8,
+    "Briefings in Bioinformatics": 8,
+    "IET Software": 7,
+    "IEEE Transactions on Information Theory": 6,
+    "Annals of Pure and Applied Logic": 6,
+    "IEEE Transactions on Human-Machine Systems": 6,
+    "BMC Bioinformatics": 5,
+    "ACM Transactions on Computer Systems": 4,
+    "ACM Transactions on Storage": 4,
+    "International Journal of Geographical Information Science": 4,
+    "IEEE Geoscience and Remote Sensing Letters": 3,
+    "Distributed and Parallel Databases": 2,
+    "Acta Informatica": 2,
+    "Interacting with computers": 2,
+    "Discover Computing": 2,
+    "Empirical Software Engineering": 1
+  },
+  "year_distribution": {
+    "2022": 20,
+    "2023": 48,
+    "2024": 62,
+    "2025": 110
+  },
+  "replacement_details": [
+    {
+      "index": 1,
+      "original_title": "Future Progress in Artificial Intelligence: A Survey of Expe",
+      "original_venue": "Artificial Intelligence",
+      "replacement_title": "Survey of Computerized Adaptive Testing: A Machine Learning ",
+      "replacement_venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "replacement_year": 2024,
+      "from_journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    },
+    {
+      "index": 2,
+      "original_title": "ARTIFICIAL INTELLIGENCE IN EDUCATION: CHALLENGES AND OPPORTU",
+      "original_venue": "Artificial Intelligence",
+      "replacement_title": "Recent Advances in Optimal Transport for Machine Learning",
+      "replacement_venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "replacement_year": 2023,
+      "from_journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    },
+    {
+      "index": 129,
+      "original_title": "The Use of Large Language Models in Generating Patient Educa",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "New orientable sequences",
+      "replacement_venue": "Acta Informatica",
+      "replacement_year": 2025,
+      "from_journal": "Acta Informatica"
+    },
+    {
+      "index": 131,
+      "original_title": "Explainability requirements as hyperproperties",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Explainability requirements as hyperproperties",
+      "replacement_venue": "Acta Informatica",
+      "replacement_year": 2025,
+      "from_journal": "Acta Informatica"
+    },
+    {
+      "index": 130,
+      "original_title": "New orientable sequences",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Interpolation in Hájek's basic logic",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2024,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 132,
+      "original_title": "WIRED BUT WEARY: GEN Z’S COMPLEX RELATIONSHIP WITH ONLINE CO",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "The Monadic Grzegorczyk Logic",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2024,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 133,
+      "original_title": "LIBRARY AND INFORMATION SERVICES IN THE DIGITAL AGE: OPPORTU",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Completeness in local positive logic",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2024,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 134,
+      "original_title": "A NEW SOFT SET OPERATION: COMPLEMENTARY SOFT BINARY PIECEWIS",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Structural and universal completeness in algebra and logic",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2023,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 135,
+      "original_title": "Diagnostic Value in Screening Severe Depression of the Hamil",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Profiniteness, monadicity and universal models in modal logi",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2023,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 136,
+      "original_title": "Barriers to the Adoption of Evidence Based Practice in Nursi",
+      "original_venue": "Acta Informatica",
+      "replacement_title": "Compatibility between modal operators in distributive modal ",
+      "replacement_venue": "Annals of Pure and Applied Logic",
+      "replacement_year": 2023,
+      "from_journal": "Annals of Pure and Applied Logic"
+    },
+    {
+      "index": 194,
+      "original_title": "Automated quantum software engineering",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "Predicting Software Perfection Through Advanced Models to Un",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 193,
+      "original_title": "Understanding Software Engineering Agents: A Study of Though",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "Automated Hybrid Methodology for Software Architecture Style",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 196,
+      "original_title": "Quantum software engineering and potential of quantum comput",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "Blockchain‐Based Model to Predict Agile Software Estimation ",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 197,
+      "original_title": "Agents in software engineering: survey, landscape, and visio",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "A Systematic Literature Review on Application of Agile Softw",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 198,
+      "original_title": "ALMAS: an Autonomous LLM-based Multi-Agent Software Engineer",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "Investigation and Research on Several Key Issues of Software",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 200,
+      "original_title": "Designing a Syllabus for a Course on Empirical Software Engi",
+      "original_venue": "Empirical Software Engineering",
+      "replacement_title": "Enhancing Software Engineering With AI: Innovations, Challen",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 195,
+      "original_title": "Thinking Longer, Not Larger: Enhancing Software Engineering ",
+      "original_venue": "Automated Software Engineering",
+      "replacement_title": "A Systematic Literature Review on Graphical User Interface T",
+      "replacement_venue": "IET Software",
+      "replacement_year": 2025,
+      "from_journal": "IET Software"
+    },
+    {
+      "index": 215,
+      "original_title": "Hamiltonian Complexity in the Thermodynamic Limit",
+      "original_venue": "Journal of the ACM",
+      "replacement_title": "Hamiltonian Complexity in the Thermodynamic Limit",
+      "replacement_venue": "Journal of the ACM",
+      "replacement_year": 2025,
+      "from_journal": "Journal of the ACM"
+    },
+    {
+      "index": 169,
+      "original_title": "A Format-Character Cooperative Recognition Method for Ancien",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Machine Learning for Human–Machine Systems With Advanced Per",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2024,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 170,
+      "original_title": "Deep Reinforcement Learning Based Cooperative Task Offloadin",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Multiobjective Control Design for Human–Machine Systems With",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2022,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 171,
+      "original_title": "Workplace Aspects of Knowledge and Expertise Sharing Practic",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Design and Experimental Verification of a Hip Exoskeleton Ba",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2023,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 172,
+      "original_title": "Bi-Directional Safety Protection for Vulnerable Road Users: ",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "A Review on Human–Machine Trust Evaluation: Human-Centric an",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2022,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 173,
+      "original_title": "Making Order in Household Accounting - Digital Invoices as D",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Modeling Team Interaction and Decision-Making in Agile Human",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2023,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 174,
+      "original_title": "Invisible to Machines: Designing AI that Supports Vision Wor",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Receding-Horizon Reinforcement Learning for Time-Delayed Hum",
+      "replacement_venue": "IEEE Transactions on Human-Machine Systems",
+      "replacement_year": 2025,
+      "from_journal": "IEEE Transactions on Human-Machine Systems"
+    },
+    {
+      "index": 175,
+      "original_title": "A Particle Swarm Optimization Algorithm Based on Experience ",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Unboxing Manipulation Checks for Voice UX",
+      "replacement_venue": "Interacting with computers",
+      "replacement_year": 2025,
+      "from_journal": "Interacting with Computers"
+    },
+    {
+      "index": 176,
+      "original_title": "Bi-population Cooperative Moth-flame Optimization Algorithm ",
+      "original_venue": "Computer Supported Cooperative Work",
+      "replacement_title": "Fostering co-design readiness in South Africa",
+      "replacement_venue": "Interacting with computers",
+      "replacement_year": 2025,
+      "from_journal": "Interacting with Computers"
+    }
+  ]
+}

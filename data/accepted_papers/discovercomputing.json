@@ -1,0 +1,26 @@
+{
+  "journal_id": "discovercomputing",
+  "journal_name": "Discover Computing",
+  "papers": [
+    {
+      "title": "Genomic privacy and security in the era of artificial intelligence and quantum computing",
+      "abstract": "The rapid advancements in sequencing technologies have greatly increased access to genomic data stored in public databases. This has raised significant privacy and security concerns. This review emphasizes the importance of protecting genomic data by analyzing vulnerabilities in current storage and sharing practices. It examines the risks genetic databases face from cyber-attacks and internal breaches, focusing especially on advanced AI-driven threats and quantum computing vulnerabilities. The review explores machine learning methods designed to secure data. It highlights algorithms that prioritize privacy while maintaining data confidentiality, such as differential privacy, federated learning, and synthetic data generation using Generative Adversarial Networks (GANs). Findings demonstrate progress in mitigating common privacy breaches like re-identification and inference attacks. However, persistent vulnerabilities remain, particularly to emerging threats such as model inversion and membership inference attacks. The review advocates an integrated approach combining robust legislative frameworks with advanced technology to address genomic privacy challenges. It calls for intensified research efforts to safeguard genomic information. In particular, there is an urgent need to adopt quantum-resistant cryptographic methods, including lattice-based encryption and blockchain-integrated security frameworks. The paper emphasizes the necessity for genomics researchers to prioritize data privacy and security. This ensures responsible handling of genomic information in research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10791-025-09627-w",
+      "arxiv": "",
+      "corpus_id": 279223012,
+      "url": "https://www.semanticscholar.org/paper/9ad4133a2264858f8643b8c638e735124757c710"
+    },
+    {
+      "title": "Advanced queueing and scheduling techniques in cloud computing using AI-based model order reduction",
+      "abstract": "Resource management in computing presents significant challenges that require innovative solutions. This paper proposes a novel architecture integrating artificial intelligence (AI) with model order reduction (ROM) and advanced queueing theory models to enhance resource allocation and task scheduling efficiency. The study demonstrates substantial improvements in critical performance parameters, including response time optimization, resource utilization, and energy consumption management through comprehensive mathematical modeling and machine learning frameworks. The methodology incorporates predictive analytics for resource demand forecasting, intelligent scheduling algorithms for automatic workload adaptation, and calendar queueing techniques for real-time decision-making. Extensive simulations and analyses across multiple queueing scenarios validate the theoretical framework, establishing a robust foundation for efficient computation in large-scale distributed environments. Results indicate a 50% reduction in response time, a 50% increase in throughput, and a 15% improvement in resource utilization. The ROM implementation achieved a 65–80% reduction in processing overhead while maintaining 95–98% accuracy compared to full-scale models. Energy efficiency improved by 20% through intelligent workload distribution, with system reliability reaching 99.99% uptime. This research contributes to computing advancement by demonstrating the effectiveness of integrating AI-driven resource management with traditional queueing theory, providing a scalable solution for modern infrastructure optimization. The proposed framework’s ability to automatically adapt to varying workloads while maintaining optimal performance parameters represents a significant step forward in resource management technology.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10791-025-09581-7",
+      "arxiv": "",
+      "corpus_id": 278471339,
+      "url": "https://www.semanticscholar.org/paper/4c6caa0950421f37faa2ed6283c8f92b46285cd3"
+    }
+  ]
+}

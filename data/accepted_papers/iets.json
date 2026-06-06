@@ -1,0 +1,66 @@
+{
+  "journal_id": "iets",
+  "journal_name": "IET Software",
+  "papers": [
+    {
+      "title": "Predicting Software Perfection Through Advanced Models to Uncover and Prevent Defects",
+      "abstract": "Software defect prediction is a critical task in software engineering, enabling organizations to proactively identify and address potential issues in software systems, thereby improving quality and reducing costs. In this study, we evaluated and compared various machine learning models, including logistic regression (LR), random forest (RF), support vector machines (SVMs), convolutional neural networks (CNNs), and eXtreme Gradient Boosting (XGBoost), for software defect prediction using a combination of diverse datasets. The models were trained and tested on preprocessed and feature‐selected data, followed by optimization through hyperparameter tuning. Performance evaluation metrics were employed to analyze the results comprehensively, including classification reports, confusion matrices, receiver operating characteristic–area under the curve (ROC‐AUC) curves, precision–recall curves, and cumulative gain charts. The results revealed that XGBoost consistently outperformed other models, achieving the highest accuracy, precision, recall, and AUC scores across all metrics. This indicates its robustness and suitability for predicting software defects in real‐world applications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sfw2/8832164",
+      "arxiv": "",
+      "corpus_id": 278887497,
+      "url": "https://www.semanticscholar.org/paper/9bb0e0118457e2afe4908f58082a2f3da96a9518"
+    },
+    {
+      "title": "Automated Hybrid Methodology for Software Architecture Style Selection Using Analytic Hierarchy Process and Fuzzy Analytic Hierarchy Process",
+      "abstract": "In software engineering, selecting the appropriate architectural style for software systems is risky and sensitive. The selection process is a multicriteria decision‐making (MCDM) problem. Consequently, selecting a suitable architecture is a key challenge in software development. This study presents an automated hybrid methodology based on the analytic hierarchy process (AHP) and fuzzy analytic hierarchy process (FAHP) to evaluate and suggest multiple architectural styles based on quality attributes (QAs) alone rather than relying on expert opinions. A Tera‐PROMISE dataset is presented to illustrate the proposed methodology and then compare the result of the methodology with expert judgments. Moreover, to support the proposed methodology, a case study is carried out to compare the proposed method to previous studies.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sfw2/9943825",
+      "arxiv": "",
+      "corpus_id": 277601313,
+      "url": "https://www.semanticscholar.org/paper/cd441d2b7ae9f891ab656375503a6e2b173f63d1"
+    },
+    {
+      "title": "Enhancing Software Engineering With AI: Innovations, Challenges, and Future Directions",
+      "abstract": "Software engineering, along with the incorporation of Artificial Intelligence (AI), has emerged as a new technological vantage point that has permanently changed classical development practices and processes for any phase and aspect of the software lifecycle. In particular, this systematic literature review, which includes 135 peer‐reviewed papers extracted from the years 2010 to 2025, follows PRISMA guidelines. It examines modern instances of AI‐based requirements analysis, automated code transformation, predictive system modeling, proactive fault monitoring and detection, and advanced project guidance systems. Technologies can be powerful tools for increasing productivity and effectiveness and strengthening the quality of software development while making technology more complex—technologically, organizationally, and ethically. The generalization, explainability, privacy and algorithmic bias challenges of the model are discussed in detail. This paper shows how AI is helping companies to predict defects, automatically identify errors and optimize the software development. It also highlights the significant adoption barriers to these technologies for organizations. The review combines new industry research with existing practice to offer practical guidance on how these implementation challenges can be overcome and the ethical use of AI can be promoted. In contrast to existing reviews concentrating on isolated stages, the study offers an integrated review through life phases, distinctive ethical frameworks and a roadmap for adoption. Takeaway: Sustainable AI deployment in SE needs interdisciplinary collaboration, ethical oversight, and a mixture of guidelines to balance technology efficiency with responsibility. The paper highlights that interdisciplinary cooperation and ethical framings are requirements to integrate AI into software engineering in a sustainable, straightforward way. This review can be utilized as a guide for authors, scientists/practitioners, and policymakers in articulating the intellectual‐practical gap.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sfw2/5691460",
+      "arxiv": "",
+      "corpus_id": 282617849,
+      "url": "https://www.semanticscholar.org/paper/54957bd1f950e2752139019a40b12f687b3f8b39"
+    },
+    {
+      "title": "Investigation and Research on Several Key Issues of Software Defect Prediction",
+      "abstract": "With the increasing size and complexity of software code, hidden defects can pose serious problems to systems, making zero‐defect software an urgent need for current industrial software applications. Software defect prediction (SDP) serves to identify defective modules or classes, with prediction models trained using historical defect data from various projects. This enables defect prediction in test projects, aiding in the rational allocation of test resources and the enhancement of software quality. The efficacy of SDP closely hinges on the quality of the defect dataset, the selected metric index, the trained model, and the algorithm design. This article reviews recent literature on SDP, summarizing existing research from three key perspectives: the dataset and metric elements employed in SDP, dataset optimization processing techniques, and defect prediction model techniques. It primarily focuses on introducing commonly used datasets and two types of defect metrics for SDP. Regarding dataset optimization processing technology, it discusses methods for handling abnormal data, high‐dimensional data, class imbalance data, and data disparity issues. Furthermore, it analyzes the construction of prediction models across four dimensions: supervised learning, semi‐supervised learning, unsupervised learning, and deep learning (DL). Key observations include: (i) Researchers utilize datasets of varying quality, performance evaluation metrics, and SDP models. The efficacy of software product metrics and development process metrics varies across different application scenarios, necessitating flexible metric selection based on actual requirements. (ii) Commonly used datasets like Promise and NASA exhibit varying data quality. Appropriate data preprocessing methods and dataset creation are crucial before training SDP models. (iii) In scenarios with limited labeled data, cross‐project transfer learning, semi‐supervised, or unsupervised learning methods tend to better utilize a broader range of training data. Given that each step in the SDP process corresponds to different unresolved issues, each requiring varying levels of response measures, we suggest that researchers comprehensively consider research objectives such as dataset quality, SDP model, performance evaluation indicators, and the need for model interpretability when conducting SDP‐related research. It’s important to note that no universal dataset or model can perform optimally across different application scenarios.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sfw2/6615496",
+      "arxiv": "",
+      "corpus_id": 282957313,
+      "url": "https://www.semanticscholar.org/paper/a90925461ed5550d2b7ec8e1602a7f4d98503957"
+    },
+    {
+      "title": "Blockchain‐Based Model to Predict Agile Software Estimation Using Machine Learning Techniques",
+      "abstract": "The importance of software estimation is utmost, as it is one of the most crucial activities for software project management. Although numerous software estimation techniques exist, the accuracy achieved by these techniques is questionable. This work studies the existing software estimation techniques for Agile software development (ASD), identifies the gap, and proposes a decentralized framework for estimation of ASD using machine‐learning (ML) algorithms, which utilize the blockchain technology. The estimation model uses nearest neighbors with four ML techniques for ASD. Using an available ASD dataset, after the augmentation on the dataset, the proposed model emits results for the completion time prediction of software. Use of another popular dataset for ASD predicts the software effort using the same proposed model. The crux of the proposed model is that it simulates blockchain technology to predict the completion time and the effort of a software using ML algorithms. This type of estimation model, using ML, making use of blockchain technology, does not exist in the literature, and this is the core novelty of this proposed model. The final prediction of the software effort integrates another technique for improving the calculated estimation, the standard deviation technique proposed by the authors previously. This model helped lessening the overall mean magnitude of relative error (MMRE) of the original model from 6.82% to 1.73% for the augmented dataset of 126 projects. All four ML techniques used for the proposed model give a better p‐value than the original model using statistical testing through the Wilcoxon test. The average of the MMRE for effort estimation of all four techniques is below 25% on a dataset of 136 projects. The application of the standard deviation technique further helps in lessening the MMRE of the proposed model at 70%, 80%, and 90% confidence levels. The work will give insight to researchers and experts and open the doors for new research in this area.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sfw2/9238663",
+      "arxiv": "",
+      "corpus_id": 282339051,
+      "url": "https://www.semanticscholar.org/paper/df5a63e640c4e429c8401c79ff95efcd9866ff7e"
+    },
+    {
+      "title": "Software Defect Prediction Using Deep Q-Learning Network-Based Feature Extraction",
+      "abstract": "Machine learning-based software defect prediction (SDP) approaches have been commonly proposed to help to deliver high-quality software. Unfortunately, all the previous research conducted without effective feature reduction suffers from high-dimensional data, leading to unsatisfactory prediction performance measures. Moreover, without proper feature reduction, the interpretability and generalization ability of machine learning models in SDP may be compromised, hindering their practical utility in diverse software development environments. In this paper, an SDP approach using deep Q-learning network (DQN)-based feature extraction is proposed to eliminate irrelevant, redundant, and noisy features and improve the classification performance. In the data preprocessing phase, the undersampling method of BalanceCascade is applied to divide the original datasets. As the first step of feature extraction, the weight ranking of all the metric elements is calculated according to the expected cross-entropy. Then, the relation matrix is constructed by applying random matrix theory. After that, the reward principle is defined for computing the Q value of Q-learning based on weight ranking, relation matrix, and the number of errors, according to which a convolutional neural network model is trained on datasets until the sequences of metric pairs are generated for all datasets acting as the revised feature set. Various experiments have been conducted on 11 NASA and 11 PROMISE repository datasets. Sensitive analysis experiments show that binary classification algorithms based on SDP approaches using the DQN-based feature extraction outperform those without using it. We also conducted experiments to compare our approach with four state-of-the-art approaches on common datasets, which show that our approach is superior to these methods in precision, F-measure, area under receiver operating characteristics curve, and Matthews correlation coefficient values.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/2024/3946655",
+      "arxiv": "",
+      "corpus_id": 270164830,
+      "url": "https://www.semanticscholar.org/paper/0857c98a29b9a7b7ed874ce5102be34276ee9bea"
+    }
+  ]
+}

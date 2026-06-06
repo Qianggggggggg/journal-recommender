@@ -1,0 +1,66 @@
+{
+  "journal_id": "iwc",
+  "journal_name": "Interacting with Computers",
+  "papers": [
+    {
+      "title": "Unboxing Manipulation Checks for Voice UX",
+      "abstract": "\n Voice-based interaction is experiencing a second wind through the advent of machine learning (ML) techniques, affordable consumer products and renewed work on natural language processing (NLP) and large language models (LLMs). A growing body of work is exploring how users perceive new forms of computer-generated voices from qualitative and quantitative angles. However, critical voices have called for greater rigour, especially in confirming the voice as a manipulated variable, i.e. manipulation checks. We present three case studies that highlight the value of investing in rigorous manipulation checks for HCI researchers and designers. We demonstrate the importance of testing assumptions, the need for care and reflection in the design of response options and measurement and the advantages of more exploratory approaches to understanding user perceptions of and user experiences (UX) with voice phenomena. Through these case studies, we raise awareness, empirically justify and critically assess the value of manipulation checks for voice UX research and beyond.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwae062",
+      "arxiv": "",
+      "corpus_id": 275360775,
+      "url": "https://www.semanticscholar.org/paper/0794dd5082af1a618c570cf89b16404d433833a2"
+    },
+    {
+      "title": "Fostering co-design readiness in South Africa",
+      "abstract": "\n Technological artifacts designed by individuals from developing nations often do not flourish in developing regions. Many authors conducting work in these regions have therefore called on researchers to make use of co-design in order to mitigate power imbalances, include the voices of communities in the design of technology intended for them, and design and build more contextually situated technology. Many of these authors also refer to the need for co-design readiness in their work. However, little is known about how co-design readiness can be articulated and achieved, especially when working with rural communities. In this paper, we make use of qualitative meta-analysis to interrogate the data from three distinct case studies in order to investigate co-design readiness. We found that co-design readiness comprises three forms, namely: (1) emotional readiness built through trust, relationship building, and empathy; (2) cultural readiness, which requires that researchers and participants have an awareness and respect for each other’s cultural values and beliefs; and, finally, (3) readiness in terms of confidence and familiarity with the technologies used which can be achieved through careful and strategic methodological decisions. We found that researchers should explicitly plan for readiness and should not assume that readiness will grow organically and that co-design, if planned well is a lengthy process. Finally, we provide learnings from our work to how co-design readiness can be achieved through planning and methodological decisions.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf005",
+      "arxiv": "",
+      "corpus_id": 276833653,
+      "url": "https://www.semanticscholar.org/paper/946127be8e17647a59ae8d436f8749d104a37a9a"
+    },
+    {
+      "title": "Widespread yet Unreliable: A Systematic Analysis of the Use of Presence Questionnaires",
+      "abstract": "\n Presence, as a psychological state, is typically assessed using questionnaires. While many researchers in this field assume that these self-report instruments are standardized, the reliability of such questionnaires remains uncertain. This knowledge gap challenges the accuracy and validity of data derived from studies assessing presence. Ensuring reliable and precise data collection and reporting is essential for the credibility of findings in presence research, because inaccuracies may cause errors in conclusions, which affects theoretical understandings, methodological approaches and practical applications. To address this issue, we conducted a systematic analysis of 397 empirical quantitative studies on presence. We investigated the use of presence scales, including applications, modifications, a variety of measures and reporting practices. We found that the majority of the presence studies modify questionnaires, do not re-validate them and improperly report their methods. Based on these findings, we propose solutions to enhance transparency and validation of the presence measurements.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwae064",
+      "arxiv": "",
+      "corpus_id": 276087670,
+      "url": "https://www.semanticscholar.org/paper/d82a85538913eccf9684e165ed45eaa154481b24"
+    },
+    {
+      "title": "Digital Confessions: The Willingness to Disclose Intimate Information to a Chatbot and its Impact on Emotional Well-Being",
+      "abstract": "\n Chatbots have several features that may stimulate self-disclosure, such as accessibility, anonymity, convenience and their perceived non-judgmental nature. The aim of this study is to investigate if people disclose (more) intimate information to a chatbot, compared to a human, and to what extent this enhances their emotional well-being through feelings of relief. An experiment with a 2 (human vs. chatbot) by 2 (low empathetic vs. high empathetic) design was conducted (N = 286). Results showed that there was no difference in the self-reported intimacy of self-disclosure between the human and chatbot conditions. Furthermore, people perceived less fear of judgment in the chatbot condition, but more trust in the human interactant compared to the chatbot interactant. Perceived anonymity was the only variable to directly impact self-disclosure intimacy. The finding that humans disclose equally intimate information to chatbots and humans is in line with the CASA paradigm, which states that people can react in a social manner to both computers and humans.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwae016",
+      "arxiv": "",
+      "corpus_id": 270506290,
+      "url": "https://www.semanticscholar.org/paper/e90e8c377776b4af1367749794c96c6c32eccf75"
+    },
+    {
+      "title": "Designing for Sustained Motivation: A Review of Self-Determination Theory in Behaviour Change Technologies",
+      "abstract": "\n Recent years have seen a surge in applications and technologies aimed at motivating users to achieve personal goals and improve their wellbeing. However, these often fail to promote long-term behaviour change, and sometimes even backfire. We consider how self-determination theory (SDT), a metatheory of human motivation and wellbeing, can help explain why such technologies fail, and how they may better help users internalize the motivation behind their goals and make enduring changes in their behaviour. In this work, we systematically reviewed 15 papers in the ACM Digital Library that apply SDT to the design of behaviour change technologies (BCTs). We identified 50 suggestions for design features in BCTs, grounded in SDT, that researchers have applied to enhance user motivation. However, we find that SDT is often leveraged to optimize engagement with the technology itself rather than with the targeted behaviour change per se. When interpreted through the lens of SDT, the implication is that BCTs may fail to cultivate sustained changes in behaviour, as users’ motivation depends on their enjoyment of the intervention, which may wane over time. An underexplored opportunity remains for designers to leverage SDT to support users to internalize the ultimate goals and value of certain behaviour changes, enhancing their motivation to sustain these changes in the long term.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2402.00121",
+      "arxiv": "2402.00121",
+      "corpus_id": 267365321,
+      "url": "https://www.semanticscholar.org/paper/53f9d44513d11d2b5cc825ee1c3706dc48c64381"
+    },
+    {
+      "title": "Designing assistive technologies for and with neurodivergent users: considerations from research practice",
+      "abstract": "\n To be accessible for neurodivergent users, interactive technologies must be designed and developed with the close involvement of end users. However, traditional HCI methods often fail to properly engage neurodivergent users, particularly during the early design phases. To characterize the design challenges and propose techniques to address methodological limitations that currently hinder access to neurodivergent users, in this paper, we make the following contributions: (1) a systematic literature review identifying gaps and opportunities in methodologies for designing interactive technologies for neurodivergent individuals; (2) an online survey gathering insights, challenges, and recommendations from researchers and practitioners for more neuroinclusive practices; and (3) case studies demonstrating adaptive interview methods integrating visual aids and interactive sketching to deeply engage neurodivergent participants. From the literature review, we found that involving neurodivergent users in design enhances engagement to ensure that technology meets their needs, and fosters collaboration and trust for neuroinclusive outcomes. From the survey, we conclude that design studies lack the involvement of neurodivergent older adults, community partnerships are essential for successful recruitment and reduced attrition, and qualitative methods are more commonly employed. The case studies presented demonstrate the feasibility and potential of adaptive interview methods, including visual aids and interactive sketching, to engage neurodivergent participants deeply in the design process. We conclude by discussing common challenges faced and offering practical recommendations for more inclusive and effective design practices in HCI, ultimately promoting greater representation and improved assistive technologies tailored to neurodivergent individuals.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf037",
+      "arxiv": "",
+      "corpus_id": 281900294,
+      "url": "https://www.semanticscholar.org/paper/ff7ba98fd9236b86cf94b4ae51a5e2fa4683b4b7"
+    }
+  ]
+}

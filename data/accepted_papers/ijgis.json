@@ -1,0 +1,66 @@
+{
+  "journal_id": "ijgis",
+  "journal_name": "International Journal of Geographical Information Science",
+  "papers": [
+    {
+      "title": "Research themes of geographical information science during 1991–2020: a retrospective bibliometric analysis",
+      "abstract": "Abstract About 30 years have passed since Michael F. Goodchild proposed the term geographical information science (GIScience) in 1992. In the past 30 years, GIScience has made great progress in expanding research findings and perfecting theories and methods. To understand the development progress of GIScience, this research conducts a bibliometric analysis of 9400 publications between 1991 and 2020 in 10 international refereed journals and 2 international conferences of GIScience. We analyze the publication statistics and trends in GIScience from two aspects of journals/conferences and countries/territories. Based on the community detection of the citation network, we extract 15 research themes and show their leading authors and highly cited articles. Furthermore, the change of publication number in different themes over time can indicate the evolution of some research focuses in GIScience. The results demonstrate that the publication proportions of some themes grow rapidly, such as “moving object,” “volunteered geographic information,” and “geographically weight regression,” while the publication proportions of some themes are decreasing, such as “digital elevation model,” “planning support system,” and “ontology.” In the discussion, the journal distribution of papers on different themes is discussed. Moreover, we suggest a few research directions that are worthy of attention in the future.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2022.2119476",
+      "arxiv": "",
+      "corpus_id": 252243376,
+      "url": "https://www.semanticscholar.org/paper/777e17d2250f8917976dea498c6f2e16d2b64887"
+    },
+    {
+      "title": "Topological data analysis for geographical information science using persistent homology",
+      "abstract": "Abstract Topological data analysis (TDA) is an emerging field of research, which considers the application of topology to data analysis. Recently, these methods have been successfully applied to research problems in the field of geographical information science (GIS) and there is much potential for future applications. In this article, we provide an introduction to the fundamentals of TDA for GIS researchers and practitioners and highlight specific benefits that TDA methods provide relative to some conventional methods. We focus on the method of persistent homology, which is the most commonly used TDA method. We describe how persistent homology can be applied to data types commonly encountered in the GIScience domain, namely sets of points, networks and sequences of images. We also describe the application of persistent homology to two specific GIS problems, which are the point pattern analysis of UK city pubs and the analysis of UK rainfall radar imagery. In each case we stress the specific benefits of TDA methods that include, for example, generating an output signature in a form that can be subject to subsequent analyses; identification of void regions in point patterns; and providing a relatively simple method to track objects in spatio-temporal images.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2022.2155654",
+      "arxiv": "",
+      "corpus_id": 255661497,
+      "url": "https://www.semanticscholar.org/paper/857a22d71a8e148140e8c495063f331c406cfdb3"
+    },
+    {
+      "title": "Geographical information science for the United Nations’ 2030 agenda for sustainable development",
+      "abstract": "ABSTRACT The United Nations General Assembly adopted the 2030 Agenda for sustainable development goal in 2015 for a prosperous and inclusive future for all. Reflecting on the contributions of IJGIS publications to sustainability, this editorial draws the intellectual relevance of GIScience to the UN sustainable development goals (SDGs). GIScience, with its body of GIScience knowledge and knowledge production, has much to contribute to addressing the shortfalls recognized by the 2019 UN High-Level Political Forum on Sustainable Development. The COVID-19 pandemic threatens sustainability in many ways, but it also signifies the decreases of environmental pollutants by reducing human activities and elicits the latent social and health inequalities. This editorial highlights opportunities for GIScience contributions to the UN SDGs, outlines research challenges of the UN SDGs to GIScience, and welcomes submissions of GIScience research on UN SDGs to IJGIS.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2020.1766244",
+      "arxiv": "",
+      "corpus_id": 219480074,
+      "url": "https://www.semanticscholar.org/paper/fdc3545fadeb91f8f2d0a3e91207a75b3d12dfbd"
+    },
+    {
+      "title": "Measuring univariate effects in the interaction of geographical patterns",
+      "abstract": "Abstract Understanding the relationships between geographical variables is a fundamental task in spatial analysis. However, existing spatial methods often underperform in scenarios involving nonlinear relationships and complex interactions among geographical variables. Identifying the relationships between individual variables (i.e. univariate effect) within multiple interacting variables remains challenging and long-lasting. In this study, we propose a novel model—Geographical Pattern Interaction (GPI)—based on the premise that the spatial pattern of a response variable emerges from the interaction of spatial patterns in explanatory variables. GPI leverages decision trees and Shapley value explanations to quantify both global and local univariate effects by measuring the alignment between the spatial distribution of the target variable and those of the predictors. Through simulation experiments, we demonstrate GPI’s superior performance compared to traditional regression-based spatial explanation methods. Notably, the GPI framework is stable across varying spatial scales and sample sizes, making it particularly suitable for spatial explanation tasks under small data and multi-scale conditions. A case study on homelessness risk in Australia demonstrates GPI’s ability to reveal nonlinear spatial associations and interaction effects. By capturing overlooked pattern similarities and interactions, GPI offers an interpretable and transferable tool for analyzing complex spatial relationships.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2025.2526042",
+      "arxiv": "",
+      "corpus_id": 280089170,
+      "url": "https://www.semanticscholar.org/paper/9cb540790c9d2e6629b0a1f64670dacb5decf6f8"
+    },
+    {
+      "title": "GIS-KG: building a large-scale hierarchical knowledge graph for geographic information science",
+      "abstract": "ABSTRACT An organized knowledge base can facilitate the exploration of existing knowledge and the detection of emerging topics in a domain. Knowledge about and around Geographic Information Science and its associated system technologies (GIS) is complex, extensive and emerging rapidly. Taking the challenge, we built a GIS knowledge graph (GIS-KG) by (1) merging existing GIS bodies of knowledge to create a hierarchical ontology and then (2) applying deep-learning methods to map GIS publications to the ontology. We conducted several experiments on information retrieval to evaluate the novelty and effectiveness of the GIS-KG. Results showed the robust support of GIS-KG for knowledge search of existing GIS topics and potential to explore emerging research themes.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2021.2005795",
+      "arxiv": "",
+      "corpus_id": 244686664,
+      "url": "https://www.semanticscholar.org/paper/055e12e420afb4fed25ed93badc169716f600c20"
+    },
+    {
+      "title": "Leverage and Cook distance in regression with geostatistical data: methodology, simulation, and applications related to geographical information",
+      "abstract": "Abstract Regression is often conducted assuming independent model errors. The detection of atypical values in regression (leverage and influential points) assumes independent errors. However, such independence could be unrealistic in geostatistics. In this article, we propose a methodology based on least squares and geostatistics to identify such values in spatial regression. Our procedure uses the hat matrix to detect leverage points. A modified Cook distance is employed to confirm whether these points are influential. The methodology is evaluated with stationary and non-stationary geostatistical data. We apply this methodology to real georeferenced data related to depth, dissolved oxygen, and temperature. First, an autoregressive model is fitted to depth data. Second, a regression between oxygen and temperature is estimated. In both models, spatial correlation is assumed to determine the parameters, leverage, and influential observations. Our methodology can be used in regression with geographical information to avoid misinterpreted results. Not considering this information may under- or over-estimate geographical indicators, such as the mean depth, which can affect the circulation of water masses or dissolved oxygen variability. Our results reveal that including spatial dependence to identify high leverage points is relevant and must be considered in any geostatistical analysis.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2022.2131790",
+      "arxiv": "",
+      "corpus_id": 253280833,
+      "url": "https://www.semanticscholar.org/paper/d0991a3cb8eb0e871b7ed58a88bda0c761793f67"
+    }
+  ]
+}

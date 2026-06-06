@@ -466,10 +466,25 @@ def main() -> None:
         prompts = yaml.safe_load(fh)
 
     pipeline = init_pipeline()
-    if not pipeline.llm_ranker or not getattr(pipeline.llm_ranker, "llm", None):
+    # When evidence_role.enabled=true, pipeline.llm_ranker is wrapped in
+    # LLMEvidenceRoleRanker which holds the LLM client as
+    # ``evidence_extractor.llm``. Walk through wrappers to find the raw
+    # LLM client.
+    raw_llm = None
+    ranker = pipeline.llm_ranker
+    if ranker is not None:
+        if hasattr(ranker, "llm") and ranker.llm is not None:
+            raw_llm = ranker.llm
+        elif hasattr(ranker, "evidence_extractor") and ranker.evidence_extractor is not None:
+            raw_llm = getattr(ranker.evidence_extractor, "llm", None)
+        elif hasattr(ranker, "direct_ranker") and ranker.direct_ranker is not None:
+            inner = ranker.direct_ranker
+            if hasattr(inner, "llm") and inner.llm is not None:
+                raw_llm = inner.llm
+    if raw_llm is None:
         raise RuntimeError("Pipeline has no LLM client; cannot run evidence extractor")
     extractor = LLMEvidenceExtractor(
-        llm=pipeline.llm_ranker.llm,
+        llm=raw_llm,
         system_prompt=prompts["llm_evidence_extractor_system"],
         user_prompt_template=prompts["llm_evidence_extractor_user"],
         focused_user_prompt_template=prompts.get(

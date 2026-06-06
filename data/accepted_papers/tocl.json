@@ -1,0 +1,66 @@
+{
+  "journal_id": "tocl",
+  "journal_name": "ACM Transactions on Computational Logic",
+  "papers": [
+    {
+      "title": "Dependently Typed Higher-Order Logic",
+      "abstract": "Higher-order logic HOL offers a very simple syntax and semantics for knowledge representation and reasoning in various particular domains, including in particular representing and reasoning about typed data structures. But its type system lacks advanced features where types may depend on terms. Dependent type theory offers such a rich type system, but has rather substantial conceptual differences to HOL, as well as comparatively poor proof automation support. We introduce a dependently typed extension DHOL of HOL that retains the style and conceptual framework of HOL. Moreover, we build a translation from DHOL to HOL and implement it as a preprocessor to HOL theorem provers able to parse TPTP, thereby making all such provers able to run on DHOL problems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3771725",
+      "arxiv": "",
+      "corpus_id": 282109328,
+      "url": "https://www.semanticscholar.org/paper/0c863de638fa8669b92805911e31f73ec2b49d9e"
+    },
+    {
+      "title": "Computing and Certifying Twin-Width Using Logic",
+      "abstract": "Twin-width is a powerful graph invariant that supports the efficient solution of various NP-hard problems when the input graph has a bounded twin-width. First-order model checking is fixed-parameter tractable on graph classes of bounded twin-width. This work introduces two algorithmic strategies for exact twin-width computation: SAT encodings and a Branch & Bound approach. The SAT encodings explore distinct formulations of twin-width, enhancing performance across different instance types; the Branch & Bound algorithm leverages cached partial solutions for improved efficiency on larger graphs. We propose a verification framework combining these methods and yield verifiable proofs for computed twin-width. Our research contributes conceptual insights into twin-width computation, including new contraction orderings and lower and upper bound techniques that can be of independent interest. We accompany our theoretical developments with a rigorous experimental evaluation.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3769869",
+      "arxiv": "",
+      "corpus_id": 281817405,
+      "url": "https://www.semanticscholar.org/paper/b57e1de67986bee5b51d0e6b9eb64b978a6998e9"
+    },
+    {
+      "title": "Fundamental Logic Is Decidable",
+      "abstract": "It is shown that Holliday’s propositional Fundamental Logic is decidable in polynomial time and that first-order Fundamental Logic is decidable in double-exponential time. The proof also yields a double-exponential–time decision procedure for first-order orthologic.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3665328",
+      "arxiv": "",
+      "corpus_id": 270554924,
+      "url": "https://www.semanticscholar.org/paper/e0a61c423de18ba89a7593361d3b1084495607eb"
+    },
+    {
+      "title": "Computationally Hard Problems for Logic Programs under Answer Set Semantics",
+      "abstract": "Showing that a problem is hard for a model of computation is one of the most challenging tasks in theoretical computer science, logic and mathematics. For example, it remains beyond reach to find an explicit problem that cannot be computed by polynomial size propositional formulas (PF). As a model of computation, logic programs (LP) under answer set semantics are as expressive as PF and also \\(\\mathtt{NP}\\) -complete for satisfiability checking. In this article, we show that the PAR problem is hard for LP, i.e., deciding whether a binary string contains an odd number of \\(1\\) ’s requires exponential size LP. The proof idea is first to transform logic programs into equivalent boolean circuits and then apply a probabilistic method known as random restriction to obtain an exponential lower bound. Based on the main result, we generalize a sufficient condition for identifying hard problems for LP and give a separation map for an LP family from a computational point of view, whose members are all equally expressive and share the same reasoning complexity.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3676964",
+      "arxiv": "",
+      "corpus_id": 271106289,
+      "url": "https://www.semanticscholar.org/paper/e49f93ae961e6748f2aef595051b00a3dddb3cd3"
+    },
+    {
+      "title": "Interpolation in Linear Logic and Related Systems",
+      "abstract": "We prove that there are continuum-many axiomatic extensions of the full Lambek calculus with exchange that have the deductive interpolation property. Further, we extend this result to both classical and intuitionistic linear logic as well as their multiplicative-additive fragments. None of the logics we exhibit have the Craig interpolation property, but we show that the exhibited extensions of classical and intuitionistic linear logic all enjoy a guarded form of Craig interpolation. We also give continuum-many axiomatic extensions of classical linear logic without the deductive interpolation property.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3680284",
+      "arxiv": "2305.05051",
+      "corpus_id": 258564448,
+      "url": "https://www.semanticscholar.org/paper/0df43e6e9b8b317fa1541ac238438bad948d97cb"
+    },
+    {
+      "title": "A Decidable Fragment of First Order Modal Logic: Two Variable Term Modal Logic",
+      "abstract": "First order modal logic (𝖥𝖮𝖬𝖫) is built by extending First Order Logic (𝖥𝖮) with modal operators. A typical formula is of the form \\(\\forall x \\exists y \\Box P(x,y)\\) . Not only is 𝖥𝖮𝖬𝖫 undecidable, even simple fragments like that of restriction to unary predicate symbols, guarded fragment and two variable fragment, which are all decidable for 𝖥𝖮 become undecidable for 𝖥𝖮𝖬𝖫. In this paper we study Term Modal logic (𝖳𝖬𝖫) which allows modal operators to be indexed by terms. A typical formula is of the form \\(\\forall x \\exists y~\\Box _x P(x,y)\\) . There is a close correspondence between 𝖳𝖬𝖫 and 𝖥𝖮𝖬𝖫 and we explore this relationship in detail in the paper. In contrast to 𝖥𝖮𝖬𝖫, we show that the two variable fragment (without constants, equality) of 𝖳𝖬𝖫 is decidable. Further, we prove that adding a single constant makes the two variable fragment of 𝖳𝖬𝖫 undecidable. On the other hand, when equality is added to the logic, it loses the finite model property.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3593584",
+      "arxiv": "",
+      "corpus_id": 258190176,
+      "url": "https://www.semanticscholar.org/paper/51ddc1f8f80ebf2cbcb0f1304d51c6b4abaaf758"
+    }
+  ]
+}

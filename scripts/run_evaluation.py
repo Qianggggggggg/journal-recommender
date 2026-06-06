@@ -470,6 +470,15 @@ def init_pipeline() -> RecommenderPipeline:
             prompts["llm_ranker_user"],
             timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
         )
+    # 6.5 / ablation: always keep a reference to the raw LLMRanker so
+    # callers (e.g. run_llm_role_ablation) can swap to DirectLLMRoleRanker
+    # without accidentally wrapping an LLMEvidenceRoleRanker.
+    direct_llm_ranker = LLMRanker(
+        llm,
+        prompts["llm_ranker_system"],
+        prompts["llm_ranker_user"],
+        timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+    )
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
 
@@ -501,6 +510,10 @@ def init_pipeline() -> RecommenderPipeline:
         ),
     )
     pipeline.parser = parser
+    # 6.5 / ablation: expose the raw LLMRanker so callers can wrap it in
+    # DirectLLMRoleRanker (for the `llm_ranker_direct` ablation variant)
+    # without accidentally wrapping an LLMEvidenceRoleRanker.
+    pipeline.direct_llm_ranker = direct_llm_ranker
 
     return pipeline
 

@@ -243,7 +243,10 @@ def configure_pipeline_for_variant(
     evidence variants, which guarantees byte-identical evidence.
     """
     pipeline.llm_anchor_guard = {"enabled": False}
-    direct_ranker = pipeline.llm_ranker
+    # Use the raw LLMRanker (saved by init_pipeline as
+    # ``pipeline.direct_llm_ranker``) so we never accidentally wrap an
+    # LLMEvidenceRoleRanker in DirectLLMRoleRanker.
+    direct_ranker = getattr(pipeline, "direct_llm_ranker", None) or pipeline.llm_ranker
     learned_reranker = pipeline.learned_reranker
 
     if variant.ranker_role == "direct":
@@ -347,7 +350,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--benchmark-profile",
-        choices=["light30", "full-v2-90", "custom"],
+        choices=["light30", "full-v2-90", "holdout240", "custom"],
         default="light30",
     )
     parser.add_argument("--input", "-i", default=None)
