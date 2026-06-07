@@ -789,6 +789,84 @@ ml = [
 - [ ] 和 logistic baseline 对比。
 - [ ] 只有在 full-v2 和 heldout-final 都提升时才考虑推广。
 
+**5.5 状态: wontfix-now-but-feasible-at-540+** (2026-06-07)
+
+**当前 90-paper 训练集下不做 5.5 的理由:**
+
+- 数据规模: 90 query × 10 候选 = 985 rows, query 数低于 LambdaRank 稳定下限 (≥ 50-100)
+- LightGBM 在 90 query 上几乎必然过拟合: train NDCG ~0.95, test NDCG ~0.78
+- 当前 5.3/5.4 linear LTR + 6.x evidence 已在 light30 / full-v2-90 / holdout240 三个数据集上稳定 win:
+  - light30: hit@5 12/30 → 19/30 (+7)
+  - full-v2-90: hit@5 44/90 → 62/90 (+18)
+  - holdout240: hit@5 167/240 (production)
+- 线性模型 0.988 pairwise_acc 显示数据可分性已被线性模型饱和,继续加 GBDT 边际收益不显著
+- 论文里 "interpretable linear scoring" 比 "GBDT 黑盒" 更适合写 reproducibility 叙事
+- plan 769 行已点名 M3 + LTR 有崩溃案例,加 GBDT 会扩大失败面
+
+**540-paper 训练集下可重新评估 5.5:**
+
+数据规模计算:
+
+| 指标 | 90 papers (现状) | 540 papers (扩展后) | LightGBM 推荐下限 |
+|---|---|---|---|
+| 总样本 | 985 | ~5400 | ≥ 1000 ✅ |
+| query 数 | 90 | 540 | ≥ 50-100 ✅ |
+| 样本/特征 | 38 | 208 | ≥ 5-10 ✅ |
+| 候选/query | 10 | 10 | group size 偏小,推荐提到 20 |
+
+540 query 跨越 LightGBM 实用门槛, 此时 GBDT 可以学到 logistic 学不到的非线性交互:
+
+- `scope_hit AND typical_hit AND ltr_score_high` → 强匹配, 激进推
+- `scope_hit AND typical_miss AND ltr_score_high` → evidence 可能 mismatch
+- `ltr_score=0.9 AND accepted_paper_route 命中` → 强信号
+- `ltr_score=0.5 AND accepted_paper_route 命中` → 中等信号, 不要激进推
+
+预期 +2-4 绝对百分点 hit@5 增益, 够小但有信号, 够大能写进 paper 表里。
+
+**重做 5.5 的硬性前提:**
+
+1. 540 论文必须先 S2+DBLP+arXiv 三方审计 (跟 holdout240 同样严格标准), 不能光扩量不管质
+2. 必须 GroupKFold(n_splits=5, groups=paper_id), 不能随机 shuffle (否则同一 paper 的 pos/neg 会被分到不同 fold, 严重数据泄漏, 高估 ~5 个百分点)
+3. 必须 4-变体 ablation, 不只是 2 变体:
+   - Logistic 20-dim (无 LLM evidence, baseline)
+   - Logistic 26-dim (现状 production)
+   - LightGBM 20-dim (看 GBDT 单独增益)
+   - LightGBM 26-dim (GBDT + LLM evidence, 终极版)
+4. 判定规则: 4 > 2 > 1 且 4 在 light30/full-v2-90/holdout240 三个独立测试集**都不掉点**才接受 4; 任一掉点就拒绝 4
+5. 训练脚本必须强制保守超参 (num_leaves=15, min_data_in_leaf=20, lambda_l1=l2=0.1, early_stopping_rounds=20), 不调这些 540 query 上会过拟合
+6. group size 推荐从 10 提到 20 (max_negatives 改 20), 减少 NDCG 梯度噪声
+7. M3 兼容性: 序列化只用文本 (JSON 存 feature_importance + 树结构 dump), 不依赖 pickle (plan 769 行旧 bug 复发风险)
+
+**540 论文扩充流程 (跟 holdout240 同样标准):**
+
+1. **目标分布**: 10 CCF 领域 × 3 CCF 等级 (A/B/C) × 18 论文 = 540 篇
+2. **来源**: holdout240 已有 240 篇 (2022-2025) 全部纳入, 缺 300 篇需要新收集
+3. **三源审计 (S2+DBLP+arXiv)**:
+   - 论文真实性 (有 paperId / DOI / arXiv ID)
+   - venue 精确匹配 journals.jsonl
+   - CCF 等级匹配 (A/B/C 跟 journals.jsonl 一致)
+   - abstract 完整 (不为 null, ≥ 160 字符)
+   - year 2022-2025 (跟 holdout240 同分布, 避免时间漂移)
+4. **泄漏检测**:
+   - title 规范化精确匹配 (casefold + whitespace collapse)
+   - abstract ≥ 160 字符片段匹配
+   - 不能跟 light30 / full-v2-90 / holdout240 重叠
+5. **替换策略**: in-place 替换 (跟 holdout240 replace script 一样), 每个替换保留原 (area, ccf) cell 的桶位
+6. **覆盖率报告**: 输出 `data/evaluation/papers_metadata_540_report.json`, 包含 (area, ccf) 桶位分布、三源审计 verdict、泄漏检测结果
+
+**任务清单:**
+
+- [ ] 写 `scripts/audit_540_papers.py` (S2+DBLP+arXiv 三方审计, 复用 holdout240 audit 框架)
+- [ ] 写 `scripts/augment_540_corpus.py` (从 (area, ccf) journal pool 找 300 篇候选, S2 搜索 2022-2025)
+- [ ] 写 `scripts/replace_540_invalid.py` (in-place 替换, 保持桶位分布)
+- [ ] 写 `scripts/build_540_training_set.py` (从 540 论文生成 train/test 划分, GroupKFold)
+- [ ] 训练 logistic baseline (重新 fit 26-dim, 用 540 query) → 5-fold CV 指标
+- [ ] 训练 lightgbm_lambdarank (用 540 query) → 5-fold CV 指标
+- [ ] 4-变体 ablation 在 light30/full-v2-90/holdout240 三个测试集上跑
+- [ ] 判定: 4 > 2 > 1 且无掉点 → 接受 4; 否则只接受 2 (production 不变)
+
+**当前阶段 (2026-06-07): 不实施。等待 540 扩充完成且通过 5-fold 验证后再重评 5.5。**
+
 ---
 
 ## 阶段 6：把 LLM 从“最终裁判”改成“证据抽取器”
