@@ -62,13 +62,18 @@ def find_replacement(
     seen_titles: set[str],
     per_journal_needed: dict[str, int],
     papers_per_search: int = 100,
+    total_need: int = 0,
 ) -> list[dict]:
-    """Search each journal in the bucket, collect up to per_journal_needed
-    new papers that aren't in seen_titles.
+    """Search each journal in the bucket, collect up to total_need papers
+    total (NOT per_journal_needed, which is just a hint). Stops as soon
+    as total_need is reached.
     """
     new_papers = []
     new_seen = set()
-    for jname, need in per_journal_needed.items():
+    for jname, hint in per_journal_needed.items():
+        if total_need > 0 and len(new_papers) >= total_need:
+            break
+        need = min(hint, total_need - len(new_papers)) if total_need > 0 else hint
         if need <= 0:
             continue
         print(f"  [S2] replacing {jname[:60]} ×{need} ...", flush=True)
@@ -128,8 +133,10 @@ def main() -> int:
 
     pool = load_pool()
 
-    # Determine which titles to drop
+    # Determine which titles to drop and which (area, ccf) buckets need
+    # how many more papers added.
     drop_titles: set[str] = set()
+    bucket_need: dict[tuple[str, str], int] = defaultdict(int)
     if args.mode == "invalid":
         if not AUDIT_PATH.exists():
             print(f"Missing {AUDIT_PATH}; run audit_540.py first")
@@ -138,27 +145,29 @@ def main() -> int:
         for a in audit["audits"]:
             if a["verdict"] == "invalid":
                 drop_titles.add(normalize_title(a["title"]))
-        print(f"Invalid titles to replace: {len(drop_titles)}")
+        # For each dropped title, find its (area, ccf) and add 1 to need
+        for t in drop_titles:
+            for p in raw_papers:
+                if normalize_title(p.get("title", "")) == t:
+                    area = (p.get("research_area") or [None])[0]
+                    ccf = p.get("ccf_level")
+                    if area and ccf:
+                        bucket_need[(area, ccf)] += 1
+                    break
+        print(f"Invalid titles to drop: {len(drop_titles)}")
     elif args.mode == "short":
         if not META_REPORT_PATH.exists():
             print(f"Missing {META_REPORT_PATH}; run build_540_metadata.py first")
             return 1
         report = json.loads(META_REPORT_PATH.read_text())
+        # Mode=short: do NOT drop anything, just record bucket-level need.
         for b in report["buckets"]:
             if b["short"]:
-                # drop last (target - count) papers in this bucket
-                bucket_papers = [
-                    p for p in raw_papers
-                    if (p.get("research_area") or [None])[0] == b["area"]
-                    and p.get("ccf_level") == b["ccf"]
-                ]
-                # drop newest (assume end of bucket is overflow/empty)
                 need = b["target"] - b["count"]
-                if need > 0 and bucket_papers:
-                    # drop the last `need` papers in this bucket
-                    for p in bucket_papers[-need:]:
-                        drop_titles.add(normalize_title(p["title"]))
-        print(f"Short-bucket titles to replace: {len(drop_titles)}")
+                if need > 0:
+                    # (area, ccf) is already a tuple
+                    bucket_need[(b["area"], b["ccf"])] += need
+        print(f"Short-bucket papers to add: {sum(bucket_need.values())}")
 
     # Build kept + drop
     kept = []
@@ -168,20 +177,8 @@ def main() -> int:
         kept.append(p)
     print(f"Kept {len(kept)} (was {len(raw_papers)}, dropped {len(drop_titles)})")
 
-    # Now figure out which buckets need more
-    seen = collect_seen_titles(kept)
-    bucket_need: dict[tuple[str, str], int] = defaultdict(int)
-    for t in drop_titles:
-        # find this paper in raw to know its (area, ccf)
-        for p in raw_papers:
-            if normalize_title(p.get("title", "")) == t:
-                area = (p.get("research_area") or [None])[0]
-                ccf = p.get("ccf_level")
-                if area and ccf:
-                    bucket_need[(area, ccf)] += 1
-                break
-
     # For each bucket, distribute need across journals
+    seen = collect_seen_titles(kept)
     per_bucket_diag = []
     for (area, ccf), need in bucket_need.items():
         key = f"{area}|{ccf}"
@@ -200,7 +197,7 @@ def main() -> int:
             remainder -= 1
         print(f"\n[replace {key}] need {need} across {len(journals)} journals")
         new_papers = find_replacement(area, ccf, journals, seen,
-                                        per_journal_targets)
+                                        per_journal_targets, total_need=need)
         kept.extend(new_papers)
         seen.update(normalize_title(p["title"]) for p in new_papers)
         per_bucket_diag.append({
