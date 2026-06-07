@@ -46,10 +46,10 @@ S2_SEARCH = "https://api.semanticscholar.org/graph/v1/paper/search"
 TARGET_PER_BUCKET = 18
 YEAR_MIN = 2022
 YEAR_MAX = 2025
-SLEEP_BETWEEN = 0.35  # seconds between S2 calls (with API key)
+SLEEP_BETWEEN = 0.7  # seconds between S2 calls (with API key, conservative)
 
 
-def s2_get(url: str, max_retries: int = 3) -> dict | None:
+def s2_get(url: str, max_retries: int = 5) -> dict | None:
     key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "")
     headers = {"User-Agent": "540-augment/1.0"}
     if key:
@@ -61,7 +61,7 @@ def s2_get(url: str, max_retries: int = 3) -> dict | None:
                 return json.loads(resp.read())
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                wait = 5 * (attempt + 1)
+                wait = 10 * (attempt + 1)  # 10, 20, 30, 40, 50s
                 print(f"  [429] backoff {wait}s", flush=True)
                 time.sleep(wait)
             elif e.code == 404:
@@ -82,14 +82,23 @@ def normalize_title(t: str) -> str:
 def search_journal_papers(
     journal_name: str, year_min: int, year_max: int, limit: int = 50
 ) -> list[dict]:
-    """S2 search by exact journal name + year range.
+    """S2 search by exact journal name + year range, with venue filter.
 
     Returns list of S2 paper records. Each record has title, abstract,
     year, venue, publicationVenue, externalIds, paperId.
+
+    IMPORTANT: S2's `query` param is fuzzy text search; it returns papers
+    that MENTION the journal name in title/abstract even if they were
+    actually published in a different journal. Adding `venue=<exact name>`
+    restricts the search to that publicationVenue, so we don't get noise
+    from sibling journals (e.g. searching "ACM Transactions on Embedded
+    Computing Systems" without venue= returns papers from TECS, TACO,
+    TIST, TOCE, etc.). Filter on publicationVenue.name is still applied
+    defensively in paper_passes_filter.
     """
-    q = f'"{journal_name}"'
     url = (
-        f"{S2_SEARCH}?query={urllib.parse.quote(q)}"
+        f"{S2_SEARCH}?query={urllib.parse.quote(journal_name)}"
+        f"&venue={urllib.parse.quote(journal_name)}"
         f"&limit={limit}&year={year_min}-{year_max}"
         f"&fields=title,venue,publicationVenue,year,abstract,externalIds,"
         f"authors,paperId"
@@ -154,7 +163,9 @@ def collect_bucket(
         need = per_journal_targets[j_idx]
         if need <= 0:
             continue
-        cache_path = CACHE_DIR / f"{area}_{ccf}_{j_idx}.json"
+        # Use j_idx in cache filename (NOT the journal name with '/' or
+        # non-ASCII chars from the area string) so the path is portable.
+        cache_path = CACHE_DIR / f"bucket_{j_idx}.json"
         if cache_path.exists():
             cached = json.loads(cache_path.read_text())
             diagnostics["per_journal_s2_searched"][j_idx] = len(cached)
