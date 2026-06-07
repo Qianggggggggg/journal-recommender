@@ -110,12 +110,28 @@ def search_journal_papers(
 
 
 def paper_matches_journal(paper: dict, journal_name: str) -> bool:
-    """publicationVenue.name or venue matches queried journal (casefold)."""
+    """publicationVenue.name or venue matches queried journal (casefold).
+
+    S2 publicationVenue.name is sometimes an abbreviation or short form
+    of the official journal name (e.g. "ACM Transactions on Autonomous
+    and Adaptive System" missing the trailing "s"; "IEEE Transactions on
+    VLSI Systems" vs "IEEE Transactions on Very Large Scale Integration
+    (VLSI) Systems"). Strict equality would reject these. Use substring
+    match in both directions to handle both truncation and the official
+    name being a prefix of the S2 name.
+    """
     pv = paper.get("publicationVenue") or {}
     pv_name = (pv.get("name") or "").casefold().strip()
     venue = (paper.get("venue") or "").casefold().strip()
     target = journal_name.casefold().strip()
-    return target == pv_name or target == venue
+    if not pv_name and not venue:
+        return False
+    # Either side can be a prefix/substring of the other
+    candidates = [c for c in [pv_name, venue] if c]
+    for c in candidates:
+        if target in c or c in target:
+            return True
+    return False
 
 
 def paper_passes_filter(paper: dict, journal_name: str) -> bool:
@@ -136,10 +152,14 @@ def paper_passes_filter(paper: dict, journal_name: str) -> bool:
 
 
 def collect_bucket(
-    area: str, ccf: str, journals: list[str], seen_titles: set[str]
+    area: str, ccf: str, journals: list[str], seen_titles: set[str],
+    bucket_idx: int = 0,
 ) -> tuple[list[dict], dict]:
     """Search S2 for each journal in this bucket, return up to TARGET_PER_BUCKET
     papers plus per-journal diagnostic counts.
+
+    bucket_idx: position of this (area, ccf) bucket in the global 30-bucket
+        pool iteration order. Used for cache key uniqueness across buckets.
     """
     target_pp = math.ceil(TARGET_PER_BUCKET / len(journals))
     # Distribute target with at least 1 per journal where possible; allow over
@@ -163,9 +183,9 @@ def collect_bucket(
         need = per_journal_targets[j_idx]
         if need <= 0:
             continue
-        # Use j_idx in cache filename (NOT the journal name with '/' or
-        # non-ASCII chars from the area string) so the path is portable.
-        cache_path = CACHE_DIR / f"bucket_{j_idx}.json"
+        # Cache key combines bucket_idx + j_idx so each (area, ccf, journal)
+        # has a unique filename across the 30-bucket pool.
+        cache_path = CACHE_DIR / f"bucket_{bucket_idx:02d}_journal_{j_idx:02d}.json"
         if cache_path.exists():
             cached = json.loads(cache_path.read_text())
             diagnostics["per_journal_s2_searched"][j_idx] = len(cached)
@@ -242,11 +262,12 @@ def main() -> int:
 
     all_papers: list[dict] = []
     all_diags: list[dict] = []
-    for bucket_key, journals in buckets.items():
+    for bucket_idx, (bucket_key, journals) in enumerate(buckets.items()):
         area, ccf = bucket_key.split("|")
         print(f"\n[{area}/{ccf}] {len(journals)} journals × ⌈{TARGET_PER_BUCKET}/{len(journals)}⌉",
               flush=True)
-        papers, diag = collect_bucket(area, ccf, journals, seen_titles)
+        papers, diag = collect_bucket(area, ccf, journals, seen_titles,
+                                       bucket_idx=bucket_idx)
         all_papers.extend(papers)
         all_diags.append(diag)
         print(f"  -> collected {len(papers)}/{TARGET_PER_BUCKET}", flush=True)
