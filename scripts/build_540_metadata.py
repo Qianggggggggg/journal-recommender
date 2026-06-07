@@ -2,7 +2,7 @@
 """Build final 540 metadata jsonl from raw + audit + leakage reports.
 
 Steps:
-  1. Load raw 540 candidates.
+  1. Load raw 540 candidates (or 540_replaced if --input replaced).
   2. Mark audit_status from 540_audit_report.json (valid / suspect / invalid).
   3. Drop invalid papers and any with leakage.
   4. If short of 18 per (area, ccf) bucket, log a warning.
@@ -15,6 +15,7 @@ Outputs:
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from collections import Counter, defaultdict
@@ -23,7 +24,8 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-RAW_PATH = project_root / "data/evaluation/papers_metadata_540_raw.jsonl"
+DEFAULT_RAW_PATH = project_root / "data/evaluation/papers_metadata_540_raw.jsonl"
+REPLACED_PATH = project_root / "data/evaluation/papers_metadata_540_replaced.jsonl"
 AUDIT_PATH = project_root / "data/evaluation/results/540_audit_report.json"
 LEAK_PATH = project_root / "data/evaluation/results/540_leakage_report.json"
 OUT_PATH = project_root / "data/evaluation/papers_metadata_540.jsonl"
@@ -35,12 +37,24 @@ def normalize_title(t: str) -> str:
 
 
 def main() -> int:
-    if not RAW_PATH.exists():
-        print(f"Missing {RAW_PATH}")
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--input", choices=["raw", "replaced"], default="replaced",
+        help="Which input jsonl to read. 'replaced' is the post-replace "
+             "set (recommended for final 540); 'raw' is the original 563.",
+    )
+    args = parser.parse_args()
+
+    if args.input == "replaced":
+        input_path = REPLACED_PATH
+    else:
+        input_path = DEFAULT_RAW_PATH
+    if not input_path.exists():
+        print(f"Missing {input_path}")
         return 1
 
-    raw_papers = [json.loads(line) for line in RAW_PATH.open() if line.strip()]
-    print(f"Loaded {len(raw_papers)} raw candidates")
+    raw_papers = [json.loads(line) for line in input_path.open() if line.strip()]
+    print(f"Loaded {len(raw_papers)} papers from {input_path.name}")
 
     # Audit map
     audit_status: dict[str, str] = {}  # title → verdict
@@ -99,7 +113,7 @@ def main() -> int:
 
     report = {
         "schema_version": 1,
-        "input_raw": str(RAW_PATH),
+        "input_raw": str(input_path),
         "total_raw": len(raw_papers),
         "total_final": len(final),
         "dropped": dict(dropped),
