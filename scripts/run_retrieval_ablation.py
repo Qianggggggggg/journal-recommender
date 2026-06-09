@@ -392,12 +392,26 @@ def load_comparable_eval_papers(
     baseline_eval_path: str,
     limit: int | None = None,
 ) -> list[dict]:
-    """Use a completed full evaluation as the denominator for ablations."""
+    """Use a completed full evaluation as the denominator for ablations.
+
+    Two paper-id field formats are accepted (top-level takes precedence):
+      - top-level "arxiv"  (newer 540 corpus)
+      - "external_ids.arXiv"  (older format, e.g. light30/full-v2-90)
+
+    Two JSON layouts are accepted:
+      - top-level "paper_results"  (legacy, pre-variants)
+      - "variants.<name>.paper_results"  (current, full_hybrid etc.)
+
+    Both degrade gracefully via title+venue fallback if arxiv lookup fails.
+    """
     metadata_papers = load_papers(papers_path)
     metadata_by_arxiv: dict[str, dict] = {}
     metadata_by_title_venue: dict[tuple[str, str], dict] = {}
     for paper in metadata_papers:
-        arxiv_id = str(paper.get("external_ids", {}).get("arXiv", "") or "")
+        arxiv_id = (
+            str(paper.get("external_ids", {}).get("arXiv", "") or "")
+            or str(paper.get("arxiv", "") or "")
+        )
         if arxiv_id:
             metadata_by_arxiv[arxiv_id] = paper
         metadata_by_title_venue[(
@@ -408,8 +422,18 @@ def load_comparable_eval_papers(
     with open(baseline_eval_path, "r", encoding="utf-8") as f:
         baseline_eval = json.load(f)
 
+    # Accept both layouts: top-level "paper_results" or "variants.<name>.paper_results"
+    paper_results = baseline_eval.get("paper_results")
+    if paper_results is None:
+        for variant_payload in baseline_eval.get("variants", {}).values():
+            if isinstance(variant_payload, dict) and "paper_results" in variant_payload:
+                paper_results = variant_payload["paper_results"]
+                break
+    if paper_results is None:
+        paper_results = []
+
     comparable = []
-    for result in baseline_eval.get("paper_results", []):
+    for result in paper_results:
         arxiv_id = str(result.get("arxiv", "") or "")
         metadata = metadata_by_arxiv.get(arxiv_id) if arxiv_id else None
         if metadata is None:
