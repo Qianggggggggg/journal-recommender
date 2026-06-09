@@ -78,7 +78,10 @@ from scripts.run_evaluation import (  # noqa: E402
     paper_profile_from_snapshot,
     resolve_benchmark_input,
 )
-from scripts.run_retrieval_ablation import load_comparable_eval_papers  # noqa: E402
+from scripts.run_retrieval_ablation import (  # noqa: E402
+    load_comparable_eval_papers,
+    paper_profile_from_metadata,
+)
 from src.ranker.llm_evidence_extractor import (  # noqa: E402
     LLMEvidenceExtractor,
     LLMEvidenceExtractorError,
@@ -184,9 +187,11 @@ def _process_one_paper(
         if not missing:
             break
         try:
-            profile = paper_profile_from_snapshot(
-                paper["paper_profile_snapshot"], paper
-            )
+            # Use paper_profile_from_metadata (accepts paper dict directly,
+            # falls back to paper_profile_snapshot internally if present).
+            # This works whether or not the source ablation JSON included
+            # a paper_profile_snapshot field.
+            profile = paper_profile_from_metadata(paper)
             focused_candidates = _build_focused_candidates(
                 entry, missing, pipeline
             )
@@ -233,10 +238,12 @@ def _extract_evidence_for_paper(
     """Run one paper through candidate gen + rule scoring + evidence extraction."""
     title = paper.get("title", "")
     venue = paper.get("venue", "")
-    snapshot = paper.get("paper_profile_snapshot")
-    if not isinstance(snapshot, dict) or not snapshot:
-        raise ValueError(f"Paper missing paper_profile_snapshot: {title[:50]}")
-    profile = paper_profile_from_snapshot(snapshot, paper)
+    # Build PaperProfile directly from paper fields. We previously required
+    # a paper_profile_snapshot field, but ablation JSONs written by
+    # run_retrieval_ablation.py don't always include one. The
+    # paper_profile_from_metadata helper accepts a paper dict and falls
+    # back to a snapshot if present.
+    profile = paper_profile_from_metadata(paper)
 
     from src.papers.paper_model import PaperInput
     paper_input = PaperInput(
