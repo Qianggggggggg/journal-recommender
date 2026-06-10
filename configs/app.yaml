@@ -68,16 +68,17 @@ ranking:
   # instead of calling LLM at recommendation time). When enabled but
   # snapshot is missing, falls back to llm_direct.
   llm_direct:
-    enabled: true                # fallback when evidence snapshot is missing
+    enabled: false                # fallback when evidence snapshot is missing
   evidence_role:
     enabled: true               # opt-in: turn on to use the new path
-    snapshot_path: "data/evaluation/evidence/light30_evidence_20260604_194946.json"
+    snapshot_path: "data/evaluation/evidence/holdout240_evidence_20260606_143232.json"
     prior_source: "learned"      # rule | learned (learned needs LTR rerank)
-    evidence_weight: 0.65        # 26-dim LTR uses evidence as a feature, so
+    evidence_weight: 0.8        # 26-dim LTR uses evidence as a feature, so
                                 # reduce the post-hoc evidence weight to
                                 # avoid double-counting.
-    prior_weight: 0.15           # linear rank prior from LTR
-    ltr_score_weight: 0.20       # raw LTR score as 3rd formula component
+    prior_weight: 0.2           # linear rank prior from LTR
+    ltr_score_weight: 0.00       # raw LTR score as 3rd formula component
+    llm_max_candidates: 20      # ablation 2026-06-10: top-20 only, 删补位 (vs30 =补位)
   llm_anchor_guard:
     enabled: true
     protect_rule_rank: 5

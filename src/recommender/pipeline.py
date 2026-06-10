@@ -39,6 +39,10 @@ class RecommenderPipeline:
         # the offline snapshot. None by default to keep tests
         # backwards-compatible.
         evidence_extractor: Optional["LLMEvidenceExtractor"] = None,
+        # Ablation knob: max size of the LLM精排 candidate pool. Default 30
+        # preserves the original补位 behavior (top-20 + up to 10 by 4 conditions).
+        # Set to 20 to disable补位 entirely and feed only RuleScorer top-20 to LLM.
+        llm_max_candidates: int = 30,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
@@ -63,6 +67,8 @@ class RecommenderPipeline:
         # (it already does so as the final fallback in
         # ``rank_with_diagnostics``).
         self.evidence_extractor = evidence_extractor
+        # Ablation knob: max LLM精排 candidate pool size.
+        self.llm_max_candidates = llm_max_candidates
 
     def recommend(
         self,
@@ -201,7 +207,7 @@ class RecommenderPipeline:
             if journal.journal_id in seen_ids:
                 continue
             if self._has_scope_boundary_evidence(retrieval_trace.get(journal.journal_id)):
-                if len(llm_candidates) < 30:
+                if len(llm_candidates) < self.llm_max_candidates:
                     llm_candidates.append((journal, score, reasons))
                     seen_ids.add(journal.journal_id)
 
@@ -211,7 +217,7 @@ class RecommenderPipeline:
             for journal, score, reasons in rule_ranked_all[20:]:
                 if journal.subject_tags and journal.journal_id not in seen_ids:
                     matched = set(journal.subject_tags) & research_areas
-                    if matched and len(llm_candidates) < 30:
+                    if matched and len(llm_candidates) < self.llm_max_candidates:
                         llm_candidates.append((journal, score, reasons))
                         seen_ids.add(journal.journal_id)
 
@@ -221,7 +227,7 @@ class RecommenderPipeline:
             for journal, score, reasons in rule_ranked_all[20:]:
                 if journal.subject_tags and journal.journal_id not in seen_ids:
                     matched = set(journal.subject_tags) & ccf_areas
-                    if matched and len(llm_candidates) < 30:
+                    if matched and len(llm_candidates) < self.llm_max_candidates:
                         llm_candidates.append((journal, score, reasons))
                         seen_ids.add(journal.journal_id)
 
@@ -231,7 +237,7 @@ class RecommenderPipeline:
                 continue
             if not self._is_typical_only(retrieval_trace.get(journal.journal_id)):
                 continue
-            if score >= top20_floor * 0.8 and len(llm_candidates) < 30:
+            if score >= top20_floor * 0.8 and len(llm_candidates) < self.llm_max_candidates:
                 llm_candidates.append((journal, score, reasons))
                 seen_ids.add(journal.journal_id)
 

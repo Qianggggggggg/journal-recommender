@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "timestamp": "20260606_143232",
-  "benchmark_profile": "custom",
+  "benchmark_profile": "holdout240",
   "benchmark_path": "data/evaluation/papers_metadata_holdout240.jsonl",
   "baseline_eval": "data/evaluation/results/eval_abstract_top5_20260605_221524.json",
   "mode": "abstract",

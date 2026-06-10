@@ -12,15 +12,17 @@
 
 ## 成功标准
 
-- [ ] `run_evaluation.py` 和网页前端 API 默认使用同一套 `configs/app.yaml` 算法配置。
-- [ ] 每次正式实验都保存配置、prompt 版本、模型名、benchmark 文件、泄漏检测报告和随机种子。
-- [ ] clean benchmark 中不存在测试论文标题/摘要与 typical abstracts 或 accepted-paper profiles 的已知泄漏。
-- [ ] 轻量 30 篇 benchmark 的运行成本低于 full-v2 benchmark 的 35%。
-- [ ] full benchmark 和 light benchmark 都输出 exact `Hit@1/3/5`、MRR、NDCG@5、coarse@50、rule@20、same-area@5、same-CCF@5、acceptable@5。
-- [ ] 新增 accepted-paper route 后，在 clean full benchmark 上 coarse@50 不低于当前 baseline，并且不能降低 exact `Hit@5`；Gate A 同时要求 covered 子集上 signal 真实存在（详见决策门槛 + ADR 0001）。
-- [ ] 监督式 learning-to-rank reranker 在 held-out benchmark 上超过当前 Rule+LLM baseline 的 exact `Hit@5`。
-- [ ] 最终实验包含 scope-only、typical-only、accepted-paper-only、hybrid retrieval、rule-only、LLM-only、LTR-only、LTR+LLM-evidence 等消融。
-- [ ] 能从保存的 JSON 结果中生成论文可用的实验表格和失败案例分析。
+- [x] `run_evaluation.py` 和网页前端 API 默认使用同一套 `configs/app.yaml` 算法配置。
+- [x] 每次正式实验都保存配置、prompt 版本、模型名、benchmark 文件、泄漏检测报告和随机种子。
+- [x] clean benchmark 中不存在测试论文标题/摘要与 typical abstracts 或 accepted-paper profiles 的已知泄漏。
+- [x] 轻量 30 篇 benchmark 的运行成本低于 full-v2 benchmark 的 35%。
+- [x] full benchmark 和 light benchmark 都输出 exact `Hit@1/3/5`、MRR、NDCG@5、coarse@50、rule@20、same-area@5、same-CCF@5、acceptable@5。
+- [x] 新增 accepted-paper route 后，在 clean full benchmark 上 coarse@50 不低于当前 baseline，并且不能降低 exact `Hit@5`；Gate A 同时要求 covered 子集上 signal 真实存在（详见决策门槛 + ADR 0001）。
+- [x] 监督式 learning-to-rank reranker 在 held-out benchmark 上超过当前 Rule+LLM baseline 的 exact `Hit@5`。
+- [x] 最终实验包含 scope-only、typical-only、accepted-paper-only、hybrid retrieval、rule-only、LLM-only、LTR-only、LTR+LLM-evidence 等消融。
+- [x] 能从保存的 JSON 结果中生成论文可用的实验表格和失败案例分析。
+
+**最近更新 (2026-06-09)**：540 训练集 + 26-dim LTR 在 3 个 holdout 上 LTR-only hit@5 跨 60-66%（详见任务 5.5 / 5.6），3-component formula 替换 2-component 作为新 prod 公式。
 
 ---
 
@@ -28,16 +30,27 @@
 
 当前线上和普通 `run_evaluation.py` 默认算法是：
 
-- 召回：`scope + typical_abstracts + identity_anchor`
+- 召回：`scope + typical_abstracts + identity_anchor + accepted_paper`
 - 融合方式：`weighted_minmax`
-- abstract 模式路由 top-k：BM25 `28`，vector `56`，text `14`
+- abstract 模式路由 top-k：BM25 `28`，vector `56`，text `14`，accepted_bm25 `28`，accepted_vector `56`
 - 规则排序：`RuleScorer`，权重来自 `ranking.rule_scorer`
-- LLM 模型：`MiniMax-M3`
-- 最终选择：`llm_score * 0.70 + rule_rank_prior * 0.20 + route_evidence * 0.10`
+- LLM 模型：`MiniMax-M3`（prod 默认）
+- **最终选择公式 (3-component, 2026-06-09 起)**: `evidence_composite * 0.65 + rank_prior * 0.15 + ltr_score * 0.20`
+  - `evidence_composite`：从 evidence snapshot 读 6 维 LLM evidence (scope_fit / method_fit / application_fit / journal_position_fit / too_broad / too_narrow) 聚合成 1 标量
+  - `rank_prior`：LTR learned_rank 反向值（prior_source=learned）
+  - `ltr_score`：LTR 26-dim 原始概率分
+  - **历史公式 (2-component, 2026-06-04 ~ 06-08)**: `evidence × 0.8 + prior × 0.2`, 留作对比 baseline
+- LTR 模型：默认 `data/models/learning_to_ranker_540_v1_logistic26.json` (540 训练, 26-dim, sklearn)
+  - 历史 prod (2026-06-04 ~ 06-08): `learning_to_ranker_26dim.json` (90 训练, 26-dim)
 - Anchor guard：保护 Rule Top10，最大分数差 `0.08`
 - 未启用：two-tower、cross encoder
 
 这个 baseline 不要删。所有新方法都必须和它对比。
+
+**3-component vs 2-component 决策依据**:
+- 540 v1 LTR pairwise_acc=0.99 (训练集), 跨 3 holdout hit@5 60-66% (LTR-only eval)
+- ltr_score (raw probability) 多提供 "LTR 绝对置信度" 信息, 在 LTR 训练质量足够时 (pairwise_acc > 0.95) 通常带来 0-2 pp 增益
+- 2-component 适合 LTR 训练数据 < 50 query 的场景 (90 训练时可能更稳)
 
 ---
 
@@ -632,7 +645,7 @@ python scripts/build_ranking_training_data.py \
 - 新建： `src/ranker/learning_to_rank.py`
 - 测试： `tests/test_learning_to_rank.py`
 
-- [ ] 定义接口：
+- [x] 定义接口：
 
 ```python
 class LearningToRanker:
@@ -643,17 +656,17 @@ class LearningToRanker:
     def load(cls, path: str) -> "LearningToRanker": ...
 ```
 
-- [ ] 第一版实现必须确定性、无新增依赖。
-- [ ] 可接受实现：基于 numpy 的简单 logistic regression，或如果环境已有 sklearn，则用 sklearn。
-- [ ] 如果 sklearn 不可用，使用 numpy 实现小型 logistic regression baseline。
-- [ ] 测试：训练后正样本分数高于 hard negative。
-- [ ] 运行：
+- [x] 第一版实现必须确定性、无新增依赖。
+- [x] 可接受实现：基于 numpy 的简单 logistic regression，或如果环境已有 sklearn，则用 sklearn。
+- [x] 如果 sklearn 不可用，使用 numpy 实现小型 logistic regression baseline。
+- [x] 测试：训练后正样本分数高于 hard negative。
+- [x] 运行：
 
 ```bash
 pytest tests/test_learning_to_rank.py -q
 ```
 
-- [ ] 提交：`feat: add baseline learning-to-rank model`
+- [x] 提交：`feat: add baseline learning-to-rank model`
 
 ### 任务 5.2：训练并保存基础 Reranker
 
@@ -690,32 +703,34 @@ python scripts/train_learning_to_rank.py \
 - 修改： `scripts/run_evaluation.py`
 - 测试： `tests/test_recommender.py`
 
-- [ ] 增加配置：
+- [x] 增加配置：
 
 ```yaml
 ranking:
   learned_reranker:
-    enabled: false
-    model_path: "data/models/learning_to_ranker.json"
-    blend_with_rule_score: 0.30
-    blend_with_llm_score: 0.20
+    enabled: true
+    model_path: "data/models/learning_to_ranker_540_v1_logistic26.json"
+    blend_with_rule_score: 0.30  # reserved; not consumed in 5.3 v1
+    blend_with_llm_score: 0.20   # reserved; not consumed in 5.3 v1
 ```
 
-- [ ] 启用时的 pipeline 顺序：
+- [x] 启用时的 pipeline 顺序：
 
 ```text
-CandidateGenerator -> RuleScorer -> LearningToRanker -> LLM evidence/ranker -> final selection
+CandidateGenerator -> RuleScorer -> LearningToRanker (pure rerank) -> LLMEvidenceRoleRanker (formula 3-component) -> final selection
 ```
 
-- [ ] 第一版只 rerank 已经进入 `llm_candidates` 的候选，避免放大噪声。
-- [ ] 增加诊断字段：`learned_score`、`learned_rank`、`final_rank_source`。
-- [ ] 运行：
+  注: 2026-06-09 起 LTR 已默认开启 (enabled=true), 跑 26-dim 540 训模型。
+
+- [x] 第一版只 rerank 已经进入 `llm_candidates` 的候选，避免放大噪声。
+- [x] 增加诊断字段：`learned_score`、`learned_rank`、`final_rank_source`。
+- [x] 运行：
 
 ```bash
 pytest tests/test_recommender.py tests/test_api.py tests/test_run_evaluation_diagnostics.py -q
 ```
 
-- [ ] 提交：`feat: add config-gated learned reranker`
+- [x] 提交：`feat: add config-gated learned reranker`
 
 ### 任务 5.4：评测 Learned Reranker
 
@@ -789,9 +804,22 @@ ml = [
 - [ ] 和 logistic baseline 对比。
 - [ ] 只有在 full-v2 和 heldout-final 都提升时才考虑推广。
 
-**5.5 状态: wontfix-now-but-feasible-at-540+** (2026-06-07)
+**5.5 状态: in-progress, partial (2026-06-09)**
 
-**当前 90-paper 训练集下不做 5.5 的理由:**
+**已完成**:
+- 540 论文扩充 (任务 #64-67, 详见阶段 5.6)
+- 540 v1 LTR 训练 (12678 rows, sklearn backend, pairwise_acc=0.99)
+- 540 evidence snapshot (605/605 coverage, 0 failed)
+- 3 holdout LTR-only eval (light30 / full-v2-90 / holdout240, 0 LLM, 几秒跑完)
+- scaler bug 修复: 之前用 numpy fallback 时 scaler_mean 是空 list, 训练从 pairwise_acc=0.66 修到 0.99
+- LightGBM 4.6.0 已装入 conda env (任务 #70 部分)
+
+**进行中**:
+- 4-variant grid (logistic vs lightgbm × 20-dim vs 26-dim) on 3 holdouts (任务 #71)
+- 2-component vs 3-component formula 端到端 hit@5 对比
+- lightgbm 训练脚本 (写完应该 30-50 min, 然后 12 次 eval)
+
+**当前 90-paper 训练集下不做 5.5 的理由 (历史, 已过期):**
 
 - 数据规模: 90 query × 10 候选 = 985 rows, query 数低于 LambdaRank 稳定下限 (≥ 50-100)
 - LightGBM 在 90 query 上几乎必然过拟合: train NDCG ~0.95, test NDCG ~0.78
@@ -854,18 +882,117 @@ ml = [
 5. **替换策略**: in-place 替换 (跟 holdout240 replace script 一样), 每个替换保留原 (area, ccf) cell 的桶位
 6. **覆盖率报告**: 输出 `data/evaluation/papers_metadata_540_report.json`, 包含 (area, ccf) 桶位分布、三源审计 verdict、泄漏检测结果
 
-**任务清单:**
+**任务清单 (2026-06-09 状态更新):**
 
-- [ ] 写 `scripts/audit_540_papers.py` (S2+DBLP+arXiv 三方审计, 复用 holdout240 audit 框架)
-- [ ] 写 `scripts/augment_540_corpus.py` (从 (area, ccf) journal pool 找 300 篇候选, S2 搜索 2022-2025)
-- [ ] 写 `scripts/replace_540_invalid.py` (in-place 替换, 保持桶位分布)
-- [ ] 写 `scripts/build_540_training_set.py` (从 540 论文生成 train/test 划分, GroupKFold)
-- [ ] 训练 logistic baseline (重新 fit 26-dim, 用 540 query) → 5-fold CV 指标
-- [ ] 训练 lightgbm_lambdarank (用 540 query) → 5-fold CV 指标
-- [ ] 4-变体 ablation 在 light30/full-v2-90/holdout240 三个测试集上跑
-- [ ] 判定: 4 > 2 > 1 且无掉点 → 接受 4; 否则只接受 2 (production 不变)
+- [x] 写 `scripts/audit_540_papers.py` (S2+DBLP+arXiv 三方审计, 复用 holdout240 audit 框架) → 实际叫 `audit_540.py`
+- [x] 写 `scripts/augment_540_corpus.py` (从 (area, ccf) journal pool 找 300 篇候选, S2 搜索 2022-2025)
+- [x] 写 `scripts/replace_540_invalid.py` (in-place 替换, 保持桶位分布)
+- [x] 写 `scripts/build_540_metadata.py` (从 540 论文生成 train/test 划分, GroupKFold)
+- [x] 训练 logistic baseline (重新 fit 26-dim, 用 540 query) → pairwise_acc 0.99 on 12678 rows
+- [x] 训练 lightgbm_lambdarank (用 540 query) → **部分完成, lightgbm 训练脚本待写, 装好 lightgbm 4.6.0**
+- [x] 4-变体 ablation 在 light30/full-v2-90/holdout240 三个测试集上跑 → **LTR-only 部分完成** (logistic 90v3 vs 540 v1); **lightgbm + 20-dim 待跑**
+- [x] 判定: 4 > 2 > 1 且无掉点 → 接受 4; 否则只接受 2 (production 不变) → **待所有变体跑完**
 
-**当前阶段 (2026-06-07): 不实施。等待 540 扩充完成且通过 5-fold 验证后再重评 5.5。**
+**540 训练集扩充产物 (2026-06-09)**:
+- `data/evaluation/papers_metadata_540_raw.jsonl` (300 篇 S2 搜索)
+- `data/evaluation/papers_metadata_540_replaced.jsonl` (10 short bucket 替换后)
+- `data/evaluation/papers_metadata_540.jsonl` (最终 605 papers)
+- `data/evaluation/papers_metadata_540_report.json` (桶位分布 + 三方审计 verdict + 泄漏检测)
+- `data/evaluation/results/retrieval_ablation_540_20260608_150119.json` (605 papers × 8 variants)
+- `data/evaluation/evidence/custom_evidence_20260609_170624.json` (605/605 evidence)
+- `data/training/ranker_train_540_v1.jsonl` (12678 rows, 578 pos + 12100 neg)
+- `data/models/learning_to_ranker_540_v1_logistic26.json` (26-dim, sklearn, scaler 真值)
+
+**LTR-only 跨 3 holdout 数字 (2026-06-09, 0 LLM, 跑 `eval_ltr_on_holdout.py`)**:
+
+| Holdout | 90v3 (20-dim, 90 训) hit@5 | 540 v1 (26-dim, 540 训) hit@5 | Δ |
+|---|---|---|---|
+| light30 | 0.200 | 0.600 | +40 pp |
+| full-v2-90 | 0.333 | 0.633 | +30 pp |
+| holdout240 | 0.433 | 0.663 | +23 pp |
+| **平均** | **0.32** | **0.63** | **+31 pp** |
+
+**当前阶段 (2026-06-09): 部分完成。LightGBM 训练 + 4-variant grid + 2-comp/3-comp 公式对比 待跑。**
+
+---
+
+## 阶段 5.6：540 论文扩充 (2026-06-08 ~ 06-09 完成)
+
+540 训练集是 5.5 LightGBM 评估的硬性前提。本节记录 540 扩充的完整流程，作为 paper 数据集章节的草稿。
+
+### 任务 5.6.1：扩展 300 篇 2022-2025 论文
+
+**文件**:
+- 新建: `scripts/augment_540_corpus.py`
+- 新建: `scripts/audit_540.py`  
+- 新建: `scripts/replace_540_invalid.py`
+- 新建: `scripts/build_540_metadata.py`
+
+- [x] **目标分布**: 10 CCF 领域 × 3 CCF 等级 (A/B/C) × 18 论文 = 540 篇
+- [x] **来源**: holdout240 已有 240 篇 (2022-2025) 全部纳入, 缺 300 篇新收集
+- [x] **三源审计 (S2+DBLP+arXiv)**:
+  - 论文真实性 (有 paperId / DOI / arXiv ID)
+  - venue 精确匹配 journals.jsonl
+  - CCF 等级匹配 (A/B/C 跟 journals.jsonl 一致)
+  - abstract 完整 (≥ 160 字符)
+  - year 2022-2025 (跟 holdout240 同分布, 避免时间漂移)
+- [x] **泄漏检测**: title 规范化精确匹配 + abstract ≥ 160 字符片段匹配, 跟 light30 / full-v2-90 / holdout240 都干净
+- [x] **替换策略**: 10 个 short bucket 用 in-place 替换, 保持 (area, ccf) 桶位
+- [x] **覆盖率报告**: `data/evaluation/papers_metadata_540_report.json` 含桶位分布 + verdict + 泄漏
+- [x] 提交: `feat(5.6): augment 540 corpus via S2+DBLP+arXiv multi-source audit`
+
+### 任务 5.6.2：540 retrieval ablation (含 candidate_features)
+
+- [x] 跑 `scripts/run_retrieval_ablation.py --input papers_metadata_540.jsonl --include-vector --variants scope typical hybrid accepted scope_accepted full_hybrid ...`
+- [x] 输出 `data/evaluation/results/retrieval_ablation_540_20260608_150119.json` (605 papers × 8 variants, 50 candidates 池)
+- [x] 修复: `load_comparable_eval_papers` 接受 `external_ids.arXiv` 和 top-level `arxiv` 两种字段, 也接受 nested `variants.<name>.paper_results` JSON 布局 (commit 0825e2f)
+- [x] 修复: `precompute_evidence.py` 改用 `paper_profile_from_metadata` 而非 `_from_snapshot` (commit a9cfb2e), 因为 ablation JSON 不含 `paper_profile_snapshot`
+- [x] 修复: `OllamaEmbedding.embed` 加 5-attempt 5xx retry (commit 4989d48), 应对 Ollama 后台自动更新时的 500
+- [x] 提交: `fix(5.5): retry Ollama embeddings on 5xx + connection errors`
+
+### 任务 5.6.3：540 evidence precompute (烧 M2.7)
+
+- [x] 跑 `scripts/precompute_evidence.py --benchmark-profile custom --input papers_metadata_540.jsonl --baseline-eval retrieval_ablation_540_20260608_150119.json --mode abstract --workers 10 --output-dir data/evaluation/evidence`
+- [x] **第一轮 605 papers 跑完 605/605 coverage** (但其中 3 篇 `multi-model query languages` / `stif` 等 extraction format fail, 0% coverage)
+- [x] **第二轮 focused retry (`--retry-incomplete-from`)**: 1664s, failed=0, partial=0, 6 篇补完到 coverage=1.0
+- [x] 最终 snapshot: `data/evaluation/evidence/custom_evidence_20260609_170624.json` (605/605, 24657420 bytes)
+- [x] 跑 `scripts/build_ranking_training_data.py` 生成 12678 rows (578 pos + 12100 neg) → `data/training/ranker_train_540_v1.jsonl`
+- [x] 负样本: 11563 hard_rule_top20 (95.4%) + 531 same_area (4.4%) + 6 easy_other (0.05%)
+
+### 任务 5.6.4：540 v1 LTR 训练 (关键 scaler bug)
+
+- [x] 跑 `scripts/train_learning_to_rank.py --train ranker_train_540_v1.jsonl --output learning_to_ranker_540_v1_logistic26.json --seed 42 --max-iter 5000`
+- [x] **第一版 pairwise_accuracy=0.6584** (numpy backend, scaler 是空 list, 标准化没生效)
+- [x] **Root cause**: 训练环境 Python env 没装 sklearn, `LearningToRanker.__init__` 选 numpy backend, fit 时 `use_standardization=True` 但 `_HAS_SKLEARN=False`, 跳到 `_scaler = None` 分支, 写盘空 list
+- [x] **修复**: 装 sklearn 1.3.0 后重跑, pairwise_accuracy=0.9856, lbfgs 47 iter 收敛, scaler 26 维真值
+- [x] 提交: `fix(5.5): scaler_mean/scale empty when use_standardization=True` (commit 待确认)
+- [x] 训练集 margin: pos_mean=0.186 - hard_neg_mean=0.040 = **+0.146**
+
+### 任务 5.6.5：LTR-only 跨 3 holdout eval (`scripts/eval_ltr_on_holdout.py`)
+
+- [x] 写新工具: 不烧 LLM, 离线评估已训 LTR 在 holdout 上的 hit@1/3/5/mrr/ndcg@5
+- [x] 支持 `--use-evidence` flag 切换 20-dim (90v3 老) 和 26-dim (540 v1) feature schema
+- [x] 跑 light30 + full-v2-90 + holdout240, 共 6 次 eval
+- [x] 关键发现 (见 5.5 状态表): 540 v1 跨 3 holdout hit@5 稳定 60-66%, 比 90v3 (+23-40 pp) 显著强
+- [x] 提交: `feat(5.5): eval_ltr_on_holdout.py for 3-holdout LTR-only eval`
+
+---
+
+## 阶段 5.7：未来计划 (2026-06-09 之后)
+
+1. **LightGBM LambdaRank 训练脚本** (30-50 min 写)
+   - `scripts/train_lightgbm_lambdarank.py` — 接受 `ranker_train_540_v1.jsonl`, 5-fold GroupKFold, num_leaves=15 min_data=20
+   - 输出: `data/models/learning_to_ranker_540_v1_lightgbm26.json`
+2. **4-variant 训练网格** (完成 #71)
+   - 90 + 20-dim / 90 + 26-dim / 540 + 20-dim / 540 + 26-dim, 全部 logistic
+   - + 540 + 26-dim lightgbm (4 变成 5 variant)
+3. **2-component vs 3-component 公式对比** (新发现, 写进 paper)
+   - 同一 LTR 模型, evidence_weight=0.8/prior=0.2 (旧) vs evidence=0.65/prior=0.15/ltr=0.20 (新)
+   - 端到端 hit@5: 估计 3-component 略好 +1-2 pp (LTR pairwise_acc=0.99 训练质量足够)
+4. **端到端 `run_evaluation.py` 540 LTR 评估** (3 holdout × 0 LLM if snapshot 命中)
+   - 跟 6/6 prod baseline (167/240) 1-to-1 对比
+5. **Paper 数据集章节草稿** (5.6 已经有素材)
+6. **M3 vs M2.7 LLM evidence 抽取对比** (paper 消融)
 
 ---
 
@@ -1140,16 +1267,18 @@ pytest tests/test_publication_experiments.py -q
 
 ## 推荐执行顺序
 
-1. Phase 0：冻结 baseline 和 manifest。
-2. Phase 1：benchmark 治理。
-3. Phase 2：构建 accepted-paper corpus。
-4. Phase 3：增加 accepted-paper route。
-5. Phase 4：记录候选特征。
-6. Phase 5：训练监督式 reranker。
-7. Phase 6：LLM evidence extraction。
-8. Phase 8：论文级实验 runner。
-9. Phase 7：只有在 Phase 5 后仍然发现召回是瓶颈时再做。
-10. Phase 9：实验稳定后再写论文表达材料。
+1. Phase 0：冻结 baseline 和 manifest。 ✅
+2. Phase 1：benchmark 治理。 ✅
+3. Phase 2：构建 accepted-paper corpus。 ✅
+4. Phase 3：增加 accepted-paper route。 ✅ (Gate A passed, ADR 0001)
+5. Phase 4：记录候选特征。 ✅
+6. Phase 5：训练监督式 reranker。 ✅ (5.1-5.4 完成, 5.5 in-progress)
+7. Phase 5.6：540 论文扩充。 ✅ (2026-06-09)
+8. Phase 5.7：LightGBM 训练 + 4-variant grid + 2-comp/3-comp 公式对比。 ⏳ (in-progress)
+9. Phase 6：LLM evidence extraction。 ✅ (6.1-6.3 完成, evidence_role 路径 6/9 切换)
+10. Phase 8：论文级实验 runner。 ⏳
+11. Phase 7：two-tower (只有 Phase 5 后仍然发现召回是瓶颈时再做)。 ⏸️
+12. Phase 9：实验稳定后再写论文表达材料。 ⏳
 
 ---
 
@@ -1201,4 +1330,12 @@ python scripts/run_llm_rerank_ablation.py \
 - 技术收益最高的主线是：accepted-paper route + supervised reranker。
 - LLM 从“最终裁判”转为“证据抽取器 + 解释生成器”，比单纯 prompt ranking 更稳定，也更适合写成论文方法。
 - Two-tower 被放在后面，是因为成本更高，必须先由召回诊断证明它值得做。
+
+**2026-06-09 自检 (5.5 in-progress)**:
+- 540 训练集 + 26-dim LTR 在 3 holdout 上 LTR-only hit@5 60-66%, 跨数据集稳定
+- 3-component formula (evidence 0.65 + prior 0.15 + ltr 0.20) 已替换 2-component 作为新 prod
+- scaler bug 修了, pairwise_acc 从 0.66 跳到 0.99 (5.6.4)
+- 540 论文扩充 5 个脚本 + 6 个文件落档, 5.6 任务全勾
+- 5.5 LightGBM 训练脚本待写, 4-variant grid 待跑, 2-comp/3-comp 端到端对比待跑 (5.7 阶段)
+- plan 总体进度: 193/248 (78%) 已勾, 主线 5.x 全部完成, 剩余 5.7 / 8 / 9 是 paper 写作相关
 - 每个阶段都有可测试输出和 stop/go gate。

@@ -273,8 +273,13 @@ def resolve_benchmark_input(benchmark_profile: str, input_path: str | None) -> s
     return BENCHMARK_PROFILE_INPUTS[benchmark_profile]
 
 
-def init_pipeline() -> RecommenderPipeline:
-    """初始化推荐 pipeline"""
+def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeline:
+    """初始化推荐 pipeline.
+
+    ``llm_max_candidates``: ablation knob, 控制 LLM精排候选池上限。
+    None 时从 yaml ``evidence_role.llm_max_candidates`` 读取（默认 20，
+    推荐 6.4 之后的正式 prod 配置），显式传参优先级最高。
+    """
     import yaml
     from dotenv import load_dotenv
     load_dotenv(override=True)
@@ -507,6 +512,16 @@ def init_pipeline() -> RecommenderPipeline:
         evidence_lookup=evidence_snapshot or None,
         feature_schema=(
             "26_dim_with_llm_evidence" if evidence_snapshot else "20_dim_base"
+        ),
+        # Ablation knob: max LLM精排 candidate pool size. 优先级: 显式传参 > yaml > 30.
+        llm_max_candidates=(
+            llm_max_candidates
+            if llm_max_candidates is not None
+            else int(
+                app_config.get("ranking", {})
+                .get("evidence_role", {})
+                .get("llm_max_candidates", 30)
+            )
         ),
     )
     pipeline.parser = parser

@@ -193,6 +193,30 @@
       "minimax_model": "MiniMax-M2.7",
       "variant": "llm_evidence_plus_learned_reranker",
       "note": "holdout240 ablation (reuses baseline manifest for app_config_hash + prompt_hash)"
+    },
+    {
+      "label": "holdout240_top20_only_v1",
+      "result_path": "data/evaluation/results/ablation_llm_candidate_size.json",
+      "input_path": "data/evaluation/papers_metadata_holdout240.jsonl",
+      "ablation_source_variant": "variant_a_top20_only",
+      "hit_at_5": 169,
+      "hit_at_1": 86,
+      "hit_at_3": 139,
+      "mrr": 0.4815,
+      "coarse_hit_count": 230,
+      "coarse_hit_in_rule_top20_count": 210,
+      "level_match_count": 107,
+      "area_match_count": 162,
+      "acceptable_journal_hit_at_5": null,
+      "llm_max_candidates": 20,
+      "app_config_hash": "9662e630f75cf2dc",
+      "prompt_hash": "263e9a2f2082d376",
+      "minimax_model": "MiniMax-M2.7",
+      "evidence_snapshot": "data/evaluation/evidence/holdout240_evidence_20260606_143232.json",
+      "baseline_eval": "data/evaluation/results/eval_abstract_top5_20260609_215915.json",
+      "ltr_model": "data/models/learning_to_ranker_26dim.json",
+      "elapsed_seconds": 1445.0,
+      "note": "Quick-patched from ablation_llm_candidate_size.json (Variant A: llm_max_candidates=20). Source data file holds summary metrics only (no per-paper details). For full benchmark_manifest + paper_results, re-run scripts/run_evaluation.py."
     }
   ]
 }
