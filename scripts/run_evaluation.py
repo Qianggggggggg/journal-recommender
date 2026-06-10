@@ -21,6 +21,7 @@ import time
 import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, asdict
+from typing import Optional
 from pathlib import Path
 from datetime import datetime
 from tqdm import tqdm
