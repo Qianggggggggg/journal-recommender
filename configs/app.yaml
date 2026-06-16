@@ -57,7 +57,7 @@ data:
 
 ranking:
   strategy: "llm"               # llm | two_tower | two_stage
-  llm_ranker_timeout_seconds: 420
+  llm_ranker_timeout_seconds: 720
   use_two_tower: false          # ablation switch
   use_cross_encoder: false      # ablation switch
   two_tower_model_path: "data/models/two_tower_ranker.pt"
@@ -68,17 +68,15 @@ ranking:
   # instead of calling LLM at recommendation time). When enabled but
   # snapshot is missing, falls back to llm_direct.
   llm_direct:
-    enabled: false                # fallback when evidence snapshot is missing
+    enabled: true                # fallback when evidence snapshot is missing
   evidence_role:
     enabled: true               # opt-in: turn on to use the new path
-    snapshot_path: "data/evaluation/evidence/holdout240_evidence_20260606_143232.json"
+    snapshot_path: "data/evaluation/evidence/v2_20260616/holdout240_evidence_20260616_195324.json"
     prior_source: "learned"      # rule | learned (learned needs LTR rerank)
-    evidence_weight: 0.8        # 26-dim LTR uses evidence as a feature, so
-                                # reduce the post-hoc evidence weight to
-                                # avoid double-counting.
-    prior_weight: 0.2           # linear rank prior from LTR
-    ltr_score_weight: 0.00       # raw LTR score as 3rd formula component
-    llm_max_candidates: 20      # ablation 2026-06-10: top-20 only, 删补位 (vs30 =补位)
+    evidence_weight: 0.55        # v3p baseline winner (e=0.55, p=0.35, l=0.10)
+    prior_weight: 0.35           # linear rank prior from LTR
+    ltr_score_weight: 0.10       # raw LTR score as 3rd formula component
+    prompt_version: "v2"         # PRODUCTION DEFAULT 2026-06-16: v2 prompt (CCF-tier calibration)
   llm_anchor_guard:
     enabled: true
     protect_rule_rank: 5
@@ -99,6 +97,19 @@ ranking:
   # blend_with_* fields are reserved for 5.4 ablation; not consumed in 5.3.
   learned_reranker:
     enabled: true
-    model_path: "data/models/learning_to_ranker_26dim.json"
+    model_path: "data/models/learning_to_ranker_balanced_v4_lr.json"
     blend_with_rule_score: 0.30  # reserved; not consumed by 5.3 v1
     blend_with_llm_score: 0.20   # reserved; not consumed by 5.3 v1
+
+  # P-counterfactual 2026-06-16: experimental ablation flags.
+  # Set skip_quality_assessment=true to bypass the LLM quality_assessor
+  # call (saves 240 LLM calls per holdout240 run). Tests whether the
+  # quality signal is actually doing anything in the final ranking.
+  #
+  # 2026-06-16 holdout240 counterfactual result:
+  #   skip=false: 154/240 (A=60, B=54, C=40)  ← baseline File2
+  #   skip=true:  154/240 (A=60, B=54, C=40)  ← 198/240 recs differ, 8 hit outcomes net to 0
+  # Conclusion: quality_assessor call is net-zero on aggregate but adds 82% rerank churn.
+  # Kept as opt-in for future ablation; default remains false.
+  experimental:
+    skip_quality_assessment: true
