@@ -197,12 +197,89 @@ def get_pipeline() -> RecommenderPipeline:
         )
         scorer = _build_rule_scorer(_store, app_config)
 
-        llm_ranker = LLMRanker(
-            llm,
-            prompts["llm_ranker_system"],
-            prompts["llm_ranker_user"],
-            timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
-        )
+        # 6.3: build LLMEvidenceRoleRanker when evidence_role is enabled and
+        # the snapshot file exists. Mirrors scripts/run_evaluation.py:410-478
+        # so the API path uses the same evidence-based formula as evaluation.
+        # Falls back to LLMRanker when evidence_role is disabled, missing, or
+        # llm_direct is explicitly enabled.
+        ranking_cfg = app_config.get("ranking", {}) or {}
+        evidence_cfg = ranking_cfg.get("evidence_role", {}) or {}
+        use_evidence = bool(evidence_cfg.get("enabled", False))
+        use_direct_default = ranking_cfg.get("llm_direct", {}).get("enabled", False)
+        evidence_snapshot = None
+        evidence_extractor = None
+        llm_ranker = None
+        if use_evidence:
+            from pathlib import Path as _Path
+            from src.ranker.llm_evidence_role_ranker import (
+                LLMEvidenceRoleRanker,
+                load_evidence_snapshot,
+            )
+            snapshot_path = evidence_cfg.get("snapshot_path", "")
+            sp = _Path(snapshot_path)
+            if not sp.exists() or not snapshot_path:
+                print(
+                    f"[api warn] evidence_role.enabled=true but snapshot not found: "
+                    f"{snapshot_path!r}; falling back to LLMRanker"
+                )
+            else:
+                try:
+                    evidence_snapshot = load_evidence_snapshot(str(sp))
+                    from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor, select_evidence_prompts
+                    # Use evidence-specific timeout (defaults to llm_ranker_timeout)
+                    # so a slow evidence call doesn't poison other LLM calls.
+                    evidence_timeout = float(
+                        evidence_cfg.get("evidence_extractor_timeout_seconds")
+                        or ranking_cfg.get("llm_ranker_timeout_seconds", 200)
+                    )
+                    # P0 (2026-06-16): select v1 or v2 evidence prompt based on
+                    # evidence_role.prompt_version. v2 adds CCF-tier calibration.
+                    evidence_prompt_version = evidence_cfg.get("prompt_version", "v1")
+                    evidence_sys_p, evidence_usr_p = select_evidence_prompts(
+                        prompts, evidence_prompt_version
+                    )
+                    evidence_extractor = LLMEvidenceExtractor(
+                        llm=llm,
+                        system_prompt=evidence_sys_p,
+                        user_prompt_template=evidence_usr_p,
+                        timeout_seconds=evidence_timeout,
+                    )
+                    llm_ranker = LLMEvidenceRoleRanker(
+                        evidence_extractor=evidence_extractor,
+                        journal_store=_store,
+                        accepted_paper_store=None,
+                        prior_source=evidence_cfg.get("prior_source", "rule"),
+                        evidence_weight=float(evidence_cfg.get("evidence_weight", 0.8)),
+                        prior_weight=float(evidence_cfg.get("prior_weight", 0.2)),
+                        ltr_score_weight=float(evidence_cfg.get("ltr_score_weight", 0.0)),
+                        evidence_snapshot=evidence_snapshot,
+                        evidence_field_weights=evidence_cfg.get("evidence_field_weights"),
+                    )
+                    print(
+                        f"[api ok] evidence_role enabled, snapshot={snapshot_path}, "
+                        f"prior_source={evidence_cfg.get('prior_source', 'rule')}, "
+                        f"ltr_score_weight={evidence_cfg.get('ltr_score_weight', 0.0)}, "
+                        f"papers={len(evidence_snapshot)}"
+                    )
+                except Exception as exc:
+                    print(f"[api warn] failed to load evidence snapshot: {exc}; falling back to LLMRanker")
+                    evidence_snapshot = None
+                    llm_ranker = None
+
+        if llm_ranker is None:
+            if not use_direct_default:
+                # Strict mode (no direct LLM fallback allowed): raise so we
+                # don't silently downgrade to a ranker that ignores evidence.
+                raise RuntimeError(
+                    "ranking config has neither llm_direct.enabled=true nor a working "
+                    "evidence_role snapshot; cannot build a ranker"
+                )
+            llm_ranker = LLMRanker(
+                llm,
+                prompts["llm_ranker_system"],
+                prompts["llm_ranker_user"],
+                timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+            )
 
         quality_assessor = PaperQualityAssessor(llm)
 
@@ -225,6 +302,10 @@ def get_pipeline() -> RecommenderPipeline:
             quality_assessor=quality_assessor,
             llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
             learned_reranker=learned_reranker,
+            # 6.5: hand the role-ranker extractor to the pipeline so
+            # get_paper_evidence_from_pipeline can do online extraction for
+            # papers not in the offline snapshot.
+            evidence_extractor=evidence_extractor,
         )
 
         # 将 parser 附加到 pipeline 以便在 API 中使用

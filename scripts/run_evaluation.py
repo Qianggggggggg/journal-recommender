@@ -434,11 +434,17 @@ def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeli
                 evidence_snapshot = load_evidence_snapshot(str(sp))
                 # Build a real extractor as required by the constructor even
                 # though we always read from the snapshot (extract() never called).
-                from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor
+                from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor, select_evidence_prompts
+                # P0 (2026-06-16): select v1 or v2 evidence prompt based on
+                # evidence_role.prompt_version. v2 adds CCF-tier calibration.
+                evidence_prompt_version = evidence_cfg.get("prompt_version", "v1")
+                evidence_sys_p, evidence_usr_p = select_evidence_prompts(
+                    prompts, evidence_prompt_version
+                )
                 evidence_extractor = LLMEvidenceExtractor(
                     llm=llm,
-                    system_prompt=prompts["llm_evidence_extractor_system"],
-                    user_prompt_template=prompts["llm_evidence_extractor_user"],
+                    system_prompt=evidence_sys_p,
+                    user_prompt_template=evidence_usr_p,
                     timeout_seconds=ranking_cfg.get("llm_ranker_timeout_seconds", 200),
                 )
                 accepted_store = None
@@ -453,6 +459,7 @@ def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeli
                     prior_weight=float(evidence_cfg.get("prior_weight", 0.2)),
                     ltr_score_weight=float(evidence_cfg.get("ltr_score_weight", 0.0)),
                     evidence_snapshot=evidence_snapshot,
+                    evidence_field_weights=evidence_cfg.get("evidence_field_weights"),
                 )
                 print(
                     f"[ok] evidence_role enabled, snapshot={snapshot_path}, "
@@ -506,6 +513,10 @@ def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeli
         quality_assessor=quality_assessor,
         llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
         learned_reranker=learned_reranker,
+        # P-counterfactual 2026-06-16: pass app_config so the pipeline
+        # can read ranking.experimental.skip_quality_assessment and other
+        # experimental flags without coupling to a specific caller.
+        app_config=app_config,
         evidence_extractor=evidence_extractor,
         # 6.4: enable 26-dim feature schema when evidence_role is on AND
         # the snapshot is loaded. attach_features() will fall back to 20
@@ -1227,6 +1238,7 @@ def save_results(
     benchmark_path: str = "",
     app_config: dict | None = None,
     ltr_info: dict | None = None,
+    filepath: str | None = None,
 ):
     """保存评估结果。
 
@@ -1234,12 +1246,24 @@ def save_results(
     5.4.e 新增:
     - environment: 评测环境元信息 (benchmark profile, path, ltr 状态, model, hash 等)
     - metrics 内每个 count 字段旁加 _rate (0~1 小数) 字段
-    """
-    os.makedirs(output_dir, exist_ok=True)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"eval_{result.mode}_top{result.top_k}_{timestamp}.json"
-    filepath = os.path.join(output_dir, filename)
+    P0.7 (2026-06-16): ``filepath`` overrides the auto-generated
+    ``eval_<mode>_top<k>_<timestamp>.json`` filename. Used by
+    scripts/run_p0p1_ablation.py so each cell writes to a predictable
+    path that can be glob'd or registered.
+    """
+    if filepath is not None:
+        # Caller provided a full path; ensure its parent dir exists.
+        os.makedirs(os.path.dirname(filepath) or ".", exist_ok=True)
+        # Derive a stable timestamp from the filepath so the JSON `timestamp`
+        # field stays consistent across re-saves of the same result file.
+        # Fall back to "now" if the basename has no parseable timestamp.
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    else:
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"eval_{result.mode}_top{result.top_k}_{timestamp}.json"
+        filepath = os.path.join(output_dir, filename)
 
     total = result.total_count if result.total_count > 0 else 1
 
@@ -1358,6 +1382,11 @@ def main():
                         help="不保存结果")
     parser.add_argument("--workers", "-w", type=int, default=10,
                         help="并行线程数（默认10）")
+    parser.add_argument("--output", default=None,
+                        help="P0.7 (2026-06-16): explicit output filepath; overrides "
+                             "the auto-generated eval_<mode>_top<k>_<timestamp>.json. "
+                             "Used by scripts/run_p0p1_ablation.py so each cell "
+                             "writes to a predictable path.")
     parser.add_argument(
         "--baseline-eval",
         default="",
@@ -1436,6 +1465,7 @@ def main():
                 benchmark_path=args.input,
                 app_config=app_config,
                 ltr_info=ltr_info,
+                filepath=args.output,
             )
 
     print("\n评估完成!")

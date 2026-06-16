@@ -158,6 +158,7 @@ class LLMEvidenceRoleRanker:
         prior_weight: float = 0.2,
         ltr_score_weight: float = 0.0,
         evidence_snapshot: Optional[Dict[str, Dict[str, Any]]] = None,
+        evidence_field_weights: Optional[Dict[str, float]] = None,
     ) -> None:
         if prior_source not in {"rule", "learned"}:
             raise ValueError(f"Unsupported prior_source: {prior_source}")
@@ -187,6 +188,10 @@ class LLMEvidenceRoleRanker:
         # When a paper's evidence is requested, the ranker looks it up here
         # and skips the LLM extractor call entirely.
         self.evidence_snapshot = evidence_snapshot
+        # P0-PRIME 2026-06-16: optional per-fit-field weights for the
+        # evidence_composite formula. None or invalid (sum != 1.0)
+        # → fall back to equal-weight mean in _evidence_composite.
+        self.evidence_field_weights = evidence_field_weights
 
     @staticmethod
     def _title_key(title: str) -> str:
@@ -349,7 +354,9 @@ class LLMEvidenceRoleRanker:
             rank_prior = self._linear_rank_prior(prior_rank, prior_population_size)
             evidence = evidence_by_id.get(journal.journal_id) or {}
             normalized = self._normalized_evidence(evidence)
-            evidence_composite = self._evidence_composite(normalized)
+            evidence_composite = self._evidence_composite(
+                normalized, weights=self.evidence_field_weights
+            )
             # Task 6.4: blend in the actual LTR score as a third component when
             # the ranker was constructed with ltr_score_weight > 0. When the
             # caller didn't supply learned_scores (e.g. legacy code paths) or
@@ -514,14 +521,52 @@ class LLMEvidenceRoleRanker:
         return float(value)
 
     @classmethod
-    def _evidence_composite(cls, evidence: Dict[str, float]) -> float:
-        fit_mean = sum(evidence[field] for field in cls.FIT_FIELDS) / len(
-            cls.FIT_FIELDS
-        )
+    def _evidence_composite(
+        cls,
+        evidence: Dict[str, float],
+        weights: Optional[Dict[str, float]] = None,
+    ) -> float:
+        """Compute evidence_composite score.
+
+        Args:
+            evidence: dict with 6 evidence fields (4 fit + 2 penalty).
+            weights: optional per-field weights for fit_fields. If provided
+                AND the 4 fit weights sum to 1.0 (within 1e-6 tolerance),
+                weighted_fit = sum(w_f * f). Otherwise fall back to
+                equal-weight mean of fit_fields. Penalty is always
+                equal-weight mean (too_broad + too_narrow).
+
+        Returns:
+            composite score in [0.0, 1.0], clipped.
+
+        P0-PRIME 2026-06-16: weights argument added to allow
+        per-field weighting derived from discrimination analysis.
+        Fallback behavior preserves backward compatibility with
+        callers that don't pass weights.
+        """
         penalty_mean = sum(evidence[field] for field in cls.PENALTY_FIELDS) / len(
             cls.PENALTY_FIELDS
         )
-        return max(0.0, min(1.0, fit_mean - penalty_mean))
+
+        # Decide between weighted and equal-weight fit aggregation.
+        use_weighted = (
+            weights is not None
+            and len(weights) == len(cls.FIT_FIELDS)
+            and all(f in weights for f in cls.FIT_FIELDS)
+        )
+        if use_weighted:
+            weight_sum = sum(weights[f] for f in cls.FIT_FIELDS)
+            # Tolerance for floating point comparison
+            use_weighted = abs(weight_sum - 1.0) < 1e-6
+
+        if use_weighted:
+            fit_score = sum(weights[f] * evidence[f] for f in cls.FIT_FIELDS)
+        else:
+            fit_score = sum(evidence[field] for field in cls.FIT_FIELDS) / len(
+                cls.FIT_FIELDS
+            )
+
+        return max(0.0, min(1.0, fit_score - penalty_mean))
 
     def _candidate_in_accepted_corpus(self, journal_id: str) -> bool:
         if self.accepted_paper_store is None:
