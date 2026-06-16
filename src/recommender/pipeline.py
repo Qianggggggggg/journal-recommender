@@ -4,7 +4,7 @@ import logging
 import yaml
 from typing import Callable, List, Optional, Dict, Any, Tuple
 
-from ..utils.text import quality_adjustment_factor
+from ..utils.text import quality_adjustment_factor, quality_adjustment_multiplier
 from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
 from ..papers.quality_assessor import PaperQualityAssessor
@@ -43,6 +43,13 @@ class RecommenderPipeline:
         # preserves the original补位 behavior (top-20 + up to 10 by 4 conditions).
         # Set to 20 to disable补位 entirely and feed only RuleScorer top-20 to LLM.
         llm_max_candidates: int = 30,
+        # P-counterfactual 2026-06-16: pass through app.yaml so the
+        # pipeline can read experimental flags like
+        # ``ranking.experimental.skip_quality_assessment`` without coupling
+        # to any specific caller. Optional; default empty dict preserves
+        # backward-compat with tests that construct the pipeline without
+        # a config.
+        app_config: Optional[Dict[str, Any]] = None,
     ):
         self.candidate_generator = candidate_generator
         self.rule_scorer = rule_scorer
@@ -69,6 +76,10 @@ class RecommenderPipeline:
         self.evidence_extractor = evidence_extractor
         # Ablation knob: max LLM精排 candidate pool size.
         self.llm_max_candidates = llm_max_candidates
+        # P-counterfactual 2026-06-16: optional app_config so the pipeline
+        # can read experimental flags without coupling to a specific
+        # caller. Used by ``ranking.experimental.skip_quality_assessment``.
+        self._app_config: Dict[str, Any] = app_config or {}
 
     def recommend(
         self,
@@ -84,7 +95,29 @@ class RecommenderPipeline:
     ) -> Dict[str, Any]:
         """执行推荐流程"""
         # 0. 评估论文质量
-        if self.quality_assessor and quality_prompts:
+        # P-counterfactual 2026-06-16: ranking.experimental.skip_quality_assessment
+        # bypasses the LLM quality_assessor call. ``paper_strength = None``
+        # triggers the early-exit branch in ``_apply_quality_adjustment``
+        # (no tier bias applied). ccf_research_area is forwarded from
+        # research_area so domain signals survive. This is the experiment
+        # knob for the "is quality assessment actually doing anything?"
+        # counterfactual — see tests/test_skip_quality_assessment.py.
+        skip_quality = bool(
+            self._app_config
+            .get("ranking", {})
+            .get("experimental", {})
+            .get("skip_quality_assessment", False)
+        )
+        if skip_quality:
+            # Forward domain signal without LLM call; clear strength so
+            # _apply_quality_adjustment returns the ranked list unchanged.
+            paper_profile.ccf_research_area = paper_profile.research_area
+            paper_profile.paper_strength = None
+            paper_profile.quality_level = None
+            paper_profile.readiness = None
+            paper_profile.quality_confidence = None
+            paper_profile.quality_reasons = []
+        elif self.quality_assessor and quality_prompts:
             self._emit_progress(
                 progress_callback,
                 stage="quality",
@@ -469,7 +502,13 @@ class RecommenderPipeline:
         ranked: List[Tuple[Journal, float, List[str]]],
         paper_profile: PaperProfile,
     ) -> List[Tuple[Journal, float, List[str]]]:
-        """应用质量软权重调整（解耦：质量评估结果不再直接流入 RuleScorer）"""
+        """应用质量软权重调整（解耦：质量评估结果不再直接流入 RuleScorer）
+
+        P1 (2026-06-16): 改用 strength-aware CCF-tier multiplier
+        (quality_adjustment_multiplier)，弱论文（strength<0.5）偏好 C 级
+        期刊，强论文保持 A>B>C。详见 src/utils/text.py 和
+        tests/test_quality_adjustment.py。
+        """
         if paper_profile.paper_strength is None:
             return ranked
 
@@ -479,7 +518,9 @@ class RecommenderPipeline:
 
         adjusted = []
         for journal, score, reasons in ranked:
-            ccf_multiplier = {"A": 1.05, "B": 1.02, "C": 1.0}.get(journal.ccf_rating, 1.0)
+            ccf_multiplier = quality_adjustment_multiplier(
+                strength, journal.ccf_rating
+            )
             adjustment = base_adjustment * ccf_multiplier
 
             adjusted_score = score * adjustment

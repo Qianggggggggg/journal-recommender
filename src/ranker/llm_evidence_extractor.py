@@ -357,3 +357,37 @@ JSON 对象必须包含 evidence 数组，每个元素必须包含候选 journal
         if "【输出格式硬约束】" in self.system_prompt:
             return self.system_prompt
         return f"{self.system_prompt.rstrip()}{self.JSON_OUTPUT_CONTRACT}"
+
+
+# P0 (2026-06-16 diagnostic): v2 evidence prompt adds CCF-tier calibration to
+# counter the systematic under-scoring of C-tier application-oriented journals
+# (C-tier hit@5 = 49-56% vs A-tier 76-85% on holdout240; C-tier gold
+# evidence_composite median = 0.50 vs top1 median = 0.775). v1 is the original
+# prompt; v2 is the calibration variant. Switch via
+# configs/app.yaml::ranking.evidence_role.prompt_version = "v1" | "v2".
+EVIDENCE_PROMPT_VERSIONS = ("v1", "v2")
+
+
+def select_evidence_prompts(prompts: Dict[str, str], version: str) -> Tuple[str, str]:
+    """Return (system_prompt, user_prompt_template) for the requested version.
+
+    Falls back to v1 keys for unknown versions so a typo in app.yaml does not
+    crash the pipeline. The fallback is logged inside the caller's
+    initialization (not here, to keep this function pure for testing).
+
+    Locked by tests/test_prompt_templates.py::TestSelectEvidencePrompts.
+    """
+    if version == "v2":
+        sys_key = "llm_evidence_extractor_system_v2"
+        usr_key = "llm_evidence_extractor_user_v2"
+    else:
+        sys_key = "llm_evidence_extractor_system"
+        usr_key = "llm_evidence_extractor_user"
+
+    # If v2 keys are missing, fall back to v1 so legacy configs / test fixtures
+    # that don't yet carry v2 still work.
+    if version == "v2" and (sys_key not in prompts or usr_key not in prompts):
+        sys_key = "llm_evidence_extractor_system"
+        usr_key = "llm_evidence_extractor_user"
+
+    return prompts[sys_key], prompts[usr_key]

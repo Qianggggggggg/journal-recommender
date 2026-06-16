@@ -85,6 +85,7 @@ from scripts.run_retrieval_ablation import (  # noqa: E402
 from src.ranker.llm_evidence_extractor import (  # noqa: E402
     LLMEvidenceExtractor,
     LLMEvidenceExtractorError,
+    select_evidence_prompts,
 )
 
 logger = logging.getLogger("precompute_evidence")
@@ -455,6 +456,17 @@ def parse_args() -> argparse.Namespace:
         default=1,
         help="Concurrent papers processed in parallel (default 1, sequential).",
     )
+    parser.add_argument(
+        "--prompt-version",
+        choices=["v1", "v2"],
+        default="v1",
+        help=(
+            "P0 (2026-06-16): v1 = original evidence prompt; "
+            "v2 = CCF-tier calibration. Default v1 preserves current behavior. "
+            "Focused retry template stays v1 since it only selects which "
+            "journal_ids to re-extract, not the calibration logic."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -492,8 +504,20 @@ def main() -> None:
         raise RuntimeError("Pipeline has no LLM client; cannot run evidence extractor")
     extractor = LLMEvidenceExtractor(
         llm=raw_llm,
-        system_prompt=prompts["llm_evidence_extractor_system"],
-        user_prompt_template=prompts["llm_evidence_extractor_user"],
+        # P0 (2026-06-16): select v1 or v2 evidence prompt based on
+        # --prompt-version. v2 adds CCF-tier calibration. select_evidence_prompts
+        # falls back to v1 if v2 keys are missing in the prompts.yaml.
+        # NOTE: do NOT use ``*select_evidence_prompts(...)`` here — that
+        # would unpack the (system_prompt, user_prompt_template) tuple into
+        # positional args and the first one would bind to ``llm`` (the first
+        # param after self), causing "got multiple values for argument 'llm'".
+        # Use named locals instead.
+        system_prompt=select_evidence_prompts(
+            prompts, args.prompt_version
+        )[0],
+        user_prompt_template=select_evidence_prompts(
+            prompts, args.prompt_version
+        )[1],
         focused_user_prompt_template=prompts.get(
             "llm_evidence_extractor_user_focused"
         ),
