@@ -295,6 +295,19 @@
       "app_config_hash": "ec12f5fa66b012c355d2684cdfc6491ca273837d120bae76df5a079b4e7bec6a",
       "prompt_hash": "68f0c81ecbb0671a1fa801842cc7cd809fce1d311b83dca5aeb42d0ff249eb46",
       "minimax_model": "MiniMax-M2.7"
+    },
+    {
+      "label": "holdout240_scope_text_only_20260617",
+      "result_path": "data/evaluation/results/eval_abstract_top5_scope_text_only_20260617.json",
+      "input_path": "data/evaluation/papers_metadata_holdout240.jsonl",
+      "hit_at_5": 146,
+      "mrr": 0.3902083333333334,
+      "coarse_hit_count": 219,
+      "coarse_hit_in_rule_top20_count": 196,
+      "acceptable_journal_hit_at_5": 208,
+      "app_config_hash": "989da47183f41520fda1672c51abf7b21d4a60bf4e77aa85e334e916be6bbffc",
+      "prompt_hash": "68f0c81ecbb0671a1fa801842cc7cd809fce1d311b83dca5aeb42d0ff249eb46",
+      "minimax_model": "MiniMax-M2.7"
     }
   ]
 }
