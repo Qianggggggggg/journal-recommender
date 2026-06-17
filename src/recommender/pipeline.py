@@ -214,7 +214,15 @@ class RecommenderPipeline:
         # paper 标题命中 evidence_lookup 时,输出 26 维 evidence schema。
         # 缺 paper_evidence 时**自动回退** 20 维(防御性,不破坏 baseline)。
         paper_title_key = " ".join((paper_profile.title or "").casefold().split())
-        paper_evidence = self.evidence_lookup.get(paper_title_key, {})
+        paper_evidence_entry = self.evidence_lookup.get(paper_title_key, {})
+        # evidence_lookup stores whole paper entries (title/venue/rule_ranks/
+        # learned_ranks/candidates/evidence/...). attach_features wants
+        # the per-journal-id evidence dict ({jid: ev_item}), so unwrap.
+        paper_evidence = (
+            paper_evidence_entry.get("evidence", {})
+            if isinstance(paper_evidence_entry, dict)
+            else {}
+        )
         feature_names: Optional[List[str]] = None
         if self._expected_feature_dim == 26 and paper_evidence:
             feature_names = FEATURE_NAMES_WITH_LLM_EVIDENCE

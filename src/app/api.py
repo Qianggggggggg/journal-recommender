@@ -306,6 +306,18 @@ def get_pipeline() -> RecommenderPipeline:
             # get_paper_evidence_from_pipeline can do online extraction for
             # papers not in the offline snapshot.
             evidence_extractor=evidence_extractor,
+            # 6.4: pass the loaded evidence_snapshot as the pipeline's
+            # evidence_lookup so the LTR model sees real LLM evidence
+            # (26-dim) instead of neutral 0.5/0.0 defaults.
+            # Mirrors scripts/run_evaluation.py:524-527.
+            # Without this, the LTR's 6 evidence-related weights operate
+            # on a constant input and lose the discrimination the model
+            # was trained on (positive mean 0.71 vs negative mean 0.50
+            # for llm_scope_fit in training data).
+            evidence_lookup=evidence_snapshot or None,
+            feature_schema=(
+                "26_dim_with_llm_evidence" if evidence_snapshot else "20_dim_base"
+            ),
         )
 
         # 将 parser 附加到 pipeline 以便在 API 中使用

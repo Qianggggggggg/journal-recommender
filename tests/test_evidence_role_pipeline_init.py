@@ -3,7 +3,7 @@ import json
 import tempfile
 from pathlib import Path
 
-import pytest
+import pytest  # noqa: F401  (used by skipif below)
 
 
 def _write_minimal_snapshot(tmp_path: Path, n_papers: int = 2) -> Path:
@@ -130,6 +130,189 @@ def test_get_paper_evidence_from_pipeline_cache_round_trip(monkeypatch):
     # Second call: must hit the cache, not call the extractor.
     ev = get_paper_evidence_from_pipeline(pipeline, title)
     assert ev == {"tifs": {"scope_fit": 0.9, "method_fit": 0.8}}
+
+
+# ---------------------------------------------------------------------------
+# P0-1 fix: api.py::get_pipeline() must thread evidence_snapshot through to
+# RecommenderPipeline as evidence_lookup + feature_schema so the LTR sees
+# real LLM evidence (26-dim) instead of neutral 0.5/0.0 defaults.
+# ---------------------------------------------------------------------------
+
+
+def test_get_pipeline_threads_evidence_snapshot_to_pipeline_when_loaded(monkeypatch):
+    """When the evidence_role snapshot loads, get_pipeline() must construct
+    the RecommenderPipeline with:
+      - evidence_lookup = the loaded snapshot (non-empty)
+      - feature_schema  = "26_dim_with_llm_evidence"
+
+    Mirrors scripts/run_evaluation.py:524-527. Without this, the LTR model
+    silently operates on neutral evidence features (all 0.5/0.0) at API
+    inference time even though the snapshot is loaded for the role ranker.
+    """
+    from src.app import api as api_module
+    import src.app.api as api_mod
+    from src.app.api import get_pipeline
+
+    # Force pipeline re-construction on next call.
+    monkeypatch.setattr(api_mod, "_pipeline", None)
+    monkeypatch.setattr(api_mod, "_store", None)
+    monkeypatch.setattr(api_module, "_EVIDENCE_CACHE", {})
+
+    pipeline = get_pipeline()
+
+    # When the role ranker is LLMEvidenceRoleRanker, the snapshot must
+    # also flow into the pipeline. When the role ranker falls back to
+    # direct LLMRanker (snapshot missing/failed), both must be empty/20-dim.
+    role_ranker = pipeline.llm_ranker
+    has_snapshot = bool(getattr(role_ranker, "evidence_snapshot", None))
+
+    if has_snapshot:
+        assert pipeline.evidence_lookup, (
+            "P0-1 regression: evidence_snapshot is loaded into the role "
+            "ranker but not threaded into the pipeline. The LTR model will "
+            "see neutral evidence features instead of the snapshot's real "
+            "LLM evidence."
+        )
+        assert pipeline.feature_schema == "26_dim_with_llm_evidence", (
+            f"feature_schema must be '26_dim_with_llm_evidence' when snapshot "
+            f"is loaded, got {pipeline.feature_schema!r}"
+        )
+        # evidence_lookup keys are normalized titles; pipeline reads them
+        # via _title_key, so verify a known paper is present.
+        sample_key = next(iter(role_ranker.evidence_snapshot))
+        assert sample_key in pipeline.evidence_lookup
+    else:
+        # No snapshot → pipeline must fall back to 20-dim and empty lookup.
+        assert pipeline.evidence_lookup == {}
+        assert pipeline.feature_schema == "20_dim_base"
+
+    # Cleanup: reset cache so subsequent tests start clean.
+    monkeypatch.setattr(api_mod, "_pipeline", None)
+    monkeypatch.setattr(api_mod, "_store", None)
+
+
+def test_pipeline_attach_features_emits_real_evidence_for_snapshot_paper(monkeypatch):
+    """When a paper title is in evidence_lookup, pipeline.recommend() must
+    write 26-dim features with the real llm_* evidence values into the
+    retrieval trace, not the neutral 0.5/0.0 defaults.
+
+    Locks P0-1: the API path's LTR must see discriminative evidence features
+    (positive mean 0.71, negative mean 0.50 in training data), not a
+    constant 0.5/0.0 input that the LTR cannot use to discriminate.
+
+    We replicate pipeline.recommend's attach_features call exactly (lines
+    216-231 of pipeline.py) to verify the contract.
+    """
+    from src.app import api as api_module
+    import src.app.api as api_mod
+    from src.app.api import get_pipeline
+    from src.ranker.feature_builder import (
+        FEATURE_NAMES_WITH_LLM_EVIDENCE,
+    )
+
+    monkeypatch.setattr(api_mod, "_pipeline", None)
+    monkeypatch.setattr(api_mod, "_store", None)
+    monkeypatch.setattr(api_module, "_EVIDENCE_CACHE", {})
+
+    pipeline = get_pipeline()
+    role_ranker = pipeline.llm_ranker
+    snapshot = getattr(role_ranker, "evidence_snapshot", None)
+    if not snapshot:
+        monkeypatch.setattr(api_mod, "_pipeline", None)
+        monkeypatch.setattr(api_mod, "_store", None)
+        pytest.skip("No evidence snapshot loaded; cannot verify 26-dim path")
+
+    # Find a paper whose snapshot has non-neutral evidence for at least one
+    # candidate (e.g. llm_scope_fit != 0.5).
+    paper_title = None
+    target_journal = None
+    target_scope_fit = None
+    for key, entry in snapshot.items():
+        evidence = entry.get("evidence") or {}
+        for jid, ev in evidence.items():
+            scope_fit = ev.get("scope_fit")
+            if scope_fit is not None and abs(float(scope_fit) - 0.5) > 0.1:
+                paper_title = entry.get("title") or key
+                target_journal = jid
+                target_scope_fit = float(scope_fit)
+                break
+        if paper_title:
+            break
+
+    if not paper_title:
+        monkeypatch.setattr(api_mod, "_pipeline", None)
+        monkeypatch.setattr(api_mod, "_store", None)
+        pytest.skip("Snapshot has no paper with non-neutral evidence")
+
+    from src.papers.paper_model import PaperProfile
+
+    paper_profile = PaperProfile(title=paper_title, research_area=["AI"])
+    paper_title_key = api_mod._title_key(paper_title)
+
+    # Mirror pipeline.recommend() lines 216-231 exactly.
+    paper_evidence_entry = pipeline.evidence_lookup.get(paper_title_key, {})
+    # Pipeline now unwraps entry["evidence"] before passing to attach_features.
+    paper_evidence = (
+        paper_evidence_entry.get("evidence", {})
+        if isinstance(paper_evidence_entry, dict)
+        else {}
+    )
+
+    # P0-1 contract: when feature_schema=26-dim and paper is in
+    # evidence_lookup, pipeline picks FEATURE_NAMES_WITH_LLM_EVIDENCE.
+    feature_names = None
+    if pipeline._expected_feature_dim == 26 and paper_evidence:
+        feature_names = FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    assert feature_names is FEATURE_NAMES_WITH_LLM_EVIDENCE, (
+        f"P0-1 regression: pipeline._expected_feature_dim="
+        f"{pipeline._expected_feature_dim} with paper_evidence present, "
+        f"expected 26-dim schema. feature_names resolved to {feature_names!r}"
+    )
+
+    # Construct a fake trace covering the target journal and another.
+    fake_trace = {
+        target_journal: {
+            "retrieval_rank": 1,
+            "routes": {
+                "scope_bm25": {"rank": 1, "raw_score": 1.0,
+                               "normalized_score": 1.0, "weighted_score": 0.5},
+            },
+        },
+        "decoy": {
+            "retrieval_rank": 2,
+            "routes": {
+                "scope_bm25": {"rank": 2, "raw_score": 0.5,
+                               "normalized_score": 0.5, "weighted_score": 0.25},
+            },
+        },
+    }
+
+    pipeline.candidate_generator.attach_features(
+        trace=fake_trace,
+        paper_profile=paper_profile,
+        rule_ranks={target_journal: 1, "decoy": 2},
+        rule_scores={target_journal: 0.9, "decoy": 0.7},
+        accepted_paper_store=None,
+        feature_names=feature_names,
+        llm_evidence_by_journal=paper_evidence,
+    )
+
+    target_features = fake_trace[target_journal]["features"]
+    assert len(target_features) == 26, (
+        f"Expected 26-dim features when feature_schema=26-dim, "
+        f"got {len(target_features)}-dim"
+    )
+    actual_scope_fit = target_features[20]  # llm_scope_fit index
+    assert abs(actual_scope_fit - target_scope_fit) < 1e-6, (
+        f"P0-1 regression: trace[{target_journal}].features[20] "
+        f"(llm_scope_fit) = {actual_scope_fit}, expected "
+        f"{target_scope_fit} from snapshot. Pipeline fed the LTR neutral "
+        f"0.5 instead of real evidence."
+    )
+
+    monkeypatch.setattr(api_mod, "_pipeline", None)
+    monkeypatch.setattr(api_mod, "_store", None)
 
 
 def test_get_paper_evidence_falls_back_to_online_extractor(monkeypatch):
