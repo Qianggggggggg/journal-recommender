@@ -1339,3 +1339,69 @@ python scripts/run_llm_rerank_ablation.py \
 - 5.5 LightGBM 训练脚本待写, 4-variant grid 待跑, 2-comp/3-comp 端到端对比待跑 (5.7 阶段)
 - plan 总体进度: 193/248 (78%) 已勾, 主线 5.x 全部完成, 剩余 5.7 / 8 / 9 是 paper 写作相关
 - 每个阶段都有可测试输出和 stop/go gate。
+
+**2026-06-16 自检 (6.5 holdout240 v2 / P0' ablation)**:
+
+### 4-cell 消融矩阵
+
+holdout240 (240 papers, abstract mode, top-5, M2.7):
+
+| Cell                          | Hit@1 | Hit@3 | Hit@5 | Hit@10 | MRR    | NDCG@5 | A   | B   | C   | acceptable |
+|-------------------------------|-------|-------|-------|--------|--------|--------|-----|-----|-----|------------|
+| File2 (v1 prompt, no skip, 等权) | 67    | 130   | 154   | 154    | 0.4132 | 0.4702 | 60  | 54  | 40  | 213        |
+| P0' (v1 prompt, skip, weighted)  | 65    | 128   | 156   | 156    | 0.4100 | 0.4698 | 60  | 56  | 40  | 212        |
+| **v2 (v2 prompt, skip, 等权) [PROD DEFAULT]** | **77** | **135** | 155 | 155 | **0.4426** | **0.4934** | 60 | 54 | **41** | 207 |
+| P0'' (v2 prompt, skip, weighted)  | 76    | 131   | 154   | 154    | 0.4355 | 0.4869 | **61** | 54 | 39 | 210        |
+
+### 决策
+
+- **采纳 v2 prompt 作为 production default**（hit@1=77, MRR=0.44, NDCG@5=0.49, C-tier=41）。
+  v2 prompt 在 `prompts.yaml` 里加 CCF-tier 校准子句（v2 keys），
+  v1 keys 保留作为 fallback（A/B 测试不破坏）。
+- **P0' weighted formula 留在代码里作为 opt-in feature**（`evidence_field_weights`
+  in `app.yaml::ranking.evidence_role`），不默认启用。
+  当权重 4 字段 sum=1.0 时生效，否则 fallback 等权。
+- **skip_quality_assessment=true 保留作为 opt-in flag**，默认 false。
+  240 次 LLM 调用/holdout240 节省，但 evidence 评分无变化（hit@5 不变）。
+
+### Trade-off 锁住的事实
+
+1. **weighted formula 不能跟 v2 prompt 叠加**：P0'' hit@5=154（< File2 baseline）。
+   v2 prompt 的 application_fit CCF-tier 加成，被 weighted formula 把 application_fit 权重
+   从 0.25 降到 0.20 部分抵消。两侧优势互相 trade-off。
+2. **v2 prompt 的 hit@5 是 +1，但 hit@1 是 +10**：精确排序质量大幅提升，
+   但"是否在 top5"几乎不动（hit@5 几近饱和于粗召回到 top20 的池）。
+3. **acceptable_journal_hit_at_5 (-6)**：v2 把 6 篇"top5 里有同档同类期刊"换成了
+   "top5 里有精确 gold"。用户感知上前者是"差但能投"，后者是"中了"——可接受 trade-off。
+
+### Pipeline loss 分解（holdout240）
+
+按 stage 拆分 misses (acceptable metric, total=33):
+
+| Stage | 阻塞论文数 | 说明 |
+|-------|-----------|------|
+| 1 (召回)   | 16    | gold 未进 coarse top50。其中 8 篇是 C-tier，召回方向错误。 |
+| 2 (LLM 池) | 1     | gold 在 coarse 但不在 rule top20。backfill 已基本饱和。 |
+| 3 (精排)   | 16    | gold 在 rule top20 pool 里但 rerank 没推上去。最大杠杆。 |
+
+(注：早期分析的 "60 篇 rerank-loss" 是 coarse-hit-and-miss-top5 = 71 篇，
+不是真正的 rerank loss。正确的精排丢失是 16 篇。)
+
+### Bug fixes this session (each with regression test)
+
+1. `PaperProfile.quality_confidence` typed as required float → Optional[float] = None.
+   `pipeline.py:118` 在 skip_quality 分支赋 None，pydantic ValidationError。
+   `tests/test_paper_model_quality_confidence.py` (8 tests).
+2. `save_results()` UnboundLocalError on `timestamp` when `--output` filepath
+   passed (if-branch skips else-branch that assigns timestamp).
+   `tests/test_save_results_filepath.py` (2 tests).
+
+### Open questions / next steps
+
+- **Stage 1 召回** (16 papers, 8 C-tier): 需要排查 paper_parser 是否把跨领域论文
+  错误归类到单一 research_area。如果验证是多领域 paper，应让 coarse 召回多领域候选。
+- **Stage 3 精排** (16 papers): gold 已在 pool，仍被 rerank 压到 top5 外。
+  这些 paper 的 evidence_composite 中位数 vs 命中 paper 的中位数差距显著，
+  但用户已经决定不继续调 prompt（v2 trade-off 已锁住）。
+- **下一步 ROI 排序**: 排查 Stage 1 (8 C-tier 论文是真正的硬上限) > Stage 3 调权
+  (P0' 公式已在代码里, 验证无 trade-off 后再考虑启用) > 召回融合权重微调。
