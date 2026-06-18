@@ -160,6 +160,18 @@ class RuleScorer:
                 typical_scores.append(score)
             elif route == "identity_anchor":
                 # identity_anchor 作为补召回证据，强度略低于 typical 摘要语义。
+                #
+                # Note (2026-06-18, audit finding #6): identity_anchor has
+                # THREE distinct meanings across modules — keep them in sync
+                # if you tune any one:
+                #   1. candidate_generator.py  : independent route, weight 0.10
+                #      (``identity_anchor_weight``) in fusion
+                #   2. rule_scorer.py here     : merged into ``typical_strength``
+                #      with 0.5 multiplier (this site)
+                #   3. feature_builder.py:236   : binary ``has_identity_anchor``
+                #      feature for LTR (not the score)
+                # This is concept leakage — modifying the route weight in
+                # candidate_generator does NOT change LTR feature semantics.
                 typical_scores.append(score * 0.5)
         has_scope = bool(scope_scores)
         has_typical = bool(typical_scores)

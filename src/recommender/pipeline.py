@@ -600,18 +600,24 @@ class RecommenderPipeline:
 
     @classmethod
     def from_config(cls, config_path: str = "configs/app.yaml") -> "RecommenderPipeline":
-        """从配置文件创建"""
-        with open(config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
+        """从配置文件创建。
 
-        # 加载 prompts
-        with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
-            prompts = yaml.safe_load(f)
+        .. deprecated:: 0.6.5
+            This classmethod constructs a RuleScorer with code-default
+            weights (8 critical weights are 0 in ``RuleScorer.DEFAULT_WEIGHTS``),
+            producing a half-disabled scorer. It exists for backward
+            compat only — production paths (src/app/api.py, scripts/run_evaluation.py)
+            use direct dependency injection with yaml-loaded weights.
+            Locked by tests/test_route_top_k_config.py and
+            tests/test_evidence_field_weights_production.py invariants.
 
-        # 这里需要传入已初始化的组件
-        # 实际使用时通过依赖注入
-        return cls(
-            candidate_generator=None,  # 外部注入
-            rule_scorer=RuleScorer(),
-            llm_ranker=None,
+        Raises:
+            NotImplementedError: always. Use direct DI instead.
+        """
+        raise NotImplementedError(
+            "RecommenderPipeline.from_config is deprecated as of 0.6.5 "
+            "(constructed RuleScorer with 8 weights=0, silently disabled). "
+            "Use direct dependency injection: pass candidate_generator, "
+            "rule_scorer (with weights from app.yaml), and llm_ranker "
+            "explicitly. See src/app/api.py:get_pipeline() for reference."
         )
