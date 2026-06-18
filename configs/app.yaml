@@ -80,16 +80,10 @@ ranking:
     prior_weight: 0.35           # linear rank prior from LTR
     ltr_score_weight: 0.10       # raw LTR score as 3rd formula component
     prompt_version: "v2"         # PRODUCTION DEFAULT 2026-06-16: v2 prompt (CCF-tier calibration)
-    # P0-2 (2026-06-18): weighted fit aggregation. Discrimination analysis
-    # showed scope_fit / application_fit ~2x the discriminative power of
-    # method_fit. Weights must sum to 1.0 (within 1e-6) for the formula to
-    # use them; otherwise _evidence_composite silently falls back to
-    # equal-weight mean. Locked by tests/test_evidence_field_weights_production.py.
-    evidence_field_weights:
-      scope_fit: 0.35
-      application_fit: 0.25
-      journal_position_fit: 0.20
-      method_fit: 0.20
+    # evidence_field_weights intentionally absent (P0-2 rolled back
+    # 2026-06-18, see commit 8384dc2 + tests/test_evidence_field_weights_production.py).
+    # Ranker falls back to equal-weight mean of fit_fields. Re-enabling
+    # requires a holdout240 ablation that beats 159 baseline.
   llm_anchor_guard:
     enabled: true
     protect_rule_rank: 5
