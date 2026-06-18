@@ -33,8 +33,11 @@ candidate_generator:
       bm25: 28
       vector: 56
       text: 14
-      accepted_bm25: 28
-      accepted_vector: 56
+      # P0-1 (2026-06-18): accepted corpus max=15 per journal (avg 9.5).
+      # Was 28/56 — copy-paste from scope route; value is meaningless when
+      # larger than corpus. Locked by tests/test_route_top_k_config.py.
+      accepted_bm25: 15
+      accepted_vector: 15
     full:
       bm25: 32
       vector: 32
@@ -77,6 +80,16 @@ ranking:
     prior_weight: 0.35           # linear rank prior from LTR
     ltr_score_weight: 0.10       # raw LTR score as 3rd formula component
     prompt_version: "v2"         # PRODUCTION DEFAULT 2026-06-16: v2 prompt (CCF-tier calibration)
+    # P0-2 (2026-06-18): weighted fit aggregation. Discrimination analysis
+    # showed scope_fit / application_fit ~2x the discriminative power of
+    # method_fit. Weights must sum to 1.0 (within 1e-6) for the formula to
+    # use them; otherwise _evidence_composite silently falls back to
+    # equal-weight mean. Locked by tests/test_evidence_field_weights_production.py.
+    evidence_field_weights:
+      scope_fit: 0.35
+      application_fit: 0.25
+      journal_position_fit: 0.20
+      method_fit: 0.20
   llm_anchor_guard:
     enabled: true
     protect_rule_rank: 5
