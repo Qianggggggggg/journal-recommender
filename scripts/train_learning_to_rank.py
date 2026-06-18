@@ -61,11 +61,25 @@ def filter_llm_evidence_features(
     Returns (filtered_rows, filtered_feature_names). The remaining 20 features
     are pure rule/retrieval signals — useful when we want the LTR to focus on
     structural priors and let ``LLMEvidenceRoleRanker`` own the LLM evidence.
+
+    Idempotent: if the input rows are already 20-dim (no LLM evidence features),
+    return them unchanged. This lets callers pass ``--exclude-llm-evidence``
+    together with an already-20-dim JSONL without raising.
     """
     keep_idx = [
         i for i, name in enumerate(feature_names) if name not in LLM_EVIDENCE_FEATURE_NAMES
     ]
     dropped = [name for name in feature_names if name in LLM_EVIDENCE_FEATURE_NAMES]
+
+    if len(dropped) == 0:
+        # Already 20-dim (no LLM evidence features present) — no-op.
+        print(
+            "[exclude-llm-evidence] input already has 0 LLM evidence features; "
+            "skipping drop (idempotent).",
+            flush=True,
+        )
+        return rows, feature_names
+
     if len(dropped) != len(LLM_EVIDENCE_FEATURE_NAMES):
         missing = set(LLM_EVIDENCE_FEATURE_NAMES) - set(dropped)
         raise ValueError(
@@ -212,7 +226,6 @@ def main() -> None:
         seed=args.seed,
         max_iter=args.max_iter,
         use_standardization=args.use_standardization,
-        model_type=args.model_type,
     )
     ranker.fit(rows)
     scores = ranker.predict_scores(rows)
