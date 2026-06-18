@@ -240,18 +240,7 @@ class CandidateGenerator:
         return route_results
 
     def _build_rich_query(self, query_text: str, paper_profile: PaperProfile) -> str:
-        """构建丰富的检索 query，整合 paper_profile 的所有关键字段。
-
-        Note (2026-06-18, audit finding #4):
-            The repetition pattern below is **intentional**, not a bug.
-            BM25's TF term is sensitive to token frequency, so repeating
-            ``core_terms``/``keywords``/``title`` biases the lexical score
-            toward those signals. The vector retrieval route uses cosine
-            similarity (TF-invariant) so this duplication does NOT affect
-            embedding-based ranking. Only BM25 routes consume the
-            duplication. If you swap to a learned lexical ranker, this
-            needs to be re-tuned.
-        """
+        """构建丰富的检索 query，整合 paper_profile 的所有关键字段"""
         core_terms = " ".join([
             " ".join(paper_profile.keywords),
             " ".join(paper_profile.techniques),

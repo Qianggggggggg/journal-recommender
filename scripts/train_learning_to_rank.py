@@ -47,9 +47,41 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.ranker.learning_to_rank import LearningToRanker  # noqa: E402
+from src.ranker.feature_builder import LLM_EVIDENCE_FEATURE_NAMES  # noqa: E402
 
 
 SCHEMA_VERSION = 1
+
+
+def filter_llm_evidence_features(
+    rows: list[dict], feature_names: list[str]
+) -> tuple[list[dict], list[str]]:
+    """Drop the 6 LLM evidence features from each row.
+
+    Returns (filtered_rows, filtered_feature_names). The remaining 20 features
+    are pure rule/retrieval signals — useful when we want the LTR to focus on
+    structural priors and let ``LLMEvidenceRoleRanker`` own the LLM evidence.
+    """
+    keep_idx = [
+        i for i, name in enumerate(feature_names) if name not in LLM_EVIDENCE_FEATURE_NAMES
+    ]
+    dropped = [name for name in feature_names if name in LLM_EVIDENCE_FEATURE_NAMES]
+    if len(dropped) != len(LLM_EVIDENCE_FEATURE_NAMES):
+        missing = set(LLM_EVIDENCE_FEATURE_NAMES) - set(dropped)
+        raise ValueError(
+            f"--exclude-llm-evidence: only found {len(dropped)}/6 LLM features in "
+            f"feature_names. Missing: {sorted(missing)}"
+        )
+    print(
+        f"[exclude-llm-evidence] dropping {len(dropped)} features: {dropped}",
+        flush=True,
+    )
+    filtered_names = [feature_names[i] for i in keep_idx]
+    filtered_rows = [
+        {**r, "features": [r["features"][i] for i in keep_idx], "feature_names": filtered_names}
+        for r in rows
+    ]
+    return filtered_rows, filtered_names
 
 
 def compute_pairwise_accuracy(rows: list[dict], scores: list[float]) -> float:
@@ -99,6 +131,31 @@ def main() -> None:
         action="store_false",
         help="关闭标准化,等价 plan 5.1 行为,仅供回归",
     )
+    parser.add_argument(
+        "--exclude-llm-evidence",
+        dest="exclude_llm_evidence",
+        action="store_true",
+        default=False,
+        help=(
+            "训练时丢掉 6 个 LLM evidence 特征 (llm_scope_fit, llm_method_fit, "
+            "llm_application_fit, llm_journal_position_fit, llm_too_broad_penalty, "
+            "llm_too_narrow_penalty),只留 20 个 rule/retrieval 特征。"
+            "配合 LLMEvidenceRoleRanker 的 evidence_weight 让 LTR 学结构先验、"
+            "让 role ranker 独占 LLM 证据,避免两路重复消费 LLM 信号。"
+        ),
+    )
+    parser.add_argument(
+        "--model-type",
+        dest="model_type",
+        default="logistic",
+        choices=["logistic", "lightgbm_lambdarank"],
+        help=(
+            "选择 backend (Task 5.5 引入):"
+            "- 'logistic' (默认): sklearn LR 或 numpy fallback,行为与 5.1 一致"
+            "- 'lightgbm_lambdarank': LightGBM LambdaRank,需要 lightgbm,"
+            "rows 必须按 paper_id 连续(已由 build_ranking_training_data.py 保证)"
+        ),
+    )
     args = parser.parse_args()
 
     train_path = Path(args.train)
@@ -133,10 +190,29 @@ def main() -> None:
     n_neg = sum(1 for r in rows if r["label"] == 0)
     print(f"Loaded {len(rows)} rows from {train_path} (pos={n_pos}, neg={n_neg}, feature_dim={feature_dim})")
 
+    # 可选:丢掉 6 个 LLM evidence 特征,只留 20 个 rule/retrieval 特征
+    if args.exclude_llm_evidence:
+        rows, feature_names = filter_llm_evidence_features(rows, feature_names)
+        feature_dim = len(feature_names)
+        # 二次防御性检查
+        bad = [r for r in rows if len(r["features"]) != feature_dim]
+        if bad:
+            print(
+                f"[error] {len(bad)} rows have mismatched feature length after filter (expected {feature_dim})",
+                file=sys.stderr,
+            )
+            sys.exit(2)
+        print(
+            f"[exclude-llm-evidence] post-filter feature_dim={feature_dim}, "
+            f"feature_names={feature_names}",
+            flush=True,
+        )
+
     ranker = LearningToRanker(
         seed=args.seed,
         max_iter=args.max_iter,
         use_standardization=args.use_standardization,
+        model_type=args.model_type,
     )
     ranker.fit(rows)
     scores = ranker.predict_scores(rows)
@@ -156,14 +232,39 @@ def main() -> None:
         "hard_negative_mean_score": hard_neg_mean,
     }
 
-    # 拿 coef / intercept
-    coef = ranker._model.coef_[0].tolist() if ranker._backend == "sklearn" else ranker._model.weights.tolist()
-    intercept = float(ranker._model.intercept_[0]) if ranker._backend == "sklearn" else float(ranker._model.bias)
+    # 拿 coef / intercept (logistic only; lightgbm 走 booster_str 分支)
+    if ranker._backend == "lightgbm":
+        coef: list | None = None
+        intercept: float | None = None
+    elif ranker._backend == "sklearn":
+        coef = ranker._model.coef_[0].tolist()
+        intercept = float(ranker._model.intercept_[0])
+    else:
+        coef = ranker._model.weights.tolist()
+        intercept = float(ranker._model.bias)
 
     scaler_mean, scaler_scale = None, None
     if ranker._scaler is not None:
         scaler_mean = ranker._scaler.mean.tolist()
         scaler_scale = ranker._scaler.scale.tolist()
+
+    # 早声明 out_path,lightgbm 分支用 ranker.save() 写文件需要它
+    out_path = Path(args.output)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # 构造 payload: lightgbm 走 ranker.save() 的统一路径(它会写 booster_str)
+    if ranker._backend == "lightgbm":
+        # 让 ranker.save() 统一写 JSON(包括 booster_str),保持与 LTRAdapter.load 一致
+        ranker.save(str(out_path))
+        print(f"Wrote LightGBM model to {out_path}")
+        print(f"  backend={ranker._backend}, use_standardization={args.use_standardization}, max_iter={args.max_iter}")
+        print(f"  convergence_info: {ranker.convergence_info}")
+        print(f"  metrics:")
+        print(f"    pairwise_accuracy      = {pairwise_acc:.4f}")
+        print(f"    positive_mean_score    = {positive_mean:.4f}")
+        print(f"    hard_negative_mean     = {hard_neg_mean:.4f}")
+        print(f"    margin (pos - hard_neg) = {positive_mean - hard_neg_mean:+.4f}")
+        return
 
     payload = {
         "schema_version": SCHEMA_VERSION,
@@ -182,8 +283,6 @@ def main() -> None:
         "max_iter": args.max_iter,
     }
 
-    out_path = Path(args.output)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # 报告

@@ -27,7 +27,10 @@ if str(REPO_ROOT) not in sys.path:
 
 
 ABSTRACT_SNIPPET_LENGTH = 160
+# All benchmark papers that must NEVER enter the accepted-paper corpus.
+# Every script that writes to data/accepted_papers/* MUST consult this list.
 DEFAULT_BENCHMARK_INPUTS = [
+    Path("data/evaluation/papers_metadata_holdout240.jsonl"),
     Path("data/evaluation/papers_metadata_full_v2_90.jsonl"),
     Path("data/evaluation/papers_metadata_light_30.jsonl"),
 ]
@@ -100,7 +103,9 @@ def accepted_profile_names(accepted_dir: Path) -> set[str]:
     for path in accepted_dir.glob("*.json"):
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
+        except (OSError, json.JSONDecodeError, ValueError):
+            continue
+        if not isinstance(data, dict):
             continue
         papers = data.get("papers", [])
         if not isinstance(papers, list) or len(papers) == 0:

@@ -131,6 +131,49 @@ def select_lightweight_papers(
     return selected, report
 
 
+def validate_lightweight_eval_set(path: str | Path) -> dict:
+    papers = load_jsonl(path, "light30")
+    combo_counts = Counter((paper_area(paper), paper.get("ccf_level")) for paper in papers)
+    expected_combos = {
+        (area, level)
+        for area in CCF_AREAS
+        for level in CCF_LEVELS
+    }
+    missing = [
+        {"research_area": area, "ccf_level": level}
+        for area, level in sorted(expected_combos)
+        if combo_counts.get((area, level), 0) == 0
+    ]
+    duplicates = [
+        {"research_area": area, "ccf_level": level, "count": count}
+        for (area, level), count in sorted(combo_counts.items())
+        if count > 1
+    ]
+    unexpected = [
+        {"research_area": area, "ccf_level": level, "count": count}
+        for (area, level), count in sorted(combo_counts.items())
+        if (area, level) not in expected_combos
+    ]
+    selected_count = len(papers)
+    report = {
+        "valid": selected_count == len(expected_combos)
+        and not missing
+        and not duplicates
+        and not unexpected,
+        "summary": {
+            "selected_count": selected_count,
+            "expected_count": len(expected_combos),
+            "missing_combo_count": len(missing),
+            "duplicate_combo_count": len(duplicates),
+            "unexpected_combo_count": len(unexpected),
+        },
+        "missing_combos": missing,
+        "duplicate_combos": duplicates,
+        "unexpected_combos": unexpected,
+    }
+    return report
+
+
 def write_jsonl(path: str | Path, rows: Iterable[dict]) -> None:
     output_path = Path(path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -155,11 +198,33 @@ def parse_args() -> argparse.Namespace:
         "--report",
         default="data/evaluation/papers_metadata_light_30_report.json",
     )
+    parser.add_argument(
+        "--validate-only",
+        action="store_true",
+        help="Validate the output light30 file without rebuilding it.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    if args.validate_only:
+        report = validate_lightweight_eval_set(args.output)
+        write_json(args.report, report)
+        summary = report["summary"]
+        print(
+            "lightweight eval validation: "
+            f"valid={report['valid']}, "
+            f"selected={summary['selected_count']}/{summary['expected_count']}, "
+            f"missing={summary['missing_combo_count']}, "
+            f"duplicates={summary['duplicate_combo_count']}, "
+            f"unexpected={summary['unexpected_combo_count']}, "
+            f"input={args.output}, report={args.report}"
+        )
+        if not report["valid"]:
+            raise SystemExit(1)
+        return
+
     primary = load_jsonl(args.primary, "primary")
     fallback = load_jsonl(args.fallback, "fallback")
     selected, report = select_lightweight_papers(primary, fallback)

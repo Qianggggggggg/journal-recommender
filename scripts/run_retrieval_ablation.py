@@ -35,13 +35,8 @@ from src.utils.embedding import OllamaEmbedding
 
 
 VARIANTS = (
-    "scope",
-    "typical",
-    "hybrid",
     "accepted",
-    "scope_typical",
     "scope_accepted",
-    "typical_accepted",
     "full_hybrid",
 )
 

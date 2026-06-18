@@ -233,11 +233,6 @@ def build_features(
         has_typical_route=_has_route(routes, "typical_"),
         has_accepted_route=_has_route(routes, "accepted_"),
         # identity_anchor 单独成 route(无前缀匹配)
-        #
-        # Note (2026-06-18, audit finding #6): this binary feature is the
-        # THIRD of three places identity_anchor is consumed. See the
-        # cross-reference comment in src/ranker/rule_scorer.py:161 for the
-        # full mapping (candidate_generator / rule_scorer / feature_builder).
         has_identity_anchor=1.0 if "identity_anchor" in routes else 0.0,
         # same_gold_area / same_parsed_ccf_area / same_ccf_level
         # 在 4.1.b 阶段先用 0.0 占位,等 4.1.d 接入 trace 详细数据后再实现

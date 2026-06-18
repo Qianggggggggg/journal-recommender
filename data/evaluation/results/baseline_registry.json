@@ -334,6 +334,32 @@
       "app_config_hash": "f121a07eda8ec73a40f1ece5adc226d6db9a9975e23f47ab93c3404c5e9dabf2",
       "prompt_hash": "68f0c81ecbb0671a1fa801842cc7cd809fce1d311b83dca5aeb42d0ff249eb46",
       "minimax_model": "MiniMax-M2.7"
+    },
+    {
+      "label": "holdout240_p0_topk_expand_20260618",
+      "result_path": "data/evaluation/results/eval_p0_topk_expand_20260618.json",
+      "input_path": "data/evaluation/papers_metadata_holdout240.jsonl",
+      "hit_at_5": 157,
+      "mrr": 0.4374305555555555,
+      "coarse_hit_count": 226,
+      "coarse_hit_in_rule_top20_count": 208,
+      "acceptable_journal_hit_at_5": 211,
+      "app_config_hash": "92f300fa30622c868878d9414298fdc12bbca376ce75b7cadc25706b5d310509",
+      "prompt_hash": "68f0c81ecbb0671a1fa801842cc7cd809fce1d311b83dca5aeb42d0ff249eb46",
+      "minimax_model": "MiniMax-M2.7"
+    },
+    {
+      "label": "holdout240_after_yaml_fix_20260618",
+      "result_path": "data/evaluation/results/eval_after_yaml_fix_20260618.json",
+      "input_path": "data/evaluation/papers_metadata_holdout240.jsonl",
+      "hit_at_5": 158,
+      "mrr": 0.44312499999999994,
+      "coarse_hit_count": 226,
+      "coarse_hit_in_rule_top20_count": 207,
+      "acceptable_journal_hit_at_5": 211,
+      "app_config_hash": "6d2ad374f67d8cf78ec3ce82e347d30f37abc3601ce05c9fac2a1be96f8302e7",
+      "prompt_hash": "68f0c81ecbb0671a1fa801842cc7cd809fce1d311b83dca5aeb42d0ff249eb46",
+      "minimax_model": "MiniMax-M2.7"
     }
   ]
 }
