@@ -6,6 +6,7 @@ import logging
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -301,3 +302,165 @@ def test_compute_scores_does_not_mutate_caller_trace(tmp_path: Path):
         assert "feature_names" not in entry
     # 应当与原 snapshot 一致
     assert trace == original_trace
+
+
+# ---------------------------------------------------------------------------
+# 阶段 6.5 (P2-mini): 28-dim schema support in LTRAdapter
+# ---------------------------------------------------------------------------
+
+
+def test_feature_schema_lookup_table_includes_28():
+    """LTRAdapter.compute_scores 必须能识别 28-dim model 并选对应 schema。"""
+    from src.ranker.feature_builder import (
+        FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+    )
+    from src.ranker.ltr_adapter import LTRAdapter
+
+    # 反射地验证 compute_scores 源码包含正确的 lookup table
+    import inspect
+    src = inspect.getsource(LTRAdapter.compute_scores)
+    assert "FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY" in src, (
+        "LTRAdapter must reference the 28-dim schema constant"
+    )
+    assert "_FEATURE_SCHEMA_BY_DIM" in src, (
+        "LTRAdapter must use a lookup table (not if-else) for schema selection"
+    )
+
+
+def test_compute_scores_unknown_feature_dim_returns_fallback(tmp_path: Path):
+    """当 model 的 feature_dim 不在 lookup table 中(如 22-dim)→ fallback 不崩。"""
+    from src.ranker.ltr_adapter import LTRAdapter
+    from src.papers.paper_model import PaperProfile
+    from src.journals.journal_model import Journal
+    from src.journals.journal_store import JournalStore
+
+    # 写一个 22-dim stub model
+    model_path = tmp_path / "stub_22dim.json"
+    model_path.write_text(json.dumps({
+        "schema_version": 1,
+        "model_type": "logistic_regression",
+        "backend": "sklearn",
+        "feature_names": ["f"] * 22,
+        "feature_dim": 22,
+        "coef": [0.0] * 22,
+        "intercept": 0.0,
+        "use_standardization": False,
+        "scaler_mean": None,
+        "scaler_scale": None,
+        "metrics": {"n_train": 0, "n_positive": 0, "n_negative": 0, "pairwise_accuracy": 0.0, "positive_mean_score": 0.0, "hard_negative_mean_score": 0.0},
+        "convergence_info": {"converged": True, "n_iter": 1, "max_iter": 100, "warning_message": None},
+        "seed": 42,
+        "max_iter": 100,
+    }))
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(model_path)},
+        journal_store=MagicMock(spec=JournalStore),
+        accepted_paper_store=None,
+    )
+    paper = PaperProfile(title="t", research_area=["AI"])
+    j = Journal(journal_id="j", journal_name="J")
+    candidates = [(j, 0.5, [])]
+    trace = {"j": {"retrieval_rank": 1, "routes": {}}}
+
+    out, diag = adapter.compute_scores(paper, candidates, trace, {}, {})
+    # 22-dim 不在 lookup → fallback_feature_dim,但 candidates 顺序保留
+    assert diag["status"] == "fallback_feature_dim"
+    assert [c[0].journal_id for c in out] == ["j"]
+
+
+def test_compute_scores_28_dim_reranks(tmp_path: Path):
+    """28-dim stub model + attach_features_to_trace 输出 28 维 → compute_scores 跑通。"""
+    from src.ranker.ltr_adapter import LTRAdapter
+    from src.papers.paper_model import PaperProfile
+    from src.journals.journal_model import Journal
+    from src.journals.journal_store import JournalStore
+
+    # 写一个 28-dim stub model(coef 全 0,predict 不会崩)
+    model_path = tmp_path / "stub_28dim.json"
+    model_path.write_text(json.dumps({
+        "schema_version": 1,
+        "model_type": "logistic_regression",
+        "backend": "sklearn",
+        "feature_names": ["f"] * 28,
+        "feature_dim": 28,
+        "coef": [0.0] * 28,
+        "intercept": 0.0,
+        "use_standardization": False,
+        "scaler_mean": None,
+        "scaler_scale": None,
+        "metrics": {"n_train": 0, "n_positive": 0, "n_negative": 0, "pairwise_accuracy": 0.0, "positive_mean_score": 0.0, "hard_negative_mean_score": 0.0},
+        "convergence_info": {"converged": True, "n_iter": 1, "max_iter": 100, "warning_message": None},
+        "seed": 42,
+        "max_iter": 100,
+    }))
+    journal = Journal(
+        journal_id="j", journal_name="J",
+        ccf_rating="C", subject_tags=["AI"],
+    )
+    journal_store = MagicMock(spec=JournalStore)
+    journal_store.get_journal.return_value = journal
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(model_path)},
+        journal_store=journal_store,
+        accepted_paper_store=None,
+    )
+    paper = PaperProfile(title="t", research_area=["AI"])
+    candidates = [(journal, 0.5, [])]
+    trace = {"j": {"retrieval_rank": 1, "routes": {}}}
+
+    out, diag = adapter.compute_scores(paper, candidates, trace, {"j": 1}, {"j": 0.5})
+    # model coef 全 0 → 不会崩
+    assert diag["status"] == "ok", f"got {diag}"
+    assert "j" in diag["learned_rank"]
+
+
+def test_compute_scores_passes_paper_anchor_to_attach_features(tmp_path: Path):
+    """28-dim LTRAdapter 必须算 paper_anchor_area + n_matching_in_pool 传给 attach_features。"""
+    from src.ranker.ltr_adapter import LTRAdapter
+    from src.papers.paper_model import PaperProfile
+    from src.journals.journal_model import Journal
+    from src.journals.journal_store import JournalStore
+    from src.ranker import feature_builder as fb
+
+    # 写 28-dim stub
+    model_path = tmp_path / "stub_28dim.json"
+    model_path.write_text(json.dumps({
+        "schema_version": 1, "model_type": "logistic_regression", "backend": "sklearn",
+        "feature_names": ["f"] * 28, "feature_dim": 28, "coef": [0.0] * 28, "intercept": 0.0,
+        "use_standardization": False, "scaler_mean": None, "scaler_scale": None,
+        "metrics": {"n_train": 0, "n_positive": 0, "n_negative": 0, "pairwise_accuracy": 0.0, "positive_mean_score": 0.0, "hard_negative_mean_score": 0.0},
+        "convergence_info": {"converged": True, "n_iter": 1, "max_iter": 100, "warning_message": None},
+        "seed": 42, "max_iter": 100,
+    }))
+    captured_kwargs = {}
+    orig_attach = fb.attach_features_to_trace
+
+    def spy_attach(trace, paper_profile, journal_store, *args, **kwargs):
+        captured_kwargs.update(kwargs)
+        return orig_attach(trace, paper_profile, journal_store, *args, **kwargs)
+
+    # Monkey-patch for this test only
+    import src.ranker.ltr_adapter as ltr_module
+    monkey = __import__("pytest").MonkeyPatch()
+    monkey.setattr(ltr_module, "attach_features_to_trace", spy_attach)
+
+    journal = Journal(journal_id="j", journal_name="J", ccf_rating="C", subject_tags=["AI"])
+    journal_store = MagicMock(spec=JournalStore)
+    journal_store.get_journal.return_value = journal
+    adapter = LTRAdapter(
+        config={"enabled": True, "model_path": str(model_path)},
+        journal_store=journal_store, accepted_paper_store=None,
+    )
+    paper = PaperProfile(title="t", research_area=["AI"])
+    candidates = [(journal, 0.5, [])]
+    trace = {"j": {"retrieval_rank": 1, "routes": {}}}
+
+    adapter.compute_scores(paper, candidates, trace, {"j": 1}, {"j": 0.5})
+    monkey.undo()
+
+    assert "paper_anchor_area" in captured_kwargs, (
+        f"paper_anchor_area not passed to attach_features; kwargs={list(captured_kwargs.keys())}"
+    )
+    assert captured_kwargs["paper_anchor_area"] == "AI"
+    assert "n_matching_in_pool" in captured_kwargs
+    assert captured_kwargs["n_matching_in_pool"] == 1  # 只有 1 个候选

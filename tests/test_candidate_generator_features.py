@@ -144,3 +144,79 @@ class StubJournalStore:
     @property
     def journals(self):
         return list(self._journals)
+
+
+# ---------------------------------------------------------------------------
+# 阶段 6.5 (P2-mini): 28-dim schema support in CandidateGenerator.attach_features
+# ---------------------------------------------------------------------------
+
+
+def test_attach_features_supports_28_dim_schema(tmp_path: Path):
+    """CandidateGenerator.attach_features 接受 28-dim feature_names,
+    输出 28 维 features。"""
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+
+    gen = _make_generator_with_journals([("j1", "C")])
+    # j1 加上 subject_tags 才能让 area_exclusivity 非零
+    j1 = next(j for j in gen.store._journals if j.journal_id == "j1")
+    j1.subject_tags = ["AI"]
+    paper = PaperProfile(title="t", research_area=["AI"])
+    trace = {"j1": {"retrieval_rank": 1, "routes": {}}}
+
+    gen.attach_features(
+        trace, paper,
+        rule_ranks={"j1": 1},
+        rule_scores={"j1": 0.5},
+        feature_names=FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+        paper_anchor_area="AI",
+        n_matching_in_pool=1,
+    )
+
+    assert len(trace["j1"]["features"]) == 28
+    assert trace["j1"]["feature_names"] == FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+    # tier C → 1.5; area_exclusivity 1/1 → 1.0
+    assert trace["j1"]["features"][-2] == 1.5
+    assert trace["j1"]["features"][-1] == 1.0
+
+
+def test_attach_features_paper_anchor_area_passed_through_to_build_features(
+    tmp_path: Path,
+):
+    """CandidateGenerator.attach_features 把 paper_anchor_area + n_matching
+    透传给底层 attach_features_to_trace (验证 build_features 收到这两个参数)。"""
+    from src.ranker.feature_builder import (
+        FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+    )
+    from src.ranker import feature_builder as fb
+
+    captured_kwargs = {}
+    orig_attach = fb.attach_features_to_trace
+
+    def spy_attach(trace, paper_profile, journal_store, *args, **kwargs):
+        captured_kwargs.update(kwargs)
+        return orig_attach(trace, paper_profile, journal_store, *args, **kwargs)
+
+    import src.retriever.candidate_generator as cg_module
+    monkey = __import__("pytest").MonkeyPatch()
+    monkey.setattr(cg_module, "attach_features_to_trace", spy_attach)
+
+    gen = _make_generator_with_journals([("j1", "B")])
+    j1 = next(j for j in gen.store._journals if j.journal_id == "j1")
+    j1.subject_tags = ["DB"]
+    paper = PaperProfile(title="t", research_area=["AI"])
+    trace = {"j1": {"retrieval_rank": 1, "routes": {}}}
+
+    gen.attach_features(
+        trace, paper,
+        rule_ranks={"j1": 1},
+        rule_scores={"j1": 0.5},
+        feature_names=FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+        paper_anchor_area="DB",
+        n_matching_in_pool=2,
+    )
+    monkey.undo()
+
+    assert "paper_anchor_area" in captured_kwargs
+    assert captured_kwargs["paper_anchor_area"] == "DB"
+    assert "n_matching_in_pool" in captured_kwargs
+    assert captured_kwargs["n_matching_in_pool"] == 2

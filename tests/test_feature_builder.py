@@ -12,8 +12,13 @@ from src.papers.paper_model import PaperProfile
 from src.ranker.feature_builder import (
     FEATURE_NAMES,
     FEATURE_NAMES_WITH_LLM_EVIDENCE,
+    FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
     LLM_EVIDENCE_FEATURE_NAMES,
     PaperCandidateFeatures,
+    TIER_EXCLUSIVITY_FEATURE_NAMES,
+    TIER_WEIGHT_BY_CCF,
+    _area_exclusivity_value,
+    _tier_weight_value,
     attach_features_to_trace,
     build_features,
     ccf_level_to_numeric,
@@ -578,3 +583,194 @@ def test_attach_features_to_trace_default_schema_remains_20_dim_when_evidence_ex
 
     assert trace["a"]["feature_names"] == FEATURE_NAMES
     assert len(trace["a"]["features"]) == 20
+
+
+# ---------------------------------------------------------------------------
+# 阶段 6.5 (P2-mini): 28-dim schema — journal_tier_weight + area_exclusivity
+# ---------------------------------------------------------------------------
+
+
+def test_feature_names_with_tier_and_exclusivity_is_28_dim():
+    """28 维 schema = 20 base + 6 LLM evidence + 2 tier/area features."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 28
+    # 前 20 项 == FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[:20] == FEATURE_NAMES
+    # 21-26 == LLM_EVIDENCE_FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[20:26] == LLM_EVIDENCE_FEATURE_NAMES
+    # 27-28 == ["journal_tier_weight", "area_exclusivity"]
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[26:] == [
+        "journal_tier_weight",
+        "area_exclusivity",
+    ]
+    assert TIER_EXCLUSIVITY_FEATURE_NAMES == ["journal_tier_weight", "area_exclusivity"]
+
+
+def test_tier_weight_value_returns_expected_discrete_values():
+    """A=0.7, B=1.0, C=1.5; unknown/missing → 1.0 (中性)。"""
+    assert _tier_weight_value("A") == 0.7
+    assert _tier_weight_value("B") == 1.0
+    assert _tier_weight_value("C") == 1.5
+    assert _tier_weight_value(None) == 1.0
+    assert _tier_weight_value("X") == 1.0
+    # 大小写不敏感
+    assert _tier_weight_value("a") == 0.7
+    assert _tier_weight_value("c") == 1.5
+
+
+def test_area_exclusivity_value_zero_when_no_anchor():
+    """paper_anchor_area=None → 0.0(没有锚就没法算互斥度)。"""
+    assert _area_exclusivity_value(["AI"], None, 3) == 0.0
+    assert _area_exclusivity_value(["AI", "DB"], None, 5) == 0.0
+
+
+def test_area_exclusivity_value_zero_when_no_match():
+    """paper_anchor_area 不在 candidate.subject_tags → 0.0。"""
+    assert _area_exclusivity_value(["DB"], "AI", 3) == 0.0
+    assert _area_exclusivity_value([], "AI", 3) == 0.0
+    assert _area_exclusivity_value(None, "AI", 3) == 0.0
+
+
+def test_area_exclusivity_value_one_over_n_when_match():
+    """match + n_matching=N → 1/N。"""
+    assert _area_exclusivity_value(["AI"], "AI", 3) == 1.0 / 3
+    assert _area_exclusivity_value(["AI", "DB"], "AI", 1) == 1.0
+    # 防御:n_matching=None 或 <=0 → 1.0 (单点最优)
+    assert _area_exclusivity_value(["AI"], "AI", None) == 1.0
+    assert _area_exclusivity_value(["AI"], "AI", 0) == 1.0
+    assert _area_exclusivity_value(["AI"], "AI", -1) == 1.0
+
+
+def test_build_features_populates_tier_weight_from_journal_ccf_rating():
+    """build_features 内置 _tier_weight_value(journal.ccf_rating) → tier_weight 字段。"""
+    journal_c = Journal(journal_id="j_c", journal_name="C", ccf_rating="C", subject_tags=["AI"])
+    paper = PaperProfile(title="t", research_area=["AI"])
+    feats = build_features(
+        paper_profile=paper,
+        journal=journal_c,
+        trace_entry={"retrieval_rank": 1, "routes": {}},
+        rule_rank=1,
+        rule_score=0.9,
+        candidate_in_accepted_corpus=False,
+    )
+    assert feats.journal_tier_weight == 1.5  # C → 1.5
+
+    journal_a = Journal(journal_id="j_a", journal_name="A", ccf_rating="A", subject_tags=["AI"])
+    feats_a = build_features(
+        paper_profile=paper,
+        journal=journal_a,
+        trace_entry={"retrieval_rank": 1, "routes": {}},
+        rule_rank=1,
+        rule_score=0.9,
+        candidate_in_accepted_corpus=False,
+    )
+    assert feats_a.journal_tier_weight == 0.7  # A → 0.7
+
+
+def test_build_features_populates_area_exclusivity_from_paper_anchor():
+    """build_features 接受 paper_anchor_area + n_matching_in_pool,产出 area_exclusivity。"""
+    journal = Journal(journal_id="j", journal_name="J", ccf_rating="B", subject_tags=["AI"])
+    paper = PaperProfile(title="t", research_area=["AI"])
+    feats = build_features(
+        paper_profile=paper,
+        journal=journal,
+        trace_entry={"retrieval_rank": 1, "routes": {}},
+        rule_rank=1,
+        rule_score=0.9,
+        candidate_in_accepted_corpus=False,
+        paper_anchor_area="AI",
+        n_matching_in_pool=4,
+    )
+    assert feats.area_exclusivity == 0.25  # 1/4
+
+    # 不匹配:journal 没有 "AI" tag
+    journal_no_match = Journal(journal_id="j2", journal_name="J2", ccf_rating="B", subject_tags=["DB"])
+    feats2 = build_features(
+        paper_profile=paper,
+        journal=journal_no_match,
+        trace_entry={"retrieval_rank": 1, "routes": {}},
+        rule_rank=1,
+        rule_score=0.9,
+        candidate_in_accepted_corpus=False,
+        paper_anchor_area="AI",
+        n_matching_in_pool=4,
+    )
+    assert feats2.area_exclusivity == 0.0  # 不匹配
+
+
+def test_build_features_default_tier_weight_and_area_exclusivity():
+    """不传 paper_anchor_area + n_matching → area_exclusivity=0.0, tier_weight=1.0 (中性)。"""
+    journal = Journal(journal_id="j", journal_name="J")  # ccf_rating=None
+    paper = PaperProfile(title="t")
+    feats = build_features(
+        paper_profile=paper,
+        journal=journal,
+        trace_entry={"retrieval_rank": 1, "routes": {}},
+        rule_rank=1,
+        rule_score=0.9,
+        candidate_in_accepted_corpus=False,
+    )
+    assert feats.journal_tier_weight == 1.0  # unknown → 中性
+    assert feats.area_exclusivity == 0.0  # 无 anchor
+
+
+def test_paper_candidate_features_to_vector_28_dim():
+    """to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) → 28 长。"""
+    feats = PaperCandidateFeatures(
+        retrieval_rank=1, rule_rank=1, rule_score=0.5,
+        journal_ccf_numeric=2, paper_strength=0.6,
+        journal_tier_weight=1.0, area_exclusivity=0.5,
+    )
+    vec = feats.to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)
+    assert len(vec) == 28
+    assert vec[-2] == 1.0  # tier_weight
+    assert vec[-1] == 0.5  # area_exclusivity
+
+
+def test_attach_features_to_trace_28_dim_schema_writes_28_features():
+    """显式 FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY + paper_anchor_area
+    → trace[jid]['features'] 长 28。"""
+    from src.ranker.feature_builder import attach_features_to_trace
+
+    journal = Journal(
+        journal_id="ji",
+        journal_name="Journal I",
+        ccf_rating="C",
+        subject_tags=["AI"],
+    )
+    journal_store = MagicMock(spec=JournalStore)
+    journal_store.get_journal.return_value = journal
+    paper = PaperProfile(title="t", research_area=["AI"])
+    trace = {"ji": {"retrieval_rank": 1, "routes": {}}}
+
+    attach_features_to_trace(
+        trace, paper, journal_store,
+        rule_ranks={"ji": 1},
+        rule_scores={"ji": 0.5},
+        accepted_paper_store=None,
+        feature_names=FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+        paper_anchor_area="AI",
+        n_matching_in_pool=2,
+    )
+
+    assert len(trace["ji"]["features"]) == 28
+    assert trace["ji"]["features"][-2] == 1.5  # tier C
+    assert trace["ji"]["features"][-1] == 0.5  # 1/2
+
+
+def test_attach_features_20_dim_path_unaffected_by_28_dim_constants():
+    """默认 20 维 schema 仍 20 长 (不破旧测试)。"""
+    journal = Journal(journal_id="j", journal_name="J", ccf_rating="A", subject_tags=["AI"])
+    journal_store = MagicMock(spec=JournalStore)
+    journal_store.get_journal.return_value = journal
+    paper = PaperProfile(title="t", research_area=["AI"])
+    trace = {"j": {"retrieval_rank": 1, "routes": {}}}
+
+    attach_features_to_trace(
+        trace, paper, journal_store,
+        rule_ranks={"j": 1}, rule_scores={"j": 0.5},
+        accepted_paper_store=None,
+        feature_names=None,  # 默认 20 维
+    )
+
+    assert len(trace["j"]["features"]) == 20
+    assert trace["j"]["feature_names"] == FEATURE_NAMES

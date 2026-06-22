@@ -148,16 +148,46 @@ class LTRAdapter:
             pass
         else:
             # Pick feature_names that match expected_dim so re-attach
-            # produces the right shape.
+            # produces the right shape. (阶段 6.5: 28-dim tier/area
+            # extension supported via lookup table.)
             from src.ranker.feature_builder import (
                 FEATURE_NAMES,
                 FEATURE_NAMES_WITH_LLM_EVIDENCE,
+                FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
             )
-            feature_names = (
-                FEATURE_NAMES_WITH_LLM_EVIDENCE
-                if expected_dim == 26
-                else FEATURE_NAMES
-            )
+            _FEATURE_SCHEMA_BY_DIM = {
+                20: FEATURE_NAMES,
+                26: FEATURE_NAMES_WITH_LLM_EVIDENCE,
+                28: FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+            }
+            feature_names = _FEATURE_SCHEMA_BY_DIM.get(expected_dim)
+            if feature_names is None:
+                logger.warning(
+                    "LTRAdapter: unknown feature_dim=%s; falling back to identity order",
+                    expected_dim,
+                )
+                return list(llm_candidates), _empty_diag("fallback_feature_dim")
+
+            # 阶段 6.5 (P2-mini):为 28-dim schema 算 paper 锚 area + n_matching。
+            # 仅当 model dim 包含 area_exclusivity feature 时才需要,
+            # 即 expected_dim == 28。20/26-dim 模型不需要这些信号,
+            # 传 None 即可,attach_features_to_trace 内部会走 0.0 默认。
+            paper_anchor_area: Optional[str] = None
+            n_matching_in_pool: Optional[int] = None
+            if expected_dim == 28 and paper_profile is not None:
+                # 锚定 paper.research_area[0];fallback 到 ccf_research_area。
+                pa = (
+                    (paper_profile.research_area or [])
+                    or (paper_profile.ccf_research_area or [])
+                )
+                paper_anchor_area = pa[0] if pa else None
+                if paper_anchor_area:
+                    n_matching_in_pool = 0
+                    for jid in trace_copy.keys():
+                        j = self._journal_store.get_journal(jid)
+                        if j and paper_anchor_area in (getattr(j, "subject_tags", None) or []):
+                            n_matching_in_pool += 1
+
             try:
                 attach_features_to_trace(
                     trace_copy,
@@ -167,6 +197,8 @@ class LTRAdapter:
                     rule_scores,
                     self._accepted_paper_store,
                     feature_names=feature_names,
+                    paper_anchor_area=paper_anchor_area,
+                    n_matching_in_pool=n_matching_in_pool,
                 )
             except Exception as e:  # 防御:任何 attach 异常都降级
                 logger.warning("LTRAdapter: attach_features_to_trace failed, fallback to identity: %s", e)

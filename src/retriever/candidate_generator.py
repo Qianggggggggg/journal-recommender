@@ -84,15 +84,22 @@ class CandidateGenerator:
         accepted_paper_store: Optional[AcceptedPaperStore] = None,
         feature_names: Optional[List[str]] = None,
         llm_evidence_by_journal: Optional[Dict[str, Dict[str, Any]]] = None,
+        paper_anchor_area: Optional[str] = None,
+        n_matching_in_pool: Optional[int] = None,
     ) -> None:
         """把 LTR 训练特征注入 trace(per Task 4.1.d + ADR 0001)。
 
         必须在 rule_scorer.rank(...) 之后调用,因为 features 需要 rule_rank/rule_score。
         ``accepted_paper_store`` 可为 None(此时 candidate_in_accepted_corpus 全为 0)。
 
-        显式传入 ``feature_names``(例如 ``FEATURE_NAMES_WITH_LLM_EVIDENCE``)
-        与 ``llm_evidence_by_journal`` 时,会输出对应的 schema(20/26 维)。
+        显式传入 ``feature_names``(例如 ``FEATURE_NAMES_WITH_LLM_EVIDENCE`` 或
+        ``FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY``)与 ``llm_evidence_by_journal``
+        时,会输出对应的 schema(20/26/28 维)。
         不传则保持默认 20 维 ``FEATURE_NAMES``。
+
+        阶段 6.5 (P2-mini):``paper_anchor_area`` + ``n_matching_in_pool`` 透传
+        给 attach_features_to_trace,仅当 feature_names 含 ``area_exclusivity``
+        (即 28 维 schema)时才有意义。
 
         原地修改 trace:每本期刊 entry 增加 ``features`` (list[float]) 与
         ``feature_names`` (list[str])。
@@ -106,6 +113,8 @@ class CandidateGenerator:
             accepted_paper_store=accepted_paper_store,
             llm_evidence_by_journal=llm_evidence_by_journal,
             feature_names=feature_names,
+            paper_anchor_area=paper_anchor_area,
+            n_matching_in_pool=n_matching_in_pool,
         )
 
     def generate_with_trace(

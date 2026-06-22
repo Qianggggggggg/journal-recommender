@@ -86,6 +86,23 @@ assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == len(
     set(FEATURE_NAMES_WITH_LLM_EVIDENCE)
 ), "FEATURE_NAMES_WITH_LLM_EVIDENCE 出现重复"
 
+# 阶段 6.5 (P2-mini): tier 提权 + area 互斥度。
+# 注意:不进 FEATURE_NAMES (locked 20-dim),只用于 28 维扩展。
+TIER_WEIGHT_BY_CCF: Dict[str, float] = {"A": 0.7, "B": 1.0, "C": 1.5}
+TIER_EXCLUSIVITY_FEATURE_NAMES: List[str] = [
+    "journal_tier_weight",
+    "area_exclusivity",
+]
+FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY: List[str] = (
+    list(FEATURE_NAMES_WITH_LLM_EVIDENCE) + list(TIER_EXCLUSIVITY_FEATURE_NAMES)
+)
+assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 28, (
+    f"expected 28-dim, got {len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)}"
+)
+assert len(set(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)) == len(
+    FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+), "FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY 出现重复"
+
 
 # trace["routes"] 中的子集,会映射到独立 rank 特征。
 # 列表顺序就是 build_features 抽取的字段顺序。
@@ -138,6 +155,9 @@ class PaperCandidateFeatures:
     llm_journal_position_fit: float = 0.5
     llm_too_broad_penalty: float = 0.0
     llm_too_narrow_penalty: float = 0.0
+    # 阶段 6.5:28 维扩展,默认中性值
+    journal_tier_weight: float = 1.0
+    area_exclusivity: float = 0.0
 
     def to_vector(self, feature_names: Optional[List[str]] = None) -> List[float]:
         """按显式 schema 返回向量;默认保持现有 20 维 ``FEATURE_NAMES``。"""
@@ -191,6 +211,40 @@ def _llm_evidence_score(
     return float(value)
 
 
+def _tier_weight_value(ccf_rating: Optional[str]) -> float:
+    """CCF 等级 → 反向提权系数 (A=0.7, B=1.0, C=1.5)。
+
+    缺失或未知 → 1.0 (中性)。
+    与 ``journal_ccf_numeric`` 单调相反但独立:LTR 可分别拟合
+    "绝对偏好" (ccf_numeric) 与 "提权强度" (tier_weight)。
+    """
+    if not ccf_rating:
+        return 1.0
+    return TIER_WEIGHT_BY_CCF.get(str(ccf_rating).upper(), 1.0)
+
+
+def _area_exclusivity_value(
+    candidate_subject_tags: Optional[List[str]],
+    paper_anchor_area: Optional[str],
+    n_matching_in_pool: Optional[int],
+) -> float:
+    """1 / 同领域候选数;paper_anchor_area 不在 candidate 时 → 0.0。
+
+    设计:
+    - paper_anchor_area 取 ``paper_profile.research_area[0]``
+      (与 ``journal.subject_tags`` 同命名空间,10/10 已审计 overlap)。
+    - 训练/推理都用 paper_profile 字段,无分布漂移。
+    - n_matching=None 或 <=0 → 防御性当作 n=1, 返回 1.0
+      (paper_anchor 不匹配时仍返回 0.0)。
+    """
+    if not paper_anchor_area:
+        return 0.0
+    if paper_anchor_area not in (candidate_subject_tags or []):
+        return 0.0
+    n = n_matching_in_pool if (n_matching_in_pool and n_matching_in_pool > 0) else 1
+    return 1.0 / float(n)
+
+
 def build_features(
     paper_profile: PaperProfile,
     journal: Journal,
@@ -199,6 +253,8 @@ def build_features(
     rule_score: float,
     candidate_in_accepted_corpus: bool,
     llm_evidence: Optional[Dict[str, Any]] = None,
+    paper_anchor_area: Optional[str] = None,
+    n_matching_in_pool: Optional[int] = None,
 ) -> PaperCandidateFeatures:
     """从候选生成器 trace + RuleScorer 结果 + 候选期刊元数据,构建特征向量。
 
@@ -254,6 +310,13 @@ def build_features(
         llm_too_narrow_penalty=_llm_evidence_score(
             llm_evidence, "too_narrow_penalty", 0.0
         ),
+        # 阶段 6.5:tier 提权 + area 互斥度
+        journal_tier_weight=_tier_weight_value(getattr(journal, "ccf_rating", None)),
+        area_exclusivity=_area_exclusivity_value(
+            candidate_subject_tags=getattr(journal, "subject_tags", None),
+            paper_anchor_area=paper_anchor_area,
+            n_matching_in_pool=n_matching_in_pool,
+        ),
     )
 
 
@@ -286,6 +349,8 @@ def attach_features_to_trace(
     accepted_paper_store: Optional[AcceptedPaperStore],
     llm_evidence_by_journal: Optional[Dict[str, Dict[str, Any]]] = None,
     feature_names: Optional[List[str]] = None,
+    paper_anchor_area: Optional[str] = None,
+    n_matching_in_pool: Optional[int] = None,
 ) -> None:
     """把 features dict 注入到 trace 中每本期刊的 entry(原地修改)。
 
@@ -319,6 +384,8 @@ def attach_features_to_trace(
             rule_score=rule_scores.get(jid, 0.0),
             candidate_in_accepted_corpus=(jid in in_corpus),
             llm_evidence=llm_evidence_by_journal.get(jid),
+            paper_anchor_area=paper_anchor_area,
+            n_matching_in_pool=n_matching_in_pool,
         )
         entry["features"] = feats.to_vector(selected_feature_names)
         entry["feature_names"] = list(selected_feature_names)

@@ -41,8 +41,11 @@ sys.path.insert(0, str(project_root))
 from src.ranker.feature_builder import (
     FEATURE_NAMES,
     FEATURE_NAMES_WITH_LLM_EVIDENCE,
+    FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
     LLM_EVIDENCE_FEATURE_NAMES,
     MISSING_RANK_SENTINEL,
+    _tier_weight_value,
+    _area_exclusivity_value,
 )
 
 
@@ -176,6 +179,7 @@ def build_training_rows(
     max_negatives: int = 10,
     only_variants: Optional[Iterable[str]] = None,
     evidence_lookup: Optional[Dict[str, Dict[str, dict]]] = None,
+    papers_by_title: Optional[Dict[str, dict]] = None,
 ) -> Iterable[dict]:
     """从 ablation JSON 产出训练样本。
 
@@ -187,6 +191,12 @@ def build_training_rows(
     looked up by (paper title, journal_id) and the row's
     ``feature_names`` is set to ``FEATURE_NAMES_WITH_LLM_EVIDENCE``
     (26-dim). When omitted, output is the legacy 20-dim schema.
+
+    ``papers_by_title`` (阶段 6.5, 28-dim schema): when supplied with
+    ``evidence_lookup``, each row's 26-dim features are further extended
+    with 2 tier/area features (journal_tier_weight + area_exclusivity),
+    and feature_names is set to FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+    (28-dim). Used for P2-mini 28-dim LTR retrain.
     """
     variants = ablation_data.get("variants") or {}
     for variant_name, variant_data in variants.items():
@@ -194,11 +204,13 @@ def build_training_rows(
             continue
         # Decide feature schema once per variant
         use_evidence_schema = evidence_lookup is not None
-        feature_names = (
-            list(FEATURE_NAMES_WITH_LLM_EVIDENCE)
-            if use_evidence_schema
-            else (variant_data.get("feature_names") or list(FEATURE_NAMES))
-        )
+        use_28_dim_schema = use_evidence_schema and papers_by_title is not None
+        if use_28_dim_schema:
+            feature_names = list(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)
+        elif use_evidence_schema:
+            feature_names = list(FEATURE_NAMES_WITH_LLM_EVIDENCE)
+        else:
+            feature_names = variant_data.get("feature_names") or list(FEATURE_NAMES)
         for paper_idx, paper_result in enumerate(variant_data.get("paper_results") or []):
             target_jid = paper_result.get("target_journal_id")
             if not target_jid:
@@ -213,12 +225,43 @@ def build_training_rows(
             # the role ranker does when paper_profile has no venue.
             paper_venue = paper_result.get("venue", "") or ""
 
+            # 阶段 6.5 (P2-mini): paper 锚 area + 同领域候选数。
+            # 从 papers_by_title (joined from papers metadata jsonl) 读。
+            paper_anchor_area: Optional[str] = None
+            paper_meta = papers_by_title.get(paper_id, {}) if papers_by_title else {}
+            pra = paper_meta.get("research_area") or []
+            if isinstance(pra, list) and pra:
+                paper_anchor_area = pra[0]
+            elif isinstance(pra, str) and pra:
+                paper_anchor_area = pra
+
+            # 算 n_matching_in_pool (同领域候选数)。
+            n_matching_in_pool: Optional[int] = None
+            if paper_anchor_area:
+                n_matching_in_pool = sum(
+                    1
+                    for jid in candidate_features.keys()
+                    if paper_anchor_area
+                    in (journals_by_id.get(jid, {}).get("subject_tags") or [])
+                )
+
             def _row(label: int, jid: str, neg_type: str) -> dict:
                 feats = candidate_features.get(jid) or []
                 if use_evidence_schema:
                     feats = list(feats) + _evidence_vector_for_row(
                         paper_id, paper_venue, jid, evidence_lookup
                     )
+                # 阶段 6.5 (P2-mini): 28-dim schema 时附加 2 维 tier/area。
+                if use_28_dim_schema:
+                    journal_meta = journals_by_id.get(jid, {})
+                    feats = list(feats) + [
+                        _tier_weight_value(journal_meta.get("ccf_rating")),
+                        _area_exclusivity_value(
+                            candidate_subject_tags=journal_meta.get("subject_tags") or [],
+                            paper_anchor_area=paper_anchor_area,
+                            n_matching_in_pool=n_matching_in_pool,
+                        ),
+                    ]
                 return {
                     "paper_id": paper_id,
                     "journal_id": jid,
@@ -420,6 +463,16 @@ def main() -> None:
             "the legacy 20-dim schema."
         ),
     )
+    parser.add_argument(
+        "--papers-jsonl",
+        default=None,
+        help=(
+            "阶段 6.5 (P2-mini, 28-dim schema): path to papers metadata jsonl "
+            "(e.g. papers_metadata_540.jsonl). Used to join paper.research_area "
+            "for area_exclusivity feature. Required when --evidence-snapshot "
+            "is also passed (28-dim path)."
+        ),
+    )
     args = parser.parse_args()
 
     ablation_data = json.loads(Path(args.ablation_json).read_text(encoding="utf-8"))
@@ -431,6 +484,18 @@ def main() -> None:
         jid = rec.get("journal_id")
         if jid:
             journals_by_id[jid] = rec
+
+    # 阶段 6.5: 读 papers metadata 拿 research_area,join 到 ablation JSON。
+    papers_by_title: Dict[str, dict] = {}
+    if args.papers_jsonl:
+        for line in Path(args.papers_jsonl).read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            rec = json.loads(line)
+            title = rec.get("title")
+            if title:
+                papers_by_title[title] = rec
+        print(f"Loaded research_area for {len(papers_by_title)} papers from {args.papers_jsonl}")
 
     evidence_lookup = None
     if args.evidence_snapshot:
@@ -454,6 +519,7 @@ def main() -> None:
             max_negatives=args.max_negatives,
             only_variants=args.variants,
             evidence_lookup=evidence_lookup,
+            papers_by_title=papers_by_title,
         )
     )
     with open(args.output, "w", encoding="utf-8") as f:
