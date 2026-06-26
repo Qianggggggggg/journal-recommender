@@ -774,3 +774,198 @@ def test_attach_features_20_dim_path_unaffected_by_28_dim_constants():
 
     assert len(trace["j"]["features"]) == 20
     assert trace["j"]["feature_names"] == FEATURE_NAMES
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-25: 修复 same_* 三个 dead 特征 (from 0.0 占位 → 真实计算)
+# ---------------------------------------------------------------------------
+
+
+def test_build_features_same_gold_area_set_when_gold_and_paper_areas_overlap():
+    """paper.research_area ∩ gold.subject_tags ≠ ∅ → same_gold_area=1.0。"""
+    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["人工智能"])
+    paper = PaperProfile(
+        title="T", research_area=["人工智能"], ccf_research_area=[]
+    )
+    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        gold_journal=gold,
+    )
+    assert f.same_gold_area == 1.0
+
+
+def test_build_features_same_gold_area_zero_on_mismatch():
+    """paper.research_area ∩ gold.subject_tags == ∅ → 0.0。"""
+    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["人工智能"])
+    paper = PaperProfile(
+        title="T", research_area=["计算机网络"], ccf_research_area=[]
+    )
+    cand = Journal(journal_id="c", journal_name="C", subject_tags=["软件工程"])
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        gold_journal=gold,
+    )
+    assert f.same_gold_area == 0.0
+
+
+def test_build_features_same_gold_area_proxy_when_no_gold():
+    """gold_journal=None → proxy 用 candidate journal 自身 subject_tags。
+    paper.research_area=["AI"], candidate.subject_tags=["AI"] → 1.0。
+    """
+    paper = PaperProfile(
+        title="T", research_area=["人工智能"], ccf_research_area=[]
+    )
+    cand = Journal(journal_id="c", journal_name="C", subject_tags=["人工智能"])
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        gold_journal=None,  # inference proxy
+    )
+    assert f.same_gold_area == 1.0
+
+
+def test_build_features_same_parsed_ccf_area_set_when_overlap():
+    """paper.ccf_research_area ∩ gold.subject_tags ≠ ∅ → same_parsed_ccf_area=1.0。"""
+    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["数据库/数据挖掘/内容检索"])
+    paper = PaperProfile(
+        title="T",
+        research_area=["人工智能"],
+        ccf_research_area=["数据库/数据挖掘/内容检索"],
+    )
+    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        gold_journal=gold,
+    )
+    assert f.same_parsed_ccf_area == 1.0
+    assert f.same_gold_area == 0.0  # research_area 和 gold tags 不重叠
+
+
+def test_build_features_same_ccf_level_set_when_levels_match():
+    """paper_ccf_target_level="A" + journal.ccf_rating="A" → same_ccf_level=1.0。"""
+    paper = PaperProfile(title="T", ccf_target_level="A")
+    cand = Journal(journal_id="c", journal_name="C", ccf_rating="A")
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        paper_ccf_target_level="A",
+    )
+    assert f.same_ccf_level == 1.0
+
+
+def test_build_features_same_ccf_level_case_insensitive():
+    """大小写不敏感:"a" vs "A" → 1.0。"""
+    paper = PaperProfile(title="T", ccf_target_level="a")
+    cand = Journal(journal_id="c", journal_name="C", ccf_rating="A")
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        paper_ccf_target_level="a",
+    )
+    assert f.same_ccf_level == 1.0
+
+
+def test_build_features_same_ccf_level_zero_when_paper_target_none():
+    """paper_ccf_target_level=None → 0.0 (inference 不可知时退化)。"""
+    paper = PaperProfile(title="T")
+    cand = Journal(journal_id="c", journal_name="C", ccf_rating="A")
+    f = build_features(
+        paper_profile=paper,
+        journal=cand,
+        trace_entry={"routes": {}},
+        rule_rank=1,
+        rule_score=0.5,
+        candidate_in_accepted_corpus=False,
+        paper_ccf_target_level=None,
+    )
+    assert f.same_ccf_level == 0.0
+
+
+def test_attach_features_to_trace_passes_gold_journal_through():
+    """attach_features_to_trace 把 gold_journal 透传给 build_features。"""
+    gold = Journal(journal_id="gold", journal_name="GOLD", subject_tags=["人工智能"])
+    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
+    journal_store = MagicMock(spec=JournalStore)
+    journal_store.get_journal.return_value = cand
+
+    paper = PaperProfile(
+        title="T", research_area=["人工智能"], ccf_research_area=[]
+    )
+    trace = {"c": {"retrieval_rank": 1, "routes": {}}}
+
+    attach_features_to_trace(
+        trace, paper, journal_store,
+        rule_ranks={"c": 1}, rule_scores={"c": 0.5},
+        accepted_paper_store=None,
+        feature_names=FEATURE_NAMES,
+        gold_journal=gold,
+    )
+
+    same_gold_idx = FEATURE_NAMES.index("same_gold_area")
+    assert trace["c"]["features"][same_gold_idx] == 1.0
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: Accepted Corpus LTR — paper_strength 移除 + schema 维度调整
+# ---------------------------------------------------------------------------
+
+
+def test_feature_names_excludes_paper_strength():
+    """2026-06-26: paper_strength removed from schema (was 20-dim, now 19-dim)."""
+    import dataclasses
+
+    assert "paper_strength" not in FEATURE_NAMES
+
+
+def test_feature_names_19_dim():
+    """2026-06-26: base schema is 19-dim (was 20)."""
+    assert len(FEATURE_NAMES) == 19
+    assert len(set(FEATURE_NAMES)) == 19  # 无重复
+
+
+def test_feature_names_with_llm_evidence_25_dim():
+    """2026-06-26: 19 base + 6 evidence = 25-dim (was 26)."""
+    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 25
+    assert "paper_strength" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+
+def test_feature_names_with_tier_and_exclusivity_27_dim():
+    """2026-06-26: 25 + 2 tier/area = 27-dim (was 28)."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 27
+    assert "paper_strength" not in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+
+
+def test_paper_candidate_features_no_paper_strength():
+    """2026-06-26: PaperCandidateFeatures dataclass no longer has paper_strength field."""
+    import dataclasses
+
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "paper_strength" not in field_names
