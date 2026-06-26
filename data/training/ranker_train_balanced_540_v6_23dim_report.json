@@ -1,0 +1,72 @@
+{
+  "positives_total": 636,
+  "positives_by_variant": {
+    "full_hybrid": 636
+  },
+  "positives_with_target_in_top50_count": 636,
+  "positives_with_target_in_top50_ratio": 1.0,
+  "retrieval_topk_80_warning": false,
+  "retrieval_topk_80_threshold": 0.8,
+  "positives_missing_route_features": {
+    "scope_bm25_rank": 205,
+    "scope_vector_rank": 29,
+    "typical_bm25_rank": 174,
+    "typical_vector_rank": 46,
+    "accepted_bm25_rank": 118,
+    "accepted_vector_rank": 58
+  },
+  "route_combination_counts": {
+    "scope_vector+typical_bm25+typical_vector+accepted_vector": 14,
+    "scope_vector+typical_vector": 9,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 299,
+    "scope_vector+typical_vector+accepted_vector": 13,
+    "scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 72,
+    "scope_bm25+scope_vector+typical_vector+accepted_bm25+accepted_vector": 46,
+    "accepted_bm25+accepted_vector": 8,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector": 22,
+    "scope_vector+typical_vector+accepted_bm25+accepted_vector": 44,
+    "scope_vector+typical_vector+accepted_bm25": 1,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_vector": 22,
+    "scope_bm25+scope_vector+typical_vector+accepted_vector": 12,
+    "scope_vector+accepted_bm25+accepted_vector": 14,
+    "scope_vector+typical_bm25+accepted_bm25+accepted_vector": 3,
+    "scope_vector+accepted_vector": 3,
+    "scope_vector+typical_bm25+typical_vector": 6,
+    "scope_bm25+scope_vector+typical_bm25+accepted_bm25+accepted_vector": 5,
+    "scope_bm25+scope_vector+accepted_vector": 1,
+    "scope_bm25+typical_bm25": 1,
+    "scope_bm25+typical_bm25+typical_vector+accepted_vector": 1,
+    "scope_bm25+scope_vector+accepted_bm25+accepted_vector": 4,
+    "typical_vector": 1,
+    "typical_bm25+typical_vector+accepted_bm25+accepted_vector": 2,
+    "scope_bm25+scope_vector+typical_bm25+accepted_bm25": 1,
+    "scope_bm25+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 2,
+    "scope_vector+typical_bm25": 1,
+    "typical_bm25+accepted_bm25+accepted_vector": 2,
+    "scope_bm25+scope_vector+typical_vector": 5,
+    "scope_vector+typical_bm25+typical_vector+accepted_bm25": 3,
+    "typical_vector+accepted_bm25+accepted_vector": 7,
+    "scope_bm25+scope_vector+typical_bm25": 2,
+    "scope_bm25+scope_vector": 1,
+    "scope_bm25+scope_vector+typical_vector+accepted_bm25": 2,
+    "scope_bm25+typical_vector+accepted_bm25+accepted_vector": 1,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25": 2,
+    "scope_bm25+typical_vector+accepted_vector": 1,
+    "scope_bm25+typical_vector": 1,
+    "typical_bm25+typical_vector+accepted_vector": 2
+  },
+  "dead_feature_nonzero": {
+    "same_gold_area": 0,
+    "same_parsed_ccf_area": 0,
+    "same_ccf_level": 636,
+    "candidate_in_accepted_corpus": 0
+  },
+  "input_ablation_json": "data/evaluation/results/retrieval_ablation_540_balanced_v4.json",
+  "output_jsonl": "data/training/ranker_train_balanced_540_v6_23dim.jsonl",
+  "max_negatives": 10,
+  "negatives_by_type": {
+    "hard_rule_top20": 6600
+  },
+  "feature_schema": "25_dim_with_llm_evidence",
+  "evidence_snapshot": "data/evaluation/evidence/balanced_540_90v3_evidence.json"
+}
