@@ -23,12 +23,37 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from src.journals.accepted_paper_store import AcceptedPaperStore
-from src.journals.journal_model import Journal
-from src.journals.journal_store import JournalStore
-from src.papers.paper_model import PaperProfile
-from src.ranker.feature_builder import attach_features_to_trace
-from src.ranker.learning_to_rank import LearningToRanker
+# 2026-06-25: import order matters — sklearn + lightgbm 必须在 src.journals.*
+# 之前显式 import。原因:src.journals.journal_store 内部 import faiss/numpy/pandas,
+# pandas 在 lightgbm 之前 import 会让 lightgbm C 库的 thread pool / numpy
+# interop state 进入污染状态,后续 _lgb.Booster(model_str=...) __init__ segfault。
+# 实测顺序:
+#   sklearn → lightgbm → src.journals.* → feature_builder → Booster OK (500 trees)
+#   src.journals.* → sklearn → lightgbm → feature_builder → Booster segfault
+# 因此顶部必须先 import sklearn + lightgbm,再 import src.*。
+# 2026-06-25 / 2026-06-26: import order matters — lightgbm 必须在 src.journals.*
+# 之前显式 import。原因:src.journals.journal_store 内部 import pandas,
+# pandas 在 lightgbm 之前 import 会让 lightgbm C 库 state 进入污染状态,
+# 后续 _lgb.Booster(model_str=...) __init__ segfault。
+# 实测顺序:
+#   lightgbm → src.journals.* → feature_builder → Booster OK (500 trees)
+#   src.journals.* → lightgbm → feature_builder → Booster segfault
+# 2026-06-26: 拿掉 sklearn early-init(过度防御,venv 没装 sklearn 会卡)。
+# 关键约束只有 lightgbm < pandas 的 import 顺序。
+try:  # pragma: no cover
+    import lightgbm as _lgb_early  # noqa: F401  # early init
+    _HAS_LIGHTGBM_EARLY = True
+except ImportError:  # pragma: no cover
+    _HAS_LIGHTGBM_EARLY = False
+# 现在 import src.* — lightgbm 已在 src.* 之前 init,后续 Booster 构造 OK。
+from src.journals.accepted_paper_store import AcceptedPaperStore  # noqa: E402
+from src.journals.journal_model import Journal  # noqa: E402
+from src.journals.journal_store import JournalStore  # noqa: E402
+from src.papers.paper_model import PaperProfile  # noqa: E402
+from src.ranker.feature_builder import attach_features_to_trace  # noqa: E402
+# LearningToRanker 仍 lazy import (在 _initialize 时 importlib.import_module),
+# 避免 learning_to_rank module-level `import lightgbm as _lgb` 二次触发污染。
+import importlib  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +92,9 @@ class LTRAdapter:
         self._config: Dict[str, Any] = dict(config or {})
         self._journal_store = journal_store
         self._accepted_paper_store = accepted_paper_store
-        self._ranker: Optional[LearningToRanker] = None
+        # 2026-06-25: type annotation 用 Any 而非 LearningToRanker,避免
+        # module-level import。LearningToRanker 在 _initialize 里 lazy import。
+        self._ranker: Optional[Any] = None
         self._enabled: bool = False
         self._disable_reason: Optional[str] = None
         self._initialize()
@@ -156,9 +183,10 @@ class LTRAdapter:
                 FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
             )
             _FEATURE_SCHEMA_BY_DIM = {
-                20: FEATURE_NAMES,
-                26: FEATURE_NAMES_WITH_LLM_EVIDENCE,
-                28: FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
+                # 2026-06-26: paper_strength removed → 20/26/28 → 19/25/27
+                19: FEATURE_NAMES,
+                25: FEATURE_NAMES_WITH_LLM_EVIDENCE,
+                27: FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
             }
             feature_names = _FEATURE_SCHEMA_BY_DIM.get(expected_dim)
             if feature_names is None:
@@ -168,13 +196,14 @@ class LTRAdapter:
                 )
                 return list(llm_candidates), _empty_diag("fallback_feature_dim")
 
-            # 阶段 6.5 (P2-mini):为 28-dim schema 算 paper 锚 area + n_matching。
+            # 阶段 6.5 (P2-mini):为 27-dim schema 算 paper 锚 area + n_matching。
             # 仅当 model dim 包含 area_exclusivity feature 时才需要,
-            # 即 expected_dim == 28。20/26-dim 模型不需要这些信号,
+            # 即 expected_dim == 27。19/25-dim 模型不需要这些信号,
             # 传 None 即可,attach_features_to_trace 内部会走 0.0 默认。
+            # 2026-06-26: 28 → 27 (paper_strength removed).
             paper_anchor_area: Optional[str] = None
             n_matching_in_pool: Optional[int] = None
-            if expected_dim == 28 and paper_profile is not None:
+            if expected_dim == 27 and paper_profile is not None:
                 # 锚定 paper.research_area[0];fallback 到 ccf_research_area。
                 pa = (
                     (paper_profile.research_area or [])
@@ -264,7 +293,10 @@ class LTRAdapter:
             logger.warning("LTRAdapter: %s", self._disable_reason)
             return
         try:
-            self._ranker = LearningToRanker.load(str(model_path))
+            # 2026-06-25: lazy import — 让 booster 构造发生在 feature_builder
+            # import 之后,绕开 lightgbm C 库在污染状态下的 segfault。
+            _ltr_mod = importlib.import_module("src.ranker.learning_to_rank")
+            self._ranker = _ltr_mod.LearningToRanker.load(str(model_path))
         except Exception as e:
             self._disable_reason = f"failed to load model ({type(e).__name__}): {e}"
             logger.warning("LTRAdapter: %s", self._disable_reason)

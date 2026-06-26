@@ -33,7 +33,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional, Set
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
@@ -180,23 +180,38 @@ def build_training_rows(
     only_variants: Optional[Iterable[str]] = None,
     evidence_lookup: Optional[Dict[str, Dict[str, dict]]] = None,
     papers_by_title: Optional[Dict[str, dict]] = None,
+    accepted_jid_set: Optional[Set[str]] = None,
 ) -> Iterable[dict]:
     """从 ablation JSON 产出训练样本。
 
     仅在 paper 的 ``candidate_features[target_jid]`` 存在时产正样本;
     负样本来自同 paper 的其他候选期刊,按 NEGATIVE_PRIORITY 分类。
 
-    ``evidence_lookup`` (Task 6.4, 26-dim schema): when supplied, each row's
-    20-dim base features are extended with the 6 LLM-evidence fields
-    looked up by (paper title, journal_id) and the row's
+    ``evidence_lookup`` (Task 6.4, 2026-06-26 → 25-dim schema): when supplied,
+    each row's 19-dim base features are extended with the 6 LLM-evidence
+    fields looked up by (paper title, journal_id) and the row's
     ``feature_names`` is set to ``FEATURE_NAMES_WITH_LLM_EVIDENCE``
-    (26-dim). When omitted, output is the legacy 20-dim schema.
+    (25-dim). When omitted, output is the legacy 19-dim schema.
 
-    ``papers_by_title`` (阶段 6.5, 28-dim schema): when supplied with
-    ``evidence_lookup``, each row's 26-dim features are further extended
-    with 2 tier/area features (journal_tier_weight + area_exclusivity),
-    and feature_names is set to FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
-    (28-dim). Used for P2-mini 28-dim LTR retrain.
+    ``papers_by_title`` (阶段 6.5, 2026-06-26 → 27-dim schema): when
+    supplied with ``evidence_lookup``, each row's 25-dim features are
+    further extended with 2 tier/area features (journal_tier_weight +
+    area_exclusivity), and feature_names is set to
+    FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY (27-dim). Used for P2-mini
+    27-dim LTR retrain.
+
+    ``accepted_jid_set`` (2026-06-26): set of journal_ids that have at
+    least one paper in the AcceptedPaperStore. Used inside ``_row()`` to
+    recompute ``candidate_in_accepted_corpus`` from real corpus coverage
+    instead of reading the (always 0.0) dead-feature value from the
+    ablation JSON. Also used together with ``journals_by_id`` to recompute
+    ``same_gold_area`` / ``same_parsed_ccf_area`` / ``same_ccf_level`` from
+    the gold venue's subject_tags + the paper's research_area.
+
+    2026-06-26 schema changes: paper_strength removed (was 0.0 in all v4
+    training rows; dead feature). Base dim 20→19, evidence schema 26→25,
+    tier+exclusivity schema 28→27. Old models incompatible; retrain
+    required.
     """
     variants = ablation_data.get("variants") or {}
     for variant_name, variant_data in variants.items():
@@ -204,8 +219,10 @@ def build_training_rows(
             continue
         # Decide feature schema once per variant
         use_evidence_schema = evidence_lookup is not None
-        use_28_dim_schema = use_evidence_schema and papers_by_title is not None
-        if use_28_dim_schema:
+        # 2026-06-26: tier+exclusivity schema is 27-dim (was 28); paper_strength
+        # removed. Variable name kept for minimal-diff with prior code paths.
+        use_27_dim_schema = use_evidence_schema and papers_by_title is not None
+        if use_27_dim_schema:
             feature_names = list(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)
         elif use_evidence_schema:
             feature_names = list(FEATURE_NAMES_WITH_LLM_EVIDENCE)
@@ -245,14 +262,98 @@ def build_training_rows(
                     in (journals_by_id.get(jid, {}).get("subject_tags") or [])
                 )
 
+            # 2026-06-26: 提取 gold venue + paper 上下文,用于重算 4 个
+            # dead 特征 (same_gold_area / same_parsed_ccf_area /
+            # same_ccf_level / candidate_in_accepted_corpus)。旧 ablation
+            # JSON 里 candidate_features 的这 4 个位置全是 0.0,必须用真实
+            # 元数据覆写才能让 LR 学到信号。
+            gold_journal_meta = journals_by_id.get(target_jid) or {}
+            gold_subject_tags = set(gold_journal_meta.get("subject_tags") or [])
+            paper_research_area = set(paper_meta.get("research_area") or [])
+            paper_ccf_research_area = (
+                set(paper_meta.get("ccf_research_area") or [])
+                or paper_research_area
+            )
+            paper_ccf_target_level = (
+                (gold_journal_meta.get("ccf_rating") or "").upper()
+            )
+            accepted_jid_set_resolved: Set[str] = (
+                accepted_jid_set if accepted_jid_set is not None else set()
+            )
+
+            # 2026-06-26: 用 feature_names 动态查 idx (19/25/27 维 schema
+            # 中 dead 特征位置一致 — 都是 base 19 维里的 [14..18] 区间)。
+            # 这样 schema 调整不需要改这里。
+            base_feature_names = list(FEATURE_NAMES)
+            idx_same_gold_area = (
+                base_feature_names.index("same_gold_area")
+                if "same_gold_area" in base_feature_names
+                else None
+            )
+            idx_same_parsed_ccf_area = (
+                base_feature_names.index("same_parsed_ccf_area")
+                if "same_parsed_ccf_area" in base_feature_names
+                else None
+            )
+            idx_same_ccf_level = (
+                base_feature_names.index("same_ccf_level")
+                if "same_ccf_level" in base_feature_names
+                else None
+            )
+            idx_candidate_in_accepted_corpus = (
+                base_feature_names.index("candidate_in_accepted_corpus")
+                if "candidate_in_accepted_corpus" in base_feature_names
+                else None
+            )
+
             def _row(label: int, jid: str, neg_type: str) -> dict:
                 feats = candidate_features.get(jid) or []
+                # 2026-06-26: ablation JSON 里 candidate_features 是 20 维
+                # (含 paper_strength 占位在 idx 18),新 schema 是 19 维。
+                # trim 掉 idx 18 保持 base 19 维(防御性,旧数据混进新管道时)。
+                if len(feats) > 19:
+                    feats = list(feats[:18]) + list(feats[19:])
+                elif len(feats) < 19:
+                    feats = list(feats) + [0.0] * (19 - len(feats))
+                else:
+                    feats = list(feats)
+                # 2026-06-26: 用真实元数据覆写 4 个 dead 特征(覆盖 ablation
+                # JSON 里全 0 的占位)。这些值之前是 dead 的,现在接通后能
+                # 让 LR 学到 "gold subject_tags ∩ paper research_area"、
+                # "paper gold ccf level"、以及 "candidate 在 accepted corpus
+                # 中" 三类强信号。
+                if idx_same_gold_area is not None:
+                    feats[idx_same_gold_area] = (
+                        1.0 if (paper_research_area & gold_subject_tags) else 0.0
+                    )
+                if idx_same_parsed_ccf_area is not None:
+                    feats[idx_same_parsed_ccf_area] = (
+                        1.0
+                        if (paper_ccf_research_area & gold_subject_tags)
+                        else 0.0
+                    )
+                if idx_same_ccf_level is not None:
+                    cand_meta = journals_by_id.get(jid) or {}
+                    cand_ccf = (cand_meta.get("ccf_rating") or "").upper()
+                    feats[idx_same_ccf_level] = (
+                        1.0
+                        if (
+                            paper_ccf_target_level
+                            and cand_ccf
+                            and paper_ccf_target_level == cand_ccf
+                        )
+                        else 0.0
+                    )
+                if idx_candidate_in_accepted_corpus is not None:
+                    feats[idx_candidate_in_accepted_corpus] = (
+                        1.0 if jid in accepted_jid_set_resolved else 0.0
+                    )
                 if use_evidence_schema:
                     feats = list(feats) + _evidence_vector_for_row(
                         paper_id, paper_venue, jid, evidence_lookup
                     )
-                # 阶段 6.5 (P2-mini): 28-dim schema 时附加 2 维 tier/area。
-                if use_28_dim_schema:
+                # 阶段 6.5 (P2-mini): 27-dim schema 时附加 2 维 tier/area。
+                if use_27_dim_schema:
                     journal_meta = journals_by_id.get(jid, {})
                     feats = list(feats) + [
                         _tier_weight_value(journal_meta.get("ccf_rating")),

@@ -45,7 +45,10 @@ SCRIPTS_DIR = Path(__file__).resolve().parent.parent / "scripts"
 
 
 def _make_train_jsonl(path: Path, n_pos: int = 30, n_neg: int = 90) -> None:
-    """写一个 20 维的小型训练 jsonl,符合 build_ranking_training_data.py 输出。"""
+    """写一个 19 维的小型训练 jsonl,符合 build_ranking_training_data.py 输出。
+
+    2026-06-26: paper_strength removed (was 20-dim, now 19-dim).
+    """
     feature_names = [
         "retrieval_rank", "rule_rank", "rule_score",
         "scope_bm25_rank", "scope_vector_rank",
@@ -54,7 +57,7 @@ def _make_train_jsonl(path: Path, n_pos: int = 30, n_neg: int = 90) -> None:
         "route_count", "has_scope_route", "has_typical_route",
         "has_accepted_route", "has_identity_anchor",
         "same_gold_area", "same_parsed_ccf_area", "same_ccf_level",
-        "journal_ccf_numeric", "paper_strength", "candidate_in_accepted_corpus",
+        "journal_ccf_numeric", "candidate_in_accepted_corpus",
     ]
     with path.open("w", encoding="utf-8") as fh:
         for i in range(n_pos):
@@ -62,7 +65,7 @@ def _make_train_jsonl(path: Path, n_pos: int = 30, n_neg: int = 90) -> None:
                 "paper_id": f"paper_{i // 3}",
                 "journal_id": f"gold_{i}",
                 "label": 1,
-                "features": [1.0] * 19 + [1.0],
+                "features": [1.0] * 19,
                 "feature_names": feature_names,
                 "negative_type": "gold",
                 "variant": "full_hybrid",
@@ -73,7 +76,7 @@ def _make_train_jsonl(path: Path, n_pos: int = 30, n_neg: int = 90) -> None:
                 "paper_id": f"paper_{i // 5}",
                 "journal_id": f"neg_{i}",
                 "label": 0,
-                "features": [0.0] * 19 + [0.0],
+                "features": [0.0] * 19,
                 "feature_names": feature_names,
                 "negative_type": "hard_rule_top20",
                 "variant": "full_hybrid",
@@ -103,8 +106,8 @@ def test_train_script_writes_expected_schema(tmp_path: Path):
     assert payload["schema_version"] == 1
     assert payload["model_type"] == "logistic_regression"
     assert isinstance(payload["feature_names"], list)
-    assert len(payload["feature_names"]) == 20
-    assert len(payload["coef"]) == 20
+    assert len(payload["feature_names"]) == 19
+    assert len(payload["coef"]) == 19
     assert isinstance(payload["intercept"], float)
     assert payload["seed"] == 42
     # metrics
@@ -181,8 +184,8 @@ def test_train_script_saves_scaler_when_standardized(tmp_path: Path):
     assert payload["use_standardization"] is True
     assert isinstance(payload["scaler_mean"], list)
     assert isinstance(payload["scaler_scale"], list)
-    assert len(payload["scaler_mean"]) == 20
-    assert len(payload["scaler_scale"]) == 20
+    assert len(payload["scaler_mean"]) == 19
+    assert len(payload["scaler_scale"]) == 19
 
 
 def test_train_script_artifact_is_loadable_and_predictable(tmp_path: Path):
@@ -199,7 +202,7 @@ def test_train_script_artifact_is_loadable_and_predictable(tmp_path: Path):
     assert result.returncode == 0, f"stderr={result.stderr}"
 
     loaded = LearningToRanker.load(str(out_path))
-    assert loaded._feature_dim == 20
+    assert loaded._feature_dim == 19
     assert loaded.use_standardization is True
     assert loaded._scaler is not None
     assert loaded.convergence_info is not None

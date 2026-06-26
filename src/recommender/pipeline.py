@@ -4,6 +4,18 @@ import logging
 import yaml
 from typing import Callable, List, Optional, Dict, Any, Tuple
 
+# 2026-06-25 / 2026-06-26: import order matters for lightgbm — lightgbm 必须在
+# src.journals.* (内部 import pandas via journal_store) 之前 import。
+# 否则 pandas 触发 lightgbm C 库 state 污染,_lgb.Booster() segfault。
+# 实测顺序: lightgbm → src.journals.* → feature_builder → Booster OK (500 trees)
+#           src.journals.* → lightgbm → feature_builder → Booster segfault
+# 2026-06-26: 把 sklearn 从 early-init 拿掉(过度防御;venv 没装 sklearn 会卡,
+# 真正的修复点只是「lightgbm < pandas」这一个顺序约束)。
+try:  # pragma: no cover
+    import lightgbm as _lgb_early  # noqa: F401  # early init
+    _HAS_LIGHTGBM_EARLY = True
+except ImportError:  # pragma: no cover
+    _HAS_LIGHTGBM_EARLY = False
 from ..utils.text import quality_adjustment_factor, quality_adjustment_multiplier
 from ..journals.journal_model import Journal, JournalMatch
 from ..papers.paper_model import PaperInput, PaperProfile
@@ -32,7 +44,8 @@ class RecommenderPipeline:
         # When set and the paper title is present, attach_features uses the
         # 26-dim schema (FEATURE_NAMES_WITH_LLM_EVIDENCE).
         evidence_lookup: Optional[Dict[str, Dict[str, Dict[str, Any]]]] = None,
-        feature_schema: str = "20_dim_base",  # "20_dim_base" | "26_dim_with_llm_evidence"
+        feature_schema: str = "19_dim_base",  # "19_dim_base" | "25_dim_with_llm_evidence"
+        # 2026-06-26: paper_strength removed (was 20/26)
         # 6.5: optional LLMEvidenceExtractor for the per-request online
         # evidence path. The API layer can call extractor.extract() to
         # backfill the in-memory evidence cache when a paper is not in
@@ -61,10 +74,11 @@ class RecommenderPipeline:
         self.evidence_lookup = evidence_lookup or {}
         self.feature_schema = feature_schema
         # 决定 attach_features 的 expected feature dim
-        # 26-dim 仅在 feature_schema="26_dim_with_llm_evidence" 时启用,
-        # 且 paper 标题必须命中 evidence_lookup(否则回退 20 维,见 recommend())
+        # 25-dim 仅在 feature_schema="25_dim_with_llm_evidence" 时启用,
+        # 且 paper 标题必须命中 evidence_lookup(否则回退 19 维,见 recommend())。
+        # 2026-06-26: paper_strength 移除 → 20/26 → 19/25。
         self._expected_feature_dim = (
-            26 if feature_schema == "26_dim_with_llm_evidence" else 20
+            25 if feature_schema == "25_dim_with_llm_evidence" else 19
         )
         # 6.5: optional LLMEvidenceExtractor for the per-request online
         # evidence path. If set, the API layer can call
@@ -210,9 +224,10 @@ class RecommenderPipeline:
         )
 
         # 2.6 (6.4) 把 LTR 训练特征注入 retrieval_trace(per journal)
-        # 默认 20 维;当 feature_schema="26_dim_with_llm_evidence" 且
-        # paper 标题命中 evidence_lookup 时,输出 26 维 evidence schema。
-        # 缺 paper_evidence 时**自动回退** 20 维(防御性,不破坏 baseline)。
+        # 默认 19 维;当 feature_schema="25_dim_with_llm_evidence" 且
+        # paper 标题命中 evidence_lookup 时,输出 25 维 evidence schema。
+        # 缺 paper_evidence 时**自动回退** 19 维(防御性,不破坏 baseline)。
+        # 2026-06-26: paper_strength 移除 → 20/26 → 19/25。
         paper_title_key = " ".join((paper_profile.title or "").casefold().split())
         paper_evidence_entry = self.evidence_lookup.get(paper_title_key, {})
         # evidence_lookup stores whole paper entries (title/venue/rule_ranks/
@@ -228,6 +243,8 @@ class RecommenderPipeline:
             feature_names = FEATURE_NAMES_WITH_LLM_EVIDENCE
         # accepted_paper_store 暂未在 pipeline 持有,传 None(attach_features
         # 内部会按 store=None 处理,candidate_in_accepted_corpus 全 0)。
+        # 2026-06-25: 透传 paper_ccf_target_level 让 same_ccf_level 在
+        # inference 也能计算(前提是 paper metadata 含 ccf_level)。
         self.candidate_generator.attach_features(
             trace=retrieval_trace,
             paper_profile=paper_profile,
@@ -236,6 +253,7 @@ class RecommenderPipeline:
             accepted_paper_store=None,
             feature_names=feature_names,
             llm_evidence_by_journal=paper_evidence,
+            paper_ccf_target_level=getattr(paper_profile, "ccf_target_level", None),
         )
 
         # 构建 LLM 候选集：top20 + scope 边界强候选 + 同领域参考候选 + 受控 typical-only 候选

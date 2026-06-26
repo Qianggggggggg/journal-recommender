@@ -196,3 +196,158 @@ def test_save_load_roundtrip_preserves_convergence_info(tmp_path: Path):
     loaded = LearningToRanker.load(str(save_path))
     assert loaded.convergence_info == ranker.convergence_info
 
+
+# ---------------------------------------------------------------------------
+# 2026-06-25: LightGBM LambdaMART backend
+# ---------------------------------------------------------------------------
+
+
+def _lightgbm_available() -> bool:
+    try:
+        import lightgbm  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
+def test_lightgbm_backend_fit_predict_produces_ranked_scores():
+    """LightGBM backend fit 后, predict_scores 必须输出**有梯度**的 scores
+    (不是全 0 或全常数)。
+
+    设计说明:
+    - per-call min-max 把 raw scores 归一到 [0,1];如果所有 raw scores 相同
+      则全 0(已知 fallback 行为,见 _predict_lightgbm)。
+    - 因此本测试验证:构造**让 raw scores 有梯度**的数据(每个 paper 内
+      pos/neg features 不同 → raw score 不同 → min-max 后非全 0)。
+    - 用 paper-level 强信号(pos 的 feature[0]=10.0,neg 的 feature[0]=0.0)
+      让 LightGBM 学到简单规则。
+    """
+    if not _lightgbm_available():
+        pytest.skip("lightgbm not installed")
+    rows = []
+    for i in range(8):
+        # 强可分信号:pos 在 feature[0]=10.0,neg 在 feature[0]=0.0
+        # 其它 27 维随机噪声 → 每个 paper 内 pos vs neg 的 raw score 应该有梯度
+        import random
+        random.seed(i)
+        noise_pos = [random.random() for _ in range(27)]
+        noise_neg = [random.random() for _ in range(27)]
+        pos_feats = [10.0] + noise_pos
+        neg_feats = [0.0] + noise_neg
+        rows.append(_make_row(pos_feats, label=1, paper_id=f"p{i}", jid="gold"))
+        rows.append(_make_row(neg_feats, label=0, paper_id=f"p{i}", jid=f"n{i}"))
+    ranker = LearningToRanker(seed=42, max_iter=200, backend="lightgbm")
+    ranker.fit(rows)
+    scores = ranker.predict_scores(rows)
+    pos_scores = [s for r, s in zip(rows, scores) if r["label"] == 1]
+    neg_scores = [s for r, s in zip(rows, scores) if r["label"] == 0]
+    # 验证 1: scores 必须有梯度(不是全 0/全 1 的退化情形)
+    distinct = len(set(scores))
+    assert distinct > 1, (
+        f"predict_scores output is degenerate (all identical); got {scores}. "
+        f"This means LightGBM produced constant raw scores → per-call min-max "
+        f"collapsed to a single value. Either data construction or training "
+        f"needs fixing."
+    )
+    # 验证 2: positives 必须排在 hard negatives 前面(listwise objective 体现)
+    assert min(pos_scores) > max(neg_scores), (
+        f"positives must rank above hard negatives; pos={pos_scores}, neg={neg_scores}"
+    )
+
+
+def test_lightgbm_backend_save_load_roundtrip_bit_equal(tmp_path: Path):
+    """LightGBM booster 是 deterministic 的(seed + num_threads=1),save/load 后预测必须 bit-equal。"""
+    if not _lightgbm_available():
+        pytest.skip("lightgbm not installed")
+    rows = [_make_row([1.0] * 28, label=1, paper_id="p0", jid="g")]
+    rows += [_make_row([0.0] * 28, label=0, paper_id="p0", jid="n0")]
+    rows += [_make_row([0.5] * 28, label=0, paper_id="p0", jid="n1")]
+    ranker = LearningToRanker(seed=42, max_iter=50, backend="lightgbm")
+    ranker.fit(rows)
+    scores_before = ranker.predict_scores(rows)
+
+    save_path = tmp_path / "ltr_lgb.json"
+    ranker.save(str(save_path))
+
+    payload = json.loads(save_path.read_text())
+    assert payload["backend"] == "lightgbm"
+    assert payload["model_type"] == "lightgbm_lambdarank"
+    assert payload["feature_dim"] == 28
+    assert payload.get("lightgbm_booster_str"), "booster_str must be populated"
+
+    loaded = LearningToRanker.load(str(save_path))
+    assert loaded._backend == "lightgbm"
+    scores_after = loaded.predict_scores(rows)
+    assert scores_before == scores_after, (
+        f"LightGBM booster not deterministic: before={scores_before}, after={scores_after}"
+    )
+
+
+def test_lightgbm_backend_groups_by_paper_id_in_order():
+    """_group_rows_by_paper 必须保持 paper_id first-appearance 顺序,group sizes 之和 == len(rows)。"""
+    rows = []
+    # 故意打乱 paper_id 出现顺序
+    for paper in ["c", "a", "b", "a", "c", "b"]:
+        rows.append(_make_row([0.5] * 20, label=1, paper_id=paper))
+    X, y, group = LearningToRanker._group_rows_by_paper(rows)
+    assert sum(group.tolist()) == len(rows)
+    # 顺序应该是 c, a, b (first appearance)
+    assert len(group) == 3
+    assert group.tolist() == [2, 2, 2]
+    assert X.shape == (6, 20)
+    assert y.tolist() == [1] * 6
+
+
+def test_lightgbm_backend_missing_dependency_raises(monkeypatch):
+    """lightgbm import 失败时,backend=lightgbm 必须 raise RuntimeError,不能 fallback 到 LR。"""
+    import src.ranker.learning_to_rank as ltr_module
+
+    monkeypatch.setattr(ltr_module, "_HAS_LIGHTGBM", False)
+    ranker = LearningToRanker(seed=42, max_iter=10, backend="lightgbm")
+    rows = [_make_row([0.5] * 20, label=1)]
+    with pytest.raises(RuntimeError, match="lightgbm"):
+        ranker.fit(rows)
+
+
+def test_lightgbm_backend_predict_scores_in_0_1_range():
+    """per-call min-max 归一化必须输出 [0,1] 范围。"""
+    if not _lightgbm_available():
+        pytest.skip("lightgbm not installed")
+    rows = [_make_row([1.0] * 20, label=1, paper_id="p0", jid="g")]
+    rows += [_make_row([0.0] * 20, label=0, paper_id="p0", jid="n0")]
+    rows += [_make_row([0.5] * 20, label=0, paper_id="p0", jid="n1")]
+    ranker = LearningToRanker(seed=42, max_iter=20, backend="lightgbm").fit(rows)
+    scores = ranker.predict_scores(rows)
+    assert all(0.0 <= s <= 1.0 for s in scores), f"scores must be in [0,1]; got {scores}"
+
+
+def test_lightgbm_backend_handles_27_dim_schema():
+    """27-dim 数据 save/load 必须保留 feature_dim=27 (2026-06-26: was 28)。"""
+    if not _lightgbm_available():
+        pytest.skip("lightgbm not installed")
+    rows = [_make_row([1.0] * 27, label=1, paper_id="p0", jid="g")]
+    rows += [_make_row([0.0] * 27, label=0, paper_id="p0", jid="n0")]
+    ranker = LearningToRanker(seed=42, max_iter=20, backend="lightgbm").fit(rows)
+    assert ranker._feature_dim == 27
+    save_path = Path("/tmp/lgb27_test.json")
+    ranker.save(str(save_path))
+    loaded = LearningToRanker.load(str(save_path))
+    assert loaded._feature_dim == 27
+    assert loaded.predict_scores(rows) == ranker.predict_scores(rows)
+
+
+def test_backend_auto_picks_sklearn_when_lightgbm_unavailable(monkeypatch):
+    """backend='auto' 不应强制 lightgbm;lightgbm 不可用时仍能 auto-pick sklearn/numpy。"""
+    import src.ranker.learning_to_rank as ltr_module
+
+    monkeypatch.setattr(ltr_module, "_HAS_LIGHTGBM", False)
+    ranker = LearningToRanker(seed=42, backend="auto")
+    # auto 选 sklearn (若有) or numpy;lightgbm 缺失不影响 auto 选择
+    assert ranker._backend in ("sklearn", "numpy")
+
+
+def test_backend_explicit_unknown_raises():
+    """backend='foo' 必须 raise ValueError,不能静默 fallback。"""
+    with pytest.raises(ValueError, match="Unknown backend"):
+        LearningToRanker(seed=42, backend="foo")
+
