@@ -870,3 +870,45 @@ def test_no_paper_strength_in_feature_names():
     ))
     pos = next(r for r in rows if r["label"] == 1)
     assert "paper_strength" not in pos["feature_names"]
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: 23-dim plan — decouple tier/area via --enable-tier-exclusivity
+# ---------------------------------------------------------------------------
+
+
+def test_build_training_rows_default_22_dim_without_tier_exclusivity_flag():
+    """2026-06-26: Without --enable-tier-exclusivity, output is 22-dim (no area_exclusivity, no journal_tier_weight).
+
+    Schema: 16 base + 6 evidence = 22-dim. The 27→23 change drops journal_tier_weight
+    AND only adds area_exclusivity when the new CLI flag is set.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    paper_title = "Paper X"
+    target_jid = "gold_j"
+    # 16-dim base + 6 evidence = 22-dim
+    candidate_features = [999.0] * 16 + [0.5, 0.5, 0.5, 0.5, 0.0, 0.0]
+    ablation = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], {target_jid: candidate_features},
+        rule_top20=[target_jid],
+    )
+    evidence_lookup = {"paper x | ": {target_jid: {
+        "scope_fit": 0.9, "method_fit": 0.8, "application_fit": 0.7,
+        "journal_position_fit": 0.85, "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+    }}}
+    # Default path: no --enable-tier-exclusivity flag → 22-dim
+    rows = list(build_training_rows(
+        ablation,
+        {target_jid: _make_journal_meta(target_jid, ["AI"], "A")},
+        max_negatives=0,
+        evidence_lookup=evidence_lookup,
+        papers_by_title={paper_title: _make_paper_meta(paper_title, research_area=["AI"])},
+        accepted_jid_set=set(),
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert len(pos["features"]) == 22, f"expected 22, got {len(pos['features'])}"
+    assert pos["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
+    # No tier/area features
+    assert "area_exclusivity" not in pos["feature_names"]
+    assert "journal_tier_weight" not in pos["feature_names"]

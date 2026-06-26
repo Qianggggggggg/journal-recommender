@@ -957,3 +957,56 @@ def test_paper_candidate_features_no_paper_strength():
 
     field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
     assert "paper_strength" not in field_names
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: 23-dim plan — drop 4 noise/harmful features
+# (journal_tier_weight, same_gold_area, same_parsed_ccf_area,
+#  candidate_in_accepted_corpus). Schema becomes 16/22/23 dim.
+# ---------------------------------------------------------------------------
+
+
+def test_feature_names_16_dim_no_dead_or_tier():
+    """2026-06-26: 23-dim plan — FEATURE_NAMES is 16-dim (drop 3 dead + journal_tier_weight)."""
+    assert len(FEATURE_NAMES) == 16
+    assert "paper_strength" not in FEATURE_NAMES
+    assert "same_gold_area" not in FEATURE_NAMES
+    assert "same_parsed_ccf_area" not in FEATURE_NAMES
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
+    assert "journal_tier_weight" not in FEATURE_NAMES
+    # Confirm useful features are still there
+    assert "same_ccf_level" in FEATURE_NAMES
+    assert "journal_ccf_numeric" in FEATURE_NAMES
+
+
+def test_feature_names_with_llm_evidence_22_dim():
+    """2026-06-26: 16 base + 6 evidence = 22-dim (drop 3 dead)."""
+    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 22
+    assert "paper_strength" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
+    assert "same_gold_area" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
+    assert "same_parsed_ccf_area" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+
+def test_feature_names_with_tier_and_exclusivity_23_dim():
+    """2026-06-26: 22 + 1 area_exclusivity = 23-dim (no journal_tier_weight)."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 23
+    assert "area_exclusivity" in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+    assert "journal_tier_weight" not in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+    # The +1 should be exactly area_exclusivity (no journal_tier_weight)
+    extra = [f for f in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY if f not in FEATURE_NAMES_WITH_LLM_EVIDENCE]
+    assert extra == ["area_exclusivity"]
+
+
+def test_paper_candidate_features_no_dropped_fields():
+    """2026-06-26: PaperCandidateFeatures has no journal_tier_weight or dropped dead features."""
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "paper_strength" not in field_names
+    assert "same_gold_area" not in field_names
+    assert "same_parsed_ccf_area" not in field_names
+    assert "candidate_in_accepted_corpus" not in field_names
+    assert "journal_tier_weight" not in field_names
+    # Confirm useful fields are still there
+    assert "same_ccf_level" in field_names
+    assert "area_exclusivity" in field_names
