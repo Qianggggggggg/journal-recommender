@@ -556,22 +556,32 @@ def main() -> None:
         "--evidence-snapshot",
         default=None,
         help=(
-            "Task 6.4 (26-dim LTR retrain): path to a precompute_evidence.py "
-            "snapshot JSON. When supplied, each training row's 20-dim base "
-            "features are extended with the 6 LLM-evidence fields for the "
-            "(paper, journal_id) pair, and feature_names is set to "
-            "FEATURE_NAMES_WITH_LLM_EVIDENCE. Without this flag, output is "
-            "the legacy 20-dim schema."
+            "Task 6.4 (2026-06-26: 25-dim LTR retrain): path to a "
+            "precompute_evidence.py snapshot JSON. When supplied, each "
+            "training row's 19-dim base features are extended with the "
+            "6 LLM-evidence fields for the (paper, journal_id) pair, "
+            "and feature_names is set to FEATURE_NAMES_WITH_LLM_EVIDENCE. "
+            "Without this flag, output is the legacy 19-dim schema."
         ),
     )
     parser.add_argument(
         "--papers-jsonl",
         default=None,
         help=(
-            "阶段 6.5 (P2-mini, 28-dim schema): path to papers metadata jsonl "
-            "(e.g. papers_metadata_540.jsonl). Used to join paper.research_area "
-            "for area_exclusivity feature. Required when --evidence-snapshot "
-            "is also passed (28-dim path)."
+            "阶段 6.5 (P2-mini, 2026-06-26: 27-dim schema): path to papers "
+            "metadata jsonl (e.g. papers_metadata_540.jsonl). Used to join "
+            "paper.research_area for area_exclusivity feature. Required "
+            "when --evidence-snapshot is also passed (27-dim path)."
+        ),
+    )
+    parser.add_argument(
+        "--accepted-corpus-dir",
+        default="data/accepted_papers",
+        help=(
+            "2026-06-26: path to AcceptedPaperStore directory. When supplied, "
+            "the build script loads the corpus and uses the set of journal_ids "
+            "with papers to compute candidate_in_accepted_corpus. Default: "
+            "data/accepted_papers (the project's standard corpus location)."
         ),
     )
     args = parser.parse_args()
@@ -604,13 +614,34 @@ def main() -> None:
         if not evidence_lookup:
             print(
                 f"[warn] --evidence-snapshot {args.evidence_snapshot} has no "
-                "per-paper evidence; output will use 20-dim defaults."
+                "per-paper evidence; output will use 19-dim defaults."
             )
             evidence_lookup = None
         else:
             print(
                 f"Loaded evidence lookup for {len(evidence_lookup)} papers "
                 f"from {args.evidence_snapshot}"
+            )
+
+    # 2026-06-26: 加载 AcceptedPaperStore 构造 accepted_jid_set,用于计算
+    # candidate_in_accepted_corpus。set 取 _by_journal.keys() (只含至少
+    # 有一篇 paper 的 jid;空 journal 不计入)。
+    accepted_jid_set: set = set()
+    if args.accepted_corpus_dir:
+        try:
+            from src.journals.accepted_paper_store import AcceptedPaperStore
+            accepted_store = AcceptedPaperStore(accepted_dir=args.accepted_corpus_dir)
+            accepted_store.load()
+            accepted_jid_set = set(accepted_store._by_journal.keys())
+            print(
+                f"Loaded {accepted_store.journal_count} journals "
+                f"({accepted_store.count} papers) from {args.accepted_corpus_dir}"
+            )
+        except Exception as e:
+            print(
+                f"[warn] failed to load AcceptedPaperStore from "
+                f"{args.accepted_corpus_dir}: {e}; accepted_jid_set will be empty",
+                file=sys.stderr,
             )
 
     rows = list(
@@ -621,6 +652,7 @@ def main() -> None:
             only_variants=args.variants,
             evidence_lookup=evidence_lookup,
             papers_by_title=papers_by_title,
+            accepted_jid_set=accepted_jid_set,
         )
     )
     with open(args.output, "w", encoding="utf-8") as f:
@@ -651,9 +683,9 @@ def main() -> None:
         report["max_negatives"] = args.max_negatives
         report["negatives_by_type"] = by_type
         report["feature_schema"] = (
-            "26_dim_with_llm_evidence"
+            "25_dim_with_llm_evidence"
             if evidence_lookup is not None
-            else "20_dim_base"
+            else "19_dim_base"
         )
         report["evidence_snapshot"] = (
             str(args.evidence_snapshot) if args.evidence_snapshot else None
