@@ -499,6 +499,17 @@ def build_training_report(
     missing_per_feature: Dict[str, int] = {f: 0 for f in ROUTE_RANK_FEATURES}
     combination_counts: Dict[str, int] = {}
 
+    # 2026-06-26: 4 dead features nonzero 计数(证明 augmentation 真生效)。
+    # 旧 ablation JSON 里这些位置全 0;新 build_training_rows._row()
+    # 会用真实元数据覆写,所以 nonzero > 0 是数据接通的标志。
+    dead_feature_names = [
+        "same_gold_area",
+        "same_parsed_ccf_area",
+        "same_ccf_level",
+        "candidate_in_accepted_corpus",
+    ]
+    dead_feature_nonzero: Dict[str, int] = {f: 0 for f in dead_feature_names}
+
     for row in positive_rows:
         positives_total += 1
         variant = row.get("variant", "")
@@ -519,6 +530,14 @@ def build_training_report(
         combination = _extract_route_combination(feats)
         if combination:
             combination_counts[combination] = combination_counts.get(combination, 0) + 1
+        # 2026-06-26: 4 dead features nonzero 计数(用 row 自身 feature_names
+        # 动态查 idx — schema 改 19/25/27 维时位置可能不同)。
+        fns = row.get("feature_names") or []
+        for fname in dead_feature_names:
+            if fname in fns:
+                idx = fns.index(fname)
+                if idx < len(feats) and feats[idx] > 0.0:
+                    dead_feature_nonzero[fname] += 1
 
     ratio = (positives_in_top50 / positives_total) if positives_total else 0.0
     warning = positives_total > 0 and ratio < RETRIEVAL_TOPK_80_THRESHOLD
@@ -532,6 +551,7 @@ def build_training_report(
         "retrieval_topk_80_threshold": RETRIEVAL_TOPK_80_THRESHOLD,
         "positives_missing_route_features": missing_per_feature,
         "route_combination_counts": combination_counts,
+        "dead_feature_nonzero": dead_feature_nonzero,  # 2026-06-26 新加
     }
 
 

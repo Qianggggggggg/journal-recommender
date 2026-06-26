@@ -339,6 +339,59 @@ def test_build_training_report_includes_positive_and_negative_counts():
     assert report["positives_by_variant"] == {"hybrid": 1}
 
 
+def test_build_training_report_includes_dead_feature_nonzero_counts():
+    """2026-06-26: sidecar report 必须含 dead_feature_nonzero 计数(4 features)。
+
+    验证 4 个 key 都存在,key 类型为 int。无 pos rows 时全 0。
+    """
+    papers = [
+        {"title": "P1", "retrieval_rank": 5, "target_journal_id": "g1", "candidate_features": {"g1": _make_features(0.9)}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    assert "dead_feature_nonzero" in report
+    nz = report["dead_feature_nonzero"]
+    assert set(nz.keys()) == {
+        "same_gold_area", "same_parsed_ccf_area",
+        "same_ccf_level", "candidate_in_accepted_corpus",
+    }
+    for v in nz.values():
+        assert isinstance(v, int)
+
+
+def test_build_training_report_counts_dead_features_when_overlap_exists():
+    """2026-06-26: paper.research_area=["AI"] ∩ gold.subject_tags=["AI","ML"]
+    → same_gold_area nonzero 计数应 >= 1;candidate_in_accepted_corpus 在
+    accepted_jid_set 包含 target 时应 >= 1。"""
+    paper_title = "Paper X"
+    target_jid = "gold_j"
+    candidate_features = _make_19_dim_base_features([target_jid])
+    papers_by_title = {
+        paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI", "ML"], "A"),
+    }
+    accepted_jid_set = {target_jid}
+    ablation = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation, journals_by_id, max_negatives=0,
+        accepted_jid_set=accepted_jid_set,
+        papers_by_title=papers_by_title,
+    ))
+    pos_rows = [r for r in rows if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    nz = report["dead_feature_nonzero"]
+    # paper.research_area=["AI"] ∩ gold.subject_tags=["AI","ML"] → same_gold_area=1
+    assert nz["same_gold_area"] == 1
+    # target_jid ∈ accepted_jid_set → candidate_in_accepted_corpus=1
+    assert nz["candidate_in_accepted_corpus"] == 1
+
+
 # ---------------------------------------------------------------------------
 # Task 6.4 — 26-dim schema with LLM evidence lookup
 # ---------------------------------------------------------------------------
