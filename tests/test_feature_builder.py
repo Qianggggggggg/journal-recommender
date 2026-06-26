@@ -25,17 +25,17 @@ from src.ranker.feature_builder import (
 )
 
 
-def test_feature_names_is_a_locked_list_of_20_strings():
-    """FEATURE_NAMES 是锁定 schema:20 个字符串特征名(per plan 4.1 + ADR 0001)。"""
+def test_feature_names_is_a_locked_list_of_19_strings():
+    """FEATURE_NAMES 是锁定 schema:19 个字符串特征名(per plan 4.1 + ADR 0001)。"""
     assert isinstance(FEATURE_NAMES, list)
-    assert len(FEATURE_NAMES) == 20
+    assert len(FEATURE_NAMES) == 19
     assert all(isinstance(n, str) for n in FEATURE_NAMES)
     # 防止重复
-    assert len(set(FEATURE_NAMES)) == 20
+    assert len(set(FEATURE_NAMES)) == 19
 
 
 def test_llm_evidence_feature_names_extend_locked_schema_without_changing_v1():
-    """6.2 evidence schema 必须显式扩展,不能改变现有 20 维 LTR schema。"""
+    """6.2 evidence schema 必须显式扩展,不能改变现有 19 维 LTR schema。"""
     assert LLM_EVIDENCE_FEATURE_NAMES == [
         "llm_scope_fit",
         "llm_method_fit",
@@ -44,10 +44,10 @@ def test_llm_evidence_feature_names_extend_locked_schema_without_changing_v1():
         "llm_too_broad_penalty",
         "llm_too_narrow_penalty",
     ]
-    assert len(FEATURE_NAMES) == 20
-    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[:20] == FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[20:] == LLM_EVIDENCE_FEATURE_NAMES
-    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 26
+    assert len(FEATURE_NAMES) == 19
+    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[:19] == FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[19:] == LLM_EVIDENCE_FEATURE_NAMES
+    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 25
 
 
 def test_feature_names_includes_accepted_route_features():
@@ -109,13 +109,13 @@ def test_paper_candidate_features_to_vector_preserves_explicit_values_in_order()
 
 
 def test_paper_candidate_features_only_emits_evidence_for_explicit_v2_schema():
-    """默认保持 20 维;显式选择 evidence schema 才输出 26 维。"""
+    """默认保持 19 维;显式选择 evidence schema 才输出 25 维。"""
     f = PaperCandidateFeatures(llm_scope_fit=0.9, llm_too_narrow_penalty=0.2)
 
-    assert len(f.to_vector()) == 20
+    assert len(f.to_vector()) == 19
 
     evidence_vector = f.to_vector(FEATURE_NAMES_WITH_LLM_EVIDENCE)
-    assert len(evidence_vector) == 26
+    assert len(evidence_vector) == 25
     assert evidence_vector[FEATURE_NAMES_WITH_LLM_EVIDENCE.index("llm_scope_fit")] == 0.9
     assert (
         evidence_vector[
@@ -246,19 +246,6 @@ def test_build_features_ccf_rating_none_maps_to_0():
     assert f.journal_ccf_numeric == 0.0
 
 
-def test_build_features_paper_strength_none_defaults_to_0():
-    """paper_profile.paper_strength=None → 0.0(无信号比哨兵 999 更合理,这是连续值)。"""
-    f = build_features(
-        paper_profile=_make_paper_profile(paper_strength=None),
-        journal=_make_journal(),
-        trace_entry={"routes": {}},
-        rule_rank=None,
-        rule_score=0.0,
-        candidate_in_accepted_corpus=False,
-    )
-    assert f.paper_strength == 0.0
-
-
 def test_build_features_uses_neutral_defaults_when_llm_evidence_is_missing():
     """缺失 evidence 不应被当成负信号:fit=0.5, penalty=0.0。"""
     f = build_features(
@@ -279,7 +266,7 @@ def test_build_features_uses_neutral_defaults_when_llm_evidence_is_missing():
 
 
 def test_build_features_extracts_valid_llm_evidence_scores():
-    """合法 evidence 分数应进入 26 维特征对象。"""
+    """合法 evidence 分数应进入 25 维特征对象。"""
     evidence = {
         "scope_fit": 0.91,
         "method_fit": 0.82,
@@ -432,9 +419,9 @@ def test_attach_features_to_trace_adds_features_to_each_journal():
 
     assert "features" in trace["a"]
     assert "feature_names" in trace["a"]
-    assert len(trace["a"]["features"]) == 20
+    assert len(trace["a"]["features"]) == 19
     assert trace["a"]["feature_names"] == FEATURE_NAMES
-    assert len(trace["b"]["features"]) == 20
+    assert len(trace["b"]["features"]) == 19
     # a 在 scope_bm25 rank=2
     assert trace["a"]["features"][FEATURE_NAMES.index("scope_bm25_rank")] == 2.0
     assert trace["a"]["features"][FEATURE_NAMES.index("rule_rank")] == 1.0
@@ -515,7 +502,7 @@ def test_attach_features_to_trace_handles_missing_rule_ranks_gracefully():
     assert trace["a"]["features"][rule_idx] == 999.0
 
 
-def test_attach_features_to_trace_can_emit_explicit_26_dim_evidence_schema():
+def test_attach_features_to_trace_can_emit_explicit_25_dim_evidence_schema():
     """显式选择 v2 schema 时,按 journal_id 注入六维 evidence。"""
     store = _setup_store_with_journals([("a", "A"), ("b", "B")])
     trace = {
@@ -544,7 +531,7 @@ def test_attach_features_to_trace_can_emit_explicit_26_dim_evidence_schema():
     )
 
     assert trace["a"]["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
-    assert len(trace["a"]["features"]) == 26
+    assert len(trace["a"]["features"]) == 25
     assert (
         trace["a"]["features"][
             FEATURE_NAMES_WITH_LLM_EVIDENCE.index("llm_scope_fit")
@@ -566,8 +553,8 @@ def test_attach_features_to_trace_can_emit_explicit_26_dim_evidence_schema():
     )
 
 
-def test_attach_features_to_trace_default_schema_remains_20_dim_when_evidence_exists():
-    """即使传入 evidence,未显式选择 v2 schema 时仍保持旧模型的 20 维输入。"""
+def test_attach_features_to_trace_default_schema_remains_19_dim_when_evidence_exists():
+    """即使传入 evidence,未显式选择 v2 schema 时仍保持旧模型的 19 维输入。"""
     store = _setup_store_with_journals([("a", "A")])
     trace = {"a": {"total_score": 0.5, "routes": {}}}
 
@@ -582,23 +569,24 @@ def test_attach_features_to_trace_default_schema_remains_20_dim_when_evidence_ex
     )
 
     assert trace["a"]["feature_names"] == FEATURE_NAMES
-    assert len(trace["a"]["features"]) == 20
+    assert len(trace["a"]["features"]) == 19
 
 
 # ---------------------------------------------------------------------------
-# 阶段 6.5 (P2-mini): 28-dim schema — journal_tier_weight + area_exclusivity
+# 阶段 6.5 (P2-mini): 27-dim schema — journal_tier_weight + area_exclusivity
+# 2026-06-26: 从 28 维降到 27 维 (paper_strength 已删除)
 # ---------------------------------------------------------------------------
 
 
-def test_feature_names_with_tier_and_exclusivity_is_28_dim():
-    """28 维 schema = 20 base + 6 LLM evidence + 2 tier/area features."""
-    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 28
-    # 前 20 项 == FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[:20] == FEATURE_NAMES
-    # 21-26 == LLM_EVIDENCE_FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[20:26] == LLM_EVIDENCE_FEATURE_NAMES
-    # 27-28 == ["journal_tier_weight", "area_exclusivity"]
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[26:] == [
+def test_feature_names_with_tier_and_exclusivity_is_27_dim():
+    """27 维 schema = 19 base + 6 LLM evidence + 2 tier/area features."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 27
+    # 前 19 项 == FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[:19] == FEATURE_NAMES
+    # 20-25 == LLM_EVIDENCE_FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[19:25] == LLM_EVIDENCE_FEATURE_NAMES
+    # 26-27 == ["journal_tier_weight", "area_exclusivity"]
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[25:] == [
         "journal_tier_weight",
         "area_exclusivity",
     ]
@@ -713,22 +701,22 @@ def test_build_features_default_tier_weight_and_area_exclusivity():
     assert feats.area_exclusivity == 0.0  # 无 anchor
 
 
-def test_paper_candidate_features_to_vector_28_dim():
-    """to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) → 28 长。"""
+def test_paper_candidate_features_to_vector_27_dim():
+    """to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) → 27 长。"""
     feats = PaperCandidateFeatures(
         retrieval_rank=1, rule_rank=1, rule_score=0.5,
-        journal_ccf_numeric=2, paper_strength=0.6,
+        journal_ccf_numeric=2,
         journal_tier_weight=1.0, area_exclusivity=0.5,
     )
     vec = feats.to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)
-    assert len(vec) == 28
+    assert len(vec) == 27
     assert vec[-2] == 1.0  # tier_weight
     assert vec[-1] == 0.5  # area_exclusivity
 
 
-def test_attach_features_to_trace_28_dim_schema_writes_28_features():
+def test_attach_features_to_trace_27_dim_schema_writes_27_features():
     """显式 FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY + paper_anchor_area
-    → trace[jid]['features'] 长 28。"""
+    → trace[jid]['features'] 长 27。"""
     from src.ranker.feature_builder import attach_features_to_trace
 
     journal = Journal(
@@ -752,13 +740,13 @@ def test_attach_features_to_trace_28_dim_schema_writes_28_features():
         n_matching_in_pool=2,
     )
 
-    assert len(trace["ji"]["features"]) == 28
+    assert len(trace["ji"]["features"]) == 27
     assert trace["ji"]["features"][-2] == 1.5  # tier C
     assert trace["ji"]["features"][-1] == 0.5  # 1/2
 
 
-def test_attach_features_20_dim_path_unaffected_by_28_dim_constants():
-    """默认 20 维 schema 仍 20 长 (不破旧测试)。"""
+def test_attach_features_19_dim_path_unaffected_by_27_dim_constants():
+    """默认 19 维 schema 仍 19 长 (不破旧测试)。"""
     journal = Journal(journal_id="j", journal_name="J", ccf_rating="A", subject_tags=["AI"])
     journal_store = MagicMock(spec=JournalStore)
     journal_store.get_journal.return_value = journal
@@ -769,10 +757,10 @@ def test_attach_features_20_dim_path_unaffected_by_28_dim_constants():
         trace, paper, journal_store,
         rule_ranks={"j": 1}, rule_scores={"j": 0.5},
         accepted_paper_store=None,
-        feature_names=None,  # 默认 20 维
+        feature_names=None,  # 默认 19 维
     )
 
-    assert len(trace["j"]["features"]) == 20
+    assert len(trace["j"]["features"]) == 19
     assert trace["j"]["feature_names"] == FEATURE_NAMES
 
 
