@@ -70,7 +70,11 @@ def test_build_negatives_prioritizes_hard_then_same_area_then_easy():
 
 
 def test_build_training_rows_emits_positive_and_negatives():
-    """每篇 paper 应产出 1 个正样本(若 gold 在 features 中)+ 至多 10 个负样本。"""
+    """每篇 paper 应产出 1 个正样本(若 gold 在 features 中)+ 至多 10 个负样本。
+
+    2026-06-26: dead features (same_gold_area, same_parsed_ccf_area,
+    candidate_in_accepted_corpus) 已删除。Base schema 是 16-dim。
+    """
     ablation = {
         "variants": {
             "hybrid": {
@@ -103,12 +107,8 @@ def test_build_training_rows_emits_positive_and_negatives():
     assert len(pos_rows) == 1
     assert pos_rows[0]["journal_id"] == "gold"
     assert pos_rows[0]["negative_type"] == "gold"
-    # 2026-06-26: dead features (idx 14, 15, 16, 18) now recomputed.
-    # No papers_by_title → all 4 → 0.0 (no paper metadata, no accepted corpus).
-    expected_pos_features = _make_features(0.9)
-    for dead_idx in (14, 15, 16, 18):
-        expected_pos_features[dead_idx] = 0.0
-    assert pos_rows[0]["features"] == expected_pos_features
+    # 16-dim schema, no dead features
+    assert len(pos_rows[0]["features"]) == 16
     assert neg_rows[0]["negative_type"] == "hard_rule_top20"
     assert neg_rows[1]["negative_type"] == "easy_other"
 
@@ -171,7 +171,10 @@ def test_build_training_rows_respects_max_negatives_per_paper():
 
 
 def test_build_training_rows_filters_variants():
-    """only_variants=['full_hybrid'] 时,只处理 full_hybrid,跳过 hybrid。"""
+    """only_variants=['full_hybrid'] 时,只处理 full_hybrid,跳过 hybrid。
+
+    2026-06-26: 16-dim schema, no dead features.
+    """
     ablation = {
         "variants": {
             "hybrid": {
@@ -191,12 +194,13 @@ def test_build_training_rows_filters_variants():
     rows = list(build_training_rows(ablation, {}, only_variants=["full_hybrid"]))
     assert len(rows) == 1
     assert rows[0]["variant"] == "full_hybrid"
-    # 2026-06-26: dead features (idx 14, 15, 16, 18) are now recomputed from
-    # metadata — with empty journals + no papers_by_title, all 4 → 0.0.
-    expected_features = _make_features(0.9)
-    for dead_idx in (14, 15, 16, 18):
-        expected_features[dead_idx] = 0.0
+    # 16-dim schema; verify features is exactly 16 elements of 0.9
+    # same_ccf_level (idx 14) is recomputed from gold_journal_meta; with empty
+    # journals_by_id, paper_ccf_target_level="", so same_ccf_level=0.0.
+    expected_features = [0.9] * len(FEATURE_NAMES)
+    expected_features[FEATURE_NAMES.index("same_ccf_level")] = 0.0
     assert rows[0]["features"] == expected_features
+    assert len(rows[0]["features"]) == 16
 
 
 # ---- Task 4.3: sidecar report + 80% warning ----
@@ -361,12 +365,14 @@ def test_build_training_report_includes_dead_feature_nonzero_counts():
 
 
 def test_build_training_report_counts_dead_features_when_overlap_exists():
-    """2026-06-26: paper.research_area=["AI"] ∩ gold.subject_tags=["AI","ML"]
-    → same_gold_area nonzero 计数应 >= 1;candidate_in_accepted_corpus 在
-    accepted_jid_set 包含 target 时应 >= 1。"""
+    """2026-06-26: 4 dead features (same_gold_area, same_parsed_ccf_area,
+    same_ccf_level, candidate_in_accepted_corpus) 已从 schema 删除。
+
+    本测试现在验证 schema 已不再含这些 features;sidecar report 不再统计它们。
+    """
     paper_title = "Paper X"
     target_jid = "gold_j"
-    candidate_features = _make_19_dim_base_features([target_jid])
+    candidate_features = _make_16_dim_base_features([target_jid])
     papers_by_title = {
         paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
     }
@@ -384,12 +390,10 @@ def test_build_training_report_counts_dead_features_when_overlap_exists():
         papers_by_title=papers_by_title,
     ))
     pos_rows = [r for r in rows if r["label"] == 1]
-    report = build_training_report(ablation, pos_rows)
-    nz = report["dead_feature_nonzero"]
-    # paper.research_area=["AI"] ∩ gold.subject_tags=["AI","ML"] → same_gold_area=1
-    assert nz["same_gold_area"] == 1
-    # target_jid ∈ accepted_jid_set → candidate_in_accepted_corpus=1
-    assert nz["candidate_in_accepted_corpus"] == 1
+    # 16-dim base schema, dead features 已删除
+    assert len(pos_rows[0]["features"]) == 16
+    assert "same_gold_area" not in pos_rows[0]["feature_names"]
+    assert "candidate_in_accepted_corpus" not in pos_rows[0]["feature_names"]
 
 
 # ---------------------------------------------------------------------------
@@ -398,11 +402,11 @@ def test_build_training_report_counts_dead_features_when_overlap_exists():
 
 
 def test_build_training_rows_outputs_19_dim_by_default():
-    """No evidence_lookup → 19-dim schema (2026-06-26: paper_strength removed, was 20).
+    """No evidence_lookup → 16-dim schema (2026-06-26: 16-dim, was 19-dim).
 
-    The ablation JSON may carry legacy 20-dim candidate_features (paper_strength
+    The ablation JSON may carry legacy 19/20-dim candidate_features (paper_strength
     position); build_training_rows must trim idx 18 (paper_strength) before
-    writing the row so output is always 19-dim.
+    writing the row so output is always 16-dim.
     """
     papers = [
         {
@@ -414,7 +418,9 @@ def test_build_training_rows_outputs_19_dim_by_default():
     ]
     ablation = _ablation_with_paper_features(papers)
     rows = list(build_training_rows(ablation, {}))
-    assert all(len(r["features"]) == 19 for r in rows)
+    assert all(len(r["features"]) == 16 for r in rows), (
+        f"expected 16-dim base, got {[len(r['features']) for r in rows]}"
+    )
     assert all(r["feature_names"] == FEATURE_NAMES for r in rows)
 
 
@@ -453,13 +459,17 @@ def test_build_training_rows_appends_6_evidence_fields_when_lookup_supplied():
         }
     }
     rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
-    assert all(len(r["features"]) == 25 for r in rows)
+    assert all(len(r["features"]) == 22 for r in rows), (
+        f"expected 22-dim (was 25), got {[len(r['features']) for r in rows]}"
+    )
     assert all(r["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE for r in rows)
-    # The 6 appended evidence values match the snapshot
+    # The 6 appended evidence values match the snapshot (2026-06-26: at idx 16+, was 19+)
     g1_row = next(r for r in rows if r["journal_id"] == "g1" and r["label"] == 1)
-    assert g1_row["features"][19:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    assert g1_row["features"][16:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05], (
+        f"evidence expected at idx 16-21, got {g1_row['features'][16:]}"
+    )
     n1_row = next(r for r in rows if r["journal_id"] == "n1")
-    assert n1_row["features"][19:] == [0.2, 0.3, 0.4, 0.25, 0.0, 0.0]
+    assert n1_row["features"][16:] == [0.2, 0.3, 0.4, 0.25, 0.0, 0.0]
 
 
 def test_build_training_rows_uses_neutral_defaults_for_missing_evidence():
@@ -489,15 +499,17 @@ def test_build_training_rows_uses_neutral_defaults_for_missing_evidence():
     rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
     g1_row = next(r for r in rows if r["journal_id"] == "g1")
     n1_row = next(r for r in rows if r["journal_id"] == "n1")
-    assert g1_row["features"][19:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    # 2026-06-26: 16-dim base; evidence slice starts at len(FEATURE_NAMES)
+    base_dim = len(FEATURE_NAMES)
+    assert g1_row["features"][base_dim:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
     # n1 falls back to neutral: 4 fits at 0.5, 2 penalties at 0.0
     expected_neutral = [
         0.5, 0.5, 0.5, 0.5,  # fits
         0.0, 0.0,  # penalties
     ]
-    assert n1_row["features"][19:] == expected_neutral
+    assert n1_row["features"][base_dim:] == expected_neutral
     # Sanity: 6 evidence values in the order declared in LLM_EVIDENCE_FEATURE_NAMES
-    assert len(n1_row["features"][19:]) == len(LLM_EVIDENCE_FEATURE_NAMES)
+    assert len(n1_row["features"][base_dim:]) == len(LLM_EVIDENCE_FEATURE_NAMES)
 
 
 def test_build_training_rows_uses_neutral_defaults_for_invalid_evidence_values():
@@ -527,7 +539,9 @@ def test_build_training_rows_uses_neutral_defaults_for_invalid_evidence_values()
     rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
     g1 = next(r for r in rows if r["journal_id"] == "g1")
     # All 6 fields fell back to defaults (only application_fit=0.6 was valid)
-    assert g1["features"][19:] == [0.5, 0.5, 0.6, 0.5, 0.0, 0.0]
+    # 2026-06-26: 16-dim base; evidence slice starts at len(FEATURE_NAMES)
+    base_dim = len(FEATURE_NAMES)
+    assert g1["features"][base_dim:] == [0.5, 0.5, 0.6, 0.5, 0.0, 0.0]
 
 
 def test_build_training_rows_uses_title_only_key_when_venue_empty():
@@ -557,9 +571,13 @@ def test_build_training_rows_uses_title_only_key_when_venue_empty():
     }
     rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
     g1 = next(r for r in rows if r["journal_id"] == "g1")
-    assert g1["features"][19:] == [0.7, 0.6, 0.5, 0.4, 0.0, 0.0]
-    # Schema is 25-dim (2026-06-26: was 26)
-    assert len(g1["features"]) == 25
+    assert g1["features"][16:] == [0.7, 0.6, 0.5, 0.4, 0.0, 0.0], (
+        f"expected evidence at idx 16-21, got {g1['features'][16:]}"
+    )
+    # Schema is 22-dim (2026-06-26: 16 base + 6 evidence = 22, was 25/26)
+    assert len(g1["features"]) == 22, (
+        f"expected 22-dim (was 25), got {len(g1['features'])}"
+    )
     assert g1["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
 
 
@@ -572,20 +590,28 @@ def test_build_training_rows_uses_title_only_key_when_venue_empty():
 def _make_19_dim_base_features(
     journal_ids: list, accepted_jid_set: set = None
 ) -> dict:
-    """Build a 19-dim base feature vector per jid (no paper_strength).
+    """兼容名 (旧测试可能还在引用);内部走 16-dim 实现。"""
+    return _make_16_dim_base_features(journal_ids, accepted_jid_set)
+
+
+def _make_16_dim_base_features(
+    journal_ids: list, accepted_jid_set: set = None
+) -> dict:
+    """Build a 16-dim base feature vector per jid (2026-06-26: 16-dim, was 19-dim).
 
     Schema (per src/ranker/feature_builder.py):
       0:retrieval_rank, 1:rule_rank, 2:rule_score,
       3-8: scope/typical/accepted bm25/vector rank (999 sentinel = missing)
       9:route_count, 10:has_scope_route, 11:has_typical_route,
       12:has_accepted_route, 13:has_identity_anchor,
-      14:same_gold_area, 15:same_parsed_ccf_area, 16:same_ccf_level,
-      17:journal_ccf_numeric, 18:candidate_in_accepted_corpus
+      14:same_ccf_level, 15:journal_ccf_numeric
+    (2026-06-26: 删 4 dead/noise features: same_gold_area, same_parsed_ccf_area,
+    candidate_in_accepted_corpus, journal_tier_weight)
     """
     accepted_jid_set = accepted_jid_set or set()
     out = {}
     for jid in journal_ids:
-        feats = [999.0] * 19
+        feats = [999.0] * 16
         feats[0] = 1.0   # retrieval_rank
         feats[1] = 999.0  # rule_rank (missing)
         feats[2] = 0.0   # rule_score
@@ -595,12 +621,8 @@ def _make_19_dim_base_features(
         feats[11] = 0.0  # has_typical_route
         feats[12] = 0.0  # has_accepted_route
         feats[13] = 0.0  # has_identity_anchor
-        # 14-17 dead placeholders (will be overwritten by build_training_rows)
-        feats[14] = 0.0
-        feats[15] = 0.0
-        feats[16] = 0.0
-        feats[17] = 0.0
-        feats[18] = 1.0 if jid in accepted_jid_set else 0.0
+        feats[14] = 0.0  # same_ccf_level (will be overwritten by build_training_rows)
+        feats[15] = 0.0  # journal_ccf_numeric
         out[jid] = feats
     return out
 
@@ -646,86 +668,39 @@ def _ablation_with_one_paper(
 
 
 def test_same_gold_area_computed_when_research_area_overlaps():
-    """same_gold_area=1.0 when paper.research_area ∩ gold.subject_tags ≠ ∅.
+    """2026-06-26: same_gold_area feature 已删除。验证 schema 中不再含此 feature。
 
-    Gold journal subject_tags=["AI","ML"], paper.research_area=["AI"] → overlap → 1.0
-    for both the gold row and the neg row (same_gold_area is a paper×gold signal,
-    not a candidate-level signal — it's 1.0 for all candidates of this paper when
-    paper.research_area matches the gold venue's tags).
-
-    Counter-test: a paper whose research_area=["Databases"] with same gold subject_tags
-    gets same_gold_area=0.0 (no overlap).
+    Schema 是 16-dim,不含 same_gold_area / same_parsed_ccf_area /
+    candidate_in_accepted_corpus。
     """
     paper_title = "Test Paper A"
     target_jid = "gold_j"
-    neg_jid = "neg_j"
-    candidate_jids = [target_jid, neg_jid]
-    candidate_features = _make_19_dim_base_features(candidate_jids)
-
+    candidate_features = _make_16_dim_base_features([target_jid])
     papers_by_title = {
         paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
     }
     journals_by_id = {
         target_jid: _make_journal_meta(target_jid, ["AI", "ML"], "A"),
-        neg_jid: _make_journal_meta(neg_jid, ["Databases"], "B"),
     }
     ablation_data = _ablation_with_one_paper(
-        paper_title, target_jid, candidate_jids, candidate_features,
+        paper_title, target_jid, [target_jid], candidate_features,
         rule_top20=[target_jid],
     )
-
     rows = list(build_training_rows(
-        ablation_data=ablation_data,
-        journals_by_id=journals_by_id,
-        max_negatives=1,
+        ablation_data, journals_by_id, max_negatives=0,
         accepted_jid_set=set(),
         papers_by_title=papers_by_title,
     ))
-
-    pos_rows = [r for r in rows if r["label"] == 1]
-    assert len(pos_rows) == 1
-    pos = pos_rows[0]
-    same_gold_area_idx = pos["feature_names"].index("same_gold_area")
-    # paper.research_area=["AI"] ∩ gold.subject_tags=["AI","ML"] → 1.0
-    assert pos["features"][same_gold_area_idx] == 1.0
-
-    neg_rows = [r for r in rows if r["label"] == 0]
-    assert len(neg_rows) == 1
-    neg = neg_rows[0]
-    # same_gold_area is paper×gold, so it's also 1.0 for the neg candidate
-    # (it's a property of the paper, not the candidate).
-    assert neg["features"][same_gold_area_idx] == 1.0
-
-    # Counter-test: a paper with research_area=["Databases"] for the same gold
-    # journal → same_gold_area=0.0.
-    paper_title_b = "Test Paper A-bis"
-    papers_by_title_b = {
-        paper_title_b: _make_paper_meta(paper_title_b, research_area=["Databases"]),
-    }
-    ablation_data_b = _ablation_with_one_paper(
-        paper_title_b, target_jid, [target_jid], _make_19_dim_base_features([target_jid]),
-        rule_top20=[target_jid],
-    )
-    rows_b = list(build_training_rows(
-        ablation_data=ablation_data_b,
-        journals_by_id=journals_by_id,
-        max_negatives=0,
-        accepted_jid_set=set(),
-        papers_by_title=papers_by_title_b,
-    ))
-    pos_b = next(r for r in rows_b if r["label"] == 1)
-    assert pos_b["features"][same_gold_area_idx] == 0.0
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "same_gold_area" not in pos["feature_names"]
+    assert len(pos["features"]) == 16
 
 
 def test_same_parsed_ccf_area_computed_when_ccf_area_overlaps():
-    """same_parsed_ccf_area=1.0 when paper.ccf_research_area ∩ gold.subject_tags ≠ ∅.
-
-    paper.ccf_research_area=["人工智能"], gold.subject_tags=["人工智能","机器学习"] → 1.0.
-    """
+    """2026-06-26: same_parsed_ccf_area feature 已删除。"""
     paper_title = "Test Paper B"
     target_jid = "gold_j"
-    candidate_features = _make_19_dim_base_features([target_jid])
-
+    candidate_features = _make_16_dim_base_features([target_jid])
     papers_by_title = {
         paper_title: _make_paper_meta(
             paper_title,
@@ -740,17 +715,13 @@ def test_same_parsed_ccf_area_computed_when_ccf_area_overlaps():
         paper_title, target_jid, [target_jid], candidate_features,
         rule_top20=[target_jid],
     )
-
     rows = list(build_training_rows(
-        ablation_data=ablation_data,
-        journals_by_id=journals_by_id,
-        max_negatives=0,
+        ablation_data, journals_by_id, max_negatives=0,
         accepted_jid_set=set(),
         papers_by_title=papers_by_title,
     ))
     pos = next(r for r in rows if r["label"] == 1)
-    idx = pos["feature_names"].index("same_parsed_ccf_area")
-    assert pos["features"][idx] == 1.0
+    assert "same_parsed_ccf_area" not in pos["feature_names"]
 
 
 def test_same_ccf_level_computed_when_levels_match():
@@ -790,63 +761,45 @@ def test_same_ccf_level_computed_when_levels_match():
 
 
 def test_candidate_in_accepted_corpus_set_when_jid_in_corpus():
-    """candidate_in_accepted_corpus=1.0 when jid ∈ AcceptedPaperStore, else 0.0."""
+    """2026-06-26: candidate_in_accepted_corpus feature 已删除。"""
     paper_title = "Test Paper D"
     target_jid = "in_corpus_j"
-    other_jid = "not_in_corpus_j"
-    candidate_jids = [target_jid, other_jid]
-    candidate_features = _make_19_dim_base_features(candidate_jids)
-
+    candidate_features = _make_16_dim_base_features([target_jid])
     papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
-    journals_by_id = {
-        target_jid: _make_journal_meta(target_jid, ["AI"], "A"),
-        other_jid: _make_journal_meta(other_jid, ["AI"], "A"),
-    }
-    accepted_jid_set = {target_jid}  # only target in corpus
-
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    accepted_jid_set = {target_jid}
     ablation_data = _ablation_with_one_paper(
-        paper_title, target_jid, candidate_jids, candidate_features,
+        paper_title, target_jid, [target_jid], candidate_features,
         rule_top20=[target_jid],
     )
-
     rows = list(build_training_rows(
-        ablation_data=ablation_data,
-        journals_by_id=journals_by_id,
-        max_negatives=1,
+        ablation_data, journals_by_id, max_negatives=0,
         accepted_jid_set=accepted_jid_set,
         papers_by_title=papers_by_title,
     ))
-    feature_names = rows[0]["feature_names"]
-    idx = feature_names.index("candidate_in_accepted_corpus")
-    by_jid = {r["journal_id"]: r for r in rows}
-    assert by_jid[target_jid]["features"][idx] == 1.0
-    assert by_jid[other_jid]["features"][idx] == 0.0
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "candidate_in_accepted_corpus" not in pos["feature_names"]
 
 
 def test_base_features_19_dim_not_20():
-    """2026-06-26: paper_strength removed → base features are 19-dim, not 20."""
+    """2026-06-26: base features are 16-dim (was 19/20-dim)."""
     paper_title = "Test Paper E"
     target_jid = "gold_j"
-    candidate_features = _make_19_dim_base_features([target_jid])
+    candidate_features = _make_16_dim_base_features([target_jid])
     papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
     journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
     ablation_data = _ablation_with_one_paper(
         paper_title, target_jid, [target_jid], candidate_features,
         rule_top20=[target_jid],
     )
-
     rows = list(build_training_rows(
-        ablation_data=ablation_data,
-        journals_by_id=journals_by_id,
-        max_negatives=0,
+        ablation_data, journals_by_id, max_negatives=0,
         accepted_jid_set=set(),
         papers_by_title=papers_by_title,
     ))
     pos = next(r for r in rows if r["label"] == 1)
-    # 19 base + 6 evidence = 25 (when evidence_lookup is None → just 19 base)
-    # Without evidence_lookup the schema is 19-dim.
-    assert len(pos["features"]) == 19
-    assert len(pos["feature_names"]) == 19
+    assert len(pos["features"]) == 16
+    assert len(pos["feature_names"]) == 16
 
 
 def test_no_paper_strength_in_feature_names():

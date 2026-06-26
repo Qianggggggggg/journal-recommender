@@ -25,17 +25,20 @@ from src.ranker.feature_builder import (
 )
 
 
-def test_feature_names_is_a_locked_list_of_19_strings():
-    """FEATURE_NAMES 是锁定 schema:19 个字符串特征名(per plan 4.1 + ADR 0001)。"""
+def test_feature_names_is_a_locked_list_of_16_strings():
+    """FEATURE_NAMES 是锁定 schema:16 个字符串特征名(per plan 4.1 + ADR 0001)。
+
+    2026-06-26: 从 19 维降到 16 维 (删 3 noise/dead features)。
+    """
     assert isinstance(FEATURE_NAMES, list)
-    assert len(FEATURE_NAMES) == 19
+    assert len(FEATURE_NAMES) == 16
     assert all(isinstance(n, str) for n in FEATURE_NAMES)
     # 防止重复
-    assert len(set(FEATURE_NAMES)) == 19
+    assert len(set(FEATURE_NAMES)) == 16
 
 
 def test_llm_evidence_feature_names_extend_locked_schema_without_changing_v1():
-    """6.2 evidence schema 必须显式扩展,不能改变现有 19 维 LTR schema。"""
+    """6.2 evidence schema 必须显式扩展,不能改变现有 16 维 LTR schema (2026-06-26: 22-dim, was 25)。"""
     assert LLM_EVIDENCE_FEATURE_NAMES == [
         "llm_scope_fit",
         "llm_method_fit",
@@ -44,10 +47,10 @@ def test_llm_evidence_feature_names_extend_locked_schema_without_changing_v1():
         "llm_too_broad_penalty",
         "llm_too_narrow_penalty",
     ]
-    assert len(FEATURE_NAMES) == 19
-    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[:19] == FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[19:] == LLM_EVIDENCE_FEATURE_NAMES
-    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 25
+    assert len(FEATURE_NAMES) == 16
+    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[:16] == FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_LLM_EVIDENCE[16:] == LLM_EVIDENCE_FEATURE_NAMES
+    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 22
 
 
 def test_feature_names_includes_accepted_route_features():
@@ -55,8 +58,7 @@ def test_feature_names_includes_accepted_route_features():
     assert "accepted_bm25_rank" in FEATURE_NAMES
     assert "accepted_vector_rank" in FEATURE_NAMES
     assert "has_accepted_route" in FEATURE_NAMES
-    # candidate-level 信号(可推理)
-    assert "candidate_in_accepted_corpus" in FEATURE_NAMES
+    # 2026-06-26: candidate_in_accepted_corpus 已删除 (99.8% = 1.0, no signal)
 
 
 def test_feature_names_excludes_gold_oracle_feature():
@@ -99,23 +101,21 @@ def test_paper_candidate_features_to_vector_preserves_explicit_values_in_order()
         retrieval_rank=3.0,
         rule_rank=2.0,
         has_accepted_route=1.0,
-        candidate_in_accepted_corpus=1.0,
     )
     vec = f.to_vector()
     assert vec[FEATURE_NAMES.index("retrieval_rank")] == 3.0
     assert vec[FEATURE_NAMES.index("rule_rank")] == 2.0
     assert vec[FEATURE_NAMES.index("has_accepted_route")] == 1.0
-    assert vec[FEATURE_NAMES.index("candidate_in_accepted_corpus")] == 1.0
 
 
 def test_paper_candidate_features_only_emits_evidence_for_explicit_v2_schema():
-    """默认保持 19 维;显式选择 evidence schema 才输出 25 维。"""
+    """默认保持 16 维;显式选择 evidence schema 才输出 22 维 (2026-06-26: was 19/25)。"""
     f = PaperCandidateFeatures(llm_scope_fit=0.9, llm_too_narrow_penalty=0.2)
 
-    assert len(f.to_vector()) == 19
+    assert len(f.to_vector()) == 16
 
     evidence_vector = f.to_vector(FEATURE_NAMES_WITH_LLM_EVIDENCE)
-    assert len(evidence_vector) == 25
+    assert len(evidence_vector) == 22
     assert evidence_vector[FEATURE_NAMES_WITH_LLM_EVIDENCE.index("llm_scope_fit")] == 0.9
     assert (
         evidence_vector[
@@ -126,16 +126,16 @@ def test_paper_candidate_features_only_emits_evidence_for_explicit_v2_schema():
 
 
 def test_paper_candidate_features_boolean_features_are_floats():
-    """所有布尔/二元特征必须以 0.0/1.0 形式存储(per plan 4.1)。"""
+    """所有布尔/二元特征必须以 0.0/1.0 形式存储(per plan 4.1)。
+
+    2026-06-26: same_gold_area / same_parsed_ccf_area / candidate_in_accepted_corpus 已删除。
+    """
     f = PaperCandidateFeatures(
         has_scope_route=1.0,
         has_typical_route=0.0,
         has_accepted_route=1.0,
         has_identity_anchor=0.0,
-        same_gold_area=1.0,
-        same_parsed_ccf_area=0.0,
         same_ccf_level=1.0,
-        candidate_in_accepted_corpus=0.0,
     )
     assert f.has_scope_route == 1.0
     assert f.has_typical_route == 0.0
@@ -194,30 +194,9 @@ def test_build_features_rule_rank_none_uses_sentinel():
     assert f.rule_rank == 999.0
 
 
-def test_build_features_sets_candidate_in_accepted_corpus_to_1_when_passed_true():
-    """调用者传入 candidate_in_accepted_corpus=True → 1.0(per ADR 0001)。"""
-    f = build_features(
-        paper_profile=_make_paper_profile(),
-        journal=_make_journal(),
-        trace_entry={"routes": {}},
-        rule_rank=None,
-        rule_score=0.0,
-        candidate_in_accepted_corpus=True,
-    )
-    assert f.candidate_in_accepted_corpus == 1.0
-
-
-def test_build_features_sets_candidate_in_accepted_corpus_to_0_when_passed_false():
-    """调用者传入 candidate_in_accepted_corpus=False → 0.0。"""
-    f = build_features(
-        paper_profile=_make_paper_profile(),
-        journal=_make_journal(journal_id="uncovered_journal"),
-        trace_entry={"routes": {}},
-        rule_rank=None,
-        rule_score=0.0,
-        candidate_in_accepted_corpus=False,
-    )
-    assert f.candidate_in_accepted_corpus == 0.0
+# 2026-06-26: candidate_in_accepted_corpus feature 已删除 (99.8% = 1.0, no signal)
+# 但 build_features 仍接受 candidate_in_accepted_corpus 参数以保持向后兼容
+# (参数被忽略,不会写入 features)。下面的 test_build_features_* 已废弃。
 
 
 def test_build_features_ccf_rating_a_maps_to_3():
@@ -400,7 +379,10 @@ def _write_corpus_journal(dir_path: Path, jid: str) -> None:
 
 
 def test_attach_features_to_trace_adds_features_to_each_journal():
-    """对 trace 中每本期刊,都应注入 'features' 与 'feature_names'。"""
+    """对 trace 中每本期刊,都应注入 'features' 与 'feature_names'。
+
+    2026-06-26: 默认 16 维 (was 19)。
+    """
     store = _setup_store_with_journals([("a", "A"), ("b", "B")])
     trace = {
         "a": {"total_score": 0.5, "routes": {"scope_bm25": {"rank": 2, "raw_score": 1.0, "normalized_score": 0.5, "weighted_score": 0.2}}},
@@ -419,9 +401,9 @@ def test_attach_features_to_trace_adds_features_to_each_journal():
 
     assert "features" in trace["a"]
     assert "feature_names" in trace["a"]
-    assert len(trace["a"]["features"]) == 19
+    assert len(trace["a"]["features"]) == 16
     assert trace["a"]["feature_names"] == FEATURE_NAMES
-    assert len(trace["b"]["features"]) == 19
+    assert len(trace["b"]["features"]) == 16
     # a 在 scope_bm25 rank=2
     assert trace["a"]["features"][FEATURE_NAMES.index("scope_bm25_rank")] == 2.0
     assert trace["a"]["features"][FEATURE_NAMES.index("rule_rank")] == 1.0
@@ -431,12 +413,11 @@ def test_attach_features_to_trace_adds_features_to_each_journal():
 
 
 def test_attach_features_to_trace_marks_candidate_in_corpus_correctly(tmp_path: Path):
-    """candidate_in_accepted_corpus 必须从 accepted_paper_store 读取,不能写死。"""
+    """2026-06-26: candidate_in_accepted_corpus feature 已删除,本测试改为
+    验证 features 长度正确 (16-dim 默认 schema)。"""
     _write_corpus_journal(tmp_path, "a")
-    # b 不在 corpus
     store = _setup_store_with_journals([("a", "A"), ("b", "B")])
-    store_path = tmp_path
-    accepted_store = AcceptedPaperStore(str(store_path))
+    accepted_store = AcceptedPaperStore(str(tmp_path))
     accepted_store.load()
 
     trace = {
@@ -454,9 +435,9 @@ def test_attach_features_to_trace_marks_candidate_in_corpus_correctly(tmp_path: 
         accepted_paper_store=accepted_store,
     )
 
-    corpus_feat_idx = FEATURE_NAMES.index("candidate_in_accepted_corpus")
-    assert trace["a"]["features"][corpus_feat_idx] == 1.0
-    assert trace["b"]["features"][corpus_feat_idx] == 0.0
+    # 16-dim schema;candidate_in_accepted_corpus 已删除 (不再写入)
+    assert len(trace["a"]["features"]) == 16
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
 
 
 def test_attach_features_to_trace_handles_journal_missing_from_store():
@@ -502,8 +483,8 @@ def test_attach_features_to_trace_handles_missing_rule_ranks_gracefully():
     assert trace["a"]["features"][rule_idx] == 999.0
 
 
-def test_attach_features_to_trace_can_emit_explicit_25_dim_evidence_schema():
-    """显式选择 v2 schema 时,按 journal_id 注入六维 evidence。"""
+def test_attach_features_to_trace_can_emit_explicit_22_dim_evidence_schema():
+    """显式选择 v2 schema 时,按 journal_id 注入六维 evidence (2026-06-26: was 25-dim)。"""
     store = _setup_store_with_journals([("a", "A"), ("b", "B")])
     trace = {
         "a": {"total_score": 0.5, "routes": {}},
@@ -531,7 +512,7 @@ def test_attach_features_to_trace_can_emit_explicit_25_dim_evidence_schema():
     )
 
     assert trace["a"]["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
-    assert len(trace["a"]["features"]) == 25
+    assert len(trace["a"]["features"]) == 22
     assert (
         trace["a"]["features"][
             FEATURE_NAMES_WITH_LLM_EVIDENCE.index("llm_scope_fit")
@@ -553,8 +534,8 @@ def test_attach_features_to_trace_can_emit_explicit_25_dim_evidence_schema():
     )
 
 
-def test_attach_features_to_trace_default_schema_remains_19_dim_when_evidence_exists():
-    """即使传入 evidence,未显式选择 v2 schema 时仍保持旧模型的 19 维输入。"""
+def test_attach_features_to_trace_default_schema_remains_16_dim_when_evidence_exists():
+    """即使传入 evidence,未显式选择 v2 schema 时仍保持旧模型的 16 维输入 (2026-06-26: was 19)。"""
     store = _setup_store_with_journals([("a", "A")])
     trace = {"a": {"total_score": 0.5, "routes": {}}}
 
@@ -569,28 +550,25 @@ def test_attach_features_to_trace_default_schema_remains_19_dim_when_evidence_ex
     )
 
     assert trace["a"]["feature_names"] == FEATURE_NAMES
-    assert len(trace["a"]["features"]) == 19
+    assert len(trace["a"]["features"]) == 16
 
 
 # ---------------------------------------------------------------------------
-# 阶段 6.5 (P2-mini): 27-dim schema — journal_tier_weight + area_exclusivity
-# 2026-06-26: 从 28 维降到 27 维 (paper_strength 已删除)
+# 阶段 6.5 (P2-mini): 23-dim schema — area_exclusivity only (2026-06-26)
+# 2026-06-26: 从 27 维降到 23 维 (删 journal_tier_weight)
 # ---------------------------------------------------------------------------
 
 
-def test_feature_names_with_tier_and_exclusivity_is_27_dim():
-    """27 维 schema = 19 base + 6 LLM evidence + 2 tier/area features."""
-    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 27
-    # 前 19 项 == FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[:19] == FEATURE_NAMES
-    # 20-25 == LLM_EVIDENCE_FEATURE_NAMES
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[19:25] == LLM_EVIDENCE_FEATURE_NAMES
-    # 26-27 == ["journal_tier_weight", "area_exclusivity"]
-    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[25:] == [
-        "journal_tier_weight",
-        "area_exclusivity",
-    ]
-    assert TIER_EXCLUSIVITY_FEATURE_NAMES == ["journal_tier_weight", "area_exclusivity"]
+def test_feature_names_with_tier_and_exclusivity_is_23_dim():
+    """23 维 schema = 16 base + 6 LLM evidence + 1 area_exclusivity (no journal_tier_weight)."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 23
+    # 前 16 项 == FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[:16] == FEATURE_NAMES
+    # 17-22 == LLM_EVIDENCE_FEATURE_NAMES
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[16:22] == LLM_EVIDENCE_FEATURE_NAMES
+    # 23 == ["area_exclusivity"]
+    assert FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY[22:] == ["area_exclusivity"]
+    assert TIER_EXCLUSIVITY_FEATURE_NAMES == ["area_exclusivity"]
 
 
 def test_tier_weight_value_returns_expected_discrete_values():
@@ -629,29 +607,10 @@ def test_area_exclusivity_value_one_over_n_when_match():
 
 
 def test_build_features_populates_tier_weight_from_journal_ccf_rating():
-    """build_features 内置 _tier_weight_value(journal.ccf_rating) → tier_weight 字段。"""
-    journal_c = Journal(journal_id="j_c", journal_name="C", ccf_rating="C", subject_tags=["AI"])
-    paper = PaperProfile(title="t", research_area=["AI"])
-    feats = build_features(
-        paper_profile=paper,
-        journal=journal_c,
-        trace_entry={"retrieval_rank": 1, "routes": {}},
-        rule_rank=1,
-        rule_score=0.9,
-        candidate_in_accepted_corpus=False,
-    )
-    assert feats.journal_tier_weight == 1.5  # C → 1.5
-
-    journal_a = Journal(journal_id="j_a", journal_name="A", ccf_rating="A", subject_tags=["AI"])
-    feats_a = build_features(
-        paper_profile=paper,
-        journal=journal_a,
-        trace_entry={"retrieval_rank": 1, "routes": {}},
-        rule_rank=1,
-        rule_score=0.9,
-        candidate_in_accepted_corpus=False,
-    )
-    assert feats_a.journal_tier_weight == 0.7  # A → 0.7
+    """2026-06-26: journal_tier_weight 已删除。本测试验证 _tier_weight_value()
+    函数本身仍存在并返回正确值 (向后兼容,仅 23-dim schema 已不再使用)。"""
+    assert _tier_weight_value("A") == 0.7
+    assert _tier_weight_value("C") == 1.5
 
 
 def test_build_features_populates_area_exclusivity_from_paper_anchor():
@@ -685,8 +644,9 @@ def test_build_features_populates_area_exclusivity_from_paper_anchor():
     assert feats2.area_exclusivity == 0.0  # 不匹配
 
 
-def test_build_features_default_tier_weight_and_area_exclusivity():
-    """不传 paper_anchor_area + n_matching → area_exclusivity=0.0, tier_weight=1.0 (中性)。"""
+def test_build_features_default_area_exclusivity_no_tier_weight():
+    """2026-06-26: 不传 paper_anchor_area + n_matching → area_exclusivity=0.0;
+    journal_tier_weight 字段已删除。"""
     journal = Journal(journal_id="j", journal_name="J")  # ccf_rating=None
     paper = PaperProfile(title="t")
     feats = build_features(
@@ -697,26 +657,28 @@ def test_build_features_default_tier_weight_and_area_exclusivity():
         rule_score=0.9,
         candidate_in_accepted_corpus=False,
     )
-    assert feats.journal_tier_weight == 1.0  # unknown → 中性
     assert feats.area_exclusivity == 0.0  # 无 anchor
+    # 验证 journal_tier_weight 字段已从 dataclass 删除
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "journal_tier_weight" not in field_names
 
 
-def test_paper_candidate_features_to_vector_27_dim():
-    """to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) → 27 长。"""
+def test_paper_candidate_features_to_vector_23_dim():
+    """to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) → 23 长 (2026-06-26: was 27)。"""
     feats = PaperCandidateFeatures(
         retrieval_rank=1, rule_rank=1, rule_score=0.5,
         journal_ccf_numeric=2,
-        journal_tier_weight=1.0, area_exclusivity=0.5,
+        area_exclusivity=0.5,
     )
     vec = feats.to_vector(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)
-    assert len(vec) == 27
-    assert vec[-2] == 1.0  # tier_weight
+    assert len(vec) == 23
     assert vec[-1] == 0.5  # area_exclusivity
 
 
-def test_attach_features_to_trace_27_dim_schema_writes_27_features():
+def test_attach_features_to_trace_23_dim_schema_writes_23_features():
     """显式 FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY + paper_anchor_area
-    → trace[jid]['features'] 长 27。"""
+    → trace[jid]['features'] 长 23 (2026-06-26: was 27)。"""
     from src.ranker.feature_builder import attach_features_to_trace
 
     journal = Journal(
@@ -740,13 +702,13 @@ def test_attach_features_to_trace_27_dim_schema_writes_27_features():
         n_matching_in_pool=2,
     )
 
-    assert len(trace["ji"]["features"]) == 27
-    assert trace["ji"]["features"][-2] == 1.5  # tier C
-    assert trace["ji"]["features"][-1] == 0.5  # 1/2
+    assert len(trace["ji"]["features"]) == 23
+    assert trace["ji"]["features"][-1] == 0.5  # 1/2 (area_exclusivity)
+    # journal_tier_weight 已删除:23-dim schema 末尾 1 个元素就是 area_exclusivity
 
 
-def test_attach_features_19_dim_path_unaffected_by_27_dim_constants():
-    """默认 19 维 schema 仍 19 长 (不破旧测试)。"""
+def test_attach_features_16_dim_path_unaffected_by_23_dim_constants():
+    """默认 16 维 schema 仍 16 长 (2026-06-26: was 19)。"""
     journal = Journal(journal_id="j", journal_name="J", ccf_rating="A", subject_tags=["AI"])
     journal_store = MagicMock(spec=JournalStore)
     journal_store.get_journal.return_value = journal
@@ -757,96 +719,16 @@ def test_attach_features_19_dim_path_unaffected_by_27_dim_constants():
         trace, paper, journal_store,
         rule_ranks={"j": 1}, rule_scores={"j": 0.5},
         accepted_paper_store=None,
-        feature_names=None,  # 默认 19 维
+        feature_names=None,  # 默认 16 维
     )
 
-    assert len(trace["j"]["features"]) == 19
+    assert len(trace["j"]["features"]) == 16
     assert trace["j"]["feature_names"] == FEATURE_NAMES
 
 
 # ---------------------------------------------------------------------------
-# 2026-06-25: 修复 same_* 三个 dead 特征 (from 0.0 占位 → 真实计算)
+# 2026-06-26: same_gold_area / same_parsed_ccf_area 已删除,只剩 same_ccf_level
 # ---------------------------------------------------------------------------
-
-
-def test_build_features_same_gold_area_set_when_gold_and_paper_areas_overlap():
-    """paper.research_area ∩ gold.subject_tags ≠ ∅ → same_gold_area=1.0。"""
-    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["人工智能"])
-    paper = PaperProfile(
-        title="T", research_area=["人工智能"], ccf_research_area=[]
-    )
-    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
-    f = build_features(
-        paper_profile=paper,
-        journal=cand,
-        trace_entry={"routes": {}},
-        rule_rank=1,
-        rule_score=0.5,
-        candidate_in_accepted_corpus=False,
-        gold_journal=gold,
-    )
-    assert f.same_gold_area == 1.0
-
-
-def test_build_features_same_gold_area_zero_on_mismatch():
-    """paper.research_area ∩ gold.subject_tags == ∅ → 0.0。"""
-    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["人工智能"])
-    paper = PaperProfile(
-        title="T", research_area=["计算机网络"], ccf_research_area=[]
-    )
-    cand = Journal(journal_id="c", journal_name="C", subject_tags=["软件工程"])
-    f = build_features(
-        paper_profile=paper,
-        journal=cand,
-        trace_entry={"routes": {}},
-        rule_rank=1,
-        rule_score=0.5,
-        candidate_in_accepted_corpus=False,
-        gold_journal=gold,
-    )
-    assert f.same_gold_area == 0.0
-
-
-def test_build_features_same_gold_area_proxy_when_no_gold():
-    """gold_journal=None → proxy 用 candidate journal 自身 subject_tags。
-    paper.research_area=["AI"], candidate.subject_tags=["AI"] → 1.0。
-    """
-    paper = PaperProfile(
-        title="T", research_area=["人工智能"], ccf_research_area=[]
-    )
-    cand = Journal(journal_id="c", journal_name="C", subject_tags=["人工智能"])
-    f = build_features(
-        paper_profile=paper,
-        journal=cand,
-        trace_entry={"routes": {}},
-        rule_rank=1,
-        rule_score=0.5,
-        candidate_in_accepted_corpus=False,
-        gold_journal=None,  # inference proxy
-    )
-    assert f.same_gold_area == 1.0
-
-
-def test_build_features_same_parsed_ccf_area_set_when_overlap():
-    """paper.ccf_research_area ∩ gold.subject_tags ≠ ∅ → same_parsed_ccf_area=1.0。"""
-    gold = Journal(journal_id="gold", journal_name="G", subject_tags=["数据库/数据挖掘/内容检索"])
-    paper = PaperProfile(
-        title="T",
-        research_area=["人工智能"],
-        ccf_research_area=["数据库/数据挖掘/内容检索"],
-    )
-    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
-    f = build_features(
-        paper_profile=paper,
-        journal=cand,
-        trace_entry={"routes": {}},
-        rule_rank=1,
-        rule_score=0.5,
-        candidate_in_accepted_corpus=False,
-        gold_journal=gold,
-    )
-    assert f.same_parsed_ccf_area == 1.0
-    assert f.same_gold_area == 0.0  # research_area 和 gold tags 不重叠
 
 
 def test_build_features_same_ccf_level_set_when_levels_match():
@@ -897,28 +779,28 @@ def test_build_features_same_ccf_level_zero_when_paper_target_none():
     assert f.same_ccf_level == 0.0
 
 
-def test_attach_features_to_trace_passes_gold_journal_through():
-    """attach_features_to_trace 把 gold_journal 透传给 build_features。"""
-    gold = Journal(journal_id="gold", journal_name="GOLD", subject_tags=["人工智能"])
-    cand = Journal(journal_id="c", journal_name="C", subject_tags=["计算机网络"])
-    journal_store = MagicMock(spec=JournalStore)
-    journal_store.get_journal.return_value = cand
+def test_same_gold_area_feature_removed():
+    """2026-06-26: same_gold_area feature 已从 schema 中删除。"""
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "same_gold_area" not in field_names
+    assert "same_gold_area" not in FEATURE_NAMES
 
-    paper = PaperProfile(
-        title="T", research_area=["人工智能"], ccf_research_area=[]
-    )
-    trace = {"c": {"retrieval_rank": 1, "routes": {}}}
 
-    attach_features_to_trace(
-        trace, paper, journal_store,
-        rule_ranks={"c": 1}, rule_scores={"c": 0.5},
-        accepted_paper_store=None,
-        feature_names=FEATURE_NAMES,
-        gold_journal=gold,
-    )
+def test_same_parsed_ccf_area_feature_removed():
+    """2026-06-26: same_parsed_ccf_area feature 已从 schema 中删除。"""
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "same_parsed_ccf_area" not in field_names
+    assert "same_parsed_ccf_area" not in FEATURE_NAMES
 
-    same_gold_idx = FEATURE_NAMES.index("same_gold_area")
-    assert trace["c"]["features"][same_gold_idx] == 1.0
+
+def test_candidate_in_accepted_corpus_feature_removed():
+    """2026-06-26: candidate_in_accepted_corpus feature 已从 schema 中删除。"""
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "candidate_in_accepted_corpus" not in field_names
 
 
 # ---------------------------------------------------------------------------
@@ -933,22 +815,23 @@ def test_feature_names_excludes_paper_strength():
     assert "paper_strength" not in FEATURE_NAMES
 
 
-def test_feature_names_19_dim():
-    """2026-06-26: base schema is 19-dim (was 20)."""
-    assert len(FEATURE_NAMES) == 19
-    assert len(set(FEATURE_NAMES)) == 19  # 无重复
+def test_feature_names_16_dim():
+    """2026-06-26: base schema is 16-dim (was 19 → 16, dropped 3 noise/dead + journal_tier_weight)."""
+    assert len(FEATURE_NAMES) == 16
+    assert len(set(FEATURE_NAMES)) == 16  # 无重复
 
 
-def test_feature_names_with_llm_evidence_25_dim():
-    """2026-06-26: 19 base + 6 evidence = 25-dim (was 26)."""
-    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 25
+def test_feature_names_with_llm_evidence_22_dim():
+    """2026-06-26: 16 base + 6 evidence = 22-dim (was 25)."""
+    assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == 22
     assert "paper_strength" not in FEATURE_NAMES_WITH_LLM_EVIDENCE
 
 
-def test_feature_names_with_tier_and_exclusivity_27_dim():
-    """2026-06-26: 25 + 2 tier/area = 27-dim (was 28)."""
-    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 27
+def test_feature_names_with_tier_and_exclusivity_23_dim_v2():
+    """2026-06-26: 22 + 1 area_exclusivity = 23-dim (was 27, dropped journal_tier_weight)."""
+    assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 23
     assert "paper_strength" not in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
+    assert "journal_tier_weight" not in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
 
 
 def test_paper_candidate_features_no_paper_strength():

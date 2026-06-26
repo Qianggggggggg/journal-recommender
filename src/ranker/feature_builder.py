@@ -5,20 +5,23 @@
 
 纪律(per ADR 0001):
 
-- ``FEATURE_NAMES`` 是**锁定**的 19 维基础 schema,顺序与名字都不能改,
+- ``FEATURE_NAMES`` 是**锁定**的 16 维基础 schema,顺序与名字都不能改,
   改了会破坏已保存的训练向量。
-  2026-06-26: 从 20 维降到 19 维,删 ``paper_strength`` (dead feature,
-  训练时全部 0.0,无 oracle-quality 信号)。所有现有 20/26/28 维模型
-  不再兼容,需要 retrain 19/25/27 维新模型。
-- ``FEATURE_NAMES_WITH_LLM_EVIDENCE`` 是阶段 6.2 的显式 25 维 schema
-  (2026-06-26 调整: 19 base + 6 evidence,旧 26 维模型需要 retrain)。
+  2026-06-26: 从 19 维降到 16 维,删 4 个 noise/harmful features:
+  - ``same_gold_area``: discrim 0.03,noise (paper×gold 重复信号)
+  - ``same_parsed_ccf_area``: discrim 0.03,noise (与 same_gold_area 对称)
+  - ``candidate_in_accepted_corpus``: 99.8% = 1.0,无信号 (corpus 覆盖率近 100%)
+  - ``journal_tier_weight``: coef +0.80,harmful (bias toward A/B journals)
+  历史 19/25/27-dim 模型需要 retrain 16/22/23-dim 新模型。
+- ``FEATURE_NAMES_WITH_LLM_EVIDENCE`` 是阶段 6.2 的显式 22 维 schema
+  (16 base + 6 evidence)。
+- ``FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY`` 是 23 维 opt-in schema
+  (22 + 1 area_exclusivity),仅在 ``--enable-tier-exclusivity`` 启用。
 - 缺失 rank 用 ``MISSING_RANK_SENTINEL = 999.0``,不能默认成 0
   (0 会被 LTR 误读成"排名第一")。
 - 布尔/二元特征以 ``0.0`` / ``1.0`` 存储。
 - ``gold_in_accepted_corpus`` 一类 oracle 特征**禁止**加入 ``FEATURE_NAMES``,
   它会让 covered 训练样本的分布与 uncovered 推理样本的分布漂移。
-- 推理时可用的覆盖率信号只有 ``candidate_in_accepted_corpus``(候选期刊
-  在 corpus 中是否有论文);该信号在训练和推理时都可计算,可用。
 """
 from __future__ import annotations
 
@@ -44,11 +47,11 @@ def ccf_level_to_numeric(level: Optional[str]) -> float:
     return float(CCF_LEVEL_TO_NUMERIC.get(str(level).upper(), 0))
 
 
-# 锁定 schema:19 个特征。顺序就是 feature vector 的列顺序,
+# 锁定 schema:16 个特征。顺序就是 feature vector 的列顺序,
 # 训练与推理必须严格一致。修改此列表前请读 ADR 0001。
-# 2026-06-26: 删 paper_strength (从 20 维 → 19 维)。
+# 2026-06-26: 从 19 维降到 16 维 (删 4 noise/harmful features)。
 FEATURE_NAMES: List[str] = [
-    # 4.1 段原计划的 19 个特征
+    # 4.1 段原计划的 19 个特征 - 删 4 noise/harmful 后剩 16
     "retrieval_rank",
     "rule_rank",
     "rule_score",
@@ -63,17 +66,18 @@ FEATURE_NAMES: List[str] = [
     "has_typical_route",
     "has_accepted_route",
     "has_identity_anchor",
-    "same_gold_area",
-    "same_parsed_ccf_area",
     "same_ccf_level",
     "journal_ccf_numeric",
-    # ADR 0001 新增:候选级别覆盖率信号(可推理,不算 oracle)
-    "candidate_in_accepted_corpus",
+    # 删 4 noise/harmful (2026-06-26 23-dim plan):
+    # - same_gold_area (discrim 0.03, noise)
+    # - same_parsed_ccf_area (discrim 0.03, noise — symmetric)
+    # - candidate_in_accepted_corpus (99.8% = 1.0, no signal)
+    # - journal_tier_weight (coef +0.80, harmful — biases toward A/B)
 ]
 assert len(FEATURE_NAMES) == len(set(FEATURE_NAMES)), "FEATURE_NAMES 出现重复"
 assert "gold_in_accepted_corpus" not in FEATURE_NAMES, "oracle 特征被错误加入"
 
-# 阶段 6.2:LLM Evidence 可选特征。默认路径仍使用上面的 19 维 FEATURE_NAMES。
+# 阶段 6.2:LLM Evidence 可选特征。默认路径仍使用上面的 16 维 FEATURE_NAMES。
 LLM_EVIDENCE_FEATURE_NAMES: List[str] = [
     "llm_scope_fit",
     "llm_method_fit",
@@ -89,18 +93,17 @@ assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == len(
     set(FEATURE_NAMES_WITH_LLM_EVIDENCE)
 ), "FEATURE_NAMES_WITH_LLM_EVIDENCE 出现重复"
 
-# 阶段 6.5 (P2-mini): tier 提权 + area 互斥度。
-# 注意:不进 FEATURE_NAMES (locked 19-dim),只用于 27 维扩展。
+# 阶段 6.5 (P2-mini): area 互斥度(2026-06-26 删 journal_tier_weight)。
+# 注意:不进 FEATURE_NAMES (locked 16-dim),只用于 opt-in 23 维扩展。
 TIER_WEIGHT_BY_CCF: Dict[str, float] = {"A": 0.7, "B": 1.0, "C": 1.5}
 TIER_EXCLUSIVITY_FEATURE_NAMES: List[str] = [
-    "journal_tier_weight",
     "area_exclusivity",
 ]
 FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY: List[str] = (
     list(FEATURE_NAMES_WITH_LLM_EVIDENCE) + list(TIER_EXCLUSIVITY_FEATURE_NAMES)
 )
-assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 27, (
-    f"expected 27-dim, got {len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)}"
+assert len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY) == 23, (
+    f"expected 23-dim, got {len(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)}"
 )
 assert len(set(FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY)) == len(
     FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
@@ -130,6 +133,9 @@ class PaperCandidateFeatures:
     ``LLM_EVIDENCE_FEATURE_NAMES`` 完全一致。
     缺失字段用 ``MISSING_RANK_SENTINEL`` 或 ``0.0`` 填充。
     缺失 LLM fit evidence 使用中性值 0.5,penalty 使用 0.0。
+
+    2026-06-26: 删 4 noise/harmful fields: same_gold_area,
+    same_parsed_ccf_area, candidate_in_accepted_corpus, journal_tier_weight。
     """
 
     retrieval_rank: float = MISSING_RANK_SENTINEL
@@ -146,23 +152,19 @@ class PaperCandidateFeatures:
     has_typical_route: float = 0.0
     has_accepted_route: float = 0.0
     has_identity_anchor: float = 0.0
-    same_gold_area: float = 0.0
-    same_parsed_ccf_area: float = 0.0
     same_ccf_level: float = 0.0
     journal_ccf_numeric: float = 0.0
-    candidate_in_accepted_corpus: float = 0.0
     llm_scope_fit: float = 0.5
     llm_method_fit: float = 0.5
     llm_application_fit: float = 0.5
     llm_journal_position_fit: float = 0.5
     llm_too_broad_penalty: float = 0.0
     llm_too_narrow_penalty: float = 0.0
-    # 阶段 6.5:27 维扩展,默认中性值 (2026-06-26: 从 28 维降到 27 维)
-    journal_tier_weight: float = 1.0
+    # 阶段 6.5:23 维扩展 (2026-06-26: 从 27 维降到 23 维,删 journal_tier_weight)
     area_exclusivity: float = 0.0
 
     def to_vector(self, feature_names: Optional[List[str]] = None) -> List[float]:
-        """按显式 schema 返回向量;默认保持现有 19 维 ``FEATURE_NAMES``。"""
+        """按显式 schema 返回向量;默认保持现有 16 维 ``FEATURE_NAMES``。"""
         selected_names = FEATURE_NAMES if feature_names is None else feature_names
         return [float(getattr(self, name)) for name in selected_names]
 
@@ -264,17 +266,14 @@ def build_features(
 
     关键不变量(per ADR 0001):
     - 缺失的 route rank 不会传 0,统一用 ``MISSING_RANK_SENTINEL``。
-    - ``candidate_in_accepted_corpus`` 由调用者预计算后传入(避免本函数
-      再次访问磁盘);不接受 ``gold_in_accepted_corpus`` 一类 oracle 参数。
+    - ``candidate_in_accepted_corpus`` 由调用者预计算后传入(2026-06-26:
+      此参数仍接受但内部不再写入 features — corpus 覆盖率近 100%,
+      99.8% = 1.0,无信号,feature 被删除)。
     - ``rule_rank=None``(候选未进 RuleScorer Top20)用哨兵 999。
 
-    ``same_*`` 特征语义(2026-06-25 修复:之前 4.1.b 阶段硬编码 0.0 占位):
-    - ``gold_journal``:训练数据生成时传入 gold venue,推理时传 ``None``
-      (走 proxy = ``journal`` 自身 subject_tags)。这有轻微 semantic gap:
-      训练时用 gold area,推理时用 candidate area;两者在
-      ``paper.research_area`` 同一 namespace 下,LTR 学到的是 marginal effect。
-    - ``paper_ccf_target_level``:训练时传入 paper gold venue 的 CCF 等级
-      (例如 "A"),推理时 ``None`` → 0.0。
+    2026-06-26: 删 4 noise/harmful features。``same_ccf_level`` 仍用
+    ``paper_ccf_target_level`` vs ``journal.ccf_rating``。
+    ``gold_journal`` 参数保留向后兼容(已不再写入 features)。
     """
     routes = trace_entry.get("routes", {}) if isinstance(trace_entry, dict) else {}
     routes = routes if isinstance(routes, dict) else {}
@@ -282,24 +281,7 @@ def build_features(
     # 逐 route 抽 rank
     rank_by_route = {name: _route_rank_or_sentinel(routes, name) for name in ROUTE_RANK_FIELDS}
 
-    # 2026-06-25: 训练时 gold_journal 注入,推理时 None → proxy 用 candidate journal。
-    # same_gold_area / same_parsed_ccf_area 用 (paper.research_area ∩ gold_tags)
-    # same_ccf_level 用 paper_ccf_target_level vs journal.ccf_rating。
-    _gold_area_src = gold_journal if gold_journal is not None else journal
-    _paper_research = list(getattr(paper_profile, "research_area", None) or [])
-    # 2026-06-25 fix: paper.ccf_research_area 通常为空 (paper quality assessor
-    # 不在 metadata 阶段跑)。fall back 到 research_area,语义与 same_gold_area
-    # 类似但用 CCF 风格的 area 命名空间。
-    _paper_ccf = list(getattr(paper_profile, "ccf_research_area", None) or []) or _paper_research
-    _gold_tags = list(getattr(_gold_area_src, "subject_tags", None) or [])
-    _same_gold_area = 1.0 if (
-        _paper_research and _gold_tags
-        and set(_paper_research) & set(_gold_tags)
-    ) else 0.0
-    _same_parsed_ccf_area = 1.0 if (
-        _paper_ccf and _gold_tags
-        and set(_paper_ccf) & set(_gold_tags)
-    ) else 0.0
+    # 2026-06-26: same_ccf_level 保留;same_gold_area / same_parsed_ccf_area 已删除。
     _same_ccf_level = 1.0 if (
         paper_ccf_target_level is not None
         and getattr(journal, "ccf_rating", None) is not None
@@ -326,13 +308,9 @@ def build_features(
         has_accepted_route=_has_route(routes, "accepted_"),
         # identity_anchor 单独成 route(无前缀匹配)
         has_identity_anchor=1.0 if "identity_anchor" in routes else 0.0,
-        # same_gold_area / same_parsed_ccf_area / same_ccf_level
-        # 2026-06-25:从 0.0 占位改为真实计算(变量在函数顶部已算好)。
-        same_gold_area=_same_gold_area,
-        same_parsed_ccf_area=_same_parsed_ccf_area,
+        # same_ccf_level (2026-06-26: same_gold_area / same_parsed_ccf_area 已删除)
         same_ccf_level=_same_ccf_level,
         journal_ccf_numeric=ccf_level_to_numeric(getattr(journal, "ccf_rating", None)),
-        candidate_in_accepted_corpus=1.0 if candidate_in_accepted_corpus else 0.0,
         llm_scope_fit=_llm_evidence_score(llm_evidence, "scope_fit", 0.5),
         llm_method_fit=_llm_evidence_score(llm_evidence, "method_fit", 0.5),
         llm_application_fit=_llm_evidence_score(llm_evidence, "application_fit", 0.5),
@@ -345,8 +323,7 @@ def build_features(
         llm_too_narrow_penalty=_llm_evidence_score(
             llm_evidence, "too_narrow_penalty", 0.0
         ),
-        # 阶段 6.5:tier 提权 + area 互斥度
-        journal_tier_weight=_tier_weight_value(getattr(journal, "ccf_rating", None)),
+        # 阶段 6.5:area 互斥度 (2026-06-26: 删 journal_tier_weight)
         area_exclusivity=_area_exclusivity_value(
             candidate_subject_tags=getattr(journal, "subject_tags", None),
             paper_anchor_area=paper_anchor_area,
