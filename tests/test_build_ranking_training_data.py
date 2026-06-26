@@ -493,3 +493,284 @@ def test_build_training_rows_uses_title_only_key_when_venue_empty():
     # Schema is still 26-dim
     assert len(g1["features"]) == 26
     assert g1["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: Accepted Corpus LTR — 4 dead features recompute
+# (same_gold_area, same_parsed_ccf_area, same_ccf_level, candidate_in_accepted_corpus)
+# ---------------------------------------------------------------------------
+
+
+def _make_19_dim_base_features(
+    journal_ids: list, accepted_jid_set: set = None
+) -> dict:
+    """Build a 19-dim base feature vector per jid (no paper_strength).
+
+    Schema (per src/ranker/feature_builder.py):
+      0:retrieval_rank, 1:rule_rank, 2:rule_score,
+      3-8: scope/typical/accepted bm25/vector rank (999 sentinel = missing)
+      9:route_count, 10:has_scope_route, 11:has_typical_route,
+      12:has_accepted_route, 13:has_identity_anchor,
+      14:same_gold_area, 15:same_parsed_ccf_area, 16:same_ccf_level,
+      17:journal_ccf_numeric, 18:candidate_in_accepted_corpus
+    """
+    accepted_jid_set = accepted_jid_set or set()
+    out = {}
+    for jid in journal_ids:
+        feats = [999.0] * 19
+        feats[0] = 1.0   # retrieval_rank
+        feats[1] = 999.0  # rule_rank (missing)
+        feats[2] = 0.0   # rule_score
+        # 3-8 stay 999
+        feats[9] = 0.0   # route_count
+        feats[10] = 0.0  # has_scope_route
+        feats[11] = 0.0  # has_typical_route
+        feats[12] = 0.0  # has_accepted_route
+        feats[13] = 0.0  # has_identity_anchor
+        # 14-17 dead placeholders (will be overwritten by build_training_rows)
+        feats[14] = 0.0
+        feats[15] = 0.0
+        feats[16] = 0.0
+        feats[17] = 0.0
+        feats[18] = 1.0 if jid in accepted_jid_set else 0.0
+        out[jid] = feats
+    return out
+
+
+def _make_journal_meta(jid: str, subject_tags: list, ccf_rating: str) -> dict:
+    return {
+        "journal_id": jid,
+        "journal_name": jid.upper(),
+        "subject_tags": subject_tags,
+        "ccf_rating": ccf_rating,
+    }
+
+
+def _make_paper_meta(title: str, research_area: list, ccf_research_area: list = None) -> dict:
+    return {
+        "title": title,
+        "research_area": research_area,
+        "ccf_research_area": ccf_research_area if ccf_research_area is not None else research_area,
+    }
+
+
+def _ablation_with_one_paper(
+    paper_title: str, target_jid: str, candidate_jids: list,
+    candidate_features: dict, rule_top20: list = None,
+) -> dict:
+    return {
+        "variants": {
+            "full_hybrid": {
+                "feature_names": None,  # 让 build_training_rows 走 FEATURE_NAMES
+                "paper_results": [
+                    {
+                        "title": paper_title,
+                        "venue": "",
+                        "retrieval_rank": 1,
+                        "target_journal_id": target_jid,
+                        "rule_top20": rule_top20 or [target_jid],
+                        "candidate_features": candidate_features,
+                    }
+                ],
+            }
+        }
+    }
+
+
+def test_same_gold_area_computed_when_research_area_overlaps():
+    """same_gold_area=1.0 when paper.research_area ∩ gold.subject_tags ≠ ∅.
+
+    Gold journal subject_tags=["AI","ML"], paper.research_area=["AI"] → overlap → 1.0.
+    Negative candidate with subject_tags=["Databases"] → no overlap → 0.0.
+    """
+    paper_title = "Test Paper A"
+    target_jid = "gold_j"
+    neg_jid = "neg_j"
+    candidate_jids = [target_jid, neg_jid]
+    candidate_features = _make_19_dim_base_features(candidate_jids)
+
+    papers_by_title = {
+        paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI", "ML"], "A"),
+        neg_jid: _make_journal_meta(neg_jid, ["Databases"], "B"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, candidate_jids, candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=1,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+
+    pos_rows = [r for r in rows if r["label"] == 1]
+    assert len(pos_rows) == 1
+    pos = pos_rows[0]
+    same_gold_area_idx = pos["feature_names"].index("same_gold_area")
+    assert pos["features"][same_gold_area_idx] == 1.0
+
+    neg_rows = [r for r in rows if r["label"] == 0]
+    assert len(neg_rows) == 1
+    neg = neg_rows[0]
+    assert neg["features"][same_gold_area_idx] == 0.0
+
+
+def test_same_parsed_ccf_area_computed_when_ccf_area_overlaps():
+    """same_parsed_ccf_area=1.0 when paper.ccf_research_area ∩ gold.subject_tags ≠ ∅.
+
+    paper.ccf_research_area=["人工智能"], gold.subject_tags=["人工智能","机器学习"] → 1.0.
+    """
+    paper_title = "Test Paper B"
+    target_jid = "gold_j"
+    candidate_features = _make_19_dim_base_features([target_jid])
+
+    papers_by_title = {
+        paper_title: _make_paper_meta(
+            paper_title,
+            research_area=["machine learning"],
+            ccf_research_area=["人工智能"],
+        ),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["人工智能", "机器学习"], "A"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    idx = pos["feature_names"].index("same_parsed_ccf_area")
+    assert pos["features"][idx] == 1.0
+
+
+def test_same_ccf_level_computed_when_levels_match():
+    """same_ccf_level=1.0 when paper gold ccf=A matches candidate ccf=A; 0.0 when ccf=B."""
+    paper_title = "Test Paper C"
+    target_jid = "gold_j"   # ccf A
+    other_a_jid = "other_a"  # ccf A
+    other_b_jid = "other_b"  # ccf B
+    candidate_jids = [target_jid, other_a_jid, other_b_jid]
+    candidate_features = _make_19_dim_base_features(candidate_jids)
+
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI"], "A"),
+        other_a_jid: _make_journal_meta(other_a_jid, ["AI"], "A"),
+        other_b_jid: _make_journal_meta(other_b_jid, ["AI"], "B"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, candidate_jids, candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=2,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    feature_names = rows[0]["feature_names"]
+    idx = feature_names.index("same_ccf_level")
+
+    by_jid = {r["journal_id"]: r for r in rows}
+    assert by_jid[target_jid]["features"][idx] == 1.0   # gold ccf=A
+    assert by_jid[other_a_jid]["features"][idx] == 1.0  # other A
+    assert by_jid[other_b_jid]["features"][idx] == 0.0  # other B
+
+
+def test_candidate_in_accepted_corpus_set_when_jid_in_corpus():
+    """candidate_in_accepted_corpus=1.0 when jid ∈ AcceptedPaperStore, else 0.0."""
+    paper_title = "Test Paper D"
+    target_jid = "in_corpus_j"
+    other_jid = "not_in_corpus_j"
+    candidate_jids = [target_jid, other_jid]
+    candidate_features = _make_19_dim_base_features(candidate_jids)
+
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI"], "A"),
+        other_jid: _make_journal_meta(other_jid, ["AI"], "A"),
+    }
+    accepted_jid_set = {target_jid}  # only target in corpus
+
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, candidate_jids, candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=1,
+        accepted_jid_set=accepted_jid_set,
+        papers_by_title=papers_by_title,
+    ))
+    feature_names = rows[0]["feature_names"]
+    idx = feature_names.index("candidate_in_accepted_corpus")
+    by_jid = {r["journal_id"]: r for r in rows}
+    assert by_jid[target_jid]["features"][idx] == 1.0
+    assert by_jid[other_jid]["features"][idx] == 0.0
+
+
+def test_base_features_19_dim_not_20():
+    """2026-06-26: paper_strength removed → base features are 19-dim, not 20."""
+    paper_title = "Test Paper E"
+    target_jid = "gold_j"
+    candidate_features = _make_19_dim_base_features([target_jid])
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    # 19 base + 6 evidence = 25 (when evidence_lookup is None → just 19 base)
+    # Without evidence_lookup the schema is 19-dim.
+    assert len(pos["features"]) == 19
+    assert len(pos["feature_names"]) == 19
+
+
+def test_no_paper_strength_in_feature_names():
+    """2026-06-26: paper_strength is gone from feature_names."""
+    paper_title = "Test Paper F"
+    target_jid = "gold_j"
+    candidate_features = _make_19_dim_base_features([target_jid])
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "paper_strength" not in pos["feature_names"]
