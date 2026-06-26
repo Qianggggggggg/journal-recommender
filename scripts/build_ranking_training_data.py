@@ -644,15 +644,15 @@ def main() -> None:
             )
 
     # 2026-06-26: 加载 AcceptedPaperStore 构造 accepted_jid_set,用于计算
-    # candidate_in_accepted_corpus。set 取 _by_journal.keys() (只含至少
-    # 有一篇 paper 的 jid;空 journal 不计入)。
+    # candidate_in_accepted_corpus。set 取 journal_ids (只含至少有一篇 paper
+    # 的 jid;空 journal 不计入)。
     accepted_jid_set: set = set()
     if args.accepted_corpus_dir:
         try:
             from src.journals.accepted_paper_store import AcceptedPaperStore
             accepted_store = AcceptedPaperStore(accepted_dir=args.accepted_corpus_dir)
             accepted_store.load()
-            accepted_jid_set = set(accepted_store._by_journal.keys())
+            accepted_jid_set = set(accepted_store.journal_ids)
             print(
                 f"Loaded {accepted_store.journal_count} journals "
                 f"({accepted_store.count} papers) from {args.accepted_corpus_dir}"

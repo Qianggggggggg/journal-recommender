@@ -130,6 +130,11 @@ class AcceptedPaperStore:
         return len(self._by_journal)
 
     @property
+    def journal_ids(self) -> List[str]:
+        """所有至少有一篇 paper 的期刊 id 列表(顺序与 load 顺序一致)。"""
+        return list(self._by_journal.keys())
+
+    @property
     def records(self) -> List[AcceptedPaperRecord]:
         """所有真实论文记录,顺序与 iter_records() 一致。"""
         return self._records

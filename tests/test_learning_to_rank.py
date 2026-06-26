@@ -259,9 +259,9 @@ def test_lightgbm_backend_save_load_roundtrip_bit_equal(tmp_path: Path):
     """LightGBM booster 是 deterministic 的(seed + num_threads=1),save/load 后预测必须 bit-equal。"""
     if not _lightgbm_available():
         pytest.skip("lightgbm not installed")
-    rows = [_make_row([1.0] * 28, label=1, paper_id="p0", jid="g")]
-    rows += [_make_row([0.0] * 28, label=0, paper_id="p0", jid="n0")]
-    rows += [_make_row([0.5] * 28, label=0, paper_id="p0", jid="n1")]
+    rows = [_make_row([1.0] * 27, label=1, paper_id="p0", jid="g")]
+    rows += [_make_row([0.0] * 27, label=0, paper_id="p0", jid="n0")]
+    rows += [_make_row([0.5] * 27, label=0, paper_id="p0", jid="n1")]
     ranker = LearningToRanker(seed=42, max_iter=50, backend="lightgbm")
     ranker.fit(rows)
     scores_before = ranker.predict_scores(rows)
@@ -272,7 +272,7 @@ def test_lightgbm_backend_save_load_roundtrip_bit_equal(tmp_path: Path):
     payload = json.loads(save_path.read_text())
     assert payload["backend"] == "lightgbm"
     assert payload["model_type"] == "lightgbm_lambdarank"
-    assert payload["feature_dim"] == 28
+    assert payload["feature_dim"] == 27
     assert payload.get("lightgbm_booster_str"), "booster_str must be populated"
 
     loaded = LearningToRanker.load(str(save_path))
@@ -321,7 +321,7 @@ def test_lightgbm_backend_predict_scores_in_0_1_range():
     assert all(0.0 <= s <= 1.0 for s in scores), f"scores must be in [0,1]; got {scores}"
 
 
-def test_lightgbm_backend_handles_27_dim_schema():
+def test_lightgbm_backend_handles_27_dim_schema(tmp_path: Path):
     """27-dim 数据 save/load 必须保留 feature_dim=27 (2026-06-26: was 28)。"""
     if not _lightgbm_available():
         pytest.skip("lightgbm not installed")
@@ -329,7 +329,7 @@ def test_lightgbm_backend_handles_27_dim_schema():
     rows += [_make_row([0.0] * 27, label=0, paper_id="p0", jid="n0")]
     ranker = LearningToRanker(seed=42, max_iter=20, backend="lightgbm").fit(rows)
     assert ranker._feature_dim == 27
-    save_path = Path("/tmp/lgb27_test.json")
+    save_path = tmp_path / "lgb27_test.json"
     ranker.save(str(save_path))
     loaded = LearningToRanker.load(str(save_path))
     assert loaded._feature_dim == 27
