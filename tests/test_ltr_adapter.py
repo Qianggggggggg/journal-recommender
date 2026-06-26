@@ -116,13 +116,16 @@ def test_disabled_when_model_missing_required_fields(tmp_path: Path):
 
 
 def test_disabled_when_model_unconverged(tmp_path: Path):
-    """model.convergence_info.converged=False → 禁用,disable_reason 含 'converge'。"""
+    """model.convergence_info.converged=False → 禁用,disable_reason 含 'converge'。
+
+    2026-06-26: feature_dim 从 20 改到 16 (paper_strength + 3 noise 删)。
+    """
     unconverged = {
         "schema_version": 1,
         "model_type": "logistic_regression",
         "backend": "sklearn",
-        "feature_dim": 20,
-        "coef": [0.0] * 20,
+        "feature_dim": 16,
+        "coef": [0.0] * 16,
         "intercept": 0.0,
         "use_standardization": False,
         "scaler_mean": None,
@@ -145,12 +148,12 @@ def test_disabled_when_model_unconverged(tmp_path: Path):
 
 
 def test_enabled_with_real_model_file(tmp_path: Path):
-    """用 19-dim stub 模型文件能成功初始化 (2026-06-26: paper_strength removed, was 20)."""
+    """用 16-dim stub 模型文件能成功初始化 (2026-06-26: 16-dim, was 19)."""
     model_path = tmp_path / "stub_ltr.json"
     model_path.write_text(json.dumps({
         "schema_version": 1, "model_type": "logistic_regression", "backend": "sklearn",
-        "feature_dim": 19, "feature_names": ["f"] * 19,
-        "coef": [0.0] * 19, "intercept": 0.0,
+        "feature_dim": 16, "feature_names": ["f"] * 16,
+        "coef": [0.0] * 16, "intercept": 0.0,
         "use_standardization": False, "scaler_mean": None, "scaler_scale": None,
         "convergence_info": {"converged": True, "n_iter": 1, "max_iter": 100, "warning_message": None},
         "seed": 42, "max_iter": 100,
@@ -158,7 +161,7 @@ def test_enabled_with_real_model_file(tmp_path: Path):
     cfg = {"enabled": True, "model_path": str(model_path)}
     adapter = LTRAdapter(config=cfg, journal_store=_StubJournalStore())
     assert adapter.enabled is True
-    assert adapter.feature_dim == 19
+    assert adapter.feature_dim == 16
     assert adapter.disable_reason is None
 
 
@@ -167,7 +170,7 @@ def test_enabled_with_real_model_file(tmp_path: Path):
 # ---------------------------------------------------------------------------
 
 
-def _write_minimal_converged_model(tmp_path: Path, feature_dim: int = 19) -> Path:
+def _write_minimal_converged_model(tmp_path: Path, feature_dim: int = 16) -> Path:
     """写一个最小可用的 converged 模型文件(系数全 0,scaler None,无 journal 依赖)。"""
     payload = {
         "schema_version": 1,
@@ -251,7 +254,7 @@ def test_compute_scores_falls_back_on_feature_dim_mismatch(tmp_path: Path):
     实现:用空 journal store(对所有 jid 返回 None),让 attach_features_to_trace
     在每本期刊的 entry 上跳过(features 不会被注入)。adapter 拿到 None → 触发 fallback。
     """
-    p = _write_minimal_converged_model(tmp_path, feature_dim=19)
+    p = _write_minimal_converged_model(tmp_path, feature_dim=16)
     empty_store = _EmptyJournalStore()  # get_journal 永远返回 None
     adapter = LTRAdapter(
         config={"enabled": True, "model_path": str(p)},
@@ -313,8 +316,8 @@ def test_compute_scores_does_not_mutate_caller_trace(tmp_path: Path):
 # ---------------------------------------------------------------------------
 
 
-def test_feature_schema_lookup_table_includes_27():
-    """LTRAdapter.compute_scores 必须能识别 27-dim model 并选对应 schema。"""
+def test_feature_schema_lookup_table_includes_23():
+    """LTRAdapter.compute_scores 必须能识别 23-dim model 并选对应 schema (2026-06-26: was 27)。"""
     from src.ranker.feature_builder import (
         FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY,
     )
@@ -324,7 +327,7 @@ def test_feature_schema_lookup_table_includes_27():
     import inspect
     src = inspect.getsource(LTRAdapter.compute_scores)
     assert "FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY" in src, (
-        "LTRAdapter must reference the 27-dim schema constant"
+        "LTRAdapter must reference the 23-dim schema constant"
     )
     assert "_FEATURE_SCHEMA_BY_DIM" in src, (
         "LTRAdapter must use a lookup table (not if-else) for schema selection"
@@ -332,21 +335,21 @@ def test_feature_schema_lookup_table_includes_27():
 
 
 def test_compute_scores_unknown_feature_dim_returns_fallback(tmp_path: Path):
-    """当 model 的 feature_dim 不在 lookup table 中(如 22-dim)→ fallback 不崩。"""
+    """当 model 的 feature_dim 不在 lookup table 中(如 20-dim)→ fallback 不崩。"""
     from src.ranker.ltr_adapter import LTRAdapter
     from src.papers.paper_model import PaperProfile
     from src.journals.journal_model import Journal
     from src.journals.journal_store import JournalStore
 
-    # 写一个 22-dim stub model
-    model_path = tmp_path / "stub_22dim.json"
+    # 写一个 20-dim stub model (not in lookup table: 16/22/23)
+    model_path = tmp_path / "stub_20dim.json"
     model_path.write_text(json.dumps({
         "schema_version": 1,
         "model_type": "logistic_regression",
         "backend": "sklearn",
-        "feature_names": ["f"] * 22,
-        "feature_dim": 22,
-        "coef": [0.0] * 22,
+        "feature_names": ["f"] * 20,
+        "feature_dim": 20,
+        "coef": [0.0] * 20,
         "intercept": 0.0,
         "use_standardization": False,
         "scaler_mean": None,
@@ -367,30 +370,30 @@ def test_compute_scores_unknown_feature_dim_returns_fallback(tmp_path: Path):
     trace = {"j": {"retrieval_rank": 1, "routes": {}}}
 
     out, diag = adapter.compute_scores(paper, candidates, trace, {}, {})
-    # 22-dim 不在 lookup → fallback_feature_dim,但 candidates 顺序保留
+    # 20-dim 不在 lookup → fallback_feature_dim,但 candidates 顺序保留
     assert diag["status"] == "fallback_feature_dim"
     assert [c[0].journal_id for c in out] == ["j"]
 
 
-def test_compute_scores_27_dim_reranks(tmp_path: Path):
-    """27-dim stub model + attach_features_to_trace 输出 27 维 → compute_scores 跑通。
+def test_compute_scores_23_dim_reranks(tmp_path: Path):
+    """23-dim stub model + attach_features_to_trace 输出 23 维 → compute_scores 跑通。
 
-    2026-06-26: tier+exclusivity schema 从 28 维降到 27 维 (paper_strength 移除)。
+    2026-06-26: tier+exclusivity schema 从 27 维降到 23 维 (paper_strength + journal_tier_weight 移除)。
     """
     from src.ranker.ltr_adapter import LTRAdapter
     from src.papers.paper_model import PaperProfile
     from src.journals.journal_model import Journal
     from src.journals.journal_store import JournalStore
 
-    # 写一个 27-dim stub model(coef 全 0,predict 不会崩)
-    model_path = tmp_path / "stub_27dim.json"
+    # 写一个 23-dim stub model(coef 全 0,predict 不会崩)
+    model_path = tmp_path / "stub_23dim.json"
     model_path.write_text(json.dumps({
         "schema_version": 1,
         "model_type": "logistic_regression",
         "backend": "sklearn",
-        "feature_names": ["f"] * 27,
-        "feature_dim": 27,
-        "coef": [0.0] * 27,
+        "feature_names": ["f"] * 23,
+        "feature_dim": 23,
+        "coef": [0.0] * 23,
         "intercept": 0.0,
         "use_standardization": False,
         "scaler_mean": None,
@@ -422,9 +425,9 @@ def test_compute_scores_27_dim_reranks(tmp_path: Path):
 
 
 def test_compute_scores_passes_paper_anchor_to_attach_features(tmp_path: Path):
-    """27-dim LTRAdapter 必须算 paper_anchor_area + n_matching_in_pool 传给 attach_features。
+    """23-dim LTRAdapter 必须算 paper_anchor_area + n_matching_in_pool 传给 attach_features。
 
-    2026-06-26: tier+exclusivity schema 从 28 维降到 27 维。
+    2026-06-26: tier+exclusivity schema 从 27 维降到 23 维。
     """
     from src.ranker.ltr_adapter import LTRAdapter
     from src.papers.paper_model import PaperProfile
@@ -432,11 +435,11 @@ def test_compute_scores_passes_paper_anchor_to_attach_features(tmp_path: Path):
     from src.journals.journal_store import JournalStore
     from src.ranker import feature_builder as fb
 
-    # 写 27-dim stub
-    model_path = tmp_path / "stub_27dim.json"
+    # 写 23-dim stub
+    model_path = tmp_path / "stub_23dim.json"
     model_path.write_text(json.dumps({
         "schema_version": 1, "model_type": "logistic_regression", "backend": "sklearn",
-        "feature_names": ["f"] * 27, "feature_dim": 27, "coef": [0.0] * 27, "intercept": 0.0,
+        "feature_names": ["f"] * 23, "feature_dim": 23, "coef": [0.0] * 23, "intercept": 0.0,
         "use_standardization": False, "scaler_mean": None, "scaler_scale": None,
         "metrics": {"n_train": 0, "n_positive": 0, "n_negative": 0, "pairwise_accuracy": 0.0, "positive_mean_score": 0.0, "hard_negative_mean_score": 0.0},
         "convergence_info": {"converged": True, "n_iter": 1, "max_iter": 100, "warning_message": None},

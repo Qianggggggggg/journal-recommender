@@ -93,6 +93,25 @@ assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE) == len(
     set(FEATURE_NAMES_WITH_LLM_EVIDENCE)
 ), "FEATURE_NAMES_WITH_LLM_EVIDENCE 出现重复"
 
+# 2026-06-26: v4 26-dim 旧 schema (含 paper_strength),仅供
+# learning_to_ranker_balanced_v4_lr.json (archive 26-dim 模型) 的回滚路径。
+# 不在生产路径使用;新模型都用 16/22/23-dim。
+FEATURE_NAMES_V4_LEGACY: List[str] = [
+    "retrieval_rank", "rule_rank", "rule_score",
+    "scope_bm25_rank", "scope_vector_rank",
+    "typical_bm25_rank", "typical_vector_rank",
+    "accepted_bm25_rank", "accepted_vector_rank",
+    "route_count", "has_scope_route", "has_typical_route",
+    "has_accepted_route", "has_identity_anchor",
+    "same_gold_area", "same_parsed_ccf_area", "same_ccf_level",
+    "journal_ccf_numeric", "paper_strength", "candidate_in_accepted_corpus",
+]
+assert len(FEATURE_NAMES_V4_LEGACY) == 20
+FEATURE_NAMES_WITH_LLM_EVIDENCE_V4_LEGACY: List[str] = (
+    list(FEATURE_NAMES_V4_LEGACY) + list(LLM_EVIDENCE_FEATURE_NAMES)
+)
+assert len(FEATURE_NAMES_WITH_LLM_EVIDENCE_V4_LEGACY) == 26
+
 # 阶段 6.5 (P2-mini): area 互斥度(2026-06-26 删 journal_tier_weight)。
 # 注意:不进 FEATURE_NAMES (locked 16-dim),只用于 opt-in 23 维扩展。
 TIER_WEIGHT_BY_CCF: Dict[str, float] = {"A": 0.7, "B": 1.0, "C": 1.5}

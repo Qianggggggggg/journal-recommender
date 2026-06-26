@@ -102,7 +102,7 @@ ranking:
   # blend_with_* fields are reserved for 5.4 ablation; not consumed in 5.3.
   learned_reranker:
     enabled: true
-    model_path: "data/models/learning_to_ranker_balanced_v5_25dim_lr.json"
+    model_path: "data/models/_archive_20260626_pre_accepted_corpus/learning_to_ranker_balanced_v4_lr.json"
     blend_with_rule_score: 0.30  # reserved; not consumed by 5.3 v1
     blend_with_llm_score: 0.20   # reserved; not consumed by 5.3 v1
 
