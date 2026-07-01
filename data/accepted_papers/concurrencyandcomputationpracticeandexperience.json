@@ -1,0 +1,70 @@
+{
+  "journal_id": "concurrencyandcomputationpracticeandexperience",
+  "journal_name": "Concurrency and Computation: Practice and Experience",
+  "papers": [
+    {
+      "title": "AWC‐NIDS: Attack‐wise customized network intrusion detection system using machine learning, concurrency, and distributed systems",
+      "abstract": "With digitization and modern network applications, information security has gained a tremendous importance. Therefore, accurate and efficient detection systems are crucial for maintaining proactive security in computer networks. Machine learning (ML) has shown great potential as a promising solution since it can teach a machine to distinguish malicious and normal network activities. However, recently proposed methods are suffering from at least one of the following: detection accuracy, false alarm rate, and computational complexity issues. The main reason behind this problem is the complexity of the model in terms of attack types. From the ML perspective, intrusion detection is a classification problem where each attack type is identified by a set of different features, and features are used for classifying network activities. Thus, training an ML algorithm to detect more than one attack type leads to a more complex model; the increasing number of used features contributes positively to the model complexity, and may result in relatively lower detection accuracy or a higher false positive rate. To tackle this problem, this study proposes an attack‐wise customized network intrusion detection system (AWC‐NIDS) based on ML, concurrency, and distributed systems to achieve accurate and efficient network‐wide intrusion detection. Since CICIDS2017 contains many modern attacks, it was used for model development and performance evaluation. The experimental results showed that the proposed methodology achieved high classification performance for all datasets with a small number of features. However, it was observed that the lowest accuracy was achieved for the comprehensive dataset (which contains all attack types); for the single attack‐type datasets, the obtained accuracy was above 99%. This finding proves the concept of attack‐wise customization for intrusion detection and shows the significance of the proposed methodology. In conclusion, this framework is promising for implementing robust and accurate cybersecurity systems for traditional and modern networking.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.7832",
+      "url": "https://www.semanticscholar.org/paper/d1b5357a28f66596011e5f7c99a25114699cabfe"
+    },
+    {
+      "title": "Optimizing Genomic Cancer Classification: A Concurrency‐Aware Approach to Computational Efficiency and Data Balance",
+      "abstract": "Medical practitioners analyze extensive genomic datasets through genomic cancer classification procedures to distinguish particular cancer types. Genomic cancer classification helps healthcare providers establish specific treatments that lead to better patient clinical results. Most of the genomic classification frameworks currently suffer from two significant issues: a reduction in the processing capabilities of large genomic data and the prevention of precise identification of rare cancer types caused by class imbalance problems. The accurate assessment of genomic cancer requires immediate attention because it will improve scalability, clinical utilization, and measurement accuracy. This research deals with genomic cancer classification inefficiencies and class imbalance through the implementation of Hadoop MapReduce and Adaptive Genomic Generative Adversarial Network (HMR‐AG‐GAN). The proposed framework implements Hadoop MapReduce distributed data processing to select features properly while executing model training with lower computational conflict. The AG‐GAN solution uses innovative dynamics to select appropriate features while maintaining genomic data integrity to create synthetic samples of rare cancer types. The AG‐GAN architecture adjusts dynamically to genomic features that matter the most; thus, it generates realistic synthetic minority class instances while preserving data genuineness. The combined algorithm method provides rapid data analysis alongside fair cancer‐type classification throughout diverse tumor groups. Research results demonstrate that AG‐GAN acts as a 45% faster computational processing technique and delivers a 15% enhancement in minority class model precision when identifying genomic cancer classes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.70336",
+      "url": "https://www.semanticscholar.org/paper/5e3dbeff5191059f2fbfef2a00d0cca29ebe8123"
+    },
+    {
+      "title": "A Unified Adaptive Deterministic Concurrency Control Framework for Distributed Systems",
+      "abstract": "Deterministic execution models used in distributed systems and generative pipelines share a common weakness, fixed concurrency schedules that fail under skewed workloads, hotspots, or noisy inputs. This paper proposes Adaptive Time stamp Informed Deterministic Flow Control (ATDFC), a unified concurrency control framework that combines time stamp‐based ordering with adaptive deterministic flow execution. ATDFC dynamically adjusts segmentation, initialization, and replay based on conflict intensity or input quality, enabling deterministic correctness while eliminating unnecessary computation. Experimental evaluation shows that ATDFC reduces conflict rates by more than half, lowers bandwidth consumption significantly, and maintains higher throughput and lower latency under extreme skew when compared to leading deterministic flow and concurrency control approaches. The results demonstrate that ATDFC offers a domain‐agnostic concurrency model capable of unifying deterministic computation across distributed ledgers, databases, and multimodal generative systems.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.70638",
+      "url": "https://www.semanticscholar.org/paper/756e7c393a393c2155508ab95a5d3960b90f985a"
+    },
+    {
+      "title": "Fuzzy logic‐based computation offloading technique in fog computing",
+      "abstract": "The fog computing environment expands the capabilities of cloud computing by moving computing, storage, and networking services closer to IoT devices. These resource‐constrained IoT devices often face challenges like high task failure rates and extended execution latency due to data traffic congestion. Distributing IoT services through task offloading across different layers of computing paradigms enhances QoS (Quality of Service) parameters. This endeavor aims to allocate custom workflow‐based real‐time tasks or jobs for processing across various cloud/fog/edge layers, optimizing QoS factors like makespan, energy consumption, and cost. In the fog computing environment, challenges arise due to uncertainties related to job execution locations and the ability to predict future user requirements. Fuzzy logic offers low‐complexity solutions for handling unpredictable and rapidly changing conditions. This paper proposes a hybrid fog‐cloud‐based computing architecture and an intelligent fuzzy logic‐based computation offloading approach. This approach effectively allocates workloads among edge, fog, and cloud layers, resulting in improvements in makespan time (7.51%), energy consumption (4.63%), and cost (13.60%). The proposed method selects suitable processing units or compute nodes for job execution, utilizing heterogeneous resources. Simulation results demonstrate that the proposed methodology outperforms current state‐of‐the‐art algorithms.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.8198",
+      "url": "https://www.semanticscholar.org/paper/ab84f1798b4d9d5169ff0edd57f681ee94eb77fe"
+    },
+    {
+      "title": "Fast and accurate computation of high‐order Tchebichef polynomials",
+      "abstract": "Discrete Tchebichef polynomials (DTPs) and their moments are effectively utilized in different fields such as video and image coding, pattern recognition, and computer vision due to their remarkable performance. However, when the moments order becomes large (high), DTPs prone to exhibit numerical instabilities. In this article, a computationally efficient and numerically stable recurrence algorithm is proposed for high order of moment. The proposed algorithm is based on combining two recurrence algorithms, which are the recurrence relations in the n$$ n $$ and x$$ x $$ ‐directions. In addition, an adaptive threshold is used to stabilize the generation of the DTP coefficients. The designed algorithm can generate the DTP coefficients for high moment's order and large signal size. By large signal size, we mean the samples of the discrete signal are large. To evaluate the performance of the proposed algorithm, a comparison study is performed with state‐of‐the‐art algorithms in terms of computational cost and capability of generating DTPs with large polynomial size and high moment order. The results show that the proposed algorithm has a remarkably low computation cost and is numerically stable, where the proposed algorithm is 27 ×$$ \\times $$ times faster than the state‐of‐the‐art algorithm.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.7311",
+      "url": "https://www.semanticscholar.org/paper/3a8013a9a95aea106d45fda79b2a9dbf2bd827cd"
+    },
+    {
+      "title": "Massively parallel computation of globally optimal shortest paths with curvature penalization",
+      "abstract": "We address the computation of paths globally minimizing an energy involving their curvature, with given endpoints and tangents at these endpoints, according to models known as the Reeds‐Shepp car (reversible and forward variants), the Euler‐Mumford elasticae, and the Dubins car. For that purpose, we numerically solve degenerate variants of the eikonal equation, on a three‐dimensional domain, in a massively parallel manner on a graphical processing unit. Due to the high anisotropy and nonlinearity of the addressed Partial Differential Equation, the discretization stencil is rather wide, has numerous elements, and is costly to generate, which leads to subtle compromises between computational cost, memory usage, and cache coherency. Accelerations by a factor 30 to 120 are obtained w.r.t a sequential implementation. The efficiency and the robustness of the method is illustrated in various contexts, ranging from motion planning to vessel segmentation and radar configuration.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.7472",
+      "url": "https://www.semanticscholar.org/paper/9fc878d87d06aee8d2c7dbcfa2e2a3c2b7604f97"
+    },
+    {
+      "title": "A methodology for assessing computation/communication overlap of MPI nonblocking collectives",
+      "abstract": "By allowing computation/communication overlap, MPI nonblocking collectives (NBC) are supposed to improve application scalability and performance. However, it is known that to actually get overlap, the MPI library has to implement progression mechanisms in software or rely on the network hardware. These mechanisms may be present or not, adequate or perfectible, they may have an impact on communication performance or may interfere with computation by stealing CPU cycles. From a user point of view, assessing and understanding the behavior of an MPI library concerning computation/communication overlap is difficult. In this article, we propose a methodology to assess the computation/communication overlap of NBC. We propose new metrics to measure how much communication and computation do overlap, and to evaluate how they interfere with each other. We integrate these metrics into a complete methodology. We compare our methodology with state of the art metrics and benchmarks, and show that ours provides more meaningful informations. We perform experiments on a large panel of MPI implementations and network hardware and show when and why overlap is efficient, nonexistent or even degrades performance.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.7168",
+      "url": "https://www.semanticscholar.org/paper/45896b9b4a3fbeeb6c63acdf2cb4b0327527fa56"
+    },
+    {
+      "title": "Task migration computation offloading with low delay for mobile edge computing in vehicular networks",
+      "abstract": "Nowadays, a new paradigm named mobile edge computing (MEC) is capable of supplying some cloud‐like functions at the edges of wireless networks, which enables vehicles to offload the computation intensive tasks on MEC servers with low latency. However, new challenges posed by the complex network environment and the mobility of vehicles are usually not covered by traditional offloading schemes. To solve such problems, we propose a heuristic task migration computation offloading (TMCO) scheme. Compared with traditional ones, TMCO can dynamically choose suitable places to offload the tasks for moving vehicles within deadline. For this purpose, the mobility of vehicle and strict delay deadline are considered comprehensively. We use hash table to store the number of tasks on the corresponding server and use random function to simulate the probability of task offloading. In terms of latency, experimental results suggest that the performance of TMCO is on average 10% higher than that of traditional full offloading schemes.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1002/cpe.6494",
+      "url": "https://www.semanticscholar.org/paper/2f41252135fb75f50784d95ccfc34d8dd359651a"
+    }
+  ]
+}

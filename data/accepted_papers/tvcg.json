@@ -17,6 +17,38 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1109/TVCG.2024.3382139",
       "url": ""
+    },
+    {
+      "title": "A Critical Reflection on Visualization Research: Where Do Decision Making Tasks Hide?",
+      "abstract": "It has been widely suggested that a key goal of visualization systems is to assist decision making, but is this true? We conduct a critical investigation on whether the activity of decision making is indeed central to the visualization domain. By approaching decision making as a user task, we explore the degree to which decision tasks are evident in visualization research and user studies. Our analysis suggests that decision tasks are not commonly found in current visualization task taxonomies and that the visualization field has yet to leverage guidance from decision theory domains on how to study such tasks. We further found that the majority of visualizations addressing decision making were not evaluated based on their ability to assist decision tasks. Finally, to help expand the impact of visual analytics in organizational as well as casual decision making activities, we initiate a research agenda on how decision making assistance could be elevated throughout visualization research.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TVCG.2021.3114813",
+      "url": "https://www.semanticscholar.org/paper/1ca938e6ee602731c91a97c23884251478ab608a"
+    },
+    {
+      "title": "VisEval: A Benchmark for Data Visualization in the Era of Large Language Models",
+      "abstract": "Translating natural language to visualization (NL2VIS) has shown great promise for visual data analysis, but it remains a challenging task that requires multiple low-level implementations, such as natural language processing and visualization design. Recent advancements in pre-trained large language models (LLMs) are opening new avenues for generating visualizations from natural language. However, the lack of a comprehensive and reliable benchmark hinders our understanding of LLMs' capabilities in visualization generation. In this paper, we address this gap by proposing a new NL2VIS benchmark called VisEval. Firstly, we introduce a high-quality and large-scale dataset. This dataset includes 2,524 representative queries covering 146 databases, paired with accurately labeled ground truths. Secondly, we advocate for a comprehensive automated evaluation methodology covering multiple dimensions, including validity, legality, and readability. By systematically scanning for potential issues with a number of heterogeneous checkers, VisEval provides reliable and trustworthy evaluation outcomes. We run VisEval on a series of state-of-the-art LLMs. Our evaluation reveals prevalent challenges and delivers essential insights for future advancements.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TVCG.2024.3456320",
+      "url": "https://www.semanticscholar.org/paper/57b657524721da25c4f6591f063249888d619220"
+    },
+    {
+      "title": "VIS30K: A Collection of Figures and Tables From IEEE Visualization Conference Publications",
+      "abstract": "We present the VIS30K dataset, a collection of 29,689 images that represents 30 years of figures and tables from each track of the IEEE Visualization conference series (Vis, SciVis, InfoVis, VAST). VIS30K's comprehensive coverage of the scientific literature in visualization not only reflects the progress of the field but also enables researchers to study the evolution of the state-of-the-art and to find relevant work based on graphical content. We describe the dataset and our semi-automatic collection process, which couples convolutional neural networks (CNN) with curation. Extracting figures and tables semi-automatically allows us to verify that no images are overlooked or extracted erroneously. To improve quality further, we engaged in a peer-search process for high-quality figures from early IEEE Visualization papers. With the resulting data, we also contribute VISImageNavigator (VIN, visimagenavigator.github.io), a web-based tool that facilitates searching and exploring VIS30K by author names, paper keywords, title and abstract, and years.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TVCG.2021.3054916",
+      "url": "https://www.semanticscholar.org/paper/6a972409645c7b66e592c787e83fa0692a0746a8"
+    },
+    {
+      "title": "Gender in 30 Years of IEEE Visualization",
+      "abstract": "We present an exploratory analysis of gender representation among the authors, committee members, and award winners at the IEEE Visualization (VIS) conference over the last 30 years. Our goal is to provide descriptive data on which diversity discussions and efforts in the community can build. We look in particular at the gender of VIS authors as a proxy for the community at large. We consider measures of overall gender representation among authors, differences in careers, positions in author lists, and collaborations. We found that the proportion of female authors has increased from 9% in the first five years to 22% in the last five years of the conference. Over the years, we found the same representation of women in program committees and slightly more women in organizing committees. Women are less likely to appear in the last author position, but more in the middle positions. In terms of collaboration patterns, female authors tend to collaborate more than expected with other women in the community. All non-gender related data is available on https://osf.io/ydfj4/ and the gender-author matching can be accessed through https://nyu.databrary.org/volume/1301.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TVCG.2021.3114787",
+      "url": "https://www.semanticscholar.org/paper/b8e1bb5fab2760c238c2e11de7c765392dc06fd5"
     }
   ]
 }

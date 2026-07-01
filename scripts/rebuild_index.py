@@ -7,32 +7,23 @@ import time
 sys.path.insert(0, '/Users/qian/PycharmProjects/paper')
 
 import numpy as np
-import httpx
 import faiss
 import pandas as pd
 
 from src.journals.journal_store import JournalStore
 from src.journals.journal_model import Journal
 from src.retriever.bm25_retriever import BM25Retriever
+from src.utils.embedding import OllamaEmbedding
 
 def embed_texts(texts: list, model: str = "qwen3-embedding:4b") -> np.ndarray:
     """使用 Ollama 生成 embedding"""
-    embeddings = []
-    url = "http://localhost:11434/api/embeddings"
-
-    for i, text in enumerate(texts):
-        try:
-            resp = httpx.post(url, json={"model": model, "prompt": text}, timeout=60)
-            resp.raise_for_status()
-            embedding = np.array(resp.json()["embedding"])
-            embeddings.append(embedding)
-            if (i + 1) % 50 == 0:
-                print(f"  Embedded {i+1}/{len(texts)}...")
-        except Exception as e:
-            print(f"  Error at {i}: {e}")
-            embeddings.append(np.zeros(3584))  # qwen3-embedding 输出维度
-
-    return np.array(embeddings)
+    client = OllamaEmbedding(
+        model=model,
+        timeout=180,
+        show_progress=True,
+        progress_desc="Journal embeddings",
+    )
+    return np.array(client.embed_batch(texts))
 
 
 def rebuild_bm25():

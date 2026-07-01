@@ -9,6 +9,62 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1109/TCC.2024.3364008",
       "url": ""
+    },
+    {
+      "title": "Privacy-Preserving and Traceable Functional Encryption for Inner Product in Cloud Computing",
+      "abstract": "Cloud computing is a distributed infrastructure that centralizes server resources on a platform in order to provide services over the internet. Traditional public-key encryption protects data confidentiality in cloud computing, while functional encryption provides a more fine-grained decryption method, which only reveals a function of the encrypted data. However, functional encryption in cloud computing faces the problem of key sharing. In order to trace malicious users who share keys with others, traceable FE-IP (TFE-IP) schemes were proposed where the key generation center (KGC) knows users’ identities and binds them with different secret keys. Nevertheless, existing schemes fail to protect the privacy of users’ identities. The fundamental challenge to construct a privacy-preserving TFE-IP scheme is that KGC needs to bind a key with a user's identity without knowing the identity. To balance privacy and accountability in cloud computing, we propose the concept of privacy-preserving traceable functional encryption for inner product (PPTFE-IP) and give a concrete construction which offers the features: (1) To prevent key sharing, both a user's identity and a vector are bound together in the key; (2) The KGC and a user execute a two-party secure computing protocol to generate a key without the former knowing anything about the latter's identity; (3) Each user can ensure the integrity and correctness of his/her key through verification; (4) The inner product of the two vectors embedded in a ciphertext and in his/her key can be calculated by an authorized user; (5) Only the tracer can trace the identity embedded in a key. We formally reduce the security of the proposed PPTFE-IP to well-known complexity assumptions, and conduct an implementation to evaluate its efficiency. The novelty of our scheme is to protect the user's privacy and provide traceability if required.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2025.3556925",
+      "url": "https://www.semanticscholar.org/paper/92dac92f890606b7410ea5dc408b894c4d10f4ba"
+    },
+    {
+      "title": "Lattice-Based Revocable IBEET Scheme for Mobile Cloud Computing",
+      "abstract": "Identity-based encryption with equality test (IBEET) is a special form of searchable encryption that has broad applications in cloud computing. It enables users to perform equality tests on encrypted data without decryption, thereby achieving secure data search while ensuring data privacy and confidentiality. However, in the context of mobile cloud computing, the susceptibility of mobile devices to loss significantly increases the risk of private key exposure. Existing IBEET schemes struggle to address this issue effectively, limiting their practical applicability. Moreover, with the rapid advancement of quantum computing, the security of traditional cryptographic hardness assumptions faces potential threats. To address these challenges and enhance system efficiency, we proposes the first lattice-based revocable IBEET (RIBEET) scheme, which supports user key revocation. We prove that our scheme satisfies adaptive CCA security under the assumption of DLWE hard problem. Additionally, performance evaluations comparing our scheme with existing ones demonstrate that our scheme offers significant efficiency advantages. Furthermore, we apply the proposed scheme to mobile health services, showcasing its practicality and reliability in mobile cloud computing environments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2025.3570332",
+      "url": "https://www.semanticscholar.org/paper/4c82182cae5ac752f2b555f98df7d86b09dc8e66"
+    },
+    {
+      "title": "Directed Search: A New Operator in NSGA-II for Task Scheduling in IoT Based on Cloud-Fog Computing",
+      "abstract": "In recent years, the Internet of Things (IoT) developments have made it one of the most important technologies. The exponential growth of data and increasing the number of latency-sensitive applications has necessitated a new approach to support these applications. The emerging fog computing architecture has partially addressed the issue of latency and other limitations of the IoT-based cloud computing paradigm. In order to achieve high-quality services and high system performance, an appropriate and efficient task scheduling method is needed, in addition, the energy consumption of computing devices should be considered. In this article, a constraint bi-objective optimization problem is designed to minimize the servers’ energy consumption and overall response time simultaneously. Then, to solve this problem, by introducing a recombination operator and modifying NSGA-II, a directed non-dominated sorting genetic algorithm, called D-NSGA-II is proposed. This algorithm can control the selection pressure of agents, and balance the exploration and exploitation abilities of the algorithm using this new operator. To evaluate the performance of this algorithm, it is compared with well-known meta-heuristic algorithms. The experimental results demonstrate the D-NSGA-II has better performance than other algorithms. It can also respond to all requests before their deadline.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2022.3188926",
+      "url": "https://www.semanticscholar.org/paper/9e90bfdd38fe6378fa5de5013020ab53b6d0a44f"
+    },
+    {
+      "title": "Efficient Online Computing Offloading for Budget- Constrained Cloud-Edge Collaborative Video Streaming Systems",
+      "abstract": "Cloud-Edge Collaborative Architecture (CEA) is a prominent framework that provides low-latency and energy-efficient solutions for video stream processing. In Cloud-Edge Collaborative Video Streaming Systems (CEAVS), efficient online offloading strategies for video tasks are crucial for enhancing user experience. However, most existing works overlook budget constraints, which limits their applicability in real-world scenarios constrained by finite resources. Moreover, they fail to adequately address the heterogeneity of video task redundancies, leading to suboptimal utilization of CEAVS's limited resources. To bridge these gaps, we propose an Efficient Online Computing framework for CEAVS (EOCA) that jointly optimizes accuracy, energy consumption, and latency performance through adaptive online offloading and redundancy compression, without requiring future task information. Technically, we formulate computing offloading and adaptive compression under budget constraints as a stochastic optimization problem that maximizes system satisfaction, defined as a weighted combination of accuracy, latency, and energy performance. We employ Lyapunov optimization to decouple the long-term budget constraint. We prove that the decoupled problem is a generalized ordinal potential game and propose algorithms based on generalized Benders decomposition (GBD) and the best response to obtain Nash equilibrium strategies for computing offloading and task compression. Finally, we analyze EOCA's performance bound, convergence rate, and worst-case performance guarantees. Evaluations demonstrate that EOCA effectively improves satisfaction while effectively balancing satisfaction and computational overhead.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2024.3524310",
+      "url": "https://www.semanticscholar.org/paper/d0055dd3552f156b26ab6afab661cb97b66adf45"
+    },
+    {
+      "title": "CloudBrain-ReconAI: A Cloud Computing Platform for MRI Reconstruction and Radiologists’ Image Quality Evaluation",
+      "abstract": "Efficient collaboration between engineers and radiologists is important for image reconstruction algorithm development and image quality evaluation in magnetic resonance imaging (MRI). Here, we develop CloudBrain-ReconAI, an online cloud computing platform, for algorithm deployment, fast and blind reader study. This platform supports online image reconstruction using state-of-the-art artificial intelligence and compressed sensing algorithms with applications for fast imaging (Cartesian and non-Cartesian sampling) and high-resolution diffusion imaging. Through visiting the website, radiologists can easily score and mark images. Then, automatic statistical analysis will be provided.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2024.3476418",
+      "url": "https://www.semanticscholar.org/paper/9de0737bd633e6560a84824f67a4d66e99b8908c"
+    },
+    {
+      "title": "Learning to Optimize Workflow Scheduling for an Edge–Cloud Computing Environment",
+      "abstract": "The widespread deployment of intelligent Internet of Things (IoT) devices brings tighter latency demands on complex workload patterns such as workflows. In such applications, tremendous dataflows are generated and processed in accordance with specific service chains. Edge computing has proven its feasibility in reducing the traffic in the core network and relieving cloud datacenters of fragmented computational demands. However, the efficient scheduling of workflows in hybrid edge–cloud networks is still challenging for the intelligent IoT paradigm. Existing works make dispatching decisions prior to real execution, making it difficult to cope with the dynamicity of the environment. Consequently, the schedulers are affected both by the scheduling strategy and by the mutual impact of dynamic workloads. We design an intelligent workflow scheduler for use in an edge–cloud network where workloads are generated with continuous steady arrivals. We develop new graph neural network (GNN)-based representations for task embedding and we design a proximal policy optimization (PPO)-based online learning scheduler. We further introduce an intrinsic reward to obtain an instantaneous evaluation of the dispatching decision and correct the scheduling policy on-the-fly. Numerical results validate the feasibility of our proposal as it outperforms existing works with an improved quality of service (QoS) level.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2024.3408006",
+      "url": "https://www.semanticscholar.org/paper/38944cd07738898895144fe88fb840e6836ec93f"
+    },
+    {
+      "title": "Secure and Efficient Online Fingerprint Authentication Scheme Based On Cloud Computing",
+      "abstract": "Privacy protection of biometrics-based on cloud computing is attracting increasing attention. In 2018, Zhu et al. proposed an efficient and privacy-preserving online fingerprint authentication scheme for data outsourcing e-Finga. Under the premise of ensuring user's fingerprint data privacy and message security authentication, the e-Finga scheme can provide accurate and efficient fingerprint identity authentication services. However, our analysis shows that the temporary fingerprint in this scheme uses the deterministic encryption algorithm, which has the risk of leaking the user's fingerprint characteristics. Therefore, we propose a temporary fingerprint attack method for the e-Finga scheme. Experiments demonstrate that an adversary can analyze specific secret parameters and fingerprint features when eavesdropping on a user's temporary fingerprint ciphertext. To counter the temporary fingerprint attack, we propose a secure e-fingerprint scheme– Secure e-finger that uses the learning with errors samples, which has the homomorphic addition property, to encrypt user's temporary fingerprints. Experiments show that the secure e-finger scheme can resist the temporary fingerprint attack. Compared with the unprotected e-Finga scheme, the client running time is increased by about 6% percent, the communication cost on the user side only increased by 0.3125% percent. As a result, our solution can realize secure online fingerprint authentication without losing efficiency. Single user authentication is likely to cause the problem of excessive authority. Based on the Secure e-finger scheme, we propose a threshold scheme based on biological characteristics.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCC.2021.3103546",
+      "url": "https://www.semanticscholar.org/paper/8d19710a4d5261491b98716be4555bc67eff6902"
     }
   ]
 }

@@ -1,0 +1,78 @@
+{
+  "journal_id": "prl",
+  "journal_name": "Pattern Recognition Letters",
+  "papers": [
+    {
+      "title": "A commentary on \"Learning error-correcting graph matching with a multiclass neural network\", Pattern Recognition Letters, 2018",
+      "abstract": "We analyze the learning graph-matching algorithm presented in M. Martineau, R. Raveaux, D. Conte, G.Venturini, Learning error-correcting graph matching with a multiclass neural network, Pattern Recognition Letters (2018). Authors propose a new definition of the graph edit distance and also a learning algorithm that deduces some weights on this new graph edit distance. In this commentary, we first show that this new definition of the graph edit distance cannot be considered a distance and then, we discuss how this fact influences on the application of their learning methodology.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2019.10.033",
+      "url": "https://www.semanticscholar.org/paper/b31728f421eb26e59c24380ad2096297bcb485c2"
+    },
+    {
+      "title": "ERANNs: Efficient Residual Audio Neural Networks for Audio Pattern Recognition",
+      "abstract": "Audio pattern recognition (APR) is an important research topic and can be applied to several ﬁelds related to our lives. Therefore, accurate and efﬁcient APR systems need to be developed as they are useful in real applications. In this paper, we propose a new convolutional neural network (CNN) architecture and a method for im-proving the inference speed of CNN-based systems for APR tasks. Moreover, using the proposed method, we can improve the performance of our systems, as conﬁrmed in experiments conducted on four audio datasets. In addition, we investigate the impact of data augmentation techniques and transfer learning on the performance of our systems. Our best system achieves a mean average precision (mAP) of 0.450 on the AudioSet dataset. Although this value is less than that of the state-of-the-art system, the proposed system is 7.1x faster and 9.7x smaller. On the ESC-50, UrbanSound8K, and RAVDESS datasets, we obtain state-of-the-art results with accuracies of 0.961, 0.908, and 0.748, respectively. Our system for the ESC-50 dataset is 1.7x faster and 2.3x smaller than the previous best system. For the RAVDESS dataset, our system is 3.3x smaller than the previous best system. We name our systems “Efﬁcient Residual Audio Neural Networks”.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2022.07.012",
+      "url": "https://www.semanticscholar.org/paper/3db0d6d80b8bf807b76dc93e1d7ca34e730e7a92"
+    },
+    {
+      "title": "Pattern Recognition and Remote Sensing techniques applied to Land Use and Land Cover mapping in the Brazilian Savannah",
+      "abstract": "The Brazilian Savannah, or Cerrado, has gained vital importance in the discussions about sustainable land development after the conversion of half of its natural vegetation. For the last two decades, most of the agricultural expansion in Brazil has occurred in this biome. This is related to technological improvements in agriculture as well as to environmental compliance policies that have effectively reduced soybean expansion in the Brazilian Amazon biome. Therefore, remotely sensed imagery, pattern recognition and image processing techniques have been employed to analyze and monitor the land dynamics over Cerrado. In this work, we present a brief review on Land Use and Land Cover mapping (LULC) in the Cerrado biome from an application perspective: natural vegetation, pastureland, agriculture, and deforestation. In this review we selected some studies whose results could contribute to the development of more detailed and accurate LULC maps for the Cerrado biome.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2021.04.028",
+      "url": "https://www.semanticscholar.org/paper/d0d3be9ef7a391d9216207a349f6d078a1fa2bae"
+    },
+    {
+      "title": "Adoption of improved neural network blade pattern recognition in prevention and control of corona virus disease-19 pandemic",
+      "abstract": "To explore the adoption effect of improved neural network blade pattern in corona virus disease (COVID)-19, comparative analysis is implemented. First, the following hypotheses are proposed. I: in addition to the confirmed cases and deaths, people suspected of being infected are also involved in the spread of the epidemic. II: patients who have been cured may also develop secondary infections, so it is considered that there is still a link between cured cases and the spread of the epidemic. III: only the relevant data of the previous day is used to predict the epidemic prevention and control of the next day. Then, the epidemic data from February 1st to February 15th in X province were selected as the control. The combined neural network model is used for prevention and control prediction, and the prediction results of the traditional neural network model are compared. The results show that the predictions of the daily new cases by the five neural network models have little difference with the actual value, and the trend is basically consistent. However, there are still differences in some time nodes. The errors of neural network 1 on the 6th and network 3 on the 13th are large. The accuracy of the combined neural network prediction model is high, and there is little difference between the result and the actual value at each time node. The prediction of the cumulative number of diagnoses per day of the five neural network models is also analyzed, and the results are relatively ideal. In addition, the accuracy of the combined neural network prediction model is high, and the difference between the result and the actual value at each time node is relatively small. It is found that the standard deviations of neural networks 2 and 3 are relatively high through the comparison of the deviations. The deviation means of the five models were all relatively low, and the mean deviation and standard deviation of the combined neural network model are the lowest. It is found that the accuracy of prediction on the epidemic spread in this province is good by comparing the performance of each neural network model. Regarding various indicators, the prediction accuracy of the combined neural network model is higher than that of the other four models, and its performance is also the best. Finally, the MSE of the improved neural network model is lower compared with the traditional neural network model. Moreover, with the change of learning times, the change trend of MSE is constant (P < 0.05 for all). In short, the improved neural network blade model has better performance compared with that of the traditional neural network blade model. The prediction results of the epidemic situation are accurate, and the application effect is remarkable, so the proposed model is worthy of further promotion and application in the medical field.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2021.08.033",
+      "url": "https://www.semanticscholar.org/paper/9b61670a3bb51534e1b5d7f169d5941865f4fa38"
+    },
+    {
+      "title": "Pattern recognition and artificial intelligence techniques for cultural heritage",
+      "abstract": "This paper is the editorial of the virtual special issue (VSI) “Pattern recognition and artificial intelligence techniques for cultural heritage”, of which the authors of this paper have been the guest editors. It aims to bring together the work of experts from the fields of pattern recognition and artificial intelligence and that of cultural heritage. This multidisciplinary subject covers a wide spectrum spanning from the study of the cultural heritage to the development of tools based on PR/AI techniques for cultural heritage analysis, reconstruction and understanding. The papers included in this special issue allowed us to highlight the advances on this subject from a wide-angle perspective, as well as to stimulate new theoretical and applied researches for better characterizing the state of the art in this domain.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2020.06.018",
+      "url": "https://www.semanticscholar.org/paper/02cde4a36d918c34f005d389aa0e4ceeca6dc6e3"
+    },
+    {
+      "title": "Improving smart interactive experiences in cultural heritage through pattern recognition techniques",
+      "abstract": "New Information and Communication Technologies have a large potential to improve general public awareness of the importance of Cultural Heritage (CH) and to provide tools that can make visits to historical sites more interesting and enjoyable. The Internet of Things (IoT) technology can further contribute to these goals, by allowing visitors to museum and CH sites to manipulate smart objects by receiving information that stimulates emotions, understanding and appropriation of the contents. In our research, interaction paradigms and innovative methods are developed to allow curators and guides of cultural sites (i.e., domain experts) to manage interactive IoT-based environments, in order to create Smart Interactive Experiences, which are usage situations created by synchronizing many available smart objects to specific situations that might better satisfy the needs of the visitors. This article illustrates a system that, by means of a tangible user interface, integrated by pattern recognition and computer vision techniques, supports CH experts in creating Smart Interactive Experiences by properly tailoring the behavior of the involved smart objects. An experimental evaluation of the used techniques has been performed and it is presented and discussed.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2019.12.011",
+      "url": "https://www.semanticscholar.org/paper/f967a02761ad6bb8a61ba0e883e9b17b1a46bd18"
+    },
+    {
+      "title": "Pattern recognition techniques for provenance classification of archaeological ceramics using ultrasounds",
+      "abstract": "This paper presents a novel application of pattern recognition to the provenance classification of archaeological ceramics. This is a challenging problem for archaeologists, which involves assigning a making location to a fragment of archaeological pottery that was found along with other fragments of pieces made in different distant locations from the find. The pieces look very similar to each other and, often, other contextual information about the use of the pieces cannot be used due to the small size of the fragments. Current standard methods to solve this problem are limited since they are time consuming, require costly equipment, and can lead to the destruction of a part of the pieces. The proposed method overcome those limitations using non-destructive ultrasonic testing and incorporates versatile data analysis through advanced pattern recognition techniques. Those techniques include the following: feature ranking, sample augmentation, semi-supervision based on active learning; and optimal fusion. This latter is based in the concept of alpha integration, which allows optimal fitting of the fusion model parameters. Different provenance classification problems are showcased: provenance classification of terra sigillata ceramic pieces from Aretina, Northern Italy and Sud-Gaul origins; and provenance classification of Iberian ceramic pieces from archaeological sites of Paterna, and Les Jovaes in Valencia, Spain. We demonstrate that the proposed fusion-based method achieves the best results, in terms of balanced classification accuracy and F1 score, compared with competitive methods like linear discriminant analysis, random forest, and support vector machine. Experiments for simulating small sample sizes and uncertainty in labeling of the pieces are included. In addition, the paper provides a design of a practical specialized device that could be used in different applications of archaeological ceramic classification.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2020.04.013",
+      "url": "https://www.semanticscholar.org/paper/61e4de7a603cb49bcab4927d7c06bfd72f95c755"
+    },
+    {
+      "title": "Trends in graph-based representations for Pattern Recognition",
+      "abstract": "In this paper we try to examine recent trends on the use of graph-based representations in Pattern Recognition, using as a vantage point the 11th IAPR-TC15 Workshop GbR2017, dedicated to this topic. A survey of the paper presented at GbR2017 will give us the opportunity to reflect on the directions where the interest of the research community working on this subject is moving.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PATREC.2018.03.016",
+      "url": "https://www.semanticscholar.org/paper/a821d0b224b3bf0a21e1d4080d44485e3d7bc230"
+    },
+    {
+      "title": "Syntactic pattern recognition-based diagnostics of fetal palates",
+      "abstract": "Analyzing ultrasound images of relatively small fetal structures is a difficult task. This difficulty particularly applies to diagnosing congenital defects of the fetus, including one of the most common defects, which is the cleft palate. To date, no methods have been developed for visualizing the fetal palate. Therefore, there is a need to improve the effectiveness of diagnostics in this area by developing appropriate image analysis and recognition methods using computer-based techniques. At the same time, relatively fast algorithms are being sought that can be a part of the software of an ultrasound device. The contribution of the paper consists in defining a new computer method satisfying all the requirements mentioned above. The method applies syntactic pattern recognition approach to the analysis of the image of the fetus’s palate. It is based on extracting of a sequence of images on multiple binarization thresholds (in the preprocessing phase), defining picture primitives on the basis of the histogram analysis, and applying a parser for a GDPLL(k) string grammar (Generalized Dynamically Programmed LL(k) grammar) for classifying abnormalities (in the recognition phase). The implementation of the method is computationally efficient and it can be a helpful tool for supporting doctors in the diagnostic process (as it has been verified in practice). The computer recognition of fetal defects on basis of the analysis of the structure of the fetus’s palate is a novel achievement. Such results have never been reported before.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patrec.2020.02.023",
+      "url": "https://www.semanticscholar.org/paper/5db53d4d43ad867e035609a2a17aac6ad834c07b"
+    }
+  ]
+}

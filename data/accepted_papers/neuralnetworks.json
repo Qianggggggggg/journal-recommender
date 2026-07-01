@@ -11,20 +11,68 @@
       "url": "https://www.semanticscholar.org/paper/4d3e492deae6d230179172bd1b77d23074483301"
     },
     {
-      "title": "Spiking neural networks on FPGA: A survey of methodologies and recent advancements",
-      "abstract": "The mimicry of the biological brain's structure in information processing enables spiking neural networks (SNNs) to exhibit significantly reduced power consumption compared to conventional systems. Consequently, these networks have garnered heightened attention and spurred extensive research endeavors in recent years, proposing various structures to achieve low power consumption, high speed, and improved recognition ability. However, researchers are still in the early stages of developing more efficient neural networks that more closely resemble the biological brain. This development and research require suitable hardware for execution with appropriate capabilities, and field-programmable gate array (FPGA) serves as a highly qualified candidate compared to existing hardware such as central processing unit (CPU) and graphics processing unit (GPU). FPGA, with parallel processing capabilities similar to the brain, lower latency and power consumption, and higher throughput, is highly eligible hardware for assisting in the development of spiking neural networks. In this review, an attempt has been made to facilitate researchers' path to further develop this field by collecting and examining recent works and the challenges that hinder the implementation of these networks on FPGA.",
-      "year": 2025,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.neunet.2025.107256",
-      "url": "https://www.semanticscholar.org/paper/31375f872b2b2acc22a0d5e362e29808d8e6d1dd"
-    },
-    {
       "title": "Study of fractional order epidemic compartmental model by using artificial deep neural networks",
       "abstract": "This paper aims to study a compartmental mathematical model of rotavirus disease with fractals fractional order differential equations. In addition, we employ the deep neural networks (DNN) to investigate the aforementioned dynamical system. Recently, DNNs approach has attracted more attention from researchers. The concerned tool has been used very well in investigating various dynamical systems of infectious diseases. This is because the aforementioned field has many applications and is useful in many scientific and engineering research fields. Additionally, a growing number of mathematical methods are being used to study the mathematical modelling of epidemiological diseases. A model that explains the kinetics of rotavirus induced gastroenteritis transmission with vaccinated class is examined in this study. We use the fractal fractional derivative with exponential kernel (FFE) in the Caputo Fabrizio sense. Appropriate results regarding the existence of solutions are obtained for the given model using the traditional fixed point method. The Euler numerical technique is expanded to interpret the results numerically. Several graphical presentations are used to discuss the transmission dynamics of the model under consideration using different fractals fractional orders. Using DNNs technique, we analyze the considered model. One of the algorithms based on Levenberg- Marquardt training algorithm is used in designed DNNs model for the deep learning and training performance. Hence, training, learning and prediction accuracies of the DNNs were examined and verified by using 9 neurons and maximum of 1000 epoches to deduce the regression R, mean square error (MSE) and root mean square error (RMSE). In addition, the predictions deduced from the multilayer artificial DNNs model developed with 9 neurons in the hidden layer have been compared with the numerical results also. The mentioned results have been presented graphically.",
       "year": 2025,
       "source": "semantic_scholar",
       "doi": "10.1016/j.neunet.2025.107944",
       "url": "https://www.semanticscholar.org/paper/fbdd50e8a22843994ee8022f27345d518d6cb699"
+    },
+    {
+      "title": "Physics-informed neural networks for solving inverse problems in phase field models",
+      "abstract": "The integration of materials science with Physics-Informed Neural Networks (PINNs) is critical for understanding and predicting material properties, especially through the study of inverse problems. However, much of the current research in materials science primarily focuses on applying PINNs to forward problems or improving prediction accuracy. This paper shifts the focus to inverse problems related to numerical simulation modeling, encompassing diffusion, flow, and phase transition problems through PINNs. By constructing a neural network that integrates data-driven and physics-driven modules, this study uncovers the underlying physical laws embedded within the data. More importantly, this work further validates the applicability of PINNs in the inversion of key anisotropic material parameters, with benchmark anisotropic function inversion results demonstrating a high degree of consistency between predicted and theoretical values. Additionally, this study extends the application of PINNs to multi-physics coupled systems by addressing inverse problems associated with the governing equations of phase field, temperature field, and flow field, thereby enabling parameter inversion under multi-physics conditions. This novel approach addressing inverse problems and the inversion of critical material parameters provides new perspectives, demonstrating the potential of integrating numerical simulation data and deep learning, further deepening the research on PINNs in material science.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107665",
+      "url": "https://www.semanticscholar.org/paper/92941202c5f52212cb64fc0f39d51c61d2754d96"
+    },
+    {
+      "title": "Physics Informed Neural Networks for Electrical Impedance Tomography",
+      "abstract": "Electrical Impedance Tomography (EIT) is an imaging modality used to reconstruct the internal conductivity distribution of a domain via boundary voltage measurements. In this paper, we present a novel EIT approach for integrated sensing of composite structures utilizing Physics Informed Neural Networks (PINNs). Unlike traditional data-driven only models, PINNs incorporate underlying physical principles governing EIT directly into the learning process, enabling precise and rapid reconstructions. We demonstrate the effectiveness of PINNs with a variety of physical constraints for integrated sensing. The proposed approach has potential to enhance material characterization and condition monitoring, offering a robust alternative to classical EIT approaches.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107410",
+      "url": "https://www.semanticscholar.org/paper/9eab7e3666edcfa0e1fc5e9dc2249d08e98cf163"
+    },
+    {
+      "title": "Fixed-time synchronization of proportional delay memristive complex-valued competitive neural networks",
+      "abstract": "The fixed-time synchronization (FXS) is considered for memristive complex-valued competitive neural networks (MCVCNNs) with proportional delays. Two less conservative criteria supporting the FXS of MCVCNNs are founded by involving Lyapunov method and inequality techniques. Suitable switch controllers are designed by defining different norms of complex numbers instead of treating complex-valued neural networks as two real-valued systems. Furthermore, the settling time (ST) has been approximated. Finally, two simulations are shown to confirm the effectiveness of criteria in this paper and the outcomes of practical application in image protection.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107411",
+      "url": "https://www.semanticscholar.org/paper/aa89bf722aaf79aa9c1965a9d55cd5e502e73836"
+    },
+    {
+      "title": "Spectral integrated neural networks with large time steps for 2D and 3D transient elastodynamic analysis",
+      "abstract": "This paper provides a neural network architecture, called spectral integrated neural networks (SINNs), designed to tackle two- and three-dimensional elastodynamic problems. In the SINNs, the second-order time derivatives of displacements are approximated through the adoption of a fully connected neural network. Subsequently, the displacements are expressed as linear combinations of the second-order time derivatives of displacements using the spectral integration. Finally, the loss function is derived by incorporating the displacements into the elastic equilibrium equations and the boundary conditions. An improved numerical technique is employed in the construction of the loss function to accurately enforce the boundary conditions. The primary strength of the present SINNs lies in its ability to maintain both stability and high accuracy, even when utilizing large time steps. A series of computational experiments validates the efficiency and reliability of the proposed framework. The numerical results demonstrate that the SINNs exhibit enhanced accuracy and efficiency compared to conventional physics-informed neural networks (PINNs).",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107559",
+      "url": "https://www.semanticscholar.org/paper/8cdf4a42662583487f733c5c7ae4c8ab83fe5fef"
+    },
+    {
+      "title": "Heterogeneous boundary synchronization of time-delayed competitive neural networks with adaptive learning parameter in the space-time discretized frames",
+      "abstract": "This article presents the master-slave time-delayed competitive neural networks in space-time discretized frames(STD-CNNs) with the heterogeneous structure, induced by the design of an adaptive learning parameter in the slave STD-CNNs. This article addresses the issue of exponential synchronization for the time-delayed STD-CNNs with the heterogeneous structure via the controls at the boundaries, based on the learning law setting for the parameter in the slave STD-CNNs. In a corresponding manner, the exponential synchronization for time-delayed STD-CNNs with the homogeneous structure can be achieved via boundary controls. This study demonstrates that the problem of exponential synchronization for time-delayed heterogeneous STD-CNNs can be modeled by designating a time-varying learning parameter in the slave STD-CNNs, which can then be solved by means of calculative linear matrix inequalities(LMIs). To illustrate the feasibility of the current work, a numerical example is presented.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.neunet.2025.107255",
+      "url": "https://www.semanticscholar.org/paper/4dce0e10118a404d834938c414b5ec61fc3f9177"
+    },
+    {
+      "title": "Long-term simulation of physical and mechanical behaviors using curriculum-transfer-learning based physics-informed neural networks",
+      "abstract": "This paper proposes a Curriculum-Transfer-Learning based physics-informed neural network (CTL-PINN) for long-term simulation of physical and mechanical behaviors. The main innovation of CTL-PINN lies in decomposing long-term problems into a sequence of short-term sub-problems. Initially, the standard PINN is employed to solve the first sub-problem. As the simulation progresses, subsequent time-domain problems are addressed using a curriculum learning approach that integrates information from previous steps. Furthermore, transfer learning techniques are incorporated, allowing the model to effectively utilize prior training data and solve sequential time-domain transfer problems. CTL-PINN combines the strengths of curriculum learning and transfer learning, overcoming the limitations of standard PINNs, such as local optimization issues, and addressing the inaccuracies over extended time domains encountered in CL-PINN and the low computational efficiency of TL-PINN. The efficacy and robustness of CTL-PINN are demonstrated through applications to nonlinear wave propagation, Kirchhoff plate dynamic response, and the hydrodynamic model of the Three Gorges Reservoir Area, showcasing its superior capability in addressing long-term computational challenges.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2502.07325",
+      "url": "https://www.semanticscholar.org/paper/406dc4f3e015e9cd90f08fc164727b5802a82bb2"
+    },
+    {
+      "title": "Gabor-Enhanced Physics-Informed Neural Networks for Fast Simulations of Acoustic Wavefields",
+      "abstract": "Physics-Informed Neural Networks (PINNs) have gained attention for solving partial differential equations, including the scattered Helmholtz equation, due to their flexibility and mesh-free formulation. However, their performance suffers from low-frequency bias, particularly in high-frequency wavefield simulations, limiting convergence speed and accuracy. To address this, we propose a novel and simplified PINN framework that incorporates explicit, trainable Gabor basis functions to efficiently capture the localized and oscillatory nature of wavefields. Unlike previous Gabor-based PINNs that rely on multiplicative filters or auxiliary networks to learn Gabor parameters, our approach redefines the network's task as learning a nonlinear mapping from input coordinates to a custom Gabor coordinate system, where a Gabor function captures the dominant oscillatory behavior of the wavefield. This formulation absorbs the effect of two Gabor parameters into the learned mapping, reducing computational complexity and eliminating the need for manual tuning of hyperparameters. We also present an efficient formulation for incorporating a Perfectly Matched Layer (PML) into the training by deriving real-valued loss components and introducing an analytical expression for the background wavefield. Numerical experiments on various velocity models show that our Gabor-PINN achieves faster convergence, higher accuracy, and greater robustness to architectural design and initialization compared to both traditional PINNs and prior Gabor-based methods. The improvement lies not in adding architectural complexity-as is common in enhanced PINNs-but in absorbing this complexity into the learned coordinate transformation, making the method both simpler and more effective. Our implementation is publicly available to support reproducibility and future research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2502.17134",
+      "url": "https://www.semanticscholar.org/paper/6e77adb04c90c187c164969cae3d4d1c8037156a"
     }
   ]
 }

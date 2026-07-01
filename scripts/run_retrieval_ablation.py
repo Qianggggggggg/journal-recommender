@@ -47,6 +47,7 @@ class CachedEmbeddingClient:
     def __init__(self, wrapped):
         self.wrapped = wrapped
         self.cache = {}
+        self.query_cache = {}
 
     def embed(self, text: str):
         if text not in self.cache:
@@ -55,6 +56,16 @@ class CachedEmbeddingClient:
 
     def embed_batch(self, texts, concurrency: int = 1, timeout: float = 60.0):
         return [self.embed(text) for text in texts]
+
+    def embed_query(self, text: str):
+        if text not in self.query_cache:
+            query_method = getattr(self.wrapped, "embed_query", None)
+            self.query_cache[text] = (
+                query_method(text)
+                if callable(query_method)
+                else self.wrapped.embed(text)
+            )
+        return self.query_cache[text]
 
 
 def route_config_for_mode(mode: str) -> dict[str, int]:
@@ -481,6 +492,12 @@ def build_candidate_generator(app_config: dict, include_vector: bool = False) ->
                 OllamaEmbedding(
                     base_url=app_config["ollama"]["base_url"],
                     model=app_config["ollama"]["embedding_model"],
+                    timeout=app_config.get("ollama", {}).get(
+                        "timeout_seconds", 60
+                    ),
+                    query_instruction=app_config.get("ollama", {}).get(
+                        "embedding_query_instruction"
+                    ),
                 )
             )
             embedding_retriever = EmbeddingRetriever(store, embedding_client)

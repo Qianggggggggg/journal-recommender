@@ -1,0 +1,86 @@
+{
+  "journal_id": "trets",
+  "journal_name": "ACM Transactions on Reconfigurable Technology and Systems",
+  "papers": [
+    {
+      "title": "hls4ml: A Flexible, Open-Source Platform for Deep Learning Acceleration on Reconfigurable Hardware",
+      "abstract": "We present hls4ml, a free and open-source platform that translates machine learning (ML) models from modern deep learning frameworks into high-level synthesis (HLS) code that can be integrated into full designs for field-programmable gate arrays (FPGAs) or application-specific integrated circuits (ASICs). With its flexible and modular design, hls4ml supports a large number of deep learning frameworks and can target HLS compilers from several vendors, including Vitis HLS, Intel oneAPI and Catapult HLS. Together with a wider eco-system for software-hardware co-design, hls4ml has enabled the acceleration of ML inference in a wide range of commercial and scientific applications where low latency, resource usage, and power consumption are critical. In this paper, we describe the structure and functionality of the hls4ml platform. The overarching design considerations for the generated HLS code are discussed, together with selected performance results.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3801979",
+      "url": "https://www.semanticscholar.org/paper/33fc4deb26236c8f867f26ad0c95667730556122"
+    },
+    {
+      "title": "A Hardware Design Framework for Computer Vision Models Based on Reconfigurable Devices",
+      "abstract": "In computer vision, the joint development of the algorithm and computing dimensions cannot be separated. Models and algorithms are constantly evolving, while hardware designs must adapt to new or updated algorithms. Reconfigurable devices are recognized as important platforms for computer vision applications because of their reconfigurability. There are two typical design approaches: customized and overlay design. However, existing work is unable to achieve both efficient performance and scalability to adapt to a wide range of models. To address both considerations, we propose a design framework based on reconfigurable devices to provide unified support for computer vision models. It provides software-programmable modules while leaving unit design space for problem-specific algorithms. Based on the proposed framework, we design a model mapping method and a hardware architecture with two processor arrays to enable dynamic and static reconfiguration, thereby relieving redesign pressure. In addition, resource consumption and efficiency can be balanced by adjusting the hyperparameter. In experiments on CNN, vision Transformer, and vision MLP models, our work’s throughput is improved by 18.8x–33.6x and 1.4x–2.0x compared to CPU and GPU. Compared to others on the same platform, accelerators based on our framework can better balance resource consumption and efficiency.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3635157",
+      "url": "https://www.semanticscholar.org/paper/b89a84b369ee9700543fbf6fc3888f538cf53494"
+    },
+    {
+      "title": "Design of Distributed Reconfigurable Robotics Systems with ReconROS",
+      "abstract": "Robotics applications process large amounts of data in real time and require compute platforms that provide high performance and energy efficiency. FPGAs are well suited for many of these applications, but there is a reluctance in the robotics community to use hardware acceleration due to increased design complexity and a lack of consistent programming models across the software/hardware boundary. In this article, we present ReconROS, a framework that integrates the widely used robot operating system (ROS) with ReconOS, which features multithreaded programming of hardware and software threads for reconfigurable computers. This unique combination gives ROS 2 developers the flexibility to transparently accelerate parts of their robotics applications in hardware. We elaborate on the architecture and the design flow for ReconROS and report on a set of experiments that underline the feasibility and flexibility of our approach.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3494571",
+      "url": "https://www.semanticscholar.org/paper/90946632199672303fc61f68c79930e16d9e52cb"
+    },
+    {
+      "title": "Reconfigurable Framework for Environmentally Adaptive Resilience in Hybrid Space Systems",
+      "abstract": "Due to ongoing innovations in both sensor technology and spacecraft autonomy, onboard space processing continues to be outpaced by the escalating computational demands required for next-generation missions. Commercial-off-the-shelf, hybrid system-on-chips, combining fixed-logic CPUs with reconfigurable-logic FPGAs, present numerous architectural advantages that address onboard computing challenges. However, commercial devices are highly susceptible to space radiation and require dependable computing strategies to mitigate radiation-induced single-event effects. Depending upon the mission, the dynamics of the near-Earth space-radiation environment expose spacecraft to radiation fluxes that can vary by several orders of magnitude. By adopting an adaptive approach to dependable computing, spacecraft computers can reconfigure system resources to efficiently accommodate changing environmental conditions to maximize system performance while satisfying availability constraints throughout the mission. In this article, we propose Hybrid, Adaptive, Reconfigurable Fault Tolerance (HARFT), a reconfigurable framework for environmentally adaptive resilience in hybrid space systems. Furthermore, we describe a methodology to model adaptive systems, represented as phased-mission systems using Markov chains, subject to the near-Earth space-radiation environment, using a combination of orbital perturbation, geomagnetic field, and single-event effect rate prediction tools. We apply this methodology to evaluate the HARFT architecture using various static and adaptive strategies for several orbital case studies and demonstrate the achievable performability gains.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3398380",
+      "url": "https://www.semanticscholar.org/paper/5beb4c275bcfb585813554c0b0e136d06c956a3a"
+    },
+    {
+      "title": "Artifact Evaluation in the FPGA Community and in ACM TRETS",
+      "abstract": "Artifact evaluation (AE) is gaining traction across the computer science community as a means of advancing reproducible research and strengthening readers’ confidence in published results. Applying reproducibility to computer systems and architecture research has proven particularly challenging, and the FPGA community faces its own distinct hurdles — namely, the use of non-standard hardware platforms and dependence on specific software tools and versions. In this editorial, we review the history of AE in the FPGA community, compare it to practices in related fields, and discuss challenges and future directions. To date, AE has meaningfully improved the availability and accessibility of artifacts and their documentation, while also increasing readers’ confidence in published findings. Looking ahead, AE is poised to continue growing across the reconfigurable hardware community. Notably, ACM Transactions on Reconfigurable Technology and Systems will now offer artifact evaluation with the opportunity to earn artifact badges for all accepted papers.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3802561",
+      "url": "https://www.semanticscholar.org/paper/dc745ade3120d09dc890ddd2969ac6f74f36de6d"
+    },
+    {
+      "title": "Reconfigurable Processor-Centric Accelerators with Hardware Extensions for Safety-Critical Applications",
+      "abstract": "Designing computing systems for safety-critical platforms operating in harsh environments now demands balancing high computing performance with reliability and low-power execution. In New Space missions, for instance, Commercial Off-The-Shelf (COTS) devices are used as an alternative to Radiation Tolerant (RT) FPGAs and Radiation Hardened By Design (RHBD) ASICs, sacrificing reliability over pure computing power. Nevertheless, a bare minimum fault tolerance level needs to be ensured in order to successfully run the missions. Depending on the target fabric, multiple mitigation techniques can be implemented at the technology node, microarchitecture or system level. These mechanisms are typically complemented with intensive fault-injection and beam testing campaigns. Open Instruction Set Architectures (ISAs), like RISC-V, free from proprietary licensing constraints, allow controlled architectural variation across both COTS FPGA and ASIC fabrics, enabling easier fault injection/beam studies and Power-Performance-Area (PPA) analysis for competitive design development. This paper presents an open-source architectural template for accelerator deployment in safety-critical systems. The template, built around a triple-core RISC-V platform, integrates system-level reliability techniques that enable runtime-adaptive switching among Single, Triple-Core LockStep (TCLS), Dual-Core LockStep (DCLS), and DCLS with classical staggering modes. The template has also support for application-specific, hardware-based functional extensions, either via memory-mapped interfaces or through custom ISA extensions (attached to each of the triplicated cores using the standard CORE-V eXtension Interface). The capabilities of the proposed accelerator template have been tested both with a software-only implementation of the AES-128 data encryption algorithm and with an in-house implementation of the CCSDS 121 data compression algorithm, widely used in space applications, showing that the system-level reliability techniques can be straightforwardly extended to the hardware-accelerated functions as well. The assessment of the proposed accelerator template includes experimental evaluation of the reliability through a lightweight fault injection campaign, and both FPGA and TSMC 65 nm LP implementations.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3815187",
+      "url": "https://www.semanticscholar.org/paper/6cda5224b31c7f453d21ca6a8acf4caaf6a7299e"
+    },
+    {
+      "title": "NC-Library: Expanding SystemC Capabilities for Nested reConfigurable Hardware Modelling",
+      "abstract": "As runtime reconfiguration is used in an increasing number of hardware architectures, new simulation and modeling tools are needed to support the developer during the design phases. In this article, a language extension for SystemC is presented, together with a design methodology for the description and simulation of dynamically reconfigurable hardware at different levels of abstraction. The library presented offers a high degree of flexibility in the description of reconfiguration features and their management, while allowing runtime reconfiguration simulation, removal, and replacement of custom modules as well as third-party components throughout the architecture development process. In addition, our approach supports the emerging concept of nested reconfiguration and split regions with a minimal simulation overhead of a maximum of three delta cycles for signal and transaction forwarding, and four delta cycles for the reconfiguration process.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3662001",
+      "url": "https://www.semanticscholar.org/paper/86ac6831a086b938474204d286405f321ed0a3f7"
+    },
+    {
+      "title": "FDRA: A Framework for a Dynamically Reconfigurable Accelerator Supporting Multi-Level Parallelism",
+      "abstract": "Coarse-grained reconfigurable architectures (CGRAs) have emerged as promising accelerators due to their high flexibility and energy efficiency. However, existing open source works often lack integration of CGRAs with CPU systems and corresponding toolchains. Moreover, there is rare support for the accelerator instruction pipelining to overlap data communication, computation, and configuration across multiple tasks. In this article, we propose FDRA, an open source exploration framework for a heterogeneous system-on-chip (SoC) with a RISC-V processor and a dynamically reconfigurable accelerator (DRA) supporting loop, instruction, and task levels of parallelism. FDRA encompasses parameterized SoC modeling, Verilog generation, source-to-source application code transformation using frontend and DRA compilers, SoC simulation, and FPGA prototyping. FDRA incorporates the extraction of periodic accumulative operators and multi-dimensional linear load/store operators from nested loops. The DRA enables accessing the shared L2 cache with virtual addresses and supports direct memory access with arbitrary start addresses and data lengths. Integrated into the RISC-V Rocket SoC, our DRA achieves a remarkable 55× acceleration for loop kernels and improves energy efficiency by 29×. Compared to state-of-the-art RISC-V vector units, our DRA demonstrates a 2.9× speed improvement and 3.5× greater energy efficiency. In contrast to previous CGRA+RISC-V SoCs, our SoC achieves a minimum speedup of 5.2×.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3614224",
+      "url": "https://www.semanticscholar.org/paper/7298805cfc7cd79dc7eb8d37207237328d61ac3d"
+    },
+    {
+      "title": "A Reconfigurable Architecture for Real-time Event-based Multi-Object Tracking",
+      "abstract": "Although advances in event-based machine vision algorithms have demonstrated unparalleled capabilities in performing some of the most demanding tasks, their implementations under stringent real-time and power constraints in edge systems remain a major challenge. In this work, a reconfigurable hardware-software architecture called REMOT, which performs real-time event-based multi-object tracking on FPGAs, is presented. REMOT performs vision tasks by defining a set of actions over attention units (AUs). These actions allow AUs to track an object candidate autonomously by adjusting its region of attention and allow information gathered by each AU to be used for making algorithmic-level decisions. Taking advantage of this modular structure, algorithm-architecture codesign can be performed by implementing different parts of the algorithm in either hardware or software for different tradeoffs. Results show that REMOT can process 0.43–2.91 million events per second at 1.75–5.45 W. Compared with the software baseline, our implementation achieves up to 44 times higher throughput and 35.4 times higher power efficiency. Migrating the Merge operation to hardware further reduces the worst-case latency to be 95 times shorter than the software baseline. By varying the AU configuration and operation, a reduction of 0.59–0.77 mW per AU on the programmable logic has also been demonstrated.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3593587",
+      "url": "https://www.semanticscholar.org/paper/21cbf95ce63e6dd8d279edad0cdb55c1fb634218"
+    },
+    {
+      "title": "Deterministic Approach for Range-enhanced Reconfigurable Packet Classification Engine",
+      "abstract": "Reconfigurable hardware is a promising technology for implementing firewalls, routing mechanisms, and new protocols for evolving high-performance network systems. This work presents a novel deterministic approach for a Range-enhanced Reconfigurable Packet Classification Engine based on the number of rules on FPGAs. The proposed framework uses a RAM-established Ternary Match to represent the prefix and the range prefix and efficient rule-reordering for priority selection to get both best-match and multi-match in the same architecture. The recommended framework exhibits 3.2 Mbits of LUT-RAM-based ternary content addressable memory (TCAM) to hold a maximum of 31.3 K of 104-bit rules with 520 MPPS. LUT-RAM, along with BRAM, shows 4 Mbits of TCAM space to implement 38.5 K of 104-bit rules to sustain a throughput of 400 MPPS on Virtex-7 FPGA. The complete architecture offers scalability, better resource utilization (minimum of 50%), representation of inverse prefix with single entry, range expansion with a single rule, getting best- and multi-match, and determination of the required number of FPGA resources for a particular dataset.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3586577",
+      "url": "https://www.semanticscholar.org/paper/222730fb0543b374c8b1ce59132256f346b35b2d"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "journal_id": "dss",
+  "journal_name": "Decision Support Systems",
+  "papers": [
+    {
+      "title": "New algorithms for automatic modelling and forecasting of decision support systems",
+      "abstract": "Decision support systems often rely on time series forecasting, making the accuracy of such systems of paramount importance for their efficiency. Since most systems nowadays require the processing of massive amount of data, automatic identification of time series models has become inevitable. This automatism is inherent in artificial intelligence methods, but it often goes unnoticed that forecasting ‘classical’ methods have also been developing their own automatic methods for a long time. The radical novelty of this paper is the development of a brand new algorithm for identification of structural Unobserved Components models from which decision support systems may benefit. A second point is that combination of forecasts is more fruitful than competition or method selection in some cases. Both points are illustrated in two examples that show the effectiveness of the identification procedure and the forecasting gains when fairly different methods are combined.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.DSS.2021.113585",
+      "url": "https://www.semanticscholar.org/paper/636f0c2933a6091c7c4d4f623163e2a4354d4023"
+    },
+    {
+      "title": "Peak cubes in service operations: Bringing multidimensionality into decision support systems",
+      "abstract": "Companies like Ritz Carlton, Disney and Verizon are among many who have invested in analytics to improve their customers' service experiences with the firms. Extensive data are collected on all aspects of how customers interact or experience the products or services. Research has shown the importance of the “peak-end” rule in service design; that is, providing a customer with good “peak” service levels and “ending” the service experience with high quality can enhance customer satisfaction and build loyalty. However, previous studies have examined this phenomenon only in contexts with unidimensional service levels. We introduce peak cubes, which enable service designers and scholars to pinpoint prominent service levels in multidimensional service experience profiles—thereby extending current research on behavioral economics and service design to more general settings. Results indicate the potential of multidimensional peak-end models to better predict customer satisfaction in various service scenarios. Using Shapley values in coalitional game theory, the resulting models can also inform service designers about the quality dimensions that are critical from the perspective of multidimensional peak-end heuristic and customer satisfaction. Our research contributions and proposed methodology will enhance decision support systems with multidimensional capabilities and have applications to fields as diverse as service operations and healthcare.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2020.113442",
+      "url": "https://www.semanticscholar.org/paper/1f6107e7d6c5e94dba1a3f838aa8aa03706f1fd1"
+    },
+    {
+      "title": "A novel decision support system for optimizing aircraft maintenance check schedule and task allocation",
+      "abstract": "Modern aircraft have thousands of parts, systems, and components that need to be recurrently inspected or replaced. To keep the fleet airworthy, maintenance planners have to schedule the maintenance checks for each aircraft and the associated tasks. In practice, these two complex problems are solved following the experience of planners, resulting in sub-efficient solutions. This paper presents the first decision support system (DSS) developed for optimizing both aircraft maintenance check schedule and task allocation. The DSS integrates aircraft maintenance check scheduling, task allocation to each maintenance check, and shift planning in the same framework. The practical relevance of the DSS is illustrated through three test cases. The results show that the DSS can be used not only to optimize maintenance plans but also to study future maintenance policies. The results reveal substantial improvements in all key performance indicators compared with the planning approach followed by a partner airline.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.DSS.2021.113545",
+      "url": "https://www.semanticscholar.org/paper/df61f219394715da1fa7c7e653bec69fda4c3ddf"
+    },
+    {
+      "title": "Bayesian Stackelberg games for cyber-security decision support",
+      "abstract": "A decision support system for cyber-security is here presented. The system aims to select an optimal portfolio of security controls to counteract multi-stage attacks. The system has several components: a preventive optimisation to select controls for an initial defensive portfolio, a learning mechanism to estimate possible ongoing attacks, and an online optimisation selecting an optimal portfolio to counteract ongoing attacks. The system relies on efficient solutions of bi-level optimisations, in particular, the online optimisation is shown to be a Bayesian Stackelberg game solution. The proposed solution is shown to be more efficient than both classical solutions like Harsanyi transformation and more recent efficient solvers. Moreover, the proposed solution provides significant security improvements on mitigating ongoing attacks compared to previous approaches. The novel techniques here introduced rely on recent advances in Mixed-Integer Conic Programming (MICP), strong duality and totally unimodular matrices.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2021.113599",
+      "url": "https://www.semanticscholar.org/paper/1275cd60441945b9d094bded352d4a73971bc23b"
+    },
+    {
+      "title": "How to elicit and cease herding behaviour? On the effectiveness of a warning message as a debiasing decision support system",
+      "abstract": "Behavioural economics has been argued to be a productive basis for decision support system (DSS) research. Whereas traditional economics assumes that individuals make decisions independently of others, behavioural economists have shown that humans tend to follow the crowd in their decisions (i.e., exhibit herding bias). However, the literature is silent on how convincing the information on the decisions of the crowd needs to be to elicit herding bias and on whether herding can be reduced (i.e., debiased) by presenting a warning message. This paper addresses both questions in the contexts of financial decisions that were guided by two DSSs in the form of simulation tools. In particular, we conduct a randomised controlled trial with 768 respondents randomly assigned to peer information. The results indicate that the intervention successfully elicited herding bias and that herding occurs when respondents are informed that at least 50% of other people made a particular decision. The results further show that a DSS in the form of a warning message is not sufficient to debias herding. In conclusion, these findings showed that individuals are easily influenced by erroneous peer information and that this effect is robust against debiasing using a warning message. Hence, DSS developers need to consider more intense debiasing strategies to overcome herding.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2021.113652",
+      "url": "https://www.semanticscholar.org/paper/0cdae5710934d3f1b61e378f659be0914ca57017"
+    },
+    {
+      "title": "A collaborative decision support system for multi-criteria automatic clustering",
+      "abstract": "Automatic clustering is a challenging problem, especially when the decision-maker has little or no information about the nature of the dataset and the criteria of interest. There is a lack of generalizability in the current validity indexes (VI) for automatic clustering algorithms, as each considers a limited number of objectives and mostly ignores the other aspects of clustering validation. The proposed framework benefits from collaboration among selected evolutionary algorithms. A mixed-integer non-linear programming model is developed, and a framework is proposed for a six-step decision support system to solve it. The decision-maker (DM) selects the quantitative (primary) VIs and the evolutionary algorithms. Given DM's knowledge on the dataset and VIs, DM can incorporate qualitative (secondary) VIs. DM determines the quality threshold for each VI and runs the evolutionary algorithms separately. The DSS then saves the best obtained value of VIs in order to prepare the input necessary to construct the aggregated function. Based on the selected primary VIs, a new normalized aggregated function is developed and solved repeatedly using the randomly selected or predefined weights of importance. Eventually, DM employs a proper DEA model to define the final clustering output among all possible solutions. Given multiple efficient solutions, the best-worst method and a multi-criteria decision-making approach are applied to find the final output. The applicability of the proposed approach is illustrated on a synthetic and two secondary datasets, and the result at each step is discussed in detail.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2021.113671",
+      "url": "https://www.semanticscholar.org/paper/421ff7d98b007e48f272a41ed710201cbeac2b51"
+    },
+    {
+      "title": "Developing a decision support system to detect material weaknesses in internal control",
+      "abstract": "Wells Fargo employees set up 3.5 million fraudulent accounts over several years. Wells Fargo ended up paying $4.5 billion in fines. The Wells Fargo scandal highlights the importance of management actions to prevent misstatements and potential frauds on a timely basis. This study utilized the design science research paradigm to develop a predictive framework (IT artifact) in order to stratify firms into multiple risk groups for disclosing material weakness(es) in internal control (MWIC). The proposed methodology employed a hybrid heuristic optimization-based machine learning methodology. Synthetic minority over-sampling technique (SMOTE) was utilized to handle the learning problem with the imbalanced data. The best performing model was the proposed hybrid Genetic Algorithms (GA) and Support Vector Machines (SVM). The proposed methodology was internally validated via k-fold cross validation, and then externally validated using several separate datasets. The (GA) selected variables were ranked from the most important to the least through Information fusion (IF) sensitivity. A web-based decision support system was built to predict the firm-specific MWIC risk category. The web-based tool can be used to create an early warning system for predicting MWIC(s).",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2021.113631",
+      "url": "https://www.semanticscholar.org/paper/2b03cb9b97e84aa9e95c56027d656b90177a6a7e"
+    },
+    {
+      "title": "Transparency and accountability in AI decision support: Explaining and visualizing convolutional neural networks for text information",
+      "abstract": "Proliferating applications of deep learning, along with the prevalence of large-scale text datasets, have revolutionized the natural language processing (NLP) field, thereby driving the recent explosive growth. Nevertheless, it is argued that state-of-the-art studies focus excessively on producing quantitative performances superior to existing models, by playing “the Kaggle game.” Hence, the field requires more effort in solving new problems and proposing novel approaches and architectures. We claim that one of the promising and constructive efforts would be to design transparent and accountable artificial intelligence (AI) systems for text analytics. By doing so, we can enhance the applicability and problem-solving capacity of the system for real-world decision support. It is widely accepted that deep learning models demonstrate remarkable performances compared to existing algorithms. However, they are often criticized for being less interpretable, i.e., the “black box.” In such cases, users tend to hesitate to utilize them for decision-making, especially in crucial tasks. Such complexity obstructs transparency and accountability of the overall system, potentially debilitating the deployment of decision support systems powered by AI. Furthermore, recent regulations are emphasizing fairness and transparency in algorithms to a greater extent, turning explanations more compulsory than voluntary. Thus, to enhance the transparency and accountability of the decision support system and preserve the capacity to model complex text data at the same time, we propose the Explaining and Visualizing Convolutional neural networks for Text information (EVCT) framework. By adopting and ameliorating cutting-edge methods in NLP and image processing, the EVCT framework provides a human-interpretable solution to the problem of text classification while minimizing information loss. Experimental results with large-scale, real-world datasets show that EVCT performs comparably to benchmark models, including widely used deep learning models. In addition, we provide instances of human-interpretable and relevant visualized explanations obtained from applying EVCT to the dataset and possible applications for real-world decision support.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dss.2020.113302",
+      "url": "https://www.semanticscholar.org/paper/b428a7466532e352906b290603f945ae07adf468"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ Semantic Scholar 论文爬虫 - 支持多 CCF 领域、多等级
 """
 
 import json
+import os
 import time
 import argparse
 from typing import Dict, List, Optional, Tuple, Set
@@ -16,7 +17,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # ====================== 配置 ======================
-API_KEY = "s2k-AeDASl4PzLGaxug6gQ9aNSlOQM10hmxa5IUVj4Ma"
+API_KEY = os.environ.get("S2_API_KEY", "")
 BASE_URL = "https://api.semanticscholar.org/graph/v1"
 HEADERS = {"x-api-key": API_KEY} if API_KEY else {}
 

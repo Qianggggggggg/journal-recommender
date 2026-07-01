@@ -9,6 +9,70 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1016/j.cagd.2024.102347",
       "url": ""
+    },
+    {
+      "title": "New algebraic and geometric characterizations of planar quintic Pythagorean-hodograph curves",
+      "abstract": "The aim of this work is to provide new characterizations of planar quintic Pythagorean-hodograph curves. The first two are algebraic and consist of two and three equations, respectively, in terms of the edges of the Bézier control polygon as complex numbers. These equations are symmetric with respect to the edge indices and cover curves with genericaswellasdegeneratecontrolpolygons. Thelasttwocharacterizationsaregeometric and rely both on just two auxiliary points outside the control polygon. One requires two (possibly degenerate) quadrilaterals to be similar, and the other highlights two families of three similar triangles. All characterizations are a step forward with respect to the state of the art, and they can be linked to the well-established counterparts for planar cubic Pythagorean-hodograph curves. The key ingredient for proving the aforementioned results is a novel general expression for the hodograph of the curve.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2023.102256",
+      "url": "https://www.semanticscholar.org/paper/822bbed0d0284f27c7d29b8820ce39d3f805df3f"
+    },
+    {
+      "title": "An optimized yarn-level geometric model for Finite Element Analysis of weft-knitted fabrics",
+      "abstract": "Knitted fabrics are widely used in clothing because of their distinctive ability to be shaped and formed, which is fundamentally different from the behavior of woven cloth. Since stitches produce complex interactions between yarns, the macroscopic behavior of knitted fabrics depends more on their loop structure and stitch patterns than on the physical properties of the yarn. In order to explore the unique mechanical properties of knitted textiles we have developed a yarn-level model for weft-knitted fabrics that can be used in Finite Element Analysis (FEA) simulations. Producing geometric models of yarns in a knitted material is framed as an optimization problem. In this computing context, a single “cost” function is defined that captures the various required features of the final geometric model. The function is specified in such a way that finding the variable values that results in a minimum function evaluation produces the desired geometric result. The centerlines of the fabric's yarns are defined as Catmull-Rom splines, and the cost function is minimized by adjusting the locations of the spline's control points. The optimization is based on physical parameters such as yarn interpenetration, length of the yarn and bending energy. The optimized models are written to a file which can be directly read by an FEA software. The results show that our approach can create yarn-level models of weft-knitted fabrics consisting of an arbitrary pattern of knit and purl stitches, with a range of sizes, that are suitable for FEA simulations.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2020.101883",
+      "url": "https://www.semanticscholar.org/paper/d221d6bb5331c564050de7a69964f9422e662239"
+    },
+    {
+      "title": "Geometric approximation of the sphere by triangular polynomial spline patches",
+      "abstract": "A sphere is a fundamental geometric object widely used in (computer aided) geometric design. It possesses rational parameterizations but no parametric polynomial parameterization exists. The present study provides an approach to the optimal approximation of equilateral spherical triangles by parametric polynomial patches if the measure of quality is the (simplified) radial error. As a consequence, optimal approximations of the unit sphere by parametric polynomial spline patches underlying on particular regular spherical triangulations arising from a tetrahedron, an octahedron and an icosahedron inscribed in the unit sphere are provided. Some low total degree spline patches with corresponding geometric smoothness are analyzed in detail and several numerical examples are shown confirming the quality of approximants.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2021.102061",
+      "url": "https://www.semanticscholar.org/paper/1428f35552397465175a2c9002f7ea6aee38f2ae"
+    },
+    {
+      "title": "Algebraic and geometric characterizations of a class of planar quartic curves with rational offsets",
+      "abstract": "Planar polynomial curves have rational offset curves, if they are either Pythagorean-hodograph (PH) or indirect Pythagorean-hodograph (iPH) curves. In this paper, we derive an algebraic and two geometric characterizations for planar quartic iPH curves. The characterizations are given in terms of quantities related to the Bezier control polygon of the curve, and naturally extend to quartic and cubic PH and quadratic iPH curves.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2020.101873",
+      "url": "https://www.semanticscholar.org/paper/44301480f5be8155c41efadeed0d49762a5496c5"
+    },
+    {
+      "title": "Spherical interpolatory geometric subdivision schemes",
+      "abstract": "We define general geometric subdivision schemes generating curves on the 2-dimensional unit sphere by using geodesic polygons and the spherical distance. We show that a spherical interpolatory geometric subdivision scheme is convergent if the sequence of maximum edge lengths is summable and the limit curve is G 1 -continuous if in addition the sequence of maximum angular defects is summable. In particular, we study the case of bisector interpolatory schemes. Some experimental examples are given to demonstrate the excellent properties of these schemes.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2020.101871",
+      "url": "https://www.semanticscholar.org/paper/02d0677099137b56f3d28a85a6e6968f4fb78404"
+    },
+    {
+      "title": "Transferable and Undefendable Point Cloud Attacks via Medial Axis Transform",
+      "abstract": "Studying adversarial attacks on point clouds is essential for evaluating and improving the robustness of 3D deep learning models. However, most existing attack methods are developed under ideal white-box settings and often suffer from limited transferability to unseen models and insufficient robustness against common defense mechanisms. In this paper, we propose MAT-Adv, a novel adversarial attack framework that enhances both transferability and undefendability by explicitly perturbing the medial axis transform (MAT) representations, in order to induce inherent adversarialness in the resulting point clouds. Specifically, we employ an autoencoder to project input point clouds into compact MAT representations that capture the intrinsic geometric structure of point clouds. By perturbing these intrinsic representations, MAT-Adv introduces structural-level adversarial characteristics that remain effective across diverse models and defense strategies. To mitigate overfitting and prevent perturbation collapse, we incorporate a dropout strategy into the optimization of MAT perturbations, further improving transferability and undefendability. Extensive experiments demonstrate that MAT-Adv significantly outperforms existing state-of-the-art methods in both transferability and undefendability. Codes will be made public upon paper acceptance.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2507.18870",
+      "url": "https://www.semanticscholar.org/paper/a56f4b7cfedb8818dd43b9905043df680a3b5150"
+    },
+    {
+      "title": "Geodesic distance approximation using a surface finite element method for the p-Laplacian",
+      "abstract": "We use the $p$-Laplacian with large $p$-values in order to approximate geodesic distances to features on surfaces. This differs from Fayolle and Belyaev's (2018) [1] computational results using the $p$-Laplacian for the distance-to-surface problem. Our approach appears to offer some distinct advantages over other popular PDE-based distance function approximation methods. We employ a surface finite element scheme and demonstrate numerical convergence to the true geodesic distance functions. We check that our numerical results adhere to the triangle inequality and examine robustness against geometric noise such as vertex perturbations. We also present comparisons of our method with the heat method from Crane et al. [2] and the classical polyhedral method from Mitchell et al. [3].",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2025.102458",
+      "url": "https://www.semanticscholar.org/paper/69ef4e222cac2d9f71ee6324d6679a749fd19fbf"
+    },
+    {
+      "title": "Transfinite barycentric coordinates for arbitrary planar domains",
+      "abstract": "Generalized barycentric coordinates provide a simple way of interpolating data given at the vertices of a polygon or polyhedron, with widespread applications in computer graphics, geometry processing, and other fields. Transfinite barycentric coordinates, also known as barycentric kernels, extend this idea to curved domains and can be used to interpolate continuous data given on the boundary of such domains. We present a novel framework for defining non-negative barycentric kernels over arbitrary bounded planar domains. This framework is inspired by the construction of a transfinite version of maximum likelihood coordinates and can be used to define a variety of barycentric kernels, including a simple pseudo-harmonic kernel and a non-negative variant of the mean value kernel. Moreover, we propose a novel barycentric kernel which yields transfinite interpolants that are similar to harmonic interpolants. We tested our new kernel for domains and boundary data described by closed uniform quadratic B-splines and in particular for image deformation. The results indicate that our method has several advantages over alternative approaches.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cagd.2025.102433",
+      "url": "https://www.semanticscholar.org/paper/fcd85f43bb0fcc31356b33e79d69874fbaaf2f1e"
     }
   ]
 }

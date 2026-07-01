@@ -1,0 +1,78 @@
+{
+  "journal_id": "tacl",
+  "journal_name": "Transactions of the Association for Computational Linguistics",
+  "papers": [
+    {
+      "title": "Culturally Aware and Adapted NLP: A Taxonomy and a Survey of the State of the Art",
+      "abstract": "The surge of interest in culture in NLP has inspired much recent research, but a shared understanding of “culture” remains unclear, making it difficult to evaluate progress in this emerging area. Drawing on prior research in NLP and related fields, we propose a fine-grained taxonomy of elements in culture that can provide a systematic framework for analyzing and understanding research progress. Using the taxonomy, we survey existing resources and methods for culturally aware and adapted NLP, providing an overview of the state of the art and the research gaps that still need to be filled.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2406.03930",
+      "url": "https://www.semanticscholar.org/paper/b920fa3bfd70bcb2f5b606ede2bd6f681e5e730c"
+    },
+    {
+      "title": "Scientia Potentia Est—On the Role of Knowledge in Computational Argumentation",
+      "abstract": "Despite extensive research efforts in recent years, computational argumentation (CA) remains one of the most challenging areas of natural language processing. The reason for this is the inherent complexity of the cognitive processes behind human argumentation, which integrate a plethora of different types of knowledge, ranging from topic-specific facts and common sense to rhetorical knowledge. The integration of knowledge from such a wide range in CA requires modeling capabilities far beyond many other natural language understanding tasks. Existing research on mining, assessing, reasoning over, and generating arguments largely acknowledges that much more knowledge is needed to accurately model argumentation computationally. However, a systematic overview of the types of knowledge introduced in existing CA models is missing, hindering targeted progress in the field. Adopting the operational definition of knowledge as any task-relevant normative information not provided as input, the survey paper at hand fills this gap by (1) proposing a taxonomy of types of knowledge required in CA tasks, (2) systematizing the large body of CA work according to the reliance on and exploitation of these knowledge types for the four main research areas in CA, and (3) outlining and discussing directions for future research efforts in CA.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00525",
+      "url": "https://www.semanticscholar.org/paper/ba805d34f762df65f499183f2010647829351def"
+    },
+    {
+      "title": "A Computational Framework for Slang Generation",
+      "abstract": "Slang is a common type of informal language, but its flexible nature and paucity of data resources present challenges for existing natural language systems. We take an initial step toward machine generation of slang by developing a framework that models the speaker’s word choice in slang context. Our framework encodes novel slang meaning by relating the conventional and slang senses of a word while incorporating syntactic and contextual knowledge in slang usage. We construct the framework using a combination of probabilistic inference and neural contrastive learning. We perform rigorous evaluations on three slang dictionaries and show that our approach not only outperforms state-of-the-art language models, but also better predicts the historical emergence of slang word usages from 1960s to 2000s. We interpret the proposed models and find that the contrastively learned semantic space is sensitive to the similarities between slang and conventional senses of words. Our work creates opportunities for the automated generation and interpretation of informal language.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00378",
+      "url": "https://www.semanticscholar.org/paper/825cdfeabf48f230f9cc3112bf3b1b4112f8bd58"
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "abstract": "While recent language models have the ability to take long contexts as input, relatively little is known about how well they use longer context. We analyze the performance of language models on two tasks that require identifying relevant information in their input contexts: multi-document question answering and key-value retrieval. We find that performance can degrade significantly when changing the position of relevant information, indicating that current language models do not robustly make use of information in long input contexts. In particular, we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models. Our analysis provides a better understanding of how language models use their input context and provides new evaluation protocols for future long-context language models.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00638",
+      "url": "https://www.semanticscholar.org/paper/1733eb7792f7a43dd21f51f4d1017a1bffd217b5"
+    },
+    {
+      "title": "In-Context Retrieval-Augmented Language Models",
+      "abstract": "Retrieval-Augmented Language Modeling (RALM) methods, which condition a language model (LM) on relevant documents from a grounding corpus during generation, were shown to significantly improve language modeling performance. In addition, they can mitigate the problem of factually inaccurate text generation and provide natural source attribution mechanism. Existing RALM approaches focus on modifying the LM architecture in order to facilitate the incorporation of external information, significantly complicating deployment. This paper considers a simple alternative, which we dub In-Context RALM: leaving the LM architecture unchanged and prepending grounding documents to the input, without any further training of the LM. We show that In-Context RALM that builds on off-the-shelf general purpose retrievers provides surprisingly large LM gains across model sizes and diverse corpora. We also demonstrate that the document retrieval and ranking mechanism can be specialized to the RALM setting to further boost performance. We conclude that In-Context RALM has considerable potential to increase the prevalence of LM grounding, particularly in settings where a pretrained LM must be used without modification or even via API access.1",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00605",
+      "url": "https://www.semanticscholar.org/paper/465471bb5bf1a945549d6291c2d23367966b4957"
+    },
+    {
+      "title": "♫ MuSiQue: Multihop Questions via Single-hop Question Composition",
+      "abstract": "Multihop reasoning remains an elusive goal as existing multihop benchmarks are known to be largely solvable via shortcuts. Can we create a question answering (QA) dataset that, by construction, requires proper multihop reasoning? To this end, we introduce a bottom–up approach that systematically selects composable pairs of single-hop questions that are connected, that is, where one reasoning step critically relies on information from another. This bottom–up methodology lets us explore a vast space of questions and add stringent filters as well as other mechanisms targeting connected reasoning. It provides fine-grained control over the construction process and the properties of the resulting k-hop questions. We use this methodology to create MuSiQue-Ans, a new multihop QA dataset with 25K 2–4 hop questions. Relative to existing datasets, MuSiQue-Ans is more difficult overall (3× increase in human–machine gap), and harder to cheat via disconnected reasoning (e.g., a single-hop model has a 30-point drop in F1). We further add unanswerable contrast questions to produce a more stringent dataset, MuSiQue-Full. We hope our datasets will help the NLP community develop models that perform genuine multihop reasoning.1",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00475",
+      "url": "https://www.semanticscholar.org/paper/ec307b17f193b14292206b65a1bcc95bfd8f02ed"
+    },
+    {
+      "title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+      "abstract": "This paper demonstrates that multilingual denoising pre-training produces significant performance gains across a wide variety of machine translation (MT) tasks. We present mBART—a sequence-to-sequence denoising auto-encoder pre-trained on large-scale monolingual corpora in many languages using the BART objective (Lewis et al., 2019). mBART is the first method for pre-training a complete sequence-to-sequence model by denoising full texts in multiple languages, whereas previous approaches have focused only on the encoder, decoder, or reconstructing parts of the text. Pre-training a complete model allows it to be directly fine-tuned for supervised (both sentence-level and document-level) and unsupervised machine translation, with no task- specific modifications. We demonstrate that adding mBART initialization produces performance gains in all but the highest-resource settings, including up to 12 BLEU points for low resource MT and over 5 BLEU points for many document-level and unsupervised models. We also show that it enables transfer to language pairs with no bi-text or that were not in the pre-training corpus, and present extensive analysis of which factors contribute the most to effective pre-training.1",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00343",
+      "url": "https://www.semanticscholar.org/paper/495da6f19baa09c6db3697d839e10432cdc25934"
+    },
+    {
+      "title": "Benchmarking Large Language Models for News Summarization",
+      "abstract": "Large language models (LLMs) have shown promise for automatic summarization but the reasons behind their successes are poorly understood. By conducting a human evaluation on ten LLMs across different pretraining methods, prompts, and model scales, we make two important observations. First, we find instruction tuning, not model size, is the key to the LLM’s zero-shot summarization capability. Second, existing studies have been limited by low-quality references, leading to underestimates of human performance and lower few-shot and finetuning performance. To better evaluate LLMs, we perform human evaluation over high-quality summaries we collect from freelance writers. Despite major stylistic differences such as the amount of paraphrasing, we find that LLM summaries are judged to be on par with human written summaries.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00632",
+      "url": "https://www.semanticscholar.org/paper/a4a41319d5805a29316f24ed9519f09db77d4c29"
+    },
+    {
+      "title": "A Primer in BERTology: What We Know About How BERT Works",
+      "abstract": "Transformer-based models have pushed state of the art in many areas of NLP, but our understanding of what is behind their success is still limited. This paper is the first survey of over 150 studies of the popular BERT model. We review the current state of knowledge about how BERT works, what kind of information it learns and how it is represented, common modifications to its training objectives and architecture, the overparameterization issue, and approaches to compression. We then outline directions for future research.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1162/tacl_a_00349",
+      "url": "https://www.semanticscholar.org/paper/bd20069f5cac3e63083ecf6479abc1799db33ce0"
+    }
+  ]
+}

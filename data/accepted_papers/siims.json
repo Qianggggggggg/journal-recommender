@@ -1,0 +1,54 @@
+{
+  "journal_id": "siims",
+  "journal_name": "SIAM Journal on Imaging Sciences",
+  "papers": [
+    {
+      "title": "Multilevel Bregman Proximal Gradient Descent",
+      "abstract": "We present the Multilevel Bregman Proximal Gradient Descent (ML BPGD) method, a novel multilevel optimization framework tailored to constrained convex problems with relative Lipschitz smoothness. Our approach extends the classical multilevel optimization framework (MGOPT) to handle Bregman-based geometries and constrained domains. We provide a rigorous analysis of ML BPGD for multiple coarse levels and establish a global linear convergence rate. We demonstrate the effectiveness of ML BPGD in the context of image reconstruction, providing theoretical guarantees for the well-posedness of the multilevel framework and validating its performance through numerical experiments.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1137/25m1775725",
+      "url": "https://openalex.org/W4416230931"
+    },
+    {
+      "title": "Smooth Optimization Using Global and Local Low-Rank Regularizers",
+      "abstract": ", nonlinear conjugate gradient) that can easily address the case of overlapping patches and have well-known convergence guarantees. In addition, we provide a novel step-size selection strategy based on a quadratic majorizer of the line-search function that leverages the Huber characteristics of the proposed regularizer. Finally, we assess the proposed optimization framework by providing empirical results in dynamic magnetic resonance imaging (MRI) reconstruction in the context of local low-rank models with overlapping patches.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1137/25m175891x",
+      "url": "https://openalex.org/W7160159772"
+    },
+    {
+      "title": "Normalized Radon Cumulative Distribution Transforms for Invariance and Robustness in Optimal Transport Based Image Classification",
+      "abstract": "The Radon cumulative distribution transform (R-CDT), is an easy-to-compute feature extractor that facilitates image classification tasks especially in the small data regime. It is closely related to the sliced Wasserstein distance and provably guaranties the linear separability of image classes that emerge from translations or scalings. In many real-world applications, like the recognition of watermarks in filigranology, however, the data is subject to general affine transformations originating from the measurement process. To overcome this issue, we recently introduced the so-called max-normalized R-CDT that only requires elementary operations and guaranties the separability under arbitrary affine transformations. The aim of this paper is to continue our study of the max-normalized R-CDT especially with respect to its robustness against non-affine image deformations. Our sensitivity analysis shows that its separability properties are stable provided the Wasserstein-infinity distance between the samples can be controlled. Since the Wasserstein-infinity distance only allows small local image deformations, we moreover introduce a mean-normalized version of the R-CDT. In this case, robustness relates to the Wasserstein-2 distance and also covers image deformations caused by impulsive noise for instance. Our theoretical results are supported by numerical experiments showing the effectiveness of our novel feature extractors as well as their robustness against local non-affine deformations and impulsive noise.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1137/25m1767741",
+      "url": "https://openalex.org/W4417136953"
+    },
+    {
+      "title": "Subspace Method of Moments for Ab Initio 3-D Single Particle Cryo-EM Reconstruction",
+      "abstract": "Cryo-electron microscopy (cryo-EM) is a widely used technique for recovering the three-dimensional (3-D) structure of biological molecules from a large number of experimentally generated noisy 2-D tomographic projection images of the 3-D structure, taken from unknown viewing angles. Through computationally intensive algorithms, these observed images are processed to reconstruct the 3-D structures. Many popular computational methods rely on estimating the unknown angles as part of the reconstruction process, which becomes particularly challenging at low signal-to-noise ratios. The method of moments offers an alternative approach that circumvents the estimation of viewing orientations of individual projection images by instead estimating the underlying distribution of the viewing angles, and is robust to noise given sufficiently many images. However, the method of moments typically entails computing higher-order moments of the projection images, incurring significant computational and memory costs. To mitigate this, we propose a new approach called the subspace method of moments (SubspaceMoM), which compresses the first three moments using data-driven low-rank tensor techniques as well as expansion into a suitable function basis. The compressed moments can be efficiently computed from the set of projection images using numerical quadrature and can be employed to jointly reconstruct the 3-D structure and the distribution of viewing orientations. We illustrate the practical applicability of SubspaceMoM through numerical experiments using up to the third-order moment on synthetic datasets with a simplified cryo-EM image formation model, which significantly improves the reconstruction resolution compared to previous MoM approaches.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1137/24m1699644",
+      "url": "https://openalex.org/W7131780242"
+    },
+    {
+      "title": "Inverse Scattering for Schrödinger Equation in the Frequency Domain via Data-Driven Reduced Order Modeling",
+      "abstract": "In this paper we develop a numerical method for solving an inverse scattering problem of estimating the scattering potential in a Schrödinger equation from frequency domain measurements based on reduced order models (ROM). The ROM is a projection of Schrödinger operator onto a subspace spanned by its solution snapshots at certain wavenumbers. Provided the measurements are performed at these wavenumbers, the ROM can be constructed in a data-driven manner from the measurements on a surface surrounding the scatterers. Once the ROM is computed, the scattering potential can be estimated using non-linear optimization that minimizes the ROM misfit. Such an approach typically outperforms the conventional methods based on data misfit minimization. We develop two variants of ROM-based algorithms for inverse scattering and test them on a synthetic example in two spatial dimensions.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1137/25m1741935",
+      "url": "https://openalex.org/W4415953189"
+    },
+    {
+      "title": "Multiplicative Reweighting for Robust Neural Network Optimization",
+      "abstract": "Neural networks are widespread due to their powerful performance. Yet, they degrade in the presence of noisy labels at training time. Inspired by the setting of learning with expert advice, where multiplicative weights (MW) updates were recently shown to be robust to moderate data corruptions in expert advice, we propose to use MW for reweighting examples during neural networks optimization. We theoretically establish the convergence of our method when used with gradient descent and prove its advantages in 1d cases. We then validate empirically our findings for the general case by showing that MW improves neural networks' accuracy in the presence of label noise on CIFAR-10, CIFAR-100 and Clothing1M. We also show the impact of our approach on adversarial robustness.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1137/25m1734816",
+      "url": "https://openalex.org/W3131236472"
+    }
+  ]
+}

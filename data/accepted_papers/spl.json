@@ -1,0 +1,78 @@
+{
+  "journal_id": "spl",
+  "journal_name": "IEEE Signal Processing Letters",
+  "papers": [
+    {
+      "title": "Towards Hybrid Quantum-Classical Deep Learning Architecture for Indoor-Outdoor Detection Using QCNN-LSTM and Cluster State Signal Processing",
+      "abstract": "Quantum computing, combined with deep learning, leverages principles like superposition and entanglement to enhance complex data-driven tasks. The Noisy Intermediate-Scale Quantum (NISQ) era presents opportunities for hybrid quantum-classical architectures to address this challenge. Despite significant progress, practical applications of these hybrid models are limited. This letter proposes a novel hybrid quantum-classical deep learning architecture, integrating Quantum Convolutional Neural Networks (QCNNs) and Long-Short-Term Memory (LSTM) networks, enhanced by Cluster State Signal Processing. Furthermore, this letter addresses indoor-outdoor detection using high-dimensional signal data, utilizing the Cirq platform—a Python framework for developing and simulating Noisy Intermediate Scale Quantum (NISQ) circuits on quantum computers and simulators. The approach addresses noise and decoherence issues. Preliminary results show that the QCNN-LSTM model outperforms pure quantum and hybrid models in accuracy and efficiency. This validates the practical benefits of hybrid architectures, paving the way for advancements in complex data classification like indoor-outdoor detection.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3480043",
+      "url": "https://www.semanticscholar.org/paper/0c71cf2f7b0ff8236a28428ba1fe9a69702986fc"
+    },
+    {
+      "title": "An Iterative Algorithm for Quaternion Eigenvalue Problems in Signal Processing",
+      "abstract": "This letter proposes a quaternion projection gradient ascent (QPGA) iterative algorithm based on generalized $\\mathbb {HR}$ calculus for computing the principal eigenvalues and its eigenvectors of quaternion Hermitian matrices. We also prove the convergence of the QPGA algorithm, demonstrating that the estimated sequence of principal eigenvalues is monotonically increasing. Numerical experiments demonstrate the superiority of the proposed iterative method over traditional algebraic methods in terms of accuracy and speed, as well as the application of principal eigenvalues and their eigenvectors obtained by the QPGA algorithm in denoising with quaternion principal component analysis and quaternion least mean square (QLMS) algorithms in filtering fetal electrocardiograms. Overall, the fast quaternion eigenvalue solving method provides a novel and effective technical tool for quaternion signal processing.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3459640",
+      "url": "https://www.semanticscholar.org/paper/848c335e5f019d90216c2b931fad167e243609c6"
+    },
+    {
+      "title": "Exponential Hyperbolic Cosine Robust Adaptive Filters for Audio Signal Processing",
+      "abstract": "In recent years, correntropy-based algorithms which include maximum correntropy criterion (MCC), generalized MCC (GMCC), kernel MCC (KMCC) and hyperbolic cosine function-based algorithms such as hyperbolic cosine adaptive filter (HCAF), logarithmic HCAF (LHCAF), least lncosh (Llncosh) have been widely utilized in adaptive filtering due to their robustness towards non-Gaussian/impulsive background noises. However, the performance of such algorithms suffers from high steady-state misalignment. To minimize the steady-state misalignment along with having comparable computational complexity, an exponential hyperbolic cosine function (EHCF) based new robust norm is introduced and a corresponding EHCF based adaptive filter called exponential hyperbolic cosine adaptive filter (EHCAF) is developed in this letter. Further, computational complexity and bound on learning rate for stability of the proposed algorithm is also studied. A set of simulation studies has been carried out for system identification scenario to assess the performance of the proposed algorithm. Further, EHCAF algorithm has been extended and the filtered-x EHCAF (Fx-EHCAF) algorithm is proposed for robust room equalization.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2021.3093862",
+      "url": "https://www.semanticscholar.org/paper/6743040729123b7c219dbc452af96f17354d04c0"
+    },
+    {
+      "title": "Point Cloud Resampling via Hypergraph Signal Processing",
+      "abstract": "Three-dimensional (3D) point clouds are important data representations in visualization applications. The rapidly growing utility and popularity of point cloud processing strongly motivate a plethora of research activities on large-scale point cloud processing and feature extraction. In this work, we investigate point cloud resampling based on hypergraph signal processing (HGSP). We develop a novel method to extract sharp object features and reduce the data size of point cloud representation. By directly estimating hypergraph spectrum based on hypergraph stationary processing, we design a spectral kernel-based filter to capture high-dimensional interactions among point signal nodes and to better preserve object surface outlines. Experimental results validate the effectiveness of hypergraph in representing point clouds, and demonstrate the robustness of the proposed algorithm under noise.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2021.3119257",
+      "url": "https://www.semanticscholar.org/paper/4ceaca2dc718e2ff89fca35a3613eba93c49b488"
+    },
+    {
+      "title": "Graph Signal Processing: Vertex Multiplication",
+      "abstract": "On the Euclidean domains of classical signal processing, linking of signal samples to underlying coordinate structures is straightforward. While graph adjacency matrices totally define the quantitative associations among the underlying graph vertices, a major problem in graph signal processing is the lack of explicit association of vertices with an underlying coordinate structure. To make this link, we propose an operation, called the vertex multiplication (VM), which is defined for graphs and can operate on graph signals. VM, which generalizes the coordinate multiplication (CM) operation in time series signals, can be interpreted as an operator that assigns a coordinate structure to a graph. By using the graph domain extension of differentiation and graph Fourier transform (GFT), VM is defined such that it shows Fourier duality that differentiation and CM operations are duals of each other under Fourier transformation (FT). Numerical examples and applications are also presented.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2021.3086391",
+      "url": "https://www.semanticscholar.org/paper/31af78f3e7c7c1650cf5986dce621d3e2208c856"
+    },
+    {
+      "title": "Radar Signal Sorting via Graph Convolutional Network and Semi-Supervised Learning",
+      "abstract": "As a key technology in radar reconnaissance systems, radar signal sorting aims to separate multiple radar pulses from an interleaved pulse stream. Supervised signal sorting methods based on deep learning depend on a large volume of training data to optimize model parameters. However, acquiring labeled pulses in practice is challenging. In this letter, a semi-supervised learning (SSL) framework is proposed to address this issue. First, a Self-Organizing Map (SOM) is used to learn the spatial distribution of impulse features, and an anchor graph is constructed based on SOM nodes. A pseudo-label set is then generated using the SOM based on pulse discrepancy information. Finally, a three-layer Weighted Residual Graph Convolutional Network (WRGCN) is designed for signal sorting, with its parameters pre-trained on pseudo-labels and fine-tuned with a limited number of true labels. Experiments on a simulated radar pulse dataset demonstrate that this framework outperforms several existing methods for radar signal sorting with limited labeled pulses.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3519884",
+      "url": "https://www.semanticscholar.org/paper/b6fd618b95cf272b31941f432826886333dd1731"
+    },
+    {
+      "title": "Theoretical Guarantees for Sparse Graph Signal Recovery",
+      "abstract": "Sparse graph signals have recently been utilized in graph signal processing (GSP) for tasks such as graph signal reconstruction, blind deconvolution, and sampling. In addition, sparse graph signals can be used to model real-world network applications across various domains, such as social, biological, and power systems. Despite the extensive use of sparse graph signals, limited attention has been paid to the derivation of theoretical guarantees on their recovery. In this paper, we present a novel theoretical analysis of the problem of recovering a node-domain sparse graph signal from the output of a first-order graph filter. The graph filter we study is the Laplacian matrix, and we derive upper and lower bounds on its mutual coherence. Our results establish a connection between the recovery performance and the minimal graph nodal degree. The proposed bounds are evaluated via simulations on the Erdős-Rényi graph.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3514800",
+      "url": "https://www.semanticscholar.org/paper/99a21cde32aebc0c93b6013d7843f40953c0ec8e"
+    },
+    {
+      "title": "Radar Signal Intra-Pulse Modulation Recognition Based on Point Cloud Network",
+      "abstract": "Aiming at the existing deep learning radar signal modulation recognition methods are mostly based on time-frequency image (TFI) and consequently result in networks with a large number of parameters due to the significant amount of redundant information contained in TFI, this paper proposes a radar signal intra-pulse modulation recognition method based on point cloud which removes redundant information. Radar signals of different modulation types are mapped into point cloud after Smoothed Pseudo Wigner-Ville Distribution (SPWVD) transformation. Then, PointNet++ is used to classify the point cloud data according to its modulation type and output its corresponding modulation type labels. Simulation results show that the proposed method can effectively recognize radar signals of typical modulation types, and show strong effectiveness and reliability at low signal-to-noise ratio (SNR). Besides, the lightweight characteristics of PointNet++ make the operation of the method more efficient.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3514796",
+      "url": "https://www.semanticscholar.org/paper/38dfeae9542fb394ff11952d3d574e679bd0c043"
+    },
+    {
+      "title": "Dynamic Functional Connectivity Neural Network for Epileptic Seizure Prediction Using Multi-Channel EEG Signal",
+      "abstract": "Epilepsy, one of the world's most common neurological diseases, impacts over 1% of the global population. Accurate early prediction of epileptic seizure has a great influence on epileptic patients' lives and attracted extensive attention. However, existing methods do not fully consider the complexity of multi-channel electroencephalogram (EEG) signal, which is the most common measurement for epileptic seizures. In this letter, we propose a Dynamic Functional Connectivity neural Network (DynFCNet) for epileptic seizure prediction. The proposed DynFCNet can discover dynamic brain functional connections and generate dynamic functional connectivity graphs, as well as extract non-Euclidean features from multi-channel EEG signals by Graph Convolutional Network (GCN). To take Euclidean features into consideration, Convolutional Neural Network (CNN) as one of the branches is also employed. Further, we incorporated both intra-group loss and inter-group loss to enhance our DynFCNet. Extensive experiments were implemented on a public multi-channel EEG dataset (CHB-MIT). The results confirm that our proposal outperforms the other competitors.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LSP.2024.3400037",
+      "url": "https://www.semanticscholar.org/paper/b6d9a4c43611a2a701a232c503dd7838c8aac166"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "journal_id": "ppna",
+  "journal_name": "Peer-to-Peer Networking and Applications",
+  "papers": [
+    {
+      "title": "C3P-RPL: A collaborative and proactive approach for optimal peer to peer path selection and sustenance",
+      "abstract": "Internet of Things is evolving from information gathering platforms into collaborative systems wherein, smart devices actively interact with each other in a seamless manner. For instance, Internet of Robotic Things is envisioned to provide augmented solutions through collaboration of varied smart devices and robots. These visions revolve around the ability of smart devices to directly communicate and cooperate with each other in real time. In this context, this paper is an attempt to study RPL’s (Routing Protocol for Low-power Lossy Networks) point to point routing that creates multi-hop paths between peer nodes. This standard routing protocol is known for robust and failsafe upward paths but its peer to peer (P2P) routes are reported to be suboptimal. This work assesses P2P performance of RPL’s storing mode in a network of new generation devices having higher memory. Further, a Collaborative and Proactive Peer to Peer (C3P) path selection and sustenance approach is proposed where, root node collates incremental topology from collaborative nodes and disseminates optimal single source shortest path trees SPT(n) . A progressive node betweenness centrality score ensures spread out paths. Minor topology changes are accommodated through incremental node and edge updates to targeted SPT(n) locally. Storing SPTs in intermediate nodes reduces storage and packet size. Through simulations and testbed experiments, it is proven that C3P-RPL improves simultaneous peer to peer communication between all the nodes. Specifically, the path length is reduced by 30% and subsequently the network latency drops by 65% in an experimental testbed of 47 nodes, making it suitable for collaborations.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-023-01447-3",
+      "url": "https://www.semanticscholar.org/paper/fdd79f2efd1f225c30aa62564d57d30f3b64d53d"
+    },
+    {
+      "title": "AToM: Active topology monitoring for the bitcoin peer-to-peer network",
+      "abstract": "Over the past decade, the Bitcoin P2P network protocol has become a reference model for all modern cryptocurrencies. While nodes in this network are known, the connections among them are kept hidden, as it is commonly believed that this helps protect from deanonymization and low-level attacks. However, adversaries can bypass this limitation by inferring connections through side channels. At the same time, the lack of topology information hinders the analysis of the network, which is essential to improve efficiency and security. In this paper, we thoroughly review network-level attacks and empirically show that topology obfuscation is not an effective countermeasure. We then argue that the benefits of an open topology potentially outweigh its risks, and propose a protocol to reliably infer and monitor connections among reachable nodes of the Bitcoin network. We formally analyze our protocol and experimentally evaluate its accuracy in both trusted and untrusted settings. Results show our system has a low impact on the network, and has precision and recall are over 90% with up to 20% of malicious nodes in the network.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-021-01201-7",
+      "url": "https://www.semanticscholar.org/paper/bf736c0bb38db13563828cf2a5086decff9e6826"
+    },
+    {
+      "title": "Blockchain smart contracts: Applications, challenges, and future trends",
+      "abstract": "In recent years, the rapid development of blockchain technology and cryptocurrencies has influenced the financial industry by creating a new crypto-economy. Then, next-generation decentralized applications without involving a trusted third-party have emerged thanks to the appearance of smart contracts, which are computer protocols designed to facilitate, verify, and enforce automatically the negotiation and agreement among multiple untrustworthy parties. Despite the bright side of smart contracts, several concerns continue to undermine their adoption, such as security threats, vulnerabilities, and legal issues. In this paper, we present a comprehensive survey of blockchain-enabled smart contracts from both technical and usage points of view. To do so, we present a taxonomy of existing blockchain-enabled smart contract solutions, categorize the included research papers, and discuss the existing smart contract-based studies. Based on the findings from the survey, we identify a set of challenges and open issues that need to be addressed in future studies. Finally, we identify future trends.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-021-01127-0",
+      "url": "https://www.semanticscholar.org/paper/4642f045a42f0c45efb3fd8fa3a7c7a4e15ed600"
+    },
+    {
+      "title": "Deep learning for intrusion detection in IoT networks",
+      "abstract": "The rapid proliferation of Internet of Things (IoT) devices has transformed our daily lives, introducing innovations like smart homes, wearables, and advanced industrial automation. While these interconnected systems offer convenience and efficiency, they also present significant security challenges. The increasing complexity and scale of IoT networks elevate the risk of malicious attacks, making the protection of these networks a pressing concern. Despite advancements in intrusion detection systems (IDS), existing methods often struggle to balance accuracy and computational efficiency, leading to higher false positive rates and inadequate detection of sophisticated threats. Traditional machine learning approaches frequently fall short in adapting to the evolving nature of attacks, thereby highlighting the necessity for more robust solutions. In response to these challenges, our study proposes an ensemble learning approach that utilizes bagging to enhance intrusion detection systems in IoT environments. By integrating the strengths of Deep Neural Networks (DNNs) and Convolutional Neural Networks (CNNs), we aim to leverage their unique advantages to improve the detection accuracy and resilience of IDS against a diverse range of cyber threats. To evaluate the effectiveness of our proposed model, we utilized the Edge-IIoTset dataset, which contains a comprehensive range of network traffic scenarios, including both normal and malicious behaviors. This dataset enables us to rigorously train and assess our models, ensuring their applicability in real-world IoT security contexts.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-024-01819-3",
+      "url": "https://www.semanticscholar.org/paper/cb278bee8e7e3d37c43bebdd2ee168f9ec8cdddc"
+    },
+    {
+      "title": "Cyclic ranking in single-resource peer-to-peer exchange",
+      "abstract": "Peer-to-peer (P2P) sharing systems use incentives for resource exchange to encourage cooperation and ensure fairness. In bilateral strategies, such as BitTorrent Tit-for-Tat or deficit-based FairTorrent, individual decisions of peers utilize direct observations. It may result in low performance and unfair treatment. In this paper, we study a novel exchange strategy that applies Cyclic Ranking (CR). In addition to direct observations, a peer utilizes provision cycles—a shared history of effective exchanges. The PageRank algorithm runs for the locally collected cycles and computes the numerical ranks to estimate the reputation. The CR strategy incrementally augments known incentive-aware strategies. For evaluation we implement CR-BitTorrent and CR-FairTorrent variants. Our simulation model captures the dependence on network bandwidth and the number of seeders as well as selfishness and stability of the participants. The initial experiments show improved fairness and download times, compared to the original BitTorrent and FairTorrent. The performance of selfish and unstable peers decreases by as much as 50%. The CR strategy suits well in environments where direct reciprocity has shown little effect. Contrasted to existing solutions, the CR strategy rewards longevity and stability of peers.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-017-0578-0",
+      "url": "https://www.semanticscholar.org/paper/fe6a7c0ca6b29a404e8896e904c7e37409418246"
+    },
+    {
+      "title": "P2P-PL: A pattern language to design efficient and robust peer-to-peer systems",
+      "abstract": "To design peer-to-peer (P2P) software systems is a challenging task, because of their highly decentralized nature, which may cause unexpected emergent global behaviors. The last fifteen years have seen many P2P applications to come out and win favor with millions of users. From success histories of applications like BitTorrent, Skype, MyP2P we have learnt a number of useful design patterns. Thus, in this article we present a P2P pattern language (shortly, P2P-PL) which encompasses all the aspects that a fully effective and efficient P2P software system should provide, namely consistency of stored data, redundancy, load balancing, coping with asymmetric bandwidth, decentralized security. The patterns of the proposed P2P-PL are described in detail, and a composition strategy for designing robust, effective and efficient P2P software systems is proposed.",
+      "year": 2016,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s12083-017-0551-y",
+      "url": "https://www.semanticscholar.org/paper/ae1d9849f55e8913e7b30b224c802b97a7913488"
+    }
+  ]
+}

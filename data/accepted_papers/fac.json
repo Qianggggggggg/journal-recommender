@@ -1,0 +1,78 @@
+{
+  "journal_id": "fac",
+  "journal_name": "Formal Aspects of Computing",
+  "papers": [
+    {
+      "title": "Assurance Case Development for Evolving Software Product Lines: A Formal Approach",
+      "abstract": "In critical software engineering, structured assurance cases (ACs) are used to demonstrate how key system properties are supported by evidence (e.g., test results, proofs). Creating rigorous ACs is particularly challenging in the context of software product lines (SPLs), i.e, sets of software products with overlapping but distinct features and behaviours. Since SPLs can encompass very large numbers of products, developing a rigorous AC for each product individually is infeasible. Moreover, if the SPL evolves, e.g., by the modification or introduction of features, it can be infeasible to assess the impact of this change. Instead, the development and maintenance of ACs ought to be lifted such that a single AC can be developed for the entire SPL simultaneously, and be analyzed for regression in a variability-aware fashion. In this article, we describe a formal approach to lifted AC development and regression analysis. We formalize a language of variability-aware ACs for SPLs and study the lifting of template-based AC development. We also define a regression analysis to determine the effects of SPL evolutions on variability-aware ACs. We describe a model-based assurance management tool which implements these techniques, and illustrate our contributions by developing an AC for a product line of medical devices.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3796233",
+      "url": "https://www.semanticscholar.org/paper/59ed06b23426bd02ca8074559dfff38bc354b3b8"
+    },
+    {
+      "title": "A History of Formal Methods in Railways",
+      "abstract": "The engineering of industrial systems, particularly in safety-critical domains such as railways, demands rigorous verification and validation processes to ensure system dependability. Formal methods have emerged as powerful tools to complement traditional software engineering practices. In the railway sector, which increasingly relies on complex, distributed, and cyber-physical control systems, formal methods have demonstrated particular value for many decades now. In this paper, we provide a retrospective overview of the application of formal methods and tools in the railway domain, with emphasis on two prominent verification approaches and one frequently verified railway system: modeling and validation with the B method and tools and formal verification of interlocking systems by model checking. We explore their role in the design and development of key railway systems, highlighting both academic research and industrial success stories, as witnessed by international projects and initiatives. We conclude with an outlook on the potential of integrating AI and formal methods to enhance the efficiency of next-generation railway systems.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3802545",
+      "url": "https://www.semanticscholar.org/paper/e6fcde2bfc5f5a412a2f67a5d5049737584f98c6"
+    },
+    {
+      "title": "Formal Methods - My 50+ Years as an Engineer, Researcher and Scientist",
+      "abstract": "It all began at the IBM Lab. in Vienna, 1973–1974. I will reminisce of how VDM, the Vienna Development Method, emerged. We were to develop a compiler for PL/I. In Feb. 1974 IBM HQ curtailed this and related projects. So three of the co-developers of VDM went abroad. Peter Lucas to the US, Cliff Jones via Brussels back to the UK, and I to Denmark. With students and later, at Dansk Datamatik Center (DDC), we then developed compilers for CHILL and Ada according to the IBM Lab. Vienna ideas. They led to the design of the RAISE (Rigorous Approach to Industrial SE) Method – with RSL (the Raise Specification Language). As UN Director of the UN University’s Intl. Inst. for Software Technology, in Macau, 1991–1997, we pursued Formal Methods and their theoretical underpinnings, and applied Formal Methods to the development of systems for railways (in China), finance ministry (Vietnam), country wide telephone system (The Philippines), multi-script documents (for Mongolia), etc. I will survey these projects – emphasizing how Domain Modeling emerged. I will then outline recent work, since my retirement, at age 70 in 2007, in Domain Science and Engineering. I will end the paper by “revealing” my “emergence” as a scientist from being an engineer/researcher.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3796228",
+      "url": "https://www.semanticscholar.org/paper/c314baf7ca5da536fc54e9903e28f35c750b850a"
+    },
+    {
+      "title": "Formal Methods in Industry: A Critical Evaluation of Their Use at Amazon Web Services",
+      "abstract": "Formal methods have long promised enhanced software reliability through rigorous mathematical reasoning, yet concerns over scalability, cost, and accessibility have historically limited their industrial adoption. This paper critically evaluates the public record on the use of formal methods in engineering at Amazon Web Services (AWS). Drawing on publicly available case studies, engineering reports, and technical documentation, we examine reported applications of model checking, SMT solving, and lightweight formal methods across domains such as distributed systems, cloud networking, cryptography, and security policy verification. We organise the analysis around 16 targeted questions across five themes: (1) technical impact, (2) organisational adoption, (3) scalability in complex and heterogeneous systems, (4) long-term strategic value, and (5) future directions. By placing these AWS case studies alongside historical precedents at companies such as IBM, Microsoft, and Google, we highlight both continuity and innovation in industrial practice. Across the published case studies, authors report benefits such as early bug detection, performance optimisation, and strengthened security assurance, including integration with CI/CD workflows in some settings. However, the evidence base is selective and does not support organisation-wide claims about prevalence, cost-effectiveness, or ROI; quantitative baselines are sparse, and survivorship bias is plausible. We discuss the resulting methodological limits, highlight challenges such as maintaining specifications under continuous evolution, and outline a research agenda to improve empirical validation, methodological refinement, and the preservation of industrial verification artefacts.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3815784",
+      "url": "https://www.semanticscholar.org/paper/b637383ef18758de4454cecc6f61d061a1f0d7bb"
+    },
+    {
+      "title": "Comprehensive Systems: A formal foundation for Multi-Model Consistency Management",
+      "abstract": "Model management is a central activity in Software Engineering. The most challenging aspect of model management is to keep inter-related models consistent with each other while they evolve. As a consequence, there is a lot of scientific activity in this area, which has produced an extensive body of knowledge, methods, results and tools. The majority of these approaches, however, are limited to binary inter-model relations; i.e. the synchronisation of exactly two models. Yet, not every multi-ary relation can be factored into a family of binary relations. In this paper, we propose and investigate a novel comprehensive system construction, which is able to represent multi-ary relations among multiple models in an integrated manner and thus serves as a formal foundation for artefacts used in consistency management activities involving multiple models. The construction is based on the definition of partial commonalities among a set of models using the same language, which is used to denote the (local) models. The main theoretical results of this paper are proofs of the facts that comprehensive systems are an admissible environment for (i) applying formal means of consistency verification (diagrammatic predicate framework), (ii) performing algebraic graph transformation (weak adhesive HLR category), and (iii) that they generalise the underlying setting of graph diagrams and triple graph grammars.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00165-021-00555-2",
+      "url": "https://www.semanticscholar.org/paper/9e060f04834df978d901d7eeca62500df2d09529"
+    },
+    {
+      "title": "Integration of Formal Proof into Unified Assurance Cases with Isabelle/SACM",
+      "abstract": "Assurance cases are often required to certify critical systems. The use of formal methods in assurance can improve automation, increase confidence, and overcome errant reasoning. However, assurance cases can never be fully formalised, as the use of formal methods is contingent on models that are validated by informal processes. Consequently, assurance techniques should support both formal and informal artifacts, with explicated inferential links between them. In this paper, we contribute a formal machine-checked interactive language, called Isabelle/SACM, supporting the computer-assisted construction of assurance cases compliant with the OMG Structured Assurance Case Meta-Model. The use of Isabelle/SACM guarantees well-formedness, consistency, and traceability of assurance cases, and allows a tight integration of formal and informal evidence of various provenance. In particular, Isabelle brings a diverse range of automated verification techniques that can provide evidence. To validate our approach, we present a substantial case study based on the Tokeneer secure entry system benchmark. We embed its functional specification into Isabelle, verify its security requirements, and form a modular security case in Isabelle/SACM that combines the heterogeneous artifacts. We thus show that Isabelle is a suitable platform for critical systems assurance.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00165-021-00537-4",
+      "url": "https://www.semanticscholar.org/paper/4665359c350a31f6e803de44053aab642f546b1f"
+    },
+    {
+      "title": "Seeking Specifications: The Case for Neuro-Symbolic Specification Synthesis",
+      "abstract": "This work is concerned with the generation of formal specifications from code, using Large Language Models (LLMs) in combination with symbolic methods. Concretely, in our study, the programming language is C, the specification language is ACSL, and the LLM is Deepseek-R1. In this context, we address two research directions, namely the specification of intent vs. implementation on the one hand, and the combination of symbolic analyses with LLMs on the other hand. For the first, we investigate how the absence or presence of bugs in the code impacts the generated specifications, as well as whether and how a user can direct the LLM to specify intent or implementation, respectively. For the second, we investigate the impact of results from symbolic analyses on the specifications generated by the LLM. The LLM prompts are augmented with outputs from two formal methods tools in the Frama-C ecosystem, Pathcrawler and EVA. We demonstrate how the addition of symbolic analysis to the workflow impacts the quality of annotations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3785411",
+      "url": "https://www.semanticscholar.org/paper/e9f08e5bd3adf3f5d4edde36a6bc2e4843816dbc"
+    },
+    {
+      "title": "Malware Analysis through Behavior Formalization",
+      "abstract": "Malware analysis represents a difficult task due to its ever-changing nature, where attackers invent new techniques for avoiding or counter-attacking analysis and prevention mechanisms. During fast-response investigations, a vital element is extracting or checking information, in order to take proper action. One key aspect that is currently missing, in a general sense, is a system which security researchers can query in order to obtain a quick verdict about the capabilities of a malware. The proposed solution is a framework for formal analysis of applications’ behavior, called Formal Tainting-Based Framework, that uses a combination of binary instrumentation, taint analysis, and runtime verification in order to selectively extract behavioral properties of a malware. These are then formalized in order to check if the application expresses certain capabilities. The formal aspect also represents a significant contribution, as we introduce a specific temporal logic, which overcomes obstacles for expressing program events. The findings are accompanied by a concrete implementation, which proved effective and efficient against real-life malware, as highlighted by an evaluation. Furthermore, the framework has been evaluated in realistic cyber forensics scenarios, demonstrating its potential to assist security researchers by reducing analysis time and effort.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3800679",
+      "url": "https://www.semanticscholar.org/paper/160a660dc03bb367e5cf7cfb6540ae839c0654e6"
+    },
+    {
+      "title": "OLTL: An Optimization Extension of Linear Temporal Logic",
+      "abstract": "Linear Temporal Logic (LTL) can be used for problem-solving when all problem constraints can be specified in this logic through the use of satisfiability checking techniques. In optimization problems such as scheduling with preferences, where constraints are primarily temporal, LTL is a desirable specification formalism. However, LTL cannot be used as a standalone formalism due to the fact that it is unable to specify soft constraints. This paper introduces Optimization LTL (OLTL), an optimization-oriented extension of LTL that can specify both hard and soft constraints in optimization problems. The syntax, semantics and basic formal properties of this logic are presented, along with an encoding based on bit-vector logic and Linear Real Arithmetic (LRA). Additionally, a tool called LiTeLLab ’ ( Li near Te mporal L ogic Lab oratory) is introduced to solve optimization problems specified by OLTL. The feasibility and scalability of using OLTL as a specification formalism is demonstrated through two case studies. These problems, with multiple optimization parameters, are specified in OLTL and LiTeLLab ’ successfully generates optimal solutions.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3812533",
+      "url": "https://www.semanticscholar.org/paper/106358384b07d3bc00d8e10fa7795d4d1c2c2dde"
+    }
+  ]
+}

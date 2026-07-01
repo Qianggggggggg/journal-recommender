@@ -1,0 +1,86 @@
+{
+  "journal_id": "tosem",
+  "journal_name": "ACM Transactions on Software Engineering and Methodology",
+  "papers": [
+    {
+      "title": "Innovating for Tomorrow: The Convergence of Software Engineering and Green AI",
+      "abstract": "The latest advancements in machine learning, specifically in foundation models, are revolutionizing the frontiers of existing software engineering (SE) processes. This is a bi-directional phenomenon, where (1) software systems are now challenged to provide AI-enabled features to their users, and (2) AI is used to automate tasks within the software development lifecycle. In an era where sustainability is a pressing societal concern, our community needs to adopt a long-term plan enabling a conscious transformation that aligns with environmental sustainability values. In this article, we reflect on the impact of adopting environmentally friendly practices to create AI-enabled software systems and make considerations on the environmental impact of using foundation models for software development.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3712007",
+      "url": "https://www.semanticscholar.org/paper/70ee2336b09b90d6f0775147eb8f02e9c91963e3"
+    },
+    {
+      "title": "Large Language Model-Based Agents for Software Engineering: A Survey",
+      "abstract": "The recent advance in Large Language Models (LLMs) has shaped a new paradigm of AI agents, i.e., LLM-based agents. Compared to standalone LLMs, LLM-based agents substantially extend the versatility and expertise of LLMs by enhancing LLMs with the capabilities of perceiving and utilizing external resources and tools. To date, LLM-based agents have been applied and shown remarkable effectiveness in Software Engineering (SE). The synergy between multiple agents and human interaction brings further promise in tackling complex real-world SE problems. In this work, we present a comprehensive and systematic survey on LLM-based agents for SE. We collect 124 papers and categorize them from two perspectives, i.e., the SE and agent perspectives. In addition, we discuss open challenges and future directions in this critical domain. The repository of this survey is at https://github.com/FudanSELab/Agent4SE-Paper-List.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2409.02977",
+      "url": "https://www.semanticscholar.org/paper/335589d44ca3067758822d84f83f7d3e194cb61e"
+    },
+    {
+      "title": "Large Language Models for Software Engineering: A Systematic Literature Review",
+      "abstract": "Large Language Models (LLMs) have significantly impacted numerous domains, including Software Engineering (SE). Many recent publications have explored LLMs applied to various SE tasks. Nevertheless, a comprehensive understanding of the application, effects, and possible limitations of LLMs on SE is still in its early stages. To bridge this gap, we conducted a Systematic Literature Review (SLR) on LLM4SE, with a particular focus on understanding how LLMs can be exploited to optimize processes and outcomes. We selected and analyzed 395 research articles from January 2017 to January 2024 to answer four key Research Questions (RQs). In RQ1, we categorize different LLMs that have been employed in SE tasks, characterizing their distinctive features and uses. In RQ2, we analyze the methods used in data collection, pre-processing, and application, highlighting the role of well-curated datasets for successful LLM for SE implementation. RQ3 investigates the strategies employed to optimize and evaluate the performance of LLMs in SE. Finally, RQ4 examines the specific SE tasks where LLMs have shown success to date, illustrating their practical contributions to the field. From the answers to these RQs, we discuss the current state-of-the-art and trends, identifying gaps in existing research, and highlighting promising areas for future study. Our artifacts are publicly available at https://github.com/security-pride/LLM4SE_SLR.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3695988",
+      "url": "https://www.semanticscholar.org/paper/000f964393dafe113a8e66734d63b2a145844159"
+    },
+    {
+      "title": "Quantum Software Engineering: Roadmap and Challenges Ahead",
+      "abstract": "As quantum computers advance, the complexity of the software they can execute increases as well. To ensure this software is efficient, maintainable, reusable, and cost-effective—key qualities of any industry-grade software—mature software engineering practices must be applied throughout its design, development, and operation. However, the significant differences between classical and quantum software make it challenging to directly apply classical software engineering methods to quantum systems. This challenge has led to the emergence of Quantum Software Engineering (QSE) as a distinct field within the broader software engineering landscape. In this work, a group of active researchers analyze in depth the current state of QSE research. From this analysis, the key areas of QSE are identified and explored in order to determine the most relevant open challenges that should be addressed in the next years. These challenges help identify necessary breakthroughs and future research directions for advancing QSE.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3712002",
+      "url": "https://www.semanticscholar.org/paper/f13cc132fca0eb9efab2dfcd3e62f287c94e2c24"
+    },
+    {
+      "title": "The Future of AI-Driven Software Engineering",
+      "abstract": "A paradigm shift is underway in Software Engineering, with AI systems such as LLMs playing an increasingly important role in boosting software development productivity. This trend is anticipated to persist. In the next years, we expect a growing symbiotic partnership between human software developers and AI. The Software Engineering research community cannot afford to overlook this trend; we must address the key research challenges posed by the integration of AI into the software development process. In this article, we present our vision of the future of software development in an AI-driven world and explore the key challenges that our research community should address to realize this vision.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3715003",
+      "url": "https://www.semanticscholar.org/paper/8fbfc75459634ab4941aafce7b23962b054b5014"
+    },
+    {
+      "title": "Promptware Engineering: Software Engineering for Prompt-Enabled Systems",
+      "abstract": "Large Language Models (LLMs) are increasingly integrated into software applications, giving rise to a broad class of prompt-enabled systems, in which prompts serve as the primary ‘programming’ interface for guiding system behavior. Building on this trend, a new software paradigm, promptware, has emerged, which treats natural language prompts as first-class software artifacts for interacting with LLMs. Unlike traditional software, which relies on formal programming languages and deterministic runtime environments, promptware is based on ambiguous, unstructured, and context-dependent natural language and operates on LLMs as runtime environments, which are probabilistic and non-deterministic. These fundamental differences introduce unique challenges in prompt development. In practice, prompt development remains largely ad hoc and relies heavily on time-consuming trial-and-error, a challenge we term the promptware crisis. To address this, we propose promptware engineering, a new methodology that adapts established Software Engineering (SE) principles to prompt development. Drawing on decades of success in traditional SE, we envision a systematic framework encompassing prompt requirements engineering, design, implementation, testing, debugging, evolution, deployment, and monitoring. Our framework re-contextualizes emerging prompt-related challenges within the SE lifecycle, providing principled guidance beyond ad-hoc practices. Without the SE discipline, prompt development is likely to remain mired in trial-and-error. This paper outlines a comprehensive roadmap for promptware engineering, identifying key research directions and offering actionable insights to advance the development of prompt-enabled systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3796535",
+      "url": "https://www.semanticscholar.org/paper/df672b2515afe155c55fba1b18a9f73619cdb2a7"
+    },
+    {
+      "title": "The Role of Empathy in Software Engineering - A Socio-Technical Grounded Theory",
+      "abstract": "Empathy, defined as the ability to understand and share others’ perspectives and emotions, is essential in software engineering (SE), where developers often collaborate with diverse stakeholders. It is also considered as a vital competency in many professional fields such as medicine, healthcare, nursing, animal science, education, marketing, and project management. Despite its importance, empathy remains under-researched in SE. To further explore this, we conducted a socio-technical grounded theory (STGT) study through in-depth semi-structured interviews with 22 software developers and stakeholders. Our study explored the role of empathy in SE and how SE activities and processes can be improved by considering empathy. Through applying the systematic steps of STGT data analysis and theory development, we developed a theory that explains the role of empathy in SE. Our theory details the contexts in which empathy arises, the conditions that shape it, the causes and consequences of its presence and absence. We also identified contingencies for enhancing empathy or overcoming barriers to its expression. Our findings provide practical implications for SE practitioners and researchers, offering a deeper understanding of how to effectively integrate empathy into SE processes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2504.13002",
+      "url": "https://www.semanticscholar.org/paper/971f90823449e3b2a9528f40c94e5aca34317e2b"
+    },
+    {
+      "title": "Towards AI-Native Software Engineering (SE 3.0): A Vision and a Challenge Roadmap",
+      "abstract": "The rise of AI-assisted software engineering (SE 2.0), powered by Foundation Models (FMs) and FM-powered coding assistants, has shown promise in improving developer productivity. However, it has also exposed inherent limitations, such as cognitive overload on developers and inefficiencies. We propose a shift towards Software Engineering 3.0 (SE 3.0), an AI-native approach characterized by intent-centric, conversation-oriented development between human developers and AI teammates. SE 3.0 envisions AI systems evolving beyond task-driven copilots into intelligent collaborators, capable of deeply understanding and reasoning about software engineering principles and intents. We outline the key components of the SE 3.0 technology stack, which includes Teammate.next for adaptive and personalized AI partnership, IDE.next for intent-centric conversation-oriented development, Compiler.next for multi-objective code synthesis, and Runtime.next for SLA-aware execution with edge-computing support. Our vision addresses the inefficiencies and cognitive strain of SE 2.0 by fostering a symbiotic relationship between human developers and AI, maximizing their complementary strengths. We also present a roadmap of challenges that must be overcome to realize our vision of SE 3.0. This paper lays the foundation for future discussions on the role of AI in the next era of software engineering.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3807901",
+      "url": "https://www.semanticscholar.org/paper/a80cb0325b78c303916cb66d6d33fe0aed8c8311"
+    },
+    {
+      "title": "Quantum Optimization for Software Engineering: A Survey",
+      "abstract": "Quantum computing, particularly in the area of quantum optimization, is steadily progressing toward practical applications, supported by an expanding range of hardware platforms and simulators. While Software Engineering (SE) optimization has a strong foundation, which is exemplified by the active Search-Based Software Engineering (SBSE) community and numerous classical optimization methods, the growing complexity of modern software systems and their engineering processes demands innovative solutions. This Systematic Literature Review (SLR) focuses specifically on studying the literature that applies quantum or quantum-inspired algorithms to solve classical SE optimization problems. We examine 76 primary studies selected from an initial pool of 2083 publications obtained through systematic searches of six digital databases using carefully crafted search strings. Our findings reveal concentrated research efforts in areas such as SE operations and software testing, while exposing significant gaps across other SE activities. Additionally, the SLR uncovers relevant works published outside traditional SE venues, underscoring the necessity of this comprehensive review. Overall, our study provides a broad overview of the research landscape, empowering the SBSE community to leverage quantum advancements in addressing next-generation SE challenges.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2506.16878",
+      "url": "https://www.semanticscholar.org/paper/a846f676202192b77e925ea0c55809134c14857b"
+    },
+    {
+      "title": "The Current Challenges of Software Engineering in the Era of Large Language Models",
+      "abstract": "With the advent of large language models (LLMs) in the AI area, the field of software engineering (SE) has also witnessed a paradigm shift. These models, by leveraging the power of deep learning and massive amounts of data, have demonstrated an unprecedented capacity to understand, generate, and operate programming languages. They can assist developers in completing a broad spectrum of software development activities, encompassing software design, automated programming, and maintenance, which potentially reduces huge human efforts. Integrating LLMs within the SE landscape (LLM4SE) has become a burgeoning trend, necessitating exploring this emergent landscape’s challenges and opportunities. The article aims at revisiting the software development lifecycle (SDLC) under LLMs, and highlighting challenges and opportunities of the new paradigm. The article first summarizes the overall process of LLM4SE, and then elaborates on the current challenges based on a through discussion. The discussion was held among more than 20 participants from academia and industry, specializing in fields such as SE and artificial intelligence. Specifically, we achieve 26 key challenges from seven aspects, including software requirement and design, coding assistance, testing code generation, code review, code maintenance, software vulnerability management, and data, training, and evaluation. We hope the achieved challenges would benefit future research in the LLM4SE field.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3712005",
+      "url": "https://www.semanticscholar.org/paper/322b6abc09c9a22d63e33ae9e2d2ffa076ea9cf4"
+    }
+  ]
+}

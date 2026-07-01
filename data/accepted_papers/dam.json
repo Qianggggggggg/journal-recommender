@@ -1,0 +1,78 @@
+{
+  "journal_id": "dam",
+  "journal_name": "Discrete Applied Mathematics",
+  "papers": [
+    {
+      "title": "Screw discrete dynamical systems and their applications to exact slow NIM",
+      "abstract": "Given integers $n,k,\\ell$ such that $0 m(x)$, take all $m$ such entries, if any, and add remaining $n-k-m$ entries arbitrarily, for example, take the largest ones. In one step, the chosen $n-k$ entries (bears) keep their values, while the remaining $k$ (bulls) are reduced by 1. Repeat such steps getting the sequence $S = S(n,k,\\ell,x^0) = (x^0 \\to x^1 \\to \\ldots \\to x^j \\to \\ldots)$. It is ``quasi-periodic\". More precisely, there is a function $N = N(n,k,\\ell,x^0)$ such that for all $j \\geq N$ we have $m(x^j) \\geq n-k$ and $range(x^j) \\leq \\ell$, where $range(x) = (\\max(x_i \\mid i \\in [n]) - \\min(x_i \\mid i \\in [n])$. Furthermore, $N$ is a polynomial in $n,k,\\ell,$ and $range(x^0)$ and can be computed in time linear in $n,k,\\ell$, and $\\log(1 + range(x^0))$. After $N$ steps, the system moves ``like a screw\". Assuming that $x_1 \\leq \\dots \\leq x_n$, introduce the cyclical order on $[n] = \\{1, \\ldots, n\\}$ considering 1 and $n$ as neighbors. Then, bears and bulls partition $[n]$ into two intervals, rotating by the angle $2 \\pi k /n$ with every $\\ell$ steps. Furthermore, after every $p = \\ell n / GCD(n,k) = \\ell LCM(n,k) / k$ steps all entries of $x$ are reduced by the same value $\\delta = pk/n$, that is, $x_i^{j+p} - x_i^j = \\delta$ for all $i \\in [n]$ and $j \\geq N$. We provide an algorithm computing $N$ (and $x^j$) in time linear in $n,k,\\ell, \\log(1 + range(x^0))$ (and $\\log (1+j)$). In case $k=n-1$ and $\\ell = 2$ such screw dynamical system are applicable to impartial games.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2024.07.018",
+      "url": "https://www.semanticscholar.org/paper/384f367b482a3925283adf10e62a3824edc22109"
+    },
+    {
+      "title": "A polynomial algorithm for minimizing discrete convic functions in fixed dimension",
+      "abstract": "In Chirkov et al., (2019), classes of conic and discrete conic functions were introduced. In this paper we use the term convic instead conic. The class of convic functions properly includes the classes of convex functions, strictly quasiconvex functions and the class of quasiconvex polynomials. On the other hand, the class of convic functions is properly included in the class of quasiconvex functions. The discrete convic function is a discrete analogue of the convic function. In Chirkov et al., (2019), the lower bound 3 n − 1 log ( 2 ρ − 1 ) for the number of calls to the comparison oracle needed to find the minimum of the discrete convic function defined on integer points of some n -dimensional ball with radius ρ was obtained. But the problem of the existence of a polynomial (in log ρ for fixed n ) algorithm for minimizing such functions has remained open. In this paper, we answer positively the question of the existence of such an algorithm. Namely, we propose an algorithm for minimizing discrete convic functions that uses 2 O ( n 2 log n ) log ρ calls to the comparison oracle and has 2 O ( n 2 log n ) poly ( log ρ ) bit complexity.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2019.10.006",
+      "url": "https://www.semanticscholar.org/paper/a181bef54d2e86e182ffdb70eb8a22f1657f6be9"
+    },
+    {
+      "title": "The discrete separation theorem and price adjustment directions in markets with heterogeneous commodities",
+      "abstract": "The separation theorem in discrete convex analysis states that two disjoint discrete convex sets can be separated by a hyperplane with a 0–1 normal vector. We apply this theorem to markets with heterogeneous commodities and uncover the mathematical structure behind price adjustment processes. When p is not an equilibrium price vector, i.e., when aggregate demand and aggregate supply are disjoint, the separation theorem indicates the existence of overdemanded/underdemanded items. This observation yields a generalization of Hall’s (1935) theorem and a characterization of equilibrium price vectors by Gul and Stacchetti (2000). Building on this characterization, we show that adjusting the prices of overdemanded/underdemanded items corresponds to Ausbel’s (2006) auction. We further extend our approach to markets with continuous commodities and uncover a striking connection between auctions and classical t a ˆ tonnement processes.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2019.08.022",
+      "url": "https://www.semanticscholar.org/paper/3cc0155504013851786dce12a6b29d250c9a5777"
+    },
+    {
+      "title": "Sufficient conditions for even factors in graphs",
+      "abstract": "Let $G$ be a graph. We denote by $e(G)$ and $\\rho(G)$ the size and the spectral radius of $G$. A spanning subgraph $F$ of $G$ is called an even factor of $G$ if $d_F(v)\\in\\{2,4,6,\\ldots\\}$ for every $v\\in V(G)$. Yan and Kano provided a sufficient condition using the number of odd components in $G-S$ for a graph $G$ of even order to contain an even factor, where $S$ is a vertex subset of $G$ [Z. Yan, M. Kano, Strong Tutte type conditions and factors of graphs, Discuss. Math. Graph Theory 40 (2020) 1057--1065]. In this paper, motivated by Yan and Kano's above result, we present some tight sufficient conditions to guarantee that a connected graph $G$ with the minimum degree $\\delta$ contains an even factor with respect to its size and spectral radius.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2026.03.018",
+      "url": "https://www.semanticscholar.org/paper/2f6d600e5dc796e7089d30dda5e8c9a8afd5fff7"
+    },
+    {
+      "title": "A decomposition structure of resonance graphs that are daisy cubes",
+      "abstract": "It has recently been shown in [\\emph{Discrete Appl. Math.} {\\bf 366} (2025) 75--85] that the resonance graph of a plane elementary bipartite graph $G$ is a daisy cube if and only if $G$ is peripherally 2-colorable. Let $G$ be a peripherally 2-colorable graph and $R(G)$ be its resonance graph. We provide a decomposition structure of $R(G)$ with respect to an arbitrary finite face of $G$ together with a proper labelling for the vertex set of $R(G)$. An algorithm is obtained to generate a proper labelling for all perfect matchings of $G$ which induces an isometric embedding of $R(G)$ as a daisy cube into an $n$-dimensional hypercube, where $n$ is the isometric dimension of $R(G)$. Moreover, the algorithm can be applied to generate such a proper labelling for all perfect matchings of any plane weakly elementary bipartite graph whose each elementary component with more than two vertices is peripherally 2-colorable. We also compare two binary codings for all perfect matchings of $G$ which induces distinct structures on $R(G)$: one as a daisy cube and the other as a finite distributive, respectively.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2025.08.030",
+      "url": "https://www.semanticscholar.org/paper/f97172a773aa254292117a17fe62a21dc9701ea3"
+    },
+    {
+      "title": "Boxicity of Zero Divisor Graphs",
+      "abstract": "A $d$-dimensional box is the cartesian product $R_i\\times\\cdots\\times R_d$ where each $R_i$ is a closed interval on the real line. The boxicity of a graph, denoted as $box(G)$, is the minimum integer $d\\geq 0$ such that $G$ is the intersection graph of a collection of $d$-dimensional boxes. The study of graph classes associated with algebraic structures is a fascinating area where graph theory and algebra meet. A well-known class of graphs associated with rings is the class of zero divisor graphs introduced by Beck in 1988. Since then, this graph class has been studied extensively by several researchers. Denote by $Z(R)$ the set of zero divisors of a ring $R$. The zero divisor graph $\\Gamma(R)$ for a ring $R$ is defined as the graph with the vertex set $V(\\Gamma(R))=Z(R)$ and $E(\\Gamma(R))=\\{\\{a_i,a_j\\}:a_ia_j\\in Z(R)\\text{ and }a_ia_j=0 \\}$. Let $N=\\Pi_{i=1}^ap_i^{n_i}$ be the prime factorization of $N$. In Discrete Applied Mathematics 365 (2025), pp. 260-269, it was shown that $box(\\Gamma(\\mathbb{Z}_N))\\leq\\Pi_{i=1}^a(n_i+1)-\\Pi_{i=1}^a(\\lfloor n_i/2\\rfloor+1)-1$. In this paper we exactly determine the boxicity of $\\Gamma(\\mathbb{Z}_N)$: We show that when $N\\equiv 2\\pmod 4$ and $N$ is not divisible by $p^3$ for any prime divisor $p$, we have $box(\\Gamma(\\mathbb{Z}_N))=a-1$. Otherwise $box(\\Gamma(\\mathbb{Z}_N))=a$. Suppose $R$ is a non-zero commutative ring with identity that is also a reduced ring and let $k$ be the size of the set of minimal prime ideals of $R$. In the same paper, it was showed that $box(\\Gamma(R))\\leq 2^k-2$. We improve this result by showing $\\lfloor k/2\\rfloor\\leq box(\\Gamma(R))\\leq k$ with the same assumption on $R$. In this paper we also show that $a-1\\leq\\dim_{TH}(\\Gamma(\\mathbb{Z}_N))\\leq a$ and $\\lfloor k/2\\rfloor\\leq\\dim_{TH}(\\Gamma(R))\\leq k$, where $\\dim_{TH}$ is another dimensional parameter associated with graphs known as the threshold dimension.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2505.12376",
+      "url": "https://www.semanticscholar.org/paper/48eb260f5cdc45c2335ed3c9aa0e2c9d397416fd"
+    },
+    {
+      "title": "House of Graphs 2.0: a database of interesting graphs and more",
+      "abstract": "In 2012 we announced “the House of Graphs” ( https://houseofgraphs.org ) [Discrete Appl. Math. 161 (2013), 311-314], which was a new database of graphs. The House of Graphs hosts complete lists of graphs of various graph classes, but its main feature is a searchable database of so called “interesting” graphs, which includes graphs that already occurred as extremal graphs or as counterexamples to conjectures. An important aspect of this database is that it can be extended by users of the website. Over the years, several new features and graph invariants were added to the House of Graphs and users uploaded many interesting graphs to the website. But as the development of the original House of Graphs website started in 2010, the underlying frameworks and technologies of the website became outdated. This is why we completely rebuilt the House of Graphs using modern frameworks to build a maintainable and expandable web application that is future-proof. On top of this, several new functionalities were added to improve the application and the user experience. This article describes the changes and new features of the new House of Graphs website.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2022.10.013",
+      "url": "https://www.semanticscholar.org/paper/02df71ccfbfb6db3ca7c900c456d92243125b855"
+    },
+    {
+      "title": "Disjoint isolating sets and graphs with maximum isolation number",
+      "abstract": "An isolating set in a graph is a set $X$ of vertices such that every edge of the graph is incident with a vertex of $X$ or its neighborhood. The isolation number of a graph, or equivalently the vertex-edge domination number, is the minimum number of vertices in an isolating set. Caro and Hansberg, and independently \\.{Z}yli\\'{n}ski, showed that the isolation number is at most one-third the order for every connected graph of order at least $6$. We show that in fact all such graphs have three disjoint isolating sets. Further, using a family introduced by Lema\\'{n}ska, Mora, and Souto-Salorio, we determine all graphs with equality in the original bound.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2024.05.022",
+      "url": "https://www.semanticscholar.org/paper/7fcd00df1c28a2f96f442bfad9ae79ebef1ba3bc"
+    },
+    {
+      "title": "Self-adhesivity in lattices of abstract conditional independence models",
+      "abstract": "We introduce an algebraic concept of the frame for abstract conditional independence (CI) models, together with basic operations with respect to which such a frame should be closed: copying and marginalization. Three standard examples of such frames are (discrete) probabilistic CI structures, semi-graphoids and structural semi-graphoids. We concentrate on those frames which are closed under the operation of set-theoretical intersection because, for these, the respective families of CI models are lattices. This allows one to apply the results from lattice theory and formal concept analysis to describe such families in terms of implications among CI statements. The central concept of this paper is that of self-adhesivity defined in algebraic terms, which is a combinatorial reflection of the self-adhesivity concept studied earlier in context of polymatroids and information theory. The generalization also leads to a self-adhesivity operator defined on the hyper-level of CI frames. We answer some of the questions related to this approach and raise other open questions. The core of the paper is in computations. The combinatorial approach to computation might overcome some memory and space limitation of software packages based on polyhedral geometry, in particular, if SAT solvers are utilized. We characterize some basic CI families over 4 variables in terms of canonical implications among CI statements. We apply our method in information-theoretical context to the task of entropic region demarcation over 5 variables.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.dam.2024.10.006",
+      "url": "https://www.semanticscholar.org/paper/f680628184e94a312390b702a055170764acf908"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "journal_id": "fuzzysetsandsystems",
+  "journal_name": "Fuzzy Sets and Systems",
+  "papers": [
+    {
+      "title": "Algorithms for random generation fuzzy measures with empirical validation of the uniformity of sample distributions",
+      "abstract": "We present four new efficient algorithms for random generation of fuzzy measures based on random linear extensions of Boolean lattices. We verify experimentally the uniformity of the resulting distributions and design various informative criteria of uniformity. The algorithms involve Karzanov and Khachiyan random walks but with much shorter mixing times to achieve uniformity. We calculated some important statistical quantities, such as the centroid of the polytope of fuzzy measures, and found patterns for their behaviour in higher dimensions. By matching these patterns we developed random generation algorithms with much higher efficiency. We confirmed empirically the uniformity of the samples.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.fss.2026.109989",
+      "url": "https://openalex.org/W7163761162"
+    },
+    {
+      "title": "A hybrid approach for building fuzzy numbers based on data and expert knowledge",
+      "abstract": "This paper presents a hybrid socio-technical methodology for constructing fuzzy numbers from numerical data while incorporating expert knowledge through an interactive Deck of Cards (DoC) process. The approach extends the existing DoC membership function construction framework by introducing a data-driven pipeline based on a convex version of Fuzzy C -Means, in which each computational step produces intermediate outputs that are translated into card-based structures for expert validation and tuning. The proposed method ensures interpretability, adaptability, and consistency between empirical evidence and expert semantics.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.fss.2026.110000",
+      "url": "https://openalex.org/W7163173536"
+    },
+    {
+      "title": "Dynamic system optimization with fuzzy uncertainties: A control perspective",
+      "abstract": "This paper investigates the optimal control of dynamic systems subject to fuzzy uncertainties in the initial conditions. By applying Zadeh’s Extension Principle, we interpret the evolution of the fuzzy membership function as the solution to a partial differential equation (PDE) of advection type. This formulation allows us to transform the problem of controlling a fuzzy differential equation into a deterministic optimal control problem for the associated PDE. We derive the first-order necessary optimality conditions — which constitute an extension of the Pontryagin Maximum Principle to the fuzzy setting — obtained via Lagrange multipliers applied to the equivalent PDE formulation, and illustrate the approach with worked examples, demonstrating how to steer the possibility distribution of the system state towards a desired target.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.fss.2026.109972",
+      "url": "https://openalex.org/W7162446224"
+    },
+    {
+      "title": "Polynomial verification for safe codiagnosability of decentralized fuzzy discrete-event systems",
+      "abstract": "",
+      "year": 2024,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2024.109041",
+      "url": "https://doi.org/10.1016/j.fss.2024.109041"
+    },
+    {
+      "title": "Extremal values-based aggregation functions",
+      "abstract": "",
+      "year": 2024,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2024.109097",
+      "url": "https://doi.org/10.1016/j.fss.2024.109097"
+    },
+    {
+      "title": "Invariant characterizations of fuzzy information systems under some homomorphisms based on data compression and related results",
+      "abstract": "",
+      "year": 2019,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2018.12.004",
+      "url": "https://doi.org/10.1016/j.fss.2018.12.004"
+    },
+    {
+      "title": "On some properties of reflected maxmin copulas",
+      "abstract": "",
+      "year": 2020,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2019.07.007",
+      "url": "https://doi.org/10.1016/j.fss.2019.07.007"
+    },
+    {
+      "title": "Betweenness relations and gated sets in fuzzy metric spaces",
+      "abstract": "",
+      "year": 2022,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2021.03.010",
+      "url": "https://doi.org/10.1016/j.fss.2021.03.010"
+    },
+    {
+      "title": "Lattice-valued spaces: ⊤-Completions",
+      "abstract": "",
+      "year": 2019,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2018.06.003",
+      "url": "https://doi.org/10.1016/j.fss.2018.06.003"
+    },
+    {
+      "title": "Uni-nullnorms on bounded lattices",
+      "abstract": "",
+      "year": 2020,
+      "source": "crossref",
+      "doi": "10.1016/j.fss.2019.01.001",
+      "url": "https://doi.org/10.1016/j.fss.2019.01.001"
+    }
+  ]
+}

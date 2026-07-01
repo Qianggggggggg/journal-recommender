@@ -1,0 +1,86 @@
+{
+  "journal_id": "cavw",
+  "journal_name": "computer animation & virtual worlds",
+  "papers": [
+    {
+      "title": "Parameter‐Preserving Real‐time BIM Rendering via Direct GPU Ray Tracing",
+      "abstract": "Current BIM visualization systems tessellate parametric geometry into triangle meshes before rendering, which increases memory usage, introduces faceting on curved surfaces, and adds significant export‐time overhead. We present an end‐to‐end system that preserves parametric shape definitions from BIM models through to GPU ray tracing, bypassing mesh conversion for supported parametric shapes. Our exporter extracts parametric shapes from a BIM authoring tool and encodes them into a compact binary format with two‐tier caching to avoid redundant extraction. Our renderer maps preserved BIM primitives to an instanced GPU scene layout and performs direct ray‐primitive intersections, with mixed‐precision parameter encoding and ray advancement improving memory efficiency and numerical robustness. Evaluation on architectural projects shows that our system achieves a lower GPU memory footprint, produces mathematically exact curved surfaces free of tessellation artifacts, and exports models faster than standard workflows.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70159",
+      "url": "https://openalex.org/W7166470484"
+    },
+    {
+      "title": "The Effects of Perspective‐Based Out‐of‐Body Experience in Virtual Reality Public Speaking",
+      "abstract": "Virtual reality (VR) offers an immersive platform for practicing public speaking in controlled environments that simulate various audience settings and performance contexts. Prior research has examined how manipulating visual perspectives, a common method for inducing out‐of‐body experiences (OBEs), can influence users across various contexts. However, the effects of visual perspectives in a VR public speaking setting remain underexplored. To address this gap, we conducted a VR public speaking study in which we compared three perspective‐based OBE conditions (i.e., first‐person perspective vs. third‐person perspective back vs. third‐person perspective front) and explored their effects on objective measurements (i.e., acoustic features of speech and gaze behaviors) and self‐reported ratings (i.e., sense of embodiment, co‐presence, intrinsic motivation, and self‐statements). Moreover, we explored the correlations between objective and self‐reported data. We found that perspective‐based OBE conditions had a significant effect on spectral slope, gaze behaviors (i.e., fixation count, average fixation duration, and total fixation duration), sense of embodiment (i.e., body ownership, agency and motor control, and external appearance), and co‐presence. Results also showed several correlations between objective measurements and self‐reported ratings. Our findings highlight how perspective‐based OBE conditions influence human behavior, with practical implications for the design of VR experiences for public speaking.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70120",
+      "url": "https://openalex.org/W7163578761"
+    },
+    {
+      "title": "A Multimodal Neurophysiological Framework for Real‐Time Evaluation of User Experience in Virtual Architectural Environments",
+      "abstract": "This study addresses the long‐standing challenge of objectively and continuously quantifying User Experience (UX) in immersive architectural environments. We propose a real‐time computational framework that integrates EEG‐based affective computing with virtual reality (VR) spatial design. A hierarchical edge architecture combined with the Lab Streaming Layer enables millisecond‐level synchronization between neural signals, behavioral trajectories, and semantic spatial events. To ensure robustness under free navigation, an adaptive preprocessing pipeline is implemented that incorporates zero‐phase filtering and artifact subspace reconstruction. At the feature level, Frontal Alpha Asymmetry (FAA) and the Engagement Index (EI) are employed to jointly model emotional valence and attentional investment. Multimodal calibration is achieved via regression against subjective benchmarks, including SAM and NASA‐TLX. A within‐subject experiment comparing stress‐inducing and restorative architectural scenarios demonstrates significant neurophysiological differentiation. FAA strongly correlates with reported valence, while EI shows a moderate association with perceived workload. Importantly, EEG measures capture transient fluctuations that remain invisible to retrospective scales. The findings establish a quantitative foundation for evidence‐based design and pave the way toward closed‐loop adaptive environments driven by real‐time affective feedback.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70152",
+      "url": "https://openalex.org/W7163318807"
+    },
+    {
+      "title": "Virtual Human for Police Training in Virtual Reality: A Dynamic Model of a Suspect With Modulated Resistance and Means",
+      "abstract": "Effective simulation‐based police training requires exposure to realistic human behavior under uncertainty, particularly in situations involving escalation and use‐of‐force decisions. Virtual Reality (VR) enables immersive and repeatable training scenarios, where behaviorally credible virtual humans (VHs)are important to produce realistic and operationally relevant simulated scenarios. This paper presents a VH acting as a suspect during police interventions, whose behavior is governed by two parameters: resistance and means. Resistance models compliance or aggression, while means represents the potential to inflict harm using a weapon or object. These parameters drive a multimodal behavioral system integrating facial expression, posture and gesture, gaze, locomotion, and voice interaction. Behavior selection is controlled by a state‐machine architecture enabling escalation and de‐escalation in response to police actions, grounded in law‐enforcement literature on proportional use of force. We evaluated the model in immersive VR with police officers across scenarios combining resistance and means. Resistance primarily affected perceived danger and intent, whereas means more strongly affected perceived capacity and opportunity. These findings validate the framework and show that interpretable rule‐based VHs can elicit differentiated threat appraisals in controlled and repeatable VR scenarios, supporting their use for training and behavioral research in police contexts.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70129",
+      "url": "https://openalex.org/W7163079834"
+    },
+    {
+      "title": "Musculoskeletal Motion Control and Generation Based on Muscle Synergies",
+      "abstract": "This paper presents a unified two‐stage framework for physics‐based musculoskeletal motion control and generation. To tackle the challenges posed by high dimensionality and redundancy, we first employ an autoencoder to learn a low‐dimensional muscle synergy space from activation data. Policies trained in this space make the character faithfully reproduce motions while generating physiologically plausible muscle activations. We then leverage these expert trajectories to train a Conditional VAE, encoding skills into a continuous latent space for task‐agnostic motion synthesis and downstream control. Experiments show our method achieves high motion imitation accuracy and generation diversity, ensures control stability, and maintains physiological realism, offering an effective solution for generalizing control of complex musculoskeletal characters.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70128",
+      "url": "https://openalex.org/W7162650663"
+    },
+    {
+      "title": "Diverse Locomotion Styles From Linear‐ and Angular‐Velocity Phase Manifolds",
+      "abstract": "Real‐time character animation requires generating natural motions while preserving diverse walking styles under user control. Phase‐based representations are commonly employed in motion generation frameworks to control periodic motions such as walking; however, existing approaches face a trade‐off between preserving fine‐grained local periodic details and maintaining coherent whole‐body motion. Methods focusing on local periodic features often insufficiently represent other joints, while global phase representations tend to smooth out stylistic details, leading to style homogenization. This paper proposes an end‐effector‐aware phase manifold learning framework that balances local stylistic features and global motion consistency. The proposed method employs a two‐stage training strategy that first learns local periodic characteristics of end‐effectors and then integrates full‐body periodicity while fixing the learned local representations. In addition, we introduce an angular velocity‐based phase representation, which more directly captures the rotational characteristics of walking motions than linear velocity. Experimental results demonstrate improved style preservation for gesture‐dominant motions while generating stable whole‐body walking motions.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70126",
+      "url": "https://openalex.org/W7162117117"
+    },
+    {
+      "title": "Neural Fluid Simulator With Hybrid Physical‐Visual Constraints",
+      "abstract": "Traditional physics‐based fluid simulations typically rely on manual modeling and incremental adjustments to achieve desired effects, which can limit objectivity and generalizability to new scenarios. To address these challenges, we propose a novel neural fluid simulator that integrates visual priors from 2D image sequences with physically constrained continuous convolution. Specifically, we extract and refine point clouds from image sequences, then infer the kinetic properties of the fluid. We introduce an energy‐based physical constraint and incorporate it into a continuous convolution solver. By iteratively optimizing these inputs to enforce physical laws—particularly incompressibility—the solver produces accurate fluid motion predictions. Our approach uniquely combines visual data and physical constraints, enhancing the realism and accuracy while providing stronger generalization of fluid simulations.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70115",
+      "url": "https://openalex.org/W7163057668"
+    },
+    {
+      "title": "Effects of Immersion Fidelity and Multimodal Support on Cognitive Load, User Experience, and Behavioral Intentions in Embodied Conversational Agent Interactions",
+      "abstract": "This study examines how immersion fidelity (2D vs. VR) and multimodal support shape user experience during 20+ min diabetes‐related conversations with an embodied conversational agent (ECA). Using a between‐subjects design, participants engaged in conversation‐only interactions or conversations augmented with subtitles, visualizations, or both. We assessed memory retention, diet attitude change, behavioral commitment intentions to adopt healthier eating habits, perceived workload, working alliance, and subjective impressions of the agent. In conversation‐only interactions, 2D supported stronger working alliance, while VR elicited stronger behavioral commitment intentions. When subtitles and/or visualizations were present, working alliance and behavioral commitment intentions converged across modalities, although subjective impressions remained condition‐specific. Across conditions, VR was associated with higher perceived workload, including consistently higher physical demand and additional increases in mental and overall workload under multimodal support. Memory retention and diet attitude change did not differ between 2D and VR. These findings highlight tradeoffs between relational alignment, motivational impact, and interaction effort when designing scalable ECA‐mediated health conversations across 2D and VR platforms.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70140",
+      "url": "https://openalex.org/W7163511187"
+    },
+    {
+      "title": "A Semantic‐to‐Motion Digital Twin Framework for Expressive Industrial Avatars in Telepresence",
+      "abstract": "Remote industrial assistance is increasingly mediated through robotic avatars, yet existing telepresence systems provide limited support for non‐verbal behaviors such as hesitation, urgency, or emphasis. Manually controlling such expressive motion can increase operator workload. We present a feasibility and system‐integration study of a semantic‐to‐motion telepresence pipeline that interprets expert utterances and scene context into parameterized expressive robot behaviors. The system combines visual grounding with language‐based intent inference to produce structured motion descriptors, which are mapped to procedural motion primitives executed in a unity‐based digital twin and streamed to a physical robot via ROS. As the semantic control vocabulary for this prototype, we define SAEH (show, alert, encourage, hesitate), a four‐class operational vocabulary derived from a thematic review of 104 HRI papers. We implement the approach on a Niryo Ned 1 manipulator and show that it can generate and execute kinematically distinct expressive motion profiles, including deictic, warning, supportive, and hesitant behaviors. The proposed framework partially separates communicative intent from robot‐specific execution through parameterized procedural primitives, providing a technical foundation for context‐aware expressive telepresence; however, a measured mean end‐to‐end latency of 10 s currently limits its use to supervisory and asynchronous task loops rather than continuous live interaction.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70122",
+      "url": "https://openalex.org/W7162950719"
+    },
+    {
+      "title": "Analysis of Robustness in Biped Locomotion Controllers",
+      "abstract": "Character locomotion analysis in physics‐based simulation remains a challenging problem in the field of computer animation. Locomotion is a fundamental skill, yet generating robust and natural motion is challenging. This has led to the development of various locomotion controllers. Robustness, defined as responsiveness to external perturbations and environmental changes, is a fundamental requirement in locomotion control. However, a lack of objective and systematic comparisons is evident in existing controllers. In this article, we propose a benchmark framework for evaluating and comparing the robustness of locomotion controllers using multiple criteria. In order to assess the responsiveness of the controller, external perturbations are applied to a simulated biped character at different gait phases. This analysis offers insights into the behavior of controllers, highlights the limitations of existing approaches, and motivates a novel controller called MMIPM‐RL.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1002/cav.70136",
+      "url": "https://openalex.org/W7162327917"
+    }
+  ]
+}

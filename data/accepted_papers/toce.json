@@ -1,0 +1,70 @@
+{
+  "journal_id": "toce",
+  "journal_name": "ACM Transactions on Computing Education",
+  "papers": [
+    {
+      "title": "A Systematic Literature Review of the Use of GenAI Assistants for Code Comprehension: Implications for Computing Education Research and Practice",
+      "abstract": "The ability to comprehend code has long been recognized as an essential skill in software engineering. As programmers lean more heavily on Generative AI (GenAI) assistants to develop code solutions, it is becoming increasingly important for programmers to comprehend GenAI solutions so that they can verify their appropriateness and properly integrate them into existing code. At the same time, GenAI tools are increasingly being enlisted to provide programmers with tailored explanations of code written both by GenAI and humans. Thus, in computing education, GenAI presents new challenges and opportunities for learners who are trying to comprehend computer programs. To provide computing educators with evidence-based guidance on the use of GenAI to facilitate code comprehension and to identify directions for future research, we present a Systematic Literature Review (SLR) of state-of-the-art approaches and tools that leverage GenAI to enhance code comprehension. Our SLR focuses on 31 studies published between 2022 and 2024. Despite their potential, GenAI assistants often yield inaccurate or unclear explanations, and novice programmers frequently struggle to craft effective prompts, thereby impeding their ability to leverage GenAI to aid code comprehension. Our review classifies GenAI-based approaches and tools, identifies methods used to study them, and summarizes the empirical evaluations of their effectiveness. We consider the implications of our findings for computing education research and practice, and identify directions for future research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3785366",
+      "url": "https://www.semanticscholar.org/paper/da01391b595c86d5741de56bcbefcf008f4bc6ba"
+    },
+    {
+      "title": "Computing Education’s Superbug: Interrogating the Computer-Mind Metaphors",
+      "abstract": "In one of the significant results from early computing education research, Pea identifies a computer-as-mind metaphor that novices use in ascribing mental properties of personhood to the computer, which causes students considerable conceptual confusion. In characterizing this as students’ superbug, Pea uses a mind-as-computer metaphor, the converse metaphor to the one that students use. In doing so, he makes visible a metaphor that has become one of the predominant metaphors of mind in mid- to late-20th century theorizing in psychology and the cognitive sciences. I take both of these metaphors (computer-as-mind and mind-as-computer) to be the superbug that plagues not only student attempts to program but also computing education more broadly. The purpose of this article is to argue that these computer-mind metaphors are a steady undercurrent that runs from the cognitive sciences through computing education and the research on it, what is problematic about these metaphors, what causes this metaphorical affliction, why we might want to cure ourselves from it, and how we can do so. Key to this cure is to counter disembodied views of human reasoning and action, epitomized in first generation cognitive science, with embodied and enactive theoretical perspectives, epitomized in second generation cognitive science and in multimodal and embodied approaches to the social sciences.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3769856",
+      "url": "https://www.semanticscholar.org/paper/65cd14b190e95f14af300b4feb2990b46cb22946"
+    },
+    {
+      "title": "Tangibles and Computing Education: A View from the History of Computing",
+      "abstract": "All sorts of objects embody ideas about data and computation through their creation, their application and impact. ‘Old’ objects also embody histories that are composed of period, location, use, ownership and so on. We explore the nature of historical artefacts and what role they might play in computing education. We argue that encounters with historical artefacts bring students closer to fundamental ideas, themes and issues in both technical and social aspects of computing.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3769855",
+      "url": "https://www.semanticscholar.org/paper/3d057c2dae04d94cf0ed14701c099c38ebcfb1f0"
+    },
+    {
+      "title": "Did Alice Do Wrong? Cross-Cultural Differences in Student Perceptions of Generative AI Use in University Computing Education",
+      "abstract": "The rise of generative AI (GenAI) in higher education has prompted urgent debates surrounding academic integrity and ethical use. This study examines cross-cultural differences in student perceptions of GenAI use, comparing responses from students at Canadian and South Korean universities. Using a scenario-based survey administered in Fall 2024, we analyzed how students judged the ethicality and rule compliance of AI-assisted coding practices. Results reveal that Canadian students were consistently more likely to perceive the use of GenAI as both unethical and against institutional policies compared to Korean students, despite functionally identical institutional policies. Statistical analysis, including Mann-Whitney U tests and correlation coefficients, demonstrated significant differences across nearly all scenarios. Analysis of the factors used in generating scenarios indicated that the amount of AI-generated code incorporated into assignments most strongly influenced ethical judgments. Findings were interpreted through Hofstede’s cultural dimensions framework, suggesting that cultural factors such as power distance, individualism, and uncertainty avoidance significantly shape students’ ethical reasoning regarding GenAI. Our results contribute to the growing body of evidence emphasizing that equitable AI integration in education must be culturally responsive, taking into account diverse conceptions of academic integrity. We advocate for the development of nuanced AI-use guidelines that are sensitive to local cultural contexts while upholding fundamental principles of academic honesty. This study highlights the need for ongoing cross-cultural research to inform ethical AI policies and support responsible GenAI use in global higher education settings.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3776558",
+      "url": "https://www.semanticscholar.org/paper/32fc5ac64bf87681afd83f973bfb163ed0a75c19"
+    },
+    {
+      "title": "Sustainability in Computing Education: A Systematic Literature Review",
+      "abstract": "Research shows that the global society as organized today, with our current technological and economic system, is impossible to sustain. We are living in an era in which human activities in highly industrialized countries are responsible for overshooting several planetary boundaries, with poorer communities contributing the least to the problems but being impacted the most. At the same time, technical and economic gains fail to provide society at large with equal opportunities and improved quality of life. This article describes approaches taken in computing education to address the issue of sustainability. It presents results of a systematic review of the literature on sustainability in computing education. From a set of 572 publications extracted from six large digital libraries plus snowballing, we distilled and analyzed 89 relevant primary studies. Using an inductive and deductive thematic analysis, we study (i) conceptions of sustainability, computing, and education; (ii) implementations of sustainability in computing education; and (iii) research on sustainability in computing education. We present a framework capturing learning objectives and outcomes as well as pedagogical methods for sustainability in computing education. These results can be mapped to existing standards and curricula in future work. We find that only a few of the articles engage with the challenges as calling for drastic systemic change, along with radically new understandings of computing and education. We suggest that future work should connect to the substantial body of critical theory, such as feminist theories of science and technology. Existing research on sustainability in computing education may be considered rather immature, as the majority of articles are experience reports with limited empirical research.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2305.10369",
+      "url": "https://www.semanticscholar.org/paper/d5c6ce7d1507b76016be14a589181391699dde9d"
+    },
+    {
+      "title": "LLMs Integration in Software Engineering Team Projects: Roles, Impact, and a Pedagogical Design Space for AI Tools in Computing Education",
+      "abstract": "This work takes a pedagogical lens to explore the implications of generative AI (GenAI) models and tools, such as ChatGPT and GitHub Copilot, in a semester-long 2nd-year undergraduate software engineering team project. Qualitative findings from a survey (39 students) and interviews (eight students) provide insights into the students' views on the impact of GenAI use on their coding experience, learning, and self-efficacy. Our results address a particular gap in understanding the role and implications of GenAI on teamwork, team-efficacy, and team dynamics. The analysis of the learning aspects is distinguished by the application of learning- and pedagogy-informed lenses to discuss the data. We propose a preliminary design space for GenAI-based programming learning tools highlighting the importance of considering the roles that GenAI can play during the learning process, the scaffolding support that can be applied to each role, and the importance of supporting transparency in GenAI for team members and students in addition to educators.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3779296",
+      "url": "https://www.semanticscholar.org/paper/bc87eb96f4d5a40c687ddab716caa321fad66c11"
+    },
+    {
+      "title": "Cognitive Load Theory in Computing Education Research: A Review",
+      "abstract": "One of the most commonly cited theories in computing education research is cognitive load theory (CLT), which explains how learning is affected by the bottleneck of human working memory and how teaching may work around that limitation. The theory has evolved over a number of decades, addressing shortcomings in earlier versions; other issues remain and are being debated by the CLT community. We conduct a systematic mapping review of how CLT has been used across a number of leading computing education research (CER) forums since 2010. We find that the most common reason to cite CLT is to mention it briefly as a design influence; authors predominantly cite old versions of the theory; hypotheses phrased in terms of cognitive load components are rare; and only a small selection of cognitive load measures have been applied, sparsely. Overall, the theory’s evolution and recent themes in CLT appear to have had limited impact on CER so far. We recommend that studies in CER explain which version of the theory they use and why; clearly distinguish between load components (e.g., intrinsic and extraneous load); phrase hypotheses in terms of load components a priori; look further into validating different measures of cognitive load; accompany cognitive load measures with complementary constructs, such as motivation; and explore themes such as collaborative CLT and individual differences in working-memory capacity.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3483843",
+      "url": "https://www.semanticscholar.org/paper/8875c3a4bb1d5faac19d3f2de73abfcae08e0730"
+    },
+    {
+      "title": "Their Fight Is Our Fight: Why Computing Education Advocates Must Be in Solidarity with Public Schools",
+      "abstract": "Those working toward equitable K-12 computing education in the United States have always had their work cut out for them: understanding how best to teach, developing robust curricula, designing novel tools, building teacher capacity, and supporting systemic change in schools to bring equitable computing education to young people. Collectively, these areas represent an ambitious and complex set of problems to solve. But current changes to the educational landscape in the United States—where teaching basic ideas about how to critically engage with the world has become deeply politicized, and where forces working toward privatization of education are on the rise—require us to broaden the scope of our work. Our efforts must shift to not just include the aforementioned problems but also include ones that are more explicitly political: engaging in solidarity with the larger project of public education and supporting teachers to have the freedom to teach what students will need to contribute to our society.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3632296",
+      "url": "https://www.semanticscholar.org/paper/b70c78d97848b3d20a8923121b730a9d3fb50348"
+    }
+  ]
+}

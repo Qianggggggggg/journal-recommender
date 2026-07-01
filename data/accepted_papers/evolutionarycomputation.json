@@ -1,0 +1,78 @@
+{
+  "journal_id": "evolutionarycomputation",
+  "journal_name": "Evolutionary Computation",
+  "papers": [
+    {
+      "title": "A Personal Perspective on Evolutionary Computation: A 35-Year Journey",
+      "abstract": "This paper presents a personal account of the author's 35 years “adventure” with Evolutionary Computation—from the first encounter in 1988 and many years of academic research through to working full-time in business—successfully implementing evolutionary algorithms for some of the world's largest corporations. The paper concludes with some observations and insights.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00323",
+      "url": "https://www.semanticscholar.org/paper/790e5e07d21c47794d170fd99a88ab046aba4786"
+    },
+    {
+      "title": "Survey of interactive evolutionary decomposition-based multiobjective optimization methods.",
+      "abstract": "Interactive methods support decision-makers in finding the most preferred solution for multiobjective optimization problems, where multiple conflicting objective functions must be optimized simultaneously. These methods let a decision-maker provide preference information iteratively during the solution process to find solutions of interest, allowing them to learn about the trade-offs in the problem and the feasibility of the preferences. Several interactive evolutionary multiobjective optimization methods have been proposed in the literature. In the evolutionary computation community, the so-called decomposition-basedmethods have been increasingly popular because of their good performance in problems with many objective functions. They decompose the multiobjective optimization problem into multiple sub-problems to be solved collaboratively. Various interactive versions of decomposition-based methods have been proposed. However, most of them do not consider the desirable properties of real interactive solution processes, such as avoiding imposing a high cognitive burden on the decision-maker, allowing them to decide when to interact with the method, and supporting them in selecting a final solution. This paper reviews interactive evolutionary decomposition-based multiobjective optimization methods and different methodologies utilized to incorporate interactivity in them. Additionally, desirable properties of interactive decomposition-based multiobjective evolutionary optimization methods are identified, aiming to make them easier to be applied in real-world problems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00366",
+      "url": "https://www.semanticscholar.org/paper/ba5c1818a41d08e096b07b11f3b75c00094bad73"
+    },
+    {
+      "title": "Large-Scale Multiobjective Evolutionary Algorithm Guided by Low-Dimensional Surrogates of Scalarization Functions.",
+      "abstract": "Recently, computationally intensive multiobjective optimization problems have been efficiently solved by surrogate-assisted multiobjective evolutionary algorithms. However, most of those algorithms can only handle no more than 200 decision variables. As the number of decision variables increases further, unreliable surrogate models will result in a dramatic deterioration of their performance, which makes large-scale expensive multiobjective optimization challenging. To address this challenge, we develop a large-scale multiobjective evolutionary algorithm guided by low-dimensional surrogate models of scalarization functions. The proposed algorithm (termed LDS-AF) reduces the dimension of the original decision space based on principal component analysis, and then directly approximates the scalarization functions in a decompositionbased multiobjective evolutionary algorithm. With the help of a two-stage modeling strategy and convergence control strategy, LDS-AF can keep a good balance between convergence and diversity, and achieve a promising performance without being trapped in a local optimum prematurely. The experimental results on a set of test instances have demonstrated its superiority over eight state-of-the-art algorithms on multiobjective optimization problems with up to 1000 decision variables using only 500 real function evaluations.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00354",
+      "url": "https://www.semanticscholar.org/paper/a84b1a1a7503ae9346f3be34b88cbfc5e370c19f"
+    },
+    {
+      "title": "Exploring Automated Algorithm Design Synergizing Large Language Models and Evolutionary Algorithms: Survey and Insights.",
+      "abstract": "Designing algorithms for optimization problems, no matter heuristic or meta-heuristic, often relies on manual design and domain expertise, limiting their scalability and adaptability. The integration of Large Language Models (LLMs) and Evolutionary Algorithms (EAs) presents a promising new way to overcome these limitations to make optimization be more automated, where LLMs function as dynamic agents capable of generating, refining, and interpreting optimization strategies, while EAs explore complex searching spaces efficiently through evolutionary operators. Since this synergy enables a more efficient and creative searching process, we first review important developments in this direction, and then summarize an LLM-EA paradigm for automated optimization algorithm design. We conduct an in-depth analysis on innovative methods for four key EA modules, namely, individual representation, selection, variation operators, and fitness evaluation, addressing challenges related to optimization algorithm design, particularly from the perspective of LLM prompts, analyzing how the prompt flow evolving with the evolutionary process, adjusting based on evolutionary feedback (e.g., population diversity, convergence rate). Furthermore, we analyze how LLMs, through flexible prompt-driven roles, introduce semantic intelligence into fundamental EA characteristics, including diversity, convergence, adaptability, and scalability. Our systematic review and thorough analysis into the paradigm can help researchers better understand the current research and boost the development of synergizing LLMs with EAs for automated optimization algorithm design.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1162/EVCO.a.370",
+      "url": "https://www.semanticscholar.org/paper/85c85a008d8ba0c1333871423f1513ec33d71ce2"
+    },
+    {
+      "title": "Evolutionary Algorithms for Parameter Optimization—Thirty Years Later",
+      "abstract": "Thirty years, 1993–2023, is a huge time frame in science. We address some major developments in the field of evolutionary algorithms, with applications in parameter optimization, over these 30 years. These include the covariance matrix adaptation evolution strategy and some fast-growing fields such as multimodal optimization, surrogate-assisted optimization, multiobjective optimization, and automated algorithm design. Moreover, we also discuss particle swarm optimization and differential evolution, which did not exist 30 years ago, either. One of the key arguments made in the paper is that we need fewer algorithms, not more, which, however, is the current trend through continuously claiming paradigms from nature that are suggested to be useful as new optimization algorithms. Moreover, we argue that we need proper benchmarking procedures to sort out whether a newly proposed algorithm is useful or not. We also briefly discuss automated algorithm design approaches, including configurable algorithm design frameworks, as the proposed next step toward designing optimization algorithms automatically, rather than by hand.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00325",
+      "url": "https://www.semanticscholar.org/paper/5871d61988fb7293342da6267ce94343e4750aca"
+    },
+    {
+      "title": "BUSTLE: A Versatile Tool for the Evolutionary Learning of STL Specifications from Data",
+      "abstract": "Describing the properties of complex systems that evolve over time is a crucial requirement for monitoring and understanding them. Signal Temporal Logic (STL) is a framework that proved to be effective for this aim because it is expressive and allows state properties as human-readable formulae. Crafting STL formulae that fit a particular system is, however, a difficult task. For this reason, a few approaches have been proposed recently for the automatic learning of STL formulae starting from observations of the system. In this paper, we propose BUSTLE (Bi-level Universal STL Evolver), an approach based on evolutionary computation for learning STL formulae from data. BUSTLE advances the state-of-the-art because it (i) applies to a broader class of problems, in terms of what is known about the state of the system during its observation, and (ii) generates both the structure and the values of the parameters of the formulae employing a bi-level search mechanism (global for the structure, local for the parameters). We consider two cases where (a) observations of the system in both anomalous and regular state are available, or (b) only observations of regular state are available. We experimentally evaluate BUSTLE on problem instances corresponding to the two cases and compare it against previous approaches. We show that the evolved STL formulae are effective and human-readable: the versatility of BUSTLE does not come at the cost of lower effectiveness.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00347",
+      "url": "https://www.semanticscholar.org/paper/422357fdb92d0f9adfc77015d1e977f8d29ee867"
+    },
+    {
+      "title": "Landscape Analysis for Surrogate Models in the Evolutionary Black-Box Context",
+      "abstract": "Surrogate modeling has become a valuable technique for black-box optimization tasks with expensive evaluation of the objective function. In this paper, we investigate the relationships between the predictive accuracy of surrogate models, their settings, and features of the black-box function landscape during evolutionary optimization by the Covariance Matrix Adaptation Evolution Strategy (CMA-ES) state-of-the-art optimizer for expensive continuous black-box tasks. This study aims to establish the foundation for specific rules and automated methods for selecting and tuning surrogate models by exploring relationships between landscape features and model errors, focusing on the behavior of a specific model within each generation in contrast to selecting a specific algorithm at the outset. We perform a feature analysis process, identifying a significant number of non-robust features and clustering similar landscape features, resulting in the selection of 14 features out of 384, varying with input data selection methods. Our analysis explores the error dependencies of four models across 39 settings, utilizing three methods for input data selection, drawn from surrogate-assisted CMA-ES runs on noiseless benchmarks within the Comparing Continuous Optimizers framework.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00357",
+      "url": "https://www.semanticscholar.org/paper/1884d2a48fb4e7d2c830008ecf0d7bf2863df200"
+    },
+    {
+      "title": "Evolutionary Sparsity Regularisation-Based Feature Selection for Binary Classification",
+      "abstract": "In classification, feature selection is an essential pre-processing step that selects a small subset of features to improve classification performance. Existing feature selection approaches can be divided into three main approaches: wrapper approaches, filter approaches, and embedded approaches. In comparison with two other approaches, embedded approaches usually have better trade-off between classification performance and computation time. One of the most well-known embedded approaches is sparsity regularisation-based feature selection which generates sparse solutions for feature selection. Despite its good performance, sparsity regularisation-based feature selection outputs only a feature ranking which requires the number of selected features to be predefined. More importantly, the ranking mechanism introduces a risk of ignoring feature interactions which leads to the fact that many top-ranked but redundant features are selected. This work addresses the above problems by proposing a new representation that considers the interactions between features and can automatically determine an appropriate number of selected features. The proposed representation is used in a differential evolutionary (DE) algorithm to optimise the feature subset. In addition, a novel initialisation mechanism is proposed to let DE consider various numbers of selected features at the beginning. The proposed algorithm is examined on both synthetic and real-world datasets. The results on the synthetic dataset show that the proposed algorithm can select complementary features while existing sparsity regularisation-based feature selection algorithms are at risk of selecting redundant features. The results on real-world datasets show that the proposed algorithm achieves better classification performance than well-known wrapper, filter, and embedded approaches. The algorithm is also as efficient as filter feature selection approaches.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/evco_a_00358",
+      "url": "https://www.semanticscholar.org/paper/0284112e6fd2fc6cc2bf5faa70eb807b3691b773"
+    },
+    {
+      "title": "Runtime Analysis of Evolutionary Diversity Optimization on the Multi-objective (LeadingOnes, TrailingZeros) Problem",
+      "abstract": "Diversity optimization is the class of optimization problems in which we aim to find a diverse set of good solutions. One of the frequently-used approaches to solve such problems is to use evolutionary algorithms that evolve a desired diverse population. This approach is called evolutionary diversity optimization (EDO). In this paper, we analyze EDO on a three-objective function LOTZk, which is a modification of the two-objective benchmark function (LeadingOnes, TrailingZeros). We prove that the GSEMO computes a set of all Pareto-optimal solutions in O(kn3) expected iterations. We also analyze the runtime of the GSEMOD algorithm (a modification of the GSEMO for diversity optimization) until it finds a population with the best possible diversity for two different diversity measures: the total imbalance and the sorted imbalances vector. For the first measure we show that the GSEMOD optimizes it in O(kn2log⁡(n)) expected iterations (which is asymptotically faster than the upper bound on the runtime until it finds a Pareto-optimal population), and for the second measure we show an upper bound of O(k2n3log⁡(n)) expected iterations. We complement our theoretical analysis with an empirical study, which shows a very similar behavior for both diversity measures. The results of experiments suggest that our bounds for the total imbalance measure are tight, while the bounds for the imbalances vector are too pessimistic.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2404.11496",
+      "url": "https://www.semanticscholar.org/paper/4f81cb95122a7c2493cdf24ec12feed06cc400a7"
+    }
+  ]
+}

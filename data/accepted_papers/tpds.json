@@ -17,6 +17,70 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1109/TPDS.2024.3416050",
       "url": ""
+    },
+    {
+      "title": "Reliability and Confidentiality Co-Verification for Parallel Applications in Distributed Systems",
+      "abstract": "Co-verification of reliability and confidentiality is a necessary process for safety- and security-critical applications. While these two objectives are conflicting, preassignment has emerged as an effective and efficient verification solution. In this article, we propose two preassignment-based co-verification techniques, namely, Blocks-based Vulnerability Preassignment (BVP) and Reversed Blocks-based Time Preassignment (RBTP) for a parallel application in distributed CAN FD systems. BVP can significantly improve reliability under a vulnerability bound, while RBTP can reduce vulnerability over a reliability goal. Real case study with the parallel automotive application and parallelism study with two structures of high-parallelism and low-parallelism applications are demonstrated; the proposed BVP and RBTP can improve the verification acceptance ratio by 19 and 10 percent compared to the state-of-the-art Average Vulnerability Preassignment (AVP) and Average Time Preassignment (ATP) techniques, respectively.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2021.3049780",
+      "url": "https://www.semanticscholar.org/paper/0192f8ba46959b293658c450d708dabf2b60c910"
+    },
+    {
+      "title": "Privacy-Preserving Multi-Keyword Searchable Encryption for Distributed Systems",
+      "abstract": "As cloud storage has been widely adopted in various applications, how to protect data privacy while allowing efficient data search and retrieval in a distributed environment remains a challenging research problem. Existing searchable encryption schemes are still inadequate on desired functionality and security/privacy perspectives. Specifically, supporting multi-keyword search under the multi-user setting, hiding search pattern and access pattern, and resisting keyword guessing attacks (KGA) are the most challenging tasks. In this article, we present a new searchable encryption scheme that addresses the above problems simultaneously, which makes it practical to be adopted in distributed systems. It not only enables multi-keyword search over encrypted data under a multi-writer/multi-reader setting but also guarantees the data and search pattern privacy. To prevent KGA, our scheme adopts a multi-server architecture, which accelerates search response, shares the workload, and lowers the key leakage risk by allowing only authorized servers to jointly test whether a search token matches a stored ciphertext. A novel subset decision mechanism is also designed as the core technique underlying our scheme and can be further used in applications other than keyword search. Finally, we prove the security and evaluate the computational and communication efficiency of our scheme to demonstrate its practicality.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2020.3027003",
+      "url": "https://www.semanticscholar.org/paper/32a9e44a8ffa569bd034c1c23d66d76839e4e51d"
+    },
+    {
+      "title": "Exploring the Design Space of Distributed Parallel Sparse Matrix-Multiple Vector Multiplication",
+      "abstract": "We consider the distributed memory parallel multiplication of a sparse matrix by a dense matrix (SpMM). The dense matrix is often a collection of dense vectors. Standard implementations will multiply the sparse matrix by multiple dense vectors at the same time, to exploit the computational efficiencies therein. But such approaches generally utilize the same sparse matrix partitioning as if multiplying by a single vector. This article explores the design space of parallelizing SpMM and shows that a coarser grain partitioning of the matrix combined with a column-wise partitioning of the block of vectors can often require less communication volume and achieve higher SpMM performance. An algorithm is presented that chooses a process grid geometry for a given number of processes to optimize the performance of parallel SpMM. The algorithm can augment existing graph partitioners by utilizing the additional concurrency available when multiplying by multiple dense vectors to further reduce communication.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2024.3452478",
+      "url": "https://www.semanticscholar.org/paper/a8dcd0923800522594ad9df9991a1f0a3990ca4d"
+    },
+    {
+      "title": "Node Essentiality Assessment and Distributed Collaborative Virtual Network Embedding in Datacenters",
+      "abstract": "Network virtualization (NV) has extensive and significant applications in cloud computing and parallel and distributed systems. Virtual network embedding (VNE) is a key issue in NV, which is an effective means to advance systems’ performance. While existing VNE research lacks resource allocation coordination between mappings of different virtual network requests, resulting in insufficient resource utilization and high overhead. In this article, we propose a novel node essentiality evaluation model for data center networks (DCNs), and design an efficient distributed collaborative virtual network embedding. Firstly, we propose a node essentiality evaluation scheme based on dynamic model, which combines the characteristics of network topology and nodes to make the evaluation results more comprehensive. Secondly, we establish the two-stage node importance evaluation criteria for the deviation mean of the data center dynamic model and the variance based on the deviation mean. Furthermore, we investigate a nodal importance assessment method based on the data center dynamic model for perturbation testing. Finally, we design a distributed coordinated VNE algorithm (CNI-VNE) which calculates the importance index of physical nodes through topology awareness. The proposed algorithm can increase the coordination between different request mappings, thereby reducing the mapping cost of physical node resources and minimizing the cost of VNE. We use the real Fat-tree DCN of 128 servers and 80 switches as testbed, and evaluate them from indicators such as average reliability, average bandwidth consumption, average energy consumption, and average mapping time. Massive simulation results in different scenarios show that our algorithm achieves the best performance on most indicators compared with the existing state-of-the-art proposals, mapping acceptance and average revenue increased by 19.4% and 21.3%, respectively, and DCN reduced bandwidth consumption by about 30%.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2023.3242952",
+      "url": "https://www.semanticscholar.org/paper/f95356978b8f2975d6ce1726ae92677eba03907d"
+    },
+    {
+      "title": "FSP: Towards Flexible Synchronous Parallel Frameworks for Distributed Machine Learning",
+      "abstract": "Myriad of machine learning (ML) algorithms refine model parameters iteratively. Existing synchronous data-parallel frameworks can accelerate training with convergence guarantees. However, the pre-assigned workload-based synchronous design still poses great challenges, since fast workers must wait for slow, straggling ones, especially in a heterogeneous computing cluster. Asynchronous alternatives can bypass this performance bottleneck, but at expense of potentially losing convergence guarantees. This article proposes a new time-based flexible synchronous parallel framework (FSP). It provides strict convergence analysis by consistently updating parameters, as well as significant cost reduction by completely unleashing the power of fast workers. It identifies the optimal synchronization frequency, by online balancing costs of parameters’ update and benefits brought by their freshness. Besides the basic goal of keeping all workers fully CPU-utilized, FSP also aims to keep data spread over the cluster fully utilized, so that they can contribute to convergence with equal opportunities. These proposals are all implemented in a prototype system Flegel, with additional engineering optimizations for further performance enhancement and programming facilitation. Experiments demonstrate that Flegel significantly outperforms recent studies.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2022.3228733",
+      "url": "https://www.semanticscholar.org/paper/34e14fdf011987ecf8abac4dc18c776e1554c51c"
+    },
+    {
+      "title": "P4SGD: Programmable Switch Enhanced Model-Parallel Training on Generalized Linear Models on Distributed FPGAs",
+      "abstract": "Generalized linear models (GLMs) are a widely utilized family of machine learning models in real-world applications. As data size increases, it is essential to perform efficient distributed training for these models. However, existing systems for distributed training have a high cost for communication and often use large batch sizes to balance computation and communication, which negatively affects convergence. Therefore, we argue for an efficient distributed GLM training system that strives to achieve linear scalability, while keeping batch size reasonably low. As a start, we propose P4SGD, a distributed heterogeneous training system that efficiently trains GLMs through model parallelism between distributed FPGAs and through forward-communication-backward pipeline parallelism within an FPGA. Moreover, we propose a light-weight, latency-centric in-switch aggregation protocol to minimize the latency of the AllReduce operation between distributed FPGAs, powered by a programmable switch. As such, to our knowledge, P4SGD is the first solution that achieves almost linear scalability between distributed accelerators through model parallelism. We implement P4SGD on eight Xilinx U280 FPGAs and a Tofino P4 switch. Our experiments show P4SGD converges up to 6.5X faster than the state-of-the-art GPU counterpart.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2023.3279255",
+      "url": "https://www.semanticscholar.org/paper/516d96d31e10567165bd7e21552f2b86c4ef7561"
+    },
+    {
+      "title": "Safety Enhancement for Real-Time Parallel Applications in Distributed Automotive Embedded Systems: A Stable Stopping Approach",
+      "abstract": "In distributed automotive embedded systems, safety issues run through the entire life cycle, and safety mechanisms for error handling are desirable for risk control. This article focuses on safety enhancement (i.e., safety mechanisms for error handling) for a safety-critical automotive application within its deadline. A stable stopping approach used for safety enhancement for an automotive application is proposed based on the static recovery mechanism provided in ISO 26262. The Stable Stopping-based Safety Enhancement (SSSE) approach is proposed by combining known backward recovery, proposed forward recovery, and proposed forward-and-backward recovery through primary-backup repetition. The stable stopping (i.e., SSSE) approach is a convergence algorithm, which means that when the reliability value reaches a steady state and the algorithm can stop. Experimental results reveal that the exposure level defined in ISO 26262 drops from E3 to E1 after using SSSE, and such improvement enables a safety guarantee of higher level.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2020.2984719",
+      "url": "https://www.semanticscholar.org/paper/bfe50d019fa5cc246f1955cc73fc84b47aa8bb83"
+    },
+    {
+      "title": "Solving Linear Diophantine Systems on Parallel Architectures",
+      "abstract": "Solving linear Diophantine systems of equations is applied in discrete-event systems, model checking, formal languages and automata, logic programming, cryptography, networking, signal processing, and chemistry. For modeling discrete systems with Petri nets, a solution in non-negative integer numbers is required, which represents an intractable problem. For this reason, solving such kinds of tasks with significant speedup is highly appreciated. In this paper we design a new solver of linear Diophantine systems based on the parallel-sequential composition of the system clans. The solver is studied and implemented to run on parallel architectures using a two-level parallelization concept based on MPI and OpenMP. A decomposable system is usually represented by a sparse matrix; a minimal clan size of the decomposition restricts the granulation of the technique. MPI is applied for solving systems for clans using a parallel-sequential composition on distributed-memory computing nodes, while OpenMP is applied in solving a single indecomposable system on a single node using multiple cores. A dynamic task-dispatching subsystem is developed for distributing systems on nodes in the process of compositional solution. Computational speedups are obtained on a series of test examples, e.g., illustrating that the best value constitutes up to 45 times speedup obtained on 5 nodes with 20 cores each.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPDS.2018.2873354",
+      "url": "https://www.semanticscholar.org/paper/5c655545943ac9b78361ba211651c96a0b762d2f"
     }
   ]
 }

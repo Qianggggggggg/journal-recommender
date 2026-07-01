@@ -168,7 +168,7 @@ def build_accepted_paper_index(
     }
 
 
-def _load_config_paths(config_path: str = "configs/app.yaml") -> dict[str, str]:
+def _load_config_paths(config_path: str = "configs/app.yaml") -> dict[str, Any]:
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
@@ -188,6 +188,7 @@ def _load_config_paths(config_path: str = "configs/app.yaml") -> dict[str, str]:
         ),
         "ollama_base_url": ollama_section.get("base_url", "http://localhost:11434"),
         "ollama_model": ollama_section.get("embedding_model", "qwen3-embedding:4b"),
+        "ollama_timeout": ollama_section.get("timeout_seconds", 60),
     }
 
 
@@ -237,6 +238,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     client = OllamaEmbedding(
         base_url=paths["ollama_base_url"],
         model=paths["ollama_model"],
+        timeout=paths["ollama_timeout"],
+        show_progress=True,
+        progress_desc="Accepted-paper embeddings",
     )
 
     print(

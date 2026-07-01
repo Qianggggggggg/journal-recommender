@@ -1,0 +1,86 @@
+{
+  "journal_id": "gmod",
+  "journal_name": "Graphical Models",
+  "papers": [
+    {
+      "title": "DP-Adapter: Dual-Pathway Adapter for Boosting Fidelity and Text Consistency in Customizable Human Image Generation",
+      "abstract": "With the growing popularity of personalized human content creation and sharing, there is a rising demand for advanced techniques in customized human image generation. However, current methods struggle to simultaneously maintain the fidelity of human identity and ensure the consistency of textual prompts, often resulting in suboptimal outcomes. This shortcoming is primarily due to the lack of effective constraints during the simultaneous integration of visual and textual prompts, leading to unhealthy mutual interference that compromises the full expression of both types of input. Building on prior research that suggests visual and textual conditions influence different regions of an image in distinct ways, we introduce a novel Dual-Pathway Adapter (DP-Adapter) to enhance both high-fidelity identity preservation and textual consistency in personalized human image generation. Our approach begins by decoupling the target human image into visually sensitive and text-sensitive regions. For visually sensitive regions, DP-Adapter employs an Identity-Enhancing Adapter (IEA) to preserve detailed identity features. For text-sensitive regions, we introduce a Textual-Consistency Adapter (TCA) to minimize visual interference and ensure the consistency of textual semantics. To seamlessly integrate these pathways, we develop a Fine-Grained Feature-Level Blending (FFB) module that efficiently combines hierarchical semantic features from both pathways, resulting in more natural and coherent synthesis outcomes. Additionally, DP-Adapter supports various innovative applications, including controllable headshot-to-full-body portrait generation, age editing, old-photo to reality, and expression editing.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2502.13999",
+      "url": "https://www.semanticscholar.org/paper/14a9cf1553b01fae35a99e12c96b31a5c93969f6"
+    },
+    {
+      "title": "Point cloud denoising review: from classical to deep learning-based approaches",
+      "abstract": "Over the past decade, we have witnessed an enormous amount of research effort dedicated to the design of point cloud denoising techniques. In this article, we first provide a comprehensive survey on state-of-the-art denoising solutions, which are mainly categorized into three classes: filter-based, optimization-based, and deep learning-based techniques. Methods of each class are analyzed and discussed in detail. This is done using a benchmark on different denoising models, taking into account different aspects of denoising challenges. We also review two kinds of quality assessment methods designed for evaluating denoising quality. A comprehensive comparison is performed to cover several popular or state-of-the-art methods, together with insightful observations. Finally, we discuss open challenges and future research directions in identifying new point cloud denoising strategies.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.2139/ssrn.3994122",
+      "url": "https://www.semanticscholar.org/paper/7b9b4fc0e3522953177339714aa238026467cc14"
+    },
+    {
+      "title": "Simplification of locally refined gradient meshes",
+      "abstract": "Gradient meshes are powerful vector graphic primitives known for producing smooth and detailed color transitions. However, their fixed rectangular topology complicates editing, as adding detail in one region introduces control points across the entire mesh. To improve editability and better support artist workflows, we propose a simplification method for gradient meshes based on local refinement. Our method transforms a traditional, globally-refined mesh into a locally-refined one by iteratively merging adjacent faces and eliminating redundant data while preserving visual quality. We achieve this by rasterizing the mesh and applying established visual quality metrics to ensure consistency with the original. Additionally, we offer artists control over the simplification process by introducing an error threshold, allowing them to balance the level of simplification with visual fidelity. Finally, we conduct a thorough comparison of various mesh simplification strategies to analyze the trade-offs between simplification quality and speed so as to inform users to the optimal one that they can use to obtain the desired trade-off.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2026.101322",
+      "url": "https://www.semanticscholar.org/paper/9654e5ede8370d722d38ef0bac63cccd56ce9ac6"
+    },
+    {
+      "title": "Structured Bitmap-to-Mesh Triangulation for Geometry-Aware Discretization of Image-Derived Domains",
+      "abstract": "We propose a template-driven triangulation framework that embeds raster- or segmentation-derived boundaries into a regular triangular grid for stable PDE discretization on image-derived domains. Unlike constrained Delaunay triangulation (CDT), which may trigger global connectivity updates, our method retriangulates only triangles intersected by the boundary, preserves the base mesh, and supports synchronization-free parallel execution. To ensure determinism and scalability, we classify all local boundary-intersection configurations up to discrete equivalence and triangle symmetries, yielding a finite symbolic lookup table that maps each case to a conflict-free retriangulation template. We prove that the resulting mesh is closed, has bounded angles, and is compatible with cotangent-based discretizations and standard finite element methods. Experiments on elliptic and parabolic PDEs, signal interpolation, and structural metrics show fewer sliver elements, more regular triangles, and improved geometric fidelity near complex boundaries. The framework is well suited for real-time geometric analysis and physically based simulation over image-derived domains.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2026.101326",
+      "url": "https://www.semanticscholar.org/paper/ae30a336d8dc45e1f7efc4c314bbc69ef398c988"
+    },
+    {
+      "title": "A non-stationary subdivision scheme for the construction of deformable models with sphere-like topology",
+      "abstract": "An affine-invariant non-stationary subdivision scheme is proposed.It produces G1 continuous surfaces with sphere-like topology.It is used to construct interactive 3D deformable models with few control points.Application examples in real volumetric biomedical images are provided. Display Omitted We present an affine-invariant non-stationary subdivision scheme for the recursive refinement of any triangular mesh that is regular or has extraordinary vertices of valence 4. In particular, when applied to an arbitrary convex octahedron, it produces a G1-continuous surface with a blob-like shape as the limit of the recursive subdivision process. In case of a regular octahedron, the subdivision process provides an accurate representation of ellipsoids. Our scheme allows us to easily construct a new interactive 3D deformable model for use in the delineation of biomedical images, which we illustrate by examples that deal with the characterization of 3D structures with sphere-like topology such as embryos, nuclei, or brains.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2017.10.001",
+      "url": "https://www.semanticscholar.org/paper/0b62c0ab7c91bb6c1f6be0a6c634f74983ef3f97"
+    },
+    {
+      "title": "Generating sparse self-supporting wireframe models for 3D printing using mesh simplification",
+      "abstract": "Wireframe models are becoming a popular option in 3D printing. Generating sparse wireframe models using classic mesh simplification methods leads to models that require a lot of support structures in the layer-upon-layer additive process. In this paper we present a mesh simplification method that takes into account the overhang angle. Specifically, we propose a metric for self-supportability. By combining this novel metric together with the classic error metrics for mesh simplification, our method generates sparse wireframe models that need much less supports. Moreover, the operations of vertex position optimization and edge flipping are used to further increase self-supportability of the wireframe models. We demonstrate the effectiveness of the proposed method on a number of 3D models.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.GMOD.2018.05.001",
+      "url": "https://www.semanticscholar.org/paper/eb2adc872c8e530abb3ae764c73e9af35d61fa4d"
+    },
+    {
+      "title": "Techniques for improved CityGML models",
+      "abstract": "This paper deals with some techniques that can be used to improve quality and geometric consistency of data driven 3D city models. It focuses on two practical tasks with respect to roof polygons: finding better edges and planarization. To increase the quality of edges, models are merged with true orthophotos and cadastral data. With mixed integer linear programs, the number of right angles and symmetry are maximized. Linear optimization problems also help to correct non-planar roof facets and to avoid artificial step edges within roofs. Since these methods change the positions of vertices, self-intersections of polygons have to be healed, and building walls have to be re-arranged. The techniques focus on roof geometries that can be represented in 2.5D. In general, this is true for CityGML models in level of detail 2 that do not have detailed facades or overhangs. However, techniques can also be adapted to other 2.5D modeling tasks.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2019.101044",
+      "url": "https://www.semanticscholar.org/paper/f89521d138d129c15a2f3bdd56806b04b4ebeae3"
+    },
+    {
+      "title": "DISCO: Efficient Diffusion Solver for Large-Scale Combinatorial Optimization Problems",
+      "abstract": "Combinatorial Optimization (CO) problems are fundamentally important in numerous real-world applications across diverse industries, characterized by entailing enormous solution space and demanding time-sensitive response. Despite recent advancements in neural solvers, their limited expressiveness struggles to capture the multi-modal nature of CO landscapes. While some research has shifted towards diffusion models, these models still sample solutions indiscriminately from the entire NP-complete solution space with time-consuming denoising processes, which limit their practicality for large problem scales. We propose DISCO, an efficient DIffusion Solver for large-scale Combinatorial Optimization problems that excels in both solution quality and inference speed. DISCO's efficacy is twofold: First, it enhances solution quality by constraining the sampling space to a more meaningful domain guided by solution residues, while preserving the multi-modal properties of the output distributions. Second, it accelerates the denoising process through an analytically solvable approach, enabling solution sampling with minimal reverse-time steps and significantly reducing inference time. DISCO delivers strong performance on large-scale Traveling Salesman Problems and challenging Maximal Independent Set benchmarks, with inference time up to 5.28 times faster than other diffusion alternatives. By incorporating a divide-and-conquer strategy, DISCO can well generalize to solve unseen-scale problem instances, even surpassing models specifically trained for those scales.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2406.19705",
+      "url": "https://www.semanticscholar.org/paper/a4a313d2f2e982dbe7588dc17b811930a790b440"
+    },
+    {
+      "title": "A review on crowd simulation and modeling",
+      "abstract": "Crowd simulation has emerged in the last decade as a widely used method of visual effects, computer games, and urban planning, etc. The improvement of hardware performance and the urgent need of special effect lead to an unprecedented wave of crowd simulation studies. This paper reports a review of crowd simulation models from traditional methods to recent methods (e.g. group simulation, emotion contagion). Traditional models can simulate general crowd dynamics which have the advantages of both microscopic and macroscopic models. The recent studies of crowd simulation from group simulation to social psychology crowds are possible to simulate realistic crowds. The purpose of this review is to introduce commonly used crowd simulation methods for newcomers to this field by making a systematic literature review, discussions and analysis of different models. The results reveal the traditional models can simulate most of the normal crowds, but lack expressiveness for special groups which needs to be solved urgently in the current applications, particularly on visual effects and urban planning. Group simulation and emotion contagion could improve the simulation realism, but it also needs to be improved in computation cost and model optimization. Also, future research directions are suggested aiming to develop new applications focused on more realistic, natural and efficient crowd simulation.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2020.101081",
+      "url": "https://www.semanticscholar.org/paper/45c2cfa5c214c5f700d13487acd5dc420225ec63"
+    },
+    {
+      "title": "Quasi-interpolation projectors for Subdivision Surfaces",
+      "abstract": "Subdivision surfaces are considered as an extension of splines to accommodate models with complex topologies, making them useful for addressing PDEs on models with complex topologies in isogeometric analysis. This has generated a lot of interest in the field of subdivision space approximation. The quasi-interpolation offers a highly efficient approach for spline approximation, eliminating the necessity of solving large linear systems of equations. Nevertheless, the lack of analytical expressions at extraordinary points on subdivision surfaces makes traditional techniques for creating B-spline quasi-interpolants inappropriate for subdivision spaces. To address this obstacle, this paper innovatively reframes the evaluation issue associated with subdivision surfaces as a correlation between subdivision matrices and limit points, offering a thorough method for quasi-interpolation specifically designed for subdivision surfaces. This developed quasi-interpolant, termed the subdivision space projection operator, accurately reproduces the subdivision space. We provide explicit quasi-interpolation formulas for various typical subdivision schemes. Numerical experiments demonstrate that the quasi-interpolants for Catmull-Clark and Loop subdivision exhibit third-order approximation in the (L_2) norm and second-order in the (L_\\infty) norm. Furthermore, the modified Loop subdivision quasi-interpolant achieves optimal approximation rates in both the (L_2) and (L_\\infty) norms.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.gmod.2024.101250",
+      "url": "https://www.semanticscholar.org/paper/797b0c5b945cde96b68a75236a311d557072d767"
+    }
+  ]
+}

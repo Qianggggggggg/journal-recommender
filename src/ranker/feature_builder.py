@@ -22,6 +22,16 @@
 - 布尔/二元特征以 ``0.0`` / ``1.0`` 存储。
 - ``gold_in_accepted_corpus`` 一类 oracle 特征**禁止**加入 ``FEATURE_NAMES``,
   它会让 covered 训练样本的分布与 uncovered 推理样本的分布漂移。
+
+2026-06-29 v4 baseline 回滚:
+- ``PaperCandidateFeatures`` 恢复 4 个字段 (same_gold_area /
+  same_parsed_ccf_area / paper_strength / candidate_in_accepted_corpus),
+  让 ``FEATURE_NAMES_V4_LEGACY`` (20-dim) 和 ``FEATURE_NAMES_WITH_LLM_EVIDENCE_V4_LEGACY``
+  (26-dim) schema 能正常 attach features。
+- 这些字段不进 ``FEATURE_NAMES`` (locked 16-dim),仅作为 dataclass 默认值存在,
+  attach V4_LEGACY schema 时才会写入向量。
+- 训练数据中这 3 个非 paper_strength 字段一直是 0.0 placeholder,
+  v4 LR 模型对它们的 coef ≈ 0,所以默认 0.0 与训练一致,不改变预测分布。
 """
 from __future__ import annotations
 
@@ -173,6 +183,16 @@ class PaperCandidateFeatures:
     has_identity_anchor: float = 0.0
     same_ccf_level: float = 0.0
     journal_ccf_numeric: float = 0.0
+    # 2026-06-29 v4 rollback path: 恢复 4 个字段,让 v4_lr.json (26-dim)
+    # 能正常 attach。production 训练数据里这 4 个字段 same_gold_area /
+    # same_parsed_ccf_area / candidate_in_accepted_corpus 是硬编码 0.0
+    # placeholder (v4 模型中这 3 个 coef ≈ 0,默认 0.0 与训练一致);
+    # paper_strength 从 paper_profile.paper_strength 读,fallback 0.0。
+    # FEATURE_NAMES (locked 16-dim) 仍不包含它们,只用于 V4_LEGACY schema。
+    same_gold_area: float = 0.0
+    same_parsed_ccf_area: float = 0.0
+    paper_strength: float = 0.0
+    candidate_in_accepted_corpus: float = 0.0
     llm_scope_fit: float = 0.5
     llm_method_fit: float = 0.5
     llm_application_fit: float = 0.5
@@ -300,7 +320,9 @@ def build_features(
     # 逐 route 抽 rank
     rank_by_route = {name: _route_rank_or_sentinel(routes, name) for name in ROUTE_RANK_FIELDS}
 
-    # 2026-06-26: same_ccf_level 保留;same_gold_area / same_parsed_ccf_area 已删除。
+    # 2026-06-30: same_ccf_level 仅当用户显式提供 paper_ccf_target_level 时才激活。
+    # 训练数据中此字段恒为 0.0（无 gold 泄漏）。线上推理 paper_ccf_target_level
+    # 默认为 None → 0.0。将来用户可显式传入目标 CCF 等级。
     _same_ccf_level = 1.0 if (
         paper_ccf_target_level is not None
         and getattr(journal, "ccf_rating", None) is not None
@@ -327,9 +349,17 @@ def build_features(
         has_accepted_route=_has_route(routes, "accepted_"),
         # identity_anchor 单独成 route(无前缀匹配)
         has_identity_anchor=1.0 if "identity_anchor" in routes else 0.0,
-        # same_ccf_level (2026-06-26: same_gold_area / same_parsed_ccf_area 已删除)
+        # same_ccf_level (2026-06-29: same_gold_area / same_parsed_ccf_area 恢复
+        # 用于 v4 26-dim 模型回滚路径 — 默认 0.0 placeholder,与训练数据一致)
         same_ccf_level=_same_ccf_level,
         journal_ccf_numeric=ccf_level_to_numeric(getattr(journal, "ccf_rating", None)),
+        # 2026-06-29 v4 rollback: 4 个 v4 26-dim schema 字段。
+        # 训练数据中 same_gold_area / same_parsed_ccf_area / candidate_in_accepted_corpus
+        # 一直硬编码 0.0 (model coef ≈ 0,默认 0.0 等价);paper_strength 来自 paper profile。
+        same_gold_area=0.0,
+        same_parsed_ccf_area=0.0,
+        paper_strength=float(getattr(paper_profile, "paper_strength", None) or 0.0),
+        candidate_in_accepted_corpus=1.0 if candidate_in_accepted_corpus else 0.0,
         llm_scope_fit=_llm_evidence_score(llm_evidence, "scope_fit", 0.5),
         llm_method_fit=_llm_evidence_score(llm_evidence, "method_fit", 0.5),
         llm_application_fit=_llm_evidence_score(llm_evidence, "application_fit", 0.5),

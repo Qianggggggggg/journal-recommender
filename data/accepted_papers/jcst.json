@@ -9,6 +9,78 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s11390-024-4522-8",
       "url": ""
+    },
+    {
+      "title": "JOURNAL OF COMPUTER SCIENCE AND TECHNOLOGY",
+      "abstract": "Please provide an abstract of 100 to 250 words. The abstract should clearly state the nature and significance of the paper. It must not include undefined abbreviations, mathematical expressions or bibli-ographic references. should closely reflect the topic and should optically characterize the paper. Please use about 3~5 keywords or phrases in alphabetical order separated by commas.]",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11390-022-0006-7",
+      "url": "https://www.semanticscholar.org/paper/e788156818d41e3fb47d1e469eab68cd9a41132c"
+    },
+    {
+      "title": "Pushing Boundaries: AI and Computer Science in the Era of Technological Revolution",
+      "abstract": "The advent of Artificial Intelligence (AI) has heralded a transformative era in Computer Science, revolutionizing various facets of technology. This paper explores the profound impact of AI on the field of Computer Science, delving into its advancements, innovations, and the potential future trajectory of technology. The primary objective of this paper is to elucidate the significant role of AI in shaping the landscape of Computer Science. Through comprehensive research and analysis, it aims to provide insights into the evolution of AI, its applications, and the implications for future technological developments. This study employs a library research approach, gathering information from academic journals, conference proceedings, books, and reputable online sources. By synthesizing existing literature and scholarly works, it seeks to construct a comprehensive overview of the advancements and innovations in AI within the realm of Computer Science. The findings reveal a dynamic and rapidly evolving field driven by AI technologies. From machine learning algorithms to neural networks and deep learning models, AI has revolutionized data analysis, pattern recognition, and decision-making processes. Moreover, AI-driven applications such as natural language processing, computer vision, and robotics have reshaped various industries, including healthcare, finance, transportation, and manufacturing. However, alongside these advancements come ethical considerations, privacy concerns, and challenges related to algorithmic biases and societal implications. Looking ahead, the future of technology promises further integration of AI into various domains, leading to unprecedented opportunities and challenges in the realm of Computer Science",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.70063/techcompinnovations.v1i1.22",
+      "url": "https://www.semanticscholar.org/paper/907f8cd45b5c37e79925f90f15a0e2e5894a7366"
+    },
+    {
+      "title": "Strategic Synergy: Integrating Business Management with Computer Science for Competitive Advantage",
+      "abstract": "In today's digital age, the integration of business management principles with computer science and technology has become increasingly vital for organizations seeking sustainable growth and competitive advantage. This study delves into the multifaceted relationship between business management and computer science, exploring integration strategies, challenges, and the resultant implications. The objective of this research is to comprehensively analyze the integration of business management and computer science, shedding light on effective strategies, potential challenges, and the overall impact on organizational performance and innovation. This study adopts a library research approach, encompassing a thorough review of existing literature, scholarly articles, case studies, and industry reports. Information is gathered from reputable databases such as PubMed, IEEE Xplore, ACM Digital Library, and Google Scholar. The collected data are analyzed qualitatively to identify patterns, trends, and insights into the integration of business management and computer science. The findings of this research highlight various integration strategies employed by organizations to leverage computer science and technology for enhancing business management practices. These strategies encompass the adoption of data analytics, artificial intelligence, machine learning, blockchain, and other emerging technologies to streamline operations, optimize decision-making processes, and gain competitive advantage. Moreover, the study identifies challenges associated with integration, including data security concerns, skills gap, resistance to change, and ethical implications. Despite these challenges, successful integration initiatives have demonstrated significant improvements in organizational efficiency, innovation capability, and market positioning",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.70063/techcompinnovations.v1i1.23",
+      "url": "https://www.semanticscholar.org/paper/cc6586e7527e019b3988460ceb3843e10b25e358"
+    },
+    {
+      "title": "Ontological paradox of computer-based technologies used in education and learning",
+      "abstract": "This study sought to investigate the ontological paradox of computer-based technologies used in education and learning. The argument of this article is that today, the use of computer-based technologies to enhance learning and disseminate knowledge is indispensable; however, this leads to an onto-educational shift in the way we regard intellectual development of learners as a subjective factor in education and the employed learning technologies themselves; a natural human subjective element of learning and knowledge is considered to be ineffective, while technologically stored and transferred facts of knowledge are given higher regard. Computer-based technologies used in education are appraised and institutionalized to the height that learners are sometimes unable to reflect on their own without recourse to the aid of such technologies. It is not enough to employ technology and technologically enhance learning, but also we have to question its impact on the intellectual development of learners. Appropriating Heidegger’s phenomenology, the ontology of the human subject provides a philosophical and normative foundation for a comprehensive analysis of the use of computer-based learning in the technological frame since it allows us to rethink more seriously about subjective factors in education in today's growing technological society. This article recommends that the embracement of educational and learning technologies should consider both subjective and technological aspects; a blended education and learning system would be appropriate.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.51317/jcst.v1i1.1",
+      "url": "https://www.semanticscholar.org/paper/464aa7623d15c790ed1a5f5c6478c7578edb515d"
+    },
+    {
+      "title": "Penerapan Computer Vision Dalam Pengenalan Bendera Negara: Integrasi HSV Dan Kontur Menggunakan OpenCV",
+      "abstract": "Penelitian ini membahas sistem pengenalan bentuk bendera negara menggunakan pendekatan pengolahan citra berbasis OpenCV Permasalahan yang diangkat adalah kesulitan dalam mengenali bendera negara dari citra digital secara otomatis dan akurat. Tujuan dari peelitian ini adalah mengembangkan sistem yang mampu mengenali bendera berdasarkan pola warna dan bentuk geometri dasar. Metode yang digunakan mencakup pengumpulan dataset gambar bendera, pra-pemrosesan citra (resizing, grayscaling, thresholding), deteksi kontur dan segmentasi warna. Sistem diuji menggunakan dataset 10 negara dengan variasi bentuk dan warna dominan. Hasil menunjukkan tingkat akurasi mencapai 92% dengan waktu proses rata-rata .. detik per citra. Penelitian ini berkontribusi pada pengembangan sistem identifikasi otomatis berbasis visual yang dapat diterapkan pada aplikasi pendidikan maupun arsip digital.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.59435/jocstec.v3i3.548",
+      "url": "https://www.semanticscholar.org/paper/658123fc9505c7fcba826337e239d9c18375d0fd"
+    },
+    {
+      "title": "Audio Enhancement for Computer Audition—An Iterative Training Paradigm Using Sample Importance",
+      "abstract": "Neural network models for audio tasks, such as automatic speech recognition (ASR) and acoustic scene classification (ASC), are susceptible to noise contamination for real-life applications. To improve audio quality, an enhancement module, which can be developed independently, is explicitly used at the front-end of the target audio applications. In this paper, we present an end-to-end learning solution to jointly optimise the models for audio enhancement (AE) and the subsequent applications. To guide the optimisation of the AE module towards a target application, and especially to overcome difficult samples, we make use of the sample-wise performance measure as an indication of sample importance. In experiments, we consider four representative applications to evaluate our training paradigm, i.e., ASR, speech command recognition (SCR), speech emotion recognition (SER), and ASC. These applications are associated with speech and nonspeech tasks concerning semantic and non-semantic features, transient and global information, and the experimental results indicate that our proposed approach can considerably boost the noise robustness of the models, especially at low signal-to-noise ratios, for a wide range of computer audition tasks in everyday-life noisy environments.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11390-024-2934-x",
+      "url": "https://www.semanticscholar.org/paper/12e2fa1c496fcc71e5f42f67b70a05531d99753e"
+    },
+    {
+      "title": "Taxonomy of Factors of Acceptance and Use of Technologies for Human Computer Interface in Digital Services",
+      "abstract": "Emerging technologies, e.g., cloud computing, artificial intelligence, robotics, and information technologies, facilitate digital transformation and promote digital services. Significant research exists on the acceptance and use of technologies and specific digital transformation (DT) practices. However, more research is needed to better understand user’s acceptance and how they use technology to better de-sign digital services. Thus, this paper: 1) proposes a Systematic Literature Re-view (SLR) of the models of acceptance and use of technologies, as well as of certain DT practices applied to the human-computer interaction (HCI) of digital services; 2) provides an analysis of the results of the behavior of the factors and practices; and 3) proposes a taxonomy of the acceptance and use factors applied to HCI of digital services by economic activity. The main contribution of this work is the proposed taxonomy in a vacancy area relevant to digital transformation efforts applied to digital services pursued globally, both in the private and public sectors.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.24215/16666038.23.e14",
+      "url": "https://www.semanticscholar.org/paper/237c831cada46b9a41b6218e21b3e87340e7d6e6"
+    },
+    {
+      "title": "Tinjauan Pustaka Sistematis : Penerapan Metode Gabor Wavelet Pada Computer Vision",
+      "abstract": "Computer Vision merupakan sebuah sistem otomatis yang digunakan untuk melakukan analisa citra dan video oleh komputer untuk memperoleh informasi dan pemahaman dari suatu obyek. Computer Vision merupakan kemampuan dari sebuah mesin atau computer dalam melihat atau mengenali sebuah citra dengan sama atau bahkan dapat melebihi kemampuan pengelihatan manusia asli. Salah satu metode yang digunakan dalam computer vision adalah gabor wavelet. Metode gabor wavelet merupakan salah satu metode yang mampu melakukan proses identifikasi wajah secara real time dan juga mampu melakukan tugas-tugas yang membutuhkan pencarian pada database wajah yang besar. Penelitian ini dilakukan dengan pendekatan systematic literature Review (SLR), yaitu dengan menggabungkan berbagai sumber dari jurnal penelitian sebelumnya. Tujuan dari penelitian dengan menggunakan pendekatan systematic Literature Review (SLR) ini adalah untuk mengetahui penerapan metode Gabor Wavelet pada Computer Vision. Hasil dari penelitian ini menunjukkan bahwa penerapan metode Gabor Wavelet pada computer vision banyak digunakan untuk pengenalan wajah (face recognition) dan deteksi wajah (face detection) yang bisa diterapkan di bidang komersial maupun bidang penegakan hukum dengan memberikan hasil yang sangat baik dengan tingkat akurasi 90%.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.59435/jocstec.v1i2.78",
+      "url": "https://www.semanticscholar.org/paper/c260a3113c03be69aff66f3d67a8bc7e66e75a31"
+    },
+    {
+      "title": "Exploring Low-Cost Platforms for Automatic Chess Digitization",
+      "abstract": "Automatic digitization of chess games through computer vision poses a considerable technological challenge. This capability holds significant appeal for tournament organizers and both amateur and professional players, enabling them to broadcast over-the-board (OTB) games online or facilitate in-depth analysis with chess engines. While existing research provides encouraging results, there's an ongoing demand to enhance recognition accuracy and minimize processing delays, particularly when leveraging affordable hardware. In our study, we adapted these techniques specifically for cost-effective single-board computers like the Nvidia Jetson Nano. Our framework combines a swift chessboard detection method with a Convolutional Neural Network for piece recognition. Notably, it can interpret an image of a chessboard setup in under a second, achieving accuracies of 92% in piece identification and 95% in board detection. Furthermore, we assessed a custom open-hardware platform equipped with affordable, low-power RISC-V processors. On their own, these processors were inadequate for real-time tasks. However, when paired with a systolic array accelerator, their performance significantly improved, yielding promising results in both piece classification and board detection.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.24215/16666038.25.e01",
+      "url": "https://www.semanticscholar.org/paper/078aad8dd386d8b8f1b8d731a3e043fac1778b50"
     }
   ]
 }

@@ -397,11 +397,11 @@ def test_build_training_report_counts_dead_features_when_overlap_exists():
 
 
 # ---------------------------------------------------------------------------
-# Task 6.4 — 26-dim schema with LLM evidence lookup
+# Task 6.4 — 22-dim schema with LLM evidence lookup
 # ---------------------------------------------------------------------------
 
 
-def test_build_training_rows_outputs_19_dim_by_default():
+def test_build_training_rows_outputs_16_dim_by_default():
     """No evidence_lookup → 16-dim schema (2026-06-26: 16-dim, was 19-dim).
 
     The ablation JSON may carry legacy 19/20-dim candidate_features (paper_strength
@@ -425,7 +425,7 @@ def test_build_training_rows_outputs_19_dim_by_default():
 
 
 def test_build_training_rows_appends_6_evidence_fields_when_lookup_supplied():
-    """With evidence_lookup, each row's features become 26-dim and
+    """With evidence_lookup, each row's features become 22-dim and
     feature_names switches to FEATURE_NAMES_WITH_LLM_EVIDENCE.
 
     The snapshot key is ``title | venue`` (both casefold-normalized),
@@ -724,8 +724,8 @@ def test_same_parsed_ccf_area_computed_when_ccf_area_overlaps():
     assert "same_parsed_ccf_area" not in pos["feature_names"]
 
 
-def test_same_ccf_level_computed_when_levels_match():
-    """same_ccf_level=1.0 when paper gold ccf=A matches candidate ccf=A; 0.0 when ccf=B."""
+def test_same_ccf_level_is_zero_without_explicit_user_target():
+    """Gold venue CCF must not leak into a feature unavailable at inference."""
     paper_title = "Test Paper C"
     target_jid = "gold_j"   # ccf A
     other_a_jid = "other_a"  # ccf A
@@ -755,9 +755,9 @@ def test_same_ccf_level_computed_when_levels_match():
     idx = feature_names.index("same_ccf_level")
 
     by_jid = {r["journal_id"]: r for r in rows}
-    assert by_jid[target_jid]["features"][idx] == 1.0   # gold ccf=A
-    assert by_jid[other_a_jid]["features"][idx] == 1.0  # other A
-    assert by_jid[other_b_jid]["features"][idx] == 0.0  # other B
+    assert by_jid[target_jid]["features"][idx] == 0.0
+    assert by_jid[other_a_jid]["features"][idx] == 0.0
+    assert by_jid[other_b_jid]["features"][idx] == 0.0
 
 
 def test_candidate_in_accepted_corpus_set_when_jid_in_corpus():

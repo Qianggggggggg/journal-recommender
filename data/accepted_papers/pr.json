@@ -1,0 +1,70 @@
+{
+  "journal_id": "pr",
+  "journal_name": "Pattern Recognition",
+  "papers": [
+    {
+      "title": "Parametric recurrence quantification analysis of autoregressive processes for pattern recognition in multichannel electroencephalographic data",
+      "abstract": "Recurrence quantification analysis (RQA) is an acknowledged method for the characterization of experimental time series. We propose a parametric version of RQA, pRQA, allowing a fast processing of spatial arrays of time series, once each is modeled by an autoregressive stochastic process. This method relies on the analytical derivation of asymptotic expressions for five current RQA measures as a function of the model parameters. By avoiding the construction of the recurrence plot of the time series, pRQA is computationally efficient. As a proof of principle, we apply pRQA to pattern recognition in multichannel electroencephalographic (EEG) data from a patient with a brain tumor.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patcog.2020.107572",
+      "url": "https://www.semanticscholar.org/paper/d5d9031c1c3f3c4ce1d971bce3e6d5cbc0123003"
+    },
+    {
+      "title": "New fractional-order Legendre-Fourier moments for pattern recognition applications",
+      "abstract": "Orthogonal moments enable computer-based systems to discriminate between similar objects. Mathematicians proved that the orthogonal polynomials of fractional-orders outperformed their corresponding counterparts in representing the fine details of a given function. In this work, novel orthogonal fractional-order Legendre-Fourier moments are proposed for pattern recognition applications. The basis functions of these moments are defined and the essential mathematical equations for the recurrence relations, orthogonality and the similarity transformations (rotation and scaling) are derived. The proposed new fractional-order moments are tested where their performance is compared with the existing orthogonal quaternion, multi-channel and fractional moments. New descriptors were found to be superior to the existing ones in terms of accuracy, stability, noise resistance, invariance to similarity transformations, recognition rates and computational times.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patcog.2020.107324",
+      "url": "https://www.semanticscholar.org/paper/16848bad00184e35acbdbc903aa46f928ca57473"
+    },
+    {
+      "title": "HTR-VT: Handwritten text recognition with vision transformer",
+      "abstract": "We explore the application of Vision Transformer (ViT) for handwritten text recognition. The limited availability of labeled data in this domain poses challenges for achieving high performance solely relying on ViT. Previous transformer-based models required external data or extensive pre-training on large datasets to excel. To address this limitation, we introduce a data-efficient ViT method that uses only the encoder of the standard transformer. We find that incorporating a Convolutional Neural Network (CNN) for feature extraction instead of the original patch embedding and employ Sharpness-Aware Minimization (SAM) optimizer to ensure that the model can converge towards flatter minima and yield notable enhancements. Furthermore, our introduction of the span mask technique, which masks interconnected features in the feature map, acts as an effective regularizer. Empirically, our approach competes favorably with traditional CNN-based models on small datasets like IAM and READ2016. Additionally, it establishes a new benchmark on the LAM dataset, currently the largest dataset with 19,830 training text lines. The code is publicly available at: https://github.com/YutingLi0606/HTR-VT.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patcog.2024.110967",
+      "url": "https://www.semanticscholar.org/paper/983c7fa4e07fa9ae1aa203718421a632770648c3"
+    },
+    {
+      "title": "A survey on handwritten mathematical expression recognition: The rise of encoder-decoder and GNN models",
+      "abstract": "Recognition of handwritten mathematical expressions (HMEs) has attracted growing interest due to steady progress in handwriting recognition techniques and the rapid emergence of pen-and touch-based devices. Math formula recognition may be understood as a generalization of text recognition: formulas represent mathematical statements using a two dimensional arrangement of symbols on writing lines that are organized hierarchically. This survey provides an overview of techniques 5 published in the last decade, including those taking input from handwritten strokes (i.e., ‘online’, as captured by a pen/touch device), raster images (i.e., ‘offline,’ from pixels), or both. Traditionally, HMEs were recognized by performing four structural pattern recognition tasks in separate steps: (1) symbol segmentation, (2) symbol classification, (3) spatial relationship classification, and (4) structural analysis, which identifies the arrangement of symbols on writing lines (e.g., in a Symbol Layout Tree (SLT) or LaTeX string). Recently, encoder – decoder neural network models and Graph Neural Network (GNN) approaches 10 have greatly increased HME recognition accuracy. These newer approaches perform all recognition tasks simultaneously, and utilize contextual features across tasks (e.g., using neural self-attention models). We also discuss evaluation techniques and benchmarks, and explore some implicit dependencies among the four key recognition tasks. Finally, we identify limitations of current systems, and present suggestions for future work, such as using two-dimensional language models rather than the one-dimensional models commonly used in encoder – decoder models. 15",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patcog.2024.110531",
+      "url": "https://www.semanticscholar.org/paper/0ffd42f2beb470e9983622c853be1abe574f741f"
+    },
+    {
+      "title": "Fractional-order orthogonal Chebyshev Moments and Moment Invariants for image representation and pattern recognition",
+      "abstract": "In this paper, we present a new set of fractional-order orthogonal moments, named Fractional-order Chebyshev Moments (FCM). We initially introduce the necessary relations and properties to define the FCM in the Cartesian coordinates. Then, we provide the theoretical framework to construct the Fractional-order Chebyshev Moment Invariants (FCMI), which are invariants with respect to rotation, scaling and translation transforms. In addition, we devoted a substantial attention to enhance their computational time and numerical accuracy. Consequently, the numerical experiments are carried out to demonstrate the validity of the introduced fractional-order moments and moment invariants in comparison with the classical methods, with regard to image representation capability and object recognition accuracy on several publicly available databases. The presented theoretical and experimental results demonstrate the efficiency and the superiority of the proposed method.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PATCOG.2018.10.001",
+      "url": "https://www.semanticscholar.org/paper/1b6672bca0e5dd9c71e6667ef6102ae43d7204ee"
+    },
+    {
+      "title": "Pattern Recognition and Its Application in Solar Radiation Forecasting",
+      "abstract": "As intermittent renewable energy sources such as wind and solar proliferate, the power systems operation and planning become more complicated due to increased uncertainties and variabilities. Accurate forecasting of these sources facilitates planning and operating the electric grid to integrate wind/solar power more reliably and efficiently. The neural network learning process can be disrupted by anomalies of wind/solar time-series data, which results in less accurate forecasting. By processing and analyzing wind/solar time-series data, machine learning and pattern recognition methods such as data clustering and classification can significantly enhance the forecast accuracy. This chapter reviews the various machine learning and pattern recognition methods proposed in the literature for time-series forecasting of solar radiation.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.5772/INTECHOPEN.83503",
+      "url": "https://www.semanticscholar.org/paper/f24cf8b487b6278c055570f32afe7ca1afda2ef1"
+    },
+    {
+      "title": "Statistical Pattern Recognition",
+      "abstract": "Statistical pattern recognition is an application in computational statistics that uses many of the concepts we have covered so far, such as probability density estimation and cross-validation. Examples where statistical pattern recognition techniques can be used are numerous and arise in disciplines such as medicine, computer vision, robotics, military systems, manufacturing, finance and many others. Some of these include the following:",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1201/9781351069809-2",
+      "url": "https://www.semanticscholar.org/paper/ba4fbc4e8467815410c5bd3cb9b8ff29a0bec781"
+    },
+    {
+      "title": "Landmark-based algorithms for group average and pattern recognition",
+      "abstract": "We introduce a class of mathematical algorithms with the aim of establishing a framework of finding a group average and extracting prominent features in a group of landmark represented shapes or image templates. A group average is an estimator that is said to best represent the common features of the group being studied. The proposed algorithms, as a tool of feature extraction, extract information about momentum at each landmark through the process of template matching. Once the convergence criterion is satisfied numerically, the algorithms produce a group average and a local coordinate system for each member of the observing group, in terms of the residual momentum. We present several examples to illustrate the use of the proposed algorithms for finding a group average. Using the metrics computed between the group average and each member of the group, we successfully run a cluster analysis for datasets that contain a heavy percentage of outliers. Finally, we apply the collected residual momenta computed in the proposed algorithms in some statistical methods to demonstrate a potential application of the algorithms for detecting structure abnormality.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.patcog.2018.09.002",
+      "url": "https://www.semanticscholar.org/paper/b0575008e8e7b6854f51f817e2a8e58bdb056aff"
+    }
+  ]
+}

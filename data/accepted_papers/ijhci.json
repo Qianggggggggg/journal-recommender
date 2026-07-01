@@ -9,6 +9,54 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1080/10447318.2024.2432776",
       "url": ""
+    },
+    {
+      "title": "Human–AI Interaction and User Satisfaction: Empirical Evidence from Online Reviews of AI Products",
+      "abstract": "Human–AI Interaction (HAI) guidelines have become increasingly important to guide the development of AI systems that align with user needs. However, large-scale empirical evidence on how HAI principles shape user satisfaction remains limited. This study addresses that gap by analyzing over 100,000 user reviews of AI-related products from G2.com. Based on widely adopted industry guidelines, we identify seven core HAI dimensions and examine their coverage and sentiment. We find that the sentiment on four HAI dimensions – adaptability, customization, error recovery, and privacy – is positively associated with user satisfaction. However, engagement with HAI dimensions varies by professional background: Users with technical job roles are more likely to discuss system-focused aspects, such as reliability, while non-technical users emphasize interaction-focused features like customization and feedback. Interestingly, job role does not moderate the link between HAI sentiment and satisfaction, indicating that once a dimension is identified, its effect is consistent across roles.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2025.2545463",
+      "url": "https://www.semanticscholar.org/paper/c0846e46120e03ad26d8af70d68d4b740166facb"
+    },
+    {
+      "title": "Intelligent Moving Display Robots: Human-Centric Design Guidelines for Human–Robot Interaction Designers",
+      "abstract": "The recent pandemic and rapid increase in the number of media platforms in recent years have significantly influenced media watching behaviors of individuals. Specifically, individuals now want to have continuous media-watching experience (MWE) for long periods in different positions, while also engaging in various other activities. Considering these trends, a new concept for display robots, equipped with mobility and screen adjustment functions, is required to improve MWE. Hence, this study focused on the introduction of a new concept for display robots and proposed interaction guidelines, derived through expert interviews, for designing such robots. In this case study, the Wizard of Oz method was used on actual users to confirm the user value of the display robot and verify the proposed guidelines. The results show that display robots can improve the MWE by supporting emerging media-watching behaviors. Furthermore, strategies for facilitating the implementation of the suggested principles are elucidated. These findings validate the feasibility of creating a display robot for enhancing the MWE of users.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2024.2331881",
+      "url": "https://www.semanticscholar.org/paper/9a1065e55a39b9dfa2970f3c9def6f20f335b236"
+    },
+    {
+      "title": "Generative AI in Human-AI Collaboration: Validation of the Collaborative AI Literacy and Collaborative AI Metacognition Scales for Effective Use",
+      "abstract": "Advancements in AI’s conversational capabilities and situational awareness mean that now, humans work with AI collaboratively. However, these developments affect the skills needed to use AI effectively. In this study, we address the need to update measures of AI-related knowledge and skills to reflect the collaborative capability of advanced AI tools by developing and validating two new scales focusing on collaboration and metacognition. A survey of 292 users of collaborative AI tools was conducted. Both the Collaborative AI Literacy and Collaborative AI Metacognition scales showed good internal consistency and predictive validity. Structural equation modeling supported their convergent and discriminant validity. Both measures correlated with users’ assessments of the benefits from working with collaborative AI tools. As predicted, Collaborative AI Metacognition explained significant variance beyond that explained by general Metacognition. These validated scales provide an important resource for assessing and researching knowledge and skills for working with Collaborative AI tools.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2025.2543997",
+      "url": "https://www.semanticscholar.org/paper/1709cb51db0dce569dd33012aefb8300af405398"
+    },
+    {
+      "title": "A Validation of the Human-Generative Artificial Intelligence Trust Scale",
+      "abstract": "Trust is a key concept in human–computer interaction, critical to the acceptance and use of generative artificial intelligence technologies. This study aimed to develop a trust scale tailored for human-generative AI interactions by adapting the original human–computer trust scale and evaluating its reliability and validity. An online survey was conducted with 310 valid responses. Results showed the scale consists of three dimensions—benevolence, competence, and reciprocity—comprising nine items, all exhibiting good discrimination. The scale’s overall Cronbach’s alpha was 0.891, with individual dimensions ranging from 0.806 to 0.810. Structural validity was confirmed (χ2/df = 2.32, TLI = 0.92, CFI = 0.95, RMSEA = 0.09, SRMR = 0.05), and criterion-related and convergent validity were well-supported. Based on the Human–Computer Trust Scale, the adapted Chinese version of the Human-Generative Artificial Intelligence Trust Scale exhibits strong reliability and validity, making it a valuable instrument for assessing trust in human-generative artificial intelligence interactions within a Chinese user context.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2025.2542881",
+      "url": "https://www.semanticscholar.org/paper/be48e7e42072c48bb3e3c3faf1408c26b797631a"
+    },
+    {
+      "title": "Skybound Magic: Enabling Body-Only Drone Piloting Through a Lightweight Vision–Pose Interaction Framework",
+      "abstract": "Natural and safe interaction with small UAVs often requires heavy vision processing or bulky controllers. We present an edge-only framework enabling intuitive whole-body gesture control. A YOLOv8-Nano detector isolates the user, followed by a MobileNet-based PoseNet extracting 17 skeletal keypoints. A lightweight rule-based classifier maps eight canonical poses to flight commands (e.g., take-off, shift, hover, land, emergency stop). A multimodal feedback loop—skeletal overlay, LED flashes, and synthesized voice—supports real-time self-correction. Implemented on a Jetson Nano, the system runs at ∼30 FPS, achieving 91.8 % gesture accuracy with 101 ms latency and low power use. In tests with 168 participants, the interface scored 4.6/5 in satisfaction, with high ratings from security and emergency operators. Results show robust, natural human–drone interaction is feasible without off-board computation, enabling field-ready aerial robots.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2025.2546039",
+      "url": "https://www.semanticscholar.org/paper/4fe79e26fd0d16829bf909445ecde5bbdf65ff0c"
+    },
+    {
+      "title": "Human Decision-Making Processes Analysis and Tasks Detection Using Eye-Tracking Data in Wargame",
+      "abstract": "Current AI agents in wargaming often rely on preset rules and historical data, limiting their adaptability in complex and dynamic scenarios. This highlights the need to better understand human decision-making. This study employs eye-tracking technology to investigate human decision processes and cognitive load in wargames. By analyzing eye movement data, we aim to understand the decision patterns of human players. Six key eye movement metrics are identified as effective indicators of decision complexity in wargaming tasks. Then, we develop a deep neural network based on these metrics, achieving an accuracy of 88.49% in detecting players' current decision tasks, significantly outperforming traditional models like Random Forest (86.0%) and GBDT (83.97%). This research demonstrates the intrinsic connection between eye movement features and decision-making tasks, offering valuable insights for designing human-aligned AI agents and enhancing perception in human-AI collaborative gameplay.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/10447318.2025.2582777",
+      "url": "https://www.semanticscholar.org/paper/08b3d0031300750d87beec203ad50abee3d855d5"
     }
   ]
 }

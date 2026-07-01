@@ -1,0 +1,86 @@
+{
+  "journal_id": "jsa",
+  "journal_name": "Journal of Systems Architecture: Embedded Software Design",
+  "papers": [
+    {
+      "title": "A convolutional autoencoder architecture for robust network intrusion detection in embedded systems",
+      "abstract": "Security threats are becoming an increasingly relevant concern in cyber–physical systems. Cyber attacks on these systems are not only common today but also increasingly sophisticated and constantly evolving. One way to secure the system against such threats is by using intrusion detection systems (IDSs) to detect suspicious or abnormal activities characteristic of potential attacks. State-of-the-art IDSs exploit both signature-based and anomaly-based strategies to detect network threats. However, existing solutions mainly focus on the analysis of statically defined features of the traffic flow, making them potentially less effective against new attacks that cannot be properly captured by analyzing such features. This paper presents an anomaly-based IDS approach that leverages unsupervised neural models to learn the expected network traffic, enabling the detection of unknown novel attacks (as well as previously-known ones). The proposed solution uses an autoencoder to reconstruct the received packets and detect malicious packets based on the reconstruction error. A careful optimization of the model architecture allowed improving detection accuracy while reducing detection time. The proposed solution has been implemented on a real embedded platform, showing that it can support modern high-performance communication interfaces, while significantly outperforming existing approaches in both detection accuracy, inference time, generalization capability, and robustness to poisoning (which is commonly ignored by state-of-the-art IDSs). Finally, a novel mechanism has been developed to explain the detection performed by the proposed IDS through an analysis of the reconstruction error.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sysarc.2024.103283",
+      "url": "https://www.semanticscholar.org/paper/e37449cf5268aa54527095d9f77eea9727f1e864"
+    },
+    {
+      "title": "Generative AI-based Pipeline Architecture for Increasing Training Efficiency in Intelligent Weed Control Systems",
+      "abstract": "In automated crop protection tasks such as weed control, disease diagnosis, and pest monitoring, deep learning has demonstrated significant potential. However, these advanced models rely heavily on high-quality, diverse datasets, often limited and costly in agricultural settings. Traditional data augmentation can increase dataset volume but usually lacks the real-world variability needed for robust training. This study presents a new approach for generating synthetic images to improve deep learning-based object detection models for intelligent weed control. Our GenAI-based image generation pipeline integrates the Segment Anything Model (SAM) for zero-shot domain adaptation with a text-to-image Stable Diffusion Model, enabling the creation of synthetic images that capture diverse real-world conditions. We evaluate these synthetic datasets using lightweight YOLO models, measuring data efficiency with mAP50 and mAP50-95 scores across varying proportions of real and synthetic data. Notably, YOLO models trained on datasets with 10% synthetic and 90% real images generally demonstrate superior mAP50 and mAP50-95 scores compared to those trained solely on real images. This approach not only reduces dependence on extensive real-world datasets but also enhances predictive performance. The integration of this approach opens opportunities for achieving continual self-improvement of perception modules in intelligent technical systems.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2411.00548",
+      "url": "https://www.semanticscholar.org/paper/a047f39535ca2c82dd65e86bca07597c927691b4"
+    },
+    {
+      "title": "Controller and architecture co-design of wireless cyber-physical systems",
+      "abstract": "Recently, more and more factories begin to employ wireless mesh networks for process control. These wireless Cyber-Physical Systems (WCPSs) need to meet performance requirements. However, the control algorithm and system are usually designed with an isolated design flow, which leads to higher integration, testing and debugging costs and poor resource utilization. To bridge the gap, we propose a controller and architecture co-design framework based on architecture analysis and design language (AADL). Firstly, we show how to build control and architecture models of WCPSs. Then methods that translates control and architecture models to performance models are proposed. With these models, we can analyze the non-function properties of the system before implementation. Finally, Matlab/Simulink and OSATE are integrated and several plugins are developed to support the realization of this framework. The synthesis of above contributions is a largely automated co-design and analysis process of WCPSs. Comparing with other co-design frameworks, our framework provides better capability, usability, and extensibility. A case study shows that our co-design framework achieves better control performance (reducing the pulp level variations to 42.3% of the former controller).",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SYSARC.2019.02.006",
+      "url": "https://www.semanticscholar.org/paper/72cd246061424b9e5f0f984ee589103ad185f93f"
+    },
+    {
+      "title": "A hierarchical architecture for time- and event-triggered real-time systems",
+      "abstract": "This paper proposes an architecture for combining the execution of time- and event-triggered real-time task sets. This makes it possible for the designer to choose the most appropriate mechanism depending on the role and nature of each task in the system. The proposed architecture allows one to choose the priority levels at which time- and event-triggered tasks are executed. This gives the designer an additional degree of freedom to make compromise decisions upon contradicting timing requirements, such as granting reduced jitter and at the same time providing prompt service to non-periodic events, for example. The proposed model is accompanied with a Ravenscar implementation of the time-triggered scheduler and a library of utilities for specifying time-triggered schedules and reusing time-triggered task patterns.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sysarc.2019.101652",
+      "url": "https://www.semanticscholar.org/paper/237233c58174f2c594f7f1c0a98145c9003857f6"
+    },
+    {
+      "title": "Scheduling computation and communication on a software-defined photonic Network-on-Chip architecture for high-performance real-time systems",
+      "abstract": "This paper presents a novel scheduling approach that efficiently schedules the computational and the communicational resources of a Software-Defined Photonic Network-on-Chip (SD-PNoC) Architecture designed for high-performance real-time systems. The proposed scheduling approach extends the conventional cyclic executive scheduling algorithm from the one that schedules solely the computational resources into a general one that schedules both the computational and the communicational resources together in a synchronized manner. The proposed SD-PNoC architecture employs Software Defined Network (SDN) approach by using application specific conflict-free and contention-free communication patterns to solve the routing and wavelength assignment (RWA) problem exists in photonic networks. The implementations of the collective communication primitives such as broadcast and all-to-broadcast are also presented to demonstrate the system as a whole.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SYSARC.2018.07.007",
+      "url": "https://www.semanticscholar.org/paper/67d65f532beeaf4b4a497da66dc0b1c57781fe02"
+    },
+    {
+      "title": "A survey on cybersecurity attacks and defenses for unmanned aerial systems",
+      "abstract": "In recent years, unmanned aerial systems (UAS) have been widely used in both military and civilian fields. However, their open-source software and protocols have made their security vulnerable, resulting in a growing number of cybersecurity issues. This paper provides a comprehensive review of UAS cybersecurity research, with a focus on attack and defense technologies. Regarding UAS being a system that integrates software and hardware and can work independently with complex tasks, this paper analyzes the UAS architecture and classifies security threats into four categories: communication network security, software security, payload security, and intelligent security. Additionally, it provides an overview of existing threat assessment methods. This paper also highlights representative research progress in UAS cyberattacks and defense technologies in the four identified categories. Finally, this paper examines the current research status and future prospects of UAS cybersecurity.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sysarc.2023.102870",
+      "url": "https://www.semanticscholar.org/paper/677a9c5d961608abce9367ec3d5966b0bb417e04"
+    },
+    {
+      "title": "Zero-trust design and assurance patterns for cyber-physical systems",
+      "abstract": "—Security is paramount in all mission-critical domains, including the aerospace industry. Cyber-attacks are increasing both in number and sophistication. Zero-trust is an emerging initiative that has proven very effective for enterprise systems in the Information Technology domain; however, research is lacking on applicable zero-trust mechanisms and their assurance for cyber-physical systems (CPS). We have already identified various zero-trust mechanisms in our previous work. In this paper, we present our zero-trust architecture design patterns and provide a methodology for the assurance of these mechanisms. Towards this objective, we have identified an initial set of assurance patterns covering individual zero-trust components in a system design. Our design and assurance patterns are made available to system engineers in pattern libraries. Engineers can model system architectures and utilize one or more of these patterns to provide design assurance based on individual zero-trust security requirements to improve the overall system cyber-security. To demonstrate our approach, we apply our assurance patterns to an unmanned aerial vehicle surveillance application. We discuss how our framework leverages the use of these patterns to develop zero-trust-enabled systems with different security requirements. Furthermore, our assurance patterns enable engineers to identify any design flaws and correct them during the initial system design phase, thus saving development time, effort, and cost. As a result, the overall approach can be utilized to design system models with specific zero-trust security requirements to improve the security posture of a CPS.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sysarc.2024.103261",
+      "url": "https://www.semanticscholar.org/paper/d3e799c7ce2d50128e874836e8ad7789927c1eef"
+    },
+    {
+      "title": "Energy-efficient scheduling for parallel applications with reliability and time constraints on heterogeneous distributed systems",
+      "abstract": "Reliability is a crucial index of the system, and many safety-critical applications have reliability requirements and deadline constraints. In addition, in order to protect the environment and reduce system operating costs, it is necessary to minimize energy consumption as much as possible. This paper considers parallel applications on heterogeneous distributed systems and proposes two algorithms to minimize energy consumption for meeting the deadline and satisfying the reliability requirement of the applications. The first algorithm is called minimizing scheduling length while satisfying the reliability requirement (MSLSRR). It first transforms the reliability requirement of the application into the reliability requirement of the task and then assigns the task to the processor with the earliest finish time. Since the reliability generated by MSLSRR is often higher than the reliability requirement of the application, and the scheduling length is also less than the deadline, an algorithm called improving energy efficiency (IEE) is designed, which redefined the minimum reliability requirement for the task and applied dynamic voltage and frequency scaling (DVFS) technique for energy conservation. The proposed algorithms are compared with existing algorithms by using real parallel applications. Experimental results demonstrate that the proposed algorithms consume the least energy.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sysarc.2024.103173",
+      "url": "https://www.semanticscholar.org/paper/3c56d91732842cdd0b00589e60577bee80136bd4"
+    },
+    {
+      "title": "Time-Sensitive Networking in automotive embedded systems: State of the art and research opportunities",
+      "abstract": "The functionality advancements and novel customer features that are currently found in modern automotive systems require high-bandwidth and low-latency in-vehicle communications, which become even more compelling for autonomous vehicles. In a recent effort to meet these requirements, the IEEE Time-Sensitive Networking (TSN) task group has developed a set of standards that introduce novel features in Switched Ethernet. TSN standards offer, for example, a common notion of time through accurate and reliable clock synchronization, delay bounds for real-time traffic, time-driven transmissions, improved reliability, and much more. In order to fully utilize the potential of these novel protocols in the automotive domain, TSN should be seamlessly integrated into the state-of-the-art and state-of-practice model-based development processes for automotive embedded systems. Some of the core phases in these processes include software architecture modeling, timing predictability verification, simulation, and hardware realization and deployment. Moreover, throughout the development of automotive embedded systems, the safety and security requirements specified on these systems need to be duly taken into account. In this context, this work provides an overview of TSN in automotive applications and discusses the recent technological developments relevant to the adoption of TSN in automotive embedded systems. The work also points at the open challenges and future research directions.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SYSARC.2021.102137",
+      "url": "https://www.semanticscholar.org/paper/17b92cd7291b728be4324b843e000532326d07f9"
+    },
+    {
+      "title": "Rahasak - Scalable blockchain architecture for enterprise applications",
+      "abstract": "Blockchain-based decentralized infrastructure has been adapted in various industries to handle the sensitive data in a privacy-preserving manner without trusting third parties. However, integrating state-of-the-art blockchain platforms with the scalable, enterprise-level applications result in several challenges. Current blockchain platforms do not support high transaction throughput, lack high scalability, and cannot provide real-time transaction processing and back-pressure operation handling in high transaction throughput applications (e.g Big data, IoT). In this paper, we propose a novel permissioned blockchain platform “Rahasak” for highly scalable, enterprise applications. Rahasak blockchain adopts the Apache Kafka-based consensus on top of a “Validate-Execute-Group” blockchain architecture to handle real-time transaction execution on the blockchain. The architecture is equipped with a functional programming and actor-based smart contract platform that enables concurrent execution of transactions in the blockchain. Rahasak supports high transaction throughput, high scalability, concurrent transaction execution, data analytics features. With Rahasak, we make blockchain more scalable, secure, structured and meaningful for further data analytics.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SYSARC.2021.102061",
+      "url": "https://www.semanticscholar.org/paper/f62ee122803770180894d093015ac6812ceff1d2"
+    }
+  ]
+}

@@ -25,6 +25,62 @@
       "source": "semantic_scholar",
       "doi": "10.1109/TCYB.2024.3395626",
       "url": "https://www.semanticscholar.org/paper/7689b2ecb90070ea7d6781c2a88f2acad8b13bba"
+    },
+    {
+      "title": "Fuzzy Knowledge-Based Hierarchical Reinforcement Learning for Large-Scale Heterogeneous Multiagent Systems",
+      "abstract": "Multiagent reinforcement learning (MARL) has garnered extensive research attention due to its strong learning capabilities, leading to its deployment in increasingly challenging scenarios. Although progress has been made toward more generalizable solutions, many MARL algorithms continue to struggle with balancing scalability and heterogeneity, particularly under conditions of growing uncertainty. Research has shown that combining dense local interactions with sparse global interactions can significantly enhance scalability while preserving agent heterogeneity. Motivated by these insights and inspired by human social behavior, we propose a novel hierarchical method that integrates human guidance with multiagent systems (MASs). Rather than requiring agents to learn from scratch, our method transfers abstract knowledge from humans, employing fuzzy logic to manage the inherent uncertainty in this guidance and reduce the required human effort. To accommodate both local and global interactions, we introduce two levels of human guidance: individual action guidance for agents and an attention graph to describe agent relationships. Our proposed approach is end-to-end and compatible with diverse MARL algorithms. We evaluate our approach in the starcraft multiagent challenge (SMAC) and SMACv2 environments. Empirical results demonstrate its effectiveness, even under low-performance fuzzy human guidance.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3638807",
+      "url": "https://doi.org/10.1109/tcyb.2025.3638807"
+    },
+    {
+      "title": "Test-Time Adaptation for Detecting Image Inpainting Forgeries",
+      "abstract": "The rapid development of deep learning-based image inpainting poses serious challenges to image authenticity. As inpainting methods continue to evolve, the inpainted images exhibit extremely high visual fidelity, presenting recognition difficulties to the forgery detection model due to differences in operational mode and forgery traces among methods. In particular, the detection performance tends to drop significantly in the testing phase when the test samples differ from the training data. To address this issue, we propose a test-time adaptive detection framework for image inpainting forgeries. First, we propose an image gradient-based metric that quantifies model uncertainty and orchestrates the entire adaptation process. Integrating this metric with sample-specific batch normalization (BN) statistics enhances the ability of pretrained models in the inference stage. Second, we introduce a cross-attention module as a side-tuning module, enabling the model to adapt dynamically to reliable test samples without altering the backbone network. To validate the effectiveness of the proposed method, we construct a dataset comprising synthetic images of multiple inpainting methods and design experiments under two scenarios of distributional bias. The results demonstrate that our proposed framework outperforms the existing baseline method, enhancing the adaptability and detection performance of the forgery detection model in dynamic environments.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3647640",
+      "url": "https://doi.org/10.1109/tcyb.2025.3647640"
+    },
+    {
+      "title": "Federated Incremental Collaborative Fault Diagnosis Method for Dynamic Data Streams in Multiple Wind Farms",
+      "abstract": "With the rise of growing privacy concerns and \"data silos,\" federated learning is gaining traction in wind turbine fault diagnosis. Most existing methods unrealistically assume that fault classes remain static over time. However, wind turbine data are collected as dynamic streams. Existing methods necessitate the storage of all historical fault class data and require real-time model retraining using this data whenever new faults are introduced. The high demands for storage, computation, and bandwidth are impractical as new data keeps coming in. Additionally, when these methods are applied to diagnose new fault classes in dynamic data streams with limited resources and heterogeneity across wind farms, the model suffers from significant memory degradation. To address these challenges, a federated incremental collaborative fault diagnosis method for dynamic data streams across multiple wind farms is proposed. First, a new fault class detection method is presented to ensure when and where to introduce new fault classes. Second, a balance between the plasticity and stability of the fault diagnosis model at each wind farm is proposed to alleviate the fading memory problem. Third, a global model adaptive compensatory method is presented to address the fading memory issue of the aggregated model caused by heterogeneity. Finally, the proposed method was validated with data from three real-world wind farms in Hubei, Jiangsu, and Yunnan provinces, China. The results showed that it effectively mitigates fading memory issues and outperforms several state-of-the-art methods.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3646266",
+      "url": "https://doi.org/10.1109/tcyb.2025.3646266"
+    },
+    {
+      "title": "Sampled Data-Based Observer and Resilient Event-Triggered Controller Design for Cyber-Physical Systems to Mitigate Bounded Mixed Cyber Attacks",
+      "abstract": "This article addresses the secure control problem for cyber-physical systems (CPSs) subject to energy-bounded mixed network attacks, which comprise both false-data-injection (FDI) attacks and denial-of-service (DoS) attacks occurring simultaneously. To cope with transmission constraints and the unavailability of full state measurements, we design a novel sampled-data observer that concurrently estimates system states and reconstructs FDI attacks, thereby enabling effective attack compensation within the control loop. Moreover, we introduce a resilient event-triggered mechanism (ETM) capable of tolerating energy-bounded DoS attacks. By integrating this mechanism with the proposed observer, we construct an observer-based event-triggered controller that ensures system stability without requiring detailed attack information. The controller guarantees asymptotically bounded convergence under mixed attacks while avoiding restrictive assumptions in the existence analysis. Numerical simulations conducted on a three-tank system and an inverted pendulum system validate the effectiveness and superior performance of the proposed approach compared to existing methods.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3637776",
+      "url": "https://doi.org/10.1109/tcyb.2025.3637776"
+    },
+    {
+      "title": "H ∞ Bipartite Synchronization Composite Antidisturbance Control of Hidden Markov Jump Reaction–Diffusion Neural Networks",
+      "abstract": "This article investigates the problem of composite $H_{\\infty }$ control for cooperation-competition networks with hidden Markov jump parameters reaction-diffusions dynamics. Considering the difficulty of directly obtaining the mode information of systems, a continuous-time hidden Markov jump model is employed to represent the joint jump process. Specifically, the hidden process stands for the dynamics of real systems, which cannot be precisely known but can be observed through a detector. Due to the existence of multiple disturbances, the performance of the aforementioned systems can be deteriorated. To reduce the influence of these disturbances, a composite disturbance observer-based controller is constructed, which combines a disturbance observer with a feedback control mechanism. This design significantly improves the robustness and antidisturbance capability of systems. Then, sufficient criteria are derived to guarantee that the bipartite synchronization error system (BSES) is stochastically stable and meets a desired performance index. Finally, the effectiveness of the proposed control method is verified through the performance analysis.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3647665",
+      "url": "https://doi.org/10.1109/tcyb.2025.3647665"
+    },
+    {
+      "title": "High-Order Fully Actuated System Approach-Based Controller Design for Tailsitter in Flight Mode Transitions",
+      "abstract": "A fan-powered tailsitter is capable of operating in both rotary-wing and fixed-wing flight modes. The transition between these modes is critical due to strong disturbances and considerable control complexity. This article investigates a predefined-time stability tracking control problem for tailsitters subject to parameter uncertainties and external disturbances. Based on the second-order dynamic model and high-order fully actuated (HOFA) system approach, a high-order robust controller is first developed to address the limitations of existing mode transitions, particularly in terms of control accuracy and disturbance suppression capabilities. On this basis, a novel predefined-time HOFA scheme is proposed by introducing adjustable parameters, which enables the system states to converge into a small neighborhood of the desired equilibrium within a prescribed time, while providing flexible tuning of the convergence time to adapt to varying mission and environmental requirements. Theoretical analysis and numerical simulations demonstrate that the proposed scheme achieves enhanced control accuracy, faster convergence, and improved robustness compared with conventional approaches. In contrast to existing approaches, the proposed HOFA-based predefined-time framework allows explicit tuning of the convergence time and provides robustness guarantees under parameter uncertainties, an aspect that has not been sufficiently addressed in the current literature.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3639150",
+      "url": "https://doi.org/10.1109/tcyb.2025.3639150"
+    },
+    {
+      "title": "Event-Based Estimation Over Hydrogen AAV-Based Relay Network With Silent Packet Loss",
+      "abstract": "Silent packet loss (SPL) poses a significant challenge for state estimation, due to the lack of information regarding the packet loss status (PLS). This issue is particularly prominent in event-based systems, where the interplay between event-triggered feedback mechanisms and SPL complicates the estimation process. Existing approaches often employ detectors, but achieving 100% detection accuracy remains nearly impossible, and false detections further complicate the probability distribution of system states. In this article, we propose a silent message-passing mechanism (SMPM) to address the SPL of measurements, which may be coupled with an event-based scheduler, as the feedback channel is also affected by the SPL. Besides, a dynamic Chi-square ( $d$ - $\\mathcal {X}^{2}$ ) detector is proposed, whose detection accuracy is proven to converge to 100% with time. Subsequently, an estimator based on the $d$ - $\\mathcal {X}^{2}$ detector under the SMPM is designed for unstable systems with the SPL of measurements. More importantly, a stability condition is established, revealing the relationship between the SPL rate and estimation performance. Both simulations and experiments validate the effectiveness of the theoretical findings presented in this article.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tcyb.2025.3641593",
+      "url": "https://doi.org/10.1109/tcyb.2025.3641593"
     }
   ]
 }

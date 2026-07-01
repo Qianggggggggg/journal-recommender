@@ -779,28 +779,30 @@ def test_build_features_same_ccf_level_zero_when_paper_target_none():
     assert f.same_ccf_level == 0.0
 
 
-def test_same_gold_area_feature_removed():
-    """2026-06-26: same_gold_area feature 已从 schema 中删除。"""
-    import dataclasses
-    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
-    assert "same_gold_area" not in field_names
+def test_same_gold_area_not_in_16_dim_schema():
+    """2026-06-26 + 2026-06-29: same_gold_area 不在 locked FEATURE_NAMES
+    (16-dim production schema),但作为 dataclass 字段保留,用于 v4 26-dim
+    rollback path (FEATURE_NAMES_WITH_LLM_EVIDENCE_V4_LEGACY)。"""
     assert "same_gold_area" not in FEATURE_NAMES
-
-
-def test_same_parsed_ccf_area_feature_removed():
-    """2026-06-26: same_parsed_ccf_area feature 已从 schema 中删除。"""
     import dataclasses
     field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
-    assert "same_parsed_ccf_area" not in field_names
+    assert "same_gold_area" in field_names  # 2026-06-29 rollback: 字段恢复
+
+
+def test_same_parsed_ccf_area_not_in_16_dim_schema():
+    """2026-06-26 + 2026-06-29: 同上。"""
     assert "same_parsed_ccf_area" not in FEATURE_NAMES
+    import dataclasses
+    field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
+    assert "same_parsed_ccf_area" in field_names  # 2026-06-29 rollback: 字段恢复
 
 
-def test_candidate_in_accepted_corpus_feature_removed():
-    """2026-06-26: candidate_in_accepted_corpus feature 已从 schema 中删除。"""
+def test_candidate_in_accepted_corpus_not_in_16_dim_schema():
+    """2026-06-26 + 2026-06-29: 同上。"""
     assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
     import dataclasses
     field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
-    assert "candidate_in_accepted_corpus" not in field_names
+    assert "candidate_in_accepted_corpus" in field_names  # 2026-06-29 rollback: 字段恢复
 
 
 # ---------------------------------------------------------------------------
@@ -834,18 +836,28 @@ def test_feature_names_with_tier_and_exclusivity_23_dim_v2():
     assert "journal_tier_weight" not in FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
 
 
-def test_paper_candidate_features_no_paper_strength():
-    """2026-06-26: PaperCandidateFeatures dataclass no longer has paper_strength field."""
+def test_paper_candidate_features_has_paper_strength_v4_rollback():
+    """2026-06-29 v4 baseline rollback: PaperCandidateFeatures 恢复 paper_strength
+    字段,让 v4_lr.json 26-dim 模型能正常 attach (idx 18 = paper_strength)。
+
+    paper_strength 仍不在 FEATURE_NAMES (locked 16-dim),只在 V4_LEGACY
+    schema (20-dim) attach 时写入。
+    """
     import dataclasses
 
     field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
-    assert "paper_strength" not in field_names
+    assert "paper_strength" in field_names  # 2026-06-29 rollback: 字段恢复
+    assert "paper_strength" not in FEATURE_NAMES  # locked 16-dim 仍不含
 
 
 # ---------------------------------------------------------------------------
 # 2026-06-26: 23-dim plan — drop 4 noise/harmful features
 # (journal_tier_weight, same_gold_area, same_parsed_ccf_area,
 #  candidate_in_accepted_corpus). Schema becomes 16/22/23 dim.
+#
+# 2026-06-29 update: 4 fields are restored to PaperCandidateFeatures for v4
+# 26-dim rollback path; they remain absent from FEATURE_NAMES (locked 16-dim)
+# and are only written when V4_LEGACY schema is explicitly requested.
 # ---------------------------------------------------------------------------
 
 
@@ -881,14 +893,21 @@ def test_feature_names_with_tier_and_exclusivity_23_dim():
     assert extra == ["area_exclusivity"]
 
 
-def test_paper_candidate_features_no_dropped_fields():
-    """2026-06-26: PaperCandidateFeatures has no journal_tier_weight or dropped dead features."""
+def test_paper_candidate_features_has_v4_rollback_fields():
+    """2026-06-29 v4 baseline rollback: PaperCandidateFeatures 恢复 4 个字段
+    (paper_strength / same_gold_area / same_parsed_ccf_area /
+    candidate_in_accepted_corpus),让 v4_lr.json 26-dim 模型能正常 attach。
+
+    这些字段不在 FEATURE_NAMES (locked 16-dim),仅在 attach V4_LEGACY
+    schema (20/26-dim) 时才写入向量。journal_tier_weight 仍未恢复
+    (从 23-dim plan 永久删除,tier 用 area_exclusivity 表达)。
+    """
     import dataclasses
     field_names = {f.name for f in dataclasses.fields(PaperCandidateFeatures)}
-    assert "paper_strength" not in field_names
-    assert "same_gold_area" not in field_names
-    assert "same_parsed_ccf_area" not in field_names
-    assert "candidate_in_accepted_corpus" not in field_names
+    assert "paper_strength" in field_names
+    assert "same_gold_area" in field_names
+    assert "same_parsed_ccf_area" in field_names
+    assert "candidate_in_accepted_corpus" in field_names
     assert "journal_tier_weight" not in field_names
     # Confirm useful fields are still there
     assert "same_ccf_level" in field_names

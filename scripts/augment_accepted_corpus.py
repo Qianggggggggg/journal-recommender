@@ -76,7 +76,8 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--api-key",
-        default="s2k-AeDASl4PzLGaxug6gQ9aNSlOQM10hmxa5IUVj4Ma",
+        default=None,
+        help="Semantic Scholar API key. Also reads from S2_API_KEY env var.",
     )
     p.add_argument(
         "--accepted-dir",

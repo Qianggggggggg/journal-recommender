@@ -30,6 +30,7 @@ ABSTRACT_SNIPPET_LENGTH = 160
 # All benchmark papers that must NEVER enter the accepted-paper corpus.
 # Every script that writes to data/accepted_papers/* MUST consult this list.
 DEFAULT_BENCHMARK_INPUTS = [
+    Path("data/evaluation/papers_metadata_660_balanced.jsonl"),
     Path("data/evaluation/papers_metadata_holdout240.jsonl"),
     Path("data/evaluation/papers_metadata_full_v2_90.jsonl"),
     Path("data/evaluation/papers_metadata_light_30.jsonl"),
@@ -59,7 +60,41 @@ def normalize_text(text: str) -> str:
 
 
 def normalize_venue(venue: str) -> str:
-    return " ".join(str(venue).strip().lower().split())
+    """Normalize venue name for matching: lowercase, strip punctuation/parentheses."""
+    import re as _re
+    text = str(venue).strip().lower()
+    # Remove parenthetical suffixes like "(Print)" or "(Online)"
+    text = _re.sub(r"\([^)]*\)", " ", text)
+    # Remove colons, commas, dashes, etc. but keep word chars and spaces
+    text = _re.sub(r"[^\w\s]", " ", text)
+    return " ".join(text.split())
+
+
+def venue_matches(a: str, b: str) -> bool:
+    """Check if two venue names refer to the same journal.
+
+    Uses exact match, substring containment, then token-level Jaccard.
+    The most common case is OpenAlex/S2 returning \"Journal of Systems
+    Architecture\" while our store has the full title with subtitle.
+    """
+    na = normalize_venue(a)
+    nb = normalize_venue(b)
+    if na == nb:
+        return True
+    if len(na) >= 10 and len(nb) >= 10:
+        if na in nb or nb in na:
+            return True
+        # Token-level fallback: if the shorter name's tokens are mostly
+        # contained in the longer name (e.g. "performance evaluation" vs
+        # "performance evaluation an international journal").
+        tokens_a = set(na.split())
+        tokens_b = set(nb.split())
+        shorter, longer = (tokens_a, tokens_b) if len(tokens_a) <= len(tokens_b) else (tokens_b, tokens_a)
+        if shorter and len(shorter) >= 2:
+            overlap = shorter & longer
+            if len(overlap) / len(shorter) >= 0.6:
+                return True
+    return False
 
 
 def abstract_snippet(abstract: str) -> str:
@@ -162,14 +197,13 @@ def filter_candidates(
 ) -> list[CandidatePaper]:
     accepted: list[CandidatePaper] = []
     seen = set(existing_titles)
-    target_norm = normalize_venue(target_venue)
     for candidate in candidates:
         title_norm = normalize_text(candidate.title)
         if not title_norm or title_norm in seen:
             continue
-        if normalize_venue(candidate.venue) != target_norm:
+        if not venue_matches(candidate.venue, target_venue):
             continue
-        if len(candidate.abstract.strip()) < 300:
+        if len(candidate.abstract.strip()) < 150:
             continue
         if _candidate_has_leak(candidate, blacklist):
             continue
@@ -230,6 +264,11 @@ def merge_profile(
         added += 1
 
     profile_path.parent.mkdir(parents=True, exist_ok=True)
+    # Don't create empty profile files when target has no existing papers
+    # and this round added nothing — leaves the corpus free of zero-row jids
+    # so subsequent rounds and the active-set filter see the same "no papers" state.
+    if not papers:
+        return added
     profile_path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -279,7 +318,7 @@ def candidate_from_openalex_work(
         ((work.get("primary_location") or {}).get("source") or {}).get("display_name")
         or ""
     )
-    if normalize_venue(source) != normalize_venue(target_venue):
+    if not venue_matches(source, target_venue):
         return None
 
     title = (work.get("title") or "").strip()
@@ -298,6 +337,14 @@ def candidate_from_openalex_work(
     )
 
 
+def _short_venue_name(venue: str) -> str:
+    """Return the short form of a venue name for API search."""
+    for sep in (": ", " \u2014 ", " \u2013 ", ", ", " - "):
+        if sep in venue:
+            return venue.split(sep)[0].strip()
+    return venue
+
+
 def fetch_semantic_scholar_candidates(
     venue: str,
     *,
@@ -306,7 +353,9 @@ def fetch_semantic_scholar_candidates(
     timeout: int,
     api_key: str = "",
 ) -> list[CandidatePaper]:
-    url = _semantic_scholar_url(venue, limit=max_candidates, year=year)
+    # Use the short venue name for S2 search (S2 doesn't index subtitles).
+    search_venue = _short_venue_name(venue)
+    url = _semantic_scholar_url(search_venue, limit=max_candidates, year=year)
     req = build_semantic_scholar_request(url, api_key=api_key)
     with urllib.request.urlopen(req, timeout=timeout) as response:
         payload = json.loads(response.read().decode("utf-8"))
@@ -358,17 +407,35 @@ def _openalex_works_url(source_id: str, *, max_candidates: int, year: str) -> st
 def _fetch_json(url: str, *, timeout: int) -> dict[str, Any]:
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "journal-recommender-corpus-expander/1.0"},
+        headers={
+            "User-Agent": "journal-recommender-corpus-expander/1.0",
+            "mailto": "paper-recommender@example.com",
+        },
     )
     with urllib.request.urlopen(req, timeout=timeout) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
 def _find_openalex_source_id(venue: str, *, timeout: int) -> str:
-    payload = _fetch_json(_openalex_sources_url(venue), timeout=timeout)
-    for source in payload.get("results", []):
-        if normalize_venue(source.get("display_name", "")) == normalize_venue(venue):
-            return str(source.get("id") or "").strip()
+    # Try full name first; if no results, fall back to progressively shorter
+    # forms (OpenAlex sometimes doesn't index subtitles/suffixes).
+    # Split on common separators: colon, em-dash, en-dash, comma, hyphen+space.
+    search_terms = [venue]
+    for sep in (": ", " \u2014 ", " \u2013 ", ", ", " - "):
+        if sep in venue:
+            search_terms.append(venue.split(sep)[0].strip())
+    # Also try just the first N words as a fallback
+    words = venue.split()
+    if len(words) >= 3:
+        for n in (len(words) - 1, len(words) // 2 + 1):
+            short = " ".join(words[:max(n, 2)])
+            if short not in search_terms:
+                search_terms.append(short)
+    for term in search_terms:
+        payload = _fetch_json(_openalex_sources_url(term), timeout=timeout)
+        for source in payload.get("results", []):
+            if venue_matches(source.get("display_name", ""), venue):
+                return str(source.get("id") or "").strip()
     return ""
 
 
@@ -417,7 +484,46 @@ def expand_corpus(args: argparse.Namespace) -> dict[str, Any]:
     accepted_dir = Path(args.accepted_dir)
     journal_index = load_journal_index(Path(args.journal_store_path))
     blacklist = build_blacklist(benchmark_inputs)
-    targets = target_uncovered_venues(benchmark_inputs, accepted_dir, journal_index)
+    if getattr(args, "targets_file", None):
+        # External targets file: list of {journal_id, journal_name, [benchmark_count]}
+        # Used to bypass benchmark-only filtering when restoring a known full target set.
+        targets_path = Path(args.targets_file)
+        raw_targets = json.loads(targets_path.read_text(encoding="utf-8"))
+        # accepted_profile_names returns normalized journal_name; we compare by
+        # either normalized name or journal_id so the same skip semantics
+        # work for targets-file entries.
+        accepted_name_set = accepted_profile_names(accepted_dir)
+        # Build a map of journal_id → paper_count for top-up decisions.
+        paper_count_by_id: dict[str, int] = {}
+        for path in accepted_dir.glob("*.json"):
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if isinstance(data, dict) and data.get("journal_id"):
+                paper_count_by_id[data["journal_id"]] = len(data.get("papers", []))
+        targets = []
+        for entry in raw_targets:
+            jid = entry["journal_id"]
+            jname = entry.get("journal_name", "")
+            current = paper_count_by_id.get(jid, 0)
+            if current >= args.target_total:
+                continue  # already at target, skip
+            if jname and normalize_venue(jname) in accepted_name_set and current > 0:
+                # has papers via a different journal_id mapping; allow top-up
+                pass
+            # journal_index is keyed by normalize_venue(journal_name), not journal_id
+            journal = journal_index.get(normalize_venue(jname)) if jname else None
+            if not journal:
+                continue  # skip if not in journal store
+            targets.append({
+                "journal_id": jid,
+                "journal_name": entry.get("journal_name") or journal["journal_name"],
+                "benchmark_count": entry.get("benchmark_count", 0),
+            })
+        print(f"[targets-file] loaded {len(raw_targets)} entries, {len(targets)} active after skip")
+    else:
+        targets = target_uncovered_venues(benchmark_inputs, accepted_dir, journal_index)
     if args.limit_venues is not None:
         targets = targets[: args.limit_venues]
 
@@ -444,48 +550,70 @@ def expand_corpus(args: argparse.Namespace) -> dict[str, Any]:
             "added_count": 0,
             "error": "",
         }
-        try:
-            if args.source == "openalex":
-                candidates = fetch_openalex_candidates(
-                    journal_name,
-                    max_candidates=args.max_candidates,
-                    year=args.year,
-                    timeout=args.timeout,
+
+        # Retry loop for rate-limiting (HTTP 429)
+        for retry in range(3):
+            try:
+                if args.source == "openalex":
+                    candidates = fetch_openalex_candidates(
+                        journal_name,
+                        max_candidates=args.max_candidates,
+                        year=args.year,
+                        timeout=args.timeout,
+                    )
+                    source = "openalex"
+                else:
+                    candidates = fetch_semantic_scholar_candidates(
+                        journal_name,
+                        max_candidates=args.max_candidates,
+                        year=args.year,
+                        timeout=args.timeout,
+                        api_key=os.environ.get(args.api_key_env, ""),
+                    )
+                    source = "semantic_scholar"
+                filtered = filter_candidates(
+                    candidates,
+                    target_venue=journal_name,
+                    blacklist=blacklist,
+                    existing_titles=existing_titles,
+                    limit=args.target_total,
                 )
-                source = "openalex"
-            else:
-                candidates = fetch_semantic_scholar_candidates(
-                    journal_name,
-                    max_candidates=args.max_candidates,
-                    year=args.year,
-                    timeout=args.timeout,
-                    api_key=os.environ.get(args.api_key_env, ""),
+                added = merge_profile(
+                    profile_path=profile_path,
+                    journal_id=journal_id,
+                    journal_name=journal_name,
+                    new_papers=filtered,
+                    target_total=args.target_total,
+                    source=source,
                 )
-                source = "semantic_scholar"
-            filtered = filter_candidates(
-                candidates,
-                target_venue=journal_name,
-                blacklist=blacklist,
-                existing_titles=existing_titles,
-                limit=args.target_total,
-            )
-            added = merge_profile(
-                profile_path=profile_path,
-                journal_id=journal_id,
-                journal_name=journal_name,
-                new_papers=filtered,
-                target_total=args.target_total,
-                source=source,
-            )
-            status.update(
-                {
-                    "candidate_count": len(candidates),
-                    "accepted_candidate_count": len(filtered),
-                    "added_count": added,
-                }
-            )
-        except Exception as exc:  # pragma: no cover - exercised via real CLI
-            status["error"] = str(exc)
+                status.update(
+                    {
+                        "candidate_count": len(candidates),
+                        "accepted_candidate_count": len(filtered),
+                        "added_count": added,
+                    }
+                )
+                break  # success → exit retry loop
+            except Exception as exc:
+                err_str = str(exc)
+                # Retry only on rate-limit (429) or transient connection errors
+                is_retryable = (
+                    "HTTP Error 429" in err_str
+                    or "ConnectionResetError" in err_str
+                    or "ConnectionError" in err_str
+                    or "RemoteDisconnected" in err_str
+                )
+                if is_retryable and retry < 2:
+                    wait = (retry + 1) * 30
+                    print(
+                        f"  [{idx}/{len(targets)}] {journal_id}: rate-limited, "
+                        f"waiting {wait}s (retry {retry + 1}/3)...",
+                        flush=True,
+                    )
+                    time.sleep(wait)
+                    continue
+                status["error"] = err_str
+                break
         report["targets"].append(status)
         if idx < len(targets) and args.sleep_seconds > 0:
             time.sleep(args.sleep_seconds)
@@ -513,6 +641,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "--api-key-env",
         default="SEMANTIC_SCHOLAR_API_KEY",
         help="Environment variable containing the Semantic Scholar API key.",
+    )
+    parser.add_argument(
+        "--targets-file",
+        default=None,
+        help="JSON file with explicit [{journal_id, journal_name, benchmark_count?}, ...] targets. "
+             "When set, bypasses benchmark-only filtering (use to restore a known full corpus target set).",
     )
     return parser
 

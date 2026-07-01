@@ -31,6 +31,9 @@ def build_typical_abstract_index(
     embedding_client = OllamaEmbedding(
         base_url=config["ollama"]["base_url"],
         model=config["ollama"]["embedding_model"],
+        timeout=config.get("ollama", {}).get("timeout_seconds", 60),
+        show_progress=True,
+        progress_desc="Typical-abstract embeddings",
     )
 
     texts = [record.search_text for record in store.records]

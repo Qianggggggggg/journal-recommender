@@ -243,10 +243,10 @@ class EvidenceDiagnosticPipeline(DummyPipeline):
                     "evidence_composite": 0.7,
                     "final_score": 0.76,
                     "final_rank": 1,
-                    "features_base": [0.0] * 20,
-                    "features_with_llm_evidence": [0.0] * 26,
-                    "feature_names_base": [f"base_{i}" for i in range(20)],
-                    "feature_names_with_llm_evidence": [f"v2_{i}" for i in range(26)],
+                    "features_base": [0.0] * 16,
+                    "features_with_llm_evidence": [0.0] * 22,
+                    "feature_names_base": [f"base_{i}" for i in range(16)],
+                    "feature_names_with_llm_evidence": [f"v2_{i}" for i in range(22)],
                 }
             },
         }
@@ -581,8 +581,8 @@ def test_evaluate_single_paper_persists_complete_llm_evidence_candidate_diagnost
     detail = result["llm_candidates_detail"][0]
     assert detail["journal_id"] == "target"
     assert detail["llm_scope_fit"] == 0.9
-    assert len(detail["features_base"]) == 20
-    assert len(detail["features_with_llm_evidence"]) == 26
+    assert len(detail["features_base"]) == 16
+    assert len(detail["features_with_llm_evidence"]) == 22
     assert result["venue_diagnostic"]["llm_evidence_rank"] == 1
     assert result["venue_diagnostic"]["llm_evidence_final_score"] == 0.76
 

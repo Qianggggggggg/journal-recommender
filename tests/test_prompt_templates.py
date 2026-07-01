@@ -50,17 +50,15 @@ def test_llm_ranker_user_prompt_formats_with_json_example():
     assert '"rankings": [' in formatted
 
 
-def test_llm_ranker_reasons_are_not_forced_to_fixed_labels():
-    """Recommendation reasons should be natural advice, not rigid label templates."""
+def test_llm_ranker_reasons_use_public_facing_labels():
+    """Reasons use stable user-facing labels while hiding internal jargon."""
     prompts = _load_prompts()
     ranker_user = prompts["llm_ranker_user"]
 
-    assert "不要机械地以\"Scope对齐：\"" in ranker_user
-    assert "推荐理由（2-4条" in ranker_user
-    assert "不要出现内部证据字段名" in ranker_user
-    assert "强候选保护" in ranker_user
-    assert "network" in ranker_user or "网络协议" in ranker_user
-    assert "推荐理由必须以\"类型标签：\"开头" not in ranker_user
+    assert "推荐理由必须以\"类型标签：\"开头" in ranker_user
+    assert "Scope对齐：" in ranker_user
+    assert "技术方法契合：" in ranker_user
+    assert "禁止使用以下内部术语" in prompts["llm_ranker_system"]
 
 
 def test_llm_evidence_extractor_prompt_formats_with_json_example():

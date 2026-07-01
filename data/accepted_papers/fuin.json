@@ -1,0 +1,70 @@
+{
+  "journal_id": "fuin",
+  "journal_name": "Fundamenta Informaticae",
+  "papers": [
+    {
+      "title": "Discovering Object-centric Petri Nets",
+      "abstract": "Techniques to discover Petri nets from event data assume precisely one case identifier per event. These case identifiers are used to correlate events, and the resulting discovered Petri net aims to describe the life-cycle of individual cases. In reality, there is not one possible case notion, but multiple intertwined case notions. For example, events may refer to mixtures of orders, items, packages, customers, and products. A package may refer to multiple items, multiple products, one order, and one customer. Therefore, we need to assume that each event refers to a collection of objects, each having a type (instead of a single case identifier). Such object-centric event logs are closer to data in real-life information systems. From an object-centric event log, we want to discover an object-centric Petri net with places that correspond to object types and transitions that may consume and produce collections of objects of different types. Object-centric Petri nets visualize the complex relationships among objects from different types. This paper discusses a novel process discovery approach implemented in PM4Py. As will be demonstrated, it is indeed feasible to discover holistic process models that can be used to drill-down into specific viewpoints if needed.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.3233/FI-2020-1946",
+      "url": "https://www.semanticscholar.org/paper/99ba0b1e1df53a0c433ea7b540ada4c50e2a81a2"
+    },
+    {
+      "title": "A Rewriting-logic-with-SMT-based Formal Analysis and Parameter Synthesis Framework for Parametric Time Petri Nets",
+      "abstract": "This paper presents a concrete and a symbolic rewriting logic semantics for parametric time Petri nets with inhibitor arcs (PITPNs), a flexible model of timed systems where parameters are allowed in firing bounds. We prove that our semantics is bisimilar to the “standard” semantics of PITPNs. This allows us to use the rewriting logic tool Maude, combined with SMT solving, to provide sound and complete formal analyses for PITPNs. We develop and implement a new general folding approach for symbolic reachability, so that Maude-with-SMT reachability analysis terminates whenever the parametric state-class graph of the PITPN is finite. Our work opens up the possibility of using the many formal analysis capabilities of Maude—including full LTL model checking, analysis with user-defined execution strategies, and even statistical model checking—for such nets. We illustrate this by explaining how almost all formal analysis and parameter synthesis methods supported by the state-of-the-art PITPN tool Roméo can be performed using Maude with SMT. In addition, we also support analysis and parameter synthesis from parametric initial markings, as well as full LTL model checking and analysis with user-defined execution strategies. Experiments show that our methods outperform Roméo in many cases.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.3233/FI-242195",
+      "url": "https://www.semanticscholar.org/paper/b5ef26fa2157c21bc14383d57b207e880610f3e3"
+    },
+    {
+      "title": "Privacy for Quantum Annealing. Attack on Spin Reversal Transformations in the case of cryptanalysis",
+      "abstract": "This paper demonstrates that applying spin reversal transformations (SRT), commonly known as a sufficient method for privacy enhancement in problems solved using quantum annealing, does not guarantee privacy for all possible cases. We show how to recover the original problem from the Ising problem obtained using SRT when the resulting problem in Ising form represents the algebraic attack on the $E_0$ stream cipher. A small example illustrates how to retrieve the original problem from that transformed by SRT. Moreover, we show that our method is efficient also for full-scale problems.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.46298/fi.14346",
+      "url": "https://www.semanticscholar.org/paper/13b810ee1d92c53b5e092be5eca7528a5c004bf0"
+    },
+    {
+      "title": "Ciphertext Malleability in Lattice-Based KEMs as a Countermeasure to Side Channel Analysis",
+      "abstract": "Due to developments in quantum computing, classical asymmetric cryptography is at risk of being breached. Consequently, new Post-Quantum Cryptography (PQC) primitives using lattices are studied. Another point of scrutiny is the resilience of these new primitives to Side Channel Analysis (SCA), where an attacker can study physical leakages. In this work we discuss a SCA vulnerability due to the ciphertext malleability of some PQC primitives exposed by a work from Ravi et al. We propose a novel countermeasure to this vulnerability exploiting the same ciphertext malleability and discuss its practical application to several PQC primitives. We also extend the seminal work of Ravi et al. by detailing their attack on the different security levels of a post-quantum Key Encapsulation Mechanism (KEM), namely FrodoKEM. We also provide a generalisation of their attack to different parameters which could be used in future similar primitives. 29 pages total, 26 pages excluding references, 8 figures. This paper is an extension of a work presented at CECC 2024 under the title \"A Countermeasure To Side Channel Message Recovery Attacks Using Chosen-Ciphertext Against ML-KEM\". It has been selected by the CECC 2024 program chairs for submission at a special edition of the Fundamenta Informaticae journal",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.46298/fi.14339",
+      "url": "https://www.semanticscholar.org/paper/42d99bd946767a322d2a74737e9240766cea8997"
+    },
+    {
+      "title": "The Index and Core of a Relation. With Applications to the Axiomatics of Relation Algebra",
+      "abstract": "We introduce the general notions of an index and a core of a relation. We postulate a limited form of the axiom of choice -- specifically that all partial equivalence relations have an index -- and explore the consequences of adding the axiom to standard axiom systems for point-free reasoning. Examples of the theorems we prove are that a core/index of a difunction is a bijection, and that the so-called ``all or nothing'' axiom used to facilitate pointwise reasoning is derivable from our axiom of choice. Fundamenta Informaticae, Volume 195, Issue 1-4, Article 2, 2025",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.46298/fi.12245",
+      "url": "https://www.semanticscholar.org/paper/ab4f3c27a5eaf721d1ca1f9299ab082fdbd3dc87"
+    },
+    {
+      "title": "Translating Three-Variable First-Order Predicate Logic to Relation Algebra, Implemented using Z3",
+      "abstract": "This paper presents the development of a software tool that enables the translation of first-order predicate logic with at most three variables into relation algebra. The tool was developed using the Z3 theorem prover, leveraging its capabilities to enhance reliability, generate code, and expedite development. The resulting standalone Python program allows users to translate first-order logic formulas into relation algebra, eliminating the need to work with relation algebra explicitly. This paper outlines the theoretical background of first-order logic, relation algebra, and the translation process. It also describes the implementation details, including validation of the software tool using Z3 for testing correctness. By demonstrating the feasibility of utilizing first-order logic as an alternative language for expressing relation algebra, this tool paves the way for integrating first-order logic into tools traditionally relying on relation algebra as input. 15 pages, 2 figures, 2 tables, to be published in Fundamenta Informaticae",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.46298/fi.11710",
+      "url": "https://www.semanticscholar.org/paper/4f374d29354a98dda61cb045b18ec324178d2cef"
+    },
+    {
+      "title": "Myhill-Nerode Theorem for Higher-Dimensional Automata",
+      "abstract": "We establish a Myhill-Nerode type theorem for higher-dimensional automata (HDAs), stating that a language is regular if and only if it has finite prefix quotient. HDAs extend standard automata with additional structure, making it possible to distinguish between interleavings and concurrency. We also introduce deterministic HDAs and show that not all HDAs are determinizable, that is, there exist regular languages that cannot be recognised by a deterministic HDA. Using our theorem, we develop an internal characterisation of deterministic languages. Lastly, we develop analogues of the Myhill-Nerode construction and of determinacy for HDAs with interfaces.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.3233/FI-242194",
+      "url": "https://www.semanticscholar.org/paper/9eded3aaf081d59fca6a483de709c414bcea80b4"
+    },
+    {
+      "title": "Perturbation Results for Distance-edge-monitoring Numbers",
+      "abstract": "Foucaud et al. recently introduced and initiated the study of a new graph-theoretic concept in the area of network monitoring. Given a graph G = (V(G), E(G)), a set M ⊆ V(G) is a distance-edge-monitoring set if for every edge e ∈ E(G), there is a vertex x ∈ M and a vertex y ∈ V(G) such that the edge e belongs to all shortest paths between x and y. The smallest size of such a set in G is denoted by dem(G). Denoted by G – e (resp. G\\u) the subgraph of G obtained by removing the edge e from G (resp. a vertex u together with all its incident edges from G). In this paper, we first show that dem(G – e) – dem(G) ≤ 2 for any graph G and edge e ∈ E(G). Moreover, the bound is sharp. Next, we construct two graphs G and H to show that dem(G) – dem(G\\u) and dem(H \\ v) – dem(H) can be arbitrarily large, where u ∈ V(G) and v ∈ V(H). We also study the relation between dem(H) and dem(G), where H is a subgraph of G. In the end, we give an algorithm to judge whether the distance-edge-monitoring set still remain in the resulting graph when any edge of a graph G is deleted.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.3233/FI-242176",
+      "url": "https://www.semanticscholar.org/paper/a646da9d37062ddee1a804e3f5bf09fa9b54b4ed"
+    }
+  ]
+}

@@ -417,6 +417,7 @@ class LLMEvidenceRoleRanker:
                 },
                 "evidence": evidence_text_clean,
                 "evidence_composite": evidence_composite,
+                "fit_score": evidence_composite,  # 2026-06-30: 语义准确的别名,不再叫 confidence
                 "final_score": final_score,
                 "feature_names_base": list(FEATURE_NAMES),
                 "features_base": features.to_vector(FEATURE_NAMES),
@@ -427,6 +428,9 @@ class LLMEvidenceRoleRanker:
                     FEATURE_NAMES_WITH_LLM_EVIDENCE
                 ),
             }
+            # 2026-06-30: evidence_composite 不是统计置信度,是 evidence fit 综合分。
+            # pipeline 将其填入 JournalMatch.confidence 是语义错误 (应为 fit_score),
+            # 但改动需跨模块。暂时保持兼容,由 diagnostic 中的 fit_score 提供正确语义。
             ranked_rows.append((journal, final_score, reasons, evidence_composite))
 
         # Python sort is stable, so equal scores retain the incoming Rule/LTR order.

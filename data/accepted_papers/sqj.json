@@ -9,6 +9,70 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s11219-025-09730-7",
       "url": ""
+    },
+    {
+      "title": "Using case-control study to explain software fault-proneness",
+      "abstract": "Studies on software fault-proneness were typically focused on analysis and prediction, with a few exceptions that used explanatory approach. This paper proposes a novel methodology that, for the first time, utilizes a case-control approach for building explanatory models of software fault-proneness. The files with post-release faults are treated as cases and the other files as controls. The cases and controls are matched by size and prerelease fault-proneness (i.e., Bugfixes) is treated as an exposure. The methodology incorporates software metrics as confounders and, for the first time, considers their interactions. Furthermore, the methodology rigorously handles multicollinearity and uses backward elimination to produce the simplest explanatory models. The odds ratios are quantified using conditional logistic regression which leads to efficient estimates, with tighter confidence intervals. The empirical results, based on three Eclipse releases, showed that while some metrics (i.e., Age, Bugfixes and Developers) consistently affected post-release fault-proneness in two or three releases, the effects of other metrics and interactions were release-specific. Additionally, the first-ever systematic exploration of the generalizability in prior explanatory studies showed that, similarly to our study, they experienced limited generalizability of impactful factors, which is likely due to the complex nature of the software and its development processes. Our results have several practical implications: (1) Simple models with 4–7 significant metrics and interactions can explain post-release fault-proneness; (2) The impactful metrics are simple and easy to collect (e.g., files age, the existence of prerelease faults, and developers count); (3) Due to limited generalizability, release/project-specific explanatory models are necessary.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11219-025-09735-2",
+      "url": "https://doi.org/10.1007/s11219-025-09735-2"
+    },
+    {
+      "title": "Improving story points estimation using ensemble machine learning",
+      "abstract": "Agile software development (ASD) emphasizes iterative development, continuous feedback, and team collaboration, addressing the limitations of traditional methodologies. This research explores the application of machine learning (ML) to improve story point estimation in ASD, a critical practice for planning and prioritization. Traditional methods like Planning Poker often suffer from human biases and inconsistencies, leading to unreliable estimates. This study introduces an innovative ML-based ensemble stacking technique, combining RoBERTa, a transformer model for natural language processing, with BiLSTM, a neural network adept at handling sequential data. The research involves reviewing existing ML methodologies, developing the proposed model, and evaluating its effectiveness using 21,064 data points from 14 open-source projects. The model’s performance was assessed through Mean Absolute Error (MAE) and Mean Absolute Percentage Error (MAPE). Results show that the proposed ensemble model achieved lower MAE and MAPE, with performance improvements ranging from 4% to 32% over state-of-the-art models. While promising, the study suggests there is still room for further refinement, indicating the potential for ongoing advancements. This research contributes to the integration of ML in software engineering, offering a path toward more accurate and efficient project management.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11219-025-09731-6",
+      "url": "https://doi.org/10.1007/s11219-025-09731-6"
+    },
+    {
+      "title": "Elicit, specify, require, revise: enhancing requirements engineering process using gamification",
+      "abstract": "Requirements engineering (RE) faces challenges due to the required collaboration and knowledge transfer among analysts, developers, and customers. Motivation theories have occasionally been used to analyze and encourage stakeholder motivation and engagement in RE tasks. Specifically, gamification mechanisms have been applied to software engineering tasks, in particular RE tasks, to promote stakeholder engagement. However, existing research lacks a rigorous method for designing gamified environments for RE tasks. This paper describes the development of a novel ESDR (Elicitation, Specification, Design, and Revision) method that leverages task types, task paradigms, gamification mechanisms, and motivation theories. The model was used as the basis for two case studies, yielding interesting results on student motivation and perceptions towards gamification. For the second case study, a socio-technical environment was developed to allow for gamified requirements elicitation and specification. This environment enables researchers and team managers to select different mechanisms to gamify the current RE task in practice. The environment was evaluated by students, providing anecdotal results. The key contributions are the proposed ESDR method integrating gamification and motivation theories into RE tasks, insights from two case studies applying this method, and the development of a gamified socio-technical environment for RE.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11219-025-09721-8",
+      "url": "https://doi.org/10.1007/s11219-025-09721-8"
+    },
+    {
+      "title": "From omelet to UML: assessing the role of process thinking on process model quality among novice analyst",
+      "abstract": "Information Systems (IS) analysts are tasked with analyzing customer needs and designing the requisite information system, commonly using models. Ensuring the high quality of these models is crucial for the success of workflow-oriented IS. This study investigates how process thinking influences the ability of novices to produce high-quality process models in IS education, focusing on quality metrics such as completeness, correctness, and irredundancy. We conducted a detailed examination of 181 students enrolled in an IS Analysis and Design course (130 students in the final sample), employing a unique three-task methodology to assess their initial process thinking levels and subsequent model quality throughout the course. Our findings reveal that students with high initial process thinking proficiency continued to excel in subsequent modeling tasks, while those with lower initial proficiency narrowed the gap and improved the quality of their models in subsequent tasks due to learning. Additionally, we found a moderate positive correlation ( r = 0.233, p = 0.008) between creativity and success in modeling tasks, suggesting that fostering creativity could enhance the quality of process models. Based on these insights, we recommend that IS training include targeted error correction, preliminary workshops for foundational skill enhancement including training in process thinking, and the integration of creativity into the curriculum. These recommendations aim to better prepare students for the complexities of IS planning and design, contributing to the development of proficient IS analysts capable of producing high-quality process models, thereby directly impacting the overall quality of software development processes.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11219-025-09713-8",
+      "url": "https://doi.org/10.1007/s11219-025-09713-8"
+    },
+    {
+      "title": "Modeling smart rejuvenation on a series system with different failure modes",
+      "abstract": "Software rejuvenation is a proactive fault management technique that is used to counteract aging phenomena in continuously running software systems. To mitigate such phenomena, rejuvenation includes preventive periodic stoppage of the running software, cleaning its internal state by garbage collection, flushing operating system kernel tables, defragmentation and reinitialization of internal data structures, and then restarting it. In this paper, a two-unit series software system is considered which can experience different failure modes. Each software component can experience both soft and hard failures. A hard failure is counteracted by a hardware reboot, though a soft failure is recovered by software rejuvenation. Additionally, rejuvenation is proactively initiated when a software component transitions into a degraded, failure-prone state. This paper introduces the innovative concept of smart rejuvenation , which strategically leverages system downtime caused by a hard failure in one component to simultaneously rejuvenate another component. To model the entire system’s evolution in time, a semi-Markov process is used. The aim of this work is twofold: firstly, to distinguish the rejuvenation policy for each software component that optimizes the entire system availability and operational cost, and secondly to examine if smart rejuvenation can improve these measures for the software system.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11219-025-09710-x",
+      "url": "https://doi.org/10.1007/s11219-025-09710-x"
+    },
+    {
+      "title": "Integrating software quality models into risk-based testing",
+      "abstract": "Risk-based testing is a frequently used testing approach which utilizes identified risks of a software system to provide decision support in all phases of the testing process. Risk assessment, which is a core activity of every risk-based testing process, is often done in an ad hoc manual way. Software quality assessments, based on quality models, already describe the product-related risks of a whole software product and provide objective and automation-supported assessments. But so far, quality models have not been applied for risk assessment and risk-based testing in a systematic way. This article tries to fill this gap and investigates how the information and data of a quality assessment based on the open quality model QuaMoCo can be integrated into risk-based testing. We first present two generic approaches showing how quality assessments based on quality models can be integrated into risk-based testing and then provide the concrete integration on the basis of the open quality model QuaMoCo. Based on five open source products, a case study is performed. Results of the case study show that a risk-based testing strategy outperforms a lines of code-based testing strategy with regard to the number of defects detected. Moreover, a significant positive relationship between the risk coefficient and the associated number of defects was found.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11219-016-9345-3",
+      "url": "https://www.semanticscholar.org/paper/377bb456b75a46ab50c4faa8b82202c78735c057"
+    },
+    {
+      "title": "Navigating social debt and its link with technical debt in large-scale agile software development projects",
+      "abstract": "Agile methodologies have emerged as transformative paradigms in the ever-evolving software development landscape, emphasizing iterative development, customer collaboration, and adaptability. As the scope and complexity of projects and organizations expand, applying agile principles within the context of Large-Scale Agile Development (LSAD) encounters distinctive challenges. The majority of challenges encountered in LSAD, technical and non-technical, are attributed to the accrual of social debt. However, a conspicuous gap remains in understanding and addressing social debt in LSAD. This study aims to fill this void by investigating social debt in LSAD through an in-depth industrial case study with a leading Nordic company specializing in telecommunications software and services and focusing on producing secure 5G network solutions. The study investigates the causes of LSAD’s social debt and examines its impacts on secure 5G telecom software development. By addressing these objectives, this research sheds light on a critical aspect of LSAD’s social debt, caused by 3C challenges(communication, coordination and collaboration), social confines challenges, community smells challenges, and organisational social challenges in the telecom sector that have been underrepresented in the existing literature.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11219-024-09688-y",
+      "url": "https://www.semanticscholar.org/paper/8a2e14d7b177ab709e012399e0203ec856badcb2"
+    },
+    {
+      "title": "Integrated multi-view modeling for reliable machine learning-intensive software engineering",
+      "abstract": "Development of machine learning (ML) systems differs from traditional approaches. The probabilistic nature of ML leads to a more experimentative development approach, which often results in a disparity between the quality of ML models with other aspects such as business, safety, and the overall system architecture. Herein the Multi-view Modeling Framework for ML Systems (M3S) is proposed as a solution to this problem. M3S provides an analysis framework that integrates different views. It is supported by an integrated metamodel to ensure the connection and consistency between different models. To facilitate the experimentative nature of ML training, M3S provides an integrated platform between the modeling environment and the ML training pipeline. M3S is validated through a case study and a controlled experiment. M3S shows promise, but future research needs to confirm its generality.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11219-024-09687-z",
+      "url": "https://www.semanticscholar.org/paper/b536a552228cb055040ad1930004570aab2100fe"
     }
   ]
 }

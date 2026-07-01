@@ -1,0 +1,78 @@
+{
+  "journal_id": "soca",
+  "journal_name": "Service Oriented Computing and Applications",
+  "papers": [
+    {
+      "title": "SPReaD: service-oriented process for reengineering and DevOps",
+      "abstract": "The reengineering of systems into a microservice-based architecture can be seen as an implementation of a service-oriented architecture (SOA). However, the deployment of SOA into an enterprise is a challenging task, as it may involve the modernization of mission-critical systems with high technical debt and high maintenance costs. To this end, a process is required to provide an appropriate set of steps and techniques that minimize risks and at the same time ensure the quality of the systems during the migration process. Thus, this work presents the Service-oriented Process for Reengineering and DevOps—SPReaD, an instantiation of the mainstream SOA methodology focusing on the reengineering of legacy systems integrating DevOps aspects for developing microservices systems. This process has been defined during a real software reengineering project of legacy systems from a Brazilian State Department of Taxation. The results obtained include a substantial improvement in the quality of the main taxation system used by the state, including not only code-related metrics but also performance improvements of the services offered, and a change in the methodology adopted by the software development team.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-021-00329-x",
+      "url": "https://www.semanticscholar.org/paper/ab6363779fe9a641e089e539fab4aa4f45e08633"
+    },
+    {
+      "title": "Service-enabled systems and applications: current and future trends",
+      "abstract": "Since its establishment as a software design style, ServiceOriented Architecture (SOA) has taken the Information and Communications Technology (ICT) world by storm. The keyword for this success is adaptivity: SOAs are implemented through a wide range of technologies and tools leading to numerous combinations that meet the application requirements in the desired way. With the emergence of Industry 4.0, the development of SOAs has to deal with a specific combination of application characteristics and requirements, e.g., data-intensive tasks coupled with temporal requirements. Big Data and the Internet of Things (IoT) applications are simply two general application categories that come with exactly those characteristics. The challenges are justified because SOA was not originally designed for these kinds of applications.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-021-00323-3",
+      "url": "https://www.semanticscholar.org/paper/672dce5f16dd372d8839be6ebfbcf5acec6c8d26"
+    },
+    {
+      "title": "Community-based service ecosystem evolution analysis",
+      "abstract": "Services are flourishing dramatically, and continuously increasing interactions among them are resulting in a new phenomenon called “service ecosystems,” which has become a focus of academia and industry. Driven by technology innovation, changes in regulations, and changes in the competitive strategies of individual businesses, service ecosystems are constantly evolving. Service ecosystem evolution analysis is an emerging research problem of great significance. By analyzing service ecosystem evolution history, common evolution patterns can be identified, underlying driving forces can be discovered, and future evolution trends can be predicated so that service providers can adjust their competitive strategies in a timely manner to adapt to evolution trends. In this paper, a framework for identifying service ecosystem evolution patterns from the service community perspective is presented. First, following the approaches of community detection and community evolution analysis, time-series community evolution traces are identified from historical service ecosystem evolution, and a service community evolution prediction model is trained in accordance with such traces. Second, the prediction model is explained to show how different factors affect the evolution of service communities. Finally, an approach for assisting service providers in making business decisions is presented according to interpretable prediction results and prior domain knowledge. Experiments on a real-world dataset showed that this work can indeed provide business-level insights on service ecosystem evolution. Additionally, all the data and source code have been made fully open-source for service ecosystem researchers.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-022-00333-9",
+      "url": "https://www.semanticscholar.org/paper/fc39d3a668455acc1728153ff77ea7cd4d774df2"
+    },
+    {
+      "title": "Notes on ensembles of IoT, network functions and clouds for service-oriented computing and applications",
+      "abstract": "Many advances have been introduced recently for service-oriented computing and applications (SOCA). The Internet of Things (IoT) has been pervasive in various application domains. Fog/Edge computing models have shown techniques that move computational and analytics capabilities from centralized data centers where most enterprise business services have been located to the edge where most customer’s Things and their data and actions reside. Network functions between the edge and the cloud can be dynamically provisioned and managed through service APIs. Microservice architectures are increasingly used to simplify engineering, deployment and management of distributed services in not only cloud-based powerful machines but also in light-weighted devices. Therefore, a key question for the research in SOCA is how do we leverage existing techniques and develop new ones for coping with and supporting the changes of data and computation resources as well as customer interactions arising in the era of IoT and Fog/Edge computing. In this editorial paper, we attempt to address this question by focusing on the concept of ensembles for IoT, network functions and clouds.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-018-0228-2",
+      "url": "https://www.semanticscholar.org/paper/5fb211af51abb824f252116915600924cd76a144"
+    },
+    {
+      "title": "Resilience analysis of service-oriented collaboration process management systems",
+      "abstract": "Collaborative business process management allows for the automated coordination of processes involving human and computer actors. In modern economies, it is increasingly needed for this coordination to be not only within organizations but also to cross organizational boundaries. The dependence on the performance of other organizations should, however, be limited, and the control over the own processes is required from a competitiveness perspective. The main objective of this work is to propose an evaluation model for measuring a resilience of a service-oriented architecture (SOA) collaborative process management system. In this paper, we have proposed resilience analysis perspectives of SOA collaborative process systems, i.e., overall system perspective, individual process model perspective, individual process instance perspective, service perspective, and resource perspective. A collaborative incident and maintenance notification process system is reviewed for illustrating our resilience analysis. This research contributes to extend SOA collaborative business process management systems with resilience support, not only looking at quantification and identification of resilience factors, but also considering ways of improving the resilience of SOA collaborative process systems through measures at design and runtime.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-018-0233-5",
+      "url": "https://www.semanticscholar.org/paper/c8e0848e174397d786b2539f48a36030190a25ac"
+    },
+    {
+      "title": "A survey of autonomic computing methods in digital service ecosystems",
+      "abstract": "Service engineering of digital service ecosystems can be associated with several challenges, such as change and evolution of requirements; gathering of quality requirements and assessment; and uncertainty caused by dynamic nature and unknown deployment environment, composition and users. Therefore, the complexity and dynamics in which these digital services are deployed call for solutions to make them autonomic. Until now there has been no up-to-date review of the scientific literature on the application of the autonomic computing initiative in the digital service ecosystems domain. This article presents a review and comparison of autonomic computing methods in digital service ecosystems from the perspective of service engineering, i.e., requirements engineering and architecting of services. The review is based on systematic queries in four leading scientific databases and Google Scholar, and it is organized in four thematic research areas. A comparison framework has been defined which can be used as a guide for comparing the different methods selected. The goal is to discover which methods are suitable for the service engineering of digital service ecosystems with autonomic computing capabilities, highlight what the shortcomings of the methods are, and identify which research activities need to be conducted in order to overcome these shortcomings. The comparison reveals that none of the existing methods entirely fulfills the requirements that are defined in the comparison framework.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-016-0203-8",
+      "url": "https://www.semanticscholar.org/paper/f6c6cf389fc01d07c8f18cacf0491281542df83d"
+    },
+    {
+      "title": "Optimized IoT service placement in the fog",
+      "abstract": "The Internet of Things (IoT) leads to an ever-growing presence of ubiquitous networked computing devices in public, business, and private spaces. These devices do not simply act as sensors, but feature computational, storage, and networking resources. Being located at the edge of the network, these resources can be exploited to execute IoT applications in a distributed manner. This concept is known as fog computing. While the theoretical foundations of fog computing are already established, there is a lack of resource provisioning approaches to enable the exploitation of fog-based computational resources. To resolve this shortcoming, we present a conceptual fog computing framework. Then, we model the service placement problem for IoT applications over fog resources as an optimization problem, which explicitly considers the heterogeneity of applications and resources in terms of Quality of Service attributes. Finally, we propose a genetic algorithm as a problem resolution heuristic and show, through experiments, that the service execution can achieve a reduction of network communication delays when the genetic algorithm is used, and a better utilization of fog resources when the exact optimization method is applied.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-017-0219-8",
+      "url": "https://www.semanticscholar.org/paper/135c6098f2ed4f11c78bd2e4d65721cc4fce639a"
+    },
+    {
+      "title": "A specification-based QoS-aware design framework for service-based applications",
+      "abstract": "Effective and accurate service discovery and composition rely on complete specifications of service behaviour, containing inputs and preconditions that are required before service execution, outputs, effects and ramifications of a successful execution and explanations for unsuccessful executions. The previously defined Web Service Specification Language (WSSL) relies on the fluent calculus formalism to produce such rich specifications for atomic and composite services. In this work, we propose further extensions that focus on the specification of QoS profiles, as well as partially observable service states. Additionally, a design framework for service-based applications is implemented based on WSSL, advancing state of the art by being the first service framework to simultaneously provide several desirable capabilities, such as supporting ramifications and partial observability, as well as non-determinism in composition schemas using heuristic encodings; providing explanations for unexpected behaviour; and QoS-awareness through goal-based techniques. These capabilities are illustrated through a comparative evaluation against prominent state-of-the-art approaches based on a typical SBA design scenario.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-017-0210-4",
+      "url": "https://www.semanticscholar.org/paper/2dc0d4195ba2811a8ce2715eaa4bf2f1f09dcf96"
+    },
+    {
+      "title": "A service requirements engineering method for a digital service ecosystem",
+      "abstract": "A digital service ecosystem enables value creation and the co-development of services in a value network under a common ecosystem regulation. The ecosystem members are able to focus on their core competences and can strengthen their forces by co-operating; yet remaining able to act independently. However, due to regulated environment, the ecosystem elements—i.e. ecosystem members, capabilities, infrastructure and the existing ecosystem assets—have an influence on digital service engineering, especially in the service requirements engineering phase. The main contribution of this paper is to describe how to specify the requirements of digital services in a digital service ecosystem. To this aim, this paper introduces the basic definitions and elements of the digital service ecosystem, and a scenario-based service requirement engineering (RE) method for the digital service ecosystem. A practical example is given to illustrate the use of the RE method. The collected feedback from the RE method users highlights the user experiences on the advantages and limitations of the proposed method.",
+      "year": 2016,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11761-015-0175-0",
+      "url": "https://www.semanticscholar.org/paper/7784a61e37a78e920ee43641ff65ecfdd10eab01"
+    }
+  ]
+}

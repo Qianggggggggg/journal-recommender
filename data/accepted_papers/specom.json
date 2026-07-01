@@ -1,0 +1,62 @@
+{
+  "journal_id": "specom",
+  "journal_name": "Speech Communication",
+  "papers": [
+    {
+      "title": "Introducing an experimental distortion-tolerant speech encryption scheme for secure voice communication",
+      "abstract": "The current increasing need for privacy-preserving voice communications is leading to new ideas for securing voice transmission. This paper refers to a relatively new concept of sending encrypted speech as pseudo-speech in the audio domain over digital voice communication infrastructures, like 3G cellular network and VoIP. This work presents a novel distortion-tolerant speech encryption scheme for secure voice communications over voice channels that combines the robustness of analog speech scrambling and elevated security offered by digital ciphers like AES-CTR. The system scrambles vocal parameters of a speech signal (loudness, pitch, timbre) using distance-preserving pseudo-random translations and rotations on a hypersphere of parameters. Next, scrambled parameters are encoded to a pseudo-speech signal adapted to transmission over digital voice channels equipped with voice activity detection. Upon reception of this pseudo-speech signal, the legitimate receiver restores distorted copies of the initial vocal parameters. Despite some deciphering errors, an integrated neural-based vocoder based on the LPCNet architecture reconstructs an intelligible speech. The experimental implementation of this speech encryption scheme has been tested by simulations and sending an encrypted signal over FaceTime between two iPhones 6 connected to the same WiFi network. Moreover, speech excerpts restored from encrypted signals were evaluated by a speech quality assessment on a group of about 40 participants. The experiments demonstrated that the proposed scheme produces intelligible speech with a gracefully progressive quality degradation depending on the channel noise. Finally, the preliminary computational analysis suggested that the presented setting may operate on high-end portable devices in nearly real-time.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.specom.2022.06.007",
+      "url": "https://www.semanticscholar.org/paper/6d75c94b45feb48e7be51c0a889980f2b35bdd23"
+    },
+    {
+      "title": "Speech emotion recognition: Emotional models, databases, features, preprocessing methods, supporting modalities, and classifiers",
+      "abstract": "Speech is the most natural way of expressing ourselves as humans. It is only natural then to extend this communication medium to computer applications. We define speech emotion recognition (SER) systems as a collection of methodologies that process and classify speech signals to detect the embedded emotions. SER is not a new field, it has been around for over two decades, and has regained attention thanks to the recent advancements. These novel studies make use of the advances in all fields of computing and technology, making it necessary to have an update on the current methodologies and techniques that make SER possible. We have identified and discussed distinct areas of SER, provided a detailed survey of current literature of each, and also listed the current challenges.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.specom.2019.12.001",
+      "url": "https://www.semanticscholar.org/paper/b71b889ab14820b81940ba1caeaf85c6ae9b7ffc"
+    },
+    {
+      "title": "A Survey of Deep Learning for Complex Speech Spectrograms",
+      "abstract": "Recent advancements in deep learning have significantly impacted the field of speech signal processing, particularly in the analysis and manipulation of complex spectrograms. This survey provides a comprehensive overview of the state-of-the-art techniques leveraging deep neural networks for processing complex spectrograms, which encapsulate both magnitude and phase information. We begin by introducing complex spectrograms and their associated features for various speech processing tasks. Next, we examine the key components and architectures of complex-valued neural networks, which are specifically designed to handle complex-valued data and have been applied to complex spectrogram processing. As recent studies have primarily focused on applying real-valued neural networks to complex spectrograms, we revisit these approaches and their architectural designs. We then discuss various training strategies and loss functions tailored for training neural networks to process and model complex spectrograms. The survey further examines key applications, including phase retrieval, speech enhancement, and speaker separation, where deep learning has achieved significant progress by leveraging complex spectrograms or their derived feature representations. Additionally, we examine the intersection of complex spectrograms with generative models. This survey aims to serve as a valuable resource for researchers and practitioners in the field of speech signal processing, deep learning and related fields.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2505.08694",
+      "url": "https://www.semanticscholar.org/paper/3e304b31a75b45a7dafea07615e53b5b51b81e3d"
+    },
+    {
+      "title": "Vibravox: A Dataset of French Speech Captured with Body-conduction Audio Sensors",
+      "abstract": "Vibravox is a dataset compliant with the General Data Protection Regulation (GDPR) containing audio recordings using five different body-conduction audio sensors: two in-ear microphones, two bone conduction vibration pickups, and a laryngophone. The dataset also includes audio data from an airborne microphone used as a reference. The Vibravox corpus contains 45 hours per sensor of speech samples and physiological sounds recorded by 188 participants under different acoustic conditions imposed by a high order ambisonics 3D spatializer. Annotations about the recording conditions and linguistic transcriptions are also included in the corpus. We conducted a series of experiments on various speech-related tasks, including speech recognition, speech enhancement, and speaker verification. These experiments were carried out using state-of-the-art models to evaluate and compare their performances on signals captured by the different audio sensors offered by the Vibravox dataset, with the aim of gaining a better grasp of their individual characteristics.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2407.11828",
+      "url": "https://www.semanticscholar.org/paper/7135db962ad035bde3a22fcb9fb0e63422e78b47"
+    },
+    {
+      "title": "Predicting speech intelligibility in older adults for speech enhancement using the Gammachirp Envelope Similarity Index, GESI",
+      "abstract": "We propose an objective intelligibility measure (OIM), called the Gammachirp Envelope Similarity Index (GESI), that can predict speech intelligibility (SI) in older adults. GESI is a bottom-up model based on psychoacoustic knowledge from the peripheral to the central auditory system. It computes the single SI metric using the gammachirp filterbank (GCFB), the modulation filterbank, and the extended cosine similarity measure. It takes into account not only the hearing level represented in the audiogram, but also the temporal processing characteristics captured by the temporal modulation transfer function (TMTF). To evaluate performance, SI experiments were conducted with older adults of various hearing levels using speech-in-noise with ideal speech enhancement on familiarity-controlled Japanese words. The prediction performance was compared with HASPIw2, which was developed for keyword SI prediction. The results showed that GESI predicted the subjective SI scores more accurately than HASPIw2. GESI was also found to be at least as effective as, if not more effective than, HASPIv2 in predicting English sentence-level SI. The effect of introducing TMTF into the GESI algorithm was insignificant, suggesting that TMTF measurements and models are not yet mature. Therefore, it may be necessary to perform TMTF measurements with bandpass noise and to improve the incorporation of temporal characteristics into the model.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.specom.2025.103318",
+      "url": "https://www.semanticscholar.org/paper/83a72d614dad742ee9135f7b596ee1fc1feb68a3"
+    },
+    {
+      "title": "Expectation of speech style improves audio-visual perception of English vowels",
+      "abstract": "Speech perception is influenced by both signal-internal properties and signal-independent knowledge, including communicative expectations. This study investigates how these two factors interact, focusing on the role of speech style expectations. Specifically, we examine how prior knowledge about speech style (clear versus plain speech) affects word identification and speech style judgment. Native English perceivers were presented with English words containing tense versus lax vowels in either clear or plain speech, with trial conditions manipulating whether style prompts (presented immediately prior to the target word) were congruent or incongruent with the actual speech style. The stimuli were also presented in three input modalities: auditory (speaker voice), visual (speaker face), and audio-visual. Results show that prior knowledge of speech style improved accuracy in identifying style after the session when style information in the prompt and target word was consistent, particularly in auditory and audio-visual modalities. Additionally, as expected, clear speech enhanced word intelligibility compared to plain speech, with benefits more evident for tense vowels and in auditory and audio-visual contexts. These results demonstrate that congruent style prompts improve style identification accuracy by aligning with high-level expectations, while clear speech enhances word identification accuracy due to signal-internal modifications. Overall, the current findings suggest an interplay of processing sources of information which are both signal-driven and signal-independent, and that high-level signal-complementary information such as speech style is not separate from, but is embodied in, the signal.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.specom.2025.103243",
+      "url": "https://www.semanticscholar.org/paper/8ab9e6141d5b5bd471399346acb7ec1f699430b8"
+    },
+    {
+      "title": "LORT: Locally Refined Convolution and Taylor Transformer for Monaural Speech Enhancement",
+      "abstract": "Achieving superior enhancement performance while maintaining a low parameter count and computational complexity remains a challenge in the field of speech enhancement. In this paper, we introduce LORT, a novel architecture that integrates spatial-channel enhanced Taylor Transformer and locally refined convolution for efficient and robust speech enhancement. We propose a Taylor multi-head self-attention (T-MSA) module enhanced with spatial-channel enhancement attention (SCEA), designed to facilitate inter-channel information exchange and alleviate the spatial attention limitations inherent in Taylor-based Transformers. To complement global modeling, we further present a locally refined convolution (LRC) block that integrates convolutional feed-forward layers, time-frequency dense local convolutions, and gated units to capture fine-grained local details. Built upon a U-Net-like encoder-decoder structure with only 16 output channels in the encoder, LORT processes noisy inputs through multi-resolution T-MSA modules using alternating downsampling and upsampling operations. The enhanced magnitude and phase spectra are decoded independently and optimized through a composite loss function that jointly considers magnitude, complex, phase, discriminator, and consistency objectives. Experimental results on the VCTK+DEMAND and DNS Challenge datasets demonstrate that LORT achieves competitive or superior performance to state-of-the-art (SOTA) models with only 0.96M parameters, highlighting its effectiveness for real-world speech enhancement applications with limited computational resources.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.specom.2025.103314",
+      "url": "https://www.semanticscholar.org/paper/e7beeae3cd3744700d55f953cf256cb4bf7fbfc9"
+    }
+  ]
+}

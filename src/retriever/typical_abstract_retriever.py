@@ -12,7 +12,7 @@ from ..journals.typical_abstract_store import (
     TypicalAbstractStore,
     aggregate_anchor_scores,
 )
-from ..utils.embedding import OllamaEmbedding
+from ..utils.embedding import OllamaEmbedding, encode_query
 
 
 class TypicalAbstractBM25Retriever:
@@ -133,7 +133,9 @@ class TypicalAbstractEmbeddingRetriever:
             return []
 
         anchor_k = anchor_k or max(top_k * 4, top_k)
-        query_embedding = self.embedding_client.embed(query_text).reshape(1, -1).astype(np.float32)
+        query_embedding = encode_query(
+            self.embedding_client, query_text
+        ).reshape(1, -1).astype(np.float32)
         distances, indices = self._index.search(query_embedding, min(anchor_k, self._index.ntotal))
 
         score_map: Dict[str, float] = {}

@@ -17,6 +17,70 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1016/j.cose.2025.104121",
       "url": ""
+    },
+    {
+      "title": "Memory under siege: A comprehensive survey of side-Channel attacks on memory",
+      "abstract": "Side-channel attacks on memory (SCAM) exploit unintended data leaks from memory subsystems to infer sensitive information, posing significant threats to system security. These attacks exploit vulnerabilities in memory access patterns, cache behaviors, and other microarchitectural features to bypass traditional security measures. The purpose of this research is to examine SCAM, classify various attack techniques, and evaluate existing defense mechanisms. It guides researchers and industry professionals in improving memory security and mitigating emerging threats. We begin by identifying the major vulnerabilities in the memory system that are frequently exploited in SCAM, such as cache timing, speculative execution, Rowhammer , and other sophisticated approaches. Next, we outline a comprehensive taxonomy that systematically classifies these attacks based on their types, target systems, attack vectors, and adversarial capabilities required to execute them. In addition, we review the current landscape of mitigation strategies, emphasizing their strengths and limitations. This work aims to provide a comprehensive overview of memory-based side-channel attacks with the goal of providing significant insights for researchers and practitioners to better understand, detect, and mitigate SCAM risks.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104810",
+      "url": "https://doi.org/10.1016/j.cose.2025.104810"
+    },
+    {
+      "title": "Usable authentication: Are we there yet?",
+      "abstract": "With technology increasingly embedded in everyday life, the demand for secure and usable authentication methods has never been greater. Traditional password-based systems continue to dominate, despite well-known usability and security challenges. This paper explores the evolution of user authentication technologies, from secret knowledge and tokens to biometrics and emerging approaches such as Passkeys. It critically evaluates the extent to which usability has been achieved, identifying both successes—such as biometrics integrated into smartphones—and persistent issues, including inconsistent guidance, ecosystem dependence, and accessibility barriers. Drawing on academic and commercial developments, the discussion highlights the growing burden on users who must authenticate across multiple devices and services daily. Future directions including transparent, continuous, and user-choice-driven authentication are discussed as potential solutions to mitigate this burden. Ultimately, it argues that while progress has been made, current solutions remain fragmented and often exclude key user groups. A more inclusive, consistent, and user-centred approach is essential to ensure authentication systems are both secure and truly usable in practice.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104823",
+      "url": "https://doi.org/10.1016/j.cose.2025.104823"
+    },
+    {
+      "title": "Cybersecurity and Cyber insurance for Small to Medium-sized Enterprises (SMEs): Perceptions, challenges and decision-making dynamics",
+      "abstract": "Cyber insurance is increasingly positioned as a complementary tool for managing cyber risk, yet Small to Medium-Sized Enterprises (SMEs) remain underrepresented in its adoption. This study investigates the perceptions, decision-making dynamics, and support needs of SMEs regarding cyber insurance, drawing on 38 semi-structured interviews with SMEs, insurers, brokers, and other relevant stakeholders. The findings reveal that many SMEs deprioritise cyber insurance; not because they dismiss its importance outright, but due to a combination of limited awareness, concerns over cost, and a perception that its value is minimal unless required by clients or regulators. This hesitation is further shaped by several key barriers: complex policy language, a lack of trust in insurers, and unclear internal ownership of cybersecurity responsibilities. Despite these challenges, the study identifies promising strategies to boost adoption. These include simplifying policy structures, fostering trust through collaborative awareness efforts, introducing financial incentives tailored to SME budgets, and offering accessible, user-friendly tools that help businesses assess their cyber risks and insurance needs. By identifying actionable strategies and addressing both cultural and structural barriers, this study contributes to efforts to enhance cybersecurity resilience in the SME sector.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104818",
+      "url": "https://doi.org/10.1016/j.cose.2025.104818"
+    },
+    {
+      "title": "A bag of words model for efficient discovery of roles in access control systems",
+      "abstract": "The popularity of the Role-based Access Control (RBAC) model is determined by its flexibility and its adaptability in different contexts, easing the enforcement and the management of security policy. In some cases, different kinds of (cardinality) constraints are considered to adjust and adapt roles and their assignment to best represent the organization’s security policy. However, the process of role mining, whether based on an organizational scenario or on existing permission assignments, is a hard task, since the problem shows NP-hard computational complexity and in case of frequent policy updates, the dynamic adaptation of the roles can be challenging. Then, the only possibility of producing an RBAC model compliant with the security policy is to resort to heuristics, which may return an approximation of the optimal solution. In this paper, we propose an innovative approach to explore the space of the solution based on the bag of word value, which is commonly deployed in the field of document representation and knowledge extraction. We propose different heuristics and validate our approach reporting the results of the application to standard datasets, and providing an evaluation under different metrics and indicators. We show that our technique returns improved results and provides an alternative way to produce valid solutions for constrained RBAC.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104808",
+      "url": "https://doi.org/10.1016/j.cose.2025.104808"
+    },
+    {
+      "title": "Characterizing tactics, techniques, and procedures in the macOS threat landscape",
+      "abstract": "As macOS systems increasingly become malware targets, understanding the tactics, techniques, and procedures (TTPs) used by adversaries is essential to improving defense strategies. This paper provides a systematic and detailed analysis of macOS malware using the MITRE ATT&CK framework, focusing on TTPs at key stages of the malware attack cycle. Leveraging a comprehensive dataset of 57,636 macOS malware samples collected between November 2006 and October 2024, we employ both static and dynamic analysis techniques to uncover patterns in adversary behavior. Our analysis, primarily based on static analysis techniques, offers a broad representation of macOS malware and highlights common characteristics across samples. While we only partially explore dynamic behaviors, we identify recurring patterns that align with specific TTPs in the MITRE ATT&CK framework, such as persistence and defense evasion. This mapping contributes to a more structured understanding of macOS threats and can help inform future detection and mitigation efforts.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104806",
+      "url": "https://doi.org/10.1016/j.cose.2025.104806"
+    },
+    {
+      "title": "Techniques and metrics for evasion attack mitigation",
+      "abstract": "Evasion attacks pose a substantial risk to the application of Machine Learning (ML) in Cybersecurity, potentially leading to safety hazards or security breaches in large-scale deployments. Adversaries can employ evasion attacks as an initial tactic to deceive malware or network scanners using ML, thereby orchestrating traditional cyber attacks to disrupt systems availability or compromise integrity. Adversarial data designed to fool AI systems for cybersecurity can be engineered by strategically selecting, modifying, or creating test instances. This paper presents novel defender-centric techniques and metrics for mitigating evasion attacks by leveraging adversarial knowledge, exploring potential exploitation methods, and enhancing alarm detection capabilities. We first introduce two new evasion resistance metrics: adversarial failure rate ( afr ) and adversarial failure curves ( afc ). These metrics generalize previous approaches, as they can be applied to threshold classifiers, facilitating analyses for adversarial attacks comparable to those performed with Receiver Operating Characteristics (ROC) curve. Subsequently, we propose two novel evasion resistance techniques (trainset size pinning and model matrix), extending research in keyed intrusion detection and randomization. We explore the application of proposed techniques and metrics to an intrusion detection system as a pilot study using two public datasets, ‘BETH 2021’ and ‘Kyoto 2015’, which are well-established cybersecurity datasets for uncertainty and robustness benchmarking. The experimental results demonstrate that the combination of the proposed randomization techniques consistently produces remarkable improvement over other known randomization techniques.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104802",
+      "url": "https://doi.org/10.1016/j.cose.2025.104802"
+    },
+    {
+      "title": "The Reverse File System: Towards open cost-effective secure WORM storage devices for logging",
+      "abstract": "Write Once Read Many (WORM) properties for storage devices are desirable to ensure data immutability for applications such as secure logging, regulatory compliance, archival storage, and other types of backup systems. WORM devices guarantee that data, once written, cannot be altered or deleted. However, implementing secure and compatible WORM storage remains a challenge. Traditional solutions often rely on specialized hardware, which is either costly, closed, or inaccessible to the general public. Distributed approaches, while promising, introduce additional risks such as denial-of-service vulnerabilities and operational complexity. We introduce Socarrat, a novel, cost-effective, and local WORM storage solution that leverages a simple external USB device-specifically, a single-board computer running Linux with USB On-The-Go (OTG) support. The resulting device can be connected via USB, appearing as an ordinary external disk formatted with an Ext4 or exFAT file system, without requiring any specialized software or drivers. By isolating the WORM enforcement mechanism in a dedicated USB hardware module, Socarrat significantly reduces the attack surface and ensures that even privileged attackers cannot modify or erase stored data. In addition to the WORM capacity, the system is designed to be tamper-evident, becoming resilient against advanced attacks. This work describes a novel approach, the Reverse File System, based on inferring the file system operations occurring at higher layers in the host computer where Socarrat is mounted. The paper also describes the current Socarrat prototype, implemented in Go and available as free/libre software. Finally, it provides a complete evaluation of the logging performance on different single-board computers.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104786",
+      "url": "https://doi.org/10.1016/j.cose.2025.104786"
+    },
+    {
+      "title": "Secure communication networks and distributed systems for a resilient society",
+      "abstract": "Given the central role of modern digital technologies, it is crucial that digital infrastructures and information systems be resilient. Yet, communication networks and interconnected IT systems are not always secure nor reliable. They are susceptible to design and implementation flaws, which make them vulnerable to attacks. This briefing paper aims to examine the root causes of this problem and how we could address them. We start by exploring some practical scenarios that demonstrate failures in the construction of secure networks and distributed systems. We then explore technical and non-technical challenges as potential root causes of these failures and conclude with a call to action to address the issues. We find that several stakeholder groups – particularly researchers, developers, decision-makers, and policy-makers – must take action to ensure that networks and distributed systems become more secure and resilient in the future.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.cose.2025.104791",
+      "url": "https://doi.org/10.1016/j.cose.2025.104791"
     }
   ]
 }

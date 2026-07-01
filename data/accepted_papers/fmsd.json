@@ -1,0 +1,70 @@
+{
+  "journal_id": "fmsd",
+  "journal_name": "Formal Methods in System Design",
+  "papers": [
+    {
+      "title": "Integrating formal specifications into applications: the ProB Java API",
+      "abstract": "The common formal methods workflow consists of formalising a model followed by applying model checking and proof techniques. Once an appropriate level of certainty is reached, code generators are used in order to gain executable code. In this paper, we propose a different approach: instead of generating code from formal models, it is also possible to embed a model checker or animator into applications in order to use the formal models themselves at runtime. We present a Java API to the ProB animator and model checker. We describe several case studies that use this API as enabling technology to interact with a formal specification at runtime.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-020-00351-3",
+      "url": "https://www.semanticscholar.org/paper/37331152ca738fe5b350910c406f249dccc26ee2"
+    },
+    {
+      "title": "Construction of verifier combinations from off-the-shelf components",
+      "abstract": "Software verifiers have different strengths and weaknesses, depending on the characteristics of the verification task. It is well-known that combinations of verifiers via portfolio- and selection-based approaches can help to combine their strengths. In this paper, we investigate (a) how to easily compose such combinations from existing, ‘off-the-shelf’ verifiers without changing them and (b) how much performance improvement each combination can yield, regarding the effectiveness (number of solved verification tasks) and efficiency (consumed resources). First, we contribute a method to systematically and conveniently construct verifier combinations from existing tools using CoVeriTeam. We consider sequential portfolios, parallel portfolios, and algorithm selections. Second, we perform a large experiment to show that combinations can improve the verification results without additional computational resources. Our benchmark set is the category ReachSafety as used in the 11th Competition on Software Verification (SV-COMP 2022). This category contains 5 400 verification tasks, with diverse characteristics. The key novelty of this work in comparison to the conference version of the article is to introduce a validation step into the verifier combinations. By validating the output of the verifier, we can mitigate the adverse effect of unsound tools on the performance of portfolios, especially parallel portfolios, as observed in our previous experiments. We confirm that combinations employing a validation process are significantly more robust against the inclusion of unsound verifiers. Finally, all combinations are constructed from off-the-shelf verifiers, that is, we use the verification tools as published. The results of our work suggest that users of combinations of verification tools can achieve a significant improvement at a negligible cost, and more robustness by using combinations with validators.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-024-00449-y",
+      "url": "https://www.semanticscholar.org/paper/c6576442355b98f6bcb0bbe7d71b8a724f7edefd"
+    },
+    {
+      "title": "Towards neural-network-guided program synthesis and verification",
+      "abstract": "We propose a novel framework of program and invariant synthesis called neural network-guided synthesis (NeuGuS). We first show that, by suitably designing and training neural networks, we can extract logical formulas over integers from the weights and biases of the trained neural networks. Based on the idea, we have implemented a tool to synthesize formulas from positive/negative examples and implication constraints, and obtained promising experimental results. We also discuss two applications of our synthesis method. One is the use of our tool for qualifier discovery in the framework of ICE-learning-based CHC solving, which can in turn be applied to program verification and inductive invariant synthesis. Another application is to a new program development framework called oracle-based programming, which is a neural-network-guided variation of Solar-Lezama’s program synthesis by sketching.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-024-00468-9",
+      "url": "https://www.semanticscholar.org/paper/6850a9b4ebe556a69899ce6b6a06e53e4c5bbb85"
+    },
+    {
+      "title": "Golem: a flexible and efficient solver for constrained Horn clauses",
+      "abstract": "The logical framework of Constrained Horn Clauses (CHC) models verification tasks from a variety of domains, ranging from verification of safety properties in transition systems to modular verification of programs with procedures. In this work we present Golem, a flexible and efficient solver for satisfiability of CHCs over linear real and integer arithmetic. Golem provides flexibility with modular architecture and multiple back-end model-checking algorithms, as well as efficiency with tight integration with the underlying SMT solver. This paper describes the architecture of Golem and its back-end engines, which include our recently introduced model-checking algorithm TPA for deep exploration. The description is complemented by extensive evaluation, demonstrating the competitive nature of the solver.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-025-00470-9",
+      "url": "https://www.semanticscholar.org/paper/40618679e65a438faa8d9c342356daa5fd5c7518"
+    },
+    {
+      "title": "Preserving provability over GPU program optimizations with annotation-aware transformations",
+      "abstract": "GPU programs are widely used in industry. To obtain the best performance, a typical development process involves the manual or semi-automatic application of optimizations prior to compiling the code. Such optimizations can introduce errors. To avoid the introduction of errors, we can augment GPU programs with (pre- and postcondition-style) annotations to capture functional properties. However, keeping these annotations correct when optimizing GPU programs is labor-intensive and error-prone. This paper presents an approach to automatically apply optimizations to GPU programs while preserving provability by defining annotation-aware transformations. It applies frequently-used GPU optimizations, but besides transforming code, it also transforms the annotations. The approach has been implemented in the Alpinist tool and we evaluate Alpinist in combination with the VerCors program verifier, to automatically apply optimizations to a collection of verified programs and reverify them.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-025-00480-7",
+      "url": "https://www.semanticscholar.org/paper/0fc9c35c7079bf496bc40a755360161c4b493535"
+    },
+    {
+      "title": "SAT modulo discrete event simulation applied to railway design capacity analysis",
+      "abstract": "This paper proposes a new method of combining SAT with discrete event simulation. This new integration proved useful for designing a solver for capacity analysis in early phase railway construction design. Railway capacity is complex to define and analyze, and existing tools and methods used in practice require comprehensive models of the railway network and its timetables. Design engineers working within the limited scope of construction projects report that only ad-hoc, experience-based methods of capacity analysis are available to them. Designs often have subtle capacity pitfalls which are discovered too late, only when network-wide timetables are made—there is a mismatch between the scope of construction projects and the scope of capacity analysis, as currently practiced. We suggest a language for capacity specifications suited for construction projects, expressing properties such as running time, train frequency, overtaking and crossing. Such specifications can be used as contracts in the interface between construction projects and network-wide capacity analysis. We show how these properties can be verified fully automatically by building a special-purpose solver which splits the problem into two: an abstracted SAT-based dispatch planning, and a continuous-domain dynamics with timing constraints evaluated using discrete event simulation. The two components communicate in a CEGAR loop (counterexample-guided abstraction refinement). This architecture is beneficial because it clearly distinguishes the combinatorial choices on the one hand from continuous calculations on the other, so that the simulation can be extended by relevant details as needed. We describe how loops in the infrastructure can be handled to eliminate repeating dispatch plans, and use case studies based on data from existing infrastructure and ongoing construction projects to show that our method is fast enough at relevant scales to provide agile verification in a design setting. Similar SAT modulo discrete event simulation combinations could also be useful elsewhere where one or both of these methods are already applicable such as in bioinformatics or hardware/software verification.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-021-00368-2",
+      "url": "https://www.semanticscholar.org/paper/901037b5d4718b7c0ab0bdff96ad2c874c6b19b5"
+    },
+    {
+      "title": "A program instrumentation framework for automatic verification",
+      "abstract": "In deductive verification and software model checking, dealing with certain specification language constructs can be problematic when the back-end solver is not sufficiently powerful or lacks the required theories. One way to deal with this is to transform, for verification purposes, the program to an equivalent one not using the problematic constructs, and to reason about this equivalent program instead. In this article, we propose program instrumentation as a unifying verification paradigm that subsumes various existing ad-hoc approaches, has a clear formal correctness criterion, can be applied automatically, and can transfer back witnesses and counterexamples. We illustrate our approach on the automated verification of programs that involve quantification and aggregation operations over arrays, such as the maximum value or sum of the elements in a given segment of the array, which are known to be difficult to reason about automatically. We implement our approach in the MonoCera tool, which is tailored to the verification of programs with aggregation, and evaluate it on example programs, including SV-COMP programs.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-026-00493-w",
+      "url": "https://www.semanticscholar.org/paper/76ea1786e1a7886f851186ebf39e24da62709fa9"
+    },
+    {
+      "title": "Isla: integrating full-scale ISA semantics and axiomatic concurrency models (extended version)",
+      "abstract": "Architecture specifications such as Armv8-A and RISC-V are the ultimate foundation for software verification and the correctness criteria for hardware verification. They should define the allowed sequential and relaxed-memory concurrency behaviour of programs, but hitherto there has been no integration of full-scale instruction-set architecture (ISA) semantics with axiomatic concurrency models, either in mathematics or in tools. These ISA semantics can be surprisingly large and intricate, e.g. 100k $$+$$ + lines for Armv8-A. In this paper we present a tool, Isla, for computing the allowed behaviours of concurrent litmus tests with respect to full-scale ISA definitions, in the Sail language, and arbitrary axiomatic relaxed-memory concurrency models, in the Cat language. It is based on a generic symbolic engine for Sail ISA specifications. We equip the tool with a web interface to make it widely accessible, and illustrate and evaluate it for Armv8-A and RISC-V. The symbolic execution engine is valuable also for other verification tasks: it has been used in automated ISA test generation for the Arm Morello prototype architecture, extending Armv8-A with CHERI capabilities, and for Iris program-logic reasoning about binary code above the Armv8-A and RISC-V ISA specifications. By using full-scale and authoritative ISA semantics, Isla lets one evaluate litmus tests using arbitrary user instructions with high confidence. Moreover, because these ISA specifications give detailed and validated definitions of the sequential aspects of systems functionality, as used by hypervisors and operating systems, e.g. instruction fetch, exceptions, and address translation, our tool provides a basis for developing concurrency semantics for these. We demonstrate this for the Armv8-A instruction-fetch and virtual-memory models and examples of Simner et al.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10703-023-00409-y",
+      "url": "https://www.semanticscholar.org/paper/88b98c5febf581087c9cbeb333a53902f7b9e32f"
+    }
+  ]
+}

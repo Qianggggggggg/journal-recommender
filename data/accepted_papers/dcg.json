@@ -1,0 +1,46 @@
+{
+  "journal_id": "dcg",
+  "journal_name": "Discrete & Computational Geometry",
+  "papers": [
+    {
+      "title": "Discrete Constant Mean Curvature Cylinders and Isothermic Tori",
+      "abstract": "We consider the monodromy problem of Darboux transforms of discrete isothermic surfaces using the integrable theory of discrete polarised curves. Then we provide, for the first time, closed-form discrete parametrisations of discrete isothermic cylinders, discrete constant mean curvature cylinders, and discrete isothermic tori.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00454-024-00697-z",
+      "url": "https://www.semanticscholar.org/paper/6732ffe35dad6f3deabf6cb0837d11327fd4f45a"
+    },
+    {
+      "title": "Decorated Discrete Conformal Equivalence in Non-Euclidean Geometries",
+      "abstract": "We introduce decorated piecewise hyperbolic and spherical surfaces and discuss their discrete conformal equivalence. A decoration is a choice of circle about each vertex of the surface. Our decorated surfaces are closely related to inversive distance circle packings, canonical tessellations of hyperbolic surfaces, and hyperbolic polyhedra. Discrete conformal equivalence introduces an equivalence relation on decorated piecewise hyperbolic and spherical surfaces. We prove the corresponding uniformization theorem—in each equivalence class there is a unique representative on a constant curvature surface. Furthermore, we introduce a fundamental invariant characterizing the discrete conformal classes. We show that one can deform continuously between decorated piecewise hyperbolic, Euclidean, and spherical surfaces sharing the same invariant. Our approach is based on a variational principle, which also provides a way to compute the discrete uniformization and geometric transitions.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00454-025-00749-y",
+      "url": "https://www.semanticscholar.org/paper/3c05bd2b1ef544b07b8bd204da46b4e8ebbea080"
+    },
+    {
+      "title": "The Tropical and Zonotopal Geometry of Periodic Timetables",
+      "abstract": "The Periodic Event Scheduling Problem (PESP) is the standard mathematical tool for optimizing periodic timetables in public transport. A solution to a PESP instance consists of three parts: a periodic timetable, a periodic tension, and integer offset values. While the space of periodic tensions has received much attention in the past, we explore geometric properties of the other two components. The general aim of this paper is to establish novel connections between periodic timetabling and discrete geometry. Firstly, we study the space of feasible periodic timetables as a disjoint union of polytropes. These are polytopes that are convex both classically and in the sense of tropical geometry. We then study this decomposition and use it to outline a new heuristic for PESP, based on neighbourhood relations of the polytropes. Secondly, we recognize that the space of fractional cycle offsets is in fact a zonotope, and then study its zonotopal tilings. These are related to the hyperrectangle of fractional periodic tensions, as well as the polytropes of the periodic timetable space, and we detail their interplay. To conclude, we also use this new understanding to give tight lower bounds on the minimum width of an integral cycle basis.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00454-024-00686-2",
+      "url": "https://www.semanticscholar.org/paper/300b94abaf131da780eebbcd087c3d19248040de"
+    },
+    {
+      "title": "Discrete Weierstrass-Type Representations",
+      "abstract": "Discrete Weierstrass-type representations yield a construction method in discrete differential geometry for certain classes of discrete surfaces. We show that the known discrete Weierstrass-type representations of certain surface classes can be viewed as applications of the $$\\varOmega $$ Ω -dual transform to lightlike Gauss maps in Laguerre geometry. From this construction, further Weierstrass-type representations arise. As an application of the techniques we develop, we show that all discrete linear Weingarten surfaces of Bryant or Bianchi type locally arise via Weierstrass-type representations from discrete holomorphic maps.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00454-022-00439-z",
+      "url": "https://www.semanticscholar.org/paper/29ab3208dd6cfc15644516774c01ee23b2f75216"
+    },
+    {
+      "title": "Geodesic Geometry on Graphs",
+      "abstract": "We investigate a graph theoretic analog of geodesic geometry. In a graph $$G=(V,E)$$ G = ( V , E ) we consider a system of paths $$\\mathcal {P}=\\{P_{u,v}:u,v\\in V\\}$$ P = { P u , v : u , v ∈ V } where $$P_{u,v}$$ P u , v connects vertices u and v . This system is consistent in that if vertices y , z are in $$P_{u,v}$$ P u , v , then the subpath of $$P_{u,v}$$ P u , v between them coincides with $$P_{y,z}$$ P y , z . A map $$w:E\\rightarrow (0,\\infty )$$ w : E → ( 0 , ∞ ) is said to induce $$\\mathcal {P}$$ P if for every $$u, v\\in V$$ u , v ∈ V the path $$P_{u,v}$$ P u , v is w -geodesic. We say that G is metrizable if every consistent path system is induced by some such w . As we show, metrizable graphs are very rare, whereas there exist infinitely many 2-connected metrizable graphs.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00454-021-00345-w",
+      "url": "https://www.semanticscholar.org/paper/7b413ddbc6a1694207fc1f130976cfca14215b1f"
+    }
+  ]
+}

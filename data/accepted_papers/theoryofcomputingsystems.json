@@ -25,6 +25,54 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s00224-025-10222-1",
       "url": ""
+    },
+    {
+      "title": "LZ78 Substring Compression in Compressed Space",
+      "abstract": "The Lempel–Ziv 78 (LZ78) factorization is a well-studied technique for data compression. It and its derivates are used in compression formats such as compress or gif. Although most research focuses on the factorization of plain data, not much research has been conducted on indexing the data for fast LZ78 factorization. Here, we study the LZ78 factorization and its derivates in the substring compression model, where we are allowed to index the data and return the factorization of a substring specified at query time. In that model, we propose an algorithm that works in compressed space, computing the factorization with a logarithmic slowdown compared to the optimal time complexity.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-025-10245-8",
+      "url": "https://www.semanticscholar.org/paper/676113b20f387accf8bebf2ab42e82abb78facf6"
+    },
+    {
+      "title": "A More General Theory of Static Approximations for Conjunctive Queries",
+      "abstract": "Conjunctive query (CQ) evaluation is NP-complete, but becomes tractable for fragments of bounded hypertreewidth. Approximating a hard CQ by a query from such a fragment can thus allow for an efficient approximate evaluation. While underapproximations (i.e., approximations that return correct answers only) are well-understood, the dual notion of overapproximations (i.e, approximations that return complete – but not necessarily sound – answers), and also a more general notion of approximation based on the symmetric difference of query results, are almost unexplored. In fact, the decidability of the basic problems of evaluation, identification, and existence of those approximations has been open. This article establishes a connection between overapproximations and existential pebble games that allows for studying such problems systematically. Building on this connection, it is shown that the evaluation and identification problem for overapproximations can be solved in polynomial time. While the general existence problem remains open, the problem is shown to be decidable in 2EXPTIME over the class of acyclic CQs and in PTIME for Boolean CQs over binary schemata. Additionally we propose a more liberal notion of overapproximations to remedy the known shortcoming that queries might not have an overapproximation, and study how queries can be overapproximated in the presence of tuple generating and equality generating dependencies. The techniques are then extended to symmetric difference approximations and used to provide several complexity results for the identification, existence, and evaluation problem for this type of approximations.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-019-09924-0",
+      "url": "https://www.semanticscholar.org/paper/1d6b01422f41fcfcc3fef1cd1c2d1573c14d1088"
+    },
+    {
+      "title": "Refined Parameterizations for Computing Colored Cuts in Edge-Colored Graphs",
+      "abstract": "In the NP-hard Colored (s,t)-Cut problem, the input is a graph G = (V,E) together with an edge-coloring ℓ : E → C, two vertices s and t, and a number k. The question is whether there is a set S⊆C$S\\subseteq C$\\end{document} of at most k colors such that deleting every edge with a color from S destroys all paths between s and t in G. We continue the study of the parameterized complexity of Colored (s,t)-Cut. First, we consider parameters related to the structure of G. For example, we study parameterization by the number ξi of edge deletions that are needed to transform G into a graph with maximum degree i. We show that Colored (s,t)-Cut is W[2]-hard when parameterized by ξ3, but fixed-parameter tractable when parameterized by ξ2. Second, we consider parameters related to the coloring ℓ. We show fixed-parameter tractability for three parameters that are potentially smaller than the total number of colors |C| and provide a linear-size problem kernel for a parameter related to the number of edges with rare edge colors.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-022-10101-z",
+      "url": "https://www.semanticscholar.org/paper/502c36587693a3f22cf900f6530d8a77449a1b93"
+    },
+    {
+      "title": "Computing Hitting Set Kernels By AC0-Circuits",
+      "abstract": "Given a hypergraph H = (V,E), what is the smallest subset X⊆V$X \\subseteq V$\\end{document} such that e ∩ X≠∅ holds for all e ∈ E? This problem, known as the hitting set problem, is a basic problem in combinatorial optimization and has been studied extensively in both classical and parameterized complexity theory. There are well-known kernelization algorithms for it, which get a hypergraph H and a number k as input and output a hypergraph H′ such that (1) H has a hitting set of size k if and only if H′$H^{\\prime }$\\end{document} has such a hitting set and (2) the size of H′$H^{\\prime }$\\end{document} depends only on k and on the maximum cardinality d of hyperedges in H. The algorithms run in polynomial time and can be parallelized to a certain degree: one can easily compute hitting set kernels in parallel time O(k) and not-so-easily in time O(d) – but it was conjectured that these are the best parallel algorithms possible. We refute this conjecture and show how hitting set kernels can be computed in constant parallel time. For our proof, we introduce a new, generalized notion of hypergraph sunflowers and show how iterated applications of the color coding technique can sometimes be collapsed into a single application.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-019-09941-z",
+      "url": "https://www.semanticscholar.org/paper/70abbe110a6be18ec9a01a5d9696a067d1145e19"
+    },
+    {
+      "title": "Computing Majority by Constant Depth Majority Circuits with Low Fan-in Gates",
+      "abstract": "We study the following computational problem: for which values of k, the majority of n bits MAJn can be computed with a depth two formula whose each gate computes a majority function of at most k bits? The corresponding computational model is denoted by MAJk ∘ MAJk. We observe that the minimum value of k for which there exists a MAJk ∘ MAJk circuit that has high correlation with the majority of n bits is equal to Θ(n1/2). We then show that for a randomized MAJk ∘ MAJk circuit computing the majority of n input bits with high probability for every input, the minimum value of k is equal to n2/3 + o(1). We show a worst case lower bound: if a MAJk ∘ MAJk circuit computes the majority of n bits correctly on all inputs, then k ≥ n13/19 + o(1).",
+      "year": 2016,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-018-9900-3",
+      "url": "https://www.semanticscholar.org/paper/33c875f2da5df8907475235a9e1a646f68987dcd"
+    },
+    {
+      "title": "Typical Sequences Revisited — Computing Width Parameters of Graphs",
+      "abstract": "In this work, we give a structural lemma on merges of typical sequences, a notion that was introduced in 1991 [Lagergren and Arnborg, Bodlaender and Kloks, both ICALP 1991] to obtain constructive linear time parameterized algorithms for treewidth and pathwidth. The lemma addresses a runtime bottleneck in those algorithms but so far it does not lead to asymptotically faster algorithms. However, we apply the lemma to show that the cutwidth and the modified cutwidth of series parallel digraphs can be computed in polynomial time.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00224-021-10030-3",
+      "url": "https://www.semanticscholar.org/paper/2e0c7a3176c9b39a237743aa7ae8303b7dc584f4"
     }
   ]
 }

@@ -24,6 +24,7 @@ import rank_bm25
 from ..journals.accepted_paper_store import AcceptedPaperStore
 from ..journals.journal_model import Journal
 from ..journals.journal_store import JournalStore
+from ..utils.embedding import encode_query
 
 
 class AcceptedPaperBM25Retriever:
@@ -187,9 +188,9 @@ class AcceptedPaperEmbeddingRetriever:
         if anchor_k <= 0:
             return []
 
-        query_embedding = (
-            self.embedding_client.embed(query).reshape(1, -1).astype(np.float32)
-        )
+        query_embedding = encode_query(
+            self.embedding_client, query
+        ).reshape(1, -1).astype(np.float32)
         distances, indices = self._index.search(query_embedding, anchor_k)
 
         per_top_score: Dict[str, float] = {}

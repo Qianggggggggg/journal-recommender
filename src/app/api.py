@@ -181,6 +181,9 @@ def get_pipeline() -> RecommenderPipeline:
             base_url=app_config["ollama"]["base_url"],
             model=app_config["ollama"]["embedding_model"],
             timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
+            query_instruction=app_config.get("ollama", {}).get(
+                "embedding_query_instruction"
+            ),
         )
 
         # 只有向量搜索可用时才创建 embedding retriever
@@ -286,13 +289,21 @@ def get_pipeline() -> RecommenderPipeline:
         # 初始化论文解析器
         parser = PaperParser(llm)
 
+        # 2026-06-30: 线上路径也加载 AcceptedPaperStore，与评测路径保持一致。
+        # 之前传 None 导致 candidate_in_accepted_corpus 等特征在两条路径中不一致。
+        from src.journals.accepted_paper_store import AcceptedPaperStore
+        _accepted_store = AcceptedPaperStore(
+            accepted_dir=app_config["data"].get("accepted_papers_dir", "data/accepted_papers")
+        )
+        _accepted_store.load()
+
         # 5.3: LTR adapter(默认 OFF 时 LTRAdapter.enabled=False,pipeline 走原路径)
         from src.ranker.ltr_adapter import LTRAdapter
         ltr_config = (app_config.get("ranking", {}).get("learned_reranker", {}) or {})
         learned_reranker = LTRAdapter(
             config=ltr_config,
             journal_store=_store,
-            accepted_paper_store=None,  # API 路径不依赖 accepted_paper_store
+            accepted_paper_store=_accepted_store,
         )
 
         _pipeline = RecommenderPipeline(
@@ -308,7 +319,7 @@ def get_pipeline() -> RecommenderPipeline:
             evidence_extractor=evidence_extractor,
             # 6.4: pass the loaded evidence_snapshot as the pipeline's
             # evidence_lookup so the LTR model sees real LLM evidence
-            # (26-dim) instead of neutral 0.5/0.0 defaults.
+            # (22-dim) instead of neutral 0.5/0.0 defaults.
             # Mirrors scripts/run_evaluation.py:524-527.
             # Without this, the LTR's 6 evidence-related weights operate
             # on a constant input and lose the discrimination the model
@@ -316,7 +327,7 @@ def get_pipeline() -> RecommenderPipeline:
             # for llm_scope_fit in training data).
             evidence_lookup=evidence_snapshot or None,
             feature_schema=(
-                "26_dim_with_llm_evidence" if evidence_snapshot else "20_dim_base"
+                "22_dim_with_llm_evidence" if evidence_snapshot else "16_dim_base"
             ),
         )
 

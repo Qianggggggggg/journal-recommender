@@ -1,0 +1,86 @@
+{
+  "journal_id": "tcasi",
+  "journal_name": "IEEE Transactions on Circuits and Systems I: Regular Papers",
+  "papers": [
+    {
+      "title": "Cyber-Attack on Charge Pump Phase-Locked Loops in Distributed Energy Systems",
+      "abstract": "This article analyzes the vulnerability of the circuit system in the charge pump phase-locked loop (CPPLL) in inverter-based distributed energy systems by designing an attack strategy that can exploit the tracking characteristics and closed-loop bandwidth of the CPPLL at non-nominal grid frequencies. Meanwhile, considering attack resource constraints, the CPPLL-based attack is analyzed across different regions to study the selection of attack targets. A multi-objective optimization problem is formulated to maximize the attack effect, such as renewable energy revenue loss, power dispatch error and voltage deviation rate. To solve this dynamic and high-dimensional optimization problem, an improved Deep Deterministic Policy Gradient (DDPG) combined with robust optimization is proposed to integrate the multi-objective into a scalarized reward function and learn the optimal policy with an Actor-Critic network. Simulation studies, conducted on a modified IEEE-33 bus system, reveal that the CPPLL-based attack with the proposed attack strategy can result in: 1) larger loss to renewable energy revenue, power dispatch, and voltage deviation rate at the low-nominal grid frequency and 2) maximized comprehensive loss in the distributed energy system by attacking cluster inverters compared to distributed inverters.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2025.3643491",
+      "url": "https://openalex.org/W7160599459"
+    },
+    {
+      "title": "A Handgrip-Responsive mmWave Phased Array Antenna-PA Module With Antenna-Based Capacitive Sensor for EIRP Recovery via Adaptive Current Redistribution",
+      "abstract": "This paper presents a 5G/6G millimeter-wave (mmWave) phased array antenna-power amplifier module that recovers the effective isotropic radiated power (EIRP) during a user’s handgrip in mobile devices. A sentenna device, which combines a capacitive sensor and an antenna to enable both wireless communication and handgrip detection, is designed and utilized to distinguish between antenna elements blocked by a user’s hand and those unblocked within the phased-array system, without using external sensors such as radar sensors. Based on handgrip information from the sentenna devices, current to the front-end circuits of blocked antenna units is cut off and redistributed to those of unblocked units. In the absence of handgrip detection and current redistribution (CR) functions, the measured EIRP of the $1\\times 4$ phased array sentenna system drops from + 31.4 dBm to + 22.4 dBm when up to three sentenna units are blocked. In contrast, with these functions enabled, the worst-case EIRP degradation is limited to + 27.4 dBm, effectively mitigating up to 5 dB of performance loss. Notably, this EIRP recovery is achieved while also improving the output-referred third-order intercept point (OIP3).",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3666207",
+      "url": "https://openalex.org/W7151991620"
+    },
+    {
+      "title": "Multi-Input Ciphertext Multiplication for Homomorphic Encryption",
+      "abstract": "Homomorphic encryption (HE) enables arithmetic operations to be performed directly on encrypted data. It is essential for privacy-preserving applications such as machine learning, medical diagnosis, and financial data analysis. In popular HE schemes, ciphertext multiplication is only defined for two inputs. However, the multiplication of multiple inputs is needed in many HE applications. In our previous work, a three-input ciphertext multiplication method for the CKKS HE scheme was developed. This paper first reformulates the three-input ciphertext multiplication to enable the combination of computations in order to further reduce the complexity. Thesecond contribution is extending the multiplication to multiple inputs without compromising the noise overhead. Additional evaluation keys are introduced to achieve relinearization of polynomial multiplication results. To minimize the complexity of the large number of rescaling units in the multiplier, a theoretical analysis is developed to relocate the rescaling, and a multi-level rescaling approach is proposed to implement combined rescaling with complexity similar to that of a single rescaling unit. Guidelines and examples are provided on the input partition to enable the combination of more rescaling operations. Additionally, efficient hardware architectures are designed to implement our proposed multipliers. The improved three-input ciphertext multiplier reduces the logic area and latency by 15% and 50%, respectively, compared to the best prior design. For multipliers with more inputs, ranging from 4 to 12, the architectural analysis reveals 29% savings in area and 63% shorter latency, on average, compared to prior work.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3674689",
+      "url": "https://openalex.org/W7140209945"
+    },
+    {
+      "title": "Optimized Lightweight Midori Cipher Architecture Featuring Side-Channel Resilient S-Boxes for Secure Edge Computing",
+      "abstract": "This paper presents novel hardware architectures for Midori, a lightweight symmetric block cipher optimized for low-energy edge computing applications. To enhance the efficiency of the Midori-64 variant, the architecture has been redesigned with a 16-bit datapath. The proposed design adopts a hybrid approach, combining parallel and serial data processing to meet the demands of encryption. Specialized selector units are integrated into the architecture to streamline this process, resulting in improved performance while maintaining a compact footprint. In addition to architectural enhancements, a masking countermeasure has been incorporated into the S-boxes of Midori to strengthen resistance against side-channel power analysis attacks. The masked S-boxes were initially integrated into the cipher’s substitution-permutation network (SPN), forming a secure variant of the core transformation layer. This modified SPN was subsequently embedded into the proposed Midori-64 architecture, and the associated performance and area overheads were systematically evaluated. The proposed masked S-boxes have an area reduction of 55.7%, power reduction of 62.38% and energy reduction of 78.2% compared to other masked designs. These significant improvements come with a 50% reduction in area overheads and a 7% reduction in delay overheads when compared to the current state-of-the-art masked designs with respect to the unmasked designs. We also evaluated the modified, overall masked and unmasked encryption architecture for Midori-64 on Nexys4 DDR FPGA and for standard cell libraries. Our findings indicate that the proposed masked designs offer improved performance with significantly reduced overheads compared to their unmasked counterparts. The FPGA-based implementations have proven to be better for the low area and high throughput requirements for a constrained device in IoT applications. Moreover, the resiliency of the proposed masked S-boxes to the differential power analysis attack has been explored and demonstrated in detail in this paper.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3669396",
+      "url": "https://openalex.org/W7138903059"
+    },
+    {
+      "title": "Analysis and Design of a Spectral-Shaper-Based RF Self-Interference Canceller for In-Band Full-Duplex Transceivers",
+      "abstract": "This article presents an effective method to enhance the RF self-interference cancellation (SIC) at higher-order stages through the Spectral-Shaper circuit. The mathematical model of the Spectral-Shaper circuit, along with its simulation and experimental results, is presented. The generic architecture for scaling the canceller stages to higher orders is described. The proposed technique is validated through an experimental prototype built on a printed circuit board at 2.45 GHz, using commercially available off-the-shelf surface-mount components. The prototype comprises two-stages: in the first stage, a variable attenuator and a phase shifter are employed, achieving 22.5 dB of cancellation; the second stage employs a Spectral-Shaper circuit and provides an additional 32.9 dB of cancellation improvement. The prototype canceller was able to suppress a +27 dBm transmit signal by 73.6 dB over a 20-MHz channel bandwidth, exclusively in the RF domain. The canceller IP1dB is +30.1dBm, and the IIP3 at the transmit path and the canceller stage are +53.9 dBm and +42.3 dBm, respectively.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3667320",
+      "url": "https://openalex.org/W7138904288"
+    },
+    {
+      "title": "Unified Analysis of Digital Δ-Σ Modulators (DDSMs) for Fractional- N Frequency Synthesis—Introducing the PASS Family of DDSMs Featuring Independent Shaping of the Probability Density and Spectral Envelope",
+      "abstract": "To enable fractional- $N$ frequency synthesis in a phase locked loop (PLL), the instantaneous division ratio of a multi-modulus divider is usually controlled by a digital $\\Delta $ - $\\Sigma $ modulator (DDSM). The accumulated quantization error (AQE) of the DDSM is injected into the loop. When distorted by inevitable nonlinearities within the loop, the distorted AQE gives rise to fractional spurs; these degrade the spectral purity and jitter of the synthesized signal. In this paper, we present a unified analysis of representative DDSMs in terms of their architectures and working principles. Their AQE’s variation range, variance (power), statistical distribution, spectral signature, and immunity to fractional spurs in the presence of nonlinear distortions are also characterized. In particular, we study and compare the classic family of Multi-stAge noise-SHaping (MASH) DDSMs and two state-of-the-art families: probability-density-shaping (PDS) and Enhanced Nonlinearity-induced nOise Performance (ENOP) DDSMs. Building on the prior art, we propose a novel family of Probability density And Spectral envelope Shaping (PASS) DDSMs which, while guaranteeing the maximum spur immunity for a given variation range of the AQE, also provide optimized shaping for fractional- $N$ frequency synthesis in terms of both the probability distribution and spectral envelope of the AQE to avoid high frequency phase noise “bumps” and/or “plateaus”.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3673203",
+      "url": "https://openalex.org/W7138059850"
+    },
+    {
+      "title": "A Lean Noise-Canceling SMASH Delta-Sigma ADC in 65-nm CMOS",
+      "abstract": "This paper presents a novel $\\Delta \\Sigma $ ADC architecture designed to simultaneously achieve moderate to high bandwidth and high SNDR. The proposed converter builds on a sturdy MASH $\\Delta \\Sigma $ topology, where the second stage is replaced by a noise-shaping SAR (NS-SAR). Thanks to the feedforward property of the NS-SAR, the quantization noise of the first stage is effectively canceled. A novel dynamic amplifier is proposed for the first integrator, providing an improved trade-off between area, drive capability, and power consumption. In addition, a passive summation scheme that reuses the quantizer capacitor array is employed, eliminating the need for a power-hungry amplifier. Simulation results demonstrate an SNDR of 89 dB over a 500 kHz bandwidth with a power consumption of 1.73 mW, corresponding to a FOM Sc of 173.7 dB. Extensive simulations further confirm robust stability across PVT variations.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3674117",
+      "url": "https://openalex.org/W7138333155"
+    },
+    {
+      "title": "Large-Signal Instability Mechanism and Stability Enhancement of the Submarine DC Power System",
+      "abstract": "Due to extreme operational conditions, submarine DC power systems are prone to large-signal instability. Therefore, it’s essential to investigate the underlying physical mechanisms and develop effective stabilization strategies. This paper first establishes a large-signal model of the submarine DC power system. Incorporating the physical characteristics and control dynamics in the system, the large-signal stability boundary is defined by using the mixed potential function method, and key factors influencing the stability boundary are identified. Subsequently, the instability mechanisms, along with the effect mechanisms of these key factors’ variations on large-signal stability, are further analyzed based on the model of source-side and load-side power interactions. The analysis indicates that suppressing the transient reduction in the voltage conversion ratio of the submarine converter is critical to maintaining stability. Motivated by this insight, a switching frequency compensation strategy is proposed, and it demonstrates improved disturbance-rejection performance compared with conventional approaches. Finally, simulations and hardware-in-the-loop experiments are conducted to validate the stability analysis results and the effectiveness of the stability enhancement strategy under large disturbances.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3669631",
+      "url": "https://openalex.org/W7135213658"
+    },
+    {
+      "title": "AdapSNE: Adaptive Fireworks-Optimized and Entropy-Guided Dataset Sampling for Edge DNN Training",
+      "abstract": "Training deep neural networks (DNNs) on edge devices faces challenges due to the large-scale datasets required, which are costly for edge devices, especially in large language model (LLM) tasks. To address this, a DNN-free method called Near-Memory Sampling (NMS) has been introduced. NMS reduces dimensionality and performs exemplar sampling in the reduced space, avoiding architectural bias and improving generalization. However, NMS has two limitations: 1) The mismatch between the search method and the non-monotonic property of the perplexity error function leads to the emergence of outliers; 2) Key parameter ( i.e. , target perplexity) is selected empirically, introducing arbitrariness and leading to uneven sampling. These two issues lead to representative bias of exemplars, resulting in degraded accuracy. To overcome these, we propose AdapSNE, which integrates the Fireworks Algorithm (FWA) for efficient non-monotonic search to avoid outliers and uses entropy-guided optimization for uniform sampling, ensuring representative training samples. To reduce the cost of iterative computations, we design an accelerator with custom dataflow and time-multiplexing mechanisms. Experimental results show that AdapSNE outperforms state-of-the-art methods, including both DNN-based (DQAS) and DNN-free (NMS) approaches, across small-scale image datasets, large-scale datasets, and the MMLU benchmark for LLM tasks.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3667183",
+      "url": "https://openalex.org/W7135028721"
+    },
+    {
+      "title": "KHNTT: A Configurable and High-Performance Polynomial Multiplication Unit Based on FPGA",
+      "abstract": "Polynomial multiplication is a critical performance bottleneck in lattice-based cryptographic schemes, in which efficient and flexible hardware implementations are essential. This paper presents a high-performance and reconfigurable polynomial multiplication unit that integrates the cooptimization of algorithmic and architectural optimizations. As the core operation of polynomial multiplication, we propose the Karatsuba-based high-efficiency radix-4 number theoretic transform (KHNTT) algorithm, which reduces the computational complexity by leveraging low-bit-width arithmetic and parallel processing techniques. Based on this algorithm, we develop a unified radix-4 butterfly unit capable of supporting modular polynomial operations under various parameter configurations, and to further improve the computational efficiency and architectural flexibility, key algorithm modules such as modular reduction and data flow scheduling are deeply optimized. Furthermore, we introduce an iterative interleaving memory strategy combined with a bank resource sharing mechanism to eliminate memory access conflicts and improve data access efficiency. The proposed polynomial multiplication unit allows flexible configuration of the butterfly units and supports polynomial computations of various degrees without the need for recompilation. The FPGA implementation results demonstrate that, compared with existing solutions, our architecture achieves a $1.25\\times $ to $5.27\\times $ improvement in the polynomial multiplication throughput and a $1.14\\times $ to $2.7\\times $ enhancement in the area efficiency, fully leveraging the computational advantages of FPGAs.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1109/tcsi.2026.3667103",
+      "url": "https://openalex.org/W7134961599"
+    }
+  ]
+}

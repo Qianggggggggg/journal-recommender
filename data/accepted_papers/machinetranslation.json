@@ -1,0 +1,78 @@
+{
+  "journal_id": "machinetranslation",
+  "journal_name": "Machine Translation",
+  "papers": [
+    {
+      "title": "Recent advances in Apertium, a free/open-source rule-based machine translation platform for low-resource languages",
+      "abstract": "This paper presents an overview of Apertium, a free and open-source rule-based machine translation platform. Translation in Apertium happens through a pipeline of modular tools, and the platform continues to be improved as more language pairs are added. Several advances have been implemented since the last publication, including some new optional modules: a module that allows rules to process recursive structures at the structural transfer stage, a module that deals with contiguous and discontiguous multi-word expressions, and a module that resolves anaphora to aid translation. Also highlighted is the hybridisation of Apertium through statistical modules that augment the pipeline, and statistical methods that augment existing modules. This includes morphological disambiguation, weighted structural transfer, and lexical selection modules that learn from limited data. The paper also discusses how a platform like Apertium can be a critical part of access to language technology for so-called low-resource languages, which might be ignored or deemed unapproachable by popular corpus-based translation technologies. Finally, the paper presents some of the released and unreleased language pairs, concluding with a brief look at some supplementary Apertium tools that prove valuable to users as well as language developers. All Apertium-related code, including language data, is free/open-source and available at https://github.com/apertium.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-021-09260-6",
+      "url": "https://www.semanticscholar.org/paper/854f5a1559d24aed2b20e952d760c04c3fb6bff9"
+    },
+    {
+      "title": "Philipp Koehn: Neural Machine Translation",
+      "abstract": "Neural machine translation (NMT) is an approach to machine translation (MT) that uses deep learning techniques, a broad area of machine learning based on deep artificial neural networks (NNs). The book Neural Machine Translation by Philipp Koehn targets a broad range of readers including researchers, scientists, academics, advanced undergraduate or postgraduate students, and users of MT, covering wider topics including fundamental and advanced neural network-based learning techniques and methodologies used to develop NMT systems. The book demonstrates different linguistic and computational aspects in terms of NMT with the latest practices and standards and investigates problems relating to NMT. Having read this book, the reader should be able to formulate, design, implement, critically assess and evaluate some of the fundamental and advanced deep learning techniques and methods used for MT. Koehn himself notes that he was somewhat overtaken by events, as originally this book was envisaged only as a chapter in a revised, extended version of his 2009 book Statistical Machine Translation. However, in the interim, NMT completely overtook this previously dominant paradigm, and this new book is likely to serve as the reference of note for the field for some time to come, despite the fact that new techniques are coming onstream all the time.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-021-09277-x",
+      "url": "https://www.semanticscholar.org/paper/4f317bd5f4df87059a566a8decff1c9e62bcfc86"
+    },
+    {
+      "title": "Semantic and syntactic information for neural machine translation",
+      "abstract": "Introducing factors such as linguistic features has long been proposed in machine translation to improve the quality of translations. More recently, factored machine translation has proven to still be useful in the case of sequence-to-sequence systems. In this work, we investigate whether this gains hold in the case of the state-of-the-art architecture in neural machine translation, the Transformer, instead of recurrent architectures. We propose a new model, the Factored Transformer, to introduce an arbitrary number of word features in the source sequence in an attentional system. Specifically, we suggest two variants depending on the level at which the features are injected. Moreover, we suggest two combination mechanisms for the word features and words themselves. We experiment both with classical linguistic features and semantic features extracted from a linked data database, and with two low-resource datasets. With the best-found configuration, we show improvements of 0.8 BLEU over the baseline Transformer in the IWSLT German-to-English task. Moreover, we experiment with the more challenging FLoRes English-to-Nepali benchmark, which includes both low-resource and very distant languages, and obtain an improvement of 1.2 BLEU. These improvements are achieved with linguistic and not with semantic information.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-021-09264-2",
+      "url": "https://www.semanticscholar.org/paper/385d89364a1ca11869d110e9f6499008aa2e16bc"
+    },
+    {
+      "title": "Extremely low-resource neural machine translation for Asian languages",
+      "abstract": "This paper presents a set of effective approaches to handle extremely low-resource language pairs for self-attention based neural machine translation (NMT) focusing on English and four Asian languages. Starting from an initial set of parallel sentences used to train bilingual baseline models, we introduce additional monolingual corpora and data processing techniques to improve translation quality. We describe a series of best practices and empirically validate the methods through an evaluation conducted on eight translation directions, based on state-of-the-art NMT approaches such as hyper-parameter search, data augmentation with forward and backward translation in combination with tags and noise, as well as joint multilingual training. Experiments show that the commonly used default architecture of self-attention NMT models does not reach the best results, validating previous work on the importance of hyper-parameter tuning. Additionally, empirical results indicate the amount of synthetic data required to efficiently increase the parameters of the models leading to the best translation quality measured by automatic metrics. We show that the best NMT models trained on large amount of tagged back-translations outperform three other synthetic data generation approaches. Finally, comparison with statistical machine translation (SMT) indicates that extremely low-resource NMT requires a large amount of synthetic parallel data obtained with back-translation in order to close the performance gap with the preceding SMT approach.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-020-09258-6",
+      "url": "https://www.semanticscholar.org/paper/cd71322fe9e2bde3dc183a36500aeb596605d08c"
+    },
+    {
+      "title": "The impact of translation modality on user experience: an eye-tracking study of the Microsoft Word user interface",
+      "abstract": "This paper presents results of the effect of different translation modalities on users when working with the Microsoft Word user interface. An experimental study was set up with 84 Japanese, German, Spanish, and English native speakers working with Microsoft Word in three modalities: the published translated version, a machine translated (MT) version (with unedited MT strings incorporated into the MS Word interface) and the published English version. An eye-tracker measured the cognitive load and usability according to the ISO/TR 16982 guidelines: i.e., effectiveness, efficiency, and satisfaction followed by retrospective think-aloud protocol. The results show that the users’ effectiveness (number of tasks completed) does not significantly differ due to the translation modality. However, their efficiency (time for task completion) and self-reported satisfaction are significantly higher when working with the released product as opposed to the unedited MT version, especially when participants are less experienced. The eye-tracking results show that users experience a higher cognitive load when working with MT and with the human-translated versions as opposed to the English original. The results suggest that language and translation modality play a significant role in the usability of software products whether users complete the given tasks or not and even if they are unaware that MT was used to translate the interface.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-021-09267-z",
+      "url": "https://www.semanticscholar.org/paper/486258b527643f8d47c041ffb86742cc07c6f45f"
+    },
+    {
+      "title": "Computer-assisted sign language translation: a study of translators’ practice to specify CAT software",
+      "abstract": "Professional Sign Language translators, unlike their text-to-text counterparts, are not equipped with computer-assisted translation (CAT) software. Those softwares are meant to ease the translators’ tasks. No prior study as been conducted on this topic, and we aim at specifying such a software. To do so, we based our study on the professional Sign Language translators’ practices and needs. The aim of this paper is to identify the necessary steps in the text-to-sign translation process. By filming and interviewing professionals for both objective and subjective data, we build a list of tasks and see if they are systematic and performed in a definite order. Finally, we reflect on how CAT tools could assist those tasks, how to adapt the existing tools to Sign Language and what is necessary to add in order to fit the needs of Sign Language translation. In the long term, we plan to develop a first prototype of CAT software for sign languages.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-021-09278-w",
+      "url": "https://www.semanticscholar.org/paper/8de83633d6fb3190aed135d3c96af154019e7b89"
+    },
+    {
+      "title": "Transfer learning and subword sampling for asymmetric-resource one-to-many neural translation",
+      "abstract": "There are several approaches for improving neural machine translation for low-resource languages: monolingual data can be exploited via pretraining or data augmentation; parallel corpora on related language pairs can be used via parameter sharing or transfer learning in multilingual models; subword segmentation and regularization techniques can be applied to ensure high coverage of the vocabulary. We review these approaches in the context of an asymmetric-resource one-to-many translation task, in which the pair of target languages are related, with one being a very low-resource and the other a higher-resource language. We test various methods on three artificially restricted translation tasks—English to Estonian (low-resource) and Finnish (high-resource), English to Slovak and Czech, English to Danish and Swedish—and one real-world task, Norwegian to North Sámi and Finnish. The experiments show positive effects especially for scheduled multi-task learning, denoising autoencoder, and subword sampling.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-020-09253-x",
+      "url": "https://www.semanticscholar.org/paper/405cd5cd6e056675d4545eba12742174cc75d7e7"
+    },
+    {
+      "title": "Lore Vandevoorde, Joke Daems, and Bart Defrancq (eds.): New Empirical Perspectives on Translation and Interpreting",
+      "abstract": "The book New Empirical Perspectives on Translation and Interpreting, edited by Lore Vandevoorde, Joke Daems, and Bart Defrancq, presents methodological approaches in Translation and Interpreting with a view to strengthening the theoretical and empirical links between the two disciplines. Following the introduction, the volume brings together eleven research papers (coherently divided into three thematic units) and two theoretical papers. Contributors include both early-career and established scholars from Translation Studies and Interpreting Studies. In the introduction, the editors do an excellent job at highlighting theoretical and methodological links between chapters on Translation and Interpreting. Furthermore, the contributions include experimental research and corpus-based methods that cut across Translation and Interpreting and bring the disciplines closer together. If studies relying on different (e.g. qualitative) methodological approaches had also been included, additional commonalities between Translation and Interpreting might have emerged. With regard to the individual research papers, they differ considerably in their consideration of the links between the disciplines. There is also variability among research papers in their inclusion of relevant (interdisciplinary) research, descriptions of study setups, and discussion of high-level (practical or theoretical) implications. As far as the theoretical chapters at the end of the volume are concerned, they do not include efforts to provide a unified theoretical framework for Translation and Interpreting Studies. They do, however, help contextualise the findings reported in the research papers. That said, one way of increasing the overall coherence of the book would have been if the editors had established a stronger dialogue among the chapters (e.g. through cross-references). Furthermore, if most chapters had addressed or considered a technology component, the connection with the technologies discussed by the editors in Chapter 1 would have been stronger.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-020-09246-w",
+      "url": "https://www.semanticscholar.org/paper/5c741cf96a340f66884dc94faee7d0ed4c93824f"
+    },
+    {
+      "title": "A review of the state-of-the-art in automatic post-editing",
+      "abstract": "This article presents a review of the evolution of automatic post-editing, a term that describes methods to improve the output of machine translation systems, based on knowledge extracted from datasets that include post-edited content. The article describes the specificity of automatic post-editing in comparison with other tasks in machine translation, and it discusses how it may function as a complement to them. Particular detail is given in the article to the five-year period that covers the shared tasks presented in WMT conferences (2015–2019). In this period, discussion of automatic post-editing evolved from the definition of its main parameters to an announced demise, associated with the difficulties in improving output obtained by neural methods, which was then followed by renewed interest. The article debates the role and relevance of automatic post-editing, both as an academic endeavour and as a useful application in commercial workflows.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10590-020-09252-y",
+      "url": "https://www.semanticscholar.org/paper/d8b11a9f5c4e816d94ef33fd4f14ef11d6f31a08"
+    }
+  ]
+}

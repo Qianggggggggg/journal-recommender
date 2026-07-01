@@ -79,11 +79,11 @@ EVIDENCE_FIT_DEFAULTS = {
     "too_narrow_penalty": 0.0,
 }
 
-# Map snapshot/raw evidence field name → 26-dim feature vector field name.
+# Map snapshot/raw evidence field name → 22-dim feature vector field name.
 # The LLM extractor returns ``scope_fit`` etc. (per the prompt), but
 # ``LLM_EVIDENCE_FEATURE_NAMES`` uses the ``llm_`` prefix because these
-# features are stored in a single feature vector alongside the 20 base
-# features. Without this remap, the 26-dim vector would have all six
+# features are stored in a single feature vector alongside the 16 base
+# features. Without this remap, the 22-dim vector would have all six
 # new fields at their default values regardless of the snapshot content.
 EVIDENCE_RAW_TO_FEATURE = {
     "scope_fit": "llm_scope_fit",
@@ -142,7 +142,7 @@ def _evidence_vector_for_row(
     evidence_lookup: Dict[str, Dict[str, dict]],
 ) -> List[float]:
     """Return the 6-element evidence vector for one training row, ordered
-    to match ``LLM_EVIDENCE_FEATURE_NAMES`` (the 26-dim feature vector
+    to match ``LLM_EVIDENCE_FEATURE_NAMES`` (the 22-dim feature vector
     schema). Reads raw evidence field names (``scope_fit`` etc.) from
     the snapshot and maps them to the prefixed feature names.
 
@@ -253,15 +253,11 @@ def build_training_rows(
                     in (journals_by_id.get(jid, {}).get("subject_tags") or [])
                 )
 
+            # 2026-06-30: same_ccf_level 不再从 gold 期刊 CCF 等级构造（gold 泄漏）。
+            # 线上推理时 paper_ccf_target_level 始终为 None，训练/推理分布不一致。
+            # 改为恒为 0.0 placeholder；将来可由用户显式输入目标 CCF 等级。
             # 2026-06-26: 仅 same_ccf_level 需要重算 (idx 14)。其他 4 个 dead
             # features 已删除,不需要它们的元数据。
-            gold_journal_meta = journals_by_id.get(target_jid) or {}
-            paper_ccf_target_level = (
-                (gold_journal_meta.get("ccf_rating") or "").upper()
-            )
-
-            # 2026-06-26: 用 feature_names 动态查 idx (16/22/23 维 schema)。
-            # same_ccf_level 保留在 idx 14 (16-dim base) — 仍需要用真实元数据覆写。
             base_feature_names = list(FEATURE_NAMES)
             idx_same_ccf_level = (
                 base_feature_names.index("same_ccf_level")
@@ -295,19 +291,11 @@ def build_training_rows(
                 while len(feats) < 16:
                     feats = list(feats) + [0.0] * (16 - len(feats))
                 feats = list(feats[:16])
-                # 2026-06-26: 用真实元数据覆写 same_ccf_level (idx 14, 16-dim base)。
+                # 2026-06-30: same_ccf_level (idx 14) 不再从 gold 元数据覆写。
+                # 训练/推理一致地使用 0.0 placeholder。线上推理 paper_ccf_target_level
+                # 始终为 None，此特征恒为 0.0。将来用户显式提供目标 CCF 等级时再启用。
                 if idx_same_ccf_level is not None:
-                    cand_meta = journals_by_id.get(jid) or {}
-                    cand_ccf = (cand_meta.get("ccf_rating") or "").upper()
-                    feats[idx_same_ccf_level] = (
-                        1.0
-                        if (
-                            paper_ccf_target_level
-                            and cand_ccf
-                            and paper_ccf_target_level == cand_ccf
-                        )
-                        else 0.0
-                    )
+                    feats[idx_same_ccf_level] = 0.0
                 if use_evidence_schema:
                     feats = list(feats) + _evidence_vector_for_row(
                         paper_id, paper_venue, jid, evidence_lookup
@@ -663,9 +651,9 @@ def main() -> None:
         report["max_negatives"] = args.max_negatives
         report["negatives_by_type"] = by_type
         report["feature_schema"] = (
-            "25_dim_with_llm_evidence"
+            "22_dim_with_llm_evidence"
             if evidence_lookup is not None
-            else "19_dim_base"
+            else "16_dim_base"
         )
         report["evidence_snapshot"] = (
             str(args.evidence_snapshot) if args.evidence_snapshot else None

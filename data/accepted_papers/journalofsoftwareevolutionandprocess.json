@@ -1,0 +1,86 @@
+{
+  "journal_id": "journalofsoftwareevolutionandprocess",
+  "journal_name": "Journal of Software: Evolution and Process",
+  "papers": [
+    {
+      "title": "Advancing Software Reliability: A Nonhomogeneous Poisson Process Model Integrating Dependent Failures, Testing Coverage, and Operational Uncertainties",
+      "abstract": "Software reliability growth models are essential for assessing software quality, predicting failure behavior, and supporting release planning during the software development lifecycle. However, many existing models rely on simplifying assumptions, such as independent failures, perfect debugging, and fixed operational conditions, which may limit their predictive accuracy in real‐world software systems. To address these limitations, this study proposes a generalized Software Reliability Growth Model based on the Non‐Homogeneous Poisson Process framework. The proposed model integrates dependent failure behavior, testing coverage, fault detection intensity, repair intensity, and uncertainty in operational usage profiles. By incorporating fault dependency dynamics into the mean value function, the model provides a more realistic representation of how software failures occur and evolve during testing. The model parameters are estimated using the Maximum Likelihood Estimation method, and its performance is evaluated using 2 real‐world software failure datasets. Comparative analysis is conducted against several established independent and dependent failure models using multiple goodness‐of‐fit and predictive accuracy criteria, including Mean Squared Error, Mean Absolute Error, Adjusted R‐squared, Akaike Information Criterion, Root Mean Square Prediction Error, Predictive Power, Predictive Ratio Risk, and Theil Statistic. The results show that the proposed model achieves superior or highly competitive performance across both datasets, particularly in terms of error reduction and model fit. In addition, an optimal software release‐time framework is developed to examine the effect of testing cost, error removal cost, installation cost, failure penalty cost, and expected usage duration on release decisions. The findings indicate that the proposed model can support more accurate reliability assessment, cost‐sensitive release planning, and improved software quality management. Overall, the study provides a practical and analytically flexible framework for modeling software reliability under dependent failures, testing coverage variation, and operational uncertainty.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70120",
+      "url": "https://www.semanticscholar.org/paper/a8d6e432e2709e5d5367d3708010536d8664fa2d"
+    },
+    {
+      "title": "Enabling Quantum Privacy and Security by Design: Imperatives for Contemporary State‐of‐the‐Art in Quantum Software Engineering",
+      "abstract": "With the advent of Quantum Computing and its exponential research endeavors in the past couple of decades, we are looking at a Golden Era of Quantum Computing. We are transitioning into an age of Hybrid Classical‐Quantum Computers, where the quantum computational resources are selectively harnessed for resource‐intensive tasks. On the one hand, Quantum Computing promises immense future computational innovation, and it also comes with privacy and security challenges. To date, Privacy by Design (PbD) and Security by Design (SbD) frameworks and guidelines in the Quantum Software Engineering (QSE) domain are still nebulous, and there are no comprehensive studies on the same. In this study, therefore, we identify the current state‐of‐the‐art in the relevant literature and investigate the principles of PbD and SbD in the domain of QSE. This is the first study to identify state‐of‐the‐art Quantum PbD and Quantum SbD in QSE. Furthermore, we also identified the gaps in the current literature, which were extended into action points for a robust literature for Quantum PbD and SbD. We recognize the crucial role of researchers, academics, and professionals in the field of Quantum Computing and Software Engineering in conducting more empirical studies and shaping the future of PbD and SbD principles in QSE.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70005",
+      "url": "https://www.semanticscholar.org/paper/55bb75b843f3c82ea439444086c42ea24f90987b"
+    },
+    {
+      "title": "Exploring the Relationship Between Trait Emotional Intelligence and Performance in the Context of SME Software Engineering",
+      "abstract": "In software‐based small‐ and medium‐sized enterprises (SMEs), enhancing individual performance (IP) of employees, particularly software engineers, is essential for organizational growth. Rather than relying on general strategies, firms increasingly focus on specific personal and professional factors influencing productivity. Trait emotional intelligence (Trait EI), including key dimensions like motivation, stress tolerance, and optimism, has emerged as a significant predictor of IP. In parallel, digital competence (DComp) has become indispensable due to the rapid evolution of technological systems. Employees with higher digital skills are better equipped to manage digital tools and adapt to innovations, leading to improved efficiency. Additionally, social support (SS) within organizations from supervisors, peers, and team members has been shown to enhance job satisfaction, engagement, and overall output. Despite growing interest, current literature lacks empirical frameworks that integrate these constructs in the SME software sector. This study proposes and validates a conceptual model to investigate the influence of Trait EI on software engineers' IP, with DC and SS serving as mediating factors. The findings offer practical implications for developing emotional and DC within tech‐driven SMEs to foster performance and growth.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70076",
+      "url": "https://www.semanticscholar.org/paper/a61e8a8ac28ea6be03802d1ce57a21ea5d835ae2"
+    },
+    {
+      "title": "Toward Platform Engineering, the Evolution of DevOps—A Systematic Mapping",
+      "abstract": "The evolution of software development can be traced parallel to the recent industrial revolutions, which have significantly changed modern society. Recent advancements have transformed how software is created, distributed, and utilized. In the digitalization of industry, software development is created by using innovative solutions for artificial intelligence, machine learning, the Internet of Things, cloud computing, and more. Platform engineering evolves DevOps by integrating development (Dev) and IT operations (Ops) for enhancing developer experience and accelerating customer value delivery. This paper maps the current landscape of platform engineering and its adoption across industries. Additionally, it also makes recommendations for further research for understanding, advancing the state of the art, and fostering the adoption of platform engineering within the software development industry.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70108",
+      "url": "https://www.semanticscholar.org/paper/10f66564a0e5340396ef009ad1e00252b7119f12"
+    },
+    {
+      "title": "A Flexible Framework to Ensure Traceability, Consistency, and Propagation of KPIs Evolution",
+      "abstract": "Organizations use key performance indicators (KPIs) to assess the effectiveness and efficiency of their procedures and processes. In a world that is constantly evolving and hyperconnected via the internet, it is of great interest to analyze how changes (organizational, legal, technological or other) can lead to modifications in the KPIs involved. However, little attention has been paid to KPI evolution either in the scientific literature or in developed solutions. This paper presents A Flexible Framework for the Evolution, Consistency and Traceability of KPIs (AFFECTK) that aims at establishing the basis for suitable KPIs' evolution management. The feasibility of this proposal is demonstrated through a proof‐of‐concept developed using a reasoning tool based on Constraint Logic Programming. The framework is further evaluated, using real KPI case studies, to assess the functional suitability of our approach.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70004",
+      "url": "https://www.semanticscholar.org/paper/008436e16c075fe8df74231c205667d64e26aec9"
+    },
+    {
+      "title": "i‐SYNERGY: An Integrated Predictive Model for Assessing Software Developers' Performance Under Time Pressure",
+      "abstract": "Human factors significantly influence software engineering (SE), where assigning unsuitable personnel to tasks is a leading cause of project failures. This challenge worsens under time pressure (TP), resulting in decreased performance and delays. Past studies have primarily focused on technical aspects, often neglecting the humanistic side, such as personality types and gender differences, in coping with TP. This study investigates the impact of personality types, gender, knowledge, and task complexity on developers' performance under TP and proposes the i‐SYNERGY model. The research provides actionable insights for project planning under time‐constrained conditions. Empirical data were collected through controlled experiments with SE students and generalized using industrial case studies. Myers–Briggs type indicator (MBTI) measured personality types, while the NASA task load index (TLX) assessed TP levels. Logistic regression outperformed four other models (artificial neural network [ANN], support vector machine [SVM], decision tree, and K‐nearest neighbor [KNN]) with the highest prediction accuracy and was used to develop the model. Gender‐specific results revealed ESTJ and ENTJ as effective under TP for males and ISFJ and ISFP for females. The i‐SYNERGY model demonstrates that TP significantly reduces developer performance, but personality type, gender, knowledge and task complexity shape resilience. These results highlight the importance of aligning task assignments with individual traits to optimize performance. The proposed i‐SYNERGY model offers a validated, structured framework to enhance decision‐making and improve project outcomes in time‐constrained environments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70071",
+      "url": "https://www.semanticscholar.org/paper/87dfb1662396560d4a7dc98935428566e48020d9"
+    },
+    {
+      "title": "A Family of Experiments to Study How Personality May Affect Software Development Effectiveness in Teams",
+      "abstract": "This paper seeks to explore how personality, analyzed across neuroticism, extraversion, openness, agreeableness, and responsibility, may impact the success of software production. We conducted an experiment to analyze which personality dimensions could predict success in software development, measured as effectiveness. The personality variables were assessed using a NEO PI‐R questionnaire, while the response variable was the percentage of success in the developed software product. The experiment was conducted within a family of experiments with two replications, involving 41 subjects in one and 40 subjects in the other. All participants were students enrolled in a software engineering course at the University of Valencia. The experimental tasks involved the analysis, design, and implementation of a software system from scratch, employing the Rational Unified Process and Java. The empirical study results indicate that conscientiousness (including order and dutifulness) and openness (in terms of generating ideas) are correlated with the success of the project.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70125",
+      "url": "https://www.semanticscholar.org/paper/622d15f41ed56e04e2eb29c1273c3e2a85283b49"
+    },
+    {
+      "title": "Exploring Indicators of Developers' Sentiment Perceptions in Student Software Projects",
+      "abstract": "Communication is a crucial social factor in the success of software projects, as positively or negatively perceived statements can influence how recipients feel and affect team collaboration through emotional contagion. Whether a developer perceives a written message as positive, negative, or neutral is likely shaped by multiple factors. In this paper, we investigate how mood traits and states, life circumstances, project phases, and group dynamics relate to the perception of text‐based messages in software development. We conducted a four‐round survey study with 81 students in team‐based software projects. Across rounds, participants reported these factors and labeled 30 decontextualized statements for sentiment, including meta‐data on labeling rationale and uncertainty. Our results show: (1) Sentiment perception is only moderately stable within individuals, and label changes concentrate on ambiguity‐prone statements; (2) correlation‐level signals are small and do not survive global multiple‐testing correction; (3) in statement‐level repeated‐measures models (GEE), higher mood trait and reactivity are associated with more positive (and less neutral) labeling, while predictors of negative labeling are weaker and at most trend‐level (e.g., task conflict); (4) we find no clear evidence of systematic project‐phase effects. Overall, sentiment perception varies within persons and is strongly statement‐dependent. Although our study was conducted in an academic setting, the observed variability and ambiguity effects suggest caution when interpreting sentiment analysis outputs and motivate future work with contextualized, in‐project communication.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/smr.70089",
+      "url": "https://www.semanticscholar.org/paper/442acf6605d587a329bf3c0bda19775a93aee007"
+    },
+    {
+      "title": "AMPM3 Criteria of Algorithm Summation for Classifying Datamining of Software Quality Management",
+      "abstract": "This research has the objective to present the algorithm summation method of AMPM3 criteria for reducing attributes in data mining classification of software quality management. Moreover, the programs used to analyze in this research are WE-KA and MATLAB and the techniques used to predict the equation and the accuracy are Decision Tree, Rule-Based, Naï ve Bayesian and KNN. Besides, the results of analyzing the Algorithm with AMPM3 criteria are to reduce the attributes from searching from the relationship of regression analyzing and the regression analysis that are the analyzing from the relationships between 2 variables for finding the similarities between questions and model documents by searching from the patterns of designing. Then, it has the steps as these following: 1) Preparation of Information 2) Selection of Information 3) Practicing Information Set and Test 4) Processing of Information 5) Creation of Model for analyzing the information relationship and effectiveness measurement to reduce attributions.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.17706/JSW.14.1.36-46",
+      "url": "https://www.semanticscholar.org/paper/ea04f6862c02de4ee1d0b2aec6fd177b741d4469"
+    },
+    {
+      "title": "Characterization Analysis Software for Microstructures Based on an Internet Sharing Platform",
+      "abstract": ": Characterization analysis software for microstructures based on an Internet sharing platform has been developed which can display and evaluate 3D morphology data for microstructures. This software is mainly used for data analysis and database functions, and is capable of storing sample data and user data, 3D display, remote sharing, and real-time processing of sample data, and is compatible with multiple data formats. It implements evaluation algorithms for parameters such as step height, grating period, and degree of roughness, and supports basic operations such as rotation, filtering, and leveling. Four types of permissions have been defined for the software for different users, and design for data security is also applied to effectively reduce security risks.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.17706/jsw.19.4.98-107",
+      "url": "https://www.semanticscholar.org/paper/53e17e541e09273b3632c4323a6f0be2f45eadf2"
+    }
+  ]
+}

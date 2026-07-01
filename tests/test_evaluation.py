@@ -11,10 +11,10 @@ from scripts.evaluate_recommender import (
 def test_paper_quality_level():
     """测试论文质量等级划分"""
     assert get_paper_quality_level(0.8) == "strong"
-    assert get_paper_quality_level(0.7) == "strong"
-    assert get_paper_quality_level(0.69) == "medium"
+    assert get_paper_quality_level(0.65) == "strong"
+    assert get_paper_quality_level(0.64) == "medium"
     assert get_paper_quality_level(0.5) == "medium"
-    assert get_paper_quality_level(0.39) == "weak"
+    assert get_paper_quality_level(0.49) == "weak"
     assert get_paper_quality_level(0.2) == "weak"
 
 

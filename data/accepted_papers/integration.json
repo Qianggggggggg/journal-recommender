@@ -1,0 +1,86 @@
+{
+  "journal_id": "integration",
+  "journal_name": "Integration, the VLSI Journal",
+  "papers": [
+    {
+      "title": "A novel image cryptosystem for FPGA based on 8-bit pseudorandom number generator with enhanced chaos and SHA-256",
+      "abstract": "This paper presents the design, FPGA implementation, and comprehensive security evaluation of a chaos-based image encryption algorithm derived from the Pseudo-Random Number Generator with two-dimensional Enhanced Lotka Volterra Map (PRNG-ELVM). The proposed ELVM introduces nonlinear perturbations that significantly enhance the chaotic dynamics and statistical behavior of the classical model, providing greater key sensitivity, a wider keyspace, and superior pseudorandomness suitable for cryptography. The proposed image encryption scheme incorporates confusion and diffusion stages driven by PRNG-ELVM sequences, where secret-key-dependent initial states and SHA-256-based image hash further strengthen security and resistance to differential attacks. The system is implemented on Altera DE2-115 FPGA using VHDL with parallel and pipelined processing to achieve real-time performance and low-hardware resource consumption. A comprehensive cryptographic evaluation is performed, including key sensitivity, histogram uniformity, correlation analysis, entropy measurement, floating frequency, NPCR/UACI metrics, robustness to noise and occlusion, and image quality degradation analysis (MSE, PSNR, SSIM). Experimental results confirm that the encrypted images exhibit uniform histograms, near-zero correlation, entropy values close to 8, and high resistance to differential perturbations. The FPGA implementation demonstrates high performance and efficient logic utilization, outperforming comparable chaotic hardware cryptosystems. Overall, the PRNG-ELVM-based FPGA architecture is an effective and scalable solution for secure image encryption in resource-constrained environments such as IoT, embedded multimedia, and biomedical imaging systems.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vlsi.2026.102779",
+      "url": "https://openalex.org/W7163076179"
+    },
+    {
+      "title": "AND-Logic embedded 7T SRAM-based backplane circuit for low-power micro-displays",
+      "abstract": "The micro-display market is expanding rapidly due to the increasing adoption of smartwatches and VR/AR head-mounted devices, creating strong demand for ultra-low-power display solutions to prolong battery life. Among various micro-display architectures, the digitally driven Pulse-Width Modulation (PWM) technique is preferred on CMOS backplanes due to its immunity to analog storage errors and the elimination of power-hungry digital-to-analog converters (DACs). However, conventional PWM-based digital driving schemes require repeated pixel programming within each frame, causing large column-line capacitance switching and substantial power dissipation in the display backplane. This paper presents an AND-Logic embedded 7T SRAM memory-based backplane circuit that minimizes pixel programming to only twice per frame, significantly reducing column line transitions and driver power. Fabricated in 65-nm CMOS, the proposed design achieves an 18.6% reduction in display backplane power compared to the conventional architecture. Furthermore, compared to the prior 8T AND-Logic embedded SRAM, the proposed SRAM cell achieves a 12.7% reduction in pixel memory area and a 4.9% reduction in backplane’s power consumption according to post-layout simulations, demonstrating its suitability for compact, power-efficient micro-display systems.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vlsi.2026.102757",
+      "url": "https://openalex.org/W7160238167"
+    },
+    {
+      "title": "Die differenzierte Integration und die Zukunft der Europäischen Union: Konsolidierung, Krisen und Erweiterung",
+      "abstract": "Differentiated integration is a central feature of the European Union (EU). This article starts with an analysis of current developments in differentiated integration. We observe a trend of consolidation thanks to Brexit, the expiration of exemptions from Eastern enlargement, and the absence of new treaty changes and accessions. We further argue that the recent crises of the EU did not lend themselves to differentiated solutions because they affected highly integrated policies and constitutional and redistributive conflicts. We discuss the EU’s enlargement as an important driver of differentiation and argue in view of past trends and the current reform proposals that so far, no comprehensive model of differentiated membership is at the horizon and hence the current plans for enlargement are likely to increase temporary differentiation and demand institutional reforms.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2023-2-94",
+      "url": "https://www.semanticscholar.org/paper/f2bb2dba2e31f3a46c2855bd08d958e475e57975"
+    },
+    {
+      "title": "Die Europäische Politische Gemeinschaft: multilaterale Koordination und differenzierte Integration in „Wider Europe“",
+      "abstract": "The founding of the European Political Community (EPC) was motivated by both geopolitics and integration policy. This article examines this new format from the perspective of summit diplomacy and as a sub-case of (external) differentiated integration in the Wider Europe. The first meeting of 44 heads of state and government in October 2022 was a demonstration of (geo-)political unity against Russia, which is waging a war of aggression on Ukraine and destroying the European security order. Participating states might also find it useful in the future to exchange views on the reordering of Europe in this high-level political forum. In contrast, it is unclear what added value the EPC can develop with regard to preparing the current ten (potential) candidate countries for membership in the European Union (EU). Moreover, the EPC has revived the political debate on partial and gradual integration and partial or staged membership. Still missing is a strategic positioning of the EU on how to deal with the nexus of its reform, enlargement and geopolitical role.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2023-2-180",
+      "url": "https://www.semanticscholar.org/paper/07a2923afd1082d4d5b1901a68980961879433f1"
+    },
+    {
+      "title": "Differenzierte Integration – (k)ein Thema im politischen Diskurs der Mitgliedstaaten?",
+      "abstract": "Recent political science research has shown the increasing differentiation of the European Union (EU) and it has worked out the associated opportunities and risks for effective and legitimate politics in the EU. This raises the question to what extent politicians in the member states pay attention to differentiated integration. Based on an analysis of official government documents and parliamentary minutes from 25 member states, this article shows that this form of integration was rarely politicized in national politics between 2004 and 2020. In national parliaments, it was mainly discussed around EU-treaty changes (around 2008), the euro crisis (around 2012) or during the debate on the future of Europe (around 2017). The final part of the paper shows that differentiated integration is discussed more frequently and more positively in French politics than in German politics.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2023-2-128",
+      "url": "https://www.semanticscholar.org/paper/2758d8fe8f4816f0fd7b1a3a5f3511e95b4897c8"
+    },
+    {
+      "title": "Die differenzierte Integration aus Sicht der Öffentlichkeit: eine umstrittene Handlungsoption",
+      "abstract": "This contribution discusses how the populations of the member states of the European Union (EU) view differentiated integration. I argue that public opinion is not generally positive, negative, or indifferent. Instead, three factors are decisive for the patterns of public support and opposition: the general attitudes of the populations and party elites, the benefits from and voluntary nature of specific proposals for differentiated integration for the affected countries, and the strength and salience of negative externalities for other member states. These factors suggest that proposals for differentiation in some important policy issues –⁠ ⁠f. ex. strengthening fiscal solidarity – would lead to significant controversies within and between the populations of the member states.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2023-2-115",
+      "url": "https://www.semanticscholar.org/paper/f78dd6d1aa673da0b29e1bf931a46b9b82d86292"
+    },
+    {
+      "title": "Aktuelle Entwicklungen in der EU-Sozialpolitik: effizientere Entscheidungsfindung durch Mehrheitsentscheidungen und differenzierte Integration?",
+      "abstract": "Design and adoption of common social policy is conditional. Limited competencies, institutional and organizational heterogeneity among member states, and ideological-programmatic majorities in the institutions of the European Union (EU) have led to far fewer new legal instruments in recent decades. One of the key challenges is the unanimity requirement in the Council, enshrined in the Treaties in areas of great member state sovereignty. In 2019 the Commission proposed to allow a transition to qualified majority voting. This paper discusses what the transition entails in legal and procedural terms and highlights three key advantages it holds. To this aim it provides an overview of the policy areas and instruments that the Commission would like to transfer to qualified majority voting. It outlines how the potential that majority voting offers for EU social policy could be exploited better with more ambitious initiatives and discusses differentiated integration as an alternative.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2021-2-115",
+      "url": "https://www.semanticscholar.org/paper/28c165a46daf4fb20bf862ebb545a292235258ad"
+    },
+    {
+      "title": "Wendepunkt Corona-Krise? Deutsche Präferenzen zur europäischen Integration staatlicher Kerngewalten seit Maastricht",
+      "abstract": "Did the Covid-19 crisis prompt a turn in German EU policy? Investigating the long-term development of German preferences on the European integration of core state powers, we find striking continuity. German governments persistently seek to minimise their costs from and maximise their control over integration. Consequently, they back supranational capacity-building primarily as a last resort in existential systemic crises. The Corona recovery fund, which is temporary and placed under intergovernmental control, is in line with this general long-term preference and does little to alleviate the structural flaws of the Euro area.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2021-2-81",
+      "url": "https://www.semanticscholar.org/paper/93c1a75d077f8b5e876ddb21071efc3e35cf60ca"
+    },
+    {
+      "title": "Frankreich, Deutschland und die europäische Integration im Aachener Vertrag",
+      "abstract": "How “European” is the new Franco-German bilateral treaty signed in Aachen on 22 January 2019? And what kind of “Franco-German leadership for Europe” does it stipulate? The article starts by establishing a model of Franco-German cooperation and leadership in the European Union, which then allows to analyse the content of the treaty. The treaty can be seen as a strategic commitment to European integration and to Franco-German leadership. It outlines far-reaching ambitions in foreign policy cooperation as well as in the areas of security and defence, where the established European model is particularly prone to bilateral leadership. The treaty is more nuanced in the field of economic and social politics, where a Franco-German economic area shall be established. While this could potentially balance Franco-German asymmetries, it will also raise questions particularly amongst Eastern European Member States.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.5771/0720-5120-2019-3-187",
+      "url": "https://www.semanticscholar.org/paper/42dd51a761c1dca035785c33d4eaf6c111761df7"
+    },
+    {
+      "title": "Was heißt eigentlich »Integration«?",
+      "abstract": "Es sind keineswegs nur AfDoder Pegida-Anhänger, die sich die Frage stellen, ob die deutschen Grenzen noch sicher sind und wie Millionen von Flüchtlingen integriert werden können� Auch ansonsten durchaus mittig denkende, akademisch gebildete Bürger, aber allemal auch Politiker aller Parteien stellen sich diese Frage� Offen bleibt damit, was überhaupt unter »Integration« verstanden werden soll, ebenso ungeklärt bleibt, »wohin beziehungsweise in was« integriert werden soll� Die öffentliche Meinung schwankt dabei zwischen Volk, Kultur, Werteordnung oder Nation hin und her� Im Folgenden sei zunächst zwischen einem »dünnen« und einem »dichten« Begriff der Integration unterschieden, während unter dem, wohin integriert werden soll, der deutsche Staat, so wie er faktisch existiert beziehungsweise der heute in Europa übliche Nationalstaat verstanden werden soll� Daher ist zunächst zwischen der Bevölkerung eines Staates und seiner Bürgerschaft zu unterscheiden� Die Bevölkerung ist die Summe aller Menschen, die in den Grenzen eines Staates leben, seien sie nun Babys oder auf einige Zeit im Lande lebende Touristen� Sie alle genießen Rechte, haben jedoch in der Regel keine Möglichkeit, auf das Setzen oder Ausgestalten dieser Rechte irgendwelchen Einfluss zu nehmen� Wenn das einleuchtet, folgt daraus im Umkehrschluss, dass Staaten in allererster Linie territorial begrenzte Rechtsgemeinschaften sind – auf jeden Fall unterscheiden sie zwischen Staatsangehörigen, die bestimmte Schutzrechte und auch Gestaltungsrechte besitzen hier und einfachen Bewohnern dort, denen diese Schutzrechte in nur geringerem Ausmaß zukommen und die keine Gestaltungs genauer gesagt: Rechtsetzungsrechte haben� Die Frage, was es heißen soll, in eine Bevölkerung integriert zu sein, ist sinnlos, während die Frage, was es heißt, in eine Rechtsgemeinschaft integriert zu sein, sinnvolle Antworten erfordert� Um Mitglied einer Rechtsgemeinschaft« zu sein, ist es zu allererst nötig, die Sprache, in der die entsprechenden Fragen verhandelt werden, zu beherrschen, sodann, jene",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.5771/9783748910558-27",
+      "url": "https://www.semanticscholar.org/paper/bb0295212b27e0f4624e50b21e97bcd25ccbe4fb"
+    }
+  ]
+}

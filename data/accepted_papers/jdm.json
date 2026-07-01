@@ -25,6 +25,62 @@
       "source": "semantic_scholar",
       "doi": "10.4018/jdm.333519",
       "url": "https://www.semanticscholar.org/paper/1648da99ff6edff5e7c60aaf36b2e5d4f4822eb4"
+    },
+    {
+      "title": "A Benchmark for Performance Evaluation of a Multi-Model Database vs. Polyglot Persistence",
+      "abstract": "As the need for handling data from various sources becomes crucial for making optimal decisions, managing multi-model data has become a key area of research. Currently, it is challenging to strike a balance between two methods: polyglot persistence and multi-model databases. Moreover, existing studies suggest that current benchmarks are not completely suitable for comparing these two methods, whether in terms of test datasets, workloads, or metrics. To address this issue, the authors introduce MDBench, an end-to-end benchmark tool. Based on the multi-model dataset and proposed workloads, the experiments reveal that ArangoDB is superior at insertion operations of graph data, while the polyglot persistence instance is better at handling the deletion operations of document data. When it comes to multi-thread and associated queries to multiple tables, the polyglot persistence outperforms ArangoDB in both execution time and resource usage. However, ArangoDB has the edge over MongoDB and Neo4j regarding reliability and availability.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.321756",
+      "url": "https://www.semanticscholar.org/paper/b887be184733109f37138791fd35143f707ddae1"
+    },
+    {
+      "title": "Meta-Explainable Machine Learning Model for Public Health Care Resource Management",
+      "abstract": "This study introduces a new meta-explainable machine learning methodology to enhance medical care recommendations and optimize healthcare operations through targeted interventions. It could assist a large, and diverse population facing challenges in resource allocation and operational complexity. The proposed method utilizes a two-stage model. It first employs an Explainable Boosting Machine (EBM) and then provides the output from the initial phase to an unsupervised machine learning framework. It examines diverse aspects to identify the most critical set of features for focused operations and policy recommendations in designated areas. The research is based on data collected from three regions of India about maternal health and maternal mortality. The results highlight the accuracy of healthcare operations, thereby facilitating data-informed decisions. Implementing the method outlined in this paper in any other region across the globe will significantly enhance the design and execution of targeted healthcare initiatives, enhancing public health outcomes and optimizing resource.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.386382",
+      "url": "https://www.semanticscholar.org/paper/0e7804d6a572b412cae8cba469d9b781e9b96656"
+    },
+    {
+      "title": "Open Source Adoption for Digital Transformation and Data Management During the COVID-19 Crisis",
+      "abstract": "With COVID-19-led business disruption and businesses expediting their move towards digital transformation, Industry experts observed a phenomenon of increased adoption of Open Source Software and database management systems to digitalize the business while keeping costs low. This research has studied this phenomenon using a three-step approach: using the collective intelligence of Twitter without the context of COVID-19, Twitter data with the context of COVID-19, and empirical validation with actual monthly downloads data of open source projects from SourceForge in Pre-COVID and COVID-19 time periods. The research finds that although the COVID-19 pandemic has triggered a digital transformation and the use of database management systems in many organizations, but there is no statistically significant increased use that can be attributed to a crisis response due to the pandemic.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.360708",
+      "url": "https://www.semanticscholar.org/paper/f2c71194052d4f35f3084a0acc9f602a57e3a9fb"
+    },
+    {
+      "title": "Exploring Data Veracity Management in a Post-Truth Business Environment: An Integrative Literature Review and Future Research Direction",
+      "abstract": "With the ever-increasing volume and variety of data generated, organisations have to ensure their truthfulness and reliability. This paper provides overview of current research on managing data veracity in a business environment where misinformation is growing. A literature analysis from 2002 to 2023 identified three major themes: methods for ensuring data validity, data processing and optimisation, and data veracity in sustainability performance. In addition, the study highlights the gaps in the current research and proposes future research directions to help develop a better understanding of the themes and organisational implications. The study concludes that data veracity is crucial for future organisational research. Nevertheless, further work is required to refine the definition of data veracity to incorporate ‘truthfulness' better, understand human capabilities to support it, examine firms' governance of truthfulness and measure data veracity for social impact. The implications of these findings for data management and the development of relevant theories are discussed.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.361726",
+      "url": "https://www.semanticscholar.org/paper/6999ea8a40d5dd64f9d9ce8cd216c0d14a9e4876"
+    },
+    {
+      "title": "Research Commentary on IS/IT Role in Emergency and Pandemic Management: Current and Future Research",
+      "abstract": "IS/IT plays an important role in our everyday life, especially in today's Internet era This article discusses the roles of IS/IT in providing services and support on information gathering, analysis, and management during major public emergencies and pandemic crises such as the battle against the new coronavirus The five selected papers in this special issue introduce advanced methods on data collection and social media user analysis to deal with the challenges brought by the COVID-19 pandemic This paper also presents future research directions on the use of IS/IT in emergency and pandemic management such as IS control and governance, intelligent health care, enhancing people's lives and mental health, and knowledge management Copyright © 2021, IGI Global Copying or distributing in print or electronic forms without written permission of IGI Global is prohibited",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.4018/JDM.2021040105",
+      "url": "https://www.semanticscholar.org/paper/627f66a679445daab24aec3478d148e92073e12f"
+    },
+    {
+      "title": "Applications of Big Data Analytics in Investment Management: A Review and Future Research Agenda Using TCM Framework",
+      "abstract": "Big data has emerged as an important resource for generating wealth in society along with capital and labour, as data analytics generates valuable information and provides critical insights to gain competitive advantage. In Investment management, access to information is vital. As analytics causes information asymmetry among those who use it and others, it has become a key result area in the domain.IM involves multi-criteria decision-making necessitating managers to acquire core capability in analytics. The field of IM is passing through rapid changes, with varying customer preferences, advancing technologies, diminishing margins, acute competition, in the midst of increase in compliances. Cock-pit monitoring and goal-based portfolio preferences by some large customers have complicated IM. The paper explores the rationale for implementing big data analytics and identifies evolving tools and technologies that are applicable in the domain. The paper also highlights few emerging areas of research in the field using both bibliometric analysis and systemic literature review techniques.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.299557",
+      "url": "https://www.semanticscholar.org/paper/baa511ca996805e1b494962e8ed75bb888276325"
+    },
+    {
+      "title": "Artificial Intelligence (AI) Ethics: Ethics of AI and Ethical AI",
+      "abstract": "Artificial intelligence (AI)-based technology has achieved many great things, such as facial recognition, medical diagnosis, and self-driving cars. AI promises enormous benefits for economic growth, social development, as well as human well-being and safety improvement. However, the low-level of explainability, data biases, data security, data privacy, and ethical problems of AI-based technology pose significant risks for users, developers, humanity, and societies. As AI advances, one critical issue is how to address the ethical and moral challenges associated with AI. Even though the concept of “machine ethics” was proposed around 2006, AI ethics is still in the infancy stage. AI ethics is the field related to the study of ethical issues in AI. To address AI ethics, one needs to consider the ethics of AI and how to build ethical AI. Ethics of AI studies the ethical principles, rules, guidelines, policies, and regulations that are related to AI. Ethical AI is an AI that performs and behaves ethically. One must recognize and understand the potential ethical and moral issues that may be caused by AI to formulate the necessary ethical principles, rules, guidelines, policies, and regulations for AI (i.e., Ethics of AI). With the appropriate ethics of AI, one can then build AI that exhibits ethical behavior (i.e., Ethical AI). This paper will discuss AI ethics by looking at the ethics of AI and ethical AI. What are the perceived ethical and moral issues with AI? What are the general and common ethical principles, rules, guidelines, policies, and regulations that can resolve or at least attenuate these ethical and moral issues with AI? What are some of the necessary features and characteristics of an ethical AI? How to adhere to the ethics of AI to build ethical AI?",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.4018/jdm.2020040105",
+      "url": "https://www.semanticscholar.org/paper/39d1f020a585d3f28cb4b4c14497649e6a469ef1"
     }
   ]
 }

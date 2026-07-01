@@ -1,0 +1,46 @@
+{
+  "journal_id": "tii",
+  "journal_name": "IEEE Transactions on Industrial Informatics",
+  "papers": [
+    {
+      "title": "A Novel Class Noise Detection Method for High-Dimensional Data in Industrial Informatics",
+      "abstract": "The data in industrial informatics may be high-dimensional and mislabeled. Irrelevant or noisy features pose a significant challenge to the detection of high-dimensional mislabeling. The traditional method usually adopts a two-step solution, first finding the relevant subspace and then using it for mislabeling detection. This two-step method struggles to provide the optimal mislabeling detection performance, since it separates the procedures of feature selection and label error detection. To solve this problem, in this article, we integrate the two steps and propose a sequential ensemble noise filter (SENF). In the SENF, relevant features are selected and used to generate a noise score for each instance. Continuously, these noise scores guide feature selection in the regression learning. Thus, the SENF falls in the scope of sequential ensemble learning. We evaluate our approach on several benchmark datasets with high dimensionality and much label noise. It is shown that the SENF is significantly better than other existing label noise detection methods.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TII.2020.3012658",
+      "url": "https://www.semanticscholar.org/paper/1b5aa434eb02d2f5834baca887390ea0b6324ac6"
+    },
+    {
+      "title": "FADN: Fully Connected Attitude Detection Network Based on Industrial Video",
+      "abstract": "In 3-D attitude angle estimation, monocular vision-based methods are often utilized for the advantages of short-time and high efficiency. However, the limitations of these methods lie in the complexity of the algorithm and the specificity of the scene, which needs to match the characteristics of the cooperation object and the scene. In this article, we propose a fully connected attitude detection network (FADN), which combines neural network and traditional algorithms for 3-D attitude angle estimation. FADN provides a whole process from the input of a single frame image in the industrial video stream to the output of the corresponding 3-D attitude angle estimation. Benefiting from the end-to-end estimation framework, FADN avoids tedious matching algorithms and thus has certain portability. A series of comparative experiments based on the rendering software 3-D Studio Max (3d Max) have been carried out to evaluate the performance of FADN. The experimental results show that FADN has high estimation accuracy and fast running speed. At the same time, the simulation results reliably prove the feasibility of FADN, and also promote the research in real scenarios.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TII.2020.2984370",
+      "url": "https://www.semanticscholar.org/paper/9e4213e221f516dfab7f1b005081d44e4af7da72"
+    },
+    {
+      "title": "Support Multimode Tensor Machine for Multiple Classification on Industrial Big Data",
+      "abstract": "Supervised machine learning algorithms, especially classification algorithms, have been widely used in data analysis of industrial big data. Among them, the support vector machine (SVM) has achieved great success in the binary classification of some areas like image processing, computer vision, and pattern recognition. However, an SVM cannot achieve the desirable classification results for heterogeneous and high-dimensional data generated from thousands of industrial sensors in physical environments, because the traditional vector-based and feature-aligned SVM algorithm may result in loss of structural information and rich context information. Although the support tensor machine (STM) has extended the traditional vector-based SVM to tensor space, it fails to deal with multiple classification problems. Therefore, designing a general multiple classification algorithm for heterogeneous and high-dimensional data is a challenging but promising topic. To achieve this goal, this article presents a support multimode tensor machine (SMTM) algorithm by applying the multimode product to generalize the formulation of the STM. Furthermore, this article presents an efficient algorithm to train the parameters. Experiments conducted on various data sets validate the better performance of the SMTM over other algorithms in the multiple classification and imply the potential of the proposed model for multiple classification on industrial big data.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TII.2020.2999622",
+      "url": "https://www.semanticscholar.org/paper/31343912edff1780cbd9f533466c9c76ac2baf71"
+    },
+    {
+      "title": "LDCNet: Limb Direction Cues-Aware Network for Flexible HPE in Industrial Behavioral Biometrics Systems",
+      "abstract": "Two-dimensional human pose estimation (HPE) has been widely used in the many fields, such as behavioral understanding, identity authentication, and industrial automatic manufacturing. Most of the previous studies have encountered many constraints, such as restricted scenarios and strict inputs. To solve this problem, we present a simple yet effective HPE network called limb direction cues (LDCs) aware network (LDCNet) with LDCs and differentiated Cauchy labels, which can efficiently suppress uncertainties and prevent deep networks from over-fitting uncertain keypoint positions. In particular, LDCNet suppresses the uncertainties from two aspects. First, a differentiated Cauchy coordinate encoding method is designed to reveal the limb direction information among adjacent keypoints. Second, Jeffreys divergence is introduced as loss function to measure the prediction heatmap and ground-truth one. Positions of keypoints are perceived at the limb direction based deep network in an end-to-end manner. An extensive study on two benchmark datasets (i.e., MS COCO and MPII) illustrates the superiority of the proposed LDCNet model over state-of-the-art approaches.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TII.2023.3266366",
+      "url": "https://www.semanticscholar.org/paper/18f6105ae1e1410ddd5255a8fb969b428ca31200"
+    },
+    {
+      "title": "A Multihead Attention Self-Supervised Representation Model for Industrial Sensors Anomaly Detection",
+      "abstract": "Industrial sensors capture critical information for intelligent manufacturing maintenance. To promote equipment upgrading and manufacturing processes, intelligent decisions, and information learning play an important role. Although deep learning methods historically obtain excellent results, there is always a tradeoff between fine-tuning existing networks or designing models from scratch for sensor data processing. In this article, we propose the multihead attention self-supervised (MAS) representation model, which is a self-supervised learning-based sensor feature extraction network. To the best of our knowledge, this is the first time a self-supervised contrastive learning method using positive samples that represent multidimensional industry sensor data is being used for anomaly detection. We review alternative data augmentation methods proposed for better-representing sensor sequence data. We use this insight to design a new structure that adapts to the temporal characteristics of the application. We apply our method to a real-world water circulation system that uses a variety of industrial sensors. The effectiveness of the proposed MAS methods is demonstrated.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TII.2023.3280337",
+      "url": "https://www.semanticscholar.org/paper/19c36b79207717339a206d1c4e194e949d96f6f2"
+    }
+  ]
+}

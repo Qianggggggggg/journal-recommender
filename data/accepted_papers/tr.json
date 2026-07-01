@@ -1,0 +1,70 @@
+{
+  "journal_id": "tr",
+  "journal_name": "IEEE Transactions on Robotics",
+  "papers": [
+    {
+      "title": "Continuous-Time State Estimation Methods in Robotics: A Survey",
+      "abstract": "Accurate, efficient, and robust state estimation is more important than ever in robotics as the variety of platforms and complexity of tasks continue to grow. Historically, discrete-time filters and smoothers have been the dominant approach, in which the estimated variables are states at discrete sample times. The paradigm of continuous-time state estimation proposes an alternative strategy by estimating variables that express the state as a continuous function of time, which can be evaluated at any query time. Not only can this benefit downstream tasks such as planning and control, but it also significantly increases estimator performance and flexibility, as well as reduces sensor preprocessing and interfacing complexity. Despite this, continuous-time methods remain underutilized, potentially because they are less well-known within robotics. To remedy this, this work presents a unifying formulation of these methods and the most exhaustive literature review to date, systematically categorizing prior work by methodology, application, state variables, historical context, and theoretical contribution to the field. By surveying splines and Gaussian process together and contextualizing works from other research domains, this work identifies and analyzes open problems in continuous-time state estimation and suggests new research directions.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2025.3593079",
+      "url": "https://www.semanticscholar.org/paper/c84282b3a634bca1a8e4cb46f6afca2a517b8079"
+    },
+    {
+      "title": "Safe Control With Learned Certificates: A Survey of Neural Lyapunov, Barrier, and Contraction Methods for Robotics and Control",
+      "abstract": "Learning-enabled control systems have demonstrated impressive empirical performance on challenging control problems in robotics, but this performance comes at the cost of reduced transparency and lack of guarantees on the safety or stability of the learned controllers. In recent years, new techniques have emerged to provide these guarantees by learning certificates alongside control policies—these certificates provide concise data-driven proofs that guarantee the safety and stability of the learned control system. These methods not only allow the user to verify the safety of a learned controller but also provide supervision during training, allowing safety and stability requirements to influence the training process itself. In this article, we provide a comprehensive survey of this rapidly developing field of certificate learning. We hope that this article will serve as an accessible introduction to the theory and practice of certificate learning, both to those who wish to apply these tools to practical robotics problems and to those who wish to dive more deeply into the theory of learning for control.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2022.3232542",
+      "url": "https://www.semanticscholar.org/paper/a8cd8d3e76ce4d986f938764a086e1a3d4706973"
+    },
+    {
+      "title": "A New Wave in Robotics: Survey on Recent MmWave Radar Applications in Robotics",
+      "abstract": "We survey the current state of millimeter-wave (mmWave) radar applications in robotics with a focus on unique capabilities, and discuss future opportunities based on the state of the art. Frequency modulated continuous wave mmWave radars operating in the 76–81 GHz range are an appealing alternative to lidars, cameras, and other sensors operating in the near-visual spectrum. Radar has been made more widely available in new packaging classes, more convenient for robotics and its longer wavelengths have the ability to bypass visual clutter, such as fog, dust, and smoke. We begin by covering radar principles as they relate to robotics. We then review the relevant new research across a broad spectrum of robotics applications beginning with motion estimation, localization, and mapping. We then cover object detection and classification, and then close with an analysis of current datasets and calibration techniques that provide entry points into radar research.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2024.3463504",
+      "url": "https://www.semanticscholar.org/paper/e42e485df83cb3481d17ddc2ddebf8a06d8fd514"
+    },
+    {
+      "title": "SDPRLayers: Certifiable Backpropagation Through Polynomial Optimization Problems in Robotics",
+      "abstract": "A recent set of techniques in the robotics community, known as certifiably correct methods, frames robotics problems as polynomial optimization problems and applies convex, semidefinite programming (SDP) relaxations to either find or certify their global optima. In parallel, differentiable optimization allows optimization problems to be embedded into end-to-end learning frameworks and has received considerable attention in the robotics community. In this article, we consider the ill effect of convergence to spurious local minima in the context of learning frameworks that use differentiable optimization. We present SDPRLayers, an approach that seeks to address this issue by combining convex relaxations with implicit differentiation techniques to provide certifiably correct solutions and gradients throughout the training process. We provide theoretical results that outline conditions for the correctness of these gradients and provide efficient means for their computation. Our approach is first applied to two simple-but-demonstrative simulated examples, which expose the potential pitfalls of reliance on local optimization in existing, state-of-the-art, differentiable optimization methods. We then apply our method in a real-world application: we train a deep neural network to detect image keypoints for robot localization in challenging lighting conditions. We provide our open-source, PyTorch implementation of SDPRLayers and our differentiable localization pipeline.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2025.3578228",
+      "url": "https://www.semanticscholar.org/paper/901b5965151e2532b1efecda5155841cff6c895d"
+    },
+    {
+      "title": "Challenges for Monocular 6-D Object Pose Estimation in Robotics",
+      "abstract": "Object pose estimation is a core perception task that enables, for example, object manipulation and scene understanding. The widely available, inexpensive, and high-resolution RGB sensors and CNNs that allow for fast inference make monocular approaches especially well-suited for robotics applications. We observe that previous surveys establish the state of the art for varying modalities, single- and multiview settings, and datasets and metrics that consider a multitude of applications. We argue, however, that those works' broad scope hinders the identification of open challenges that are specific to monocular approaches and the derivation of promising future challenges for their application in robotics. By providing a unified view on recent publications from both robotics and computer vision, we find that occlusion handling, pose representations, and formalizing and improving category-level pose estimation are still fundamental challenges that are highly relevant for robotics. Moreover, to further improve robotic performance, large object sets, novel objects, refractive materials, and uncertainty estimates are central and largely unsolved open challenges. In order to address them, ontological reasoning, deformability handling, scene-level reasoning, realistic datasets, and the ecological footprint of algorithms need to be improved.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2024.3433870",
+      "url": "https://www.semanticscholar.org/paper/66dbad3c6970972eda62b67d9f551caf12610b03"
+    },
+    {
+      "title": "Contact Models in Robotics: A Comparative Analysis",
+      "abstract": "Physics simulation is ubiquitous in robotics. Whether in model-based approaches (e.g., trajectory optimization), or model-free algorithms (e.g., reinforcement learning), physics simulators are a central component of modern control pipelines in robotics. Over the past decades, several robotic simulators have been developed, each with dedicated contact modeling assumptions and algorithmic solutions. In this article, we survey the main contact models and the associated numerical methods commonly used in robotics for simulating advanced robot motions involving contact interactions. In particular, we recall the physical laws underlying contacts and friction (i.e., Signorini condition, Coulomb's law, and the maximum dissipation principle), and how they are transcribed in current simulators. For each physics engine, we expose their inherent physical relaxations along with their limitations due to the numerical techniques employed. Based on our study, we propose theoretically grounded quantitative criteria on which we build benchmarks assessing both the physical and computational aspects of simulation. We support our work with an open-source and efficient C++ implementation of the existing algorithmic variations. Our results demonstrate that some approximations or algorithms commonly used in robotics can severely widen the reality gap and impact target applications. We hope this work will help motivate the development of new contact models, contact solvers, and robotic simulators in general, at the root of recent progress in motion generation in robotics.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2024.3434208",
+      "url": "https://www.semanticscholar.org/paper/7f82a6339a1302ecc84c5bad5528ca8a9a0582bf"
+    },
+    {
+      "title": "Partially Observable Markov Decision Processes in Robotics: A Survey",
+      "abstract": "Noisy sensing, imperfect control, and environment changes are defining characteristics of many real-world robot tasks. The partially observable Markov decision process (POMDP) provides a principled mathematical framework for modeling and solving robot decision and control tasks under uncertainty. Over the last decade, it has seen many successful applications, spanning localization and navigation, search and tracking, autonomous driving, multirobot systems, manipulation, and human–robot interaction. This survey aims to bridge the gap between the development of POMDP models and algorithms at one end and application to diverse robot decision tasks at the other. It analyzes the characteristics of these tasks and connects them with the mathematical and algorithmic properties of the POMDP framework for effective modeling and solution. For practitioners, the survey provides some of the key task characteristics in deciding when and how to apply POMDPs to robot tasks successfully. For POMDP algorithm designers, the survey provides new insights into the unique challenges of applying POMDPs to robot systems and points to promising new directions for further research.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2022.3200138",
+      "url": "https://www.semanticscholar.org/paper/56f4b84959a56f27c109c4065facae01e1a64ecd"
+    },
+    {
+      "title": "On Semidefinite Relaxations for Matrix-Weighted State-Estimation Problems in Robotics",
+      "abstract": "In recent years, there has been remarkable progress in the development of so-called certifiable perception methods, which leverage semidefinite, convex relaxations to find global optima of perception problems in robotics. However, many of these relaxations rely on simplifying assumptions that facilitate the problem formulation, such as an isotropic measurement noise distribution. In this article, we explore the tightness of the semidefinite relaxations of matrix-weighted (anisotropic) state-estimation problems and reveal the limitations lurking therein: matrix-weighted factors can cause convex relaxations to lose tightness. In particular, we show that the semidefinite relaxations of localization problems with matrix weights may be tight only for low noise levels. To better understand this issue, we introduce a theoretical connection between the posterior uncertainty of the state estimate and the certificate matrix obtained via convex relaxation. With this connection in mind, we empirically explore the factors that contribute to this loss of tightness and demonstrate that redundant constraints can be used to regain it. As a second technical contribution of this article, we show that the state-of-the-art relaxation of scalar-weighted simultaneous localization and mapping cannot be used when matrix weights are considered. We provide an alternate formulation and show that its semidefinite program relaxation is not tight (even for very low noise levels) unless specific redundant constraints are used. We demonstrate the tightness of our formulations on both simulated and real-world data.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TRO.2024.3475220",
+      "url": "https://www.semanticscholar.org/paper/d38c1dd39a3ba52c51cc5c8687f5bce955ef431a"
+    }
+  ]
+}

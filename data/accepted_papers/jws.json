@@ -1,0 +1,70 @@
+{
+  "journal_id": "jws",
+  "journal_name": "Journal of Web Semantics",
+  "papers": [
+    {
+      "title": "Towards the Web of Embeddings: Integrating multiple knowledge graph embedding spaces with FedCoder",
+      "abstract": "The Semantic Web is distributed yet interoperable: Distributed since resources are created and published by a variety of producers, tailored to their specific needs and knowledge; Interoperable as entities are linked across resources, allowing to use resources from different providers in concord. Complementary to the explicit usage of Semantic Web resources, embedding methods made them applicable to machine learning tasks. Subsequently, embedding models for numerous tasks and structures have been developed, and embedding spaces for various resources have been published. The ecosystem of embedding spaces is distributed but not interoperable: Entity embeddings are not readily comparable across different spaces. To parallel the Web of Data with a Web of Embeddings, we must thus integrate available embedding spaces into a uniform space. Current integration approaches are limited to two spaces and presume that both of them were embedded with the same method — both assumptions are unlikely to hold in the context of a Web of Embeddings. In this paper, we present FedCoder— an approach that integrates multiple embedding spaces via a latent space. We assert that linked entities have a similar representation in the latent space so that entities become comparable across embedding spaces. FedCoder employs an autoencoder to learn this latent space from linked as well as non-linked entities. Our experiments show that FedCoder substantially outperforms state-of-the-art approaches when faced with different embedding models, that it scales better than previous methods in the number of embedding spaces, and that it improves with more graphs being integrated whilst performing comparably with current approaches that assumed joint learning of the embeddings and were, usually, limited to two sources. Our results demonstrate that FedCoder is well adapted to integrate the distributed, diverse, and large ecosystem of embeddings spaces into an interoperable Web of Embeddings. © 2022TheAuthor(s).",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2022.100741",
+      "url": "https://www.semanticscholar.org/paper/eaaab470dbaf6da871bf8c0d7fbc9dd3e8d1cca5"
+    },
+    {
+      "title": "Uncovering Hidden Semantics of Set Information in Knowledge Bases",
+      "abstract": "Knowledge Bases (KBs) contain a wealth of structured information about entities and predicates. This paper focuses on set-valued predicates, i.e., the relationship between an entity and a set of entities. In KBs, this information is often represented in two formats: (i) via counting predicates such as numberOfChildren and staffSize, that store aggregated integers, and (ii) via enumerating predicates such as parentOf and worksFor, that store individual set memberships. Both formats are typically complementary: unlike enumerating predicates, counting predicates do not give away individuals, but are more likely informative towards the true set size, thus this coexistence could enable interesting applications in question answering and KB curation. In this paper we aim at uncovering this hidden knowledge. We proceed in two steps. (i) We identify set-valued predicates from a given KB predicates via statistical and embedding-based features. (ii) We link counting predicates and enumerating predicates by a combination of co-occurrence, correlation and textual relatedness metrics. We analyze the prevalence of count information in four prominent knowledge bases, and show that our linking method achieves up to 0.55 F1 score in set predicate identification versus 0.40 F1 score of a random selection, and normalized discounted gains of up to 0.84 at position 1 and 0.75 at position 3 in relevant predicate alignments. Our predicate alignments are showcased in a demonstration system available at this https URL.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2020.100588",
+      "url": "https://www.semanticscholar.org/paper/c3e211a1b91a551c4d96ea26d50f4b4bf8d480a8"
+    },
+    {
+      "title": "Intelligent Software Web Agents: A Gap Analysis",
+      "abstract": "Semantic web technologies have shown their effectiveness, especially when it comes to knowledge representation, reasoning, and data integration. However, the original semantic web vision, whereby machine readable web data could be automatically actioned upon by intelligent software web agents, has yet to be realised. In order to better understand the existing technological opportunities and challenges, in this paper we examine the status quo in terms of intelligent software web agents, guided by research with respect to requirements and architectural components, coming from the agents community. We use the identified requirements to both further elaborate on the semantic web agent motivating use case scenario, and to summarise different perspectives on the requirements from the semantic web agent literature. We subsequently propose a hybrid semantic web agent architecture, and use the various components and subcomponents in order to provide a focused discussion in relation to existing semantic web standards and community activities. Finally, we highlight open research opportunities and challenges and take a broader perspective of the research by discussing the potential for intelligent software web agents as an enabling technology for emerging domains, such as digital assistants, cloud computing, and the internet of things.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2021.100659",
+      "url": "https://www.semanticscholar.org/paper/bc78623e07d1891c91e946247cdbd80e4cbbb188"
+    },
+    {
+      "title": "Knowledge Graphs, Large Language Models, and Hallucinations: An NLP Perspective",
+      "abstract": "Large Language Models (LLMs) have revolutionized Natural Language Processing (NLP) based applications including automated text generation, question answering, chatbots, and others. However, they face a significant challenge: hallucinations, where models produce plausible-sounding but factually incorrect responses. This undermines trust and limits the applicability of LLMs in different domains. Knowledge Graphs (KGs), on the other hand, provide a structured collection of interconnected facts represented as entities (nodes) and their relationships (edges). In recent research, KGs have been leveraged to provide context that can fill gaps in an LLM understanding of certain topics offering a promising approach to mitigate hallucinations in LLMs, enhancing their reliability and accuracy while benefiting from their wide applicability. Nonetheless, it is still a very active area of research with various unresolved open problems. In this paper, we discuss these open challenges covering state-of-the-art datasets and benchmarks as well as methods for knowledge integration and evaluating hallucinations. In our discussion, we consider the current use of KGs in LLM systems and identify future directions within each of these challenges.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2024.100844",
+      "url": "https://www.semanticscholar.org/paper/e57c7eb215a87ca8fbb5284f3e3189c6bbc524da"
+    },
+    {
+      "title": "Accelerating Knowledge Graph and Ontology Engineering with Large Language Models",
+      "abstract": "Large Language Models bear the promise of significant acceleration of key Knowledge Graph and Ontology Engineering tasks, including ontology modeling, extension, modification, population, alignment, as well as entity disambiguation. We lay out LLM-based Knowledge Graph and Ontology Engineering as a new and coming area of research, and argue that modular approaches to ontologies will be of central importance.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2411.09601",
+      "url": "https://www.semanticscholar.org/paper/cdc5aea6fbd8578b0642d65453891f99329b7bc9"
+    },
+    {
+      "title": "Education in the Era of Neurosymbolic AI",
+      "abstract": "Education is poised for a transformative shift with the advent of neurosymbolic artificial intelligence (NAI), which will redefine how we support deeply adaptive and personalized learning experiences. NAI-powered education systems will be capable of interpreting complex human concepts and contexts while employing advanced problem-solving strategies, all grounded in established pedagogical frameworks. This will enable a level of personalization in learning systems that to date has been largely unattainable at scale, providing finely tailored curricula that adapt to an individual's learning pace and accessibility needs, including the diagnosis of student understanding of subjects at a fine-grained level, identifying gaps in foundational knowledge, and adjusting instruction accordingly. In this paper, we propose a system that leverages the unique affordances of pedagogical agents -- embodied characters designed to enhance learning -- as critical components of a hybrid NAI architecture. To do so, these agents can thus simulate nuanced discussions, debates, and problem-solving exercises that push learners beyond rote memorization toward deep comprehension. We discuss the rationale for our system design and the preliminary findings of our work. We conclude that education in the era of NAI will make learning more accessible, equitable, and aligned with real-world skills. This is an era that will explore a new depth of understanding in educational tools.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2024.100857",
+      "url": "https://www.semanticscholar.org/paper/68102dc3c28fc04cfd17dfc3c29149ca24e56098"
+    },
+    {
+      "title": "RevOnt: Reverse engineering of competency questions from knowledge graphs via language models",
+      "abstract": "The process of developing ontologies – a formal, explicit specification of a shared conceptualisation – is addressed by well-known methodologies. As for any engineering development, its fundamental basis is the collection of requirements, which includes the elicitation of competency questions. Competency questions are defined through interacting with domain and application experts or by investigating existing datasets that may be used to populate the ontology i.e. its knowledge graph. The rise in popularity and accessibility of knowledge graphs provides an opportunity to support this phase with automatic tools. In this work, we explore the possibility of extracting competency questions from a knowledge graph. This reverses the traditional workflow in which knowledge graphs are built from ontologies, which in turn are engineered from competency questions. We describe in detail RevOnt, an approach that extracts and abstracts triples from a knowledge graph, generates questions based on triple verbalisations, and filters the resulting questions to yield a meaningful set of competency questions; the WDV dataset. This approach is implemented utilising the Wikidata knowledge graph as a use case, and contributes a set of core competency questions from 20 domains present in the WDV dataset. To evaluate RevOnt, we contribute a new dataset of manually-annotated high-quality competency questions, and compare the extracted competency questions by calculating their BLEU scoreagainstthehumanreferences.Theresultsfortheabstractionandquestiongenerationcomponents oftheapproachshowgoodtohighquality.Meanwhile,theaccuracyofthefilteringcomponentisabove86%,whichiscomparabletothestate-of-the-artclassifications.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2024.100822",
+      "url": "https://www.semanticscholar.org/paper/0229715d13216f9c3806ce9b142d7fbb581c3692"
+    },
+    {
+      "title": "A simple and efficient approach to unsupervised instance matching and its application to linked data of power plants",
+      "abstract": "Knowledge graphs store and link semantically annotated data about real-world entities from a variety of domains and on a large scale. The World Avatar is based on a dynamic decentralised knowledge graph and on semantic technologies to realise complex cross-domain scenarios. Accurate computational results for such scenarios require the availability of complete, high-quality data. This work focuses on instance matching – one of the subtasks of automatically populating the knowledge graph with data from a wide spectrum of external sources. Instance matching compares two data sets and seeks to identify instances (data, records) referring to the same real-world entity. We introduce AutoCal, a new instance matcher which does not require labelled data and runs out of the box for a wide range of domains without tuning method-specific parameters. AutoCal achieves results competitive to recently proposed unsupervised matchers from the field of Machine Learning. We also select an unsupervised state-of-the-art matcher from the field of Deep Learning for a thorough comparison. Our results show that neither AutoCal nor the state-of-the-art matcher is superior regarding matching quality while AutoCal has only moderate hardware requirements and runs 2.7 to 60 times faster. In summary, AutoCal is specifically well-suited to be used in an automated environment. We present its prototypical integration into the World Avatar and apply AutoCal to the domain of power plants which is relevant for practical environmental scenarios of the World Avatar.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.websem.2024.100815",
+      "url": "https://www.semanticscholar.org/paper/b52eba0bde9958cd2133e76e509fe61eb1c1ab32"
+    }
+  ]
+}

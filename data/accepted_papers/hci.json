@@ -1,0 +1,62 @@
+{
+  "journal_id": "hci",
+  "journal_name": "Human-Computer Interaction",
+  "papers": [
+    {
+      "title": "Quantum-Driven Computer-Aided Engineering (Q-CAE): A Hybrid AI–Quantum Paradigm for Rapid Design Space Exploration and Automated Optimization in Engineering Systems",
+      "abstract": "The convergence of quantum computing and artificial intelligence (AI) is redefining the boundaries of computational engineering, offering an unprecedented capacity for optimization, simulation, and design automation. This research introduces Quantum-Driven Computer-Aided Engineering (Q-CAE), a hybrid AI–quantum framework developed to accelerate design space exploration and enhance the precision of optimization in complex engineering systems. Q-CAE combines the analytical rigor of quantum algorithms with the adaptability of AI-driven optimization models to address the challenges of high-dimensional, nonlinear, and interdependent design parameters that traditionally strain classical computing resources. Within this framework, quantum subroutines such as Quantum Approximate Optimization Algorithms (QAOA) and Variational Quantum Circuits (VQC) are employed to efficiently search large solution spaces, while AI models leverage reinforcement learning and neural networks to predict optimal configurations and refine performance iteratively. This hybrid approach enables dynamic learning from multi-objective data sets, optimizing energy efficiency, material properties, and system reliability. Participants engaged with Q-CAE applications gained first-hand experience in algorithmic modeling, quantum heuristics, and AI-driven engineering design, cultivating interdisciplinary skills essential for future computational innovation. Results indicate that hybrid Q-CAE systems can significantly reduce computational time and enhance accuracy compared to traditional CAE workflows. The study demonstrates how integrating quantum principles into engineering design pipelines can transform modern computational methodologies, setting the foundation for autonomous, intelligent, and quantum-enhanced engineering systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.62802/85jmsy51",
+      "url": "https://www.semanticscholar.org/paper/d72a62c7f63599bedd50d84892db5f77494bd12e"
+    },
+    {
+      "title": "Modeling Human Creativity and Problem-Solving with Quantum-Inspired Cognitive Architectures",
+      "abstract": "Creativity and problem-solving are central components of human intelligence, yet they remain difficult to model within classical cognitive and computational frameworks. Traditional approaches, grounded in symbolic reasoning or probabilistic optimization, often struggle to capture the non-linear, context-sensitive, and exploratory nature of creative thought. Quantum-inspired cognitive architectures offer an alternative modeling paradigm by drawing on mathematical principles from quantum probability and quantum information theory—such as superposition, interference, and contextuality—without assuming physical quantum processes in the brain. This paper examines how quantum-inspired models can represent creative cognition as a dynamic process involving parallel idea generation, contextual recombination, and non-deterministic insight formation. By conceptualizing mental states as superposed cognitive representations and problem-solving as a sequence of state transitions influenced by contextual measurements, quantum-inspired architectures provide a unified framework for modeling divergent thinking, insight, and adaptive reasoning. The study synthesizes theoretical foundations from quantum cognition, creativity research, and artificial intelligence, and discusses implications for the design of intelligent systems that more closely emulate human creative and problem-solving capabilities.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.62802/vgpdeb05",
+      "url": "https://www.semanticscholar.org/paper/26f8a37c1aab163f44b04c0ca6d0fe49629bf14c"
+    },
+    {
+      "title": "Human AI Collaboration in Decision-Making Auto Systems With AI",
+      "abstract": "The integration of Artificial Intelligence (AI) with human decision-making processes has led to the emergence of advanced automated systems designed to enhance efficiency, accuracy, and adaptability across various domains. This research investigates the collaborative dynamics between human decision-makers and AI-driven systems, focusing on their synergistic potential in automated decision-making frameworks. By combining human intuition and expertise with the computational power of AI, these systems enable optimized decision-making in complex environments. The study explores applications across industries such as healthcare, finance, and autonomous vehicles, highlighting their impact on productivity and innovation. Challenges, including ethical considerations, transparency, and trust, are critically analyzed to ensure responsible implementation. This research further examines how human oversight complements AI capabilities, fostering robust systems that balance automation with accountability. Through interdisciplinary analysis and empirical evidence, the study underscores the transformative potential of human-AI collaboration in reshaping decision-making paradigms. The findings contribute to the ongoing discourse on the future of human-machine synergy, offering actionable insights for policymakers, industry leaders, and researchers.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.62802/b4z5p105",
+      "url": "https://www.semanticscholar.org/paper/4f3804ef3010539c9738e10cd5956265b3a1e90b"
+    },
+    {
+      "title": "Computer Vision in Self-Driving Cars",
+      "abstract": "With the introduction of autonomous vehicles into our daily lives, our thoughts about transportation have changed. It is obvious that these vehicles, which can drive without human intervention, have an advanced combination of technologies to move safely and efficiently on the roads. The most important part of autonomous vehicles is computer vision. This vision allows the vehicle to see and understand the road, traffic, walking people, and other objects around it. Cameras and sensors are used to obtain this information. The vehicle makes quick decisions using what it sees and drives safely in different road conditions. In this article, we will briefly discuss how computer vision works, how the vehicle detects objects, and how it uses algorithms such as YOLO, Deep SORT, and LIDAR.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.62802/h1prr610",
+      "url": "https://www.semanticscholar.org/paper/3ecb8dded36c29a793de5226705b12b11ba95c14"
+    },
+    {
+      "title": "Enhancing Accessibility through Brain-Computer Interfaces (BCIs) in Assistive Technology",
+      "abstract": "Brain-Computer Interfaces (BCIs) have revolutionized assistive technology, offering transformative solutions to enhance accessibility for individuals with physical and neurological disabilities. By enabling direct communication between the brain and external devices, BCIs bypass traditional pathways, empowering users to control assistive tools through neural activity. This research explores the integration of BCIs into assistive technology, focusing on their potential to improve mobility, communication, and independence. It examines cutting-edge applications such as neural-controlled prosthetics, speech-generating devices, and smart home systems tailored for accessibility. The study also addresses challenges including signal processing accuracy, user adaptability, and ethical considerations surrounding data privacy and inclusivity. By analyzing advancements in machine learning algorithms and neurofeedback systems, the research provides insights into optimizing BCI functionality for practical deployment. Ultimately, this study highlights the role of BCIs in creating a more inclusive society by redefining the capabilities of assistive technologies.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.62802/7tt4r452",
+      "url": "https://www.semanticscholar.org/paper/232579ae9b8a4a179a6b2f7926531482ca8680fc"
+    },
+    {
+      "title": "Artificial Intelligence in Personalized Education: Enhancing Learning Outcomes Through Adaptive Technologies and Data-Driven Insights",
+      "abstract": "The integration of Artificial Intelligence (AI) in personalized education is revolutionizing traditional learning paradigms, enabling adaptive, data-driven approaches to enhance learning outcomes. This research investigates how AI-driven technologies, including intelligent tutoring systems, adaptive learning platforms, and predictive analytics, transform the educational landscape by providing tailored, learner-centered experiences. AI facilitates the identification of individual learning patterns, preferences, and challenges, offering customized content delivery and real-time feedback to optimize student engagement and comprehension. The study emphasizes the role of AI in fostering equitable access to quality education by bridging gaps in learning opportunities and addressing diverse needs. Furthermore, it explores the ethical implications of AI in education, such as data privacy, algorithmic bias, and the balance between human and machine-driven instruction. By examining current advancements, case studies, and future prospects, this research aims to provide a comprehensive understanding of how AI technologies can drive innovation in personalized education and contribute to more effective, inclusive, and sustainable learning environments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.62802/ygye0506",
+      "url": "https://www.semanticscholar.org/paper/5e49f5859b9ff39af30b0a3882f7b5795aed1794"
+    },
+    {
+      "title": "Strategic Frameworks for Organizational Readiness and Competitive Advantage in the Adoption of Quantum Computing Technologies Across Global Financial and Technology Enterprises",
+      "abstract": "Quantum computing is emerging as a potentially transformative technology with the capacity to redefine computational boundaries in finance and technology-intensive industries. However, the strategic adoption of quantum computing remains uneven, constrained by technological uncertainty, organizational readiness, and significant capability gaps. This paper examines strategic frameworks for organizational readiness and competitive advantage in the adoption of quantum computing technologies across global financial and technology enterprises. Drawing on theories of dynamic capabilities, technological innovation, and strategic management, the study conceptualizes quantum adoption as a multi-dimensional process encompassing technological infrastructure, human capital, governance structures, and ecosystem integration. The paper synthesizes existing research to identify critical readiness factors and proposes a strategic framework that aligns organizational capabilities with the evolving quantum computing landscape. By emphasizing the role of strategic foresight, cross-functional integration, and adaptive governance, this research contributes to understanding how organizations can transition from experimental engagement to sustained competitive advantage through quantum-enabled innovation.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.62802/5h6v7241",
+      "url": "https://www.semanticscholar.org/paper/cdf24e50898b1e6ebf40b8a868dd317f5d2e6dbd"
+    }
+  ]
+}

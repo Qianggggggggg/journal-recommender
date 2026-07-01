@@ -392,9 +392,9 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Override the LTR model path from configs/app.yaml. Use this to "
-            "swap between 20-dim v4 and 26-dim evidence LTR for ablation "
+            "swap between 16-dim base and 22-dim evidence LTR for ablation "
             "comparisons without editing the config. The model file's "
-            "feature_dim must match what the LTR adapter expects (20 or 26)."
+            "feature_dim must match what the LTR adapter expects (16 or 22)."
         ),
     )
     parser.add_argument(

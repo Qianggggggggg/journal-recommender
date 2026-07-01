@@ -49,7 +49,7 @@ def normalize(text: str) -> str:
     return text.strip().lower() if text else ""
 
 
-def test_single_paper(
+def evaluate_single_paper(
     paper: dict,
     llm: MiniMaxLLM,
     parser: PaperParser,
@@ -206,7 +206,7 @@ def main():
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
         futures = {
             executor.submit(
-                test_single_paper, paper, llm, parser, quality_assessor, prompts
+                evaluate_single_paper, paper, llm, parser, quality_assessor, prompts
             ): paper
             for paper in papers
         }

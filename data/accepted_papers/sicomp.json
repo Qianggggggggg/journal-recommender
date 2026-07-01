@@ -9,6 +9,38 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1137/23M1608483",
       "url": ""
+    },
+    {
+      "title": "On Bounded Depth Proofs for Tseitin Formulas on the Grid; Revisited",
+      "abstract": "We study Frege proofs using depth-d Boolean formulas for the Tseitin contradiction on n \\times n grids. We prove that if each line in the proof is of size M, then the number of lines is exponential in n/(log M)O(d). This strengthens a recent result of Pitassi, Ramakrishman, and Tan [2022 IEEE 62nd Annual Symposium on Foundations of Computer Science, 2022, pp. 445-456]. The key technical step is a multiswitching lemma extending the switching lemma of H\\rastad [J. ACM, 68 (2021), 1] for a space of restrictions related to the Tseitin contradiction. The strengthened lemma also allows us to improve the lower bound for standard proof size of bounded depth Frege refutations from exponential in \\Omega(\\~ n1/59d) to exponential in \\Omega(\\~ n1/d). This strengthens the bounds given in the preliminary version of this paper [J. H\\rastad and K. Risse, 2022 IEEE 63rd Annual Symposium on Foundations of Computer Science, 2022, pp. 1138-1149].",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1137/22m153851x",
+      "url": "https://doi.org/10.1137/22m153851x"
+    },
+    {
+      "title": "Complexity and Parametric Computation of Equilibria in Atomic Splittable Congestion Games via Weighted Block Laplacians",
+      "abstract": "We show that computing an equilibrium in atomic splittable congestion games with player-specific affine cost functions $l_{e,i}(x) = a_{e,i} x + b_{e,i}$ is $\\mathsf{PPAD}$-complete. To prove that the problem is contained in $\\mathsf{PPAD}$, we develop a homotopy method that traces an equilibrium for varying flow demands of the players. A key technique for this method is to describe the evolution of the equilibrium locally by a novel block Laplacian matrix. Using the properties of this matrix give rise to a path following formulation for computing an equilibrium where states correspond to supports that are feasible for some demands. A closer investigation of the block Laplacian system further allows to orient the states giving rise to unique predecessor and successor states thus putting the problem into $\\mathsf{PPAD}$. For the $\\mathsf{PPAD}$-hardness, we reduce from computing an approximate equilibrium of a bimatrix win-lose game. As a byproduct of our reduction we further show that computing a multi-class Wardrop equilibrium with class dependent affine cost functions is $\\mathsf{PPAD}$-complete as well. As another byproduct of our $\\mathsf{PPAD}$-completeness proof, we obtain an algorithm that computes a continuum of equilibria parametrized by the players' flow demand. For player-specific costs, the algorithm runs in polynomial space. For games with player-independent costs, we obtain an algorithm computing all equilibria as a function of the flow demand that runs in time polynomial in the output.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1137/20m1361523",
+      "url": "https://doi.org/10.1137/20m1361523"
+    },
+    {
+      "title": "On the Nisan–Ronen Conjecture for Submodular Valuations",
+      "abstract": "We consider incentive compatible mechanisms for a domain that is very close to the domain of scheduling n unrelated machines: the single exception is that the valuation of just one machine is submodular. For the scheduling problem with such cost functions, we give a lower bound of Ω(√n) on the approximation ratio of incentive compatible deterministic mechanisms. This is a strong information-theoretic impossibility result on the approximation ratio of mechanisms that provides strong evidence for the Nisan-Ronen conjecture. This is the first non-constant lower bound that assumes no restriction on the mechanism side; in contrast, all previous general results hold for only special classes of mechanisms such as local, strongly monotone, and anonymous mechanisms. Our approach is based on a novel multi-player characterization of appropriately selected instances that allows us to focus on particular type of algorithms, linear mechanisms, and it is a potential stepping stone towards the full resolution of the conjecture.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1137/22m1483141",
+      "url": "https://doi.org/10.1137/22m1483141"
+    },
+    {
+      "title": "Toward Derandomizing Markov Chain Monte Carlo",
+      "abstract": "We present a new framework to derandomize certain Markov chain Monte Carlo (MCMC) algorithms. As in MCMC, we first reduce counting problems to sampling from a sequence of marginal distributions. For the latter task, we introduce a method called coupling toward the past that can, in logarithmic time, evaluate one or a constant number of variables from a stationary Markov chain state. Since there are at most logarithmic random choices, this leads to very simple derandomization. As an application, we provide an efficient deterministic approximate counting algorithm for hypergraph independent sets, under local lemma type conditions matching, up to lower-order factors, their state-of-the-art randomized counterparts.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1137/24m1663806",
+      "url": "https://doi.org/10.1137/24m1663806"
     }
   ]
 }

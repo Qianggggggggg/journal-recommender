@@ -1,0 +1,78 @@
+{
+  "journal_id": "cybersecurity",
+  "journal_name": "Cybersecurity",
+  "papers": [
+    {
+      "title": "Review and insight on the behavioral aspects of cybersecurity",
+      "abstract": "Stories of cyber attacks are becoming a routine in which cyber attackers show new levels of intention by sophisticated attacks on networks. Unfortunately, cybercriminals have figured out profitable business models and they take advantage of the online anonymity. A serious situation that needs to improve for networks’ defenders. Therefore, a paradigm shift is essential to the effectiveness of current techniques and practices. Since the majority of cyber incidents are human enabled, this shift requires expanding research to underexplored areas such as behavioral aspects of cybersecurity. It is more vital to focus on social and behavioral issues to improve the current situation. This paper is an effort to provide a review of relevant theories and principles, and gives insights including an interdisciplinary framework that combines behavioral cybersecurity, human factors, and modeling and simulation.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-020-00050-w",
+      "url": "https://www.semanticscholar.org/paper/b62c7b071be29caffd75336ff49b101a468f9d9b"
+    },
+    {
+      "title": "Social engineering in cybersecurity: a domain ontology and knowledge graph application examples",
+      "abstract": "Social engineering has posed a serious threat to cyberspace security. To protect against social engineering attacks, a fundamental work is to know what constitutes social engineering. This paper first develops a domain ontology of social engineering in cybersecurity and conducts ontology evaluation by its knowledge graph application. The domain ontology defines 11 concepts of core entities that significantly constitute or affect social engineering domain, together with 22 kinds of relations describing how these entities related to each other. It provides a formal and explicit knowledge schema to understand, analyze, reuse and share domain knowledge of social engineering. Furthermore, this paper builds a knowledge graph based on 15 social engineering attack incidents and scenarios. 7 knowledge graph application examples (in 6 analysis patterns) demonstrate that the ontology together with knowledge graph is useful to 1) understand and analyze social engineering attack scenario and incident, 2) find the top ranked social engineering threat elements (e.g. the most exploited human vulnerabilities and most used attack mediums), 3) find potential social engineering threats to victims, 4) find potential targets for social engineering attackers, 5) find potential attack paths from specific attacker to specific target, and 6) analyze the same origin attacks.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-021-00094-6",
+      "url": "https://www.semanticscholar.org/paper/c9de7f1dfa7ba504d3e4743f6f502c4628b35ed0"
+    },
+    {
+      "title": "Tackling imbalanced data in cybersecurity with transfer learning: a case with ROP payload detection",
+      "abstract": "In recent years, deep learning gained proliferating popularity in the cybersecurity application domain, since when being compared to traditional machine learning methods, it usually involves less human efforts, produces better results, and provides better generalizability. However, the imbalanced data issue is very common in cybersecurity, which can substantially deteriorate the performance of the deep learning models. This paper introduces a transfer learning based method to tackle the imbalanced data issue in cybersecurity using return-oriented programming payload detection as a case study. We achieved 0.0290 average false positive rate, 0.9705 average F1 score and 0.9521 average detection rate on 3 different target domain programs using 2 different source domain programs, with 0 benign training data sample in the target domain. The performance improvement compared to the baseline is a trade-off between false positive rate and detection rate. Using our approach, the total number of false positives is reduced by 23.16%, and as a trade-off, the number of detected malicious samples decreases by 0.68%.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-022-00135-8",
+      "url": "https://www.semanticscholar.org/paper/765c5b20045d8a8b879c17fd936aed8aac56d05c"
+    },
+    {
+      "title": "Sifu - a cybersecurity awareness platform with challenge assessment and intelligent coach",
+      "abstract": "Software vulnerabilities, when actively exploited by malicious parties, can lead to catastrophic consequences. Proper handling of software vulnerabilities is essential in the industrial context, particularly when the software is deployed in critical infrastructures. Therefore, several industrial standards mandate secure coding guidelines and industrial software developers’ training, as software quality is a significant contributor to secure software. CyberSecurity Challenges (CSC) form a method that combines serious game techniques with cybersecurity and secure coding guidelines to raise secure coding awareness of software developers in the industry. These cybersecurity awareness events have been used with success in industrial environments. However, until now, these coached events took place on-site. In the present work, we briefly introduce cybersecurity challenges and propose a novel platform that allows these events to take place online. The introduced cybersecurity awareness platform, which the authors call Sifu, performs automatic assessment of challenges in compliance to secure coding guidelines, and uses an artificial intelligence method to provide players with solution-guiding hints. Furthermore, due to its characteristics, the Sifu platform allows for remote (online) learning, in times of social distancing. The CyberSecurity Challenges events based on the Sifu platform were evaluated during four online real-life CSC events. We report on three surveys showing that the Sifu platform’s CSC events are adequate to raise industry software developers awareness on secure coding.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-020-00064-4",
+      "url": "https://www.semanticscholar.org/paper/26c7621e7c345d5c9963450d4c59c23aef13c3f3"
+    },
+    {
+      "title": "Study of smart grid cyber-security, examining architectures, communication networks, cyber-attacks, countermeasure techniques, and challenges",
+      "abstract": "Smart Grid (SG) technology utilizes advanced network communication and monitoring technologies to manage and regulate electricity generation and transport. However, this increased reliance on technology and connectivity also introduces new vulnerabilities, making SG communication networks susceptible to large-scale attacks. While previous surveys have mainly provided high-level overviews of SG architecture, our analysis goes further by presenting a comprehensive architectural diagram encompassing key SG components and communication links. This holistic view enhances understanding of potential cyber threats and enables systematic cyber risk assessment for SGs. Additionally, we propose a taxonomy of various cyberattack types based on their targets and methods, offering detailed insights into vulnerabilities. Unlike other reviews focused narrowly on protection and detection, our proposed categorization covers all five functions of the National Institute of Standards and Technology cybersecurity framework. This delivers a broad perspective to help organizations implement balanced and robust security. Consequently, we have identified critical research gaps, especially regarding response and recovery mechanisms. This underscores the need for further investigation to bolster SG cybersecurity. These research needs, among others, are highlighted as open issues in our concluding section.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-023-00200-w",
+      "url": "https://www.semanticscholar.org/paper/61db486077f5385494cf2d3628280d2c01d49cc5"
+    },
+    {
+      "title": "Survey of intrusion detection systems: techniques, datasets and challenges",
+      "abstract": "Cyber-attacks are becoming more sophisticated and thereby presenting increasing challenges in accurately detecting intrusions. Failure to prevent the intrusions could degrade the credibility of security services, e.g. data confidentiality, integrity, and availability. Numerous intrusion detection methods have been proposed in the literature to tackle computer security threats, which can be broadly classified into Signature-based Intrusion Detection Systems (SIDS) and Anomaly-based Intrusion Detection Systems (AIDS). This survey paper presents a taxonomy of contemporary IDS, a comprehensive review of notable recent works, and an overview of the datasets commonly used for evaluation purposes. It also presents evasion techniques used by attackers to avoid detection and discusses future research challenges to counter such techniques so as to make computer systems more secure.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-019-0038-7",
+      "url": "https://www.semanticscholar.org/paper/38e81867da601ae6877dd9ce2c1e1aa085852ecb"
+    },
+    {
+      "title": "The SEIRS-NIMFA epidemiological model for malware propagation analysis in IoT networks",
+      "abstract": "With the rapid advancement of Internet of Things networks and its significant cybersecurity challenges, the proposal of models capable of studying malware propagation within these structures has become highly relevant. This paper aims to formulate and implement an SEIRS-NIMFA model to analyze the dissemination of malware infections with a latency period. To accomplish this, we mathematically articulated an SEIRS epidemiological model using an individual-based approach and implemented it using Python. In addition, this paper examines how varying the network size and density, the initially infected device, and several model parameters influence the propagation dynamics. Moreover, to address the Markov chain approach’s high temporal and spatial complexity, we use the n-intertwined mean-field approximation method. Our findings demonstrate that our proposal can effectively aid decision-making in implementing security measures in real-world situations. Finally, our proposal and its implementation are open to further enhancements, broadening their potential applications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-024-00310-z",
+      "url": "https://www.semanticscholar.org/paper/594534a1eea7b4bf061fe23fbee9016cd9a58ea8"
+    },
+    {
+      "title": "Deep neural network modeling attacks on arbiter-PUF-based designs",
+      "abstract": "Physical Unclonable Functions (PUFs) are novel circuit structures that provide hardware security solutions in application areas such as chip design and IoT, due to characteristics of their lightweight, key-free and tamper-resistant. PUFs are not immune to threats like machine learning modeling attacks and side channel modeling attacks. Strong PUFs are susceptible to classical machine learning attacks, however, machine learning’s effectiveness in attacking complex structured strong PUFs is limited, and its efficiency is relatively low. Side-channel modeling attacks, on the other hand, incur high implementation costs. Hence, employing deep learning for modeling attacks becomes an effective and cost-efficient choice when attacking complex structured PUFs. In this paper, we introduce a method that employs deep neural network to assess the modeling resilience of combination logic operation-based PUFs with APUFs as components for the first time. We employed a 4-layer DNN model to investigate the security resilience of PUF models involving any combination of OR AND and XOR logical operations. We explored the security regular patterns of modeling resilience. We have demonstrated for the first time that bias in PUF responses can reduce or destroy the security of PUFs. OR or AND logic operations do not provide any security benefit in PUF design, while XOR operations enhance the security of PUFs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-024-00308-7",
+      "url": "https://www.semanticscholar.org/paper/cd8b9b3209f2072bfb3572bb27056478e5de3f4c"
+    },
+    {
+      "title": "Insider threat detection for specific threat scenarios",
+      "abstract": "Insider threats pose significant challenges to network security due to their destructive and covert nature, often resulting in substantial losses for enterprises. Traditional methods mainly analyze user behavior patterns or convert behaviors into time sequences for further analysis. However, existing detection methods primarily focus on identifying abnormal users or behaviors, lacking the capability to pinpoint specific threats. Additionally, these methods struggle to accurately identify long-distance dependencies in behavior sequences, frequently increasing false positives. To address these issues, we introduce a scenario-oriented insider threat detection model. This model targets three specific threat scenarios-privilege abuse, identity theft, and data leakage-by analyzing user behavior patterns, extracting detailed behavioral characteristics, and constructing behavior sequences. Firstly, this paper serializes user behavior daily and vectorizes it using one-hot encoding. Then, it introduces contextual characteristic information and reconstructs the background of abnormal behavior through behavior vectorization, providing a comprehensive description of user behavior characteristics. This approach addresses the issue of behavior isolation, thereby improving the accuracy and robustness of anomaly detection. Subsequently, a time series analysis model based on a multi-head attention mechanism is employed to analyze long-distance dependencies in behavior sequences. The multi-head attention mechanism simultaneously attends to multiple positions in the behavior sequence, capturing potential correlations between behaviors and user behavior patterns. This mechanism can analyze local information and obtain long-distance dependencies, providing depth feature representation for anomaly detection. Ultimately, we achieve the goal of classifying abnormal behavior sequences. We conduct comprehensive tests on the CERT dataset, demonstrating that our method outperforms traditional deep learning approaches (LSTM, GNN, and GCN) in detecting abnormal sequences. Compared to the best results among the baseline methods, it shows an improvement in accuracy of approximately 2% for privilege abuse, 5% for identity theft, and 2% for data leakage.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1186/s42400-024-00321-w",
+      "url": "https://www.semanticscholar.org/paper/2fd72dc7657485cdeda9c9378aa79c090f417480"
+    }
+  ]
+}

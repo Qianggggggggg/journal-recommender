@@ -1,0 +1,62 @@
+{
+  "journal_id": "is",
+  "journal_name": "Information Systems",
+  "papers": [
+    {
+      "title": "Evaluation of factors contributing to the failure of information systems in public universities: The case of Iran",
+      "abstract": "In this paper, we evaluate the reasons for the failure of information systems in public universities. To that end, we start by presenting a hierarchical structure of criteria after reviewing related studies, and dividing the criteria into the categories of project management, organizational management, human-related, organizational and technical. To assess the weight of the criteria in the proposed framework, we collect the opinions of a sample of information technology experts working in different public universities in Iran, using an online questionnaire that is based on the best-worst method (BWM). By analyzing the weight of the criteria, we can reveal that misfit of information systems software (closely followed by lack of top management support and unsuccessful monitoring and measurement) has the greatest impact on the failure of information systems in the public universities of Iran. The methodology proposed in this paper can be used in other countries facing the same problem.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.is.2020.101534",
+      "url": "https://www.semanticscholar.org/paper/7e3baf937f53e2fbabf02953140c92368071ac96"
+    },
+    {
+      "title": "Information Systems Hardware",
+      "abstract": "Award will be made based on a review of qualifications, scope of services and price. COMMISSIONER'S COURT RESERVES THE RIGHT TO REJECT ANY AND ALL PROPOSALS AND WAIVE TECHNICALITIES. Only proposals that conform to specifications will be considered. Successful Proposer shall not order items or services until a Purchasing Order is received from the County Purchasing Office. Payment will not be made on items delivered without an Agreement. If the proposal totals more than $100,000.00, the bidder shall furnish a certified cashiers check made payable to the County of El Paso or a good and sufficient bid bond in the amount of 5% of the total contract price, executed with a surety company authorized to do business in the State of Texas. The certified cashiers check must be included with the proposal at the time of the opening. In order to remain active on the El Paso County Vendor list, each Vendor receiving this proposal must respond in some form. Vendors submitting a proposal must meet or exceed all specifications herein. Vendors submitting a no proposal must submit their reason in writing to the El Paso County Purchasing Department. I or we agree to furnish the following described equipment, supplies, or services for the prices shown in accordance with specifications listed below or attached. By execution of this proposal, I hereby represent and warrant to El Paso County that I have read and understood the Proposal Documents and the Contract Documents and this proposal is made in accordance with the Proposal Documents. TOTAL COST $ Please do not include tax, as the County is tax-exempt. We will sign tax exemption certificates covering these items. Please submit one (1) original copy and two (2) copies of your bid.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1201/9780429061011-3",
+      "url": "https://www.semanticscholar.org/paper/c6d45b3970bf0e5af9b952657982ec32ae3abcff"
+    },
+    {
+      "title": "Recommender systems for smart cities",
+      "abstract": "Among other conceptualizations, smart cities have been defined as functional urban areas articulated by the use of Information and Communication Technologies (ICT) and modern infrastructures to face city problems in efficient and sustainable ways. Within ICT, recommender systems are strong tools that filter relevant information, upgrading the relations between stakeholders in the polity and civil society, and assisting in decision making tasks through technological platforms. There are scientific articles covering recommendation approaches in smart city applications, and there are recommendation solutions implemented in real world smart city initiatives. However, to the best of our knowledge, there is not a comprehensive review of the state of the art on recommender systems for smart cities. For this reason, in this paper we present a taxonomy of smart city features, dimensions, actions and goals, and, according to these variables, we survey the existing literature on recommender systems. As a result of our survey, we do not only identify and analyze main research trends, but also show current opportunities and challenges where personalized recommendations could be exploited as solutions for citizens, firms and public administrations.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.is.2020.101545",
+      "url": "https://www.semanticscholar.org/paper/2abcc1b1c632ebfd3ec178876f1c4c5203271aa8"
+    },
+    {
+      "title": "Novel predictive model to improve the accuracy of collaborative filtering recommender systems",
+      "abstract": "The recommendation problem involves the prediction of a set of items that maximize the utility for users. Numerous factors, such as the filtering method and similarity measure, affect the prediction accuracy. We propose a novel prediction mechanism that can be applied to collaborative filtering recommender systems. This prediction mechanism consists of a novel adaptable predictive model, called inheritance-based prediction (INH-BP), and a suitable heuristic search algorithm. INH-BP enables the customization of the predictor to suit the user context. It helps in defining a user interest print (UIP) matrix and employs an optimization algorithm such as a genetic algorithm. The UIP matrix should reflect the degree of user satisfaction based on the concept levels instead of the instance level. The optimization algorithm is used to determine the optimal predictor for each user. A set of experiments were conducted to compare INH-BP with Resnick’s well-known adjusted weighted sum. Two benchmark datasets, MovieLens-100K and MovieLens-Last, were used. Both prediction methods were employed using different collaborative filtering techniques. The results demonstrate the superiority of INH-BP and its capability to achieve an accurate prediction irrespective of the number of k-neighbors and their quality. In addition, the results show that INH-BP alleviates the cold start and sparsity issues.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.is.2020.101670",
+      "url": "https://www.semanticscholar.org/paper/19d02182b9d2dddd90a3706ab858bc5e2832baae"
+    },
+    {
+      "title": "Keeping our rivers clean: Information-theoretic online anomaly detection for streaming business process events",
+      "abstract": "Event log anomaly detection aims at identifying anomalous information in the logs generated by the execution of business processes. While several techniques for detecting trace-level anomalies in event logs in offline settings, i.e., when event logs are processed as a batch, have appeared recently in the literature, such techniques are currently lacking for online settings, i.e., when events are processed as a stream. Event log anomaly detection in online settings can be crucial for discovering anomalies in process execution as soon as they occur and, consequently, allowing to take early corrective actions. Moreover, it is also crucial for creating models that can adapt to concept drift in the process generating the events. This paper describes a novel approach to event log anomaly detection in process event streams: we define a general framework in which different anomaly detection methods can be plugged in and we propose and evaluate our own method based on statistical leverage. The leverage is an information-theoretic measure that has been used extensively in statistics to identify outliers and it has been adapted in this paper to the specific scenario of event streams. The proposed approach has been evaluated on artificial and real event streams and also on artificial event streams characterised by concept drift.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.is.2021.101894",
+      "url": "https://www.semanticscholar.org/paper/049b52d69edbe1ba8e35d3ca42f87305ba6aef9d"
+    },
+    {
+      "title": "Exploring computation offloading in IoT systems",
+      "abstract": "Internet of Things (IoT) paradigm raises challenges for devising efficient strategies that offload applications to the fog or the cloud layer while ensuring the optimal response time for a service. Traditional computation offloading policies assume the response time is only dominated by the execution time. However, the response time is a function of many factors including contextual parameters and application characteristics that can change over time. For the computation offloading problem, the majority of existing literature presents efficient solutions considering a limited number of parameters (e.g., computation capacity and network bandwidth) neglecting the effect of the application characteristics and dataflow configuration. In this paper, we explore the impact of the computation offloading on total application response time in three-layer IoT systems considering more realistic parameters, e.g., application characteristics, system complexity, communication cost, and dataflow configuration. This paper also highlights the impact of a new application characteristic parameter defined as Output-Input Data Generation (OIDG) ratio and dataflow configuration on the system behavior. In addition, we present a proof-of-concept end-to-end dynamic computation offloading technique, implemented in a real hardware setup, that observes the aforementioned parameters to perform real-time decision-making.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.IS.2021.101860",
+      "url": "https://www.semanticscholar.org/paper/3ef2bf081403383248cfc7b1b9ac29fb7b244c23"
+    },
+    {
+      "title": "LILLIE: Information extraction and database integration using linguistics and learning-based algorithms",
+      "abstract": "Querying both structured and unstructured data via a single common query interface such as SQL or natural language has been a long standing research goal. Moreover, as methods for extracting information from unstructured data become ever more powerful, the desire to integrate the output of such extraction processes with ‘‘clean’’, structured data grows. We are convinced that for successful integration into databases, such extracted information in the form of ‘‘triples’’ needs to be both (1) of high quality and (2) have the necessary generality to link up with varying forms of structured data. It is the combination of both these aspects, which heretofore have been usually treated in isolation, where our approach breaks new ground. The cornerstone of our work is a novel, generic method for extracting open information triples from unstructured text, using a combination of linguistics and learning-based extraction methods, thus uniquely balancing both precision and recall. Our system called LILLIE (LInked Linguistics and Learning-Based Information Extractor) uses dependency tree modification rules to refine triples from a high-recall learning-based engine, and combines them with syntactic triples from a high-precision engine to increase effectiveness. In addition, our system features several augmentations, which modify the generality and the degree of granularity of the output triples. Even though our focus is on addressing both quality and generality simultaneously, our new method substantially outperforms current state-of-the-art systems on the two widely-used CaRB and Re-OIE16 benchmark sets for information extraction. We have made our code publicly available1 to facilitate further research. © 2021 The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.is.2021.101938",
+      "url": "https://www.semanticscholar.org/paper/625ba19c5d053bada5f6744f6a6296bcc84fa56e"
+    }
+  ]
+}

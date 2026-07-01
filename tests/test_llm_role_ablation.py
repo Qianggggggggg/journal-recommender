@@ -242,7 +242,7 @@ def test_evidence_role_ranker_uses_neutral_evidence_when_extractor_fails():
     assert diagnostics["candidates"]["j1"]["llm_too_broad_penalty"] == 0.0
 
 
-def test_evidence_role_ranker_persists_20_and_26_dim_candidate_features():
+def test_evidence_role_ranker_persists_16_and_22_dim_candidate_features():
     journals = [_journal("j1")]
     ranker = LLMEvidenceRoleRanker(
         evidence_extractor=FixedEvidenceExtractor({"j1": _evidence(0.8)}),
@@ -263,8 +263,8 @@ def test_evidence_role_ranker_persists_20_and_26_dim_candidate_features():
     detail = diagnostics["candidates"]["j1"]
     assert detail["feature_names_base"] == FEATURE_NAMES
     assert detail["feature_names_with_llm_evidence"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
-    assert len(detail["features_base"]) == 20
-    assert len(detail["features_with_llm_evidence"]) == 26
+    assert len(detail["features_base"]) == 16
+    assert len(detail["features_with_llm_evidence"]) == 22
     assert detail["prior_source"] == "learned"
     assert not hasattr(ranker, "last_diagnostics")
 

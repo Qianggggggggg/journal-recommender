@@ -25,6 +25,62 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1111/cgf.70001",
       "url": ""
+    },
+    {
+      "title": "Improving the Watertightness of Parametric Surface/Surface Intersection",
+      "abstract": "The parametric surface/surface intersection (SSI) computation serves as a fundamental component in geometric modelling kernels for computer‐aided design (CAD) systems. The geometric fidelity of intersection curves—particularly whether the computed intersection loci in the two parametric domains (‐curves) under the two surface maps agree with the true intersection curve in the modelling space—determines the watertightness of the surface trimming. Despite abundant research and industrial developments for SSI algorithms, ensuring the watertightness of the intersection remains challenging, which directly impacts the stability and reliability of the modelling systems. In this paper, we present a practical algorithm for computing parametric SSI with gap control between the maps in the modelling space of the two ‐curves. We first analyse the topology of the two ‐curves by solving lower‐dimensional systems of equations and build a graph in each domain representing the topology. Then we refine the graphs through adaptive edge subdivision and construct initial approximation of ‐curves by interpolation. A constrained optimization framework incorporating distance and tangential information is employed to improve accuracy and minimize gaps. We demonstrate the effectiveness of our algorithm through extensive experiments and comparisons with the intersection package in the open source software OCCT and the commercial engine ACIS.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70298",
+      "url": "https://doi.org/10.1111/cgf.70298"
+    },
+    {
+      "title": "Fluid Composer: Fluid Detail Composition and Rendering Using Video Diffusion Models",
+      "abstract": "We introduce a hybrid pipeline that combines classical fluid simulation with modern generative video models to produce high‐quality, controllable fluid effects without implementationally difficult solvers or costly ray‐tracing. First, a lightweight physics‐based simulator enforces core properties like incompressibility and lets artists specify layout, boundary conditions, and source positions. Second, we render a simple ‘control video’ via real‐time rasterisation (diffuse shading, masks, depth) to capture scene structure and material regions. Third, a text‐guided diffusion transformer (e.g., VACE) treats this control video as a canvas, refining it by adding foam, bubbles, splashes, and realistic colour blending for multiple materials. Our method leverages pretrained video generators' implicit physical priors, while masking and noise‐warping ensure precise, per‐material control and seamless mixtures in latent space. Compared to purely simulation‐based or generative model based text‐only approaches, we avoid implementing specialised multiphase algorithms and expensive rendering passes, yet retain full artistic control over fluid behaviour and appearance. We demonstrate that this training‐free strategy delivers photorealistic fluid videos, supports diverse effects (multiphase flows, transparent media and wet foams), and simplifies the artist's workflow by unifying simulation, shading, and generative rendering in a single, extensible framework.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70300",
+      "url": "https://doi.org/10.1111/cgf.70300"
+    },
+    {
+      "title": "NePO: Neural Point Octrees for Large‐Scale Novel View Synthesis",
+      "abstract": "Point‐based radiance field rendering produces impressive results for novel‐view synthesis tasks. Established methods work with object‐centric datasets or room‐sized scenes, as computational resources and model capabilities are limited. To overcome this limitation, we introduce neural point octrees (NePOs) to radiance field rendering, which enables optimisation and rendering of large‐scale datasets at varying detail levels, including different acquisition modalities, such as camera drones and LiDAR vehicles. Our method organises input point clouds into an octree from the bottom up, enabling level of detail (LOD) selection during rendering. Appearance descriptors for each point are optimised using the RGB captures, enabling our system to self‐refine and address real‐world challenges such as capture coverage discrepancies and SLAM pose drift. The refinement is achieved by adaptively densifying octree nodes during training and optimising camera poses via gradient descent. Overall, our approach efficiently optimises scenes with thousands of images and renders scenes containing hundreds of millions of points in real time.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70287",
+      "url": "https://doi.org/10.1111/cgf.70287"
+    },
+    {
+      "title": "EvolvED: Evolutionary Embeddings to Understand the Generation Process of Diffusion Models",
+      "abstract": "Diffusion models, widely used in image generation, rely on iterative refinement to produce images from noise. Understanding this data evolution supports model development and interpretability, yet is challenging due to its high‐dimensional, iterative nature. Prior works often focus on static or instance analyses, missing the iterative and holistic aspects of the generative space. While dimensionality reduction can visualise image evolution for some instances, it does not preserve the iterative structure. To address these gaps, we introduce EvolvED, a method that presents a holistic view of the iterative generative process in diffusion models. EvolvED goes beyond instance analysis, leveraging predefined analysis goals to streamline generative space exploration. User‐defined prompts aligned with these goals extract intermediate images, preserving the iterative context. Relevant feature extractors are used to trace the evolution of key image attributes, addressing the complexity of high‐dimensional outputs. Central to EvolvED is a novel evolutionary embedding algorithm, explicitly encoding iterations while preserving semantic and evolutionary relations of these encoded representations. It clusters semantically similar elements via a t‐SNE loss per iteration, introduces a displacement loss to represent iterations in distinct predefined spatial regions, and an alignment loss for continuity across iterations. This embedding is presented as rectilinear and radial layouts. We apply EvolvED to models like GLIDE and Stable Diffusion, demonstrating its ability to provide valuable insights into the generative process.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70301",
+      "url": "https://doi.org/10.1111/cgf.70301"
+    },
+    {
+      "title": "Preserving Photographic Defocus in Stylised Image Synthesis",
+      "abstract": "While style transfer has been extensively studied, most existing approaches fail to account for the defocus effects inherent in content images, thereby compromising the photographer's intended focus cues. To overcome this shortcoming, we introduce an optimisation‐based post‐processing framework that restores defocus characteristics to stylised images, regardless of the style transfer technique used. Our method initiates by estimating a blur map through a data‐driven model that predicts pixel‐level blur magnitudes. This blur map subsequently guides a layer‐based defocus rendering framework, which effectively simulates depth‐of‐field (DoF) effects using a Gaussian filter bank. To map the blur values to appropriate kernel sizes in the filter bank, we introduce a neural network that determines the optimal maximum filter size, ensuring both content integrity and stylistic fidelity. Experimental results, both quantitative and qualitative, show that our method significantly improves stylised images by preserving the original depth cues and defocus details.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70299",
+      "url": "https://doi.org/10.1111/cgf.70299"
+    },
+    {
+      "title": "Robust Differentiable Sketch Rendering for Single‐View 3D Reconstruction",
+      "abstract": "In this paper, we propose a novel end‐to‐end method to model 3D objects with geometric details from a single‐view sketch input. Specifically, a novel deep learning‐based differentiable sketch renderer is introduced to establish the relationship between geometric features, represented by normal maps, and 2D sketch strokes. Then, building upon this renderer, we design algorithms to automatically create 3D models with geometric details from a single‐view sketch. With the aid of two introduced loss functions: one based on silhouette‐derived confidence maps and the other on regression similarities, our framework supports the gradient of loss functions calculated between the rendered sketch and input sketch back‐propagating through the whole architecture, thereby enhancing the geometric details on the frontal surface of the generated 3D object. Through comparisons with state‐of‐the‐art sketch‐based 3D modelling techniques, our approach demonstrates superior capability in generating plausible geometric shapes and details, without the necessity for semantic annotations within the input sketch.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70297",
+      "url": "https://doi.org/10.1111/cgf.70297"
+    },
+    {
+      "title": "Adaptive Use of LBO Bases by Shape Feature Scales for High‐Quality and Efficient Shape Correspondence",
+      "abstract": "Bases from the eigenfunctions of the Laplace–Beltrami operator (LBO), called LBO bases, are popularly used to construct functional mappings for shape correspondence. Although many efforts have been made to improve LBO basis construction and their application in shape correspondence, they often overlook the role of shape feature scales in determining the suitability of LBO bases. This mismatch between the selected LBO bases and shape features results in poor representation, hindering shape correspondence and requiring more iterations for convergence, ultimately reducing efficiency. In this paper, we present an attention‐based module that adaptively learns weights based on the scales of shape features to better utilise LBO bases. This ensures that the selected LBO bases have frequencies that align with the scales of shape features, addressing the mismatch problem and improving feature representation. By filtering out LBO bases with incompatible frequencies, our approach enhances shape correspondence while reducing the number of iterations required for convergence, thereby improving efficiency. Additionally, the selected LBO bases can be easily integrated with existing methods, such as the test‐time adaptation strategy, to further enhance shape correspondence. Experimental results demonstrate that our method achieves higher‐quality results than state‐of‐the‐art methods while at a high efficiency.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1111/cgf.70294",
+      "url": "https://doi.org/10.1111/cgf.70294"
     }
   ]
 }

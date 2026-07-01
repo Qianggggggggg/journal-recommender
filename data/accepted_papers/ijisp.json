@@ -1,0 +1,86 @@
+{
+  "journal_id": "ijisp",
+  "journal_name": "International Journal of Information Security and Privacy",
+  "papers": [
+    {
+      "title": "Factors Impacting Behavioral Intention of Users to Adopt IoT In India: From Security and Privacy Perspective",
+      "abstract": "The purpose of this study is to identify the factors that impact on the behavioral intention of the Indian consumers to use devices embedded with the internet of things (IoT). While identifying the factors, due attention has been given on the security and privacy issues. With the inputs from the studies of available literature and with the help of technology adoption model (TAM) and of innovation diffusion theory (IDT), some hypotheses have been formulated and a conceptual model has been developed. The hypotheses have been tested and the conceptual model has been validated statistically with the help of survey works using 232 usable respondents. The result shows that perceived usefulness, perceived ease of use, compatibility and cost affect the behavioral intention of the consumers to use IoT enabled devices in India.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.2020100106",
+      "url": "https://www.semanticscholar.org/paper/02d595c1a494f6c4bea16f2fb3da3f385a015174"
+    },
+    {
+      "title": "Explaining Privacy Paradox on WeChat: Investigating the Effect of Privacy Fatigue on Personal Information Disclosure Behaviors Among SNS Users",
+      "abstract": "With the development of the information age, people need to disclose personal information in exchange for socializing and related services. At the same time, people's privacy concerns are gradually increasing. Privacy paradox has become a normal phenomenon in social network sites (SNS). The loss of control of privacy might lead to privacy fatigue. Previous work has studied the mechanism of privacy paradox and explored the influence of specific factors on privacy paradox. However, the effect of privacy fatigue on privacy paradox among SNS users has not been studied. In this study, we use structural equation modeling (SEM) to explore the effect of privacy fatigue on personal information disclosure intentions and actual behaviors among WeChat users. Our results of 710 participants showed that privacy fatigue has a mediating role between privacy concern and privacy disclosure intention, and has a positive influence on privacy disclosure intention and disclosure behavior. Based on these results, we provide implications to reduce privacy fatigue and privacy paradox.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.357250",
+      "url": "https://www.semanticscholar.org/paper/50421794b91a098f42d7ac4309ca94092d6f465b"
+    },
+    {
+      "title": "Information Security Situation in Blockchain for Secure SDN Based on Big Data in Smart Communities",
+      "abstract": "In the internet of things (IoT) and big data, the global information society is entering a new phase where consumers, networks, and perception devices work together more intimately. Software-defined networks (SDN) offer lower latency and massive connectivity for intelligent devices (IoT) for the internet of things. Smart communities are one of the most important applications of the blockchain. SDN technology is used to provide residents with smart services. Situational awareness for information security offers a distinct, high-level security perspective based on security alarm occurrences. However, contemporary information security warning data has become too complicated and varied than a simple analysis is almost impossible. In addition to enhancing IoT security's monitoring, emergency response, and forecasting capabilities, this article presents an IoT-assisted information security situation awareness framework (IoT-ISSAF). SDN model has been validated through simulation as being able to accurately assess the current state of network security in blockchain.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.308315",
+      "url": "https://www.semanticscholar.org/paper/b49f63807ffa7b0e8b5fa6a9800c93f22c58fe4c"
+    },
+    {
+      "title": "A Meta-Analysis of Privacy: Ethical and Security Aspects of Facial Recognition Systems",
+      "abstract": "Facial recognition systems use advanced computing to capture facial information and compare the same with proprietary databases for validation. The emergence of data capturing intermediaries and open access image repositories have compounded the need for a holistic perspective for handling the privacy and security challenges associated with FRS. The study presents the results of a bibliometric analysis conducted on the topic of privacy, ethical and security aspects of FRS. This study presents the level of academic discussion on the topic using bibliometric performance analysis. The results of the bibliographic coupling analysis to identify the research hotspots are also presented. The results also include the systematic literature review of 148 publications that are distributed across seven themes. Both the bibliometric and systematic analysis showed that privacy and security in FRS requires a holistic perspective that cuts across privacy, ethical, security, legal, policy and technological aspects.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.285580",
+      "url": "https://www.semanticscholar.org/paper/35cd6c0d65e84edd9be8b4e7613ed4400164ae06"
+    },
+    {
+      "title": "Examination of Privacy and Security Perceptions of Social Media and Online Shopping Users: A Comparison Between Turkey and the USA",
+      "abstract": "In a period when the protection of the privacy of personal information and data belonging to internet users became extremely important, this study intends to evaluate, analyze and present the privacy and security perceptions of social media and online shopping users. After examination of five factors related to the information privacy and security, the research aims at investigating the relationship between these factors and their impacts on online users’ protection behaviors (protection and concealment). The research also intends to make a comparison between Turkish and American online users in terms of privacy and security perceptions and their online protection behaviors. The theoretical basis of the study is the Protection Motivation Theory and the study is an explanatory research based on quantitative research methods that is seeking answers to specific questions and testing hypotheses with a positivist approach. After the obtained findings have been evaluated, the limitations of the study are determined and some suggestions regarding to the future research are presented.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.300321",
+      "url": "https://www.semanticscholar.org/paper/226f40370db3ee4120ffe80da9768c22517caf92"
+    },
+    {
+      "title": "Privacy Disclosure on Electronic Commerce: The Role of Algorithmic Transparency, Algorithmic Invasion, and Trust",
+      "abstract": "This study examines the effects and underlying mechanisms of algorithmic invasion and algorithmic transparency on users' privacy disclosure intentions within the context of electronic commerce platforms. The research consists of three studies: Studies 1 and 2 are controlled experiments with 120 participants. Study 3 is an empirical investigation, involving 400 online questionnaires. The findings reveal that algorithmic invasion negatively affects users' privacy disclosure intention, while algorithmic transparency has a positive influence. Psychological resistance and trust mediate the relationship between algorithmic invasion and privacy disclosure intention, whereas perceived risk and trust mediate the relationship between algorithmic transparency and privacy disclosure intention. Additionally, algorithmic invasion and transparency influence privacy disclosure intention sequentially through these mediators. This study contributes to understanding how algorithmic transparency and algorithmic invasion shape privacy-related behaviors.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.384917",
+      "url": "https://www.semanticscholar.org/paper/7d4757b8feedcfaed0f55efdc2db5ac85ece28d3"
+    },
+    {
+      "title": "A Secure Three Factor-Based Authentication Scheme for Telecare Medicine Information Systems With Privacy Preservation",
+      "abstract": "Telecare Medicine Information System (TMIS) is now attracting field for remote healthcare, diagnosis and emergency health services etc. The major objective of this type of system is to provide medical facilities to patients who are critically ill and unable to attend hospitals or put in isolation for observations. A major challenge of such systems is to securely transmit patients' health related information to the medical server through an insecure channel. This collected sensitive data is further used by medical practitioners for diagnosis and treatment purposes. Therefore, security and privacy are essential for healthcare data. In this paper, a robust authentication protocol based on Chebyshev Chaotic map has been proposed for adequate security while transmitting data. The privacy preservation is maintained by a rule set which mainly controls the views. A detailed security analysis was performed for the proposed scheme.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.2022010111",
+      "url": "https://www.semanticscholar.org/paper/abf91f2c856e5e399b791742acef590b349f0290"
+    },
+    {
+      "title": "Privacy Protection in the Application of Artificial Intelligence Technology in Corporate Governance",
+      "abstract": "This study investigates the application of AI in corporate governance and capital investment, drawing on case studies from multiple jurisdictions—including the EU, China, and the U.S.—and focusing on financial, regulatory, and strategic data. The implementation of advanced privacy-preserving technologies, such as differential privacy and federated learning, resulted in a 64% reduction in data breaches, a 12% decrease in regulatory fines, and a 16% increase in client retention. Stakeholder feedback indicated significant improvements in audit readiness (89%) and overall trust (84%). While these technologies enhance compliance, transparency, and operational efficiency, challenges related to computational costs, system compatibility, and scalability remain. The findings underscore the importance of adopting an integrated privacy governance framework that combines robust technical solutions with organizational and regulatory strategies to effectively safeguard data in AI-driven corporate environments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.389733",
+      "url": "https://www.semanticscholar.org/paper/db8aaba5a2865d610a3a451a97059bd2a8df7b0a"
+    },
+    {
+      "title": "A Novel Method of Correlated Laplace Noise Generation for Differential Privacy on Time-Series Data",
+      "abstract": "Data correlation is crucial to privacy protection of time series data. Series indistinguishability provides a theoretical basis for ensuring differential privacy on correlated time series data and is implemented with the correlated Laplace mechanism (CLM), which has become a novel privacy-preserving method. CLM requires generating Laplace noise series with original data correlation. However, the existing method (CLM-S) can generate only Laplace noise series with nonnegative autocorrelation, which prevents it from achieving series indistinguishability on negatively correlated data, potentially compromising privacy guarantees in such scenarios. This study proposes a new method named CLM-M as well as its effective implementation (CLM-M-Delta) for generating correlated Laplace noise series through multiplication combination of four Gaussian noises. It has been theoretically proven that CLM-M can match negative correlations. The experimental results demonstrate that CLM-M-Delta effectively adapts to various data correlations and provides improved privacy performance over CLM-S.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.372683",
+      "url": "https://www.semanticscholar.org/paper/59529f363af354837cf97294d5833745d51315db"
+    },
+    {
+      "title": "Data Privacy Regulations in the Gaming Industry: A Comparative Analysis of Singapore, Macau, and Japan",
+      "abstract": "This study explores the relatively under-researched area of comparing data privacy regulations and best practices across different countries, with a focus on the gaming industry. It provides an overview of general data privacy principles and existing global regulations, analyzing how gaming operators leverage personal data for competitive advantage. Specifically, the research examines the data privacy approaches and regulatory requirements in Singapore, Macau, and Japan, highlighting the cultural and historical contexts influencing these regulations. Through a comparative analysis, the article discusses the compliance needs for gaming operators in these jurisdictions.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijisp.388647",
+      "url": "https://www.semanticscholar.org/paper/42caf91fbff05c6ada23eddfbf6e1b2c5a502423"
+    }
+  ]
+}

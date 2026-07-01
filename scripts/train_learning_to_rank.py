@@ -58,13 +58,13 @@ def filter_llm_evidence_features(
 ) -> tuple[list[dict], list[str]]:
     """Drop the 6 LLM evidence features from each row.
 
-    Returns (filtered_rows, filtered_feature_names). The remaining 20 features
+    Returns (filtered_rows, filtered_feature_names). The remaining 16 features
     are pure rule/retrieval signals — useful when we want the LTR to focus on
     structural priors and let ``LLMEvidenceRoleRanker`` own the LLM evidence.
 
-    Idempotent: if the input rows are already 20-dim (no LLM evidence features),
+    Idempotent: if the input rows are already 16-dim (no LLM evidence features),
     return them unchanged. This lets callers pass ``--exclude-llm-evidence``
-    together with an already-20-dim JSONL without raising.
+    together with an already-16-dim JSONL without raising.
     """
     keep_idx = [
         i for i, name in enumerate(feature_names) if name not in LLM_EVIDENCE_FEATURE_NAMES
@@ -72,7 +72,7 @@ def filter_llm_evidence_features(
     dropped = [name for name in feature_names if name in LLM_EVIDENCE_FEATURE_NAMES]
 
     if len(dropped) == 0:
-        # Already 20-dim (no LLM evidence features present) — no-op.
+        # Already 16-dim (no LLM evidence features present) — no-op.
         print(
             "[exclude-llm-evidence] input already has 0 LLM evidence features; "
             "skipping drop (idempotent).",

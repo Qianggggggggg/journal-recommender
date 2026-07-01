@@ -1,0 +1,70 @@
+{
+  "journal_id": "ijcis",
+  "journal_name": "International Journal of Cooperative Information Systems",
+  "papers": [
+    {
+      "title": "A Decomposed Hybrid Approach to Business Process and Data Modeling with LLMs",
+      "abstract": "Effective business process execution requires the integration of both process logic and business data. While recent approaches explore the potential of Large Language Models (LLMs) in automating process modeling, their applicability is limited in real-world scenarios where textual descriptions—often authored by non-experts—are complex or incomplete. Moreover, these works primarily focus on the control-flow perspective and overlook the critical role of data modeling and execution. In this paper, we propose a hybrid and decomposed approach to automatically generate executable process and data models from text using LLMs. Our method modularizes the task: the LLM clarifies and enriches the description, then extracts both process and data elements, which are combined into a unified model. Structured algorithms ensure robust and executable outputs. Evaluation results demonstrate that our approach improves model completeness, clarity, and efficiency compared to existing methods.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843026500024",
+      "url": "https://www.semanticscholar.org/paper/0a6e422c40fed7bcb47fba13a08ce9111406c46d"
+    },
+    {
+      "title": "From Prompt to Process: Event Log Extraction From Relational Databases Using Large Language Models",
+      "abstract": "Process mining enables organizations to discover, monitor, and analyze their work processes based on data. A fundamental requirement for initiating a process mining project is the availability of an event log, which is not always readily available. In such cases, extracting an event log typically involves various time-consuming tasks, such as writing custom structured query language (SQL) scripts to extract relevant data into an event log format from a relational database. In this work, we explore the potential of large language models (LLMs) to support event log extraction for process mining by leveraging LLMs’ ability to produce SQL scripts. We evaluate the effectiveness of LLMs in assisting this process and analyze their performance across a range of scenarios. Despite the inherent non-determinism of LLM outputs, our findings highlight the potential of future LLM-assisted tools in automating event log extraction, particularly when provided with the appropriate domain and data knowledge context. The implementation of such tools could democratize access to process mining by reducing the need for specialized technical expertise for producing relational database query scripts and minimizing manual effort.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843026500012",
+      "url": "https://www.semanticscholar.org/paper/1ee9b5841834d7cf437e9b506673a0c472acf444"
+    },
+    {
+      "title": "Chameleons Do Not Forget: Prompt-Based Online Continual Learning for Next Activity Prediction",
+      "abstract": "Predictive process monitoring (PPM) focuses on predicting future process trajectories, including next activity predictions. This is crucial in dynamic environments where processes change or face uncertainty. However, current frameworks often assume a static environment, overlooking dynamic characteristics and concept drifts. This results in catastrophic forgetting, where training while focusing merely on new data distribution negatively impacts the performance on previously learned data distributions. Continual learning addresses, among others, the challenges related to mitigating catastrophic forgetting. This paper proposes a novel approach called Continual Next Activity Prediction with Prompts (CNAPwP), which adapts the DualPrompt algorithm for next activity prediction to improve accuracy and adaptability while mitigating catastrophic forgetting. We introduce new datasets with recurring concept drifts, alongside a task-specific forgetting metric that measures the prediction accuracy gap between initial occurrence and subsequent task occurrences. Extensive testing on three synthetic and two real-world datasets representing several setups of recurrent drifts shows that CNAPwP achieves SOTA or competitive results compared to five baselines, demonstrating its potential applicability in real-world scenarios. An open-source implementation of our method, together with the datasets and results, is available at: https://github.com/SvStraten/CNAPwP .",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1142/S0218843026500036",
+      "url": "https://www.semanticscholar.org/paper/f8d81952fde17a228fa1c3a38e5404c0d3dfd070"
+    },
+    {
+      "title": "Secured Framework with a Hash Function-Enabled Keyword Search in Cloud Storage Services",
+      "abstract": "As with IoT devices, cloud computation increases its applicability to other areas that use the information and puts it in a commonplace that is necessary for computing and analysis. These devices need the cloud to store and retrieve data since they are unable to store and process data on their own. Cloud computing offers a variety of services to consumers, including IaaS, PaaS, and SaaS. The usage of cloud resources for data storage that may be accessible by all users associated with cloud computing is a key disadvantage of cloud computing. Without disclosing the data’s contents, the usage of Public Key Encryptions with Keyword Search (PEKS) secures publicly encrypted keys against third-party search capabilities that are not trustworthy. PEKs provide a security risk every time Interior Keywords Guessing Attacks (IKGA) are discovered in the system since an unauthorized service estimates the keywords in the trapdoor. This issue can be resolved using various methodologies such as the Certificateless Fleshed Public Key Authenticated Encryption of Keyword Search (CL-HPAEKS), which also uses Altered Elliptic Curve Cryptography (MECC), and the Mutation Centred Flower Pollinations Algorithm (CM-FPA), which uses optimization in keys to be improving the algorithm’s performance. The system’s security is achieved by adding a Message Fragments 5 (MD5) scramble mechanism. The proposed system achieves system security of 96%, and it takes less time to implement than earlier encryption methods.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843024500011",
+      "url": "https://www.semanticscholar.org/paper/6dc43a69cb7bbe78786608beaef39ae66f20ecef"
+    },
+    {
+      "title": "Edge Computing Security of Mobile Communication System Based on Computer Algorithms",
+      "abstract": "With the progress of information technology recently, mobile communication system edge computing (EC) has been widely used in all walks of life, but the traditional mobile communication system EC mode has security problems such as privacy disclosure, malicious tampering, and virus attacks. Computer algorithms has brought new vitality to EC in mobile communication systems. This paper analyzed the application of computer algorithm in EC mode of mobile communication system, and selected 20 users as the research object. This paper adopted traditional computing mode (such as cloud computing) and computer algorithm-based mobile communication system EC security research. This text compared the effects of two modes on security performance, data transmission efficiency, energy consumption, cost savings, and user satisfaction. The experimental results in this paper showed that the average security of EC mode of mobile communication system based on computer algorithm was 84%, and the average data transmission time was 4.8[Formula: see text]s. The energy consumption was 40%, and the cost savings and user satisfaction were 432,000 yuan and 13 points, respectively. Both were superior to the traditional edge counting mode. The EC mode of mobile communication system using computer algorithms can significantly improve the security of mobile communication, data transmission speed, cost savings, user satisfaction, and reduce energy consumption. This model has important significance and value for social development.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843024500023",
+      "url": "https://www.semanticscholar.org/paper/81855df6d8d7d58abed7f394bf377c1b67839cc8"
+    },
+    {
+      "title": "Governance Mechanism and Structural Power Fit: Evidence from an Information System Development Project",
+      "abstract": "This study identifies how relational and contractual governance mechanisms differently influence the distinct output of information systems development (ISD) performance at the project level. This study also reveals how the consequence of two modes of inter-organizational relationships (IOR) governance mechanism is affected by the gap of a dyadic partner’s centrality within the network — the client’s structural power (CSP). We collected dyadic samples of clients and vendors for 107 ISD projects and explored their governance mechanisms and project performances, all of which were evaluated by both parties. Our results first reveal a positive relationship between relational (or contractual) governance and qualitative (or quantitative) performance, respectively, but not vice versa. Second, the results incorporating a structural position within the network reveal that CSP facilitates the efficacy of relational governance to lead the quantitative performance, but surprisingly, CSP also mitigates the efficacy of contractual governance.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843020500069",
+      "url": "https://www.semanticscholar.org/paper/5108e83605661aef217581cbbec051d14123658e"
+    },
+    {
+      "title": "Key Technology of Distributed Memory File System Based on High-Performance Computer",
+      "abstract": "With the rapid development of computer technology, distributed systems have become an indispensable part of the field of information storage and management. In the process of large-scale data processing, it is an important issue to compress or replay files to ensure their integrity. In order to solve the problem of large-scale computing resources and data storage, the distributed file system emerged as a new system structure. The purpose of this paper to is study the key technologies of the distributed memory file system of high-performance computers is to improve the capability and efficiency of the distributed system. This paper mainly uses the experimental method and the comparative method to analyze the key technology of the distributed memory file system of the high-performance computer. Experimental results show that the maximum bandwidth value of DFMS in file memory processing can reach more than 2000, and the value becomes more stable as the file increases.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843023500193",
+      "url": "https://www.semanticscholar.org/paper/0307acfcaa701f2ceea48964830a957bdf2696c7"
+    },
+    {
+      "title": "Deep Belief Network-Based User and Entity Behavior Analytics (UEBA) for Web Applications",
+      "abstract": "Machine learning (ML) is currently a crucial tool in the field of cyber security. Through the identification of patterns, the mapping of cybercrime in real time, and the execution of in-depth penetration tests, ML is able to counter cyber threats and strengthen security infrastructure. Security in any organization depends on monitoring and analyzing user actions and behaviors. Due to the fact that it frequently avoids security precautions and does not trigger any alerts or flags, it is much more challenging to detect than traditional malicious network activity. ML is an important and rapidly developing anomaly detection field in order to protect user security and privacy, a wide range of applications, including various social media platforms, have incorporated cutting-edge techniques to detect anomalies. A social network is a platform where various social groups can interact, express themselves, and share pertinent content. By spreading propaganda, unwelcome messages, false information, fake news, and rumours, as well as by posting harmful links, this social network also encourages deviant behavior. In this research, we introduce Deep Belief Network (DBN) with Triple DES, a hybrid approach to anomaly detection in unbalanced classification. The results show that the DBN-TDES model can typically detect anomalous user behaviors that other models in anomaly detection cannot.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0218843023500168",
+      "url": "https://www.semanticscholar.org/paper/af8821178be3caf47d82437305942b76bf5dc59d"
+    }
+  ]
+}

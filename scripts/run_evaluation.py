@@ -18,8 +18,12 @@ import json
 import sys
 import os
 import time
+import copy
+import hashlib
+import math
+import statistics
 import unicodedata
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 from typing import Optional
 from pathlib import Path
@@ -90,6 +94,7 @@ class EvaluationResult:
     # MRR 和 NDCG@5
     mrr: float = 0.0
     ndcg_at_5: float = 0.0
+    elapsed_seconds: float = 0.0
 
     # 新增指标
     ndcg_at_10: float = 0.0  # NDCG@10（真正跑满10个）
@@ -315,6 +320,9 @@ def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeli
         base_url=app_config["ollama"]["base_url"],
         model=app_config["ollama"]["embedding_model"],
         timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
+        query_instruction=app_config.get("ollama", {}).get(
+            "embedding_query_instruction"
+        ),
     )
 
     embedding_retriever = None
@@ -518,12 +526,12 @@ def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeli
         # experimental flags without coupling to a specific caller.
         app_config=app_config,
         evidence_extractor=evidence_extractor,
-        # 6.4: enable 26-dim feature schema when evidence_role is on AND
-        # the snapshot is loaded. attach_features() will fall back to 20
+        # 6.4: enable 22-dim feature schema when evidence_role is on AND
+        # the snapshot is loaded. attach_features() will fall back to 16
         # dims per-paper if a paper is missing from the snapshot.
         evidence_lookup=evidence_snapshot or None,
         feature_schema=(
-            "26_dim_with_llm_evidence" if evidence_snapshot else "20_dim_base"
+            "22_dim_with_llm_evidence" if evidence_snapshot else "16_dim_base"
         ),
         # Ablation knob: max LLM精排 candidate pool size. 优先级: 显式传参 > yaml > 30.
         llm_max_candidates=(
@@ -556,6 +564,7 @@ def evaluate_single_paper(
     """
     并行评估单篇论文，返回结果字典（非 EvaluationResult，避免锁竞争）
     """
+    started_at = time.perf_counter()
     title = paper.get("title", "")
     abstract = paper.get("abstract", "")
     venue = paper.get("venue", "")
@@ -674,11 +683,22 @@ def evaluate_single_paper(
     }
     llm_candidate_ids.update(j.journal_id for j, s, r in llm_candidates)
 
-    # 计算 Hit@K（真正跑10个）
+    # 计算 Hit@K（Hit@10 用 LLM 精排全量排序，而非仅 Top-5 推荐）
     hit_1 = venue_normalized in recommended_journals_norm[:1] if recommended_journals else False
     hit_3 = venue_normalized in recommended_journals_norm[:3] if recommended_journals else False
     hit_5 = venue_normalized in recommended_journals_norm[:5] if recommended_journals else False
-    hit_10 = venue_normalized in recommended_journals_norm[:10] if venue else False
+    # 2026-06-30: 修复 Hit@10 恒等于 Hit@5 的 bug。
+    # 用 llm_ranked_all_names（LLM 精排全部排序结果）而非仅 Top-5。
+    llm_ranked_all_names = rec_result.get("llm_ranked_all_names") or []
+    llm_ranked_all_norm = [_normalize_venue(n) for n in llm_ranked_all_names]
+    ranked_for_top10 = llm_ranked_all_norm or recommended_journals_norm
+    full_ranking_available = bool(llm_ranked_all_norm)
+    relevant_rank_at_10 = 0
+    for i, jname in enumerate(ranked_for_top10[:10]):
+        if jname == venue_normalized:
+            relevant_rank_at_10 = i + 1
+            break
+    hit_10 = relevant_rank_at_10 > 0
 
     # 粗排是否命中（实际发表的期刊在 top 50 候选中）
     coarse_hit = venue_normalized in candidate_journal_names_norm if venue else False
@@ -879,6 +899,9 @@ def evaluate_single_paper(
         "hit_5": hit_5,
         "hit_10": hit_10,
         "relevant_rank": relevant_rank,  # MRR 计算用
+        "relevant_rank_at_10": relevant_rank_at_10,
+        "ranking_depth": len(ranked_for_top10),
+        "full_ranking_available": full_ranking_available,
         "ndcg_gain": 1.0 if relevant_rank > 0 else 0.0,  # NDCG 计算用（二值相关性）
         "coarse_hit": coarse_hit,  # 粗排命中
         "coarse_hit_in_rule_top10": coarse_hit_in_rule_top10,  # 粗排候选在 RuleScorer top10 中
@@ -984,6 +1007,7 @@ def evaluate_single_paper(
             if learned_enabled or llm_role_diag
             else {}
         ),
+        "latency_seconds": round(time.perf_counter() - started_at, 4),
     }
 
 
@@ -998,6 +1022,7 @@ def run_evaluation(
     reuse_profile_snapshots: bool = False,
 ) -> EvaluationResult:
     """运行评估（并行）"""
+    evaluation_started_at = time.perf_counter()
 
     result = EvaluationResult(
         total_count=len(papers),
@@ -1055,14 +1080,14 @@ def run_evaluation(
             # MRR 和 NDCG@5 累加
             rank = paper_result.get("relevant_rank", 0)
             if rank > 0:
-                import math
                 result.mrr += 1.0 / rank
+            if 0 < rank <= 5:
                 result.ndcg_at_5 += 1.0 / math.log2(rank + 1)  # 二值相关性: DCG=1/log2(r+1), IDCG=1/log2(2)=1
 
-            # NDCG@10（真正跑满10个，只有10个结果时才计算）
-            recommended_journals = paper_result.get("recommended_journals", [])
-            if len(recommended_journals) >= 10 and rank > 0:
-                result.ndcg_at_10 += 1.0 / math.log2(rank + 1)
+            # NDCG@10 使用完整精排结果中的真实 rank，而不是仅 Top-5 输出。
+            rank_at_10 = paper_result.get("relevant_rank_at_10", 0)
+            if 0 < rank_at_10 <= 10:
+                result.ndcg_at_10 += 1.0 / math.log2(rank_at_10 + 1)
 
             # 同领域/同CCF档位命中
             if paper_result.get("area_hit_5"):
@@ -1121,9 +1146,10 @@ def run_evaluation(
             if paper_result["hit_5"]: result.by_level[ccf]["hit"] += 1
 
             # 保存单篇结果
+            # 保留逐论文 outcome，方便评测后直接筛选回归/修复样本。
+            # ndcg_gain 可由 relevant_rank 重算，没有必要重复保存。
             result.paper_results.append({
-                k: v for k, v in paper_result.items()
-                if k not in ["hit_1", "hit_3", "hit_5", "hit_10", "area_match", "level_match", "relevant_rank", "ndcg_gain"]
+                k: v for k, v in paper_result.items() if k != "ndcg_gain"
             })
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -1161,6 +1187,7 @@ def run_evaluation(
                     "level_match": f"{result.level_match_count}/{n}",
                 })
 
+    result.elapsed_seconds = round(time.perf_counter() - evaluation_started_at, 4)
     return result
 
 
@@ -1230,6 +1257,316 @@ def print_report(result: EvaluationResult):
     print("=" * 70)
 
 
+_SENSITIVE_CONFIG_KEYS = {
+    "api_key",
+    "apikey",
+    "authorization",
+    "credential",
+    "credentials",
+    "password",
+    "secret",
+    "token",
+    "access_token",
+    "auth_token",
+    "bearer_token",
+    "client_secret",
+}
+_SENSITIVE_CONFIG_SUFFIXES = (
+    "_api_key",
+    "_credential",
+    "_credentials",
+    "_password",
+    "_secret",
+    "_token",
+    "_access_token",
+    "_auth_token",
+)
+
+
+def _redact_sensitive_config(value, key: str = ""):
+    """Return a JSON-safe config snapshot without leaking credentials."""
+    normalized_key = key.lower().replace("-", "_")
+    if (
+        normalized_key in _SENSITIVE_CONFIG_KEYS
+        or normalized_key.endswith(_SENSITIVE_CONFIG_SUFFIXES)
+    ):
+        return "<redacted>"
+    if isinstance(value, dict):
+        return {
+            str(child_key): _redact_sensitive_config(child_value, str(child_key))
+            for child_key, child_value in value.items()
+        }
+    if isinstance(value, list):
+        return [_redact_sensitive_config(item) for item in value]
+    return copy.deepcopy(value)
+
+
+def _file_fingerprint(path: str | os.PathLike | None) -> dict | None:
+    """Fingerprint an experiment artifact; missing files remain explicit."""
+    if not path:
+        return None
+    file_path = Path(path)
+    record = {"path": str(path), "exists": file_path.is_file()}
+    if not file_path.is_file():
+        return record
+
+    digest = hashlib.sha256()
+    with file_path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    stat = file_path.stat()
+    record.update(
+        {
+            "sha256": digest.hexdigest(),
+            "size_bytes": stat.st_size,
+            "modified_at": datetime.fromtimestamp(stat.st_mtime).isoformat(
+                timespec="seconds"
+            ),
+        }
+    )
+    return record
+
+
+def _load_ltr_model_metadata(model_path: str | None) -> dict:
+    """Read compact, analysis-relevant metadata from a JSON LTR model."""
+    if not model_path:
+        return {}
+    try:
+        with Path(model_path).open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (OSError, ValueError, TypeError):
+        return {}
+    if not isinstance(payload, dict):
+        return {}
+    return {
+        key: copy.deepcopy(payload[key])
+        for key in (
+            "schema_version",
+            "model_type",
+            "backend",
+            "feature_dim",
+            "feature_names",
+            "metrics",
+            "convergence_info",
+            "seed",
+            "max_iter",
+        )
+        if key in payload
+    }
+
+
+def build_artifact_manifest(
+    *,
+    benchmark_path: str,
+    app_config: dict | None,
+    benchmark_manifest: dict | None,
+    ltr_info: dict | None,
+) -> dict:
+    """Record the exact data, indices, model and evidence used by the run."""
+    config = app_config or {}
+    data_config = config.get("data", {}) or {}
+    evidence_config = (
+        config.get("ranking", {}).get("evidence_role", {}) or {}
+    )
+    model_path = (ltr_info or {}).get("model_path")
+    artifact_paths = {
+        "benchmark_input": benchmark_path,
+        "app_config": "configs/app.yaml",
+        "prompts": "configs/prompts.yaml",
+        "journal_store": data_config.get("journal_store_path"),
+        "journal_index": data_config.get("faiss_index_path"),
+        "journal_metadata": data_config.get("metadata_path"),
+        "typical_abstract_index": data_config.get("typical_abstracts_faiss_path"),
+        "typical_abstract_metadata": data_config.get(
+            "typical_abstracts_metadata_path"
+        ),
+        "accepted_paper_index": data_config.get("accepted_papers_faiss_path"),
+        "accepted_paper_metadata": data_config.get(
+            "accepted_papers_metadata_path"
+        ),
+        "ltr_model": model_path,
+        "evidence_snapshot": evidence_config.get("snapshot_path"),
+        "baseline_eval": (benchmark_manifest or {}).get("baseline_eval_path"),
+    }
+    artifacts = {
+        name: fingerprint
+        for name, path in artifact_paths.items()
+        if (fingerprint := _file_fingerprint(path)) is not None
+    }
+    if "ltr_model" in artifacts:
+        artifacts["ltr_model"]["model_metadata"] = _load_ltr_model_metadata(
+            model_path
+        )
+    return artifacts
+
+
+def _distribution(values) -> dict:
+    return dict(sorted(Counter(value for value in values if value is not None).items()))
+
+
+def build_analysis_summary(result: EvaluationResult) -> dict:
+    """Aggregate diagnostics that are expensive to reconstruct by hand."""
+    papers = result.paper_results or []
+    processed = len(papers)
+    total = result.total_count
+
+    def _rate(count: int, denominator: int = total) -> float:
+        return round(count / denominator, 4) if denominator > 0 else 0.0
+
+    diagnostics = [paper.get("venue_diagnostic") or {} for paper in papers]
+    latencies = sorted(
+        float(paper["latency_seconds"])
+        for paper in papers
+        if isinstance(paper.get("latency_seconds"), (int, float))
+    )
+
+    def _latency_percentile(percentile: float) -> float | None:
+        if not latencies:
+            return None
+        index = max(0, math.ceil(percentile * len(latencies)) - 1)
+        return round(latencies[index], 4)
+
+    funnel_counts = {
+        "target_in_journal_store": sum(
+            bool(diagnostic.get("target_journal_id")) for diagnostic in diagnostics
+        ),
+        "wide_recalled": sum(
+            diagnostic.get("wide_retrieval_rank") is not None
+            or bool(diagnostic.get("wide_retrieval_route_scores"))
+            for diagnostic in diagnostics
+        ),
+        "retrieved_top50": sum(bool(paper.get("coarse_hit")) for paper in papers),
+        "rule_top10": sum(
+            bool(paper.get("coarse_hit_in_rule_top10")) for paper in papers
+        ),
+        "rule_top20": sum(
+            bool(paper.get("coarse_hit_in_rule_top20")) for paper in papers
+        ),
+        "llm_candidate_pool": sum(
+            bool(diagnostic.get("in_llm_pool")) for diagnostic in diagnostics
+        ),
+        "final_hit_at_5": sum(bool(paper.get("hit_5")) for paper in papers),
+        "final_hit_at_10": sum(bool(paper.get("hit_10")) for paper in papers),
+    }
+    stage_funnel = {
+        name: {"count": count, "rate": _rate(count)}
+        for name, count in funnel_counts.items()
+    }
+
+    hit_ranks = [
+        int(paper["relevant_rank"])
+        for paper in papers
+        if isinstance(paper.get("relevant_rank"), int)
+        and paper["relevant_rank"] > 0
+    ]
+    top10_ranks = [
+        int(paper["relevant_rank_at_10"])
+        for paper in papers
+        if isinstance(paper.get("relevant_rank_at_10"), int)
+        and paper["relevant_rank_at_10"] > 0
+    ]
+    evidence_coverages = [
+        float(paper["llm_evidence_coverage"])
+        for paper in papers
+        if isinstance(paper.get("llm_evidence_coverage"), (int, float))
+    ]
+    ranking_depths = [
+        int(paper["ranking_depth"])
+        for paper in papers
+        if isinstance(paper.get("ranking_depth"), int)
+    ]
+
+    by_area = {}
+    for area, stats in sorted((result.by_area or {}).items()):
+        area_total = stats.get("total", 0)
+        by_area[area] = {
+            **dict(stats),
+            "hit_at_5_rate": _rate(stats.get("hit", 0), area_total),
+            "profile_area_match_rate": _rate(
+                stats.get("area_match", 0), area_total
+            ),
+        }
+    by_level = {}
+    for level, stats in sorted((result.by_level or {}).items()):
+        level_total = stats.get("total", 0)
+        by_level[level] = {
+            **dict(stats),
+            "hit_at_5_rate": _rate(stats.get("hit", 0), level_total),
+        }
+
+    return {
+        "processed_count": processed,
+        "failed_or_skipped_count": max(total - processed, 0),
+        "elapsed_seconds": result.elapsed_seconds,
+        "throughput_papers_per_second": (
+            round(processed / result.elapsed_seconds, 4)
+            if result.elapsed_seconds > 0
+            else None
+        ),
+        "latency_seconds": {
+            "count": len(latencies),
+            "mean": round(statistics.fmean(latencies), 4) if latencies else None,
+            "median": round(statistics.median(latencies), 4) if latencies else None,
+            "p95": _latency_percentile(0.95),
+            "max": round(max(latencies), 4) if latencies else None,
+        },
+        "stage_funnel": stage_funnel,
+        "miss_stage_distribution": _distribution(
+            diagnostic.get("miss_stage") for diagnostic in diagnostics
+        ),
+        "evaluation_status_distribution": _distribution(
+            paper.get("evaluation_status") for paper in papers
+        ),
+        "rank_method_distribution": _distribution(
+            paper.get("rank_method") for paper in papers
+        ),
+        "final_rank_source_distribution": _distribution(
+            paper.get("final_rank_source") for paper in papers
+        ),
+        "evidence_status_distribution": _distribution(
+            paper.get("llm_evidence_status") for paper in papers
+        ),
+        "gold_rank_distribution_at_5": {
+            **_distribution(hit_ranks),
+            "miss": processed - len(hit_ranks),
+        },
+        "gold_rank_distribution_at_10": {
+            **_distribution(top10_ranks),
+            "miss": processed - len(top10_ranks),
+        },
+        "gold_rank_on_hits": {
+            "mean_at_5": round(statistics.fmean(hit_ranks), 4)
+            if hit_ranks
+            else None,
+            "median_at_5": statistics.median(hit_ranks) if hit_ranks else None,
+            "mean_at_10": round(statistics.fmean(top10_ranks), 4)
+            if top10_ranks
+            else None,
+        },
+        "ranking_depth": {
+            "full_ranking_available_count": sum(
+                bool(paper.get("full_ranking_available")) for paper in papers
+            ),
+            "min": min(ranking_depths) if ranking_depths else None,
+            "median": statistics.median(ranking_depths)
+            if ranking_depths
+            else None,
+            "max": max(ranking_depths) if ranking_depths else None,
+        },
+        "evidence_coverage": {
+            "count": len(evidence_coverages),
+            "mean": round(statistics.fmean(evidence_coverages), 4)
+            if evidence_coverages
+            else None,
+            "full_coverage_count": sum(
+                coverage >= 1.0 for coverage in evidence_coverages
+            ),
+        },
+        "by_area": by_area,
+        "by_level": by_level,
+    }
+
+
 def save_results(
     result: EvaluationResult,
     output_dir: str = "data/evaluation/results",
@@ -1242,10 +1579,12 @@ def save_results(
 ):
     """保存评估结果。
 
-    顶层除原有的 timestamp / mode / top_k / total_count / metrics / paper_results 外,
-    5.4.e 新增:
-    - environment: 评测环境元信息 (benchmark profile, path, ltr 状态, model, hash 等)
-    - metrics 内每个 count 字段旁加 _rate (0~1 小数) 字段
+    输出同时包含：
+    - experiment_config: 脱敏后的完整 app.yaml 快照
+    - artifacts: benchmark / index / model / evidence 的 SHA256 指纹
+    - metrics: 主指标、条件召回率和正确分母下的分层指标
+    - analysis: 阶段漏斗、失败分布、排名分布和耗时统计
+    - paper_results: 可稳定排序和逐篇对比的完整诊断
 
     P0.7 (2026-06-16): ``filepath`` overrides the auto-generated
     ``eval_<mode>_top<k>_<timestamp>.json`` filename. Used by
@@ -1270,16 +1609,36 @@ def save_results(
     def _rate(num: int) -> float:
         return round(num / total, 4) if total > 0 else 0.0
 
+    def _rate_with_denominator(num: int, denominator: int) -> float:
+        return round(num / denominator, 4) if denominator > 0 else 0.0
+
+    config_snapshot = _redact_sensitive_config(app_config or {})
+    artifact_manifest = build_artifact_manifest(
+        benchmark_path=benchmark_path,
+        app_config=app_config,
+        benchmark_manifest=benchmark_manifest,
+        ltr_info=ltr_info,
+    )
+    analysis_summary = build_analysis_summary(result)
+    full_ranking_count = sum(
+        bool(paper.get("full_ranking_available"))
+        for paper in (result.paper_results or [])
+    )
+
     # 转换为可序列化的dict
     result_dict = {
+        "result_schema_version": 2,
         "timestamp": timestamp,
         "mode": result.mode,
         "top_k": result.top_k,
         "total_count": result.total_count,
+        "experiment_config": config_snapshot,
+        "artifacts": artifact_manifest,
         "environment": {
             "benchmark_profile": benchmark_profile,
             "benchmark_path": benchmark_path,
             "paper_count": result.total_count,
+            "elapsed_seconds": result.elapsed_seconds,
             "ltr_enabled": (ltr_info or {}).get("enabled", False),
             "ltr_model_path": (ltr_info or {}).get("model_path"),
             "ltr_model_converged": (ltr_info or {}).get("model_converged"),
@@ -1301,6 +1660,10 @@ def save_results(
             "prompt_hash": (benchmark_manifest or {}).get("prompt_hash"),
         },
         "metrics": {
+            "processed_count": len(result.paper_results or []),
+            "failed_or_skipped_count": max(
+                result.total_count - len(result.paper_results or []), 0
+            ),
             "hit_at_1": result.hit_at_1,
             "hit_at_1_rate": _rate(result.hit_at_1),
             "hit_at_3": result.hit_at_3,
@@ -1309,16 +1672,31 @@ def save_results(
             "hit_at_5_rate": _rate(result.hit_at_5),
             "hit_at_10": result.hit_at_10,
             "hit_at_10_rate": _rate(result.hit_at_10),
+            "hit_at_10_evaluable_count": full_ranking_count,
+            "hit_at_10_rate_when_evaluable": _rate_with_denominator(
+                result.hit_at_10, full_ranking_count
+            ),
             "area_match_count": result.area_match_count,
             "area_match_rate": _rate(result.area_match_count),
             "level_match_count": result.level_match_count,
             "level_match_rate": _rate(result.level_match_count),
             "mrr": result.mrr / total if total > 0 else 0.0,
+            "mrr_cutoff": result.top_k,
             "ndcg_at_5": result.ndcg_at_5 / total if total > 0 else 0.0,
+            "ndcg_at_10": result.ndcg_at_10 / total if total > 0 else 0.0,
             "coarse_hit_count": result.coarse_hit_count,
             "coarse_hit_rate": _rate(result.coarse_hit_count),
+            "retrieval_recall_at_50": _rate(result.coarse_hit_count),
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
+            "rule_recall_at_10": _rate(result.coarse_hit_in_rule_top10_count),
+            "rule_retention_at_10_given_retrieved": _rate_with_denominator(
+                result.coarse_hit_in_rule_top10_count, result.coarse_hit_count
+            ),
             "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
+            "rule_recall_at_20": _rate(result.coarse_hit_in_rule_top20_count),
+            "rule_retention_at_20_given_retrieved": _rate_with_denominator(
+                result.coarse_hit_in_rule_top20_count, result.coarse_hit_count
+            ),
             "fallback_count": result.fallback_count,
             "fallback_rate": _rate(result.fallback_count),
             "llm_success_count": result.llm_success_count,
@@ -1329,16 +1707,24 @@ def save_results(
             "area_subject_tag_match_rate": _rate(result.area_subject_tag_match_count),
             "level_a_count": result.level_a_count,
             "level_a_hit_at_5": result.level_a_hit_at_5,
-            "level_a_hit_at_5_rate": _rate(result.level_a_hit_at_5) if result.level_a_count > 0 else 0.0,
+            "level_a_hit_at_5_rate": _rate_with_denominator(
+                result.level_a_hit_at_5, result.level_a_count
+            ),
             "level_b_count": result.level_b_count,
             "level_b_hit_at_5": result.level_b_hit_at_5,
-            "level_b_hit_at_5_rate": _rate(result.level_b_hit_at_5) if result.level_b_count > 0 else 0.0,
+            "level_b_hit_at_5_rate": _rate_with_denominator(
+                result.level_b_hit_at_5, result.level_b_count
+            ),
             "level_c_count": result.level_c_count,
             "level_c_hit_at_5": result.level_c_hit_at_5,
-            "level_c_hit_at_5_rate": _rate(result.level_c_hit_at_5) if result.level_c_count > 0 else 0.0,
+            "level_c_hit_at_5_rate": _rate_with_denominator(
+                result.level_c_hit_at_5, result.level_c_count
+            ),
             "level_d_count": result.level_d_count,
             "level_d_hit_at_5": result.level_d_hit_at_5,
-            "level_d_hit_at_5_rate": _rate(result.level_d_hit_at_5) if result.level_d_count > 0 else 0.0,
+            "level_d_hit_at_5_rate": _rate_with_denominator(
+                result.level_d_hit_at_5, result.level_d_count
+            ),
             "area_hit_at_5": result.area_hit_at_5,
             "area_hit_at_5_rate": _rate(result.area_hit_at_5),
             "area_hit_at_10": result.area_hit_at_10,
@@ -1350,9 +1736,17 @@ def save_results(
             "acceptable_journal_hit_at_5": result.acceptable_journal_hit_at_5,
             "acceptable_journal_hit_at_5_rate": _rate(result.acceptable_journal_hit_at_5),
         },
+        "analysis": analysis_summary,
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),
-        "paper_results": result.paper_results,
+        # 并行评测完成顺序不稳定；保存时排序便于 git diff / 跨实验逐篇比较。
+        "paper_results": sorted(
+            result.paper_results or [],
+            key=lambda item: (
+                str(item.get("title", "")).casefold(),
+                str(item.get("venue", "")).casefold(),
+            ),
+        ),
     }
     if benchmark_manifest is not None:
         result_dict["benchmark_manifest"] = benchmark_manifest

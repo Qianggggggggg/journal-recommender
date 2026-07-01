@@ -1,0 +1,70 @@
+{
+  "journal_id": "jasist",
+  "journal_name": "Journal of the Association for Information Science and Technology",
+  "papers": [
+    {
+      "title": "Technical standards within socio‐technical systems: An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "Technical standards are sets of rules or specifications that enable specific types of connections, interrelations, and behaviors. Technical standards are central to modern societies and technical systems. This paper provides an overview of technical standards as a topic of interest for people in information science and related fields. It takes a critical‐analytic view of standardization and examines technical standards as artifacts produced by people for specific purposes. The paper presents interdisciplinary viewpoints to discuss key aspects of the literature, including how standards reflect political, financial, and cultural motivations, how standards are often implemented in different ways, challenging their effectiveness, and how standards structure work as much as they structure information. These various disciplinary perspectives are also used to highlight standardization issues related to emerging technologies, such as social media and generative artificial intelligence. This review highlights how standards remain key topics for information scholars, professionals, and institutions as societies, economies, and infrastructures continue to interconnect across the globe.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.25017",
+      "url": "https://www.semanticscholar.org/paper/6de8547fa2a89b7c7a67487d8f08927f0d679db8"
+    },
+    {
+      "title": "Research data management services in academic libraries to support the research data life cycle: A systematic review. An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "Academic libraries play an increasingly crucial role in providing services, information, education, and infrastructure support related to research data management (RDM). This systematic review aims to provide a comprehensive and critical analysis of the state of RDM services offered by academic libraries worldwide. Utilizing the systematic review methodology, the paper examines 89 empirical studies to answer four research questions: (1) the types of RDM services implemented by academic libraries; (2) what are the infrastructure, workflow, and resources used to support these services; (3) what are the reasons for implementing these RDM services; and (4) the effectiveness of these RDM services in supporting the research data life cycle, if any. This review highlights the critical reasons academic libraries provide RDM services and how they implemented these services through partnerships, infrastructure, and systems, and adapting to new workflows within the library. These findings also examine the balance between institutional contexts, researchers' needs, and library resources required to provide these RDM services. By investigating these questions, the results will provide recommendations and guidance for academic libraries interested in implementing RDM services in their own library and institutional contexts.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.70008",
+      "url": "https://www.semanticscholar.org/paper/1f0fa3b61dcd8915b2cd6619fe0b5ea443427037"
+    },
+    {
+      "title": "Semantic primitives and compositionality: An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "The term semantic primitives refers to a set of basic, atomic concepts from which all other (compound) concepts are constructed. It presupposes the principle of compositionality—the idea that complex items or expressions can be formed by combining simpler constituents. Both notions are of particular relevance to knowledge organization (KO), where concepts are understood to be the primary objects of organization in knowledge organization systems (KOS). Semantic primitives, therefore, may be viewed as candidates for foundational units in such systems. Moreover, these concepts play important roles in fields such as automatic language processing, lexicography, word sense disambiguation, and artificial intelligence. In KO, they relate to methods such as semantic factoring and facet analysis, while in linguistics they parallel componential analysis. Nevertheless, semantic primitives and compositionality remain controversial, with strong arguments both for and against their very existence. The philosophical assumptions underlying these debates have significant implications for information science and knowledge organization.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.70011",
+      "url": "https://www.semanticscholar.org/paper/c88999f4e507a10613d1d8a921bcc1b5c7ae2c3c"
+    },
+    {
+      "title": "Investigating the interactions between individuals with disabilities and information retrieval systems: A review of help‐seeking situations, search tactics, and design recommendations. An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "People with disabilities face barriers when engaging with information retrieval (IR) systems due to designs that overlook their needs. This systematic literature review explores research for individuals with disabilities interacting with IR systems. Relevant theories concerning disabilities were examined, and the gap model was used as the theoretical framework that guided the review. This review covers relevant research published from 2000 to 2023, focusing on user groups with sensory, cognitive, and motor impairments. The main topics are help‐seeking situations encountered by these user groups in various IR systems due to system design not meeting user needs, and search tactics applied by users with different types of disabilities corresponding to various help‐seeking situations. Design recommendations for IR systems and platforms were also examined. Key limitations in existing research and the authors' reflections are highlighted, including a lack of theories on the interactions between people with disabilities and IR systems, imbalanced research on and misclassification between different types of impairments, unclear distinctions between accessibility and usability, unexplored IR issues in mobile environments, and inadequate existing IR system designs, along with the challenges posed by one‐size‐fits‐all design. Further research opportunities are also proposed.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.24997",
+      "url": "https://www.semanticscholar.org/paper/74651f73efb9023843673737c188cc13e6f85680"
+    },
+    {
+      "title": "The issues caused by misinformation—How workers and organizations deal with it: A systematic literature review. An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "In today's digital age, misinformation propagates rapidly through digital channels, blurring the lines between truth and fiction, and challenging the foundations of trust in information sources. Although affecting all spheres of life, misinformation poses a significant threat to workers highlighting a critical intersection between technological advancement and vulnerability. This systematic literature review identifies how misinformation impacts organizational outcomes including workers' job productivity, engagement, job satisfaction, etc. It recognizes implications for workplace dynamics, including disrupted communication channels, increased workload, decreased work engagement, and professional challenges, including implications for client‐professional dynamics. It discusses the strategies organizations employ to manage misinformation to maintain their workforce productivity and service delivery, including information verification and fact‐checking protocols, technological strategies, communication and information management strategies, development of media literacy programs, and collaborative efforts. Understanding the role of emerging technologies in creating misinformation, the impact of misinformation on workers, and how organizations can proactively address it is vital within organizations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.25016",
+      "url": "https://www.semanticscholar.org/paper/feaf98b83bba341ae9925280a6b487b2d1540006"
+    },
+    {
+      "title": "Sustaining the “frozen footprints” of scholarly communication through open citations: An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "This review examines the role of open citations in fostering transparency, reproducibility, and accessibility in scholarly communication. Through a critical synthesis of diverse sources—articles, proceedings, presentations, datasets, and blog posts—it explores the motivations behind citing, the evolving meanings of citations, and key milestones in the open citation movement. Particular attention is given to initiatives like OpenCitations and the Initiative for Open Citations (I4OC), highlighting their contributions to advancing open scholarship. Key findings indicate that open citations democratize research by providing free access to citation data, improving discoverability, and facilitating the creation of public citation graphs. Technological advancements, such as advanced data models and reference mining tools, have significantly contributed to the management and utilization of citation data. Despite these benefits, challenges such as ensuring data quality and standardization, addressing structural inequalities in citation networks, and achieving universal publisher adoption persist. The study concludes with recommendations for future efforts, emphasizing policy advocacy, technological innovation, global collaboration, and educational initiatives to promote the widespread adoption and effective use of open citations. These strategies aim to make the “frozen footprints” of scholarly communication accessible to all, fostering a more equitable and transparent scientific landscape.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.24982",
+      "url": "https://www.semanticscholar.org/paper/d69b0df558103676731c18dc8f61b170df1774ef"
+    },
+    {
+      "title": "Neurodivergence in academic libraries: A review of findings, recommendations, and remaining gaps in practice and research. An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "Many academic libraries aim to improve services for and interactions with patrons and stakeholders who are neurodivergent, that is, those who have neurocognitive functions that differ from what is considered normal. To support this aim, numerous scholarly works have focused on neurodivergence in academic libraries, but such works have yet to be reviewed and synthesized to guide future practice and research. Therefore, a scoping review of 47 relevant scholarly publications was conducted to identify the main topics, recommendations for practice, and remaining knowledge gaps. Existing research on the topic has concerned itself with neurodivergent staff, users, and their respective needs and experiences with library services and library spaces. Recommendations are identified to better meet the needs of stakeholders—both neurodivergent and neurotypical—by improving accessibility and tailoring library instruction and services, for example, in customizing library spaces, integrating universal design for learning into library instruction, and providing social support for neurodivergent students. Gaps remain around conditions other than autism and around how intersectional demographic factors affect library accessibility for neurodivergent users. Following these results, we suggest possible directions for future research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.70030",
+      "url": "https://www.semanticscholar.org/paper/8d892af782816ae3b299bba2b8a298fc34ecd9c2"
+    },
+    {
+      "title": "Evolution of the “long‐tail” concept for scientific data: An Annual Review of Information Science and Technology (ARIST) paper",
+      "abstract": "This review paper explores the evolution of discussions about “long‐tail” scientific data in the scholarly literature. The “long‐tail” concept, originally used to explain trends in digital consumer goods, was first applied to scientific data in 2007 to refer to a vast array of smaller, heterogeneous data collections that cumulatively represent a substantial portion of scientific knowledge. However, these datasets, often referred to as “long‐tail data,” are frequently mismanaged or overlooked due to inadequate data management practices and institutional support. This paper examines the changing landscape of discussions about long‐tail data over time, situated within broader ecosystems of research data management and the natural interplay between “big” and “small” data. The review also bridges discussions on data curation in Library & Information Science (LIS) and domain‐specific contexts, contributing to a more comprehensive understanding of the long‐tail concept's utility for effective data management outcomes. The review aims to provide a more comprehensive understanding of this concept, its terminological diversity in the literature, and its utility for guiding data management, overall informing current and future information science research and practice.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1002/asi.24967",
+      "url": "https://www.semanticscholar.org/paper/ce86c270626174e92f9eec9e2a5f319637337c5f"
+    }
+  ]
+}

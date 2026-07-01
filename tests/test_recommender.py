@@ -535,12 +535,12 @@ def test_pipeline_with_ltr_missing_model_falls_back():
 
 
 # ---------------------------------------------------------------------------
-# Task 6.4 — Pipeline threads evidence_lookup to 26-dim attach_features
+# Task 6.4 — Pipeline threads evidence_lookup to 22-dim attach_features
 # ---------------------------------------------------------------------------
 
 
 class _AttachingCandidateGenerator(DummyGenerator):
-    """DummyGenerator that records attach_features() kwargs and writes 26-dim features.
+    """DummyGenerator that records attach_features() kwargs and writes requested features.
 
     Mimics the real CandidateGenerator.attach_features contract: it builds a
     feature vector of length ``len(feature_names)`` per journal id.
@@ -581,7 +581,7 @@ class _AttachingCandidateGenerator(DummyGenerator):
                 evidence.get("too_broad_penalty", 0.0),
                 evidence.get("too_narrow_penalty", 0.0),
             ]
-            # Base 20-dim vector is all zeros; pad with evidence values to hit dim.
+            # Base 16-dim vector is all zeros; pad with evidence values to hit dim.
             base = [0.0] * len(FEATURE_NAMES)
             full = base + evidence_values
             entry["features"] = full[:dim]
@@ -592,9 +592,8 @@ class _AttachingCandidateGenerator(DummyGenerator):
             )
 
 
-def test_pipeline_attaches_26_dim_features_when_evidence_supplied():
-    """When evidence_lookup is set on the pipeline and LTR is 26-dim,
-    the trace's per-journal features array is 26 long."""
+def test_pipeline_attaches_22_dim_features_when_evidence_supplied():
+    """Evidence lookup selects the 22-dimensional feature schema."""
     from src.journals.journal_model import Journal
     from src.journals.journal_store import JournalStore
 
@@ -611,21 +610,23 @@ def test_pipeline_attaches_26_dim_features_when_evidence_supplied():
     ranked = [(journal_a, 1.0, []), (journal_b, 0.8, [])]
     snapshot = {
         "test paper": {
-            "j1": {
-                "scope_fit": 0.9,
-                "method_fit": 0.8,
-                "application_fit": 0.7,
-                "journal_position_fit": 0.85,
-                "too_broad_penalty": 0.1,
-                "too_narrow_penalty": 0.05,
-            },
-            "j2": {
-                "scope_fit": 0.4,
-                "method_fit": 0.3,
-                "application_fit": 0.5,
-                "journal_position_fit": 0.2,
-                "too_broad_penalty": 0.0,
-                "too_narrow_penalty": 0.0,
+            "evidence": {
+                "j1": {
+                    "scope_fit": 0.9,
+                    "method_fit": 0.8,
+                    "application_fit": 0.7,
+                    "journal_position_fit": 0.85,
+                    "too_broad_penalty": 0.1,
+                    "too_narrow_penalty": 0.05,
+                },
+                "j2": {
+                    "scope_fit": 0.4,
+                    "method_fit": 0.3,
+                    "application_fit": 0.5,
+                    "journal_position_fit": 0.2,
+                    "too_broad_penalty": 0.0,
+                    "too_narrow_penalty": 0.0,
+                },
             },
         }
     }
@@ -640,7 +641,7 @@ def test_pipeline_attaches_26_dim_features_when_evidence_supplied():
         rule_scorer=FixedRuleScorer(ranked),
         llm_ranker=FixedLLMRanker(llm_ranked),
         evidence_lookup=snapshot,
-        feature_schema="26_dim_with_llm_evidence",
+        feature_schema="22_dim_with_llm_evidence",
     )
 
     result = pipeline.recommend(
@@ -650,26 +651,26 @@ def test_pipeline_attaches_26_dim_features_when_evidence_supplied():
         mode="abstract",
     )
 
-    # Pipeline called attach_features once, with the 26-dim schema and the
+    # Pipeline called attach_features once, with the 22-dim schema and the
     # per-paper evidence dict.
     assert len(gen.attach_features_calls) == 1
     call = gen.attach_features_calls[0]
     assert call["feature_names"] is not None
-    assert len(call["feature_names"]) == 26
-    assert call["llm_evidence_by_journal"] == snapshot["test paper"]
+    assert len(call["feature_names"]) == 22
+    assert call["llm_evidence_by_journal"] == snapshot["test paper"]["evidence"]
 
-    # Per-journal features are now 26 long.
+    # Per-journal features are now 22 long.
     retrieval_trace = result["retrieval_trace"]
     for jid, entry in retrieval_trace.items():
         if "features" in entry:
-            assert len(entry["features"]) == 26
-    assert len(retrieval_trace["j1"]["features"]) == 26
-    assert len(retrieval_trace["j2"]["features"]) == 26
+            assert len(entry["features"]) == 22
+    assert len(retrieval_trace["j1"]["features"]) == 22
+    assert len(retrieval_trace["j2"]["features"]) == 22
 
 
 def test_pipeline_omits_evidence_schema_when_paper_not_in_snapshot():
     """When the paper title isn't in evidence_lookup, pipeline falls back to
-    20-dim base schema (legacy behavior) even if feature_schema='26_dim...'."""
+    16-dim base schema when no matching evidence exists."""
     from src.journals.journal_model import Journal
     from src.journals.journal_store import JournalStore
 
@@ -686,7 +687,7 @@ def test_pipeline_omits_evidence_schema_when_paper_not_in_snapshot():
         rule_scorer=FixedRuleScorer(ranked),
         llm_ranker=FixedLLMRanker(llm_ranked),
         evidence_lookup={},  # paper not in snapshot
-        feature_schema="26_dim_with_llm_evidence",
+        feature_schema="22_dim_with_llm_evidence",
     )
 
     result = pipeline.recommend(
@@ -698,10 +699,10 @@ def test_pipeline_omits_evidence_schema_when_paper_not_in_snapshot():
 
     assert len(gen.attach_features_calls) == 1
     call = gen.attach_features_calls[0]
-    # feature_names is None → 20-dim default
+    # feature_names is None → 16-dim default
     assert call["feature_names"] is None
-    # features still attached (20-dim)
-    assert len(result["retrieval_trace"]["j1"]["features"]) == 20
+    # features still attached (16-dim)
+    assert len(result["retrieval_trace"]["j1"]["features"]) == 16
 
 
 def test_pipeline_surfaces_learned_score_in_result_when_ltr_enabled():

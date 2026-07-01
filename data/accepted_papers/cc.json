@@ -25,6 +25,62 @@
       "source": "openalex",
       "doi": "10.1016/j.comcom.2026.108554",
       "url": "https://openalex.org/W7161243739"
+    },
+    {
+      "title": "Cognitive computing and wireless communications on the edge for healthcare service robots",
+      "abstract": "In recent years, we have witnessed dramatic developments of mobile healthcare robots, which enjoy many advantages over their human counterparts. Previous communication networks for healthcare robots always suffer from high response latency and/or time-consuming computing demands. Robust and high-speed communications and swift processing are critical, sometimes vital in particular in the case of healthcare robots, to the healthcare receivers. As a promising solution, offloading delay-sensitive and communicating-intensive tasks to the robot is expected to improve the services and benefit users. In this paper, we review several state-of-the-art technologies, such as the human–robot interface, environment and user status perceiving, navigation, robust communication and artificial intelligence, of a mobile healthcare robot and discuss in details the customized demands over offloading the computation and communication tasks. According to the intrinsic demands of tasks over the network usage, we categorize abilities of a typical healthcare robot into alternative classes: the edge functionalities and the core functionalities. Many latency-sensitive tasks, such as user interaction, or time-consuming tasks including health receiver status recognition and autonomous moving, can be processed by the robot without frequent communications with data centers. On the other hand, several fundamental abilities, such as radio resource management, mobility management, service provisioning management, need to update the main body with the cutting-edge artificial intelligence. Robustness and safety, in this case, are the primary goals in wireless communications that AI may provide ground-breaking solutions. Based on this partition, this article refers to several state-of-the-art technologies of a mobile healthcare robot and reviews some challenges to be met for its wireless communications.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comcom.2019.10.012",
+      "url": "https://www.semanticscholar.org/paper/9f70ab5bda91502322f7f3268356b816a6bb17fa"
+    },
+    {
+      "title": "Making cellular networks crisis-proof: Towards island-ready, resilient-by-design 6G communication networks",
+      "abstract": "5G and 5G-Advanced cellular networks are vulnerable to local outages resulting from disasters or targeted attacks. This fragility stems from the reliance on the central core network involved for most 5G connectivity use cases. Crisis-struck areas isolated from the cellular core network form islands , where crisis response is hindered by the unavailability of recovery-relevant services, such as emergency calls, cell broadcasts, messengers, and news apps. Our concept of island-ready, resilient-by-design 6G communication networks envisions local cellular connectivity allowing users to connect to local application servers, which is currently impossible. In our conceptualization, we follow an all-society approach, as realizing island connectivity requires the cooperation of multiple actors, including users, operators, developers, providers, and authorities. We evaluate the island readiness of 5G and 5G-Advanced systems and outline the open challenges stakeholders must address for full island readiness, such as decentralizing the 6G core network and designing local-first application architectures.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.comcom.2025.108407",
+      "url": "https://doi.org/10.1016/j.comcom.2025.108407"
+    },
+    {
+      "title": "A cooperative distributed model to evaluate and optimize task offloading in Mobile Edge Computing",
+      "abstract": "This paper proposes a cooperative and distributed framework to evaluate and optimize task offloading in Mobile Edge Computing (MEC). Each agent, representing either a user device or an edge domain, autonomously interacts with others through trust-driven recommendations and cluster formation. The proposed algorithm exploits this information to iteratively increase — and asymptotically converge over time to — the configuration that maximizes the collective utility of edge servers and user devices, i.e., the Average Performance ( A P ), which corresponds to a Nash equilibrium where only reliable agents are rewarded. Two synthetic indicators are introduced to model the main aspects of MEC collaboration: the Quality of Experience ( Q o E ), representing the perceived user-side performance, and the Convenience ( C ), expressing the server-side efficiency and resource cost. Experimental validation, performed over a simulated MEC environment with up to 1000 agents, shows a rapid convergence (within 20 iterations), a stable equilibrium with A P ≈ 0 . 92 , and robustness to variations in the simulated values of agents’ reliability. The results demonstrate that the proposed distributed algorithm achieves efficient, self-organized coordination among heterogeneous edge entities while maintaining scalability and fairness.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.comcom.2025.108403",
+      "url": "https://doi.org/10.1016/j.comcom.2025.108403"
+    },
+    {
+      "title": "Power prediction and energy aware placement of containers over virtual machines",
+      "abstract": "The rapid expansion of 5G and the upcoming arrival of 6G have significantly increased the demand for cloud computing resources, especially in edge cloud servers, to meet stringent connectivity and latency requirements. This surge has raised serious energy concerns as data centers now account for about 1–1.5% of global energy consumption and contribute about 1% of global CO 2 emissions. In response to these facts, this study proposes a novel energy-aware machine learning model, using power sensor data from physical machines (PMs) in data centers, to optimize energy consumption while managing container placement as a use case. We conducted experiments in a testbed using realistic 5G traffic scenarios, deliberately avoiding artificial stressors such as stress-ng, which create synthetic loads that do not accurately reflect real-world resource utilization. Our machine learning model, particularly the XGBoost implementation, proved to be highly effective, achieving an R 2 score of 91.2%. The model demonstrated the ability to reduce energy consumption by 3% and improve task completion times, all without the need for explicit consolidation strategies or cluster reconfiguration. This approach highlights the power of machine learning in optimizing energy efficiency in dynamic and resource-intensive environments such as edge cloud servers, providing a scalable solution for data centers facing increasing energy demands.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.comcom.2025.108340",
+      "url": "https://doi.org/10.1016/j.comcom.2025.108340"
+    },
+    {
+      "title": "User Plane Performance in Beyond 5G Networks: Comprehensive Analysis and Evaluation",
+      "abstract": "Emerging applications such as autonomous driving, virtual reality, and smart factories place greater demands on the Quality of Service of existing network infrastructure, particularly radio networks. The current 5th and new 6th generation of cellular networks aim to meet these requirements and provide ubiquitous connectivity to devices with diverse demands. These networks comprise a control plane and a user plane. While the control plane is responsible for managing the network and its devices, the user plane forwards data and directly influences the experienced Quality of Service. A key network function in the user plane is the User Plane Function (UPF), which forwards packets between cellular network devices and the data network, such as the Internet or an edge data center. However, the extent to which existing UPF implementations can provide sufficient Quality of Service for emerging applications remains largely unexplored. In this work, we analyze and compare various UPF implementations from both theoretical and practical perspectives. We consider both software-based and hardware-accelerated implementations and compare them in terms of performance and latency under load. The setup enables up to 10,000 subscriber sessions while enforcing QoS mechanisms such as rate limiting. The evaluation demonstrates that three of the four investigated UPFs provide QoS enforcement, while their latency behavior differs by orders of magnitude depending on the employed technology.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.comcom.2025.108397",
+      "url": "https://doi.org/10.1016/j.comcom.2025.108397"
+    },
+    {
+      "title": "A Location-Aware RF-Assisted MAC Protocol for Sectorized Vehicular Visible Light Communications",
+      "abstract": "Vehicular Visible Light Communications (V-VLC) has emerged as a viable technology complementing RF-based communication in automotive scenarios. This is mainly due to properties such as the large unlicensed spectrum and the intrinsic security due to the Line Of Sight (LOS) requirement. In this context, one aspect of V-VLC needs further attention given the current state of the art, namely medium access under multi-user interference. In this paper, we extensively study interference in typical vehicular scenarios. Based on the findings from this study, we propose a novel approach for medium access. We follow a location-aware cross-layer approach that exploits the Space Division Multiple Access (SDMA) feature of modern matrix lighting modules to avoid interference and thus collisions. Making use of heterogeneous communication concepts, in which vehicles share their positions via the Radio Frequency (RF) channel, V-VLC transmissions can be scheduled accordingly. In an extensive simulation study using a realistic urban scenario, we first identify critical interference scenarios and then assess the efficacy of our proposed solution. We also investigate the impact of position uncertainty due to, e.g., GPS errors. Our results clearly indicate the benefits of a location-aware protocol that exploits the space-division features of the matrix lights.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comcom.2022.10.020",
+      "url": "https://www.semanticscholar.org/paper/e9b9ad2e6b7275bb163d38a0346baa79b01f7182"
+    },
+    {
+      "title": "Experimental vs. simulation analysis of LoRa for vehicular communications",
+      "abstract": "LoRa, a Low Power Wide Area Network (LPWAN) technology, demands reduced network infrastructure to cover a large area, with low power consumption. In the context of vehicular communications, LoRa has the potential to support monitoring and cooperative navigation applications, where small amounts of data can be transmitted asynchronously through the network. Nevertheless, the literature lacks evaluations of LoRa in the context of vehicular communications. Thus, in this paper we analyze the performance of this technology operating in an urban mobility environment, using LoRa terminal devices embarked on vehicles and a LoRa receiver unit, acting as infrastructure. Moreover, we evaluate the equivalence between experimental and simulated results, obtained from the communication link between the LoRa module inside a vehicle and a LoRa receiver comparing to those produced by NS-3 simulations. Three metrics of interest are evaluated: Packet Delivery Ratio (PDR), Packet Inter-Reception (PIR) time, and Received Signal Strength Indicator (RSSI). Field experiments are performed at the campus of the Federal University of Rio de Janeiro (UFRJ), Brazil. Results revealed that all the metrics evaluated in the simulated experiments are consistent with the results of the real experiments, however, we concluded that the model can be improved by looking for a stronger correlation with real experiments.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comcom.2020.06.006",
+      "url": "https://www.semanticscholar.org/paper/3e74d3bb5ba9b4f3927255988c47dbf077de30ad"
     }
   ]
 }

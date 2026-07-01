@@ -3,64 +3,68 @@
   "journal_name": "Annals of Pure and Applied Logic",
   "papers": [
     {
-      "title": "Interpolation in Hájek's basic logic",
-      "abstract": "We exhaustively classify varieties of BL-algebras with the amalgamation property, showing that there are only countably many of them and solving an open problem of Montagna. As a consequence of this classification, we obtain a complete description of which axiomatic extensions of H\\'{a}jek's basic fuzzy logic BL have the deductive interpolation property. Along the way, we provide similar classifications of varieties of basic hoops with the amalgamation property and axiomatic extensions of the negation-free fragment of BL with the deductive interpolation property.",
-      "year": 2024,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.apal.2025.103615",
-      "arxiv": "2403.13617",
-      "corpus_id": 268537106,
-      "url": "https://www.semanticscholar.org/paper/a00d4c4f4067e9b3feac9fc000f6e25b38bb8a31"
+      "title": "Constructive quantifier elimination with a focus on matrix rings",
+      "abstract": "We give a sufficient condition for a model theoretic structure B to ‘inherit’ quantifier elimination from another structure A . This yields an alternative proof of one of the main results from [8] , namely quantifier elimination for certain matrix rings. The original proof uses model theory, and while it is very elegant and insightful, the proof we propose is much shorter and provides a constructive algorithm.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103706",
+      "url": "https://doi.org/10.1016/j.apal.2025.103706"
     },
     {
-      "title": "The Monadic Grzegorczyk Logic",
-      "abstract": "We develop a semantic criterion for determining whether a given monadic modal logic axiomatizes the one-variable fragment of a predicate modal logic. We show that the criterion applies to the monadic Grzegorczyk logic $\\textbf{MGrz}$, thus establishing that $\\textbf{MGrz}$ axiomatizes the one-variable fragment of the predicate Grzegorczyk logic $\\textbf{QGrz}$. This we do by proving the finite model property of $\\textbf{MGrz}$, which is achieved by strengthening the notion of a maximal point of a descriptive $\\textbf{MGrz}$-frame and by refining the existing selective filtration methods.",
-      "year": 2024,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.apal.2026.103793",
-      "arxiv": "2412.10854",
-      "corpus_id": 274776315,
-      "url": "https://www.semanticscholar.org/paper/d361b9db1bda39732f8966cca5ebfeb8cfaba090"
+      "title": "A note on Erdős-Hajnal property for graphs with VC dimension ≤2",
+      "abstract": "Using a result in [6] and the proof of [2, Theorem 1.1] , we show that there is γ > 0 such that for any finite graph G with VC-dimension ≤2, G has a clique or an anti-clique of size ≥ | G | γ . We also show that the Erdős-Hajnal property for graphs with VC-dimension 1 can be proved using the δ -dimension technique in [4] , and we show that when E is a definable symmetric binary relation, [4, Theorem 1.3] can be proved without using Shelah's 2-rank.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103705",
+      "url": "https://doi.org/10.1016/j.apal.2025.103705"
     },
     {
-      "title": "Completeness in local positive logic",
-      "abstract": "We develop the basic model theory of local positive logic, a new logic that mixes positive logic (where negation is not allowed) and local logic (where models omit types of infinite distant pairs). We study several basic model theoretic notions such as compactness, positive closedness (existential closedness) and completeness (irreducibility).",
-      "year": 2024,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.apal.2025.103601",
-      "arxiv": "2401.03260",
-      "corpus_id": 266843849,
-      "url": "https://www.semanticscholar.org/paper/f9fd4eaaedb66019a05096a87386117d91b80976"
+      "title": "Maximal sets without choice",
+      "abstract": "We show that it is consistent relative to ZF , that there is no well-ordering of R while a wide class of special sets of reals such as Hamel bases, transcendence bases, Vitali sets or Bernstein sets exists. To be more precise, we can assume that every projective hypergraph on R has a maximal independent set, among a few other things. For example, we get transversals for all projective equivalence relations. Moreover, this is possible while either DC ω 1 holds, or countable choice for reals fails. Assuming the consistency of an inaccessible cardinal, “projective” can even be replaced with “ L ( R ) ” and we can add that any instance of AC in L ( R ) has a choice function. This vastly strengthens the consistency results obtained in [6] , [11] or [15] .",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103694",
+      "url": "https://doi.org/10.1016/j.apal.2025.103694"
     },
     {
-      "title": "Structural and universal completeness in algebra and logic",
-      "abstract": "In this work we study the notions of structural and universal completeness both from the algebraic and logical point of view. In particular, we provide new algebraic characterizations of quasivarieties that are actively and passively universally complete, and passively structurally complete. We apply these general results to varieties of bounded lattices and to quasivarieties related to substructural logics. In particular we show that a substructural logic satisfying weakening is passively structurally complete if and only if every classical contradiction is explosive in it. Moreover, we fully characterize the passively structurally complete varieties of MTL-algebras, i.e., bounded commutative integral residuated lattices generated by chains.",
-      "year": 2023,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.apal.2023.103391",
-      "arxiv": "2309.14151",
-      "corpus_id": 262483303,
-      "url": "https://www.semanticscholar.org/paper/4aee5a62469bf95d4b144bb895524a6c20e3c512"
+      "title": "MA ( I ) and a failure of separation on the third level",
+      "abstract": "We present a method which forces the failure of Π 3 1 and Σ 3 1 -separation, while MA ( I ) holds, for I the family of indestructible ccc forcings. This shows that, in contrast to the assumption BPFA and ℵ 1 = ℵ 1 L which implies Π 3 1 -separation, that weaker forcing axioms do not decide separation on the third projective level.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103667",
+      "url": "https://doi.org/10.1016/j.apal.2025.103667"
     },
     {
-      "title": "Profiniteness, monadicity and universal models in modal logic",
-      "abstract": "Taking inspiration from the monadicity of complete atomic Boolean algebras, we prove that profinite modal algebras are monadic over Set. While analyzing the monadic functor, we recover the universal model construction - a construction widely used in the modal logic literature for describing finitely generated free modal algebras and the essentially finite subframes of their canonical models.",
-      "year": 2023,
-      "source": "semantic_scholar",
-      "doi": "10.1016/j.apal.2024.103454",
-      "arxiv": "2305.04592",
-      "corpus_id": 258558367,
-      "url": "https://www.semanticscholar.org/paper/523e6a20b5543b355891a1bbaf985af73197b7c4"
+      "title": "Arrow algebras",
+      "abstract": "In this paper we introduce arrow algebras, simple algebraic structures which induce elementary toposes through the tripos-to-topos construction. This includes localic toposes as well as various realizability toposes, in particular, those realizability toposes which are obtained from partial combinatory algebras. Since there are many examples of arrow algebras and arrow algebras have a number of closure properties, including a notion of subalgebra given by a nucleus, arrow algebras provide a flexible tool for constructing toposes; we illustrate this by providing some general tools for creating toposes for Kreisel's modified realizability.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103664",
+      "url": "https://doi.org/10.1016/j.apal.2025.103664"
     },
     {
-      "title": "Alternating (In)Dependence-Friendly Logic",
-      "abstract": "Hintikka and Sandu originally proposed Independence Friendly Logic (IF) as a first-order logic of imperfect information to describe game-theoretic phenomena underlying the semantics of natural language. The logic allows for expressing independence constraints among quantified variables, in a similar vein to Henkin quantifiers, and has a nice game-theoretic semantics in terms of imperfect information games. However, the IF semantics exhibits some limitations. It treats the players asymmetrically, considering only one of the two players as having imperfect information when evaluating truth, resp., falsity, of a sentence. In addition, the truth and falsity of sentences coincide with the existence of a uniform winning strategy for one of the two players in the semantic imperfect information game. As a consequence, IF does admit undetermined sentences, which are neither true nor false, thus failing the law of excluded middle. In this paper, we investigate an extension of IF, called Alternating Dependence/Independence Friendly Logic (ADIF), tailored to overcome these limitations. To this end, we introduce a novel compositional semantics, generalising the one based on trumps proposed by Hodges for IF. The new semantics (i) allows for meaningfully restricting both players at the same time, (ii) enjoys the property of game-theoretic determinacy, (iii) recovers the law of excluded middle for sentences, and (iv) grants ADIF the full descriptive power of Second Order Logic. We also provide an equivalent Herbrand-Skolem semantics and a game-theoretic semantics for the prenex fragment of ADIF, the latter being defined in terms of a determined infinite-duration game that precisely captures the other two semantics on finite structures.",
-      "year": 2023,
-      "source": "semantic_scholar",
-      "doi": "10.48550/arXiv.2304.11652",
-      "arxiv": "2304.11652",
-      "corpus_id": 258298812,
-      "url": "https://www.semanticscholar.org/paper/0d0f1739659491513a0ede6c5ee03508701e6055"
+      "title": "Univalent material set theory",
+      "abstract": "Homotopy type theory (HoTT) can be seen as a generalisation of structural set theory, in the sense that 0-types represent structural sets within the more general notion of types. For material set theory, we also have concrete models as 0-types in HoTT, but this does not currently have any generalisation to higher types. The aim of this paper is to give such a generalisation of material set theory to higher type levels within homotopy type theory. This is achieved by generalising the construction of the type of iterative sets to obtain an n -type universe of n -types. At level 1, this gives a connection between groupoids and multisets. More specifically, we define the notion of an ∈-structure as a type with an extensional binary type family and generalise the axioms of constructive set theory to higher type levels. There is a tight connection between the univalence axiom and the extensionality axiom of ∈-structures. Once an ∈-structure is given, its elements can be seen as representing types in the ambient type theory. A useful property of these structures is that an ∈-structure of n -types is itself an n -type, as opposed to univalent universes, which have higher type levels than the types in the universe. The theory has an alternative, coalgebraic formulation, in terms of coalgebras for a certain hierarchy of functors, P n , which generalises the powerset functor from sub-types to covering spaces and n -connected maps in general. The coalgebras which furthermore are fixed-points of their respective functors in the hierarchy are shown to model the axioms given in the first part. As concrete examples of models for the theory developed we construct the initial algebras of the P n functors. In addition to being an example of initial algebras of non-polynomial functors, this construction allows one to start with a univalent universe and get a hierarchy of ∈-structures which gives a stratified ∈-structure representation of that universe. These types are moreover n -type universes of n -types which contain all the usual types an type formers. The universes are cumulative both with respect to universe levels and with respect to type levels. The results are formalised in the proof-assistant Agda.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103662",
+      "url": "https://doi.org/10.1016/j.apal.2025.103662"
+    },
+    {
+      "title": "Transposition of variables is hard to axiomatize",
+      "abstract": "The function p x y that interchanges two logical variables x , y in formulas is hard to describe in the following sense. Let F denote the Lindenbaum–Tarski formula-algebra of a finite-variable first-order logic, endowed with p x y as a unary function. We prove that each equational axiom system for the equational theory of F has to contain, for each finite n , an equation that contains together with p x y at least n algebraic variables, and each of the operations ∃ , = , ∨ . This gives an answer to a problem raised by Johnson [ J. Symb. Logic ] in 1969: the class R P E A α of representable polyadic equality algebras of a finite dimension α ≥ 3 cannot be axiomatized by adding finitely many equations to the equational theory of representable cylindric algebras of dimension α . Consequences for proof systems of finite-variable logic and for defining equations of polyadic equality algebras are given. The proof uses a family of nonrepresentable polyadic equality algebras A n that are more and more nearly representable as n increases: their n -generated subalgebras as well as their proper reducts are representable. The lattice of subvarieties of R P E A α is investigated and new open problems are asked about the interplay between the transposition operations and about generalizability of the results to infinite dimensions.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103650",
+      "url": "https://doi.org/10.1016/j.apal.2025.103650"
+    },
+    {
+      "title": "The DeMorganization of a locale",
+      "abstract": "In 2009, Caramello proved that each topos has a largest dense subtopos whose internal logic satisfies De Morgan law (also known as the law of the weak excluded middle). This finding implies that every locale has a largest dense extremally disconnected sublocale, referred to as its DeMorganization. In this paper, we take the first steps in exploring the DeMorganization in the localic context, shedding light on its geometric nature by showing that it is always a fitted sublocale and by providing a concrete description. Explicit examples of DeMorganizations for toposes that do not satisfy De Morgan law are rather difficult to find. We present a contribution in that direction, with the main result of the paper showing that for any metrizable locale (without isolated points), its DeMorganization coincides with its Booleanization. This, in particular, implies that any extremally disconnected metric locale (without isolated points) must be Boolean, generalizing a well-known result for topological spaces to the localic setting.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103634",
+      "url": "https://doi.org/10.1016/j.apal.2025.103634"
     }
   ]
 }

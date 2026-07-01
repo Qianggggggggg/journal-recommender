@@ -9,6 +9,70 @@
       "source": "local_evaluation_metadata",
       "doi": "",
       "url": "https://arxiv.org/pdf/1501.02069.pdf"
+    },
+    {
+      "title": "Symbolic execution for refuting ∀∃ hyperproperties",
+      "abstract": "Many important hyperliveness properties, such as refinement and generalized non-interference, fall into the class of $$\\forall \\exists$$ hyperproperties, and require, for each execution trace of a system, the existence of another execution trace relating to the first one in a certain way. The alternation of quantifiers in the specification renders these hyperproperties extremely difficult to verify, or even just to test. Indeed, contrary to trace properties, where it suffices to find a single counterexample trace, refuting a $$\\forall \\exists$$ hyperproperty requires not only to find a trace, but also a proof that no second trace exists that satisfies the specified relation with the first trace. As a consequence, automated testing of $$\\forall \\exists$$ hyperproperties falls out of the scope of existing automated testing tools. In this paper, we present a fully automated approach to detect violations of $$\\forall \\exists$$ hyperproperties in synchronous and asynchronous infinite-state systems. Our approach extends bug-finding techniques based on symbolic execution with support for trace quantification. We provide a prototype implementation of our approach, and demonstrate its effectiveness on a set of challenging examples.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00504-z",
+      "url": "https://doi.org/10.1007/s00236-025-00504-z"
+    },
+    {
+      "title": "Watson-Crick finite automata of small size and variants of string assembling systems",
+      "abstract": "We investigate the relationship of languages characterized by variants of string assembling systems and by Watson-Crick finite automata with a small number of states. Besides the general variant, we consider so-called free, and pure string assembling systems and compare their language generating power to Watson-Crick finite automata having one state (also called stateless) and two or three states in their state sets. We also study restricted variants of models that describe unary languages.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00510-1",
+      "url": "https://doi.org/10.1007/s00236-025-00510-1"
+    },
+    {
+      "title": "Shortest characteristic factors of a deterministic finite automaton and computing its positive position run by pattern set matching",
+      "abstract": "Given a deterministic finite automaton (DFA) A, we present a simple algorithm for constructing deterministic finite automata that accept the shortest forbidden factors, the shortest forbidden prefixes, the shortest forbidden suffixes, the shortest forbidden words, the shortest allowed suffixes, and the shortest allowed words of the automaton A. We refer to these sets as the shortest characteristic factors of the automaton A. If the given automaton is local, and therefore the language it accepts is strictly locally testable, the sets of its shortest characteristic factors are finite, and these automata are acyclic. Otherwise, they accept infinite languages. This approach simplifies existing methods for the extraction of forbidden factors, allows the extraction of more types of characteristic factors, and also generalizes the extraction for all classes of DFAs. Furthermore, we demonstrate that this type of extraction can be used for a sublinear run of an automaton for certain inputs. We define a positive position run of a deterministic finite automaton, representing all positions in an input string where the automaton reaches a final state. Finally, we present an algorithm for computing the positive position run of the automaton, which utilizes pattern set matching of its shortest forbidden factors and its shortest forbidden or allowed suffixes, provided that the sets are finite. We showcase the computation of the positive position run of a local automaton using backward pattern set matching, which can achieve sublinear time.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00484-0",
+      "url": "https://doi.org/10.1007/s00236-025-00484-0"
+    },
+    {
+      "title": "On integer linear programs for treewidth based on perfect elimination orderings (extended version)",
+      "abstract": "We analyze integer programming formulations for determining the treewidth of a graph that are based on perfect elimination orderings. For the first time, we prove structural properties that explain their limitations in providing convenient lower bounds and show how the latter are constituted. Moreover, we investigate a flow metric approach that proved promising to achieve approximation guarantees for the pathwidth of a graph, and we show why these techniques cannot be carried over to improve the addressed treewidth formulations. In addition, we present two complementary formulations for treewidth that employ positional rather than relational variables. Via computational experiments, we provide an impression on the quality and proportionality of the lower bounds on the treewidth obtained with different relaxations of perfect elimination ordering formulations.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00505-y",
+      "url": "https://doi.org/10.1007/s00236-025-00505-y"
+    },
+    {
+      "title": "Reasoning over n-indexed sequences in SMT",
+      "abstract": "The SMT (Satisfiability Modulo Theories) theory of arrays is well-established and widely used, with various decision procedures and extensions developed for it. However, recent contributions suggest that developing tailored reasoning for some theories, such as sequences and strings, can be more efficient than reasoning over them through axiomatization over the theory of arrays. In this paper, we are interested in reasoning over $$n$$ -indexed sequences as they are found in some programming languages, such as Ada. We propose an SMT theory of $$n$$ -indexed sequences and explore different ways to represent and reason over $$n$$ -indexed sequences using existing theories, as well as tailored calculi for this theory.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00496-w",
+      "url": "https://doi.org/10.1007/s00236-025-00496-w"
+    },
+    {
+      "title": "Tracy, traces, and transducers: computable counterexamples and explanations for HyperLTL model-checking",
+      "abstract": "HyperLTL model-checking enables the automated verification of information-flow properties for security-critical systems. However, it only provides a binary answer. Here, we consider the problem of computing counterexamples and explanations for HyperLTL model-checking, thereby considerably increasing its usefulness. Based on the maxim “counterexamples/explanations are Skolem functions for the existentially quantified trace variables”, we consider (Turing machine) computable Skolem functions. As not every finite transition system and formula have computable Skolem functions witnessing that the system satisfies the formula, we consider the problem of deciding whether such functions exist. Our main result shows that this problem is decidable by reducing it to solving multiplayer games with hierarchical imperfect information. Furthermore, our algorithm also computes transducers implementing such functions, if they exist.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00499-7",
+      "url": "https://doi.org/10.1007/s00236-025-00499-7"
+    },
+    {
+      "title": "Gray-box runtime enforcement of hyperproperties",
+      "abstract": "Enforcement of information-flow policies has been extensively studied by language-based approaches over the past few decades. In this paper, we propose an alternative, novel, general, and effective approach using enforcement of hyperproperties – a powerful formalism for expressing and reasoning about a wide range of information-flow security policies. We study black- vs. gray- vs. white-box enforcement of hyperproperties expressed by nondeterministic finite-word hyperautomata (NFH), where the enforcer has null, some, or complete information about the implementation of the system under scrutiny. Given an NFH, in order to generate a runtime enforcer, we reduce the problem to controller synthesis for hyperproperties and subsequently to the satisfiability problem for quantified Boolean formulas (QBFs). The resulting enforcers are transferable with low-overhead. We conduct a rich set of case studies, including information-flow control for JavaScript code, as well as synthesizing obfuscators for control plants.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00502-1",
+      "url": "https://doi.org/10.1007/s00236-025-00502-1"
+    },
+    {
+      "title": "Preserving hyperproperties of programs using primitives with consensus number 2",
+      "abstract": "When a concrete concurrent object refines another, more abstract object, the correctness of a program employing the concrete object can be verified by considering its behaviors when using the more abstract object. This approach is sound for trace properties of the program, but not for hyperproperties , including many security properties and probability distributions of events. We define strong observational refinement , a strengthening of refinement that preserves hypersafety properties, and prove that it is equivalent to the existence of forward simulations . We show that strong observational refinement generalizes strong linearizability , a restriction of linearizability , the prevalent consistency condition for implementing concurrent objects. Our results imply that strong linearizability is also equivalent to existence of forward simulations, and show that strongly linearizable implementations can be composed both horizontally and vertically. This paper also investigates whether there are wait-free strongly-linearizable implementations from realistic primitives such as test&set or fetch&add, whose consensus number is 2. We show that many objects with consensus number 1 have wait-free strongly-linearizable implementations from fetch&add. We also show that several objects with consensus number 2 have wait-free or lock-free implementations from other objects with consensus number 2. In contrast, we prove that even when fetch&add, swap and test&set primitives are used, some objects with consensus number 2 do not have lock-free strongly-linearizable implementations. This includes queues and stacks, and relaxed variants thereof.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s00236-025-00500-3",
+      "url": "https://doi.org/10.1007/s00236-025-00500-3"
     }
   ]
 }

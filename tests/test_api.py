@@ -278,10 +278,8 @@ def test_recommend_stream_emits_live_ranking_progress(monkeypatch, client):
 # ---------------------------------------------------------------------------
 
 
-def test_get_pipeline_constructs_ltr_adapter_in_disabled_state_by_default(monkeypatch):
-    """默认 OFF 时(get_pipeline 不修改 yaml),LTRAdapter 实例化但 enabled=False,
-    pipeline 走 baseline 路径,bit-equal。
-    """
+def test_get_pipeline_constructs_enabled_production_ltr_adapter(monkeypatch):
+    """生产配置应加载当前 16 维 LTR 模型。"""
     from src.app.api import get_pipeline
     import src.app.api as api_module
 
@@ -291,6 +289,6 @@ def test_get_pipeline_constructs_ltr_adapter_in_disabled_state_by_default(monkey
     pipeline = get_pipeline()
     assert hasattr(pipeline, "learned_reranker")
     assert pipeline.learned_reranker is not None
-    # 默认 yaml enabled=False
-    assert pipeline.learned_reranker.enabled is False
-    assert "disabled" in (pipeline.learned_reranker.disable_reason or "").lower()
+    assert pipeline.learned_reranker.enabled is True
+    assert pipeline.learned_reranker.disable_reason is None
+    assert pipeline.learned_reranker.feature_dim == 16

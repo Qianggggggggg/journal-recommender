@@ -339,7 +339,7 @@ def test_evaluate_variant_persists_features_per_candidate():
 
 
 def test_evaluate_variant_persists_features_even_without_accepted_store():
-    """accepted_paper_store 缺省时,features 也要落地(candidate_in_accepted_corpus=0.0)。"""
+    """accepted_paper_store 缺省时仍应落地锁定的 16 维 features。"""
     from src.ranker.feature_builder import FEATURE_NAMES
 
     store = JournalStore()
@@ -367,10 +367,9 @@ def test_evaluate_variant_persists_features_even_without_accepted_store():
     )
 
     pr = result["paper_results"][0]
-    corpus_idx = FEATURE_NAMES.index("candidate_in_accepted_corpus")
-    # accepted store 缺省 → 全部候选 candidate_in_accepted_corpus=0.0
-    for jid, feats in pr["candidate_features"].items():
-        assert feats[corpus_idx] == 0.0
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
+    for feats in pr["candidate_features"].values():
+        assert len(feats) == 16
 
 
 def test_evaluate_variant_persists_rule_top20_for_hard_negative_mining():

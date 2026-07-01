@@ -49,15 +49,15 @@ def test_candidate_generator_attach_features_uses_internal_store():
 
     assert "features" in trace["a"]
     assert "features" in trace["b"]
-    assert len(trace["a"]["features"]) == 20
+    assert len(trace["a"]["features"]) == 16
     assert trace["a"]["feature_names"] == FEATURE_NAMES
     rule_idx = FEATURE_NAMES.index("rule_rank")
     assert trace["a"]["features"][rule_idx] == 1.0
     assert trace["b"]["features"][rule_idx] == 2.0
 
 
-def test_candidate_generator_attach_features_marks_corpus_membership(tmp_path: Path):
-    """accepted_paper_store 传入时,candidate_in_accepted_corpus 必须按 jid 正确填充。"""
+def test_candidate_generator_base_schema_excludes_corpus_membership(tmp_path: Path):
+    """16 维 schema 不包含近乎常量的 corpus membership 特征。"""
     payload = {"journal_id": "a", "journal_name": "A", "papers": [{"title": "x", "abstract": "y" * 50}]}
     (tmp_path / "a.json").write_text(json.dumps(payload), encoding="utf-8")
     accepted_store = AcceptedPaperStore(str(tmp_path))
@@ -78,14 +78,14 @@ def test_candidate_generator_attach_features_marks_corpus_membership(tmp_path: P
         accepted_paper_store=accepted_store,
     )
 
-    corpus_idx = FEATURE_NAMES.index("candidate_in_accepted_corpus")
-    assert trace["a"]["features"][corpus_idx] == 1.0
-    assert trace["b"]["features"][corpus_idx] == 0.0
+    assert "candidate_in_accepted_corpus" not in FEATURE_NAMES
+    assert len(trace["a"]["features"]) == 16
+    assert len(trace["b"]["features"]) == 16
 
 
-def test_attach_features_supports_26_dim_schema():
+def test_attach_features_supports_22_dim_schema():
     """When feature_names=FEATURE_NAMES_WITH_LLM_EVIDENCE and evidence is
-    supplied, each trace entry's features array must be 26 long."""
+    supplied, each trace entry's features array must be 22 long."""
     from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
 
     journals = [_journal("j1"), _journal("j2")]
@@ -116,12 +116,12 @@ def test_attach_features_supports_26_dim_schema():
         llm_evidence_by_journal=paper_evidence,
     )
 
-    assert len(trace["j1"]["features"]) == 26
+    assert len(trace["j1"]["features"]) == 22
     assert trace["j1"]["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
     # Last 6 entries should be the evidence values
-    assert trace["j1"]["features"][20:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
-    assert len(trace["j2"]["features"]) == 26
-    assert trace["j2"]["features"][20:] == [0.4, 0.3, 0.5, 0.2, 0.0, 0.0]
+    assert trace["j1"]["features"][16:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    assert len(trace["j2"]["features"]) == 22
+    assert trace["j2"]["features"][16:] == [0.4, 0.3, 0.5, 0.2, 0.0, 0.0]
 
 
 def _journal(jid: str) -> Journal:
@@ -147,13 +147,12 @@ class StubJournalStore:
 
 
 # ---------------------------------------------------------------------------
-# 阶段 6.5 (P2-mini): 28-dim schema support in CandidateGenerator.attach_features
+# 阶段 6.5 (P2-mini): 23-dim schema support in CandidateGenerator.attach_features
 # ---------------------------------------------------------------------------
 
 
-def test_attach_features_supports_28_dim_schema(tmp_path: Path):
-    """CandidateGenerator.attach_features 接受 28-dim feature_names,
-    输出 28 维 features。"""
+def test_attach_features_supports_23_dim_schema(tmp_path: Path):
+    """CandidateGenerator.attach_features 接受 23-dim feature_names。"""
     from src.ranker.feature_builder import FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
 
     gen = _make_generator_with_journals([("j1", "C")])
@@ -172,10 +171,9 @@ def test_attach_features_supports_28_dim_schema(tmp_path: Path):
         n_matching_in_pool=1,
     )
 
-    assert len(trace["j1"]["features"]) == 28
+    assert len(trace["j1"]["features"]) == 23
     assert trace["j1"]["feature_names"] == FEATURE_NAMES_WITH_TIER_AND_EXCLUSIVITY
-    # tier C → 1.5; area_exclusivity 1/1 → 1.0
-    assert trace["j1"]["features"][-2] == 1.5
+    # 23 维扩展仅保留 area_exclusivity；有害的 tier weight 已删除。
     assert trace["j1"]["features"][-1] == 1.0
 
 

@@ -4,7 +4,7 @@
   "papers": [
     {
       "title": "Weighted models for higher-order computation",
-      "abstract": "Abstract We study a class of quantitative models for higher-order computation: Lafont categories with (infinite) biproducts. These are models of intuitionistic linear type theory with a canonical enrichment over the modules of a internal complete semiring: we give a semantics of non-deterministic PCF weighted over the elements of this semiring. The fixed points in our model are obtained by constructing a bifree algebra for the comonad which gives its exponential structure. By characterizing these fixed points more concretely as infinite sums of finitary approximants indexed over the nested finite multisets, we prove computational adequacy with respect to an operational semantics which evaluates a term by taking a weighted sum of the residues of its terminating reduction paths. We investigate the construction of Lafont categories with biproducts by weighting intensional models such as categories of games over a complete semiring. This transition from a qualitative semantics to a quantitative one is characterized as a “change of base” of enriched categories: it is induced by a monoidal functor from the category of coherence spaces to the category of free modules over a complete semiring. Using the properties of this functor, we characterise some requirements for the change of base to preserve the structure of a Lafont category. As an example, we show that the game semantics of Idealized Algol bears a natural enrichment over the category of coherence spaces, and thus gives rise by change of base to a semiring weighted model, which is fully abstract. We relate this to existing categories of probabilistic games and slot games.",
+      "abstract": "We study a class of quantitative models for higher-order computation: Lafont categories with (infinite) biproducts. These are models of intuitionistic linear type theory with a canonical enrichment over the modules of a internal complete semiring: we give a semantics of non-deterministic PCF weighted over the elements of this semiring. The fixed points in our model are obtained by constructing a bifree algebra for the comonad which gives its exponential structure. By characterizing these fixed points more concretely as infinite sums of finitary approximants indexed over the nested finite multisets, we prove computational adequacy with respect to an operational semantics which evaluates a term by taking a weighted sum of the residues of its terminating reduction paths. We investigate the construction of Lafont categories with biproducts by weighting intensional models such as categories of games over a complete semiring. This transition from a qualitative semantics to a quantitative one is characterized as a “change of base” of enriched categories: it is induced by a monoidal functor from the category of coherence spaces to the category of free modules over a complete semiring. Using the properties of this functor, we characterise some requirements for the change of base to preserve the structure of a Lafont category. As an example, we show that the game semantics of Idealized Algol bears a natural enrichment over the category of coherence spaces, and thus gives rise by change of base to a semiring weighted model, which is fully abstract. We relate this to existing categories of probabilistic games and slot games.",
       "year": 2020,
       "source": "semantic_scholar",
       "doi": "10.1016/j.ic.2020.104645",
@@ -19,12 +19,44 @@
       "url": "https://www.semanticscholar.org/paper/2c886ff4907cfd411a558ac72563de4a38f30280"
     },
     {
-      "title": "Seven kinds of equivalent models for generalized coalition logics",
-      "abstract": "Coalition Logic is an important logic in logical research on strategic reasoning. In two recent papers, Li and Ju argued that generally, concurrent game models, models of Coalition Logic, have three too strong assumptions: seriality, independence of agents, and determinism. They presented eight coalition logics based on eight classes of general concurrent game models, determined by which of the three assumptions are met. In this paper, we show that each of the eight sets of valid formulas of the eight logics is determined by six other kinds of models, that is, single-coalition-first action models, single-coalition-first actual neighborhood models, clear grand-coalition-first action models, clear single-coalition-first actual neighborhood models, tree-like grand-coalition-first action models, and tree-like single-coalition-first actual neighborhood models.",
-      "year": 2025,
+      "title": "Finite-time Safety and Reach-avoid Verification of Stochastic Discrete-time Systems",
+      "abstract": "This paper studies finite-time safety and reach-avoid verification for stochastic discrete-time dynamical systems. The aim is to ascertain lower and upper bounds of the probability that, within a predefined finite-time horizon, a system starting from an initial state in a safe set will either exit the safe set (safety verification) or reach a target set while remaining within the safe set until the first encounter with the target (reach-avoid verification). We introduce novel barrier-like sufficient conditions for characterizing these bounds, which either complement existing ones or fill gaps. Finally, we demonstrate the efficacy of these conditions on two examples.",
+      "year": 2024,
       "source": "semantic_scholar",
-      "doi": "10.1016/j.ic.2026.105419",
-      "url": "https://www.semanticscholar.org/paper/6949ccb8a46f181616c8540acc84147023594f82"
+      "doi": "10.48550/arXiv.2404.18118",
+      "url": "https://www.semanticscholar.org/paper/a4f8d80a64c297d546992ac681e7953e4bca3abb"
+    },
+    {
+      "title": "Constructing and indexing the bijective and extended Burrows-Wheeler transform",
+      "abstract": "The Burrows–Wheeler transform (BWT) is a permutation whose applications are prevalent in data compression and text indexing. The bijective BWT is a bijective variant of it that has not yet been studied for text indexing applications. We fill this gap by proposing a self-index built on the bijective BWT. The self-index applies the backward search technique of the FM-index to find a pattern P with O ( | P | lg | P | ) backward search steps. Additionally, we propose the first linear-time construction algorithm that is based on SAIS, improving the best known result of O ( n lg n/ lg lg n ) time to linear.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ic.2024.105153",
+      "url": "https://www.semanticscholar.org/paper/ea5a73e87dd73358fe02383cd00d6cc3af54ba75"
+    },
+    {
+      "title": "Roadmap of post-quantum cryptography standardization: Side-channel attacks and countermeasures",
+      "abstract": "Quantum computing utilizes properties of quantum physics to build a fast-computing machine that can perform quantum computations. This will eventually lead to faster and more e ﬃ cient calculations especially when we deal with complex problems. However, there is a downside related to this hardware revolution since the security of widely used cryptographic schemes, e.g., RSA encryption scheme, relies on the hardness of certain mathematical problems that are known to be solved e ﬃ ciently by quantum computers, i.e., making these protocols insecure. As such, while quantum computers most likely will not be available any time in the near future, it’s necessary to create alternative solutions before quantum computers become a reality. This paper therefore provides a comprehensive review of attacks and countermeasures in Post-Quantum Cryptography (PQC) to portray a roadmap of PQC standardization, currently led by National Institute of Standards and Technology (NIST). More speciﬁcally, there has been a rise in the side-channel attacks against PQC schemes while the NIST standardization process is moving forward. We therefore focus on the side-channel attacks and countermeasures in major post-quantum cryptographic schemes, i.e., the ﬁnal NIST candidates. © 2022 Published by Elsevier Ltd.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ic.2023.105112",
+      "url": "https://www.semanticscholar.org/paper/a335f5310e29d95d4e68e5e7a93dea4362cb33b6"
+    },
+    {
+      "title": "Verifying and interpreting neural networks using finite automata",
+      "abstract": "Verifying properties and interpreting the behaviour of deep neural networks (DNN) is an important task given their ubiquitous use in applications, including safety-critical ones, and their black-box nature. We propose an automata-theoretic approach to tackling problems arising in DNN analysis. We show that the input-output behaviour of a DNN can be captured precisely by a (special) weak Büchi automaton and we show how these can be used to address common verification and interpretation tasks of DNN like adversarial robustness or minimum sufficient reasons.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ic.2025.105398",
+      "url": "https://doi.org/10.1016/j.ic.2025.105398"
+    },
+    {
+      "title": "Approximation algorithms for non-sequential star packing problems",
+      "abstract": "For a positive integer k ≥ 1 , a k -star ( k + -star, k − -star, respectively) is a connected graph containing a degree- ℓ vertex and ℓ degree-1 vertices, where ℓ = k ( ℓ ≥ k , 1 ≤ ℓ ≤ k , respectively). The k + -star packing problem is to cover as many vertices of an input graph G as possible using vertex-disjoint k + -stars in G ; and given k > t ≥ 1 , the k − / t -star packing problem is to cover as many vertices of G as possible using vertex-disjoint k − -stars but no t -stars in G . Both problems are NP-hard for any fixed k ≥ 2 . We present a ( 1 + k 2 2 k + 1 ) - and a 3 2 -approximation algorithms for the k + -star packing problem when k ≥ 3 and k = 2 , respectively, and a ( 1 + 1 t + 1 + 1 / k ) -approximation algorithm for the k − / t -star packing problem when k > t ≥ 2 . They are all local search algorithms and they improve the best known approximation algorithms for the problems, respectively.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ic.2025.105397",
+      "url": "https://doi.org/10.1016/j.ic.2025.105397"
     }
   ]
 }

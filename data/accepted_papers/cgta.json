@@ -1,0 +1,78 @@
+{
+  "journal_id": "cgta",
+  "journal_name": "Computational Geometry: Theory and Applications",
+  "papers": [
+    {
+      "title": "k-Sets and rectilinear crossings in complete uniform hypergraphs",
+      "abstract": "In this paper, we study the $d$-dimensional rectilinear drawings of the complete $d$-uniform hypergraph $K_{2d}^d$. Anshu et al. [Computational Geometry: Theory and Applications, 2017] used Gale transform and Ham-Sandwich theorem to prove that there exist $\\Omega \\left(2^d\\right)$ crossing pairs of hyperedges in such a drawing of $K_{2d}^d$. We improve this lower bound by showing that there exist $\\Omega \\left(2^d \\sqrt{ d}\\right)$ crossing pairs of hyperedges in a $d$-dimensional rectilinear drawing of $K_{2d}^d$. In addition, we show that there are $\\Omega \\left(2^d {d^{3/2}}\\right)$ crossing pairs of hyperedges in a $d$-dimensional rectilinear drawing of $K_{2d}^d$ when its $2d$ vertices are either not in convex position in $\\mathbb{R}^d$ or form the vertices of a $d$-dimensional convex polytope satisfying one of the following two conditions: (a) the polytope is $t$-neighborly but not $(t+1)$-neighborly for some constant $t\\geq1$ independent of $d$, (b) the polytope is $\\left(\\lfloor{d/2}\\rfloor-t'\\right)$-neighborly for some constant $t' \\geq 0$ independent of $d$.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comgeo.2019.101578",
+      "url": "https://www.semanticscholar.org/paper/dfba9abc8fbf89ac587fbb8267d1c0d650a4c24d"
+    },
+    {
+      "title": "Rational tensegrities through the lens of toric geometry",
+      "abstract": "A classical tensegrity model consists of an embedded graph in a vector space with rigid bars representing edges, and an assignment of a stress to every edge such that at every vertex of the graph the stresses sum up to zero. The tensegrity frameworks have been recently extended from the two dimensional graph case to the multidimensional setting. We study the multidimensional tensegrities using tools from toric geometry. For a given rational tensegrity framework $\\mathcal{F}$, we construct a glued toric surface $X_\\mathcal{F}$. We show that the abelian group of tensegrities on $\\mathcal{F}$ is isomorphic to a subgroup of the Chow group $A^1(X_\\mathcal{F};\\QQ)$. In the case of planar frameworks, we show how to explicitly carry out the computation of tensegrities via classical tools in toric geometry.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comgeo.2023.102075",
+      "url": "https://www.semanticscholar.org/paper/534681c266c37617069dbcdf0205c127d321fa61"
+    },
+    {
+      "title": "Decomposing filtered chain complexes: Geometry behind barcoding algorithms",
+      "abstract": "In Topological Data Analysis, filtered chain complexes enter the persistence pipeline between the initial filtering of data and the final persistence invariants extraction. It is known that they admit a tame class of indecomposables, called interval spheres. In this paper, we provide an algorithm to decompose filtered chain complexes into such interval spheres. This algorithm provides geometric insights into various aspects of the standard persistence algorithm and two of its run-time optimizations. Moreover, since it works for any filtered chain complexes, our algorithm can be applied in more general cases. As an application, we show how to decompose filtered kernels with it.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comgeo.2022.101938",
+      "url": "https://www.semanticscholar.org/paper/17821193879da91b2d4b1070b38c699da30b0b32"
+    },
+    {
+      "title": "Maximum number of points in general position in a random subset of finite 3-dimensional spaces",
+      "abstract": "Let $\\alpha(\\mathbb{F}_q^{d},p)$ be the maximum possible size of a point set in general position in the $p$-random subset of $\\mathbb{F}_q^d$. In this note, we determine the order of magnitude of $\\alpha(\\mathbb{F}_q^{3},p)$ up to a polylogarithmic factor by proving a balanced supersaturation result for the sets of $4$ points in the same plane.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comgeo.2026.102244",
+      "url": "https://www.semanticscholar.org/paper/aff9c5a238ad590979a1a4711cb1cbf7ab51c759"
+    },
+    {
+      "title": "Optimal Bound for PCA with Outliers using Higher-Degree Voronoi Diagrams",
+      "abstract": "In this paper, we introduce new algorithms for Principal Component Analysis (PCA) with outliers. Utilizing techniques from computational geometry, specifically higher-degree Voronoi diagrams, we navigate to the optimal subspace for PCA even in the presence of outliers. This approach achieves an optimal solution with a time complexity of $n^{d+\\mathcal{O}(1)}\\text{poly}(n,d)$. Additionally, we present a randomized algorithm with a complexity of $2^{\\mathcal{O}(r(d-r))} \\times \\text{poly}(n, d)$. This algorithm samples subspaces characterized in terms of a Grassmannian manifold. By employing such sampling method, we ensure a high likelihood of capturing the optimal subspace, with the success probability $(1 - \\delta)^T$. Where $\\delta$ represents the probability that a sampled subspace does not contain the optimal solution, and $T$ is the number of subspaces sampled, proportional to $2^{r(d-r)}$. Our use of higher-degree Voronoi diagrams and Grassmannian based sampling offers a clearer conceptual pathway and practical advantages, particularly in handling large datasets or higher-dimensional settings.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2408.06867",
+      "url": "https://www.semanticscholar.org/paper/b21d77ec6acfdf7fe1d0b2163e3ed7f517d01eb2"
+    },
+    {
+      "title": "Isometric Deformations of Discrete and Smooth T-surfaces",
+      "abstract": "Quad-surfaces are polyhedral surfaces with quadrilateral faces and the combinatorics of the square grid. A generic quad-surface is rigid. T-hedra is a class of flexible quad-surfaces introduced by Graf and Sauer in 1931. Particular examples of T-hedra are the celebrated Miura fold, discrete surfaces of revolution, and discrete molding surfaces. We provide an explicit parametrization of the isometric deformation of a T-hedron. T-hedra have a smooth analog, T-surfaces. For these we provide a synthetic and an analytic description, both similar to the corresponding descriptions of T-hedra. We also parametrize the isometric deformations of T-surfaces and discuss their deformability range.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2302.08925",
+      "url": "https://www.semanticscholar.org/paper/4884e23d4a40c3e01d303f0d765795d4256284c8"
+    },
+    {
+      "title": "Embeddings and near-neighbor searching with constant additive error for hyperbolic spaces",
+      "abstract": "We give an embedding of the Poincar\\'e halfspace $H^D$ into a discrete metric space based on a binary tiling of $H^D$, with additive distortion $O(\\log D)$. It yields the following results. We show that any subset $P$ of $n$ points in $H^D$ can be embedded into a graph-metric with $2^{O(D)}n$ vertices and edges, and with additive distortion $O(\\log D)$. We also show how to construct, for any $k$, an $O(k\\log D)$-purely additive spanner of $P$ with $2^{O(D)}n$ Steiner vertices and $2^{O(D)}n \\cdot \\lambda_k(n)$ edges, where $\\lambda_k(n)$ is the $k$th-row inverse Ackermann function. Finally, we show how to construct an approximate Voronoi diagram for $P$ of size $2^{O(D)}n$. It allows us to answer approximate near-neighbor queries in $2^{O(D)}+O(\\log n)$ time, with additive error $O(\\log D)$. These constructions can be done in $2^{O(D)}n \\log n$ time.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2402.14604",
+      "url": "https://www.semanticscholar.org/paper/3eaea30e0b91ea6d308613a564ae8cb502ed43a3"
+    },
+    {
+      "title": "An efficient three-dimensional face recognition system based random forest and geodesic curves",
+      "abstract": "3D Face recognition is being extensively recognized as a biometric performance refers to its non-intrusive environment. In spite of large research on 2-D face recognition, it suffers from low recognition rate due to illumination variations, pose changes, poor image quality, occlusions and facial expression variations, while 3D face models are insensitive to all these conditions. In this paper, we present an efficient 3D face recognition approach based on Geodesic Distance (GD) of Riemannian geometry and Random Forest (RF), named GD-FM+RF. Therefore, to compute the geodesic distance between the specified pairs of the points of 3D faces, we applied Fast Marching (FM) algorithm, in order to solve the Eikonal equation. Then, these extracted features presented by the geodesic facial curves are used by Principal Component Analysis (PCA) algorithm to analyze class separability. Afterwards, these features were utilized as input of RF classifier. In order to test our approach and assess its effectiveness, simulated series of tests were implemented on 3D SHape REtrieval Contest 2008 database (SHREC'08). As a result, our proposed approach enhances the recognition rate and achieves promising results compared to state of the art methods, getting 99.11% in terms of recognition rate.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.COMGEO.2021.101758",
+      "url": "https://www.semanticscholar.org/paper/85f786bcd1fffd8e4f48f184551f3a147f55eff9"
+    },
+    {
+      "title": "Compression for 2-Parameter Persistent Homology",
+      "abstract": "Compression aims to reduce the size of an input, while maintaining its relevant properties. For multi-parameter persistent homology, compression is a necessary step in any computational pipeline, since standard constructions lead to large inputs, and computational tasks in this area tend to be expensive. We propose two compression methods for chain complexes of free 2-parameter persistence modules. The first method extends the multi-chunk algorithm for one-parameter persistent homology, returning the smallest chain complex among all the ones quasi-isomorphic to the input. The second method produces minimal presentations of the homology of the input; it is based on an algorithm of Lesnick and Wright, but incorporates several improvements that lead to substantial performance gains. The two methods are complementary, and can be combined to compute minimal presentations for complexes with millions of generators in a few seconds. The methods have been implemented, and the software is publicly available. We report on experimental evaluations, which demonstrate substantial improvements in performance compared to previously available compression strategies.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.comgeo.2022.101940",
+      "url": "https://www.semanticscholar.org/paper/ddd6e4becb778e1a712ad202080cb26e5b4c7486"
+    }
+  ]
+}

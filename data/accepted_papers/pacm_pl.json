@@ -1,0 +1,86 @@
+{
+  "journal_id": "pacm_pl",
+  "journal_name": "Proceedings of the ACM on Programming Languages",
+  "papers": [
+    {
+      "title": "Modular GPU Programming with Typed Perspectives",
+      "abstract": "To achieve peak performance on modern GPUs, one must balance two frames of mind: issuing instructions to individual threads to control their behavior, while simultaneously tracking the convergence of many threads acting in concert to perform collective operations like Tensor Core instructions. The tension between these two mindsets makes modular programming error prone. Functions that encapsulate collective operations, despite being called per-thread, must be executed cooperatively by groups of threads. In this work, we introduce Prism, a new GPU language that restores modularity while still giving programmers the low-level control over collective operations necessary for high performance. Our core idea is typed perspectives, which materialize, at the type level, the granularity at which the programmer is controlling the behavior of threads. We describe the design of Prism, implement a compiler for it, and lay its theoretical foundations in a core calculus called Bundl. We implement state-of-the-art GPU kernels in Prism and find that it offers programmers the safety guarantees needed to confidently write modular code without sacrificing performance.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2511.11939",
+      "url": "https://www.semanticscholar.org/paper/c3445112702b7d5b94336e0c0dd4aa5e4ee69e18"
+    },
+    {
+      "title": "Kuiper: Correct and Efficient GPU Programming with Dependent Types and Separation Logic",
+      "abstract": "We introduce Kuiper, a language for safe and verified efficient CPU/GPU programming embedded as an extensible library within the F* dependently typed language. We rely on F*’s support for dependent types and its associated Pulse concurrent separation logic to develop a program logic in which to prove CPU/GPU programs safe, data-race free, and functionally correct. Our model of the GPU includes several intricacies, including the memory hierarchy, kernel launches, and synchronization within a single comprehensive framework. To do so, we extend the Pulse program logic with a novel notion of located resources and a new connective to structure reasoning about massively parallel programs, and present new proof rules to lift the per-thread view of GPU kernels to an end-to-end correctness specification. We have used Kuiper to program and prove correct a variety of GPU kernels, including full functional correctness proofs of an optimized matrix multiplication using two levels of block tiling and tensor cores. In doing so, we have developed a range of libraries to enable programs and proofs at a high level of abstraction but without imposing any runtime overhead. These allow Kuiper programs to be polymorphic (over types, operations, memory layout, and more) and compile to efficient, specialized CUDA code, while enabling a novel form of verified auto-tuning. Our experimental evaluation confirms that Kuiper programs match the performance of their handwritten CUDA counterparts and are competitive with closed source, state-of-the-art kernels in cuBLAS.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3808280",
+      "url": "https://www.semanticscholar.org/paper/027d2b1d6a09a0df9c400fe935e93ef0918b9a38"
+    },
+    {
+      "title": "Mechanised Semantics of Multi-stage Programming",
+      "abstract": "Multi-stage programming (MSP) languages such as MetaML have subtle semantics, in which familiar properties often fail to hold and hazardous interactions with other language features such as state or polymorphism abound. The ongoing incorporation of MSP features into general purpose languages makes the need to establish confidence in their design increasingly pressing. Taking inspiration from existing MSP systems, we present a Rocq mechanisation of a core calculus for compile-time and run-time MSP with effects, λrun$, formally establishing key properties such as type and elaboration soundness and phase distinction. We hope that our mechanised semantics will be a useful basis for formal study of other designs, easing the extension of existing languages with support for MSP.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3798260",
+      "url": "https://www.semanticscholar.org/paper/157de3f01534920cbe956c8da6f00640a2f8b7e2"
+    },
+    {
+      "title": "Speak Now: Safe Actor Programming with Multiparty Session Types",
+      "abstract": "Actor languages such as Erlang and Elixir are widely used for implementing scalable and reliable distributed applications, but the informally-specified nature of actor communication patterns leaves systems vulnerable to costly errors such as communication mismatches and deadlocks. Multiparty session types (MPSTs) rule out communication errors early in the development process, but until now, the many-sender, single-receiver nature of actor communication has made it difficult for actor languages to benefit from session types. This paper introduces Maty, the first actor language design supporting both static multiparty session typing and the full power of actors taking part in multiple sessions. Maty therefore combines the error prevention mechanism of session types with the scalability and fault tolerance of actor languages. Our main insight is to enforce session typing through a flow-sensitive effect system, combined with an event-driven programming style and first-class message handlers. Using MPSTs allows us to guarantee communication safety: a process will never send or receive an unexpected message, nor will a session get stuck because an actor is waiting for a message that will never be sent. We extend Maty to support Erlang-style supervision and cascading failure, and show that this preserves Maty’s strong metatheory. We implement Maty in Scala using an API generation approach, and demonstrate the expressiveness of our model by implementing a representative sample of the widely-used Savina actor benchmark suite; an industry-supplied factory scenario; and a chat server.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3798267",
+      "url": "https://www.semanticscholar.org/paper/bd4976ea1ac7112b27b76881c952858508c31ebe"
+    },
+    {
+      "title": "Effectively Propositional Higher-Order Functional Programming",
+      "abstract": "Decidable automation is a key feature of program verification tools, which makes them easier for non-expert developers to use and understand. Unfortunately, decidable fragments of logic are very restrictive, and not ideal for the expression of idiomatic programs. The decidable Extended EPR fragment, combined with an encoding technique called relational abstraction, has seen wide use for its ability to handle both quantifiers and uninterpreted functions. However, the complexity of the relational abstraction encoding, combined with its inherent incompleteness, still poses a significant obstacle to non-experts. In this paper, we show that Extended EPR and relational abstraction can be deployed to achieve decidable, quantified verification within a familiar, principled domain: a higher-order, purely-functional programming language. We observe that, by defining the semantics of our language in terms of partial functions, we obtain a well-behaved, three-valued logic that matches the behavior of the relational abstraction encoding while hiding its complexity. We demonstrate that our prototype implementation can ergonomically replicate EPR-based program verification benchmarks and verify recursive programs on inductive datatypes.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3798259",
+      "url": "https://www.semanticscholar.org/paper/934331682951214a40adcb03795f1cc521cf759e"
+    },
+    {
+      "title": "DeCo: A Core Calculus for Incremental Functional Programming with Generic Data Types",
+      "abstract": "Incrementalization speeds up computations by avoiding unnecessary recomputations and by efficiently reusing previous results. While domain-specific techniques achieve impressive speedups, e.g., in the context of database queries, they are difficult to generalize. Meanwhile, general approaches offer little support for incrementalizing domain-specific operations. In this work, we present DeCo, a novel core calculus for incremental functional programming with support for a wide range of user-defined data types. Despite its generic nature, our approach statically incrementalizes domain-specific operations on user-defined data types. It is, hence, more fine-grained than other generic techniques which resort to treating domain-specific operations as black boxes. We mechanized our work in Lean and proved it sound, meaning incrementalized execution computes the same result as full reevaluation. We also provide an executable implementation with case studies featuring examples from linear algebra, relational algebra, dictionaries, trees, and conflict-free replicated data types, plus a brief performance evaluation on linear and relational algebra and on trees.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3798264",
+      "url": "https://www.semanticscholar.org/paper/5d04dc2c30309f9cd38465c390934cff2866b83a"
+    },
+    {
+      "title": "Weighted NetKAT: A Programming Language For Quantitative Network Verification",
+      "abstract": "We introduce weighted NetKAT, a domain-specific language for modeling and verifying quantitative network properties. The language is parametric on a semiring, enabling the treatment of a wide range of quantities in a uniform way. We provide a denotational semantics and an equivalent operational semantics, the latter based on a novel model of weighted NetKAT automata (WNKA) capturing the stateful behavior of our language. With WNKA, we obtain a class of generic decision procedures for reasoning about quantitative safety and reachability in a fully automatic way, even in the presence of possibly unbounded iteration. We demonstrate the applicability of our framework in a case study using Internet2's Abilene network as the underlying topology.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3808318",
+      "url": "https://www.semanticscholar.org/paper/8b7fb88141a0aa3e9f2d6903b5ed4ef4c0d72451"
+    },
+    {
+      "title": "Type Inference for Functional and Imperative Dynamic Languages",
+      "abstract": "In this paper, we formalize a type system based on set-theoretic types for dynamic languages that support both functional and imperative programming paradigms. We adapt prior work in the typing of overloaded and generic functions to support an impure lambda-calculus, focusing on imperative features commonly found in dynamic languages such as JavaScript, Python, and Julia. We introduce a general notion of parametric opaque data types using set-theoretic types, enabling precise modeling of mutable data structures while promoting modularity, clarity, and readability. Finally, we compare our approach to existing work and evaluate our prototype implementation on a range of examples.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3798220",
+      "url": "https://www.semanticscholar.org/paper/61412270ada6b0884403bbe038c8243eee0784b2"
+    },
+    {
+      "title": "Revisiting Partial Tracing for Safe, Efficient, and Concurrent Garbage Collection in Unmanaged Languages",
+      "abstract": "Garbage collection (GC) remains a desirable yet elusive goal in unmanaged languages like C/C++ and Rust, where concurrent memory reclamation must be achieved without compiler or runtime support. Existing techniques face fundamental trade-offs among efficiency , safety , and ease of integration : tracing collectors like BDWGC incur costly stop-the-world pauses and unsafe conservative scanning, while reference counting schemes like CIRC are safe but introduce high overhead and require manual handling of cyclic data. We present a safe, efficient, and easy-to-integrate concurrent GC library, revisiting partial tracing (PT), a concept initially conceived by Bacon et al. 22 years ago. PT is a hybrid approach that maintains reference counts for roots, ensuring safety through precise root identification, and traces from objects with non-zero counts, offering ease of integration by handling cyclic garbage. Although PT has historically been considered inefficient due to the high cost of root mutation, we overcome this limitation in two design steps. First, Concurrent Partial Tracing (CPT) introduces phase consensus , enabling concurrent phase coordination without mutator suspension and eliminating most reference-count updates during traversal. Second, Concurrent Deferred Partial Tracing (CDPT) further reduces overhead by replacing atomic root updates with a lightweight, hazard pointer (HP)-based mechanism safeguarded by a phase barrier . We show that CDPT outperforms automatic collectors like BDWGC and CIRC while being comparable to manual schemes like RCU, through both micro-benchmarks on concurrent data structures and a macro-benchmark on Moka, a production cache library.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3808310",
+      "url": "https://www.semanticscholar.org/paper/e6fe6a1fa8d0b8b94ab761bee188c02686341bd4"
+    },
+    {
+      "title": "Myths and mythconceptions: what does it mean to be a programming language, anyhow?",
+      "abstract": "Modern software does not stand alone; it is embedded in complex physical and sociotechnical systems. It relies on computational support from interdependent subsystems as well as non-code resources such as data, communications, sensors, and interactions with humans. Both general-purpose programming languages and mainstream programming language research focus on symbolic notations with well-defined abstractions that are intended for use by professionals to write programs that solve precisely specified problems. There is a strong emphasis on correctness of the resulting programs, preferably by formal reasoning. However, these languages, despite their careful design and formal foundations, address only a modest portion of modern software and only a minority of software developers. Several persistent myths reinforce this focus. These myths express an idealized model of software and software development. They provide a lens for examining modern software and software development practice: highly trained professionals are outnumbered by vernacular developers. Writing new code is dominated by composition of ill-specified software and non-software components. General-purpose languages may be less appropriate for a task than domain-specific languages, and functional correctness is often a less appropriate goal than overall fitness for task. Support for programming to meet a specification is of little help to people who are programming in order to understand their problems. Reasoning about software is challenged by uncertainty and nondeterminism in the execution environment and by the increasingly dominant role of data, especially with the advent of systems that rely on machine learning. The lens of our persistent myths illuminates the dissonance between our idealized view of software development and common practice, which enables us to identify emerging opportunities and challenges for programming language research.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3480947",
+      "url": "https://www.semanticscholar.org/paper/2b353eaef438ced15e02b39718b171a58578378c"
+    }
+  ]
+}

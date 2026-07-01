@@ -1,0 +1,70 @@
+{
+  "journal_id": "jcomplexity",
+  "journal_name": "Journal of Complexity",
+  "papers": [
+    {
+      "title": "Complexity bounds for smooth multiobjective optimization",
+      "abstract": "We study the oracle complexity of finding $\\varepsilon$-Pareto stationary points in smooth multiobjective optimization with $m$ objectives. Progress is measured by the Pareto stationarity gap $\\mathcal{G}(x)$, the norm of the best convex combination of objective gradients. Our analysis relies on a non-degenerate lifting that embeds hard single-objective instances into MOO instances with distinct objectives and non-singleton Pareto fronts while preserving lower bounds on $\\mathcal{G}$. We establish: (i) in the $\\mu$-strongly convex case, any span first-order method has worst-case linear convergence no faster than $\\exp(-\\Theta(T/\\sqrt{\\kappa}))$ after $T$ oracle calls, yielding $\\Theta(\\sqrt{\\kappa}\\log(1/\\varepsilon))$ iterations and matching accelerated upper bounds; (ii) in the convex case, an $\\Omega(1/T)$ min-iterate lower bound for oblivious one-step methods and a universal last-iterate lower bound $\\Omega(1/T^2)$ for oblivious span methods via polynomial-degree arguments, and we further show this latter bound is loose (for general adaptive methods) by importing geometric lower bounds to obtain an $\\Omega(1/T)$ min-iterate lower bound for general adaptive first-order methods; (iii) in the nonconvex case with $L$-Lipschitz gradients, an $\\Omega(\\sqrt{L}/(T+1))$-type lower bound on $\\mathcal{G}$ (tight in order), implying $\\Omega(1/\\varepsilon^2)$ iterations to reach $\\mathcal{G}(x)\\le\\varepsilon$ up to natural scaling.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jco.2026.102044",
+      "url": "https://www.semanticscholar.org/paper/714b11d6808f89a6bba8e0cfe82a66d076e8382e"
+    },
+    {
+      "title": "Randomized Complexity of Mean Computation and the Adaption Problem",
+      "abstract": "Recently the adaption problem of Information-Based Complexity (IBC) for linear problems in the randomized setting was solved in Heinrich (J. Complexity 82, 2024, 101821). Several papers treating further aspects of this problem followed. However, all examples obtained so far were vector-valued. In this paper we settle the scalar-valued case. We study the complexity of mean computation in finite dimensional sequence spaces with mixed $L_p^N$ norms. We determine the $n$-th minimal errors in the randomized adaptive and non-adaptive setting. It turns out that among the problems considered there are examples where adaptive and non-adaptive $n$-th minimal errors deviate by a power of $n$. The gap can be (up to log factors) of the order $n^{1/4}$. We also show how to turn such results into infinite dimensional examples with suitable deviation for all $n$ simultaneously.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2401.14100",
+      "url": "https://www.semanticscholar.org/paper/dd866a9a4c74d1dcf1fc5d9adaf27592a705581c"
+    },
+    {
+      "title": "Randomized Complexity of Parametric Integration and the Role of Adaption I. Finite Dimensional Case",
+      "abstract": "We study the randomized $n$-th minimal errors (and hence the complexity) of vector valued mean computation, which is the discrete version of parametric integration. The results of the present paper form the basis for the complexity analysis of parametric integration in Sobolev spaces, which will be presented in Part 2. Altogether this extends previous results of Heinrich and Sindambiwe (J.\\ Complexity, 15 (1999), 317--341) and Wiegand (Shaker Verlag, 2006). Moreover, a basic problem of Information-Based Complexity on the power of adaption for linear problems in the randomized setting is solved.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2306.13471",
+      "url": "https://www.semanticscholar.org/paper/61c58340dd098598519bfc1e180e621dc78c816f"
+    },
+    {
+      "title": "Randomized Complexity of Parametric Integration and the Role of Adaption II. Sobolev Spaces",
+      "abstract": "We study the complexity of randomized computation of integrals depending on a parameter, with integrands from Sobolev spaces. That is, for $r,d_1,d_2\\in{\\mathbb N}$, $1\\le p,q\\le \\infty$, $D_1= [0,1]^{d_1}$, and $D_2= [0,1]^{d_2}$ we are given $f\\in W_p^r(D_1\\times D_2)$ and we seek to approximate $$ Sf=\\int_{D_2}f(s,t)dt\\quad (s\\in D_1), $$ with error measured in the $L_q(D_1)$-norm. Our results extend previous work of Heinrich and Sindambiwe (J.\\ Complexity, 15 (1999), 317--341) for $p=q=\\infty$ and Wiegand (Shaker Verlag, 2006) for $1\\le p=q<\\infty$. Wiegand's analysis was carried out under the assumption that $W_p^r(D_1\\times D_2)$ is continuously embedded in $C(D_1\\times D_2)$ (embedding condition). We also study the case that the embedding condition does not hold. For this purpose a new ingredient is developed -- a stochastic discretization technique. The paper is based on Part I, where vector valued mean computation -- the finite-dimensional counterpart of parametric integration -- was studied. In Part I a basic problem of Information-Based Complexity on the power of adaption for linear problems in the randomized setting was solved. Here a further aspect of this problem is settled.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2306.13499",
+      "url": "https://www.semanticscholar.org/paper/c7a474f5af586b290bfdce3b7206edebdd2e739a"
+    },
+    {
+      "title": "On the oracle complexity of smooth strongly convex minimization",
+      "abstract": "We construct a family of functions suitable for establishing lower bounds on the oracle complexity of first-order minimization of smooth strongly-convex functions. Based on this construction, we derive new lower bounds on the complexity of strongly-convex minimization under various inaccuracy criteria. The new bounds match the known upper bounds up to a constant factor, and when the inaccuracy of a solution is measured by its distance to the solution set, the new lower bound exactly matches the upper bound obtained by the recent Information-Theoretic Exact Method by the same authors, thereby establishing the exact oracle complexity for this class of problems.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.JCO.2021.101590",
+      "url": "https://www.semanticscholar.org/paper/2f5397b4425d52058519c08ce3cab6f39181dc6c"
+    },
+    {
+      "title": "On the complexity of Putinar-Vasilescu's Positivstellensatz",
+      "abstract": "We provide a new degree bound on the weighted sum-of-squares (SOS) polynomials for Putinar-Vasilescu's Positivstellensatz. This leads to another Positivstellensatz saying that if $f$ is a polynomial of degree at most $2 d_f$ nonnegative on a semialgebraic set having nonempty interior defined by finitely many polynomial inequalities $g_j(x)\\ge 0$, $j=1,\\dots,m$ with $g_1:=L-\\|x\\|_2^2$ for some $L>0$, then there exist positive constants $\\bar c$ and $c$ depending on $f,g_j$ such that for any $\\varepsilon>0$, for all $k\\ge \\bar c \\varepsilon^{-c}$, $f$ has the decomposition \\begin{equation} \\begin{array}{l} (1+\\|x\\|_2^2)^k(f+\\varepsilon)=\\sigma_0+\\sum_{j=1}^m \\sigma_jg_j \\,, \\end{array} \\end{equation} for some SOS polynomials $\\sigma_j$ being such that the degrees of $\\sigma_0,\\sigma_jg_j$ are at most $2(d_f+k)$. Here $\\|\\cdot\\|_2$ denotes the $\\ell_2$ vector norm. As a consequence, we obtain a converging hierarchy of semidefinite relaxations for lower bounds in polynomial optimization on basic compact semialgebraic sets. The complexity of this hierarchy is $\\mathcal{O}(\\varepsilon^{-c})$ for prescribed accuracy $\\varepsilon>0$. In particular, if $m=L=1$ then $c=65$, yielding the complexity $\\mathcal{O}(\\varepsilon^{-65})$ for the minimization of a polynomial on the unit ball. Our result improves the complexity bound $\\mathcal{O}(\\exp(\\varepsilon^{-c}))$ due to Nie and Schweighofer in [Journal of Complexity 23.1 (2007): 135-150].",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jco.2022.101663",
+      "url": "https://www.semanticscholar.org/paper/bb927c7e2d7839d8eb7773ddff80b1faed0e9b88"
+    },
+    {
+      "title": "On the complexity of extending the convergence region for Traub's method",
+      "abstract": "The convergence region of Traub’s method for solving equations is small in general. This fact limits its applicability. We locate a more precise region containing the Traub iterations leading to at least as tight Lipschitz constants as before. Our convergence analysis is finer, and obtained without additional conditions. The new theoretical results are tested on numerical examples that illustrate their superiority over earlier results.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.JCO.2019.101423",
+      "url": "https://www.semanticscholar.org/paper/3af1a463081b9b850ed92e417995f6d0c30e8a69"
+    },
+    {
+      "title": "Complexity and tractability for a class of elliptic partial integro-differential equations",
+      "abstract": "We study the complexity and tractability of computing e-approximations to a simple class of elliptic partial integro-differential equations (PIDEs). Given f ∈ F d and q ∈ Q 2 d , we find u ∈ H 1 ( I d ) such that − Δ u + u + T q u = f on the d-dimensional unit cube, subject to homogeneous Neumann boundary conditions. Here, T q is the Fredholm integral operator with kernel q, with F d and Q 2 d being Hilbert subspaces of the dual spaces [ H 1 ( I d ) ] ⁎ and [ H 1 ( I 2 d ) ] ⁎ of H 1 ( I d ) and H 1 ( I 2 d ) . We consider the worst case setting over f in the F d unit ball and q in the Q 2 d ball of radius M 1 ∈ ( 0 , 1 ) , measuring error in the H 1 ( I d ) norm. We show that information complexity and tractability for this problem are essentially the same as that of the [ H 1 ( I d ) ] ⁎ approximation problem or (equivalently) the elliptic partial differential equation with operator − Δ + I under homogeneous Neumann boundary conditions. In addition, we show how a Picard iteration can overcome various implementation issues, with a penalty of at most O ( ln ⁡ e − 1 ) .",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jco.2021.101603",
+      "url": "https://www.semanticscholar.org/paper/1f7945c926be14626bec59c1ca193ab4095756b0"
+    }
+  ]
+}

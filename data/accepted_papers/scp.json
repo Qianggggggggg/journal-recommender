@@ -1,0 +1,86 @@
+{
+  "journal_id": "scp",
+  "journal_name": "Science of Computer Programming",
+  "papers": [
+    {
+      "title": "Ranking programming languages by energy efficiency",
+      "abstract": "This paper compares a large set of programming languages regarding their eﬃciency, including from an energetic point-of-view. Indeed, we seek to establish and analyze different rankings for programming languages based on their energy eﬃciency. The goal of being able to rank programming languages based on their energy eﬃciency is both recent, and certainly deserves further studies. We have taken rigorous and strict solutions to 10 well deﬁned programming problems, expressed in (up to) 27 programming languages, from the well known Computer Language Benchmark Game repository. This repository aims to compare programming languages based on a strict set of implementation rules and conﬁgurations for each benchmarking problem. We have also built a framework to automatically, and systematically, run, measure and compare the energy, time, and memory eﬃciency of such solutions. Ultimately, it is based on such comparisons that we propose a series of eﬃciency rankings, based on single and multiple criteria. Our results show interesting ﬁndings, such as how slower/faster languages can consume less/more energy, and how memory usage inﬂuences energy consumption. We also present a simple way to use our results to provide software engineers and practitioners support in",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2021.102609",
+      "url": "https://www.semanticscholar.org/paper/ae17c900f9cd235f71d8e6dc13b52142f4a54fd5"
+    },
+    {
+      "title": "EMIP: The eye movements in programming dataset",
+      "abstract": "A large dataset that contains the eye movements of N=216 programmers of different experience levels captured during two code comprehension tasks is presented. Data are grouped in terms of programming expertise (from none to high) and other demographic descriptors. Data were collected through an international collaborative effort that involved eleven research teams across eight countries on four continents. The same eye tracking apparatus and software was used for the data collection. The Eye Movements in Programming (EMIP) dataset is freely available for download. The varied metadata in the EMIP dataset provides fertile ground for the analysis of gaze behavior and may be used to make novel insights about code comprehension.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2020.102520",
+      "url": "https://www.semanticscholar.org/paper/0b0c48f4608025e7d8f740978d6e2fe029a2a714"
+    },
+    {
+      "title": "Programming interactions in collective adaptive systems by relying on attribute-based communication",
+      "abstract": "Collective adaptive systems are new emerging computational systems consisting of a large number of interacting components and featuring complex behaviour. These systems are usually distributed, heterogeneous, decentralised and interdependent, and are operating in dynamic and possibly unpredictable environments. Finding ways to understand and design these systems and, most of all, to model the interactions of their components, is a difficult but important endeavour. In this article we propose a language-based approach for programming the interactions of collective-adaptive systems by relying on attribute-based communication; a paradigm that permits a group of partners to communicate by considering their run-time properties and capabilities. We introduce AbC, a foundational calculus for attribute-based communication and show how its linguistic primitives can be used to program a sophisticated variant of the well-known problem of Stable Allocation in Content Delivery Networks. In our variant, content providers are assigned to clients based on collaboration and by taking into account the preferences of both parties in a fully anonymous and distributed settings. We also illustrate the expressive power of attribute-based communication by showing the natural encoding of group-based, publish/subscribe-based and channel-based communication paradigms into AbC.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2020.102428",
+      "url": "https://www.semanticscholar.org/paper/43a4e04544429955da62d48c3c49d616f6d309e1"
+    },
+    {
+      "title": "Castor: Programming with extensible generative visitors",
+      "abstract": "Much recent work on type-safe extensibility for Object-Oriented languages has focused on design patterns that require modest type system features. Examples of such design patterns include Object Algebras, Extensible Visitors, Finally Tagless interpreters, or Polymorphic Embeddings. Those techniques, which often use a functional style, can solve basic forms of the Expression Problem. However, they have important limitations. This paper presents Castor : a Scala framework for programming with extensible, generative visitors. Castor has several advantages over previous approaches. Firstly, Castor comes with support for (type-safe) pattern matching to complement its visitors with a concise notation to express operations. Secondly, Castor supports type-safe interpreters (a la Finally Tagless), but with additional support for pattern matching and a generally recursive style. Thirdly, Castor enables many operations to be defined using an imperative style, which is significantly more performant than a functional style (especially in the JVM platform). Finally, functional techniques usually only support tree structures well, but graph structures are poorly supported. Castor supports type-safe extensible programming on graph structures. The key to Castor 's usability is the use of annotations to automatically generate large amounts of boilerplate code to simplify programming with extensible visitors. To illustrate the applicability of Castor we present several applications and two case studies. The first case study compares the ability of Castor for modularizing the interpreters from the “Types and Programming Languages” book with previous modularization work. The second case study on UML activity diagrams illustrates the imperative aspects of Castor , as well as its support for hierarchical datatypes and graphs.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2020.102449",
+      "url": "https://www.semanticscholar.org/paper/0295af489d8d73850fc67b9b71ef1ab2f6a45c8e"
+    },
+    {
+      "title": "MetaOCaml: ten years later - System description",
+      "abstract": ". MetaOCaml is a superset of OCaml for convenient code generation with static guarantees: the generated code is well-formed, well-typed and well-scoped, by construction. Not only the completed generated code always compiles; code fragments with a variable escaping its scope are detected already during code generation. MetaOCaml has been employed for compiling domain-specific languages, generic programming, automating tedious specializations in high-performance computing, generating efficient computational kernels and embedded programming. It is used in education, and served as inspiration for several other metapro-gramming systems. Most well-known in MetaOCaml are the types for values representing generated code and the template-based mechanism to produce such values, a.k.a., brackets and escapes. MetaOCaml also features cross-stage persistence, generating ordinary and mutually-recursive definitions, first-class pattern-matching and heterogeneous metaprogramming. The extant implementation of MetaOCaml, first presented at FLOPS 2014, has been continuously evolving. We describe the current design and implementation, stressing particularly notable additions. Among them is a new, efficient, the easiest to retrofit translation from typed code templates to code combinators. Scope extrusion detection unexpectedly brought let-insertion, and a conclusive solution to the 20-year–old vexing problem of cross-stage persistence.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2025.103397",
+      "url": "https://www.semanticscholar.org/paper/0fb63df07e3af286ac9f3eebdc78501882a7c9d2"
+    },
+    {
+      "title": "Comparing Differentiable Logics for Learning with Logical Constraints",
+      "abstract": "Extensive research on formal verification of machine learning systems indicates that learning from data alone often fails to capture underlying background knowledge, such as specifications implicitly available in the data. Various neural network verifiers have been developed to ensure that a machine-learnt model satisfies correctness and safety properties; however, they typically assume a trained network with fixed weights. A promising approach for creating machine learning models that inherently satisfy constraints after training is to encode background knowledge as explicit logical constraints that guide the learning process via so-called differentiable logics. In this paper, we experimentally compare and evaluate various logics from the literature, present our findings, and highlight open problems for future work. We evaluate differentiable logics with respect to their suitability in training, and use a neural network verifier to check their ability to establish formal guarantees. The complete source code for our experiments is available as an easy-to-use framework for training with differentiable logics at https://github.com/tflinkow/comparing-differentiable-logics.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.scico.2025.103280",
+      "url": "https://www.semanticscholar.org/paper/70ebbf77c34fbfa36b92f4363e920716f0bb892e"
+    },
+    {
+      "title": "Enhancing Automated Loop Invariant Generation for Complex Programs with Large Language Models",
+      "abstract": "Automated program verification has always been an important component of building trustworthy software. While the analysis of real-world programs remains a theoretical challenge, the automation of loop invariant analysis has effectively resolved the problem. However, real-world programs that often mix complex data structures and control flows pose challenges to traditional loop invariant generation tools. To enhance the applicability of invariant generation techniques, we proposed ACInv, an Automated Complex program loop Invariant generation tool, which combines static analysis with Large Language Models (LLMs) to generate the proper loop invariants. We utilize static analysis to extract the necessary information for each loop and embed it into prompts for the LLM to generate invariants for each loop. Subsequently, we employ an LLM-based evaluator to assess the generated invariants, refining them by either strengthening, weakening, or rejecting them based on their correctness, ultimately obtaining enhanced invariants. We conducted experiments on ACInv, which showed that ACInv outperformed previous tools on data sets with data structures, and maintained similar performance to the state-of-the-art tool AutoSpec on numerical programs without data structures. For the total data set, ACInv can solve 21% more examples than AutoSpec and can generate reference data structure templates.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2412.10483",
+      "url": "https://www.semanticscholar.org/paper/1684f0bf7390c72093de16f9c3efd0fb52982802"
+    },
+    {
+      "title": "AmbieGen: A Search-based Framework for Autonomous Systems Testing",
+      "abstract": "Thorough testing of safety-critical autonomous systems, such as self-driving cars, autonomous robots, and drones, is essential for detecting potential failures before deployment. One crucial testing stage is model-in-the-loop testing, where the system model is evaluated by executing various scenarios in a simulator. However, the search space of possible parameters defining these test scenarios is vast, and simulating all combinations is computationally infeasible. To address this challenge, we introduce AmbieGen, a search-based test case generation framework for autonomous systems. AmbieGen uses evolutionary search to identify the most critical scenarios for a given system, and has a modular architecture that allows for the addition of new systems under test, algorithms, and search operators. Currently, AmbieGen supports test case generation for autonomous robots and autonomous car lane keeping assist systems. In this paper, we provide a high-level overview of the framework's architecture and demonstrate its practical use cases.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2301.01234",
+      "url": "https://www.semanticscholar.org/paper/e34e90953be6f61bb9aff5e9f430d4aad4e12a32"
+    },
+    {
+      "title": "Towards naturalistic programming: Mapping language-independent requirements to constrained language specifications",
+      "abstract": "This research paper presents a new approach that constitutes a first step towards programming using language-independent requirements. To leverage the needed programming effort, our approach takes requirements in the form of language-independent use case scenarios. Then, it generates the inputs of a code generator which, in turn, produces the corresponding code. To provide for the language-independence, our approach uses an enriched version of the semantic model, as a means to represent similar ideas possibly in different ways and in different natural languages. The enrichment consists of a set of patterns that it implements as XML code representing the information embedded in the use case scenarios. This intermediate representation can be processed to derive the inputs required by any code generator to produce code in a particular programming language. This paper illustrates the approach and its tool support for use case scenarios written in English and French, and semantic model patterns implemented as XML code that can be processed by the ReDSeeDS code generator. In addition, it presents the results of an experimental evaluation of the approach on use case scenarios (written in English and in French) belonging to five different systems. This evaluation quantitatively shows the ability of our approach: to extract ReDSeeDS inputs conforming to the expert's inputs with a high precision; to generate XML code elements conforming to the input with an encouraging performance as evaluated by the participating students (an F-measure ranging between 87.43% and 92.31%); and to generate Java code judged efficient by the participating programmers (an F-measure ranging between 66.4% and 93.43%).",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SCICO.2018.05.006",
+      "url": "https://www.semanticscholar.org/paper/1393afbc47351edcdbe173456ea45855d17e2c25"
+    },
+    {
+      "title": "A didactic object-oriented, prototype-based visual programming environment",
+      "abstract": "Object-oriented programming is widely used in both the industry and the education areas. The most-common model of object-oriented programming is the class-based one. However, popular languages not implementing this model are gaining traction as time goes by. This alternative model is the prototype-based one, with one key characteristic: there are no classes. In this paper, a visual tool is proposed as a vehicle for learning the prototype-based object-oriented programming, present, for instance, in Self, Lua, or JavaScript. This software has been in use for three years in a subject of the Computer Science Engineering degree, at the University of Vigo.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SCICO.2019.02.004",
+      "url": "https://www.semanticscholar.org/paper/67ec81486b2bdc943095799f8fbbad65bec27fb5"
+    }
+  ]
+}

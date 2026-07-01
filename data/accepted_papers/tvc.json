@@ -1,0 +1,54 @@
+{
+  "journal_id": "tvc",
+  "journal_name": "The Visual Computer",
+  "papers": [
+    {
+      "title": "A survey on deep multimodal learning for computer vision: advances, trends, applications, and datasets",
+      "abstract": "The research progress in multimodal learning has grown rapidly over the last decade in several areas, especially in computer vision. The growing potential of multimodal data streams and deep learning algorithms has contributed to the increasing universality of deep multimodal learning. This involves the development of models capable of processing and analyzing the multimodal information uniformly. Unstructured real-world data can inherently take many forms, also known as modalities, often including visual and textual content. Extracting relevant patterns from this kind of data is still a motivating goal for researchers in deep learning. In this paper, we seek to improve the understanding of key concepts and algorithms of deep multimodal learning for the computer vision community by exploring how to generate deep models that consider the integration and combination of heterogeneous visual cues across sensory modalities. In particular, we summarize six perspectives from the current literature on deep multimodal learning, namely: multimodal data representation, multimodal fusion (i.e., both traditional and deep learning-based schemes), multitask learning, multimodal alignment, multimodal transfer learning, and zero-shot learning. We also survey current multimodal applications and present a collection of benchmark datasets for solving problems in various vision domains. Finally, we highlight the limitations and challenges of deep multimodal learning and provide insights and directions for future research.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-021-02166-7",
+      "url": "https://www.semanticscholar.org/paper/2a9b33f66ccc3806af58bdab2319559f4f9d2c5e"
+    },
+    {
+      "title": "Deep learning based computer vision under the prism of 3D point clouds: a systematic review",
+      "abstract": "Point clouds consist of 3D data points and are among the most considerable data formats for 3D representations. Their popularity is due to their broad application areas, such as robotics and autonomous driving, and their employment in basic 3D vision tasks such as segmentation, classification, and detection. However, processing point clouds is challenging compared to other visual forms such as images, mainly due to their unstructured nature. Deep learning (DL) has been established as a powerful tool for data processing, reporting remarkable performance enhancements compared to traditional methods for all basic 2D vision tasks. However new challenges are emerging when it comes to processing unstructured 3D point clouds. This work aims to guide future research by providing a systematic review of DL on 3D point clouds, holistically covering all 3D vision tasks. 3D technologies of point cloud formation are reviewed and compared to each other. The application of DL methods for point cloud processing is discussed, and state-of-the-art models’ performances are compared focusing on challenges and solutions. Moreover, in this work the most popular 3D point cloud benchmark datasets are summarized based on their task-oriented applications, aiming to highlight existing constraints and to comparatively evaluate them. Future research directions and upcoming trends are also highlighted.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-023-03237-7",
+      "url": "https://www.semanticscholar.org/paper/58d691deb026017dfb107084fd73224b9eaa7dc3"
+    },
+    {
+      "title": "Multistage attention region supplement transformer for fine-grained visual categorization",
+      "abstract": "The classification of fine-grained images using computer technology employs neural network models to distinguish between instances of different classes that share very similar visual content. Thus, learning to extract nuanced representations of selected object details is essential. This paper introduces a novel fine-grained visual categorization model, the Multistage Attention Region Supplement Transformer (MARS-Trans), which is based on the Vision Transformer (ViT). Our main contributions are threefold. Firstly, we observed that in the ViT’s multi-head attention module, the softmaxed feature results of each attention head are directly concatenated and multiplied by weights. Consequently, we propose a Multistage Attention Module (MAM) to grade the attention heads based on their importance. Additionally, we introduce a Region Supplement Module (RSM) to suppress non-critical regions and enhance edge information in key areas, thereby highlighting the discriminative features. Finally, we employ our proposed Approximate Adjust Method (AAM) to refine the final features and improve categorization results. We conducted comprehensive experiments with MARS-Trans on five popular public fine-grained image datasets, validating the effectiveness of these modules. Our model achieved state-of-the-art (SOTA) accuracy on one dataset and SOTA average precisions on three datasets. The code is available on https://github.com/ArrikenMei/MARS-Trans.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-024-03502-3",
+      "url": "https://www.semanticscholar.org/paper/edf0d83e2407ee639087075faa0ad95da12159e8"
+    },
+    {
+      "title": "Attention-driven visual emphasis for medical volumetric image visualization",
+      "abstract": "Direct volume rendering (DVR) is a commonly utilized technique for three-dimensional visualization of volumetric medical images. A key goal of DVR is to enable users to visually emphasize regions of interest (ROIs) which may be occluded by other structures. Conventional methods for ROIs visual emphasis require extensive user involvement for the adjustment of rendering parameters to reduce the occlusion, dependent on the user’s viewing direction. Several works have been proposed to automatically preserve the view of the ROIs by eliminating the occluding structures of lower importance in a view-dependent manner. However, they require pre-segmentation labeling and manual importance assignment on the images. An alternative to ROIs segmentation is to use ‘saliency’ to identify important regions. This however lacks semantic information and thus leads to the inclusion of false positive regions. In this study, we propose an attention-driven visual emphasis method for volumetric medical image visualization. We developed a deep learning attention model, termed as focused-class attention map (F-CAM), trained with only image-wise labels for automated ROIs localization and importance estimation. Our F-CAM transfers the semantic information from the classification task for use in the localization of ROIs, with a focus on small ROIs that characterize medical images. Additionally, we propose an attention compositing module that integrates the generated attention map with transfer function within the DVR pipeline to automate the view-dependent visual emphasis of the ROIs. We demonstrate the superiority of our method compared to existing methods on a multi-modality PET-CT dataset and an MRI dataset.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-024-03596-9",
+      "url": "https://www.semanticscholar.org/paper/62a844c1f6b4d8ea3933420176765f8d3ea77e19"
+    },
+    {
+      "title": "Visual analysis of fitness landscapes in architectural design optimization",
+      "abstract": "In architectural design optimization, fitness landscapes are used to visualize design space parameters in relation to one or more objective functions for which they are being optimized. In our design study with domain experts, we developed a visual analytics framework for exploring and analyzing fitness landscapes spanning data, projection, and visualization layers. Within the data layer, we employ two surrogate models and three sampling strategies to efficiently generate a wide array of landscapes. On the projection layer, we use star coordinates and UMAP as two alternative methods for obtaining a 2D embedding of the design space. Our interactive user interface can visualize fitness landscapes as a continuous density map or a discrete glyph-based map. We investigate the influence of surrogate models and sampling strategies on the resulting fitness landscapes in a parameter study. Additionally, we present findings from a user study (N = 12), revealing how experts’ preferences regarding projection methods and visual representations may be influenced by their level of expertise, characteristics of the techniques, and the specific task at hand. Furthermore, we demonstrate the usability and usefulness of our framework by a case study from the architecture domain, involving one domain expert.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-024-03491-3",
+      "url": "https://www.semanticscholar.org/paper/7c734f24782df9cbbfa43dedadc81832d17c27cb"
+    },
+    {
+      "title": "Aspects of visual avatar appearance: self-representation, display type, and uncanny valley",
+      "abstract": "The visual representation of human-like entities in virtual worlds is becoming a very important aspect as virtual reality becomes more and more “social”. The visual representation of a character’s resemblance to a real person and the emotional response to it, as well as the expectations raised, have been a topic of discussion for several decades and have been debated by scientists from different disciplines. But as with any new technology, the findings may need to be reevaluated and adapted to new modalities. In this context, we make two contributions which may have implications for how avatars should be represented in social virtual reality applications. First, we determine how default and customized characters of current social virtual reality platforms appear in terms of human likeness, eeriness, and likability, and whether there is a clear resemblance to a given person. It can be concluded that the investigated platforms vary strongly in their representation of avatars. Common to all is that a clear resemblance does not exist. Second, we show that the uncanny valley effect is also present in head-mounted displays, but—compared to 2D monitors—even more pronounced.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00371-021-02151-0",
+      "url": "https://www.semanticscholar.org/paper/ea229540afa4409c778ef494d6edf75297fc3264"
+    }
+  ]
+}

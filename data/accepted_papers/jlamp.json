@@ -1,0 +1,86 @@
+{
+  "journal_id": "jlamp",
+  "journal_name": "Journal of Logical and Algebraic Methods in Programming",
+  "papers": [
+    {
+      "title": "Fairness and consensus in an asynchronous opinion model for social networks",
+      "abstract": "We revisit finite-state communicating systems with round-based communication under mailbox semantics. Mailboxes correspond to one FIFO buffer per process (instead of one buffer per pair of processes in peer-to-peer systems). Round-based communication corresponds to sequences of rounds in which processes can first send messages, then only receive (and receives must be in the same round as their sends). A system is called synchronizable if every execution can be re-scheduled into an equivalent execution that is a sequence of rounds. Previous work mostly considered the setting where rounds have fixed size. Our main contribution shows that the problem whether a mailbox communication system complies with the round-based policy, with no size limitation on rounds, is PSPACE-complete. For this we use a novel automata-based approach, that also allows to determine the precise complexity (PSPACE) of several questions considered in previous literature.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101140",
+      "url": "https://openalex.org/W4404750705"
+    },
+    {
+      "title": "Graphical tests of causality",
+      "abstract": "Bell inequalities limit the possible observations of non-communicating parties. Here, we present analogous inequalities for any number of communicating parties under the causal constraints of static causal order, definite causal order, and bi-causal order. All derived inequalities are remarkably simple. They correspond to upper bounds on the winning chance in graphical games: Given a specific directed graph over the parties, the parties are challenged to communicate along a randomly chosen arc. In the case of definite causal order, every game that we find is specified by a kefalopoda digraph. Based on this we define weakly causal correlations as those that satisfy all kefalopoda inequalities. We show that the problem of deciding whether some correlations are weakly causal is solvable in polynomial time in the number of parties.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101133",
+      "url": "https://openalex.org/W4416946761"
+    },
+    {
+      "title": "Model to mitigate: Using DCR graphs to prevent vulnerabilities in smart contracts",
+      "abstract": "We propose a ‘Model to Mitigate’ methodology: designing a platform-agnostic model of smart contract business logic and analyzing it before implementation. Using Dynamic Condition Response (DCR) graphs, originally developed for modeling business processes, we formally specify smart contracts and introduce a trace-conformance notion that links DCR-level guarantees to Solidity execution traces. Our method captures high-level properties such as event ordering, role-based access control, and time constraints, enabling the identification of design-rooted vulnerabilities through the discipline of explicit modeling. The DCR formalism requires developers to make concrete decisions about access control, preconditions, initial states, and event ordering-decisions that, when left implicit until implementation, are a documented source of vulnerabilities. Our analysis of real-world exploited and audited smart contracts yields six key insights, demonstrating how DCR-based modeling can enhance smart contract security by surfacing design flaws before they reach deployment. While we validate the approach on existing smart contracts with known flaws (i. e., post-implementation scenarios), the proposed methodology is applicable during design time (pre-development).",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101131",
+      "url": "https://openalex.org/W7162133421"
+    },
+    {
+      "title": "Unification and anti-unification in applicative matching logic",
+      "abstract": "Matching logic is a logical framework for specifying and reasoning about programs using pattern matching semantics. A pattern in normal form is made up of a number of structural components and constraints. Structural components are syntactically matched, while constraints need to be satisfied. Having multiple structural patterns poses a practical problem as it requires multiple matching operations. The number of structural components can be reduced by unification and anti-unification. Algorithms for both processes have already been defined and proven correct in a sorted, polyadic variant of matching logic. This paper revisits the subject in the applicative variant of the language, while generalizing the unification problem and mechanizing a proven-sound solution in Coq, as well as exploring certain possible extensions of the unification algorithm in a semi-formalized manner.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101128",
+      "url": "https://openalex.org/W7150911967"
+    },
+    {
+      "title": "Rule and constraint based debugging of DBpedia queries",
+      "abstract": "• SPARQL debugger for DBpedia queries • SPARQL query rewriting for expected and unexpected answers • Sound and complete rule and constraint based solving procedure • Web tool support DBpedia serves as the principal resource for Linked Open Data available on the Web and is currently the largest Knowledge Graph. Queries to DBpedia resources typically utilize the SPARQL query language through its SPARQL endpoint. Errors can occur within SPARQL queries. A recent study examining SPARQL endpoint executions found that 66.9% experience runtime errors, while 20.0% may not have errors but produce empty results. Ensuring a query is both error-free and aligned with user expectations presents a challenge. This paper introduces a debugging technique for DBpedia queries aimed at aligning a specific query with expected and unexpected answers. By converting SPARQL into rules, the debugger identifies query rewrites that meet these criteria. It employs constraint solving to determine filter conditions aligning with expected and unexpected results. A semantic characterization of query rewriting is defined, for which the proposed method has been proved to be sound and complete. The paper showcases the practical use of rule systems and constraint solving within databases, more specifically in SPARQL and DBpedia, facilitating real-time query adjustment to actual datasets.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101113",
+      "url": "https://openalex.org/W7134108945"
+    },
+    {
+      "title": "Should computations halt?",
+      "abstract": "The so-called Hilbert’s Program , aiming at a full axiomatization of mathematics , fuelled the quest to provide an answer to the Entscheidungsproblem , the Decision Problem , aiming to find effective methods to obtain the truth value of logical sentences. Intuitively, when using such methods a halting behavior would be desirable, thus providing a clear answer to the prospective user. This was implicit in Hilbert’s finitist approach to the foundations of mathematics and practical use of logical methods. In 1936 the quest for such effective methods brought four different approaches: Kleene’s formulation of Gödel/Herbrand general recursion, Church’s λ -definability, Turing’s computation with automatic machines (a-machines), and Post’s machines. However, the halting issue was treated quite differently in those approaches. In particular, the technical meaning of “computation” was explicitly introduced by Turing in his 1936 paper and he payed no attention to halting computations there. This paper traces how the halting requirement became a stable part of the definition of computation which is often used today.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101112",
+      "url": "https://openalex.org/W7133303804"
+    },
+    {
+      "title": "Safe orchestrated multicomposition of systems of communicating finite state machines",
+      "abstract": "The Participants-as-Interfaces (PaI) approach to system composition suggests that participants in a system can be considered interfaces to the outside world. Given a set of systems, one participant per system is chosen to play the role of an interface. When systems are composed, these interface participants are replaced by gateways that communicate with each other by forwarding messages. The PaI approach for systems of asynchronously communicating finite state machines (CFSMs) has been exploited in the literature for binary composition where the forwarding policy is necessarily unique. In this paper we consider the case of multiple system composition and extend preliminary work to the case where interactions among gateways can be mediated by additional orchestrating participants that comply with a given connection model . We represent the interactions among gateways as CFSM systems (called orchestrated connection policies ) and prove that a number of relevant communication properties (e.g. deadlock-freedom, reception-error-freedom) are preserved by orchestrated PaI multicomposition , provided that the orchestrated connection policy used also satisfies the communication property in question.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2026.101109",
+      "url": "https://openalex.org/W7124827383"
+    },
+    {
+      "title": "DM-Check: Verifying invariants of concurrent systems by deductive model checking",
+      "abstract": "We propose a new deductive model checking methodology where narrowing-based logical model checking of symbolic states specified as disjunctions of constrained patterns is combined with inductive theorem proving to discharge inductive verification conditions that ensure useful symbolic state space reductions. An obvious combination is to use an inductive theorem prover in automated mode as an oracle to help logical model checking reach a fixpoint. But this is not the only possible combination. In this paper we focus instead on a new deductive model checking methodology to verify invariants —including inductive invariants— of infinite-state systems, where logical model checking automates large parts of the verification effort with the help of an inductive theorem prover as an oracle . Inductive verification conditions not discharged automatically by the oracle are dealt with by commands that refine some constrained patterns by useful semantic equivalences, and by using an inductive theorem prover in interactive mode. This methodology is demonstrated by means of concurrent system examples using two Maude tools working in tandem: the DM-Check narrowing-based symbolic model checker, and the NuITP inductive theorem prover.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2025.101107",
+      "url": "https://openalex.org/W4416920837"
+    },
+    {
+      "title": "Hoare-style logic for unstructured programs",
+      "abstract": "Enabling Hoare-style reasoning for low-level code is attractive since it opens the way to regain structure and modularity in a domain where structure is essentially absent. The field, however, has not yet arrived at a fully satisfactory solution, in the sense of avoiding restrictions on control flow (important for compiler optimization), controlling access to intermediate program points (important for modularity), and supporting total correctness. Proposals in the literature support some of these properties, but a solution that meets them all is yet to be found. We introduce the novel Hoare-style program logic L A , which interprets postconditions relative to program points when these are first encountered. The logic supports both partial and total correctness, derives contracts for arbitrary control flow, and allows one to freely choose decomposition strategy during verification while avoiding step-indexed approximations and global invariants. The logic can be instantiated for a variety of concrete instruction set architectures and intermediate languages. The rules of L A have been verified in the interactive theorem prover HOL4 and integrated with the toolbox HolBA for semi-automated program verification, which supports the ARMv6, ARMv8 and RISC-V instruction sets.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2025.101099",
+      "url": "https://openalex.org/W4416444354"
+    },
+    {
+      "title": "Makina: A QuickCheck state machine library",
+      "abstract": "This article presents Makina, a library written in the Elixir programming language, and a domain specific language for writing property-based testing models for stateful programs. Models written in the domain specific language are translated into standard QuickCheck state machines. Our main goals with Makina are to facilitate the task of developing correct and maintainable models, and to encourage model reuse. To meet these goals, Makina provides a declarative syntax for defining model states and commands. In particular, Makina encourages the typing of specifications, and ensures that such type information can be used by Elixir type checking tools. Moreover, to promote model reuse, the domain specific language provides constructs that allow models to be defined in terms of collections of previously defined ones. To this end a number of operators for combining models have been defined and implemented in our library. A semantics for Makina models is presented in two steps. First, a novel operational semantics for standard QuickCheck state machine models is provided. Then, a translation from a Makina model to a standard QuickCheck state model is given.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1016/j.jlamp.2025.101096",
+      "url": "https://openalex.org/W4415320485"
+    }
+  ]
+}

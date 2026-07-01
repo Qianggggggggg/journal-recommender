@@ -9,6 +9,62 @@
       "source": "local_evaluation_metadata",
       "doi": "",
       "url": "https://arxiv.org/pdf/2112.00713.pdf"
+    },
+    {
+      "title": "Algorithm 1054: ellipFor, a Fortran Software Library for Legendre Elliptic Integrals and Jacobi Elliptic Functions with Generalized Input Arguments",
+      "abstract": "Legendre elliptic integrals and Jacobi elliptic functions arise in multiple applications within the physical sciences, including oscillations, celestial mechanics, and geodynamics. In this study, we describe the Fortran library ellipFor capable of evaluating the following for generalized input values: (1) the complete Legendre elliptic integrals of the first and second kinds, (2) the incomplete Legendre elliptic integrals of the first and second kinds, and (3) the principal Jacobi elliptic functions. Our software builds upon previously developed Fortran routines, which were designed with restrictions on input parameters that may be limiting in applications. Our routines apply multiple transformations to allow for more general input values, such as elliptic moduli greater than unity for points 1–3, arbitrary real Jacobi amplitudes for points 1–2, and complex first arguments for point 3. In addition, our routines are thread-safe, allowing for parallel computations. Our routines were compared with values from the computer algebra system SageMath over a wide range of input parameters. Values from ellipFor and SageMath agreed to within tolerances commensurate with the limitations of floating-point arithmetic used for the elliptic integrals and Jacobi elliptic functions listed in points 1, 2, and 3 above for generalized input arguments.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3709136",
+      "url": "https://www.semanticscholar.org/paper/09828604cd98b55725ded7af07a42c7a0c176e07"
+    },
+    {
+      "title": "Algorithm 1041: HiPPIS—A High-order Positivity-preserving Mapping Software for Structured Meshes",
+      "abstract": "Polynomial interpolation is an important component of many computational problems. In several of these computational problems, failure to preserve positivity when using polynomials to approximate or map data values between meshes can lead to negative unphysical quantities. Currently, most polynomial-based methods for enforcing positivity are based on splines and polynomial rescaling. The spline-based approaches build interpolants that are positive over the intervals in which they are defined and may require solving a minimization problem and/or system of equations. The linear polynomial rescaling methods allow for high-degree polynomials but enforce positivity only at limited locations (e.g., quadrature nodes). This work introduces open-source software (HiPPIS) for high-order data-bounded interpolation (DBI) and positivity-preserving interpolation (PPI) that addresses the limitations of both the spline and polynomial rescaling methods. HiPPIS is suitable for approximating and mapping physical quantities such as mass, density, and concentration between meshes while preserving positivity. This work provides Fortran and Matlab implementations of the DBI and PPI methods, presents an analysis of the mapping error in the context of PDEs, and uses several 1D and 2D numerical examples to demonstrate the benefits and limitations of HiPPIS.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3632291",
+      "url": "https://www.semanticscholar.org/paper/7cf592756a6d0254829b97bfe6b925bd1ed7953d"
+    },
+    {
+      "title": "Adaptive Precision Block-Jacobi for High Performance Preconditioning in the Ginkgo Linear Algebra Software",
+      "abstract": "The use of mixed precision in numerical algorithms is a promising strategy for accelerating scientific applications. In particular, the adoption of specialized hardware and data formats for low-precision arithmetic in high-end GPUs (graphics processing units) has motivated numerous efforts aiming at carefully reducing the working precision in order to speed up the computations. For algorithms whose performance is bound by the memory bandwidth, the idea of compressing its data before (and after) memory accesses has received considerable attention. One idea is to store an approximate operator–like a preconditioner–in lower than working precision hopefully without impacting the algorithm output. We realize the first high-performance implementation of an adaptive precision block-Jacobi preconditioner which selects the precision format used to store the preconditioner data on-the-fly, taking into account the numerical properties of the individual preconditioner blocks. We implement the adaptive block-Jacobi preconditioner as production-ready functionality in the Ginkgo linear algebra library, considering not only the precision formats that are part of the IEEE standard, but also customized formats which optimize the length of the exponent and significand to the characteristics of the preconditioner blocks. Experiments run on a state-of-the-art GPU accelerator show that our implementation offers attractive runtime savings.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3441850",
+      "url": "https://www.semanticscholar.org/paper/e1fa6a1318da4720db0e6a3ae6dcfff7177ad060"
+    },
+    {
+      "title": "HAZniCS – Software Components for Multiphysics Problems",
+      "abstract": "We introduce the software toolbox HAZniCS for solving interface-coupled multiphysics problems. HAZniCS is a suite of modules that combines the well-known FEniCS framework for finite element discretization with solver and graph library HAZmath. The focus of this article is on the design and implementation of robust and efficient solver algorithms which tackle issues related to the complex interfacial coupling of the physical problems often encountered in applications in brain biomechanics. The robustness and efficiency of the numerical algorithms and methods is shown in several numerical examples, namely the Darcy-Stokes equations that model the flow of cerebrospinal fluid in the human brain and the mixed-dimensional model of electrodiffusion in the brain tissue.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3625561",
+      "url": "https://www.semanticscholar.org/paper/bb90dcef3e61560a0a5ef766102d6a926b61823d"
+    },
+    {
+      "title": "Algorithms for Parallel Generic hp-Adaptive Finite Element Software",
+      "abstract": "The hp-adaptive finite element method—where one independently chooses the mesh size (h) and polynomial degree (p) to be used on each cell—has long been known to have better theoretical convergence properties than either h- or p-adaptive methods alone. However, it is not widely used, owing at least in part to the difficulty of the underlying algorithms and the lack of widely usable implementations. This is particularly true when used with continuous finite elements. Herein, we discuss algorithms that are necessary for a comprehensive and generic implementation of hp-adaptive finite element methods on distributed-memory, parallel machines. In particular, we will present a multistage algorithm for the unique enumeration of degrees of freedom suitable for continuous finite element spaces, describe considerations for weighted load balancing, and discuss the transfer of variable size data between processes. We illustrate the performance of our algorithms with numerical examples and demonstrate that they scale reasonably up to at least 16,384 message passage interface processes. We provide a reference implementation of our algorithms as part of the open source library deal.II.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3603372",
+      "url": "https://www.semanticscholar.org/paper/c7da8655c718bb117b68064f92ca897092d0544c"
+    },
+    {
+      "title": "Algorithm 1025: PARyOpt: A Software for Parallel Asynchronous Remote Bayesian Optimization",
+      "abstract": "PARyOpt1 is a Python based implementation of the Bayesian optimization routine designed for remote and asynchronous function evaluations. Bayesian optimization is especially attractive for computational optimization due to its low cost function footprint as well as the ability to account for uncertainties in data. A key challenge to efficiently deploy any optimization strategy on distributed computing systems is the synchronization step, where data from multiple function calls is assimilated to identify the next campaign of function calls. Bayesian optimization provides an elegant approach to overcome this issue via asynchronous updates. We formulate, develop and implement a parallel, asynchronous variant of Bayesian optimization. The framework is robust and resilient to external failures. We show how such asynchronous evaluations help reduce the total optimization wall clock time for a suite of test problems. Additionally, we show how the software design of the framework allows easy extension to response surface reconstruction (Kriging), providing a high performance software for autonomous exploration. The software is available on PyPI, with examples and documentation.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3529517",
+      "url": "https://www.semanticscholar.org/paper/1219ce679fdf7f2e8360a0aeda861e67b9c4ebcd"
+    },
+    {
+      "title": "Enabling New Flexibility in the SUNDIALS Suite of Nonlinear and Differential/Algebraic Equation Solvers",
+      "abstract": "In recent years, the SUite of Nonlinear and DIfferential/ALgebraic equation Solvers (SUNDIALS) has been redesigned to better enable the use of application-specific and third-party algebraic solvers and data structures. Throughout this work, we have adhered to specific guiding principles that minimized the impact to current users while providing maximum flexibility for later evolution of solvers and data structures. The redesign was done through the addition of new linear and nonlinear solvers classes, enhancements to the vector class, and the creation of modern Fortran interfaces. The vast majority of this work has been performed “behind-the-scenes,” with minimal changes to the user interface and no reduction in solver capabilities or performance. These changes allow SUNDIALS users to more easily utilize external solver libraries and create highly customized solvers, enabling greater flexibility on extreme-scale, heterogeneous computational architectures.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3539801",
+      "url": "https://www.semanticscholar.org/paper/b88e84c7c913d79c642275196ad91c26b5a81d70"
     }
   ]
 }

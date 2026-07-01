@@ -3,14 +3,6 @@
   "journal_name": "Autonomous Agents and Multi-Agent Systems",
   "papers": [
     {
-      "title": "Investigating the impact of direct punishment on the emergence of cooperation in multi-agent reinforcement learning systems",
-      "abstract": "Solving the problem of cooperation is fundamentally important for the creation and maintenance of functional societies. Problems of cooperation are omnipresent within human society, with examples ranging from navigating busy road junctions to negotiating treaties. As the use of AI becomes more pervasive throughout society, the need for socially intelligent agents capable of navigating these complex cooperative dilemmas is becoming increasingly evident. Direct punishment is a ubiquitous social mechanism that has been shown to foster the emergence of cooperation in both humans and non-humans. In the natural world, direct punishment is often strongly coupled with partner selection and reputation and used in conjunction with third-party punishment. The interactions between these mechanisms could potentially enhance the emergence of cooperation within populations. However, no previous work has evaluated the learning dynamics and outcomes emerging from multi-agent reinforcement learning populations that combine these mechanisms. This paper addresses this gap. It presents a comprehensive analysis and evaluation of the behaviors and learning dynamics associated with direct punishment, third-party punishment, partner selection, and reputation. Finally, we discuss the implications of using these mechanisms on the design of cooperative AI systems.",
-      "year": 2023,
-      "source": "semantic_scholar",
-      "doi": "10.1007/s10458-025-09698-5",
-      "url": "https://www.semanticscholar.org/paper/ffb8353dfb48d7a6b1d0c5bda2a9a054cb77713b"
-    },
-    {
       "title": "Testing BDI-based Multi-Agent Systems using Discrete Event Simulation",
       "abstract": "Multi-agent systems are designed to deal with open, distributed systems with unpredictable dynamics, which makes them inherently hard to test. The value of using simulation for this purpose is recognized in the literature, although achieving sufficient fidelity (i.e., the degree of similarity between the simulation and the real-world system) remains a challenging task. This is exacerbated when dealing with cognitive agent models, such as the Belief Desire Intention (BDI) model, where the agent codebase is not suitable to run unchanged in simulation environments, thus increasing the reality gap between the deployed and simulated systems. We argue that BDI developers should be able to test in simulation the same specification that will be later deployed, with no surrogate representations. Thus, in this paper, we discuss how the control flow of BDI agents can be mapped onto a Discrete Event Simulation (DES), showing that such integration is possible at different degrees of granularity. We substantiate our claims by producing an open-source prototype integration between two pre-existing tools (JaKtA and Alchemist), showing that it is possible to produce a simulation-based testing environment for distributed BDI} agents, and that different granularities in mapping BDI agents over DESs may lead to different degrees of fidelity.",
       "year": 2026,
@@ -25,6 +17,70 @@
       "source": "semantic_scholar",
       "doi": "10.1007/s10458-023-09623-8",
       "url": "https://www.semanticscholar.org/paper/7ef46587e6797b2cb4fac28c102fe402a6cbbbee"
+    },
+    {
+      "title": "An agent-based persuasion model using emotion-driven concession and multi-objective optimization",
+      "abstract": "Multi-attribute negotiation is essentially a multi-objective optimization (MOO) problem, where models of agent-based emotional persuasion (EP) can exhibit characteristics of anthropomorphism. This paper proposes a novel EP model by fusing the strategy of emotion-driven concession with the method of multi-objective optimization (EDC-MOO). Firstly, a comprehensive emotion model is designed to enhance the authenticity of the emotion. A novel concession strategy is then proposed to enable the concession to be dynamically tuned by the emotions of the agents. Finally, a new EP model is constructed by integrating emotion, historical transaction, persuasion behavior, and concession strategy under the framework of MOO. Comprehensive experiments on bilateral negotiation are conducted to illustrate and validate the effectiveness of EDC-MOO. These include an analysis of negotiations under five distinct persuasion styles, a comparison of EDC-MOO with a non-emotion-based MOO negotiation model and classic trade-off strategies, negotiations between emotion-driven and non-emotion-driven agents, and negotiations involving human participants. A detailed analysis of parameter sensitivity is also discussed. Experimental results show that the proposed EDC-MOO model can enhance the diversity of the negotiation process and the anthropomorphism of the bilateral agents, thereby improving the social welfare of both parties.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-024-09664-7",
+      "url": "https://www.semanticscholar.org/paper/ddd8814a447f2b078a9ee3e7a5dd0d1d3f3ce80a"
+    },
+    {
+      "title": "Logic-based technologies for multi-agent systems: a systematic literature review",
+      "abstract": "Precisely when the success of artificial intelligence (AI) sub-symbolic techniques makes them be identified with the whole AI by many non-computer-scientists and non-technical media, symbolic approaches are getting more and more attention as those that could make AI amenable to human understanding. Given the recurring cycles in the AI history, we expect that a revamp of technologies often tagged as “classical AI”—in particular, logic-based ones—will take place in the next few years. On the other hand, agents and multi-agent systems (MAS) have been at the core of the design of intelligent systems since their very beginning, and their long-term connection with logic-based technologies, which characterised their early days, might open new ways to engineer explainable intelligent systems. This is why understanding the current status of logic-based technologies for MAS is nowadays of paramount importance. Accordingly, this paper aims at providing a comprehensive view of those technologies by making them the subject of a systematic literature review (SLR). The resulting technologies are discussed and evaluated from two different perspectives: the MAS and the logic-based ones.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-020-09478-3",
+      "url": "https://www.semanticscholar.org/paper/5da0c994c52d3a460169aef02557786866f6697f"
+    },
+    {
+      "title": "Real-time multi-agent systems: rationality, formal model, and empirical results",
+      "abstract": "Since its dawn as a discipline, Artificial Intelligence (AI) has focused on mimicking the human mental processes. As AI applications matured, the interest for employing them into real-world complex systems (i.e., coupling AI with Cyber-Physical Systems—CPS) kept increasing. In the last decades, the multi-agent systems (MAS) paradigm has been among the most relevant approaches fostering the development of intelligent systems. In numerous scenarios, MAS boosted distributed autonomous reasoning and behaviors. However, many real-world applications (e.g., CPS) demand the respect of strict timing constraints. Unfortunately, current AI/MAS theories and applications only reason “about time” and are incapable of acting “in time” guaranteeing any timing predictability. This paper analyzes the MAS compliance with strict timing constraints (real-time compliance)—crucial for safety-critical applications such as healthcare, industry 4.0, and automotive. Moreover, it elicits the main reasons for the lack of real-time satisfiability in MAS (originated from current theories, standards, and implementations). In particular, traditional internal agent schedulers (general-purpose-like), communication middlewares, and negotiation protocols have been identified as co-factors inhibiting real-time compliance. To pave the road towards reliable and predictable MAS, this paper postulates a formal definition and mathematical model of real-time multi-agent systems (RT-MAS). Furthermore, this paper presents the results obtained by testing the dynamics characterizing the RT-MAS model within the simulator MAXIM-GPRT. Thus, it has been possible to analyze the deadline miss ratio between the algorithms employed in the most popular frameworks and the proposed ones. Finally, discussing the obtained results, the ongoing and future steps are outlined.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-020-09492-5",
+      "url": "https://www.semanticscholar.org/paper/bb2d9d587ba3c2b31e650cf5046accbca100b560"
+    },
+    {
+      "title": "Enabling scalable and fault-tolerant multi-agent systems by utilizing cloud-native computing",
+      "abstract": "Multi-agent systems (MAS) represent a distributed computing paradigm well suited to tackle today’s challenges in the field of the Internet of Things (IoT). Both share many similarities such as the interconnection of distributed devices and their cooperation. The combination of MAS and IoT would allow the transfer of the experience gained in MAS research to the broader range of IoT applications. The key enabler for utilizing MAS in the IoT is the ability to build large-scale and fault-tolerant MASs since IoT concepts comprise possibly thousands or even millions of devices. However, well known multi-agent platforms (MAP), e. g., Java Agent DE-velopment Framework (JADE), are not able to deal with these challenges. To this aim, we present a cloud-native Multi-Agent Platform (cloneMAP) as a modern MAP based on cloud-computing techniques to enable scalability and fault-tolerance. A microservice architecture is used to implement it in a distributed way utilizing the open-source container orchestration system Kubernetes. Thereby, bottlenecks and single-points of failure are conceptually avoided. A comparison with JADE via relevant performance metrics indicates the massively improved scalability. Furthermore, the implementation of a large-scale use case verifies cloneMAP’s suitability for IoT applications. This leads to the conclusion that cloneMAP extends the range of possible MAS applications and enables the integration with IoT concepts.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-020-09489-0",
+      "url": "https://www.semanticscholar.org/paper/aeed0321683e3a10798556edc9d2c9cd1d2daced"
+    },
+    {
+      "title": "Modelling and verification of reconfigurable multi-agent systems",
+      "abstract": "We propose a formalism to model and reason about reconfigurable multi-agent systems. In our formalism, agents interact and communicate in different modes so that they can pursue joint tasks; agents may dynamically synchronize, exchange data, adapt their behaviour, and reconfigure their communication interfaces. Inspired by existing multi-robot systems, we represent a system as a set of agents (each with local state), executing independently and only influence each other by means of message exchange. Agents are able to sense their local states and partially their surroundings. We extend ltl to be able to reason explicitly about the intentions of agents in the interaction and their communication protocols. We also study the complexity of satisfiability and model-checking of this extension.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-021-09521-x",
+      "url": "https://www.semanticscholar.org/paper/fe81427e687992fd67e6b70e2b5f4b32582a30f2"
+    },
+    {
+      "title": "Decentralized multi-agent path finding framework and strategies based on automated negotiation",
+      "abstract": "This paper introduces a negotiation framework to solve the Multi-Agent Path Finding (MAPF) Problem for self-interested agents in a decentralized fashion. The framework aims to achieve a good trade-off between the privacy of the agents and the effectiveness of solutions. Accordingly, a token-based bilateral negotiation protocol and two negotiation strategies are presented. The experimental results over four different settings of the MAPF problem show that the proposed approach could find conflict-free path solutions albeit suboptimally, especially when the search space is large and high-density. In contrast, Explicit Estimation Conflict-Based Search (EECBS) struggles to find optimal solutions. Besides, deploying a sophisticated negotiation strategy that utilizes information about local density for generating alternative paths can yield remarkably better solution performance in this negotiation framework.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-024-09639-8",
+      "url": "https://www.semanticscholar.org/paper/34c11b4d8e6fb3bd7fe1465dfe55e950711339ad"
+    },
+    {
+      "title": "Formal contracts mitigate social dilemmas in multi-agent reinforcement learning",
+      "abstract": "Multi-agent Reinforcement Learning (MARL) is a powerful tool for training autonomous agents acting independently in a common environment. However, it can lead to sub-optimal behavior when individual incentives and group incentives diverge. Humans are remarkably capable at solving these social dilemmas. It is an open problem in MARL to replicate such cooperative behaviors in selfish agents. In this work, we draw upon the idea of formal contracting from economics to overcome diverging incentives between agents in MARL. We propose an augmentation to a Markov game where agents voluntarily agree to binding transfers of reward, under pre-specified conditions. Our contributions are theoretical and empirical. First, we show that this augmentation makes all subgame-perfect equilibria of all Fully Observable Markov Games exhibit socially optimal behavior, given a sufficiently rich space of contracts. Next, we show that for general contract spaces, and even under partial observability, richer contract spaces lead to higher welfare. Hence, contract space design solves an exploration-exploitation tradeoff, sidestepping incentive issues. We complement our theoretical analysis with experiments. Issues of exploration in the contracting augmentation are mitigated using a training methodology inspired by multi-objective reinforcement learning: Multi-Objective Contract Augmentation Learning. We test our methodology in static, single-move games, as well as dynamic domains that simulate traffic, pollution management, and common pool resource management.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-024-09682-5",
+      "url": "https://www.semanticscholar.org/paper/3307543bee768632f371a3ffc8262e230b4bad40"
+    },
+    {
+      "title": "A multi-level explainability framework for engineering and understanding BDI agents",
+      "abstract": "As the complexity of software systems rises, explainability - i.e. the ability of systems to provide explanations of their behaviour - becomes a crucial property. This is true for any AI-based systems, including autonomous systems that exhibit decisionmaking capabilities such as multi-agent systems. Although explainabil- ity is generally considered useful to increase the level of trust for end-users, we argue it is also an interesting property for software engineers, developers, and designers to debug and validate the system’s behaviour. In this paper, we propose a multi-level explainability framework for BDI agents to generate explanations of a running system from logs at different levels of abstraction, tailored to different users and their needs. We describe the mapping from logs to explanations, and present a prototype tool based on the JaCaMo platform which implements the framework.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10458-025-09689-6",
+      "url": "https://www.semanticscholar.org/paper/66d7c913e970d373bdcbaf1ac98a609b1d7784f1"
     }
   ]
 }

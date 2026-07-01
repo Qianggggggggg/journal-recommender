@@ -1,0 +1,70 @@
+{
+  "journal_id": "artificiallife",
+  "journal_name": "Artificial Life",
+  "papers": [
+    {
+      "title": "Guideless Artificial Life Model for Reproduction, Development, and Interactions",
+      "abstract": "Reproduction, development, and individual interactions are vital yet complex natural processes. Tierra (an ALife model proposed by Thomas Ray) and cellular automata, which can manage these aspects in a complex manner, are significantly limited in their ability to express morphology and behavior. In contrast, the virtual creatures proposed by Karl Sims have a considerably higher degree of freedom in terms of morphology and behavior. However, they also exhibit a limited capacity for processes like reproduction, development, and individual interactions. In addition, they employ genetic algorithms, which can result in a loss of biological diversity, as their implementation necessitates predefining a fitness function. Contrarily, the evolution of natural life is determined by mutation and natural selection, rather than by a human-defined fitness function. This study carefully extracts the characteristics of these models to propose a new Artificial Life model that can simulate reproduction, development, and individual interactions while exhibiting a high expressive power for morphology and behavior. The model is based on the concept of incorporating Tierra and cellular automata mechanisms into a cell that moves freely in 3-D space. In this model, no predefined fitness function or form that qualifies as a living creature exists. In other words, this approach can be rephrased as searching for persistent patterns, which is similar to the approach of Conway's Game of Life. The primary objective of this study was to conduct a proof-of-concept demonstration to showcase the capabilities of this model. Guideless simulation by the proposed model using mutation and natural selection resulted in the formation of two types of creatures-dumbbell shaped and reticulated. These creatures exhibit intriguing features, exploiting the degrees of freedom inherent to the proposed model. Particularly noteworthy is their unique method of reproduction, which bears a striking resemblance to that of real organisms. These results reinforce the potential of this approach in modeling intricate processes observed in actual organisms and its ability to generate virtual creatures with intriguing ecologies.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00466",
+      "url": "https://www.semanticscholar.org/paper/278f8476b738d53b19a18476682353d106f1c0fe"
+    },
+    {
+      "title": "A Survey of Recent Practice of Artificial Life in Visual Art",
+      "abstract": "Nowadays, interdisciplinary fields between Artificial Life, artificial intelligence, computational biology, and synthetic biology are increasingly emerging into public view. It is necessary to reconsider the relations between the material body, identity, the natural world, and the concept of life. Art is known to pave the way to exploring and conveying new possibilities. This survey provides a literature review on recent works of Artificial Life in visual art during the past 40 years, specifically in the computational and software domain. Having proposed a set of criteria and a taxonomy, we briefly analyze representative artworks of different categories. We aim to provide a systematic overview of how artists are understanding nature and creating new life with modern technology.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00433",
+      "url": "https://www.semanticscholar.org/paper/2c64e3df6cfa4f0e8f70c078905164c163c5aaf8"
+    },
+    {
+      "title": "Complexity, Artificial Life, and Artificial Intelligence.",
+      "abstract": "The scientific fields of complexity, Artificial Life (ALife), and artificial intelligence (AI) share commonalities: historic, conceptual, methodological, and philosophical. Although their origins trace back to the 1940s birth of cybernetics, they were able to develop properly only as modern information technology became available. In this perspective, I offer a personal (and thus biased) account of the expectations and limitations of these fields, some of which have their roots in the limits of formal systems. I use interactions, self-organization, emergence, and balance to compare different aspects of complexity, ALife, and AI. Even when the trajectory of the article is influenced by my personal experience, the general questions posed (which outweigh the answers) will, I hope, be useful in aligning efforts in these fields toward overcoming-or accepting-their limits.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00462",
+      "url": "https://www.semanticscholar.org/paper/e80f72439d9a71a6e273c1e43fb2c8f22caea467"
+    },
+    {
+      "title": "The Ethics of Life as It Could Be: Do We Have Moral Obligations to Artificial Life?",
+      "abstract": "The field of Artificial Life studies the nature of the living state by modeling and synthesizing living systems. Such systems, under certain conditions, may come to deserve moral consideration similar to that given to nonhuman vertebrates or even human beings. The fact that these systems are nonhuman and evolve in a potentially radically different substrate should not be seen as an insurmountable obstacle to their potentially having rights, if they are sufficiently sophisticated in other respects. Nor should the fact that they owe their existence to us be seen as reducing their status as targets of moral concern. On the contrary, creators of Artificial Life may have special obligations to their creations, resembling those of an owner to their pet or a parent to their child. For a field that aims to create artificial life-forms with increasing levels of sophistication, it is crucial to consider the possible ethical implications of our activities, with an eye toward assessing potential moral obligations for which we should be prepared. If Artificial Life is larger than life, then the ethics of artificial beings should be larger than human ethics.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00436",
+      "url": "https://www.semanticscholar.org/paper/5c2115765072fbcf54adff9e241e8ee9edfe2f2a"
+    },
+    {
+      "title": "Effect of Environmental Change Distribution on Artificial Life Simulations",
+      "abstract": "It is already well known that environmental variation has a big effect on real evolution, and similar effects have been found in evolutionary artificial life simulations. In particular, a lot of research has been carried out on how the various evolutionary outcomes depend on the noise distributions representing the environmental changes, and how important it is for models to use inverse power-law distributions with the right noise colour. However, there are two distinct factors of relevance—the average total magnitude of change per unit time and the distribution of individual change magnitudes—and misleading results may emerge if those factors are not properly separated. This article makes use of an existing agent-based artificial life modeling framework to explore this issue using models previously tried and tested for other purposes. It begins by demonstrating how the total magnitude and distribution effects can easily be confused, and goes on to show how it is possible to untangle the influence of these interacting factors by using correlation-based normalization. It then presents a series of simulation results demonstrating that interesting dependencies on the noise distribution remain after separating those factors, but many effects involving the noise colour of inverse power-law distributions disappear, and very similar results arise across restricted-range white-noise distributions. The average total magnitude of change per unit time is found to have a substantial effect on the simulation outcomes, but the distribution of individual changes has very little effect. A robust counterexample is thereby provided to the idea that it is always important to use accurate environmental change distributions in artificial life models.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00366",
+      "url": "https://www.semanticscholar.org/paper/49244e2d2a38518fb99fcce6e4f87e003549077d"
+    },
+    {
+      "title": "Emergence in Artificial Life",
+      "abstract": "Even when concepts similar to emergence have been used since antiquity, we lack an agreed definition. However, emergence has been identified as one of the main features of complex systems. Most would agree on the statement “life is complex.” Thus understanding emergence and complexity should benefit the study of living systems. It can be said that life emerges from the interactions of complex molecules. But how useful is this to understanding living systems? Artificial Life (ALife) has been developed in recent decades to study life using a synthetic approach: Build it to understand it. ALife systems are not so complex, be they soft (simulations), hard (robots), or wet(protocells). Thus, we can aim at first understanding emergence in ALife, to then use this knowledge in biology. I argue that to understand emergence and life, it becomes useful to use information as a framework. In a general sense, I define emergence as information that is not present at one scale but present at another. This perspective avoids problems of studying emergence from a materialist framework and can also be useful in the study of self-organization and complexity.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00397",
+      "url": "https://www.semanticscholar.org/paper/a96cc9e62f4765683afccbf3edcf0dca31be94b9"
+    },
+    {
+      "title": "Artificial Life Next Generation Perspectives: Echoes from the 2018 Conference in Tokyo",
+      "abstract": "Artificial life is a research field devoted to the theoretical study of features of living systems, such as evolution and the brain. The field has developed philosophical concepts such as autopoiesis and emergence, alongside a large range of computational and experimental setups, from evolutionary simulations to robotics and chemical experiments.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_e_00306",
+      "url": "https://www.semanticscholar.org/paper/5de4dc69fe303110e3a377c6afd70a831891c5e2"
+    },
+    {
+      "title": "Motivations for Artificial Intelligence, for Deep Learning, for ALife: Mortality and Existential Risk",
+      "abstract": "We survey the general trajectory of artificial intelligence (AI) over the last century, in the context of influences from Artificial Life. With a broad brush, we can divide technical approaches to solving AI problems into two camps: GOFAIstic (or computationally inspired) or cybernetic (or ALife inspired). The latter approach has enabled advances in deep learning and the astonishing AI advances we see today—bringing immense benefits but also societal risks. There is a similar divide, regrettably unrecognized, over the very way that such AI problems have been framed. To date, this has been overwhelmingly GOFAIstic, meaning that tools for humans to use have been developed; they have no agency or motivations of their own. We explore the implications of this for concerns about existential risk for humans of the “robots taking over.” The risks may be blamed exclusively on human users—the robots could not care less.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1162/artl_a_00427",
+      "url": "https://www.semanticscholar.org/paper/fc3ff85a64bf8bc81c932cede86778c5aae04c97"
+    }
+  ]
+}

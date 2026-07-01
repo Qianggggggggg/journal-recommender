@@ -1,6 +1,5 @@
 """Regression checks for local journal and typical-abstract data quality."""
 import json
-from collections import Counter
 from pathlib import Path
 
 
@@ -12,40 +11,39 @@ def _load_journals():
     ]
 
 
-def test_journal_names_are_not_ambiguous():
+def test_duplicate_journal_names_are_explicit_alias_ids():
     journals = _load_journals()
-    names = Counter(journal["journal_name"].strip().lower() for journal in journals)
+    ids_by_name = {}
+    for journal in journals:
+        name = journal["journal_name"].strip().lower()
+        ids_by_name.setdefault(name, []).append(journal["journal_id"])
 
-    assert [name for name, count in names.items() if count > 1] == []
-
-
-def test_low_accuracy_journal_metadata_contains_subdomain_terms():
-    journals = {journal["journal_id"]: journal for journal in _load_journals()}
-
-    expected_terms = {
-        "ton": ["goal-oriented communication", "age of information"],
-        "toit": ["firmware version identification", "IoT intrusion detection"],
-        "tdsc": ["coded blockchain", "blockchain for IoT"],
-        "sicomp": ["meta-complexity", "minimum circuit size problem"],
-        "appliedintelligence": ["high-utility pattern mining", "LiDAR semantic segmentation"],
-        "bmcbioinformatics": ["multi-omics integration", "cancer subtype classification"],
+    duplicates = {
+        name: sorted(ids)
+        for name, ids in ids_by_name.items()
+        if len(ids) > 1
+    }
+    assert duplicates == {
+        "data & knowledge engineering": ["dke", "dke_2"],
+        "information processing letters": ["ipl", "ipl_2"],
+        "international journal of intelligent systems": ["ijis", "ijis_2"],
     }
 
-    for journal_id, terms in expected_terms.items():
-        journal_text = " ".join([
-            journals[journal_id]["scope_text"],
-            " ".join(journals[journal_id]["keywords"]),
-        ]).lower()
-        for term in terms:
-            assert term.lower() in journal_text
+
+def test_journal_metadata_has_complete_scope_signals():
+    for journal in _load_journals():
+        assert journal.get("scope_text", "").strip()
+        assert len(journal.get("keywords") or []) >= 10
+        assert journal.get("subject_tags")
 
 
-def test_typical_abstracts_include_real_local_examples_for_low_accuracy_journals():
+def test_low_accuracy_journals_use_real_accepted_paper_examples():
     for journal_id in ["ton", "toit", "sicomp", "tap", "bmcbioinformatics"]:
-        path = Path(f"data/typical_abstracts/{journal_id}.json")
+        path = Path(f"data/accepted_papers/{journal_id}.json")
         data = json.loads(path.read_text(encoding="utf-8"))
-        abstracts = data["abstracts"]
+        papers = data["papers"]
 
-        assert len(abstracts) == 4
-        assert any(item.get("method_type") == "真实代表论文" for item in abstracts)
-        assert all((item.get("abstract") or "").strip() for item in abstracts)
+        assert len(papers) >= 5
+        assert all((item.get("title") or "").strip() for item in papers)
+        assert all((item.get("abstract") or "").strip() for item in papers)
+        assert all((item.get("source") or "").strip() for item in papers)

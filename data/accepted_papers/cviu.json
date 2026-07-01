@@ -1,0 +1,78 @@
+{
+  "journal_id": "cviu",
+  "journal_name": "Computer Vision and Image Understanding",
+  "papers": [
+    {
+      "title": "Context Understanding in Computer Vision: A Survey",
+      "abstract": "Contextual information plays an important role in many computer vision tasks, such as object detection, video action detection, image classification, etc. Recognizing a single object or action out of context could be sometimes very challenging, and context information may help improve the understanding of a scene or an event greatly. Appearance context information, e.g., colors or shapes of the background of an object can improve the recognition accuracy of the object in the scene. Semantic context (e.g. a keyboard on an empty desk vs. a keyboard next to a desktop computer ) will improve accuracy and exclude unrelated events. Context information that are not in the image itself, such as the time or location of an images captured, can also help to decide whether certain event or action should occur. Other types of context (e.g. 3D structure of a building) will also provide additional information to improve the accuracy. In this survey, different context information that has been used in computer vision tasks is reviewed. We categorize context into different types and different levels. We also review available machine learning models and image/video datasets that can employ context information. Furthermore, we compare context based integration and context-free integration in mainly two classes of tasks: image-based and video-based. Finally, this survey is concluded by a set of promising future directions in context learning and utilization.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2023.103646",
+      "url": "https://www.semanticscholar.org/paper/cb09965c89492b2a158652706c3a1616eb438ea4"
+    },
+    {
+      "title": "Co-segmentation Inspired Attention Module for Video-based Computer Vision Tasks",
+      "abstract": "Video-based computer vision tasks can benefit from estimation of the salient regions and interactions between those regions. Traditionally, this has been done by identifying the object regions in the images by utilizing pre-trained models to perform object detection, object segmentation and/or object pose estimation. Although using pre-trained models is a viable approach, it has several limitations in the need for an exhaustive annotation of object categories, a possible domain gap between datasets, and a bias that is typically present in pre-trained models. In this work, we propose to utilize the common rationale that a sequence of video frames capture a set of common objects and interactions between them, thus a notion of co-segmentation between the video frame features may equip the model with the ability to automatically focus on task-specific salient regions and improve the underlying task's performance in an end-to-end manner. In this regard, we propose a generic module called ``Co-Segmentation inspired Attention Module'' (COSAM) that can be plugged in to any CNN model to promote the notion of co-segmentation based attention among a sequence of video frame features. We show the application of COSAM in three video-based tasks namely: 1) Video-based person re-ID, 2) Video captioning,&3) Video action classification and demonstrate that COSAM is able to capture the task-specific salient regions in video frames, thus leading to notable performance improvements along with interpretable attention maps for a variety of video-based vision tasks, with possible application to other video-based vision tasks as well.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2022.103532",
+      "url": "https://www.semanticscholar.org/paper/55cf57efc27fda3c6c252374f5891902fdcfcba7"
+    },
+    {
+      "title": "GAFL: Global adaptive filtering layer for computer vision",
+      "abstract": "We devise a universal adaptive neural layer to\"learn\"optimal frequency filter for each image together with the weights of the base neural network that performs some computer vision task. The proposed approach takes the source image in the spatial domain, automatically selects the best frequencies from the frequency domain, and transmits the inverse-transform image to the main neural network. Remarkably, such a simple add-on layer dramatically improves the performance of the main network regardless of its design. We observe that the light networks gain a noticeable boost in the performance metrics; whereas, the training of the heavy ones converges faster when our adaptive layer is allowed to\"learn\"alongside the main architecture. We validate the idea in four classical computer vision tasks: classification, segmentation, denoising, and erasing, considering popular natural and medical data benchmarks.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2022.103519",
+      "url": "https://www.semanticscholar.org/paper/becfb80d151aa691f69841f4db79569315a3316b"
+    },
+    {
+      "title": "Vision and Structured-Language Pretraining for Cross-Modal Food Retrieval",
+      "abstract": "Vision-Language Pretraining (VLP) and Foundation models have been the go-to recipe for achieving SoTA performance on general benchmarks. However, leveraging these powerful techniques for more complex vision-language tasks, such as cooking applications, with more structured input data, is still little investigated. In this work, we propose to leverage these techniques for structured-text based computational cuisine tasks. Our strategy, dubbed VLPCook, first transforms existing image-text pairs to image and structured-text pairs. This allows to pretrain our VLPCook model using VLP objectives adapted to the strutured data of the resulting datasets, then finetuning it on downstream computational cooking tasks. During finetuning, we also enrich the visual encoder, leveraging pretrained foundation models (e.g. CLIP) to provide local and global textual context. VLPCook outperforms current SoTA by a significant margin (+3.3 Recall@1 absolute improvement) on the task of Cross-Modal Food Retrieval on the large Recipe1M dataset. We conduct further experiments on VLP to validate their importance, especially on the Recipe1M+ dataset. Finally, we validate the generalization of the approach to other tasks (i.e, Food Recognition) and domains with structured text such as the Medical domain on the ROCO dataset. The code is available here: https://github.com/mshukor/VLPCook",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2024.104071",
+      "url": "https://www.semanticscholar.org/paper/508d9b43832790b4d35f4ae1fa76e9712859d6aa"
+    },
+    {
+      "title": "Joint image-instance spatial-temporal attention for few-shot action recognition",
+      "abstract": "Few-shot Action Recognition (FSAR) constitutes a crucial challenge in computer vision, entailing the recognition of actions from a limited set of examples. Recent approaches mainly focus on employing image-level features to construct temporal dependencies and generate prototypes for each action category. However, a considerable number of these methods utilize mainly image-level features that incorporate background noise and focus insufficiently on real foreground (action-related instances), thereby compromising the recognition capability, particularly in the few-shot scenario. To tackle this issue, we propose a novel joint Image-Instance level Spatial-temporal attention approach (I2ST) for Few-shot Action Recognition. The core concept of I2ST is to perceive the action-related instances and integrate them with image features via spatial-temporal attention. Specifically, I2ST consists of two key components: Action-related Instance Perception and Joint Image-Instance Spatial-temporal Attention. Given the basic representations from the feature extractor, the Action-related Instance Perception is introduced to perceive action-related instances under the guidance of a text-guided segmentation model. Subsequently, the Joint Image-Instance Spatial-temporal Attention is used to construct the feature dependency between instances and images...",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2025.104322",
+      "url": "https://www.semanticscholar.org/paper/ca05cfde75a5257127eb67015a370b8821fb28c3"
+    },
+    {
+      "title": "Other Tokens Matter: Exploring Global and Local Features of Vision Transformers for Object Re-Identification",
+      "abstract": "Object Re-Identification (Re-ID) aims to identify and retrieve specific objects from images captured at different places and times. Recently, object Re-ID has achieved great success with the advances of Vision Transformers (ViT). However, the effects of the global-local relation have not been fully explored in Transformers for object Re-ID. In this work, we first explore the influence of global and local features of ViT and then further propose a novel Global-Local Transformer (GLTrans) for high-performance object Re-ID. We find that the features from last few layers of ViT already have a strong representational ability, and the global and local information can mutually enhance each other. Based on this fact, we propose a Global Aggregation Encoder (GAE) to utilize the class tokens of the last few Transformer layers and learn comprehensive global features effectively. Meanwhile, we propose the Local Multi-layer Fusion (LMF) which leverages both the global cues from GAE and multi-layer patch tokens to explore the discriminative local representations. Extensive experiments demonstrate that our proposed method achieves superior performance on four object Re-ID benchmarks.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2024.104030",
+      "url": "https://www.semanticscholar.org/paper/e6f0648fa8d91ea556064eab55b34fad775141b6"
+    },
+    {
+      "title": "FSATFusion: Frequency-Spatial Attention Transformer for Infrared and Visible Image Fusion",
+      "abstract": "The infrared and visible images fusion (IVIF) is receiving increasing attention from both the research community and industry due to its excellent results in downstream applications. Existing deep learning approaches often utilize convolutional neural networks to extract image features. However, the inherently capacity of convolution operations to capture global context can lead to information loss, thereby restricting fusion performance. To address this limitation, we propose an end-to-end fusion network named the Frequency-Spatial Attention Transformer Fusion Network (FSATFusion). The FSATFusion contains a frequency-spatial attention Transformer (FSAT) module designed to effectively capture discriminate features from source images. This FSAT module includes a frequency-spatial attention mechanism (FSAM) capable of extracting significant features from feature maps. Additionally, we propose an improved Transformer module (ITM) to enhance the ability to extract global context information of vanilla Transformer. We conducted both qualitative and quantitative comparative experiments, demonstrating the superior fusion quality and efficiency of FSATFusion compared to other state-of-the-art methods. Furthermore, our network was tested on two additional tasks without any modifications, to verify the excellent generalization capability of FSATFusion. Finally, the object detection experiment demonstrated the superiority of FSATFusion in downstream visual tasks. Our code is available at https://github.com/Lmmh058/FSATFusion.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2506.10366",
+      "url": "https://www.semanticscholar.org/paper/0754a17980a439b59ec656aeb1b14740a0619ff6"
+    },
+    {
+      "title": "Effective crowd counting using multi-resolution context and image quality assessment-guided training",
+      "abstract": "Crowd counting is the challenging task in the crowd scene analysis. To tackle the scale variant issue and to calculate the more accurate result in this target task, this paper designs an effective crowd counting method based on multi-resolution context and image quality assessment-guided training. Specially, a multi-resolution context module is designed to extract the multi-scale context adaptively to enhance the final counting performance through learning the imbalance between different scale paths. An image quality assessment-guided training approach is developed to facilitate the crowd counting network to generate high-quality density map and more accurate counting result. Extensive experiments on benchmarks demonstrate the effectiveness of the proposed method on crowd counting task, the generalization of the proposed method, and the generalization of the developed image quality assessment-guided training approach.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2020.103065",
+      "url": "https://www.semanticscholar.org/paper/8132a183a7a20b374bd32a84f8dc596f7453844d"
+    },
+    {
+      "title": "MF-LPR2: Multi-frame license plate image restoration and recognition using optical flow",
+      "abstract": "License plate recognition (LPR) is important for traffic law enforcement, crime investigation, and surveillance. However, license plate areas in dash cam images often suffer from low resolution, motion blur, and glare, which make accurate recognition challenging. Existing generative models that rely on pretrained priors cannot reliably restore such poor-quality images, frequently introducing severe artifacts and distortions. To address this issue, we propose a novel multi-frame license plate restoration and recognition framework, MF-LPR$^2$, which addresses ambiguities in poor-quality images by aligning and aggregating neighboring frames instead of relying on pretrained knowledge. To achieve accurate frame alignment, we employ a state-of-the-art optical flow estimator in conjunction with carefully designed algorithms that detect and correct erroneous optical flow estimations by leveraging the spatio-temporal consistency inherent in license plate image sequences. Our approach enhances both image quality and recognition accuracy while preserving the evidential content of the input images. In addition, we constructed a novel Realistic LPR (RLPR) dataset to evaluate MF-LPR$^2$. The RLPR dataset contains 200 pairs of low-quality license plate image sequences and high-quality pseudo ground-truth images, reflecting the complexities of real-world scenarios. In experiments, MF-LPR$^2$ outperformed eight recent restoration models in terms of PSNR, SSIM, and LPIPS by significant margins. In recognition, MF-LPR$^2$ achieved an accuracy of 86.44%, outperforming both the best single-frame LPR (14.04%) and the multi-frame LPR (82.55%) among the eleven baseline models. The results of ablation studies confirm that our filtering and refinement algorithms significantly contribute to these improvements.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cviu.2025.104361",
+      "url": "https://www.semanticscholar.org/paper/2d12a85b549b94a82945b5385f336878ec131114"
+    }
+  ]
+}

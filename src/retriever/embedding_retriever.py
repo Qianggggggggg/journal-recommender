@@ -5,7 +5,7 @@ import numpy as np
 
 from ..journals.journal_model import Journal
 from ..journals.journal_store import JournalStore
-from ..utils.embedding import OllamaEmbedding
+from ..utils.embedding import OllamaEmbedding, encode_query
 
 
 class EmbeddingRetriever:
@@ -20,7 +20,7 @@ class EmbeddingRetriever:
     ) -> List[Tuple[Journal, float]]:
         """向量检索"""
         # 获取查询向量
-        query_embedding = self.embedding_client.embed(query_text)
+        query_embedding = encode_query(self.embedding_client, query_text)
 
         # FAISS 检索
         results = self.store.search_by_vector(query_embedding, top_k)

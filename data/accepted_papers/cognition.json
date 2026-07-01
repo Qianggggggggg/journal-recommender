@@ -1,0 +1,70 @@
+{
+  "journal_id": "cognition",
+  "journal_name": "Cognition",
+  "papers": [
+    {
+      "title": "The link between non-human primate vocalizations and cognition is not constrained by maturation alone: Evidence from healthy preterm infants",
+      "abstract": "To acquire language, infants must not only identify the signals of their language(s), but also discover how these signals are connected to meaning. By 3 months of age, infants’ native language, non-native languages, and vocalizations of non-human primates support infants’ formation of object categories—a building block of cognition. But by 6 months, only the native language exerts this cognitive advantage. Prior work with preterm infants indicates that maturation constrains this developing link between the native language and cognition. Here, we assess whether maturation exerts similar constraints on the influence of non-human primate vocalizations on infant categorization. Cross-sectional growth curve analyses of new data from preterm infants and extant data from fullterm infants indicate that developmental tuning of this signal’s influence on categorization is best predicted by infants’ chronological age, and not gestational status. This evidence, together with prior work, suggests that as infants tune the initially broad set of signals that support early cognition, they are guided by two independent processes: maturation constrains the expression of a link between their native language and cognition, while the influence of non-linguistic signals are guided by other factors, such as postnatal age and experience.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2024.105886",
+      "url": "https://www.semanticscholar.org/paper/225cf12301fe4869a23a625665b539c302c20403"
+    },
+    {
+      "title": "The temporal momentum effect reflects temporal cognition and cannot be entirely explained by central tendency and range effects.",
+      "abstract": "The Temporal Momentum Effect (TME) describes the systematic overestimation of reproduced estimates when adding two temporal intervals and underestimation when subtracting them. The TME has been attributed to a spatial component in the representation of time. However, previous studies on the TME used continuous white noise to indicate the operands, which confounds duration with stimulus energy. In Experiment 1, we separated sensory energy from temporal duration by presenting operands defined as the silent interval between a start and a stop signal. We replicated the TME both with continuous white noise and empty intervals, implying that it reflects temporal cognition. Experiment 2 tested the hypothesis that the TME merely reflects basic perceptual principles such as central tendency and range effects that govern behavior in various psychophysical domains. Under this hypothesis, the TME should have been mainly reflecting the impact of stimulus range. While Experiment 2 revealed a significant impact of stimulus range, the overall pattern of results did not entirely support this mechanism as the main driver of the TME. These results establish the TME as a cognitive bias that allows studying the principles that govern the mental manipulation of quantitative information such as time, space, and number.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2026.106500",
+      "url": "https://www.semanticscholar.org/paper/bf60ac0eca8cdccffc5742ff9bd92050fbe1f6bc"
+    },
+    {
+      "title": "Domain-general and domain-specific influences on emerging numerical cognition: Contrasting uni-and bidirectional prediction models.",
+      "abstract": "Domain-general skills such as executive functions (EFs), and domain-specific skills such as non-symbolic number sense and symbolic understanding are often pitted against each other as predictors of emerging maths. Here we aimed to investigate early childhood relations between these foundational skills with a balanced, longitudinal design. One hundred and seventy 3- and 4-year-old-children were tested at two time points, 5 months apart, on four domain-general executive and five domain-specific numeracy tasks. A latent EF factor was a strong predictor of symbolic maths and of their growth. In addition, stronger symbolic maths at Time 1 was correlated with later stronger EF, but symbolic maths did not predict EF growth. Our findings provide novel insights into dynamic interplay between general and specific cognitive skills contributing to preschool maths.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2021.104816",
+      "url": "https://www.semanticscholar.org/paper/6083a13f4966bf3a695d8bd35b22ca83ab2f569f"
+    },
+    {
+      "title": "Emotion recognition ability: Evidence for a supramodal factor and its links to social cognition.",
+      "abstract": "Accurate recognition of others' emotions is an important skill for successful social interaction. Unsurprisingly, it has been an enduring topic of interest, and notable individual differences have been observed. Despite this focus, the underlying functional architecture of this ability has not been thoroughly investigated, particularly concerning emotion recognition across different sensory domains and stimulus modalities. Using a structural equation modelling approach, Study 1 (N = 284) established the structure of emotion recognition ability across three expressive domains - face, body and voice - and observed strong evidence for a superordinate 'supramodal' emotion recognition factor, over and above domain-specific factors. Additionally, we observed a significant moderate negative association between this superordinate factor and alexithymia. In Study 2 (N = 218), findings indicated that supramodal emotion recognition ability and face identity recognition are two related but independent constructs. In Study 3 (N = 249), we examined links from both supramodal emotion recognition and face identity recognition to broader cognitive ability, and observed that general intelligence was a significant predictor of supramodal emotion recognition ability. In contrast, there was no association between intelligence and face identity recognition ability. Across three independent samples, then, our findings offer strong support for an emotion recognition ability factor existing across visual and auditory domains encompassing social signals conveyed by face, body and voice, and outline its associations to broader cognitive and affective traits.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2019.104166",
+      "url": "https://www.semanticscholar.org/paper/f517fff2dc0b9093abd490b37e535fd800af55fa"
+    },
+    {
+      "title": "Rational information search in welfare-tradeoff cognition.",
+      "abstract": "One of the most important dimensions along which we evaluate others is their propensity to value our welfare: we like people who are disposed to incur costs for our benefit and who refrain from imposing costs on us to benefit themselves. The evolutionary importance of social valuation in our species suggests that humans have cognitive mechanisms that are able to efficiently extract information about how much another person values them. Here I test the hypothesis that people are spontaneously interested in the kinds of events that have the most potential to reveal such information. In two studies, I presented participants (Ns = 216; 300) with pairs of dilemmas that another individual faced in an economic game; for each pair, I asked them to choose the dilemma for which they would most like to see the decision that the individual had made. On average, people spontaneously selected the choices that had the potential to reveal the most information about the individual's valuation of the participant, as quantified by a Bayesian ideal search model. This finding suggests that human cooperation is supported by sophisticated cognitive mechanisms for information-gathering.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2022.105317",
+      "url": "https://www.semanticscholar.org/paper/6d5f16c883038c46331cd18b55eaa7f578118981"
+    },
+    {
+      "title": "More why, less how: What we need from models of cognition",
+      "abstract": "Science regularly experiences periods in which simply describing the world is prioritised over attempting to explain it. Cognition, this journal, came into being some 45 years ago as an attempt to lay one such period to rest; without doubt, it has helped create the current cognitive science climate in which theory is decidedly welcome. Here we summarise the reasons why a theoretical approach is imperative in our field, and call attention to some potentially counter-productive trends in which cognitive models are concerned too exclusively with how processes work at the expense of why the processes exist in the first place and thus what the goal of modelling them must be.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2021.104688",
+      "url": "https://www.semanticscholar.org/paper/873d22fddf0d72ae6b525f5af83b0dcb8f42ff0e"
+    },
+    {
+      "title": "Selecting among competing models of talker adaptation: Attention, cognition, and memory in speech processing efficiency",
+      "abstract": "Phonetic variability across talkers imposes additional processing costs during speech perception, often measured by performance decrements between single- and mixed-talker conditions. However, models differ in their predictions about whether accommodating greater phonetic variability (i.e., more talkers) imposes greater processing costs. We measured speech processing efficiency in a speeded word identification task, in which we manipulated the number of talkers (1, 2, 4, 8, or 16) listeners heard. Word identification was less efficient in every mixed-talker condition compared to the single-talker condition, but the magnitude of this performance decrement was not affected by the number of talkers. Furthermore, in a condition with uniform transition probabilities between two talkers, word identification was more efficient when the talker was the same as the prior trial compared to trials when the talker switched. These results support an auditory streaming model of talker adaptation, where processing costs associated with changing talkers result from attentional reorientation.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2020.104393",
+      "url": "https://www.semanticscholar.org/paper/b2edf942c600e10673019c41435c002cbc22201e"
+    },
+    {
+      "title": "How Cognition came into being.",
+      "abstract": "Jacques Mehler and I started Cognition, to break the grip of empiricist associationist behaviorism and stultifying style requirements on scientific discourse, and to liberate Cognitive Psychology's contributions to social issues. The journal provided opportunities for upcoming generations to expand Cognitive Psychology, publishing new concepts unhindered by established topics and standard formats. As the journal matured, Jacques kept. it fresh for 4 decades, seeking young scientists, novel ideas, and elegant writing, as it midwifed the emergence from Reductionist Behaviorism through Cognitive Psychology to rationalist Cognitive Science. The journal now has opportunities to nurture further progress in the future of Cognitive Science. I speculate that the field will keep associationist processes but integrate them with a new kind of non-reductionist theory that eschews detailed predictions, and which which interprets the brain as an enactor of thought, but not its structural cause. Ideally it will provide a set of constraints on the action of brain and mind that subsume and explain behavioral regularities, the role of frequency, how the brain externalizes those constraints and how the externalization processes emerge developmentally as a function of innate factors, structures unique to the mind and brain, experience and natural law.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cognition.2021.104761",
+      "url": "https://www.semanticscholar.org/paper/01506885234213970e1bb17bc51264d596c86161"
+    }
+  ]
+}

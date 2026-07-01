@@ -78,7 +78,7 @@ def test_pdf_contains_quality_info():
     print(f"Extracted text: {pdf_text}")
 
     # 检查质量信息是否在 PDF 中（位于推荐期刊列表下方）
-    assert "论文评级: B" in pdf_text, f"PDF should contain '论文评级: B', got: {pdf_text}"
+    assert "论文评级: A" in pdf_text, f"PDF should contain '论文评级: A', got: {pdf_text}"
     assert "论文强度: 75%" in pdf_text, f"PDF should contain '论文强度: 75%', got: {pdf_text}"
     assert "评估置信度: 85%" in pdf_text, f"PDF should contain '评估置信度: 85%', got: {pdf_text}"
 
@@ -88,8 +88,8 @@ def test_pdf_contains_quality_info():
     idx_section = pdf_text.find("推荐期刊列表")
     assert idx_section < idx_quality < idx_journal, "Quality info should be between section header and first journal"
 
-    # 必须包含：质量等级(Q2)、强度(75%)、置信度(85%)
-    assert "B" in pdf_text, f"PDF should contain quality level B, got: {pdf_text[:300]}"
+    # 必须包含：显式质量等级、强度(75%)、置信度(85%)
+    assert "A" in pdf_text, f"PDF should contain quality level A, got: {pdf_text[:300]}"
     assert "75" in pdf_text or "0.75" in pdf_text, f"PDF should contain paper_strength 75%, got: {pdf_text[:300]}"
     assert "85" in pdf_text or "0.85" in pdf_text, f"PDF should contain confidence 85%, got: {pdf_text[:300]}"
 

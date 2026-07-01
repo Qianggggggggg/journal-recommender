@@ -1,0 +1,86 @@
+{
+  "journal_id": "tfs",
+  "journal_name": "IEEE Transactions on Fuzzy Systems",
+  "papers": [
+    {
+      "title": "Resilient Event-Triggered Filtering for Networked Switched T-S Fuzzy Systems Under Denial-of-Service Attacks",
+      "abstract": "This article focuses on the problem of resilient event-triggered $H_{\\infty }$ filtering for networked switched Takagi–Sugeno (T-S) fuzzy systems in the presence of Denial-of-Service (DoS) attacks. To improve the utilization efficiency of communication resources and resist the influence of attacks, the resilient mode-dependent event-triggered strategy (ETS) is proposed to determine the necessary data transmission. Different from the existing ETSs for the switching linear systems, the proposed strategy not only removes the two adjacent trigger instants that are strictly less than the average dwell time constraint but also releases data immediately at the end of the attack to mitigate its side effects. Based on the transmitted switching signal and measurable output, the switching fuzzy filter is constructed to estimate the target signal. Unlike the traditional switching filter design, the transmission signals are affected by intermittent interruption of DoS attacks and ETS leads to the asynchronous behavior of system mode and filter mode, which increases the difficulty of filtering error system analysis and filter design. To overcome this challenge, a novel multiple Lyapunov function related to attack signals, system modes, and filter modes is established to analyze the exponential stability and $H_{\\infty }$ performance of the estimation error system. Furthermore, co-design methods regarding filter gains and event-triggered parameters are given. Finally, simulation results are carried out to substantiate the feasibility of the proposed approach.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2023.3345834",
+      "url": "https://www.semanticscholar.org/paper/fa842e33b1965eb8b430482fa4ec520f9176ba5c"
+    },
+    {
+      "title": "Observer-Based Adaptive Event-Triggered Control for Interval Type-2 Fuzzy Systems Under Multiple Cyber-Attacks",
+      "abstract": "This article focuses on the observer-based event-triggered (ET) scheme issue for interval type-2 (IT-2) fuzzy systems under the multiple cyber-attacks including false data injection (FDI) attacks and denial-of-service (DoS) attacks. Considering both intermittency of DoS attacks and unmeasurable of partial systems, a switched observer-based nonlinear systems in the form of IT-2 fuzzy models is established. An adaptive event-triggered (AET) scheme that can modulate the threshold value is proposed for better saving the communication resources. Considering the impact of stochastic FDI attacks, a switched AET controller is designed. Then, Lyapunoval analysis method is developed such that the augmented error IT-2 fuzzy systems is mean square exponentially stable with $H_\\infty$ performance. Finally, a practical example is employed to reflect the validity of the approach.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2024.3354241",
+      "url": "https://www.semanticscholar.org/paper/ea909a03b35c33589612f03b4745c68e1f7231ea"
+    },
+    {
+      "title": "General and Less Conservative Criteria on Stability and Stabilization of T–S Fuzzy Systems With Time-Varying Delay",
+      "abstract": "This article deals with the problem of stability and stabilization of Takagi–Sugeno (T–S) fuzzy systems with time-varying delay. First, a novel Lyapunov–Krasovskii functional is constructed, which is dependent on membership functions and takes more information on the time-varying delay into account. Next, based on an $N$-order free-matrix-based integral inequality and a switching method, a cluster of criteria on the stability and stabilization are obtained for the closed-loop system connected with switching state-feedback controllers. Then, a parameter tuning method and an iterative algorithm are devised to calculate control gains. Finally, three numerical examples including the truck-trailer system are given to show that the proposed criteria can offer less conservative results than some existing ones.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2022.3204899",
+      "url": "https://www.semanticscholar.org/paper/cf46879a8f7031462c053ad187ebc0d7cfaebd9a"
+    },
+    {
+      "title": "Dynamic Output Feedback Fault Tolerant Control for Switched Fuzzy Systems With Fast Time Varying and Unbounded Faults",
+      "abstract": "This article focuses on the fault reconstruction and fault-tolerant control problems of switched fuzzy systems with actuator and sensor faults, where the faults may be fast time-varying and unbounded. The multiple coordinate transformations are introduced, then the reduced-order observer based fault reconstruction method is considered, which can reconstruct the system state, actuator, and sensor faults, simultaneously. For the case that there is no disturbance, the LMI conditions are achieved to ensure that for any switching signal, the error dynamics can be exponentially stable. Utilizing the estimated fault information, the fuzzy dynamic output feedback fault tolerant controllers are designed to compensate the fault effect and stabilize the systems. The root-mean-square gain is considered to reduce the disturbance influence on fault estimation and fault-tolerant control, in which the zero initial condition is not needed. Finally, simulations are conducted to demonstrate the effectiveness of the considered techniques.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2023.3246061",
+      "url": "https://www.semanticscholar.org/paper/4de861dd32e4a9700d46164bb83678286b9c4351"
+    },
+    {
+      "title": "Aperiodic Sampled-Data-Based Control for T-S Fuzzy Systems: An Improved Fuzzy-Dependent Adaptive Event-Triggered Mechanism",
+      "abstract": "This article is devoted to designing a novel aperiodic sampled-data-based event-triggered control strategy for Takagi–Sugeno fuzzy systems. First, via taking the structural features of fuzzy subsystems and the available information of fuzzy membership functions into consideration, an improved fuzzy-dependent adaptive event-triggered mechanism, which designs different adaptive event-triggered mechanisms for corresponding fuzzy subsystems, is proposed to provide extra design flexibility and further optimize communication efficiency. Then, the two-side looped-functional method and dynamic partitioning approach are introduced in the construction of the novel Lyapunov–Krasovskii functional (LKF). These two methods contribute to deriving preferable stability criterion and stabilization approach via relaxing the positive definite constraint on LKF and fully utilizing the inner system state during the whole aperiodic sampling interval. Eventually, two simulation examples are introduced to verify the effectiveness of the proposed control strategy and its advantages in lightening communication frequency.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2023.3276818",
+      "url": "https://www.semanticscholar.org/paper/9de8a120b39e0eaf059f4013c6a2abead760a043"
+    },
+    {
+      "title": "Security-Based Control for Networked Interval Type-2 Fuzzy Systems With Multiple Cyber-Attacks: An Improved Dynamic Event-Triggered Scheme",
+      "abstract": "This article addresses the problem of dynamic event-triggered (DET) control for networked interval type-2 (IT2) fuzzy systems subject to multiple cyber-attacks, which contain deception attacks and aperiodic denial-of-service attacks simultaneously. First, a multiple cyber-attack model is established for the IT2 fuzzy systems with multiple cyber-attacks and external disturbances. Second, an improved DET mechanism (DETM) is proposed to reduce the communication burden. Contrasting with existing works, by introducing two adjustable parameters into the novel DETM, the presented DETM has more flexibility in adjusting the data packet transmissions to conserve more limited network resources. Meanwhile, the Zeno behavior is probably excluded under the proposed DETM while preserving the system performance. Third, imperfectly matched membership functions (MFs) are considered between fuzzy controller and IT2 fuzzy model, and the global boundary information of MFs and slack matrices are introduced to relax stability conditions. Besides, by constructing a proper Lyapunov–Krasovskii functional, sufficient conditions are obtained to ensure the exponentially mean-square stable of the IT2 fuzzy systems with the $H_{\\infty }$ performance. Finally, two simulation examples are provided to illustrate the effectiveness of the theoretical results.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2023.3235441",
+      "url": "https://www.semanticscholar.org/paper/921f9cab0633ca81bb5b9da51223d2e829822e7d"
+    },
+    {
+      "title": "Adaptive Fuzzy Distributed Optimal FTC for Nonlinear Multiagent Systems Based Multiplayer Differential Game",
+      "abstract": "This article proposes an adaptive fuzzy distributed output-feedback optimal fault tolerant control (FTC) methodology for strict-feedback nonlinear multiagent systems with intermittent actuator faults. The proposed adaptive distributed FTC method is composed of a fuzzy feedforward output-feedback distributed FTC and a fuzzy error feedback distributed optimal controller. The fuzzy feedforward distributed FTC is designed by backstepping design technique and fuzzy state observer, which can solve unmeasured states problem of the agents and transform the strict-feedback nonlinear multiagent systems (MASs) into a linearizable feedback nonlinear MASs. The fuzzy distributed optimal controller is designed for the error nonlinear MASs based on adaptive dynamical programming to find a Nash equilibrium solution of the mutiplayer differential graphical game. It is proved that the formulated adaptive distributed fuzzy optimal FTC scheme can achieve the global optimal control objective, and make the controlled MASs asymptotic stable, the followers' outputs follow the leader's output. The simulation results on ship autopilot systems demonstrate its effectiveness.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2024.3488015",
+      "url": "https://www.semanticscholar.org/paper/6de2caa5fb33f22caf4d37ae512ecbe77d857e1c"
+    },
+    {
+      "title": "Ultimately Bounded PID Control for T–S Fuzzy Systems Under FlexRay Communication Protocol",
+      "abstract": "This article investigates the ultimately bounded proportional–integral–derivative (PID) control problem for a class of discrete-time Takagi–Sugeno fuzzy systems subject to unknown-but-bounded noises and protocol constraints. The signal transmissions from sensors to the remote controller are realized via a communication network, where the FlexRay protocol is employed to flexibly schedule the information exchange. The FlexRay protocol is characterized by both the time- and event-triggered mechanisms, which are conducted in a cyclic manner. By using a piecewise approach, the measurement outputs affected by the FlexRay protocol are established based on a switching model. Then, a fuzzy PID controller is proposed with a concise and realizable structure. To evaluate the performance of the controlled system, a special time sequence is introduced that accounts for the behavior of the FlexRay protocol. Subsequently, a general framework is obtained to verify the boundedness of the closed-loop system, and then, the controller gains are designed by minimizing the bound of the concerned variables. Finally, a simulation study is conducted to validate the effectiveness of the developed control scheme.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2023.3282044",
+      "url": "https://www.semanticscholar.org/paper/361b699bbf2cbf488c40812bcb5ce8e50fc5934f"
+    },
+    {
+      "title": "Further Stability Criteria for Sampled-Data-Based Interval Type-2 Fuzzy Systems via a Refined Two-Side Looped-Functional Method",
+      "abstract": "This article investigates the stability and stabilization problem of aperiodic sampled-data nonlinear systems in the framework of interval type-2 (IT-2) fuzzy models. First, by introducing two adjustable parameters and splitting the sampling intervals into four nonuniform intervals, a refined two-side looped-functional method is constructed to fully utilize inner state information during the whole aperiodic sampling interval. Simultaneously, the positive definiteness constraint for the individual matrix in Lyapunov–Krasovskii functional can be further relaxed. Then, via constructing a novel fuzzy Lyapunov–Krasovskii functional (FLKF) together with a fuzzy-dependent-switching scheme, the available features of fuzzy membership functions (FMFs) can be further taken into consideration to increase the design flexibility. Consequently, the stability condition and corresponding controller design approach for aperiodic sampled-data IT-2 fuzzy systems can be obtained with less design conservatism and larger sampling intervals. Finally, two simulation examples are employed to demonstrate the validity and superiority of the proposed method.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2022.3185711",
+      "url": "https://www.semanticscholar.org/paper/144e904571e651939202d5536f66041aa387521d"
+    },
+    {
+      "title": "Security Control of Sampled-Data T–S Fuzzy Systems Subject to Cyberattacks and Successive Packet Losses",
+      "abstract": "This article investigates the security control problem of sampled-data Takagi–Sugeno (T–S) fuzzy systems subject to cyberattacks and successive packet losses. The cyberattack considered in this article is a stochastic deception attack. The packet losses under consideration occur in the sensor-to-controller and controller-to-actor channels, both of which are modeled as two independent Bernoulli processes. On this basis, a novel successive packet loss modeling method is proposed with some basic assumptions. By the exact discrete-time model approach, a discretized sampled-data T–S fuzzy model is first established by considering the probability characteristic of the deception attacks and successive packet losses in a unified framework. Based on the established mode, the sufficient conditions to guarantee the security degree are derived by the Lyapunov function approach. Furthermore, the fuzzy security controller is designed in view of linear matrix inequalities. Finally, a benchmark example is given to show the validity of the proposed approach.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TFUZZ.2022.3197312",
+      "url": "https://www.semanticscholar.org/paper/3dfad02b94428566bd8549045329da52ef58a990"
+    }
+  ]
+}

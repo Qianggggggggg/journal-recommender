@@ -9,6 +9,86 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1049/ipr2.13237",
       "url": ""
+    },
+    {
+      "title": "IET Image Processing",
+      "abstract": ": Since histopathological images exist in various forms, performing segmentation on these images is tedious. While in cancer-free colon tissue, epithelial cells generally have an elliptical shape; their structure alters in a malignant tissue. This study proposes a technique consisting of colon biopsy image segmentation and a hybrid set of features for classification, and is evaluated on multiple databases with various levels of magnifications. This study presents a novel image segmentation method with multi-level thresholding based on Rényi's two-dimensional entropy with a cultural algorithm (2DR e CA). Based on the entropy, elliptical epithelial cells, being the region of interest, are identified from the segmented background. After successful segmentation, shape descriptors are extracted with morphological operations. Two sets of texture features (grey-level co-occurrence matrix and block-wise elliptical local binary pattern) are calculated based on pre-processed grey-scale colon images. The proposed hybrid feature vector set, then concatenates the extracted features for training and testing with a random forest classifier. The proposed segmentation and classification model is evaluated by considering four data sets consisting of various colon images at different magnifications. In addition, it is evaluated by multiple performance measures and compared with existing techniques.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2019.1717",
+      "url": "https://www.semanticscholar.org/paper/c1d7db3472482a653f2b2d20d6d05217d9eaa837"
+    },
+    {
+      "title": "Breaking the rain barrier: A novel approach in image processing with AMGR-Net",
+      "abstract": "Image quality is significantly impacted by rain, posing challenges in fields like surveillance, autonomous driving, and outdoor robotics. The field of image deraining, particularly for single image, has attracted considerable attention to improve image clarity in inclement weather. To overcome the inherent complexity of the single‐image rain removal task, we proposed a novel architecture of the attention mechanism and gated recurrent network (AMGR‐Net) that combines spatial and channel attention mechanisms with gated recurrent units. AMGR‐Net contains multiple modules, each of which uses convolution kernels and attention mechanisms to enhance feature extraction. AMGR‐Net demonstrates superior performance over state‐of‐the‐art methods in both synthetic and real‐world image datasets, as evidenced by higher peak signal to noise ratio and structural similarity index measurement scores. The integration of spatial attention significantly enhances feature expression, enabling more effective rain streak removal and detail preservation. Furthermore, this method also shows promising results in the application of stripe noise removal from meteorological satellite cloud images.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/ipr2.13258",
+      "url": "https://www.semanticscholar.org/paper/630f673036744932dbd76ae400e29a4d13546884"
+    },
+    {
+      "title": "Identification of malnutrition and prediction of BMI from facial images using real-time image processing and machine learning",
+      "abstract": "Human faces contain useful information that can be used in the identiﬁcation of age, gender, weight etc. Among these biometrics, body mass index (BMI) and body weight are good indicators of a healthy person. Motivated by the recent health science studies, this work investigates ways to identify malnutrition affected people and obese people by ana-lyzing body weight and BMI from facial images by proposing a regression method based on the 50-layers Residual network architecture. For face detection, Multi-task Cascaded Convolutional Neural Networks have been employed. A system is created to evaluate BMI along with age and gender from human facial real-time images. Malnutrition and obesity are commonly determined with the help of BMI. In the previous works, height, weight, and BMI estimation through automatic means have predominantly focused on full-body images and videos of humans. The usage of facial images",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1049/IPR2.12222",
+      "url": "https://www.semanticscholar.org/paper/4ccd116ad3d85130c4f2646b86bf219e65ed8052"
+    },
+    {
+      "title": "Jointly network image processing: multi-task image semantic segmentation of indoor scene based on CNN",
+      "abstract": "Image semantic segmentation has always been a research hotspot in the field of robots. Its purpose is to assign different semantic category labels to objects by segmenting different objects. However, in practical applications, in addition to knowing the semantic category information of objects, robots also need to know the position information of objects to complete more complex visual tasks. Aiming at a complex indoor environment, this study designs an image semantic segmentation network framework of joint target detection. Using the parallel operation of adding semantic segmentation branches to the target detection network, it innovatively implements multi-vision task combining object classification, detection and semantic segmentation. By designing a new loss function, adjusting the training using the idea of transfer learning, and finally verifying it on the self-built indoor scene data set, the experiment proves that the method in this study is feasible and effective, and has good robustness.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2020.0088",
+      "url": "https://www.semanticscholar.org/paper/04f3a2b7c127f802b5add02796fd537587bef81f"
+    },
+    {
+      "title": "Review of image processing approaches for detecting plant diseases",
+      "abstract": "There is intense pressure on agricultural productivity due to the ever-growing population. Several diseases affect crop yield and thus, effective control of these can significantly improve the production of food for all. In this regard, detection of diseases at an early stage and quantification of the severity, in general, has acquired urgent attention of the researchers. In this study, a summary of prevalent techniques and methodologies used for the detection, quantification and classification of diseases is presented to understand the scope of improvement. The study pays attention to critical gaps that exist in available approaches and enhance them for the early prediction of diseases. Diseases affect almost all parts of plants, e.g. root, stem, flower, leaf; a manifestation in different ways for different parts of the plant of the same disease presents a challenge for researchers. This study extends the review work published by JGA Barbedo in 2013, as there have been significant advances and numerous new techniques introduced since then. A novel approach of classifying and categorisation of the existing techniques based on pathogen types is a significant contribution by the authors in this study.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2018.6210",
+      "url": "https://www.semanticscholar.org/paper/8f9425d0b2c32df2ac5a0e3a209bff5242b5ae78"
+    },
+    {
+      "title": "Intelligent monitoring method of water quality based on image processing and RVFL-GMDH model",
+      "abstract": ": The water quality, contaminant migration characteristics, and emissions quantity of pollutants in the basin would have a great impact on aquatic creatures, agricultural irrigation, human life, and so on. In the aquaculture industry, because water colour can reflect the species and number of phytoplankton in the water, the water quality type can be obtained by analysing the colour of the aquaculture water using image processing techniques. Therefore, this study proposes an intelligent monitoring approach for water quality. The critical features of water colour images are extracted, and then using the machine learning methods, an intelligent system for water quality monitoring is established based on the fused random vector functional link network (RVFL) and group method of data handling (GMDH) model. The proposed approach presents a superior performance relative to other state-of-the-art methods, and it achieves an average predicting accuracy of 96.19% on the feature dataset. Experimental findings demonstrate the validity of the proposed approach, and it is accomplished efficiently for the monitoring of water quality.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2020.0254",
+      "url": "https://www.semanticscholar.org/paper/f9010bac1e58385b46759c0b2236bceab86d957d"
+    },
+    {
+      "title": "Automated fish cage net inspection using image processing techniques",
+      "abstract": "Fish-cage dysfunction in aquaculture installations can trigger significant negative consequences affecting the operational costs. Low oxygen levels, due to excessive fooling's, leads to decrease growth performance, and feed efficiency. Therefore, frequent periodic inspection of fish-cage nets is required, but this task can become quite expensive with the traditional means of employing professional divers that perform visual inspections at regular time intervals. The modern trend in aquaculture is to take advantage of IT technologies with the use of a small-sized, low-cost autonomous underwater vehicle, permanently residing within a fish cage and performing regular video inspection of the infrastructure for the entire net surface. In this study, we explore specialised image processing schemes to detect net holes of multiple area size and shape. These techniques are designed with the vision to provide robust solutions that take advantage of either global or local image structures to provide the efficient inspection of multiple net holes.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2019.1667",
+      "url": "https://www.semanticscholar.org/paper/db10078d880fcd8f2e06600f274451be5c334047"
+    },
+    {
+      "title": "A bi-directional fractional-order derivative mask for image processing applications",
+      "abstract": ": Fractional computation has been recently designed as a major mathematical tool in image and signal processing fields. This study presents a novel operator established for two-dimensional fractional differentiation. It is developed based on the one-dimensional Charef fractional differentiation extension. A new multi-directional mask is proposed and a new adaptive fractional-order computation is introduced. The proposed method uses the gradient computation properties. It has been applied in edge detection and de-noising problems using real and synthetic images. Obtained results have been compared to those given by integer and fractional useful operators. Results demonstrate that the fractional edge images obtained using the proposed operator has more complete and clear contour information and more abundant texture detail information. The performances have been improved by the proposed method.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2019.0467",
+      "url": "https://www.semanticscholar.org/paper/e100b8a4ba7633d813b91727000b2ea2e65cd306"
+    },
+    {
+      "title": "Detection, quantification and classification of ripened tomatoes: a comparative analysis of image processing and machine learning",
+      "abstract": "In this paper, specifically for detection of ripe/unripe tomatoes with/without defects in the crop field, two distinct methods are described and compared. One is a machine learning approach, known as ‘Cascaded Object Detector’ and the other is a composition of traditional customized methods, individually known as ‘Colour Transformation’, ‘Colour Segmentation’ and ‘Circular Hough Transformation’. The (Viola Jones) Cascaded Object Detector generates ‘histogram of oriented gradient’ (HOG) features to detect tomatoes. For ripeness checking, the RGB mean is calculated with a set of rules. However, for traditional methods, color thresholding is applied to detect tomatoes either from a natural or solid background and RGB colour is adjusted to identify ripened tomatoes. In this work, Colour Segmentation is applied in the detection of tomatoes with defects, which has not previously been applied under machine learning techniques. The function modules of this algorithm are fed formatted images, captured by a camera mounted on a mobile robot. This robot was designed, built and operated in a tomato field to identify and quantify both green and ripened tomatoes as well as to detect damaged/blemished ones. This algorithm is shown to be optimally feasible for any micro-controller based miniature electronic devices in terms of its run time complexity of O(n3) for traditional method in best and average cases. Comparisons show that the accuracy of the machine learning method is 95%, better than that of the Colour Segmentation Method using MATLAB. This result is potentially significant for farmers in crop fields to identify the condition of tomatoes quickly.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2019.0738",
+      "url": "https://www.semanticscholar.org/paper/bed7066d318bcf473bd3ad1ed1a609ee7eb578d6"
+    },
+    {
+      "title": "Learning an Adaptive Model for Extreme Low-light Raw Image Processing",
+      "abstract": "Low-light images suffer from severe noise and low illumination. Current deep learning models that are trained with real-world images have excellent noise reduction, but a ratio parameter must be chosen manually to complete the enhancement pipeline. In this work, we propose an adaptive low-light raw image enhancement network to avoid parameter-handcrafting and to improve image quality. The proposed method can be divided into two sub-models: Brightness Prediction (BP) and Exposure Shifting (ES). The former is designed to control the brightness of the resulting image by estimating a guideline exposure time $t_1$. The latter learns to approximate an exposure-shifting operator $ES$, converting a low-light image with real exposure time $t_0$ to a noise-free image with guideline exposure time $t_1$. Additionally, structural similarity (SSIM) loss and Image Enhancement Vector (IEV) are introduced to promote image quality, and a new Campus Image Dataset (CID) is proposed to overcome the limitations of the existing datasets and to supervise the training of the proposed model. Using the proposed model, we can achieve high-quality low-light image enhancement from a single raw image. In quantitative tests, it is shown that the proposed method has the lowest Noise Level Estimation (NLE) score compared with the state-of-the-art low-light algorithms, suggesting a superior denoising performance. Furthermore, those tests illustrate that the proposed method is able to adaptively control the global image brightness according to the content of the image scene. Lastly, the potential application in video processing is briefly discussed.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-ipr.2020.0100",
+      "url": "https://www.semanticscholar.org/paper/07d8d17574d56183ed41f0091bd987affda7c306"
     }
   ]
 }

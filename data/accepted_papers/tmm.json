@@ -1,0 +1,70 @@
+{
+  "journal_id": "tmm",
+  "journal_name": "IEEE Transactions on Multimedia",
+  "papers": [
+    {
+      "title": "ByteNet: Rethinking Multimedia File Fragment Classification Through Visual Perspectives",
+      "abstract": "Multimedia file fragment classification (MFFC) aims to identify file fragment types, e.g., image/video, audio, and text without system metadata. It is of vital importance in multimedia storage and communication. Existing MFFC methods typically treat fragments as 1D byte sequences and emphasize the relations between separate bytes (interbytes) for classification. However, the more informative relations inside bytes (intrabytes) are overlooked and seldom investigated. By looking inside bytes, the bit-level details of file fragments can be accessed, enabling a more accurate classification. Motivated by this, we first propose Byte2Image, a novel visual representation model that incorporates previously overlooked intrabyte information into file fragments and reinterprets these fragments as 2D grayscale images. This model involves a sliding byte window to reveal the intrabyte information and a rowwise stacking of intrabyte n-grams for embedding fragments into a 2D space. Thus, complex interbyte and intrabyte correlations can be mined simultaneously using powerful vision networks. Additionally, we propose an end-to-end dual-branch network ByteNet to enhance robust correlation mining and feature representation. ByteNet makes full use of the raw 1D byte sequence and the converted 2D image through a shallow byte branch feature extraction (BBFE) and a deep image branch feature extraction (IBFE) network. In particular, the BBFE, composed of a single fully-connected layer, adaptively recognizes the co-occurrence of several some specific bytes within the raw byte sequence, while the IBFE, built on a vision Transformer, effectively mines the complex interbyte and intrabyte correlations from the converted image. Experiments on the two representative benchmarks, including 14 cases, validate that our proposed method outperforms state-of-the-art approaches on different cases by up to 12.2%.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2024.3521830",
+      "url": "https://www.semanticscholar.org/paper/5a532efc521f9809ada75535c90656a49dafd280"
+    },
+    {
+      "title": "DeepSpoof: Deep Reinforcement Learning-Based Spoofing Attack in Cross-Technology Multimedia Communication",
+      "abstract": "Cross-technology communication is essential for the Internet of Multimedia Things (IoMT) applications, enabling seamless integration of diverse media formats, optimized data transmission, and improved user experiences across devices and platforms. This integration drives innovative and efficient IoMT solutions in areas like smart homes, smart cities, and healthcare monitoring. However, this integration of diverse wireless standards within cross-technology multimedia communication increases the susceptibility of wireless networks to attacks. Current methods lack robust authentication mechanisms, leaving them vulnerable to spoofing attacks. To mitigate this concern, we introduce DeepSpoof, a spoofing system that utilizes deep learning to analyze historical wireless traffic and anticipate future patterns in the IoMT context. This innovative approach significantly boosts an attacker's impersonation capabilities and offers a higher degree of covertness compared to traditional spoofing methods. Rigorous evaluations, leveraging both simulated and real-world data, confirm that DeepSpoof significantly elevates the average success rate of attacks.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2024.3414660",
+      "url": "https://www.semanticscholar.org/paper/58835103a4b6cf81a34a1b07ea7589d5c1660894"
+    },
+    {
+      "title": "Reducing Latency for Multimedia Broadcast Services Over Mobile Networks",
+      "abstract": "Multimedia services over mobile networks pose several challenges, such as the efficient management of radio resources or the latency induced by network delays and buffering requirements on the multimedia players. In Long Term Evolution (LTE) networks, the definition of multimedia broadcast services over a common radio channel addresses the shortage of radio resources but introduces the problem of network error recovery. In order to address network errors on LTE multimedia broadcast services, the current standards propose the combined use of forward error correction and unicast recovery techniques at the application level. This paper shows how to efficiently synchronize the broadcasting server and the multimedia players and how to reduce service latency by limiting the multimedia player buffer length. This is accomplished by analyzing the relation between the different parameters of the LTE multimedia broadcast service, the multimedia player buffer length, and service interruptions. A case study is simulated to confirm how the quality of the multimedia service is improved by applying our proposals.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2016.2620605",
+      "url": "https://www.semanticscholar.org/paper/b37a553d5694c4f926f565e3611850f74d10e9a8"
+    },
+    {
+      "title": "Design of a 5G Multimedia Broadcast Application Function Supporting Adaptive Error Recovery",
+      "abstract": "The demand for mobile multimedia streaming services has been steadily growing in recent years. Mobile multimedia broadcasting addresses the shortage of radio resources but introduces a network error recovery problem. Retransmitting multimedia segments that are not correctly broadcast can cause service disruptions and increased service latency, affecting the quality of experience perceived by end users. With the advent of networking paradigms based on virtualization technologies, mobile networks have been enabled with more flexibility and agility to deploy innovative services that improve the utilization of available network resources. This paper discusses how mobile multimedia broadcast services can be designed to prevent service degradation by using the computing capabilities provided by multiaccess edge computing (MEC) platforms in the context of a 5G network architecture. An experimental platform has been developed to evaluate the feasibility of a MEC application to provide adaptive error recovery for multimedia broadcast services. The results of the experiments carried out show that the proposal provides a flexible mechanism that can be deployed at the network edge to lower the impact of transmission errors on latency and service disruptions.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2021.3126458",
+      "url": "https://www.semanticscholar.org/paper/d22ccde11d12ab1d03dd0dac7dba903d5c0a5345"
+    },
+    {
+      "title": "IEEE Transactions on Multimedia",
+      "abstract": "sTephen p. Welby, Executive Director & Chief Operating Officer Thomas siegerT, Business Administration Julie eve cozin, Corporate Governance donna hourican, Corporate Strategy Jamie moesch, Educational Activities sophia a. muirhead, General Counsel & Chief Compliance Officer liesel bell, Human Resources chris branTley, IEEE-USA cherif amiraT, Information Technology Karen haWKins, Marketing cecelia JanKoWsKi, Member and Geographic Activities vacanT, Publications KonsTanTinos Karachalios, Standards Association mary Ward-callan, Technical Activities IEEE Officers Toshio fuKuda, President susan K. “KaThy” land, President-Elect KaThleen a. Kramer, Secretary Joseph v. lillie, Treasurer José m. f. moura, Past President sTephen m. phillips, Vice President, Educational Activities Tapan K. sarKar, Vice President, Publication Services and Products KuKJin chun, Vice President, Member and Geographic Activities roberT s. fish, President, Standards Association Kazuhiro Kosuge, Vice President, Technical Activities James m. conrad, President, IEEE-USA",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tmm.2018.2851504",
+      "url": "https://www.semanticscholar.org/paper/3e17d29f31b6df8eb9373f7712cf0cc518f3999b"
+    },
+    {
+      "title": "Beyond Correlation: Evaluating Multimedia Quality Models With the Constrained Concordance Index",
+      "abstract": "This study investigates the evaluation of multimedia quality models, focusing on the inherent uncertainties in subjective Mean Opinion Score (MOS) ratings due to factors like rater inconsistency and bias. Traditional statistical measures such as Pearson's Correlation Coefficient (PCC), Spearman's Rank Correlation Coefficient (SRCC), and Kendall's Tau (KTAU) often fail to account for these uncertainties, leading to inaccuracies in model performance assessment. We introduce the Constrained Concordance Index (CCI), a novel metric designed to overcome the limitations of existing metrics by considering the statistical significance of MOS differences and excluding comparisons where MOS confidence intervals overlap. Through comprehensive experiments across various domains including speech and image quality assessment, we demonstrate that CCI provides a more robust and accurate evaluation of instrumental quality models, especially in scenarios of low sample sizes, rater group variability, and restriction of range. Our findings suggest that incorporating rater subjectivity and focusing on statistically significant pairs can significantly enhance the evaluation framework for multimedia quality prediction models. This work not only sheds light on the overlooked aspects of subjective rating uncertainties but also proposes a methodological advancement for more reliable and accurate quality model evaluation.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2025.3542991",
+      "url": "https://www.semanticscholar.org/paper/4d63b898d11252e6ccc0033605e5d35cf57fd3ff"
+    },
+    {
+      "title": "Hybrid Deep-Learning-Based Anomaly Detection Scheme for Suspicious Flow Detection in SDN: A Social Multimedia Perspective",
+      "abstract": "The continuous development and usage of multi-media-based applications and services have contributed to the exponential growth of social multimedia traffic. In this context, secure transmission of data plays a critical role in realizing all of the key requirements of social multimedia networks such as reliability, scalability, quality of information, and quality of service (QoS). Thus, a trust-based paradigm for multimedia analytics is highly desired to meet the increasing user requirements and deliver more timely and actionable insights. In this regard, software-defined networks (SDNs) play a vital role; however, several factors such as as-runtime security, and energy-aware networking limit its capabilities to facilitate efficient network control and management. Thus, with the view to enhance the reliability of the SDN, a hybrid deep-learning-based anomaly detection scheme for suspicious flow detection in the context of social multimedia is proposed. It consists of the following two modules: 1) an anomaly detection module that leverages improved restricted Boltzmann machine and gradient descent-based support vector machine to detect the abnormal activities, and 2) an end-to-end data delivery module to satisfy strict QoS requirements of the SDN, that is, high bandwidth and low latency. Finally, the proposed scheme has been experimentally evaluated on both real-time and benchmark datasets to prove its effectiveness and efficiency in terms of anomaly detection and data delivery essential for social multimedia. Further, a large-scale analysis over a Carnegie Mellon University (CMU)-based insider threat dataset has been conducted to identify its performance in terms of detecting malicious events such as-Identity theft, profile cloning, confidential data collection, etc.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TMM.2019.2893549",
+      "url": "https://www.semanticscholar.org/paper/ae72f496c60e8cf1aa96715eabf6ecd25d0b1d2d"
+    },
+    {
+      "title": "Progress and Opportunities in Modelling Just-Noticeable Difference (JND) for Multimedia",
+      "abstract": "Just-Noticeable Difference (JND) is the minimal amount of signal change that the human being is able to perceive. The human has five major sensing organs, namely, eyes, ears, nose, skin and tongue, and therefore JND exists for the corresponding five signal modalities and their derivatives. JND can play an important role in many multimedia applications and services, because these imperfect human perceptual characteristics may be turned into advantages for relevant system design, development and optimization. This paper starts off by giving a general description for JND concepts and the related statistical processes. Then, existing computational models for visual JND, which represent the majority of the related research so far, are to be reviewed systematically, with both handcrafted modeling and machine learning approaches. Furthermore, research attempts will be surveyed for JNDs for audio, smell, haptics and gustatory signals, as well as cross-modality/media efforts. Finally, possible future directions and opportunities are analysed and discussed.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tmm.2021.3106503",
+      "url": "https://www.semanticscholar.org/paper/1cfc9fc06358b25fd13b4cd9015ef813bb294e08"
+    }
+  ]
+}

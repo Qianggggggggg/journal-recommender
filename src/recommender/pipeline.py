@@ -42,9 +42,9 @@ class RecommenderPipeline:
         learned_reranker: Optional[LTRAdapter] = None,
         # 6.4: per-paper LLM evidence snapshot, keyed by normalized title.
         # When set and the paper title is present, attach_features uses the
-        # 26-dim schema (FEATURE_NAMES_WITH_LLM_EVIDENCE).
+        # 22-dim schema (FEATURE_NAMES_WITH_LLM_EVIDENCE).
         evidence_lookup: Optional[Dict[str, Dict[str, Dict[str, Any]]]] = None,
-        feature_schema: str = "19_dim_base",  # "19_dim_base" | "25_dim_with_llm_evidence"
+        feature_schema: str = "16_dim_base",
         # 2026-06-26: paper_strength removed (was 20/26)
         # 6.5: optional LLMEvidenceExtractor for the per-request online
         # evidence path. The API layer can call extractor.extract() to
@@ -74,11 +74,11 @@ class RecommenderPipeline:
         self.evidence_lookup = evidence_lookup or {}
         self.feature_schema = feature_schema
         # 决定 attach_features 的 expected feature dim
-        # 25-dim 仅在 feature_schema="25_dim_with_llm_evidence" 时启用,
-        # 且 paper 标题必须命中 evidence_lookup(否则回退 19 维,见 recommend())。
-        # 2026-06-26: paper_strength 移除 → 20/26 → 19/25。
+        # 22-dim (16 base + 6 evidence) 仅在 feature_schema="22_dim_with_llm_evidence" 时启用,
+        # 且 paper 标题必须命中 evidence_lookup(否则回退 16 维,见 recommend())。
+        # 2026-06-26: paper_strength 移除 → 26→22, 19→16。
         self._expected_feature_dim = (
-            25 if feature_schema == "25_dim_with_llm_evidence" else 19
+            22 if feature_schema == "22_dim_with_llm_evidence" else 16
         )
         # 6.5: optional LLMEvidenceExtractor for the per-request online
         # evidence path. If set, the API layer can call
@@ -224,10 +224,10 @@ class RecommenderPipeline:
         )
 
         # 2.6 (6.4) 把 LTR 训练特征注入 retrieval_trace(per journal)
-        # 默认 19 维;当 feature_schema="25_dim_with_llm_evidence" 且
-        # paper 标题命中 evidence_lookup 时,输出 25 维 evidence schema。
-        # 缺 paper_evidence 时**自动回退** 19 维(防御性,不破坏 baseline)。
-        # 2026-06-26: paper_strength 移除 → 20/26 → 19/25。
+        # 默认 16 维;当 feature_schema="22_dim_with_llm_evidence" 且
+        # paper 标题命中 evidence_lookup 时,输出 22 维 evidence schema。
+        # 缺 paper_evidence 时**自动回退** 16 维(防御性,不破坏 baseline)。
+        # 2026-06-26: paper_strength 移除 → 26→22, 20→16。
         paper_title_key = " ".join((paper_profile.title or "").casefold().split())
         paper_evidence_entry = self.evidence_lookup.get(paper_title_key, {})
         # evidence_lookup stores whole paper entries (title/venue/rule_ranks/
@@ -239,12 +239,15 @@ class RecommenderPipeline:
             else {}
         )
         feature_names: Optional[List[str]] = None
-        if self._expected_feature_dim == 26 and paper_evidence:
+        if self._expected_feature_dim == 22 and paper_evidence:
             feature_names = FEATURE_NAMES_WITH_LLM_EVIDENCE
         # accepted_paper_store 暂未在 pipeline 持有,传 None(attach_features
         # 内部会按 store=None 处理,candidate_in_accepted_corpus 全 0)。
-        # 2026-06-25: 透传 paper_ccf_target_level 让 same_ccf_level 在
-        # inference 也能计算(前提是 paper metadata 含 ccf_level)。
+        # 2026-06-29 v4 baseline rollback: 删 paper_ccf_target_level=
+        # kwarg — candidate_generator.attach_features 不支持这个 kwarg,
+        # 158 baseline 也没传。same_ccf_level 在 feature_builder 用
+        # paper_profile.ccf_target_level 默认 None 走 placeholder,
+        # 等价于 158 baseline 的行为。
         self.candidate_generator.attach_features(
             trace=retrieval_trace,
             paper_profile=paper_profile,
@@ -253,7 +256,6 @@ class RecommenderPipeline:
             accepted_paper_store=None,
             feature_names=feature_names,
             llm_evidence_by_journal=paper_evidence,
-            paper_ccf_target_level=getattr(paper_profile, "ccf_target_level", None),
         )
 
         # 构建 LLM 候选集：top20 + scope 边界强候选 + 同领域参考候选 + 受控 typical-only 候选
@@ -445,12 +447,22 @@ class RecommenderPipeline:
             ))
 
         # 5. 构建响应
+        # 2026-06-30: 把 llm_ranked_all 也暴露给下游，用于评测计算 Hit@K (K > top_k)。
+        llm_ranked_all_journals: list = []
+        if self.llm_ranker and rank_method != "rule_fallback":
+            try:
+                llm_ranked_all_journals = [
+                    j.journal_name for j, _, _, _ in llm_ranked_all
+                ]
+            except Exception:
+                pass
         result = {
             "recommendations": recommendations,
             "candidates": candidates,  # 粗排候选（用于调试分析）
             "rule_ranked": rule_ranked_all,  # RuleScorer 排序结果（用于调试分析）
             "llm_candidates": llm_candidates,  # LLM 精排候选池（用于评估诊断）
             "llm_candidate_ids": [j.journal_id for j, _, _ in llm_candidates],
+            "llm_ranked_all_names": llm_ranked_all_journals,  # LLM 精排全部排序（用于 Hit@10/20）
             "retrieval_trace": retrieval_trace,  # 候选召回来源（用于评估噪声定位）
             "paper_profile": paper_profile,
             "mode_used": mode,

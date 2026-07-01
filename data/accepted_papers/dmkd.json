@@ -3,14 +3,6 @@
   "journal_name": "Data Mining and Knowledge Discovery",
   "papers": [
     {
-      "title": "Explainable and interpretable machine learning and data mining",
-      "abstract": "The growing number of applications of machine learning and data mining in many domains—from agriculture to business, education, industrial manufacturing, and medicine—gave rise to new requirements for how to inspect and control the learned models. The research domain of explainable artificial intelligence (XAI) has been newly established with a strong focus on methods being applied post-hoc on black-box models. As an alternative, the use of interpretable machine learning methods has been considered—where the learned models are white-box ones. Black-box models can be characterized as representing implicit knowledge—typically resulting from statistical and neural approaches of machine learning, while white-box models are explicit representations of knowledge—typically resulting from rule-learning approaches. In this introduction to the special issue on ‘Explainable and Interpretable Machine Learning and Data Mining’ we propose to bring together both perspectives, pointing out commonalities and discussing possibilities to integrate them.",
-      "year": 2024,
-      "source": "semantic_scholar",
-      "doi": "10.1007/s10618-024-01041-y",
-      "url": "https://www.semanticscholar.org/paper/bb5e0284219cb6b5aa283eb734c1bd0202c4d7a7"
-    },
-    {
       "title": "A practical approach to novel class discovery in tabular data",
       "abstract": "The problem of novel class discovery (NCD) consists in extracting knowledge from a labeled set of known classes to accurately partition an unlabeled set of novel classes. While NCD has recently received a lot of attention from the community, it is often solved on computer vision problems and under unrealistic conditions. In particular, the number of novel classes is usually assumed to be known in advance, and their labels are sometimes used to tune hyperparameters. Methods that rely on these assumptions are not applicable in real-world scenarios. In this work, we focus on solving NCD in tabular data when no prior knowledge of the novel classes is available. To this end, we propose to tune the hyperparameters of NCD methods by adapting the k-fold cross-validation process and hiding some of the known classes in each fold. Since we have found that methods with too many hyperparameters are likely to overfit these hidden classes, we define a simple deep NCD model. This method is composed of only the essential elements necessary for the NCD problem and shows robust performance under realistic conditions. Furthermore, we find that the latent space of this method can be used to reliably estimate the number of novel classes. Additionally, we adapt two unsupervised clustering algorithms (k-means and Spectral Clustering) to leverage the knowledge of the known classes. Extensive experiments are conducted on 7 tabular datasets and demonstrate the effectiveness of the proposed method and hyperparameter tuning process, and show that the NCD problem can be solved without relying on knowledge from the novel classes.",
       "year": 2023,
@@ -25,6 +17,62 @@
       "source": "semantic_scholar",
       "doi": "10.1007/s10618-024-01087-y",
       "url": "https://www.semanticscholar.org/paper/13d71fcf7468d6b5eb8763f454d0e10bedc34a55"
+    },
+    {
+      "title": "Matrix profile goes MAD: variable-length motif and discord discovery in data series",
+      "abstract": "In the last 15 years, data series motif and discord discovery have emerged as two useful and well-used primitives for data series mining, with applications to many domains, including robotics, entomology, seismology, medicine, and climatology. Nevertheless, the state-of-the-art motif and discord discovery tools still require the user to provide the relative length. Yet, in several cases, the choice of length is critical and unforgiving. Unfortunately, the obvious brute-force solution, which tests all lengths within a given range, is computationally untenable. In this work, we introduce a new framework, which provides an exact and scalable motif and discord discovery algorithm that efficiently finds all motifs and discords in a given range of lengths. We evaluate our approach with five diverse real datasets, and demonstrate that it is up to 20 times faster than the state-of-the-art. Our results also show that removing the unrealistic assumption that the user knows the correct length, can often produce more intuitive and actionable results, which could have otherwise been missed.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-020-00685-w",
+      "url": "https://www.semanticscholar.org/paper/7d8db83c12256c2bb4164fe95515bd6b7b31e99f"
+    },
+    {
+      "title": "Bounding the family-wise error rate in local causal discovery using Rademacher averages",
+      "abstract": "Many algorithms have been proposed to learn local graphical structures around target variables of interest from observational data, focusing on two sets of variables. The first one, called Parent–Children (PC) set, contains all the variables that are direct causes or consequences of the target while the second one, known as Markov boundary (MB), is the minimal set of variables with optimal prediction performances of the target. In this paper we introduce two novel algorithms for the PC and MB discovery tasks with rigorous guarantees on the Family-Wise Error Rate (FWER), that is, the probability of reporting any false positive in output. Our algorithms use Rademacher averages, a key concept from statistical learning theory, to properly account for the multiple-hypothesis testing problem arising in such tasks. Our evaluation on simulated data shows that our algorithms properly control for the FWER, while widely used algorithms do not provide guarantees on false discoveries even when correcting for multiple-hypothesis testing. Our experiments also show that our algorithms identify meaningful relations in real-world data.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01069-0",
+      "url": "https://www.semanticscholar.org/paper/aea462f2a67d9d5d8dbba9a7a7425ec6b31a5236"
+    },
+    {
+      "title": "Knowledge graph embedding closed under composition",
+      "abstract": "Knowledge Graph Embedding (KGE) has attracted increasing attention. Relation patterns, such as symmetry and inversion, have received considerable focus. Among them, composition patterns are particularly important, as they involve nearly all relations in KGs. However, prior KGE approaches often consider relations to be compositional only if they are well-represented in the training data. Consequently, it can lead to performance degradation, especially for under-represented composition patterns. To this end, we propose HolmE, a general form of KGE with its relation embedding space closed under composition, namely that the composition of any two given relation embeddings remains within the embedding space. This property ensures that every relation embedding can compose, or be composed by other relation embeddings. It enhances HolmE’s capability to model under-represented (also called long-tail) composition patterns with limited learning instances. To our best knowledge, our work is pioneering in discussing KGE with this property of being closed under composition. We provide detailed theoretical proof and extensive experiments to demonstrate the notable advantages of HolmE in modelling composition patterns, particularly for long-tail patterns. Our results also highlight HolmE’s effectiveness in extrapolating to unseen relations through composition and its state-of-the-art performance on benchmark datasets.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01050-x",
+      "url": "https://www.semanticscholar.org/paper/15710515bae025372f298570267d234d4a3141cb"
+    },
+    {
+      "title": "Syntheval: a framework for detailed utility and privacy evaluation of tabular synthetic data",
+      "abstract": "With the growing demand for synthetic data to address contemporary issues in machine learning, such as data scarcity, data fairness, and data privacy, having robust tools for assessing the utility and potential privacy risks of such data becomes crucial. SynthEval, a novel open-source evaluation framework distinguishes itself from existing tools by treating categorical and numerical attributes with equal care, without assuming any special kind of preprocessing steps. This makes it applicable to virtually any synthetic dataset of tabular records. Our tool leverages statistical and machine learning techniques to comprehensively evaluate synthetic data fidelity and privacy-preserving integrity. SynthEval integrates a wide selection of metrics that can be used independently or in highly customisable benchmark configurations, and can easily be extended with additional metrics. In this paper, we describe SynthEval and illustrate its versatility with examples. The framework facilitates better benchmarking and more consistent comparisons of model capabilities.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-024-01081-4",
+      "url": "https://www.semanticscholar.org/paper/c4f2b1bfddbfe48d436d3f9abba758ab5a3fa4c2"
+    },
+    {
+      "title": "Guiding the generation of counterfactual explanations through temporal background knowledge for predictive process monitoring",
+      "abstract": "Counterfactual explanations suggest what should be different in the input instance to change the outcome of an AI system. When dealing with counterfactual explanations in the field of Predictive Process Monitoring, however, control flow relationships among events have to be carefully considered. A counterfactual, indeed, should not violate control flow relationships among activities (temporal background knowledge). Within the field of Explainability in Predictive Process Monitoring, there have been a series of works regarding counterfactual explanations for outcome-based predictions. However, none of them consider the inclusion of temporal background knowledge when generating these counterfactuals. In this work, we address the problem of generating counterfactual explanations that consider a temporal background knowledge in the scenario of outcome predictions in Predictive Process Monitoring. We do so by adapting state-of-the-art techniques for counterfactual generation in the domain of Explainable Artificial Intelligence that are based on genetic algorithms to consider a series of temporal constraints, expressed by means of Declare constraints, at runtime. We assume that this temporal background knowledge is given, and we adapt the fitness function, as well as the crossover and mutation operators, to maintain the satisfaction of the constraints. The proposed methods are evaluated with respect to state-of-the-art genetic algorithms for counterfactual generation and the results are presented. We showcase that the inclusion of temporal background knowledge allows the generation of counterfactuals more conformant to the temporal background knowledge, without however losing in terms of the counterfactual traditional quality metrics.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-025-01117-3",
+      "url": "https://www.semanticscholar.org/paper/87afd4e4318d77ab8cf54dbde2ee59a4f45a60c0"
+    },
+    {
+      "title": "An efficient procedure for mining egocentric temporal motifs",
+      "abstract": "Temporal graphs are structures which model relational data between entities that change over time. Due to the complex structure of data, mining statistically significant temporal subgraphs, also known as temporal motifs, is a challenging task. In this work, we present an efficient technique for extracting temporal motifs in temporal networks. Our method is based on the novel notion of egocentric temporal neighborhoods, namely multi-layer structures centered on an ego node. Each temporal layer of the structure consists of the first-order neighborhood of the ego node, and corresponding nodes in sequential layers are connected by an edge. The strength of this approach lies in the possibility of encoding these structures into a unique bit vector, thus bypassing the problem of graph isomorphism in searching for temporal motifs. This allows our algorithm to mine substantially larger motifs with respect to alternative approaches. Furthermore, by bringing the focus on the temporal dynamics of the interactions of a specific node, our model allows to mine temporal motifs which are visibly interpretable. Experiments on a number of complex networks of social interactions confirm the advantage of the proposed approach over alternative non-egocentric solutions. The egocentric procedure is indeed more efficient in revealing similarities and discrepancies among different social environments, independently of the different technologies used to collect data, which instead affect standard non-egocentric measures.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-021-00803-2",
+      "url": "https://www.semanticscholar.org/paper/96efa130b2ae797c3862541e2d6b2be037f0374a"
+    },
+    {
+      "title": "Knowledge graph embedding methods for entity alignment: experimental review",
+      "abstract": "In recent years, we have witnessed the proliferation of knowledge graphs (KG) in various domains, aiming to support applications like question answering, recommendations, etc. A frequent task when integrating knowledge from different KGs is to find which subgraphs refer to the same real-world entity, a task largely known as the Entity Alignment. Recently, embedding methods have been used for entity alignment tasks, that learn a vector-space representation of entities which preserves their similarity in the original KGs. A wide variety of supervised, unsupervised, and semi-supervised methods have been proposed that exploit both factual (attribute based) and structural information (relation based) of entities in the KGs. Still, a quantitative assessment of their strengths and weaknesses in real-world KGs according to different performance metrics and KG characteristics is missing from the literature. In this work, we conduct the first meta-level analysis of popular embedding methods for entity alignment, based on a statistically sound methodology. Our analysis reveals statistically significant correlations of different embedding methods with various meta-features extracted by KGs and rank them in a statistically significant way according to their effectiveness across all real-world KGs of our testbed. Finally, we study interesting trade-offs in terms of methods’ effectiveness and efficiency.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10618-023-00941-9",
+      "url": "https://www.semanticscholar.org/paper/84aa127dc5ca3080385439cb10edc50b5d2c04e4"
     }
   ]
 }

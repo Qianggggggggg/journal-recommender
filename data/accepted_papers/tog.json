@@ -3,28 +3,52 @@
   "journal_name": "ACM Transactions on Graphics",
   "papers": [
     {
-      "title": "Instant neural graphics primitives with a multiresolution hash encoding",
-      "abstract": "Neural graphics primitives, parameterized by fully connected neural networks, can be costly to train and evaluate. We reduce this cost with a versatile new input encoding that permits the use of a smaller network without sacrificing quality, thus significantly reducing the number of floating point and memory access operations: a small neural network is augmented by a multiresolution hash table of trainable feature vectors whose values are optimized through stochastic gradient descent. The multiresolution structure allows the network to disambiguate hash collisions, making for a simple architecture that is trivial to parallelize on modern GPUs. We leverage this parallelism by implementing the whole system using fully-fused CUDA kernels with a focus on minimizing wasted bandwidth and compute operations. We achieve a combined speedup of several orders of magnitude, enabling training of high-quality neural graphics primitives in a matter of seconds, and rendering in tens of milliseconds at a resolution of 1920×1080.",
-      "year": 2022,
-      "source": "local_evaluation_metadata",
-      "doi": "",
-      "url": "https://arxiv.org/pdf/2201.05989.pdf"
-    },
-    {
-      "title": "MoVer: Motion Verification for Motion Graphics Animations",
-      "abstract": "While large vision-language models can generate motion graphics animations from text prompts, they regularly fail to include all spatio-temporal properties described in the prompt. We introduce MoVer, a motion verification DSL based on first-order logic that can check spatio-temporal properties of a motion graphics animation. We identify a general set of such properties that people commonly use to describe animations (e.g., the direction and timing of motions, the relative positioning of objects, etc.). We implement these properties as predicates in MoVer and provide an execution engine that can apply a MoVer program to any input SVG-based motion graphics animation. We then demonstrate how MoVer can be used in an LLM-based synthesis and verification pipeline for iteratively refining motion graphics animations. Given a text prompt, our pipeline synthesizes a motion graphics animation and a corresponding MoVer program. Executing the verification program on the animation yields a report of the predicates that failed and the report can be automatically fed back to LLM to iteratively correct the animation. To evaluate our pipeline, we build a synthetic dataset of 5600 text prompts paired with ground truth MoVer verification programs. We find that while our LLM-based pipeline is able to automatically generate a correct motion graphics animation for 58.8% of the test prompts without any iteration, this number raises to 93.6% with up to 50 correction iterations. Our code and dataset are at https://mover-dsl.github.io.",
-      "year": 2025,
-      "source": "local_evaluation_metadata",
-      "doi": "",
-      "url": "https://arxiv.org/pdf/2502.13372.pdf"
-    },
-    {
       "title": "Real-time Neural Appearance Models",
       "abstract": "We present a complete system for real-time rendering of scenes with complex appearance previously reserved for offline use. This is achieved with a combination of algorithmic and system level innovations. Our appearance model utilizes learned hierarchical textures that are interpreted using neural decoders, which produce reflectance values and importance-sampled directions. To best utilize the modeling capacity of the decoders, we equip the decoders with two graphics priors. The first prior—transformation of directions into learned shading frames—facilitates accurate reconstruction of mesoscale effects. The second prior—a microfacet sampling distribution—allows the neural decoder to perform importance sampling efficiently. The resulting appearance model supports anisotropic sampling and level-of-detail rendering, and allows baking deeply layered material graphs into a compact unified neural representation. By exposing hardware accelerated tensor operations to ray tracing shaders, we show that it is possible to inline and execute the neural decoders efficiently inside a real-time path tracer. We analyze scalability with increasing number of neural materials and propose to improve performance using code optimized for coherent and divergent execution. Our neural material shaders can be over an order of magnitude faster than non-neural layered materials. This opens up the door for using film-quality visuals in real-time applications such as games and live previews.",
       "year": 2024,
       "source": "local_evaluation_metadata",
       "doi": "10.1145/3659577",
       "url": ""
+    },
+    {
+      "title": "Differentiable vector graphics rasterization for editing and learning",
+      "abstract": "We introduce a differentiable rasterizer that bridges the vector graphics and raster image domains, enabling powerful raster-based loss functions, optimization procedures, and machine learning techniques to edit and generate vector content. We observe that vector graphics rasterization is differentiable after pixel prefiltering. Our differentiable rasterizer offers two prefiltering options: an analytical prefiltering technique and a multisampling anti-aliasing technique. The analytical variant is faster but can suffer from artifacts such as conflation. The multisampling variant is still efficient, and can render high-quality images while computing unbiased gradients for each pixel with respect to curve parameters. We demonstrate that our rasterizer enables new applications, including a vector graphics editor guided by image metrics, a painterly rendering algorithm that fits vector primitives to an image by minimizing a deep perceptual loss function, new vector graphics editing algorithms that exploit well-known image processing methods such as seam carving, and deep generative models that generate vector content from raster-only supervision under a VAE or GAN training objective.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3414685.3417871",
+      "url": "https://www.semanticscholar.org/paper/7b27894ffb7dab1305d71d3433991e3e61412489"
+    },
+    {
+      "title": "A perceptual model for eccentricity-dependent spatio-temporal flicker fusion and its applications to foveated graphics",
+      "abstract": "Virtual and augmented reality (VR/AR) displays strive to provide a resolution, framerate and field of view that matches the perceptual capabilities of the human visual system, all while constrained by limited compute budgets and transmission bandwidths of wearable computing systems. Foveated graphics techniques have emerged that could achieve these goals by exploiting the falloff of spatial acuity in the periphery of the visual field. However, considerably less attention has been given to temporal aspects of human vision, which also vary across the retina. This is in part due to limitations of current eccentricity-dependent models of the visual system. We introduce a new model, experimentally measuring and computationally fitting eccentricity-dependent critical flicker fusion thresholds jointly for both space and time. In this way, our model is unique in enabling the prediction of temporal information that is imperceptible for a certain spatial frequency, eccentricity, and range of luminance levels. We validate our model with an image quality user study, and use it to predict potential bandwidth savings 7X higher than those afforded by current spatial-only foveated models. As such, this work forms the enabling foundation for new temporally foveated graphics techniques.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3450626.3459784",
+      "url": "https://www.semanticscholar.org/paper/1f113daf7b839e3fdbc66bb7ac2006ce534102fa"
+    },
+    {
+      "title": "Physical validation of simulators in computer graphics",
+      "abstract": "We introduce a selected set of protocols inspired from the Soft Matter Physics community in order to validate Computer Graphics simulators of slender elastic structures possibly subject to dry frictional contact. Although these simulators were primarily intended for feature film animation and visual effects, they are more and more used as virtual design tools for predicting the shape and deformation of real objects; hence the need for a careful, quantitative validation. Our tests, experimentally verified, are designed to evaluate carefully the predictability of these simulators on various aspects, such as bending elasticity, bend-twist coupling, and frictional contact. We have passed a number of popular codes of Computer Graphics through our benchmarks by defining a rigorous, consistent, and as fair as possible methodology. Our results show that while some popular simulators for plates/shells and frictional contact fail even on the simplest scenarios, more recent ones, as well as well-known codes for rods, generally perform well and sometimes even better than some reference commercial tools of Mechanical Engineering. To make our validation protocols easily applicable to any simulator, we provide an extensive description of our methodology, and we shall distribute all the necessary model data to be compared against.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3476576.3476618",
+      "url": "https://www.semanticscholar.org/paper/6433b460bd25bfb60f153d8700364335ba3cd29c"
+    },
+    {
+      "title": "Code replicability in computer graphics",
+      "abstract": "Being able to duplicate published research results is an important process of conducting research whether to build upon these findings or to compare with them. This process is called \"replicability\" when using the original authors' artifacts (e.g., code), or \"reproducibility\" otherwise (e.g., re-implementing algorithms). Reproducibility and replicability of research results have gained a lot of interest recently with assessment studies being led in various fields, and they are often seen as a trigger for better result diffusion and transparency. In this work, we assess replicability in Computer Graphics, by evaluating whether the code is available and whether it works properly. As a proxy for this field we compiled, ran and analyzed 151 codes out of 374 papers from 2014, 2016 and 2018 SIGGRAPH conferences. This analysis shows a clear increase in the number of papers with available and operational research codes with a dependency on the subfields, and indicates a correlation between code replicability and citation count. We further provide an interactive tool to explore our results and evaluation data.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3386569.3392413",
+      "url": "https://www.semanticscholar.org/paper/85bfd320fd6aed25614d69d9cff71acf98d111be"
+    },
+    {
+      "title": "3D Gaussian Ray Tracing: Fast Tracing of Particle Scenes",
+      "abstract": "Particle-based representations of radiance fields such as 3D Gaussian Splatting have found great success for reconstructing and re-rendering of complex scenes. Most existing methods render particles via rasterization, projecting them to screen space tiles for processing in a sorted order. This work instead considers ray tracing the particles, building a bounding volume hierarchy and casting a ray for each pixel using high-performance GPU ray tracing hardware. To efficiently handle large numbers of semi-transparent particles, we describe a specialized rendering algorithm which encapsulates particles with bounding meshes to leverage fast ray-triangle intersections, and shades batches of intersections in depth-order. The benefits of ray tracing are well-known in computer graphics: processing incoherent rays for secondary lighting effects such as shadows and reflections, rendering from highly-distorted cameras common in robotics, stochastically sampling rays, and more. With our renderer, this flexibility comes at little cost compared to rasterization. Experiments demonstrate the speed and accuracy of our approach, as well as several applications in computer graphics and vision. We further propose related improvements to the basic Gaussian representation, including a simple use of generalized kernel functions which significantly reduces particle hit counts.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2407.07090",
+      "url": "https://www.semanticscholar.org/paper/2afcaa7fa2d2b19b5287b4ee8ea2b4e34b1a936d"
     }
   ]
 }

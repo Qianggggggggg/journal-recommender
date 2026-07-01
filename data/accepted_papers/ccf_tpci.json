@@ -9,6 +9,38 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1007/s42486-025-00205-z",
       "url": ""
+    },
+    {
+      "title": "A survey of foundation models for IoT: taxonomy and criteria-based analysis",
+      "abstract": "Foundation models have gained growing interest in the IoT domain due to their reduced reliance on labeled data and strong generalizability across tasks, which address key limitations of traditional machine learning approaches. However, most existing foundation model based methods are developed for specific IoT tasks, making it difficult to compare approaches across IoT domains and limiting guidance for applying them to new tasks. This survey aims to bridge this gap by providing a comprehensive overview of current methodologies and organizing them around four shared performance objectives by different domains: efficiency , context-awareness , safety , and security & privacy . For each objective, we review representative works, summarize commonly-used techniques and evaluation metrics. This objective-centric organization enables meaningful cross-domain comparisons and offers practical insights for selecting and designing foundation model based solutions for new IoT tasks. We conclude with key directions for future research to guide both practitioners and researchers in advancing the use of foundation models in IoT applications.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42486-025-00208-w",
+      "url": "https://doi.org/10.1007/s42486-025-00208-w"
+    },
+    {
+      "title": "RingRT: recognizing air-writing on the palm through an IMU-integrated ring",
+      "abstract": "Gesture recognition is a fundamental technology in nearly all Human-Computer Interaction (HCI) devices, drawing significant attention from engineers and researchers worldwide. Fine-grained air-writing recognition within a small spatial range remains a challenging yet crucial research topic. In this paper, we propose a method, namely RingRT, which uses an inertial measurement unit (IMU) integrated in the ring to identify character air-writing actions within an area as big as the palm of one’s hand. RingRT leverages the neural network that integrates both the Transformer architecture and the Focused Linear Attention mechanism, enabling it to effectively analyze 6-axis motion signals and accurately recognize air-written characters. In experiments, we collected 24,120 air-writing samples within a 6 cm $$\\times$$ 6 cm area, comprising 67 characters from 24 participants across three scenarios. RingRT achieved a user-independent accuracy of 90.08% in offline evaluation and maintained over 86% accuracy in real-world scenarios.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42486-025-00209-9",
+      "url": "https://doi.org/10.1007/s42486-025-00209-9"
+    },
+    {
+      "title": "Cross-technology interference: detection, avoidance, and coexistence mechanisms in the ISM bands",
+      "abstract": "A large number of heterogeneous wireless networks share the unlicensed spectrum designated as the ISM (Industry, Scientific, and Medicine) radio band. These networks do not adhere to a common medium access rule and differ in their specifications considerably. As a result, when concurrently active, they cause cross-technology interference (CTI) on each other. The effect of this interference is not reciprocal, the networks using high transmission power and advanced transmission schemes often causing disproportionate disruptions to those with modest communication and computation resources. CTI corrupts packets, incurs packet retransmission cost, introduces end-to-end latency and jitter, and make networks unpredictable. The purpose of this paper is to closely examine its impact on low-power networks which are based on the IEEE 802.15.4 standard. It discusses latest developments on CTI detection, coexistence and avoidance mechanisms as well on messaging schemes which attempt to enable heterogeneous networks directly communicate with one another to coordinate packet transmission and channel assignment. Graphical abstract",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42486-025-00185-0",
+      "url": "https://doi.org/10.1007/s42486-025-00185-0"
+    },
+    {
+      "title": "Robust spatio-temporal demand prediction for bike-sharing systems with dynamic hierarchical structure",
+      "abstract": "Bike-sharing systems have gained popularity as a solution for short-distance urban travel, highlighting the need for precise demand prediction. Most existing methods predict bike-sharing demand across all regions without adequately accounting for spatial heterogeneity, meaning they overlook that different regions may have distinct and skewed demand distributions. Moreover, these models frequently miss the temporal heterogeneity introduced by varying demand patterns, as they tend to model temporal correlations with a uniform parameter set across all time periods, failing to account for the dynamic fluctuations in demand over time. To address these shortcomings, we introduce a novel Robust Spatio-Temporal Demand Prediction (RST) model that enhances bike-sharing demand prediction. The proposed approach employs a convolutional spatio-temporal graph, which integrates the features from multiple sources, including Points of Interest (POIs), road networks, and weather. Upon that, it proposes a scheme to classify the stations based on their traffic irregularity. The proposed scheme captures the traffic dependencies between stations by generating an embedding sequence from the historical data and ignoring correlations to the low-relevant stations, ensuring accurate predictions. Furthermore, the model introduces a dynamic hierarchical structure, where an additional retraining layer is activated only for stations with underperforming predictions, leveraging data from similar stations to refine and improve accuracy. This two-layered hierarchical structure ensures robustness and adaptability in complex scenarios such as different weather conditions or events. Our methodology sets a new standard in demand prediction for bike-sharing, demonstrating significant improvements in prediction accuracy on real-world datasets from New York City’s Citi-Bike and Beijing’s BJ-Bike. The results validate our model’s superior performance, offering a scalable and effective strategy for enhancing urban mobility.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42486-024-00167-8",
+      "url": "https://doi.org/10.1007/s42486-024-00167-8"
     }
   ]
 }

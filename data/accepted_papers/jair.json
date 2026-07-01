@@ -9,6 +9,70 @@
       "source": "local_evaluation_metadata",
       "doi": "10.1613/jair.1.18405",
       "url": ""
+    },
+    {
+      "title": "Mapping the Landscape of Artificial Intelligence Applications against COVID-19",
+      "abstract": "COVID-19, the disease caused by the SARS-CoV-2 virus, has been declared a pandemic by the World Health Organization, which has reported over 18 million confirmed cases as of August 5, 2020. In this review, we present an overview of recent studies using Machine Learning and, more broadly, Artificial Intelligence, to tackle many aspects of the COVID19 crisis. We have identified applications that address challenges posed by COVID-19 at different scales, including: molecular, by identifying new or existing drugs for treatment; clinical, by supporting diagnosis and evaluating prognosis based on medical imaging and non-invasive measures; and societal, by tracking both the epidemic and the accompanying infodemic using multiple data sources. We also review datasets, tools, and resources needed to facilitate Artificial Intelligence research, and discuss strategic considerations related to the operational implementation of multidisciplinary partnerships and open science. We highlight the need for international cooperation to maximize the potential of AI in this and future pandemics.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.12162",
+      "url": "https://www.semanticscholar.org/paper/9f6034d02bf0766c021489bfe498488b0fd5eff5"
+    },
+    {
+      "title": "Ethics and Governance of Artificial Intelligence: Evidence from a Survey of Machine Learning Researchers",
+      "abstract": "Machine learning (ML) and artificial intelligence (AI) researchers play an important role in the ethics and governance of AI, including through their work, advocacy, and choice of employment. Nevertheless, this influential group's attitudes are not well understood, undermining our ability to discern consensuses or disagreements between AI/ML researchers. To examine these researchers' views, we conducted a survey of those who published in two top AI/ML conferences (N = 524). We compare these results with those from a 2016 survey of AI/ML researchers (Grace et al., 2018) and a 2018 survey of the US public (Zhang & Dafoe, 2020). We find that AI/ML researchers place high levels of trust in international organizations and scientific organizations to shape the development and use of AI in the public interest; moderate trust in most Western tech companies; and low trust in national militaries, Chinese tech companies, and Facebook. While the respondents were overwhelmingly opposed to AI/ML researchers working on lethal autonomous weapons, they are less opposed to researchers working on other military applications of AI, particularly logistics algorithms. A strong majority of respondents think that AI safety research should be prioritized and that ML institutions should conduct pre-publication review to assess potential harms. Being closer to the technology itself, AI/ML researchers are well placed to highlight new risks and develop technical solutions, so this novel attempt to measure their attitudes has broad relevance. The findings should help to improve how researchers, private sector executives, and policymakers think about regulations, governance frameworks, guiding principles, and national and international governance strategies for AI. This article appears in the special track on AI & Society.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.12895",
+      "url": "https://www.semanticscholar.org/paper/cd2b2bbb13f37b2bff8826a5a7614b1f897e2db2"
+    },
+    {
+      "title": "Leveraging Artificial Intelligence to Assess Physicians’ Willingness to Share Electronic Medical Records in a Hierarchical Diagnostic Ecosystem",
+      "abstract": "In order to promote the practice of the hierarchical diagnosis system in China, We looked into electronic medical record-the important information carrier of patient health data. Based on literature reading and pre-investigation, a model of influencing factors of doctors’ willingness to use and share electronic medical records under the background of the implementation of the hierarchical diagnosis and treatment system was constructed. The questionnaire was designed with the traditional model and the questionnaire data were collected. The structural equation model was used to test the constructed model. The results show that the perceived usefulness of electronic medical records has the most significant impact on the willingness to share. Perceived ease of use and privacy protection of patient information have significant effects on sharing intention. In the future, the construction of electronic medical record system should be based on improving its use value and considering its convenience.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.70891/jair.2024.100024",
+      "url": "https://www.semanticscholar.org/paper/31c313669d46b04d478e9609b710d376a0c3dd71"
+    },
+    {
+      "title": "Viewpoint: Artificial Intelligence Accidents Waiting to Happen?",
+      "abstract": "Artificial Intelligence (AI) is at a crucial point in its development: stable enough to be used in production systems, and increasingly pervasive in our lives. What does that mean for its safety? In his book Normal Accidents, the sociologist Charles Perrow proposed a framework to analyze new technologies and the risks they entail. He showed that major accidents are nearly unavoidable in complex systems with tightly coupled components if they are run long enough. In this essay, we apply and extend Perrow’s framework to AI to assess its potential risks. Today’s AI systems are already highly complex, and their complexity is steadily increasing. As they become more ubiquitous, different algorithms will interact directly, leading to tightly coupled systems whose capacity to cause harm we will be unable to predict. We argue that under the current paradigm, Perrow’s normal accidents apply to AI systems and it is only a matter of time before one occurs. This article appears in the AI & Society track.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.14263",
+      "url": "https://www.semanticscholar.org/paper/4f4f25fbe7479cd7dfd1bca7c817600ee517c8b9"
+    },
+    {
+      "title": "The AI Race: Why Current Neural Network-based Architectures are a Poor Basis for Artificial General Intelligence",
+      "abstract": "Artificial General Intelligence is the idea that someday an hypothetical agent will arise from artificial intelligence (AI) progresses, and will surpass by far the brightest and most gifted human minds. This idea has been around since the early development of AI. Since then, scenarios on how such AI may behave towards humans have been the subject of many fictional and research works. This paper analyzes the current state of artificial intelligence progresses, and how the current AI race with the ever faster release of impressive new AI methods (that can deceive humans, outperform them at tasks we thought impossible to tackle by AI a mere decade ago, and that disrupt the job market) have raised concerns that Artificial General Intelligence (AGI) might be coming faster that we thought. In particular, we focus on 3 specific families of modern AIs to develop the idea that deep neural networks, which are the current backbone of nearly all artificial intelligence methods, are poor candidates for any AGI to arise due to their many limitations, and therefore that any threat coming from the recent AI race does not lie in AGI but in the limitations, uses, and lack of regulations of our current models and algorithms. This article appears in the AI & Society track.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.15315",
+      "url": "https://www.semanticscholar.org/paper/df0fbf9bfa05a7733d0bf1294da5e1a0a3af464a"
+    },
+    {
+      "title": "Introduction to the Special Track on Artificial Intelligence and COVID-19",
+      "abstract": "The human race is facing one of the most meaningful public health emergencies in the modern era caused by the COVID-19 pandemic. This pandemic introduced various challenges, from lock-downs with significant economic costs to fundamentally altering the way of life for many people around the world. The battle to understand and control the virus is still at its early stages yet meaningful insights have already been made. The uncertainty of why some patients are infected and experience severe symptoms, while others are infected but asymptomatic, and others are not infected at all, makes managing this pandemic very challenging. Furthermore, the development of treatments and vaccines relies on knowledge generated from an ever evolving and expanding information space. Given the availability of digital data in the modern era, artificial intelligence (AI) is a meaningful tool for addressing the various challenges introduced by this unexpected pandemic. Some of the challenges include: outbreak prediction, risk modeling including infection and symptom development, testing strategy optimization, drug development, treatment repurposing, vaccine development, and others.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.14552",
+      "url": "https://www.semanticscholar.org/paper/2ac3e89b65dddcce85e24b6f0dfd0f6ad2aed74d"
+    },
+    {
+      "title": "Quantum Mathematics in Artificial Intelligence",
+      "abstract": "In the decade since 2010, successes in artificial intelligence have been at the forefront of computer science and technology, and vector space models have solidified a position at the forefront of artificial intelligence. At the same time, quantum computers have become much more powerful, and announcements of major advances are frequently in the news. The mathematical techniques underlying both these areas have more in common than is sometimes realized. Vector spaces took a position at the axiomatic heart of quantum mechanics in the 1930s, and this adoption was a key motivation for the derivation of logic and probability from the linear geometry of vector spaces. Quantum interactions between particles are modelled using the tensor product, which is also used to express objects and operations in artificial neural networks. This paper describes some of these common mathematical areas, including examples of how they are used in artificial intelligence (AI), particularly in automated reasoning and natural language processing (NLP). Techniques discussed include vector spaces, scalar products, subspaces and implication, orthogonal projection and negation, dual vectors, density matrices, positive operators, and tensor products. Application areas include information retrieval, categorization and implication, modelling word-senses and disambiguation, inference in knowledge bases, decision making, and and semantic composition. Some of these approaches can potentially be implemented on quantum hardware. Many of the practical steps in this implementation are in early stages, and some are already realized. Explaining some of the common mathematical tools can help researchers in both AI and quantum computing further exploit these overlaps, recognizing and exploring new directions along the way.This paper describes some of these common mathematical areas, including examples of how they are used in artificial intelligence (AI), particularly in automated reasoning and natural language processing (NLP). Techniques discussed include vector spaces, scalar products, subspaces and implication, orthogonal projection and negation, dual vectors, density matrices, positive operators, and tensor products. Application areas include information retrieval, categorization and implication, modelling word-senses and disambiguation, inference in knowledge bases, and semantic composition. Some of these approaches can potentially be implemented on quantum hardware. Many of the practical steps in this implementation are in early stages, and some are already realized. Explaining some of the common mathematical tools can help researchers in both AI and quantum computing further exploit these overlaps, recognizing and exploring new directions along the way.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.12702",
+      "url": "https://www.semanticscholar.org/paper/6181243b00fb7fc91083c2a7d56ad5c21e76419e"
+    },
+    {
+      "title": "The Force Awakens: Artificial Intelligence for Consumer Law",
+      "abstract": "Recent years have been tainted by market practices that continuously expose us, as consumers, to new risks and threats. We have become accustomed, and sometimes even resigned, to businesses monitoring our activities, examining our data, and even meddling with our choices. Artificial Intelligence (AI) is often depicted as a weapon in the hands of businesses and blamed for allowing this to happen. In this paper, we envision a paradigm shift, where AI technologies are brought to the side of consumers and their organizations, with the aim of building an efficient and effective counter-power. AI-powered tools can support a massive-scale automated analysis of textual and audiovisual data, as well as code, for the benefit of consumers and their organizations. This in turn can lead to a better oversight of business activities, help consumers exercise their rights, and enable the civil society to mitigate information overload. We discuss the societal, political, and technological challenges that stand before that vision.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1613/jair.1.11519",
+      "url": "https://www.semanticscholar.org/paper/1431a57181e0423919f4166ecb92eb833fe62bb8"
     }
   ]
 }
