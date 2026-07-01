@@ -1,0 +1,78 @@
+{
+  "journal_id": "monet",
+  "journal_name": "Mobile Networks and Applications",
+  "papers": [
+    {
+      "title": "LiDAR-Based Segmentation of Tall Vegetation",
+      "abstract": "This paper presents a comparative analysis of various segmentation methods for extracting tall vegetation objects from LiDAR data, including clustering-based methods, voxelization strategies, and Canopy Height Model (CHM)-based segmentation. First, an overview of Light Detection and Ranging (LiDAR) technology is provided, focusing on its underlying principles and the unique advantages it offers in forestry management, such as detailed canopy structure mapping. Subsequently, an extensive experimental evaluation is conducted on real forest datasets, where each segmentation technique is assessed in terms of accuracy using Intersection over Union (IoU) metric. Through these experiments, the paper highlights key trade-offs between accuracy and runtime performance, revealing that methods leveraging voxelization can achieve high IoU values while remaining computationally feasible. The findings underscore the importance of selecting an appropriate segmentation algorithm for forestry applications, as it can significantly impact the fidelity of canopy measurements and downstream forest management decisions. The experimental results demonstrate that combining voxelization with DBSCAN algorithm yields superior segmentation performance compared to other evaluated CHM-based methods.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-026-02492-x",
+      "url": "https://openalex.org/W7127302507"
+    },
+    {
+      "title": "Management through the Implementation of Innovative Information Technologies - Artificial Intelligence (AI)",
+      "abstract": "Industrial revolutions have always marked breakthrough periods that fundamentally changed the way of production, work organisation and the overall functioning of industry. From the first mechanised machines in the 18th century to today’s intelligent technologies, industry has undergone enormous changes affecting production, logistics, transport and trade. Each industrial revolution has brought new technologies that have helped businesses become more efficient and better respond to market demands. The research and the submitted manuscript aimed to examine different ways of managing the supply chain through innovative information technologies and to analyse their effectiveness and risks at individual stages of the supply chain. The study also focused on identifying optimal ways of implementing these technologies and their possible impacts on the performance and competitiveness of the company.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-026-02498-5",
+      "url": "https://openalex.org/W7153594701"
+    },
+    {
+      "title": "Seeds Image – Introduction and Baseline Experiments with the New Labeled Benchmark for Machine Learning Tasks",
+      "abstract": "The aim of this paper is to propose a new image data set for assessing the quality of solutions to machine learning tasks, in particular, deep neural networks. The data set is derived from X-ray images of wheat grains, in which three species, Kama, Rosa, and Canadian, are distinguished. In this paper, the structure of the data is presented in detail and ten pretrained deep neural networks are applied to identify individual wheat species. The Seeds Image Data Set, due to its compact nature, can compete with well-known and quite frequently used object recognition benchmark tasks (CIFAR-10, CIFAR-100, SVHN, and ImageNet, etc.). The compactness of the data set is based on a relatively small number of data instances, which shortens the rather time-consuming computing process. The proposed data set will be made available in a public repository, and the results presented will provide a starting point for other competing solutions for exploratory data analysis in the broad sense.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-025-02479-0",
+      "url": "https://openalex.org/W4415870502"
+    },
+    {
+      "title": "Knowledge Learning for Securing Workflow Scheduling Algorithm in Mobile Edge Computing",
+      "abstract": "Mobile Edge Computing (MEC) is capable of inheriting cloud and Internet of Things (IoT) resources to the brim of the computational and communication networks. Conservatively, the MEC is outsourced from the IoT/ cloud platforms to Maximize the workflow and task completion abilities. However, due to outsourcing features, the security requirements for workflow scheduling and task completion rely on trusted device selection and high normalization. To satisfy these security demands, this article introduces a secure workflow scheduling algorithm using the knowledge learning concept. The proposed algorithm verifies the operative and failing device features under diverse allocation parameters. Based on the workflow completion lag, new scheduling or offloading decisions are Made. The decision support is provided by the knowledge learning is retains the previous operational status of the edge devices through stage-based updates. The stages for scheduling, classification, and offloading are updated periodically to Maximize the device selection and to reduce overhead in the process. Thus the consolidated process is adaptable to scheduling, offloading, and workflow completion regardless of the devices, allocation time, and device selection processes. This proposed algorithm is reliable in improving the normalized security by 14.17% by reducing the device selection overhead by 12.82% for the maximum allocation rates.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-025-02465-6",
+      "url": "https://openalex.org/W4417488953"
+    },
+    {
+      "title": "A Security Benchmarking Approach for Cooperative Driving Automation (CDA) Applications",
+      "abstract": "This paper proposes a reference model for defining security benchmarks for the safety assessment of Cooperative Driving Automation (CDA) applications. Our reference model provides a systematic approach to benchmark the resilience of CDA applications against malicious attacks through extensive system simulations. It enables the test repeatability and comparison of results across different implementations of CDA applications. In our approach, a benchmark is defined as a series of tests that expose the target system to specific attacks while recording its response. Using this model, we define a benchmark for evaluating the resilience of Cooperative Adaptive Cruise Control (CACC) algorithms against barrage jamming attacks targeting the physical layer of the IEEE 802.11p communication standard. We apply this benchmark to assess and compare the performance of four CACC algorithms: P1, Flatbed, Ploeg, and Consensus. The benchmark measures reveal that the Consensus algorithm demonstrates the highest resilience against jamming attacks, primarily due to its heavy reliance on onboard sensors and the use of sensor data from all other vehicles for decision-making. In contrast, the P1 algorithm, which depends mainly on vehicle-to-vehicle (V2V) communication, proves to be the most vulnerable. Furthermore, the results indicate that vehicles are most susceptible to jamming attacks during acceleration phases, making these periods critical for security evaluation. These findings validate the effectiveness of our benchmarking framework in identifying strengths and vulnerabilities of CACC algorithms under cyberattacks.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-025-02460-x",
+      "url": "https://openalex.org/W4414393609"
+    },
+    {
+      "title": "Anomaly Detection for Semiconductor Wafer Multi-wire Sawing Machines Using Statistical and Deep Learning Methods",
+      "abstract": "Diamond multi-wire sawing machines are essential in semiconductor manufacturing, especially for slicing hard and brittle third-generation materials such as silicon carbide (SiC) and gallium nitride (GaN). The increased difficulty in processing these materials has highlighted the urgent need for reliable machine health monitoring and anomaly detection systems. While Predictive Maintenance and Prognostics and Health Management (PHM) frameworks have been widely applied across various industries, little research has specifically addressed semiconductor cutting equipment, where operational dynamics and data confidentiality present unique challenges. This study, in collaboration with an industry partner, develops two anomaly detection models tailored for diamond multi-wire sawing machines. The first model is a rule-based approach that utilizes sliding window techniques to extract statistical features and establish dynamic thresholds for anomaly detection. The second model employs a data-driven Univariate Autoencoder (UAE) to perform unsupervised anomaly detection by learning reconstruction errors from normal operating data. Both models are trained and validated using confidential industrial sensor datasets. Experimental results demonstrate that the UAE-based model achieves high detection accuracy with no observed false positives, providing an effective solution for enhancing operational reliability and production efficiency in semiconductor wafer slicing processes.",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1007/s11036-025-02477-2",
+      "url": "https://openalex.org/W4415560091"
+    },
+    {
+      "title": "FECNet: a Neural Network and a Mobile App for COVID-19 Recognition",
+      "abstract": "COVID-19 has caused over 6.35 million deaths and over 555 million confirmed cases till 11/July/2022. It has caused a serious impact on individual health, social and economic activities, and other aspects. Based on the gray-level co-occurrence matrix (GLCM), a four-direction varying-distance GLCM (FDVD-GLCM) is presented. Afterward, a five-property feature set (FPFS) extracts features from FDVD-GLCM. An extreme learning machine (ELM) is used as the classifier to recognize COVID-19. Our model is finally dubbed FECNet. A multiple-way data augmentation method is utilized to boost the training sets. Ten runs of tenfold cross-validation show that this FECNet model achieves a sensitivity of 92.23 ± 2.14, a specificity of 93.18 ± 0.87, a precision of 93.12 ± 0.83, and an accuracy of 92.70 ± 1.13 for the first dataset, and a sensitivity of 92.19 ± 1.89, a specificity of 92.88 ± 1.23, a precision of 92.83 ± 1.22, and an accuracy of 92.53 ± 1.37 for the second dataset. We develop a mobile app integrating the FECNet model, and this web app is run on a cloud computing-based client–server modeled construction. This proposed FECNet and the corresponding mobile app effectively recognize COVID-19, and its performance is better than five state-of-the-art COVID-19 recognition models.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11036-023-02140-8",
+      "url": "https://www.semanticscholar.org/paper/e158cd5e38a4478c22ba809c543c1c3536fa4004"
+    },
+    {
+      "title": "An Optimized Collaborative Scheduling Algorithm for Prioritized Tasks with Shared Resources in Mobile-Edge and Cloud Computing Systems",
+      "abstract": "Mobile edge computing (MEC) is a promising technology that has the potential to meet the latency requirements of next-generation mobile networks. Since MEC servers have limited resources, an orchestrator utilizes a scheduling algorithm to decide where and when each task should execute so that the quality of service (QoS) of each task is achieved. The scheduling algorithm should use the least possible resources required to meet the service demands. In this paper, we develop a two-level cooperative scheduling algorithm with a centralized orchestrator layer. The first scheduling level is used to schedule tasks locally on MEC servers. In contrast, the second level resides at the orchestrator and assigns tasks to a neighboring base station or the cloud. The tasks serve in accordance with their priority, which is determined by the latency and required throughput. We also present a resource optimization algorithm for determining resource distribution in the system in order to ensure satisfactory service availability at the minimum cost. The resource optimization algorithm contains two variations that can be employed depending on the traffic model. One variant is used when the traffic is uniformly distributed, and the other is used when the traffic load is unbalanced among base stations. Numerical results show that the cooperative model of task scheduling outperforms the non-cooperative model. Furthermore, the results show that the suggested scheduling algorithm performs better than other well-known scheduling algorithms, such as shortest job first scheduling and earliest deadline first scheduling.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11036-022-01974-y",
+      "url": "https://www.semanticscholar.org/paper/d3fcb4d989a563e55a05350c98895956bbada07e"
+    },
+    {
+      "title": "Performance Assessment of OTFS Modulation in High Doppler Airborne Communication Networks",
+      "abstract": "Emerging 5G and future 6G mobile networks are expected to cater for high mobility scenarios ranging from vehicle-to-vehicle communications to unmanned aerial vehicles and airborne platforms. Communications in this type of deployments suffer from severe Doppler shifts which require new modulation waveforms. Orthogonal time frequency space (OTFS) modulation has recently been proposed as a promising technology for coping with high Doppler channels. OTFS converts a time-varying fading channel into a time-independent channel in the two-dimensional delay-Doppler (DD) domain. The transmit symbols are multiplexed into a nearly constant channel with a complex channel gain in the DD domain. In this paper, we consider a high Doppler airborne communication network where relative mobile node speeds can be above 1200 m/s. The considered system represents a mobile ad-hoc network where the airborne mobile nodes can join or leave the network. Furthermore, each node is equipped with an antenna array that supports directed communication among mobile nodes. The Doppler shifts in this airborne communication network are in the order of 52-72 kHz and may potentially be even higher depending on the selected carrier frequency and the relative speed among the airborne platforms. As such, OTFS modulation is used in this work to efficiently compensate for the high Doppler shifts in the DD domain. In particular, a comprehensive performance assessment in terms of bit error rate (BER) is conducted to reveal the potential of OTFS modulation in dealing with such extreme transmission scenarios. The impact of physical layer parameters, number of delay-Doppler bins in the DD domain used for OTFS modulation, directed versus two-ray channels, and the combination of multiple-input multiple-output (MIMO) systems with OTFS modulation on the BER is assessed. It is shown that both OTFS modulation over a two-ray channel as well as MIMO-OTFS modulation provide a reliable airborne communication network with low BER.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11036-022-01928-4",
+      "url": "https://www.semanticscholar.org/paper/22ebcda741f3b8d187094931780292a754496fed"
+    }
+  ]
+}

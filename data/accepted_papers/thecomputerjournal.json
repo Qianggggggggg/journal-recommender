@@ -1,0 +1,78 @@
+{
+  "journal_id": "thecomputerjournal",
+  "journal_name": "The Computer Journal",
+  "papers": [
+    {
+      "title": "EBPFI: enhancing binary protocol format inference via field boundary learning",
+      "abstract": "Protocol reverse engineering can be applied to various security applications, including fuzzing, malware analysis, and intrusion detection. It aims to acquire an unknown protocol’s format and semantics, where format extraction is the primary task. Currently, there are already methods such as multiple sequence comparison, statistical analysis, and deep learning to extract field formats from network traffic. However, they mainly locate key fields and learn boundary information through heuristic rules or comparative analysis, and they have limitations in processing large datasets and generalization inference. This paper proposes EBPFI, a novel framework that integrates deep learning with self-supervised boundary learning to enhance field boundary detection. This method stacks multiple network traffic to form an image, designs a field boundary guidance module, and adds self-supervised boundary learning to the loss function, realizing the recognition of field boundaries for fixed-format protocols. We evaluate the proposed approach on 10 widely used protocols. The experimental results demonstrate that EBPFI achieves superior performance in protocol format inference, consistently outperforming all compared methods in terms of F1-score and inference efficiency.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag065",
+      "url": "https://openalex.org/W7165838784"
+    },
+    {
+      "title": "Hidden state-based fusion network for multimodal sentiment analysis",
+      "abstract": "Multimodal sentiment analysis (MSA has gained attention for its capacity to overcome the limitations of unimodal approaches by integrating multiple modalities. We propose a hidden state-based fusion model with a gating mechanism for efficient multimodal feature integration. The proposed model achieves strong performance on the CMU-Multimodal Opinionlevel Sentiment Intensity(CMU-MOSI), CMU Multimodal Opinion Sentiment and Emotion Intensity(CMU-MOSEI), and Chinese Multimodal Sentiment Analysis(CH-SIMS) datasets while maintaining favorable parameter efficiency. By operating on hidden states and using an extensible gating design, the framework supports additional modalities with controlled computational cost. Experimental results demonstrate its effectiveness in improving prediction performance, generalization, and resource efficiency. These findings highlight the value of optimized fusion architectures for MSA.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag062",
+      "url": "https://openalex.org/W7165543276"
+    },
+    {
+      "title": "A graph-assisted attention transformer based network for air quality prediction",
+      "abstract": "Achieving accurate air quality predictions depends on a variety of factors, including meteorological conditions, the spatial distribution of pollution sources, and the geographic environment of the target area. This complexity poses challenges in capturing the intricate spatiotemporal dependencies inherent in air quality data. To address this issue, this work proposes a spatiotemporal graph network called GA$^{2}$Transformer, as a novel Transformer-based encoder–decoder architecture, to capture fine-grained spatiotemporal dependencies of air quality data. The proposed GA$^{2}$Transformer integrates a multilevel discrete wavelet decomposition module for extracting trend and periodicity clues at multiple levels from air quality data, and a graph-assisted attention module for modeling graph-structured spatiotemporal dependencies of air quality data. Extensive experiments on the real-world collected Beijing dataset show the validity of the proposed GA$^{2}$Transformer in air quality prediction tasks, outperforming other used methods.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag064",
+      "url": "https://openalex.org/W7165957079"
+    },
+    {
+      "title": "FPH2D: a failure prediction model for heterogeneous hard drives based on feature similarity",
+      "abstract": "With the increasing scale and heterogeneity of data centers, accurate failure prediction in mixed hard drive models poses critical challenges. Existing studies based on single-model SMART datasets perform well in homogeneous settings but suffer degradation in mixed-model scenarios due to inconsistent attribute distributions and failure patterns across models. To address this, we propose FPH2D, a fusion prediction model for multi-model hard drives. Dynamic Time Warping (DTW) measures inter-model feature similarity, and a feature alignment method maps heterogeneous data into a unified space to reduce bias. Raw SMART features are preserved to avoid normalization-induced distortion. The model is trained using an improved LightGBM with Enhanced Gradient-based One-Side Sampling (E-GOSS) for enhanced accuracy and stability. Experimental results show optimal performance with a 16–20-day time window, a relatively high failure rate, a count ratio of 0.7–1.0, and DTW similarity of 0.28–0.36, balancing feature sufficiency and sample representativeness. Experiments on ST12000NM0007 and ST14000NM0138 drives demonstrate strong generalization, achieving average AUC of 0.9984, Precision 0.9926, Recall 0.9054, and F1-score 0.9479, enabling reliable early failure prediction and supporting maintenance optimization for heterogeneous storage systems.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag061",
+      "url": "https://openalex.org/W7164941460"
+    },
+    {
+      "title": "Multi-stage cross-transformer-based CNN for image denoising",
+      "abstract": "Deep convolutional neural networks have shown exceptional performance in eliminating spatially invariant noise, such as synthetic noise, from images. However, their effectiveness diminishes with real-world images, often requiring complex, multi-stage architectures. To overcome this challenge and improve the practical applicability of denoising algorithms, this paper introduces a novel model called cross-Transformer denoising convolutional neural network (CTCNet). CTCNet is built upon three core components: consecutive blocks (CB), parallel blocks (PB), and a filtering block (FB). The CB employs a ConvNeXt block to extract essential structural information, ensuring effective noise removal. To minimize information loss, PB integrates three heterogeneous networks to support multi-level feature interaction, enhancing adaptability to complex real-world scenes. Transformer blocks are strategically embedded within both CB and PB to further boost performance. A fusion Module aggregates outputs from the sub-blocks, promoting inter-channel feature interaction. Additionally, this study introduces Dual multilayer perceptron (Dual MLP) and Cross-Dual multilayer perceptron (Cross-Dual MLP) architectures, which extract complementary features, enhancing the model’s ability to capture pixel-level relationships and remove noise effectively. The final FB refines the processed image to generate a clean result. Experimental results demonstrate that CTCNet consistently outperforms several existing denoising techniques, achieving superior performance on both synthetic and real-world noise removal tasks.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag059",
+      "url": "https://openalex.org/W7165462224"
+    },
+    {
+      "title": "Fault tolerant communication performance of BCCC data center networks based on disjoint paths",
+      "abstract": "To satisfy the requirements of various application scenarios, data center networks with higher computing power, faster processing speed, and larger storage space have been proposed. As a server-centric data center network, BCube connected crossbars (BCCC) has significant advantages in terms of expandability, communication latency, and robustness in component failures to ensure better network performance. The switches of BCCC only serve as crossbars, so we focus on the interconnections among servers, and the logical graph of BCCC is denoted as L-BCCC. With the expansion of network scale, failures are inevitable, and it is imperative to maintain reliable communication and reduce communication delay in the event of failures. In this work, we investigate the fault tolerant communication performance of L-BCCC with respect to disjoint paths. First, we devise an $O(k^{3}+nk^{2})$ algorithm to construct $n+k-1$ disjoint paths (i.e. as many paths as the connectivity) between any two distinct nodes in L-BCCC$(n, k)$, where the maximum length of the path is only 3 larger than the diameter. As a by-product, we determine the connectivity of L-BCCC$(n, k)$. In addition, we also investigate the $(n+k-1)$-wide diameter and $(n+k-2)$-fault diameter of L-BCCC$(n, k)$, which are close to the diameter of the network. Finally, the fault tolerant routing based on the constructed disjoint paths is evaluated by simulation experiments to have good and stable transmission performance in case of node failures.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag057",
+      "url": "https://openalex.org/W7163394682"
+    },
+    {
+      "title": "FunSp: countering binary code similarity detection through function splitting",
+      "abstract": "Binary code similarity detection (BCSD) poses a significant threat to software security by enabling reverse engineers to identify critical functions in binaries. Code obfuscation is a primary defense, yet existing techniques often incur high performance overhead and introduce recognizable patterns. To address these limitations, we present FunSp, a lightweight code obfuscation method based on function splitting at the compiler intermediate representation level. FunSp partitions a function’s control flow graph into multiple subgraphs via dominator-tree analysis, repairs inter-subgraph data dependencies, reconstructs control flow, and finally rewrites the code to produce semantically equivalent sub-functions. This approach redistributes basic blocks across subfunctions without injecting substantial redundant code, thereby minimizing overhead. Experimental results show that FunSp effectively undermines state-of-the-art BCSD models, reducing Recall@1 to 0.016 in a 10 000-function pool. It maintains practicality, introducing a mean code expansion ratio of 1.353 $\\times $ and a runtime overhead of 12.7%. Compared with Obfuscator-LLVM and Tigress, FunSp reduces code bloat by 73.5% and runtime overhead by 5.5%.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag054",
+      "url": "https://openalex.org/W7162285141"
+    },
+    {
+      "title": "Multi-layer traceability of diffusion and diffusion-stego models based on zero-watermarking and Swin transformer-PCA",
+      "abstract": "With the rapid development of AI-Generative Content (AIGC), various diffusion and diffusion steganography models have been rising recently. However, existing diffusion and diffusion steganography models mainly focused on generating content and hiding secret data, ignoring copyright protection and traceability of generated content, secret data, and models. Model watermarking served as an active defense mechanism in traceability has been widely concerned. However, existing model watermarking primarily fine-tunes diffusion models, which not only requires additional training but also degrades the quality of generated content. To address these issues, based on zero-watermarking and Swin Transformer-Principal Component Analysis (PCA), this paper proposes a multi-layer traceability method for diffusion and diffusion steganography models, without requiring extra modifications and training, making it simple and efficient. We first propose Swin Transformer-PCA to extract features of the noise images generated during the diffusion process, significantly reducing the dimensionality of feature vectors while retaining the most important features and enhancing the feature robustness. Then we combine the extracted features with the model’s copyright to create a zero-watermark for model traceability. According to the different protection targets, we extract features of generated content or secret data separately, then combine them with the image copyright or secret data copyright to create zero-watermarks, achieving multi-layer traceability. Experimental results demonstrate that the proposed multi-layer traceability method exhibits strong robustness and high visual quality, resisting various attacks, with an average Peak Signal-to-Noise Ratio of 43.13 dB and Normalized Cross-Correlation (NCC) of up to 0.96 under various attacks. Moreover, our scheme achieves zero modifications on both model and generated content, ensuring high accuracy of the model and high quality of the generated content.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag051",
+      "url": "https://openalex.org/W7160383037"
+    },
+    {
+      "title": "FADM: protecting user privacy from attribute inference attacks in federated recommendation",
+      "abstract": "In recent years, federated learning (FL) has gained widespread adoption to address increasing privacy concerns in personalized recommendation. However, recent studies have revealed that federated recommender systems (FedRecs) remain vulnerable to the attribute inference attack (AIA). Specifically, the local model parameters uploaded by clients encode significant information about their sensitive attributes, inadvertently creating an avenue for AIA adversaries. To better understand the threat severity and characteristics of AIA in FedRecs, we conduct systematic attack experiments on several representative recommenders. The results underscore the substantial vulnerability of FedRecs to AIA, and reveal the heterogeneous and dynamic nature of the information leakage level from model updates. Consequently, existing local differential privacy (LDP)-based defense methods relying on uniform or static noise allocation fail to achieve a well balance between utility and privacy. To address this challenge, we propose the flexible adaptive defense mechanism (FADM). FADM incorporates a dynamic, attack-aware noise control strategy tailored to the varying degrees of leakage throughout training, integrated with component-wise noise scaling against leakage heterogeneity across model components. In FADM, users adaptively tune privacy budgets based on real-time simulated attack evaluations, consistently ensuring sufficient yet non-excessive noise addition. Extensive experiments on benchmark datasets demonstrate that FADM provides robust resistance to AIAs while preserving high recommendation quality, achieving a superior trade-off compared to all defense baselines. For instance, the gender inference F1 score drops from 0.894 to 0.537 with only a 0.055 decrease in the Hit Ratio (HR@10), for the FedNCF model on the ML-1M dataset. Compared to the state-of-the-art (SOTA) defense adaptive privacy preserving mechanism, FADM achieves a 12% relative improvement in HR@10 and a 14% reduction in the F1 score. Furthermore, FADM remains robust against adversaries with substantial prior knowledge.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1093/comjnl/bxag049",
+      "url": "https://openalex.org/W7161608660"
+    }
+  ]
+}

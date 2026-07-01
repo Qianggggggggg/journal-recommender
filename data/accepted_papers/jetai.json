@@ -1,0 +1,86 @@
+{
+  "journal_id": "jetai",
+  "journal_name": "Journal of Experimental and Theoretical Artificial Intelligence",
+  "papers": [
+    {
+      "title": "The future of artificial intelligence and digital development: a study of trust in social robot capabilities",
+      "abstract": "This paper aims to study people’s trust in the capabilities of social robots in the context of digital transformation. Firstly, the current application status of social robots is studied. Then, the capability trust problem of social robots is studied according to the existing problems and phenomena. Students from a municipal experimental middle school are selected for a questionnaire survey, and the anthropomorphism of social robots is taken as the independent variable. The role of social robots with different anthropomorphic degrees on students’ initial capability trust and the mediating role of attraction perception are studied. A research model is established, and SPSS 26.0 is used to further analyse the data. The results show that among the students with a low degree of an anthropomorphic social robot, the average score of anthropomorphism is 2.52, the average score of attraction perception is 3.29, and the score of capability trust is 3.64, which is the upper-middle level. There are significant differences in the initial capability trust evaluation of social robots among students of different ages (F = 38.13, P = 0.00). When the degree of anthropomorphism of social robots is at different levels, there are significant differences in students’ initial capability trust evaluation (F = 34.25, P = 0.00). It can be seen that the degree of anthropomorphism of social robots has an impact on students’ initial capability trust.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2023.2263456",
+      "url": "https://www.semanticscholar.org/paper/8a46622c7aef2d671c9917c2ef8f717fc3bab1b9"
+    },
+    {
+      "title": "Artiﬁcial intelligence methods to support the research of destination image in tourism. A systematic review",
+      "abstract": "Destination Image can be considered as both, a theoretical and practical tool, to better understand how a destination is perceived in the minds of potential visitors. Given the im- pressive growth of digital sources of tourism-related data in the last decades, methods that exploit this information have been designed to explore this construct. Due to its capacity to emulate human intelligence and its ability to uncover hidden patterns, Artiﬁcial Intelligence has captured the attention of the academic and business sectors, for this reason, several ap- proaches from tourism research take advantage of such techniques. However, to date, there is neither sufficient information about what speciﬁc methods are being employed nor an eval- uation of their usefulness for the task. In this work, we identify the main techniques, as well as the representations, measurements, and results derived from the computational science perspective related to destination image in tourism studies. As a result, two taxonomies emerged: one related to the group of methods and techniques, and the other pertaining to the results obtained through these particular methodological designs. From our analysis, we found that electronic information is gaining strength as a primary information source, how- ever, our results showed that surveys are still on the top. On the other hand, the preferred techniques for information analysis are based on word frequencies but with a growing trend in the use of neural networks and deep learning techniques.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2022.2153276",
+      "url": "https://www.semanticscholar.org/paper/6e2d72c376bd63332694f8a9dda613d33a3cbd20"
+    },
+    {
+      "title": "A new hybrid Pythagorean fuzzy AHP and COCOSO MCDM based approach by adopting artificial intelligence technologies",
+      "abstract": "In recent decades, Artificial Intelligence (AI) has advanced from a research field to reality for executives. These are demonstrated by the accelerated use of AI technology in businesses, which has contributed to increased revenues, cost reductions, and expanded organisation performance. This research is the first to propose Pythagorean fuzzy analytic hierarchy process (PF-AHP) and Pythagorean fuzzy compromised solution integration (PF-CoCoSo). PF-AHP calculates the weighting factors of the critical elements, whereas PF-CoCoSo ranks the benefit expectations (BEs) according its AI adoption. To illustrate the framework’s relevance, a scenario of Vietnam Telecom Corporation was performed. The most impactful AI technologies to adopt include ‘Managerial capabilities and related advantages’ following ‘government involvement,’ ‘technical capability and vendor partnership for AI adoption,’ and then ‘compatibility.’ A sensitivity analysis is used to verify the performance of the proposed framework. The study findings and the comparisons made between the results of the proposed technique and other Multi-Criteria Decision Making (MCDM) methods confirm the accuracy of the proposed method in solving the AI technology adoption problem. These contributions will support AI researchers and practitioners by providing recommendations and methodologies for examining the use of AI.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2022.2143908",
+      "url": "https://www.semanticscholar.org/paper/f1142024a04a44cee7a1508f0156b1d5074f891c"
+    },
+    {
+      "title": "The risks associated with Artificial General Intelligence: A systematic review",
+      "abstract": "Artificial General intelligence (AGI) offers enormous benefits for humanity, yet it also poses great risk. The aim of this systematic review was to summarise the peer reviewed literature on the risks associated with AGI. The review followed the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines. Sixteen articles were deemed eligible for inclusion. Article types included in the review were classified as philosophical discussions, applications of modelling techniques, and assessment of current frameworks and processes in relation to AGI. The review identified a range of risks associated with AGI, including AGI removing itself from the control of human owners/managers, being given or developing unsafe goals, development of unsafe AGI, AGIs with poor ethics, morals and values; inadequate management of AGI, and existential risks. Several limitations of the AGI literature base were also identified, including a limited number of peer reviewed articles and modelling techniques focused on AGI risk, a lack of specific risk research in which domains that AGI may be implemented, a lack of specific definitions of the AGI functionality, and a lack of standardised AGI terminology. Recommendations to address the identified issues with AGI risk research are required to guide AGI design, implementation, and management.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2021.1964003",
+      "url": "https://www.semanticscholar.org/paper/220e224b3c5ee56f6d31220d3f087caf4db95635"
+    },
+    {
+      "title": "Projection: a mechanism for human-like reasoning in Artificial Intelligence",
+      "abstract": "Artificial Intelligence systems cannot yet match human abilities to apply knowledge to situations that vary from what they have been programmed for, or trained for. In visual object recognition, methods of inference exploiting top-down information (from a model) have been shown to be effective for recognising entities in difficult conditions. Here a component of this type of inference, called ‘projection’, is shown to be a key mechanism to solve the problem of applying knowledge to varied or challenging situations, across a range of AI domains, such as vision, robotics, or language. Finally, the relevance of projection to tackling the commonsense knowledge problem is discussed.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2022.2078889",
+      "url": "https://www.semanticscholar.org/paper/f5b4725027a4bdccd9a2329519fab90750987ebb"
+    },
+    {
+      "title": "Application of Artificial Intelligence on Post Pandemic Situation and Lesson Learn for Future Prospects",
+      "abstract": "Coronavirus disease (COVID-19) pandemic has intensively damaged human socio-economic lives and the growth of countries around the world. Many efforts have been made in the direction of artificial intelligence (AI) techniques to detect the corona at an early stage and take necessary precautions to stop it from spreading or recovery from the infection. However, the situation and solutions are still challenging. In this paper, we proposed various technological aspects, solutions using a supervised/unsupervised manner and continuous health monitoring with physiological parameters. Finally, the performance of COVID-19 detection with Gaussian mixture model-universal background model (GMM-UBM) technique using the voice signal has been demonstrated. The developed system achieves the COVID-19 detection performance in terms of areas under receiver operating characteristic (ROC) curves in the range 60–67%. Moreover, the various lessons learned from the current COVID-19 crisis are presented for future directions.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2021.1958063",
+      "url": "https://www.semanticscholar.org/paper/5748653a2df8f15562afee419b5e307a286ebf3e"
+    },
+    {
+      "title": "AIDrugApp: artificial intelligence-based Web-App for virtual screening of inhibitors against SARS-COV-2",
+      "abstract": "Currently, there is no effective cure for SARS-COVID-19 diseases. The identification of novel therapeutic targets and drug-like compounds is required for the development of anti-COVID-19 drugs. Virtual screening is currently the most significant component for identifying drug-like molecules from large datasets for drug design and development. However, there are no effective easily available and user-friendly applications for virtual screening of drug leads against SARS-COV-2. Therefore, we have developed a user-friendly web-app named ‘AIDrugApp’ for the virtual screening of inhibitor molecules against SARS-CoV-2. AIDrugApp is a novel open-access, deep learning AI-based inhibitory activity prediction and data statistics visualisation platform. Users can predict the inhibitory activities (Active/Inactive) and pIC-50 values of new compounds against SARS-CoV-2 replicase polyprotein, 3CLpro and human angiotensin-converting enzymes. It is also useful for virtual screening of chemical features of molecules towards SARS-COVID-19 clinical trial bioactivities. This paper presents the development and architecture of AIDrugApp. We also present two case studies where large sets of molecules were screened using the ‘Bioactivity Prediction’ module of our app. Screened molecules were analysed further for validation by molecular docking and ADME analysis to identify the potential drug candidates.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2022.2058619",
+      "url": "https://www.semanticscholar.org/paper/0d0db90a9804dacf5f4fd9d81d62413d8c83f214"
+    },
+    {
+      "title": "The pursuit of general intelligence and the limits of robust alignment",
+      "abstract": "The challenge of reliable alignment of artificial intelligence systems has drawn increasing attention from both researchers and policymakers. While current alignment efforts often presume the feasibility of specific solutions for today’s systems, this study addresses a further question: is robust alignment compatible with the essential cognitive capacities required for general intelligence? Based on the analysis of necessary characteristics of general intelligence, such as autonomous exploration of sensory environment and others, our analysis shows that under natural assumptions, systems advancing towards general intelligence can develop goals and perspectives that diverge from human norms and expectations. We argue that such divergence is not a failure of design but a logical outcome of the very properties that enable general intelligence. These findings imply both technological limits to alignment programs based on rigid control, and ethical and societal challenges including the risks of cognitive divergence, miscommunication, and limits of enforceable compliance. They also carry policy implications, highlighting the need for monitoring for early signs of misalignment, responsive governance, and frameworks for long-term human – AI coexistence. The study emphasises a structural tension between open-ended intelligence and robust alignment, underscoring the necessity of rethinking not only technical solutions but also societal approaches to managing advanced AI systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2025.2584831",
+      "url": "https://www.semanticscholar.org/paper/8913d9009d56ec83ee8fb503d15d78638de54ff2"
+    },
+    {
+      "title": "A QoS-based technique for load balancing in green cloud computing using an artificial bee colony algorithm",
+      "abstract": "Nowadays, high energy amount is being wasted by computing servers and personal electronic devices, which produce a high amount of carbon dioxide. Thus, it is required to decrease energy usage and pollution. Many applications are utilised by green computing to save energy. Scheduling of tasks acts as an important process to reach the mentioned goals. It is worth stating that the vital characteristic of task scheduling in green clouds is the load balancing of tasks on virtual machines. Efficient load balancing moves tasks from overloaded to underloaded virtual machines to maintain the Quality of Service (QoS). This issue is an NP-complete problem, so this research suggests a new technique based on the behavioural structure of artificial bee behaviour. This method aims to improve QoS while lowering energy usage in green computing. In addition, the honey bees are considered the removed tasks from overloaded virtual machines and a candidate for migrating selected tasks with the lowest priority. The CloudSim testing findings demonstrate that the technique is successful in QoS, makespan, and energy usage compared to other ways.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2023.2188490",
+      "url": "https://www.semanticscholar.org/paper/8953342d3f2dc0e86104ceb3caf6e2533f3720b6"
+    },
+    {
+      "title": "Fitness-distance balance based artificial ecosystem optimisation to solve transient stability constrained optimal power flow problem",
+      "abstract": "The Transient Stability Constrained Optimal Power Flow (TSCOPF) has become an important tool for power systems today. TSCOPF is a nonlinear optimisation problem, making its solution difficult, especially for small power systems. This paper presents a new optimisation method that incorporates Fitness-Distance Balance (FDB) with the Artificial Ecosystem Optimisation (AEO) algorithm to improve the solution quality in multi-dimensional and nonlinear optimisation problems. The proposed method, named the Fitness-Distance Balance Artificial Ecosystem Optimisation (FDBAEO), also has the capacity to solve the TSCOPF problem efficiently. In order to evaluate the proposed algorithm, it was tested on IEEE CEC benchmarks and on an IEEE 30-bus test system for the TSCOPF problem. Simulation results were compared with the basic AEO algorithm and other current meta-heuristic methods reported in the literature. The results showed that the proposed method was more effective in converging at the global optimum point in solving the TSCOPF problem compared to the other algorithms. This situation indicates that the design changes made in the decomposition phase of the AEO were more suitable for simulating the operation of the algorithm in the real world. The FDBAEO has exhibited a promising performance in solving both single-objective optimisation and constrained real-world engineering design problems.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0952813X.2022.2104388",
+      "url": "https://www.semanticscholar.org/paper/c8d7d350fa22744d3da9ec92c72a3b050232490e"
+    }
+  ]
+}

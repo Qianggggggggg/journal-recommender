@@ -1,10 +1,16 @@
 """API 测试"""
 import json
+import time
 import pytest
 from unittest.mock import patch, MagicMock
 from starlette.testclient import TestClient
 
 from src.app.main import app
+from src.app.api import _build_candidate_generator, _build_rule_scorer
+from src.journals.journal_model import Journal
+from src.journals.journal_store import JournalStore
+from src.papers.paper_model import PaperProfile
+from src.retriever.bm25_retriever import BM25Retriever
 
 
 @pytest.fixture
@@ -34,6 +40,98 @@ def test_health_endpoint(client):
     assert "version" in data
 
 
+def test_build_candidate_generator_uses_typical_abstract_retrievers(tmp_path):
+    """配置 typical_abstracts 时，应接入典型摘要三路召回。"""
+    abstracts_dir = tmp_path / "typical_abstracts"
+    abstracts_dir.mkdir()
+    (abstracts_dir / "target.json").write_text(
+        json.dumps({
+            "journal_id": "target",
+            "journal_name": "Target Journal",
+            "abstracts": [
+                {
+                    "method_type": "method",
+                    "novelty_level": "new_method",
+                    "abstract": "Graph neural recommendation systems for representation learning.",
+                }
+            ],
+        }),
+        encoding="utf-8",
+    )
+
+    store = JournalStore(store_path=str(tmp_path / "journals.jsonl"))
+    store.add_journal(Journal(journal_id="other", journal_name="Other Journal", journal_profile="unrelated systems"))
+    store.add_journal(Journal(journal_id="target", journal_name="Target Journal", journal_profile="general computing"))
+
+    bm25 = BM25Retriever(store)
+    bm25.build_index()
+    app_config = {
+        "candidate_generator": {
+            "retrieval_target": "typical_abstracts",
+            "merge_weights": {"bm25": 0.45, "vector": 0.35, "text": 0.20},
+            "fusion_strategy": "weighted_minmax",
+            "hybrid_scope_weight": 0.65,
+            "hybrid_typical_weight": 0.35,
+            "identity_anchor_weight": 0.10,
+            "route_top_k": {
+                "abstract": {"bm25": 28, "vector": 56, "text": 14},
+            },
+        },
+        "data": {
+            "typical_abstracts_dir": str(abstracts_dir),
+            "typical_abstracts_faiss_path": str(tmp_path / "missing.faiss"),
+            "typical_abstracts_metadata_path": str(tmp_path / "missing.parquet"),
+            # 显式指向空目录,避免误加载真实仓库 accepted-paper corpus + index
+            "accepted_papers_dir": str(tmp_path / "no_accepted_papers"),
+            "accepted_papers_faiss_path": str(tmp_path / "missing_accepted.faiss"),
+            "accepted_papers_metadata_path": str(tmp_path / "missing_accepted.parquet"),
+        },
+    }
+
+    generator = _build_candidate_generator(
+        store=store,
+        bm25=bm25,
+        embedding_retriever=None,
+        embedding_client=MagicMock(),
+        app_config=app_config,
+    )
+
+    assert generator.retrieval_target == "typical_abstracts"
+    assert generator.hybrid_scope_weight == 0.65
+    assert generator.hybrid_typical_weight == 0.35
+    assert generator.identity_anchor_weight == 0.10
+    assert generator.fusion_strategy == "weighted_minmax"
+    assert generator.route_top_k["abstract"]["vector"] == 56
+    assert generator.typical_bm25_retriever is not None
+    assert generator.typical_embedding_retriever is not None
+    assert generator.typical_text_retriever is not None
+
+    profile = PaperProfile(title="Graph neural recommendation", keywords=["graph", "recommendation"])
+    candidates, trace = generator.generate_with_trace("graph neural recommendation", profile, top_k=3)
+    assert "target" in [journal.journal_id for journal in candidates]
+    assert any(route.startswith("typical_") for route in trace["target"]["routes"])
+
+
+def test_build_rule_scorer_uses_ranking_config():
+    store = JournalStore()
+    store.add_journal(Journal(journal_id="target", journal_name="Target Journal"))
+    app_config = {
+        "ranking": {
+            "rule_scorer": {
+                "retrieval_rank_prior": 0.9,
+                "strong_scope_rank_bonus": 0.7,
+                "research_area_match": 0.4,
+            }
+        }
+    }
+
+    scorer = _build_rule_scorer(store, app_config)
+
+    assert scorer.weights["retrieval_rank_prior"] == 0.9
+    assert scorer.weights["strong_scope_rank_bonus"] == 0.7
+    assert scorer.weights["research_area_match"] == 0.4
+
+
 def test_journals_endpoint(client):
     """测试期刊列表接口"""
     response = client.get("/api/journals?limit=5")
@@ -45,7 +143,7 @@ def test_journals_endpoint(client):
 
 def test_recommend_endpoint_with_mock(mock_llm):
     """测试推荐接口（使用 mock LLM）"""
-    with patch("src.app.api.MiniMaxLLM", return_value=mock_llm):
+    with patch("src.app.api.build_minimax_llm", return_value=mock_llm):
         with patch("src.app.api.PaperParser") as MockParser:
             mock_profile = MagicMock()
             mock_profile.research_area = ["AI", "CV"]
@@ -99,7 +197,7 @@ def test_recommend_endpoint_with_mock(mock_llm):
 
 def test_recommend_stream_endpoint_with_mock(mock_llm):
     """测试 SSE 流式推荐接口（使用 mock LLM）"""
-    with patch("src.app.api.MiniMaxLLM", return_value=mock_llm):
+    with patch("src.app.api.build_minimax_llm", return_value=mock_llm):
         client = TestClient(app)
 
         # 由于流式接口较复杂，如果 LLM 不可用则只检查结构
@@ -120,3 +218,77 @@ def test_recommend_stream_endpoint_with_mock(mock_llm):
         else:
             assert response.status_code == 200
             assert response.headers["content-type"].startswith("text/event-stream")
+
+
+def test_recommend_stream_emits_live_ranking_progress(monkeypatch, client):
+    """候选召回与排序耗时时，SSE 应继续推送进度，避免前端进度条停住。"""
+    from src.app import api as api_module
+    from src.journals.journal_model import JournalMatch
+
+    journal = Journal(journal_id="target", journal_name="Target Journal")
+
+    class DummyParser:
+        def parse(self, paper_input, system_prompt, user_prompt):
+            return PaperProfile(title=paper_input.title, abstract=paper_input.abstract)
+
+    class DummyPipeline:
+        parser = DummyParser()
+        quality_assessor = None
+
+        def recommend(self, *args, **kwargs):
+            time.sleep(0.08)
+            return {
+                "recommendations": [
+                    JournalMatch(
+                        journal=journal,
+                        score=0.9,
+                        confidence=0.8,
+                        match_reasons=["匹配"],
+                    )
+                ],
+                "rank_method": "llm",
+                "mode_used": "abstract",
+            }
+
+    monkeypatch.setattr(api_module, "get_pipeline", lambda: DummyPipeline())
+    monkeypatch.setattr(api_module, "STREAM_PROGRESS_INTERVAL_SECONDS", 0.01, raising=False)
+
+    response = client.get(
+        "/api/recommend/stream",
+        params={
+            "title": "Deep Learning for Image Recognition",
+            "abstract": "This paper proposes a new method.",
+            "mode": "abstract",
+            "top_k": 1,
+        },
+    )
+
+    assert response.status_code == 200
+    ranking_progress = [
+        json.loads(block.split("data: ", 1)[1])
+        for block in response.text.split("\n\n")
+        if "event: progress" in block and '"stage": "ranking"' in block
+    ]
+
+    assert any(40 < item["percent"] < 80 for item in ranking_progress)
+
+
+# ---------------------------------------------------------------------------
+# Task 5.3 — LTR 接入
+# ---------------------------------------------------------------------------
+
+
+def test_get_pipeline_constructs_enabled_production_ltr_adapter(monkeypatch):
+    """生产配置应加载当前 16 维 LTR 模型。"""
+    from src.app.api import get_pipeline
+    import src.app.api as api_module
+
+    # 强制 reset 缓存的 pipeline,让 get_pipeline 重新构造
+    api_module._pipeline = None
+
+    pipeline = get_pipeline()
+    assert hasattr(pipeline, "learned_reranker")
+    assert pipeline.learned_reranker is not None
+    assert pipeline.learned_reranker.enabled is True
+    assert pipeline.learned_reranker.disable_reason is None
+    assert pipeline.learned_reranker.feature_dim == 16

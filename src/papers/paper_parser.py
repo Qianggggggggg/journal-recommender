@@ -37,8 +37,8 @@ class PaperParser:
             abstract=paper_input.abstract or "",
             full_text_summary=paper_input.full_text if paper_input.full_text else "",
         )
-        print(f"[DEBUG] paper_input.title='{paper_input.title}', abstract len={len(paper_input.abstract)}, full_text len={len(paper_input.full_text)}")
-        print(f"[DEBUG] user_filled first 200: {user_filled[:200]}")
+        #print(f"[DEBUG] paper_input.title='{paper_input.title}', abstract len={len(paper_input.abstract)}, full_text len={len(paper_input.full_text)}")
+        #print(f"[DEBUG] user_filled first 200: {user_filled[:200]}")
 
         try:
             response = self.llm.chat_auto(system_prompt, user_filled)
@@ -47,22 +47,31 @@ class PaperParser:
 
         # 解析 JSON 响应
         data = parse_json_response(response.content)
-        if data:
+        if data is None:
+            raise PaperParserError(f"LLM响应格式错误，无法解析: {response.content}")
 
-            # 确保列表字段是列表类型（防御 LLM 返回字符串的情况）
-            list_fields = ["research_area", "application_domain", "keywords", "techniques", "datasets", "evaluation_metrics"]
-            for field in list_fields:
-                if field in data and not isinstance(data[field], list):
-                    # 如果是字符串，尝试按逗号分割
-                    if isinstance(data[field], str):
-                        data[field] = [x.strip() for x in data[field].split(",") if x.strip()]
-                    else:
-                        data[field] = []
+        # 兼容处理：如果是数组，取第一个元素
+        if isinstance(data, list):
+            if len(data) > 0:
+                data = data[0]
+            else:
+                raise PaperParserError(f"LLM响应为空数组: {response.content}")
 
-            return PaperProfile(
-                title=paper_input.title,
-                abstract=paper_input.abstract or "",
-                **{k: v for k, v in data.items() if k != "title"}
-            )
+        if not isinstance(data, dict):
+            raise PaperParserError(f"LLM响应不是有效的字典格式: {response.content}")
 
-        raise PaperParserError(f"LLM响应格式错误，无法解析: {response.content}")
+        # 确保列表字段是列表类型（防御 LLM 返回字符串的情况）
+        list_fields = ["research_area", "application_domain", "keywords", "techniques", "datasets", "evaluation_metrics"]
+        for field in list_fields:
+            if field in data and not isinstance(data[field], list):
+                # 如果是字符串，尝试按逗号分割
+                if isinstance(data[field], str):
+                    data[field] = [x.strip() for x in data[field].split(",") if x.strip()]
+                else:
+                    data[field] = []
+
+        return PaperProfile(
+            title=paper_input.title,
+            abstract=paper_input.abstract or "",
+            **{k: v for k, v in data.items() if k != "title"}
+        )

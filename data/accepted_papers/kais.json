@@ -1,0 +1,86 @@
+{
+  "journal_id": "kais",
+  "journal_name": "Knowledge and Information Systems",
+  "papers": [
+    {
+      "title": "Implicit knowledge-augmented prompting for commonsense explanation generation",
+      "abstract": "Commonsense explanation generation refers to reasoning and explaining why a commonsense statement contradicts commonsense knowledge, such as why the statement “My dad grew volleyballs in his garden” is nonsensical. While such reasoning is trivial for humans, it remains a challenge for AI systems. Despite their notable performance in tasks like text generation and reasoning, large language models (LLMs) often fall short of consistently generating coherent and accurate commonsense explanations. To bridge this gap, we propose a novel Two-stage Identification and Prompting (TIP) framework for enhancing LLMs’ ability to handle the task of commonsense explanation generation. Specifically, in the first stage, TIP identifies the nonsensical concept in the given statement, pinpointing the specific element that contradicts commonsense knowledge. In the second stage, TIP generates implicit knowledge based on the identified nonsensical concept and then leverages this implicit knowledge to guide the adopted LLMs in generating explanations. In order to demonstrate the effectiveness of the proposed TIP framework for commonsense explanation generation, we conducted extensive experiments based on the ComVE dataset and a newly constructed CSE dataset, where a variety of LLMs are evaluated. The experimental results show that TIP consistently outperforms all baseline methods across multiple metrics, demonstrating its effectiveness in improving LLMs’ commonsense reasoning and explanation generation capabilities.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-024-02326-w",
+      "url": "https://www.semanticscholar.org/paper/4a7021bbfccf27196873e47fac2e5bd901e78290"
+    },
+    {
+      "title": "Cybersecurity knowledge graphs",
+      "abstract": "Cybersecurity knowledge graphs, which represent cyber-knowledge with a graph-based data model, provide holistic approaches for processing massive volumes of complex cybersecurity data derived from diverse sources. They can assist security analysts to obtain cyberthreat intelligence, achieve a high level of cyber-situational awareness, discover new cyber-knowledge, visualize networks, data flow, and attack paths, and understand data correlations by aggregating and fusing data. This paper reviews the most prominent graph-based data models used in this domain, along with knowledge organization systems that define concepts and properties utilized in formal cyber-knowledge representation for both background knowledge and specific expert knowledge about an actual system or attack. It is also discussed how cybersecurity knowledge graphs enable machine learning and facilitate automated reasoning over cyber-knowledge.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-023-01860-3",
+      "url": "https://www.semanticscholar.org/paper/4cb2924d5f4a076724942d791076438679b384be"
+    },
+    {
+      "title": "Large-scale knowledge graph representation learning",
+      "abstract": "The knowledge graph emerges as powerful data structures that provide a deep representation and understanding of the knowledge presented in networks. In the pursuit of representation learning of the knowledge graph, entities and relationships undergo an embedding process, where they are mapped onto a vector space with reduced dimensions. These embeddings are progressively used to extract their information for a multitude of tasks in machine learning. Nevertheless, the increase data in knowledge graph has introduced a challenge, especially as knowledge graph embedding now encompass millions of nodes and billions of edges, surpassing the capacities of existing knowledge representation learning systems. In response to these challenge, this paper presents DistKGE, a distributed learning approach of knowledge graph embedding based on a new partitioning technique. In our experimental evaluation, we illustrate that the proposed approach improves the scalability of distributed knowledge graph learning with respect to graph size compared to existing methods in terms of runtime performances in the link prediction task aimed at identifying new links between entities within the knowledge graph.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-024-02131-5",
+      "url": "https://www.semanticscholar.org/paper/01d595b3c29d533607110daa739af2043ec7df95"
+    },
+    {
+      "title": "Collective warming versus strategic alliances: Which emerges more readily? A networked evolutionary game analysis in status-equal populations",
+      "abstract": "Individuals with equal status or strength are more likely to interact within the same region or field, leading to self-interested gameplay. In real life, nodes exhibit heterogeneous statuses or classes, categorized as small nodes (low-status) and big nodes (high-status). This study analyzes cooperative behaviors by modeling games between status-homogeneous nodes with networked evolutionary games. This paper employed temporal random networks to simulate interaction dynamics and investigate the effects of payoff factors. One type of network consists of small nodes representing low-status individuals, while the other is made up of big nodes representing high-status individuals. These temporal networks evolve dynamically, with node counts and edge numbers changing over time. The experiments show that punishment enhances cooperation among big nodes (high-status individuals). Cooperative behaviors differ between node types: big nodes are more likely to cooperate with their peers, exhibiting higher cooperation levels compared to small nodes.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10115-025-02622-z",
+      "url": "https://doi.org/10.1007/s10115-025-02622-z"
+    },
+    {
+      "title": "Emergency management using geographic information systems: application to the first Romanian traveling salesman problem instance",
+      "abstract": "The strategic design of logistic networks, such as roads, railways or mobile phone networks, is essential for efficiently managing emergency situations. The geographic coordinate systems could be used to produce new traveling salesman problem (TSP) instances with geographic information systems (GIS) features. The current paper introduces a recurrent framework designed for building a sequence of instances in a systematic way. The framework intends to model real-life random adverse events manifested on large areas, as massive rainfalls or the arrival of a polar front, or targeted relief supply in early stages of the response. As a proof of concept for this framework, we use the first Romanian TSP instance with the main human settlements, in order to derive several sequences of instances. Nowadays state-of-the-art algorithms for TSP are used to solve these instances. A branch-and-cut algorithm delivers the integer exact solutions, using substantial computing resources. An implementation of the Lin–Kernighan heuristic is used to rapidly find very good near-optimal integer solutions to the same instances. The Lin–Kernighan heuristic shows stability on the tested instances. Further work could be done to better exploit GIS features in order to efficiently tackle operations on large areas and to test the solutions delivered by other algorithms on new instances, derived using the introduced framework.",
+      "year": 2016,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-016-0938-8",
+      "url": "https://www.semanticscholar.org/paper/d2ebf4373a49679e419806496d954caf42770b0d"
+    },
+    {
+      "title": "A template-based approach for question answering over knowledge bases",
+      "abstract": "In this paper, we address the problem of answering complex questions formulated by users in natural language. Since traditional information retrieval systems are not suitable for complex questions, these questions are usually run over knowledge bases, such as Wikidata or DBpedia. We propose a semi-automatic approach for transforming a natural language question into a SPARQL query that can be easily processed over a knowledge base. The approach applies classification techniques to associate a natural language question with a proper query template from a set of predefined templates. The nature of our approach is semi-automatic as the query templates are manually written by human assessors, who are the experts of the knowledge bases, whereas the classification and query processing steps are completely automatic. Our experiments on the large-scale CSQA dataset for question-answering corroborate the effectiveness of our approach.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-023-01966-8",
+      "url": "https://www.semanticscholar.org/paper/25f9412bda48c8d57f57e7bb8a8838adbffec454"
+    },
+    {
+      "title": "Scholarly recommendation systems: a literature survey",
+      "abstract": "A scholarly recommendation system is an important tool for identifying prior and related resources such as literature, datasets, grants, and collaborators. A well-designed scholarly recommender significantly saves the time of researchers and can provide information that would not otherwise be considered. The usefulness of scholarly recommendations, especially literature recommendations, has been established by the widespread acceptance of web search engines such as CiteSeerX, Google Scholar, and Semantic Scholar. This article discusses different aspects and developments of scholarly recommendation systems. We searched the ACM Digital Library, DBLP, IEEE Explorer, and Scopus for publications in the domain of scholarly recommendations for literature, collaborators, reviewers, conferences and journals, datasets, and grant funding. In total, 225 publications were identified in these areas. We discuss methodologies used to develop scholarly recommender systems. Content-based filtering is the most commonly applied technique, whereas collaborative filtering is more popular among conference recommenders. The implementation of deep learning algorithms in scholarly recommendation systems is rare among the screened publications. We found fewer publications in the areas of the dataset and grant funding recommenders than in other areas. Furthermore, studies analyzing users’ feedback to improve scholarly recommendation systems are rare for recommenders. This survey provides background knowledge regarding existing research on scholarly recommenders and aids in developing future recommendation systems in this domain.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-023-01901-x",
+      "url": "https://www.semanticscholar.org/paper/057676b741dd7a504bc3ab4c4473a46195953ae7"
+    },
+    {
+      "title": "Drug-CoV: a drug-origin knowledge graph discovering drug repurposing targeting COVID-19",
+      "abstract": "Drug repurposing is a technique for probing new usages of existing medicines, but its traditional methods, such as computational approaches, can be time-consuming and laborious. Recently, knowledge graphs (KGs) have emerged as a powerful approach for graph-based representation in drug repurposing, encoding entities and relations to predict new connections and facilitate drug discovery. As COVID-19 has become a major public health concern, it is critical to establish an appropriate COVID-19 KG for drug repurposing to combat the spread of the virus. However, most publicly available COVID-19 KGs lack support for multi-relations and comprehensive entity types. Moreover, none of them originates from COVID-19-related drugs, making it challenging to identify effective treatments. To tackle these issues, we developed Drug-CoV, a drug-origin and multi-relational COVID-19 KG. We evaluated the quality of Drug-CoV by performing link prediction and comparing the results to another publicly available COVID-19 KG. Our results showed that Drug-CoV outperformed the comparing KG in predicting new links between entities. Overall, Drug-CoV represents a valuable resource for COVID-19 drug repurposing efforts and demonstrates the potential of KGs for facilitating drug discovery.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-023-01923-5",
+      "url": "https://www.semanticscholar.org/paper/a3eb29aabedf510b45accecf0843d8509b055047"
+    },
+    {
+      "title": "Named entity disambiguation in short texts over knowledge graphs",
+      "abstract": "The ever-growing usage of knowledge graphs (KGs) positions named entity disambiguation (NED) at the heart of designing accurate KG-driven systems such as query answering systems (QAS). According to the current research, most studies dealing with NED on KGs involve long texts, which is not the case of short text fragments, identified by their limited contexts. The accuracy of QASs strongly depends on the management of such short text. This limitation motivates this paper, which studies the NED problem on KGs, involving only short texts. First, we propose a NED approach including the following steps: (i) context expansion using WordNet to measure its similarity to the resource context. (ii) Exploiting coherence between entities in queries that contain more than one entity, such as “Is Michelle Obama the wife of Barack Obama?”. (iii) Taking into account the relations between words to calculate their similarity with the properties of a resource. (iv) the use of syntactic features. The NED solution approach is compared to state-of-the-art approaches using five datasets. The experimental results show that our approach outperforms these systems by 27% in the F-measure. A system called Welink, implementing our proposal, is available on GitHub, and it is also accessible via a REST API.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-021-01642-9",
+      "url": "https://www.semanticscholar.org/paper/e173da33e53566e018fdd42512ad32d207fce9e3"
+    },
+    {
+      "title": "Information extraction from electronic medical documents: state of the art and future research directions",
+      "abstract": "In the medical field, a doctor must have a comprehensive knowledge by reading and writing narrative documents, and he is responsible for every decision he takes for patients. Unfortunately, it is very tiring to read all necessary information about drugs, diseases and patients due to the large amount of documents that are increasing every day. Consequently, so many medical errors can happen and even kill people. Likewise, there is such an important field that can handle this problem, which is the information extraction. There are several important tasks in this field to extract the important and desired information from unstructured text written in natural language. The main principal tasks are named entity recognition and relation extraction since they can structure the text by extracting the relevant information. However, in order to treat the narrative text we should use natural language processing techniques to extract useful information and features. In our paper, we introduce and discuss the several techniques and solutions used in these tasks. Furthermore, we outline the challenges in information extraction from medical documents. In our knowledge, this is the most comprehensive survey in the literature with an experimental analysis and a suggestion for some uncovered directions.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10115-022-01779-1",
+      "url": "https://www.semanticscholar.org/paper/e5f5a058c26b87dc94b8b0c35e9395bac578969c"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "journal_id": "jwe",
+  "journal_name": "Journal of Web Engineering",
+  "papers": [
+    {
+      "title": "Introducing Students to Web Engineering Topics by Teaching Web Augmentation",
+      "abstract": "Web augmentation has gained prominence as a promising approach to elevate the user experience by tailoring web content to meet diverse user needs and preferences. It offers the potential to enhance accessibility and personalization, making web experiences more engaging and inclusive. This research study examines the use of web augmentation in the context of web engineering education and its influence on student motivation. The study investigates how the integration of web augmentation techniques motivates students and enhances their learning experience. A questionnaire was administered to gather data on student perceptions and motivation levels following their exposure to web augmentation in the web engineering subject. The findings reveal that the implementation of web augmentation in the web engineering subject has positively motivated students. Students express a strong preference for web augmentation as a learning tool, citing increased engagement and a more interactive learning environment. The findings support the adoption of web augmentation techniques as a valuable pedagogical tool, enhancing the learning experience and fostering student engagement. This study contributes to the field by addressing the gap in related work that focuses on the use of web augmentation specifically in educational settings.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2311",
+      "url": "https://www.semanticscholar.org/paper/ac60e40243508124e95492aabec9bd4ac56658a9"
+    },
+    {
+      "title": "Proposed Secure Hypertext Model in Web Engineering",
+      "abstract": "Secure web application development is one of the prime challenges for the software industry. In the last decade, web applications have rapidly developed but web engineering methods have some limitations while designing web applications. The extensive literature survey explores various concepts like web engineering, hypertext modelling, web applications hypertext modelling methods, attacks on web applications, same origin policy (SOP) and cross origin resource sharing (CORS). The complexity of web pages is a major concern for security. The proposed secure hypertext model (SHM) provides hypertext modelling of web applications and helps in the identification of attacks on hypertext links. It provides security stereotypes and precisely specifies vulnerability defences in web application design. This standardized attack vector and defence mechanism will help developers to build more secure applications.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2241",
+      "url": "https://www.semanticscholar.org/paper/3fd349762a3bacc826e3c3eea1b0e6cff1a5aacb"
+    },
+    {
+      "title": "Disclosure: Improving Performance and Security of Web App Migration in Liquid Computing",
+      "abstract": "Web app migration refers to capturing a snapshot of the execution state of a web app on a device and restoring it on another device to continue its execution for cross-device liquid computing. Although web apps are relatively easy to migrate due to their high portability, there is a JavaScript language feature called closure that complicates the migration since it requires migrating the variable states of already-finished outer functions. One approach to web app migration is to instrument the source code to trace the closure variables, yet this often suffers from performance slowdown, especially for multiple migrations. In this paper, we propose a new instrumentation-based technique called Disclosure, which moves the declarations of closure variables to a managed data structure and replaces the closure variables with the corresponding references to the data structure. This technique can improve runtime performance while enhancing security. We evaluated our work with eight Octane benchmarks and four real web apps. The runtime performance penalty due to Disclosure is 0–15%, which is a significant improvement over the results of the latest instrumentation-based work that supports similar deep closures and multiple migrations to Disclosure. Furthermore, real web apps are demonstrated to migrate seamlessly, even multiple times. Finally, Disclosure can hide data from exposure during migration with a secure migration technique using data encryption.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2215",
+      "url": "https://www.semanticscholar.org/paper/f927d65a85bd4e4526f5892c44f73e5f036c13ca"
+    },
+    {
+      "title": "Development of Web Content for Music Education Using AR Human Facial Recognition Technology",
+      "abstract": "As the media market changes rapidly, market demand is increasing for content that can be consumed on web platforms. It’s required to produce differentiated web content that can attract viewers’ interest. In order to increase the productivity and efficiency of content creation, cases of content production using AR engines are increasing. This study has a development environment in which parametrics and muscle-based model techniques are mixed. The faces of famous Western classical musicians, such as Mozart, Beethoven, Chopin and List are created as 3D characters and augmented on human’s face based on facial recognition technology in this study. It analyzes and traces the changed of facial expression of each person, then apply to 3D character’s facial expression in real-time. Each person who augmented musicians’ faces can become those who lived in different times, deliver information and communicate with viewers of the present era based on the music educational scripts. This study presents a new direction for video production required in the media market.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2252",
+      "url": "https://www.semanticscholar.org/paper/2f10f1be836bc8ee97c33d4f03dfe5c314d09467"
+    },
+    {
+      "title": "Credibility Evaluation of Web Big Data Information Based on Particle Swarm Optimization",
+      "abstract": "In order to improve the credibility evaluation effectiveness of web big data information, the improved particle swarm optimization is established. Firstly, framework of web big data is designed to include web big data source, data storage, data processing and data analysis. The global credibility calculation formula of whole web is established. Secondly, the improved particle swarm algorithm is constructed through updating weight and training factor, introducing cross and mutation operations into the algorithm, and improving population diversification based on mountain climbing algorithm. Finally, ten sample industries and one hundred sample stocks are selected to carry out experiment analysis, and the results show that the proposed algorithm can effectively distinguish trusted and untrustworthy records. And the proposed algorithm of calculating credibility of web big data has high reasonableness.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.21212",
+      "url": "https://www.semanticscholar.org/paper/828c91f22d519c47df1779ece5416b438f6507f5"
+    },
+    {
+      "title": "A Large-scale Empirical Assessment of Web API Size Evolution",
+      "abstract": "Like any other type of software, also Web Application Programming Interfaces (APIs) evolve over time. In the case of widely used API, introducing changes is never a trivial task, because of the risk of breaking thousands of clients relying on the API. In this paper we conduct an empirical study over a large collection of OpenAPI descriptions obtained by mining open source repositories. We measure the speed at which Web APIs change and how changes affect their size, simply defined as the number of operations. The dataset of API descriptions was collected over a period of one year and includes APIs with histories spanning across up to 7 years of commits. The main finding is that APIs tend to grow, although some do reduce their size, as shown in the case study examples included in the appendix.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2167",
+      "url": "https://www.semanticscholar.org/paper/ceaf9f3a56b544e01c6ee3690712d1fc51a23bbc"
+    },
+    {
+      "title": "Research Into the Security Threat of Web Application",
+      "abstract": "In order to effectively analyze the security threat of web application, the security threat model of web application is established. Firstly, the main problems with web application are summarized. Secondly, the main security threat of web application are analyzed, and the corresponding optimization model is constructed. An algorithm based on the improved Butterfly Optimization Algorithm (BOA) security threat optimization model is designed. Finally, a SQL injection loophole is selected for example research, and the security threat path of web application is obtained. The results show IBOA has the advantages of high optimization accuracy, global optimization and stable solution, and average accuracy rate is 99.1% and the average recall rate is 99.1%, which shows that the model has better classification effect, therefore it has the best performance.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.21514",
+      "url": "https://www.semanticscholar.org/paper/90eb69c833c089b1a3daa4facb597cec6378926d"
+    },
+    {
+      "title": "Application of the LDA Model to Semantic Annotation of Web-based English Educational Resources",
+      "abstract": "Based on the LDA model, this paper builds a three-layer semantic model of Web English educational resources “document-topic-keyword”, models the semantic topics of resource documents, and obtains the semantic topics and keywords of document resources as the semantic labels of resources. The experimental results show that document LDA topic modeling is beneficial to the macroscopic classification of Web English educational resources. The experimental results show that LDA topic modeling of documents is useful for macroscopic cataloging of Web English educational resources, highlighting teaching priorities, difficulties, and interrelationships, while LDA modeling of teaching topics with the same teaching content expands the metadata generation method of resource description based on the basic education metadata standard and provides more information about the inherent characteristics of resources. The semantic information can be used to mine the semantic thematic features and detailed differences inherent in the resources, and the final performance analysis verifies the parallel computing advantages of the LDA model in a big data environment.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.2047",
+      "url": "https://www.semanticscholar.org/paper/d5a7bd2f84162559f19f3471f9cf412b74bf2df2"
+    },
+    {
+      "title": "Challenges for the Adoption of Model-Driven Web Engineering Approaches in Industry",
+      "abstract": "Model-Driven Web Engineering approaches have become an attractive research and technology solution for Web application development. However, for more than 20 years of development, the industry has not adopted them due to the mismatch between technical versus research requirements. In the context of this joint work between academia and industry, the authors conduct a survey among hundreds of engineers from different companies around the world and, by statistical analysis, they present the current problems of these approaches in scale. Then, a set of guidelines is provided to improve Model-Driven Web Engineering approaches in order to make them viable industry solutions.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.5220/0006382704150421",
+      "url": "https://www.semanticscholar.org/paper/b5c7a24909d6188cba26735c6e907d93407ad0ca"
+    },
+    {
+      "title": "Ethical Use of Web-based Welfare Technology for Caring Elderly People Who Live Alone in Korea: A Case Study",
+      "abstract": "This study examined ethical ways to use welfare technology in a situation where the demand for non-face-to-face welfare services using Cloud based healthcare systems had increased rapidly in caring for elderly people who live alone. Through focus group interviews with social workers related to the care of elderly people who live alone, in-depth interviews were conducted on the current situation, problems, ethical issues, and development directions arising in the implementation of welfare technology. The main areas of interest were focused on improving safety in caring them using IoT technology and enhancing emotional support in preventing lonely deaths using companion robot and AI speaker. Issues such as the need for individualization, client-centeredness, privacy, self-determination, competence, informed consent, right to know, convenience, and advocacy were identified as important ethical considerations related to use of welfare technology. The research results suggested that various stakeholders should participate in the development of ethical indicators and welfare technology for the ethical use of welfare technology.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.13052/jwe1540-9589.21410",
+      "url": "https://www.semanticscholar.org/paper/59a70fee6a58f95cb71f726421730fa232a35371"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "journal_id": "ejis",
+  "journal_name": "European Journal of Information Systems",
+  "papers": [
+    {
+      "title": "Navigating role identity tensions — IT project managers’ identity work in agile information systems development",
+      "abstract": "While the management of traditional, plan-based information systems development (ISD) projects lies with the information technology project manager (ITPM), this role is challenged in agile ISD team settings, characterised by self-managed and autonomous teams. Driven by the potential for individual, project, and organisational benefits through a deeper comprehension of these challenges, our study draws upon role identity theories to uncover identity tensions that this role creates and ways in which ITPMs engage in identity work to resolve these tensions. We conducted an in-depth, qualitative study involving interviews with ITPMs operating within agile ISD teams embedded in traditionally-managed organisations. A central contribution of our paper lies in the development of a theoretical model that unpacks how ITPMs navigate identity work tensions by engaging in specific identity work activities. By revealing the interplay between ITPMs’ role identity tensions, identity work activities, and contextual factors, our study moves beyond purely descriptive accounts and offers a nuanced understanding of the emotional and behavioural dimensions of ITPMs in their liminal position. Additionally, our work underscores the pivotal role of ITPMs as boundary spanners, bridging the gap between traditional and agile governance structures to drive digital transformation. For practitioners, we provide agile ISD team design recommendations.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2024.2371813",
+      "url": "https://www.semanticscholar.org/paper/59182bd57df669a0c5fddb37c8ac05d44ae05208"
+    },
+    {
+      "title": "Digital Desire Paths: Exploring the Role of Computer Workarounds in Emergent Information Systems Design",
+      "abstract": "The information systems literature generally conceptualises information system (IS) workarounds as negative disturbances that need to be avoided. IS design literature has emphasised the need to incorporate user behaviour in emergent IS design. Surprisingly, information systems research has kept the literatures on workarounds and IS design separate and remains silent on how workaround behaviour can inform information system design. In this research, we explore six workarounds in two case organisations and analyse the connections between them. We develop the concept of digital desire paths to describe the process how information system designers improve the system design by observing how users use and work around the system. Digital desire paths offer a novel interpretation of workarounds as input for information systems design and thereby serve as instance of the principle of guided emergence in action design research.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2024.2313537",
+      "url": "https://www.semanticscholar.org/paper/8425615da6747337af87b87ad8cb7564b184ccb2"
+    },
+    {
+      "title": "Clinical research from information systems practice",
+      "abstract": "An increasing presence of practitioners with doctoral degrees in Information Systems and related disciplines holds promise to advance Information Systems research. The prospect is to gain more knowledge from the practical experience of developing, using, and managing information systems in context. To scientifically capitalise on this opportunity, this EJIS special issue introduces the research genre of “Information Systems Clinical Research”. The genre presents knowledge generated from practitioner-researcher interventions to achieve desired outcomes in information systems development, use, and management practice contexts. In this editorial, we introduce and conceptualise the genre; we present a research framework that defines its four key elements; and we discuss how to address its key challenges in research projects. As a result, we derive ten criteria for rigorous Information Systems Clinical Research and provide examples on how the articles published in the special issue have addressed these criteria. We conclude with a call to further advance clinical research as an important part of the Information Systems discipline.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2022.2126030",
+      "url": "https://www.semanticscholar.org/paper/572cbc525944998ad1ef0415c8696eff299e19b9"
+    },
+    {
+      "title": "Patient health locus of control: the design of information systems for patient-provider interactions",
+      "abstract": "Patient locus of control (LOC) is a strong determinant of health outcomes, yet healthcare systems rarely use patient LOC to devise treatment plans. Our clinical research applies action design research methods to design and evaluate healthcare information systems to improve paths and outcomes of patient care. Socio-technical synergies between the interior (technical) and exterior (socio) designs support effective human-computer interfaces and interactions. Rigorous focus group evaluations of the systems for capturing LOC information and using that information in treatment plans are performed and system refinements are implemented. The practitioner organisation has future plans for full implementation of the designed systems.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2022.2088416",
+      "url": "https://www.semanticscholar.org/paper/ee932598c79025790e1229efcfad4e62aeee39f4"
+    },
+    {
+      "title": "The impact of enterprise architecture management on information systems architecture complexity",
+      "abstract": "Significant investments in information systems (IS) over the past decades have led to increasingly complex IS architectures in organisations, which are difficult to understand, operate, and maintain. We investigate this development and associated challenges through a conceptual model that distinguishes four constituent elements of IS architecture complexity by differentiating technological from organisational aspects and structural from dynamic aspects. Building on this conceptualisation, we hypothesise relations between these four IS architecture complexity constructs and investigate their impact on architectural outcomes (i.e., efficiency, flexibility, transparency, and predictability). Using survey data from 249 IS managers, we test our model through a partial least squares (PLS) approach to structural equation modelling (SEM). We find that organisational complexity drives technological complexity and that structural complexity drives dynamic complexity. We also demonstrate that increasing IS architecture complexity has a significant negative impact on efficiency, flexibility, transparency, and predictability. Finally, we show that enterprise architecture management (EAM) helps to offset these negative effects by acting as a moderator in the relation between organisational and technological IS architecture complexity. Thus, organisations without adequate EAM are likely to face large increases in technological complexity due to increasing organisational complexity, whereas organisations with adequate EAM exhibit no such relation.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2022.2103045",
+      "url": "https://www.semanticscholar.org/paper/c76515f61113a8613aece8845a1f22670374fef5"
+    },
+    {
+      "title": "Socially responsible design science in information systems for sustainable development: a critical research methodology",
+      "abstract": "This study presents an Information Systems (IS) research methodology for the conduct of critical research into sustainable development that encompasses the objectives of socially inclusive and environmentally sustainable economic growth. The specific context is the application of critical research in the problem definition phase of IS Design Science Research for sustainable development. The paper guides IS research through problem scenarios of unsustainable development where power can distort truth and corrupt the public discourse in the furtherance of their ambitions. The methodology provides a structured approach to engage in inquiry of topics which are by their nature, deceptive and opaque. The methodology enables research inquiry encompassing societal topics, macro-social issues related to sustainable development and the application of nomothetic inquiry to address systemic problems. The paper concludes with illustrative examples of outcomes from the application of the prescribed methodology. The study provides an IS response to systemic social and environmental challenges by identifying the routes to transformation which in turn inform the design of IS solutions. Consequently, the study lays a foundation for IS engagement in socially responsible design science research.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2021.1946442",
+      "url": "https://www.semanticscholar.org/paper/c62715c53b319eed2987c8200c59fde471c52fe5"
+    },
+    {
+      "title": "Control-style ambidexterity and information systems project performance: an expanded view of control activities",
+      "abstract": "Information systems (IS) projects represent key building blocks of large-scale digital transformation and innovation initiatives. As a result, IS projects have become increasingly ambitious in terms of both goals and scale, making it even more challenging for managers to exercise control over such projects. While prior research focused primarily on the direct and interactive effects of formal and informal control modes on IS project performance, recent research directs attention to the importance of considering project managers’ control styles (i.e., how managers interact with controlees to enact controls). Corresponding studies also indicate that “either/or” control approaches – as opposed to “both/and” approaches – are no longer viable in today’s complex environment. As such, our study draws on an ambidexterity perspective to theoretically develop and empirically test the direct and interactive effects of control-style ambidexterity on IS project performance. Using matched-pair data from 146 IS projects (from 146 high-tech firms), we find that control-style ambidexterity improves project performance – directly and in combination with both formal and informal control. The study results contribute novel insights regarding the effective control of IS projects in the digital era and help explain mixed findings in prior literature, thereby facilitating continued theory development in the research area.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2021.1977728",
+      "url": "https://www.semanticscholar.org/paper/16ef4d1c6e1b6674aa7f1dfafb5c795b178da9e0"
+    },
+    {
+      "title": "An immodest proposal – going “All in” on replication research in information systems",
+      "abstract": "Genuine theory testing, also under the term “replication research”, is rarely found in Information Systems (IS) research. Based on a replication’s results, our understanding or representation of the original theory is updated. This function of replication is integral to a scientific discipline to accumulate confidence in the explanatory power of a theory and to weed out theories that did not withstand scrutiny. However, many new theories are only tested once in the original study, while subsequent studies reference it without explicitly questioning the original theory. Against this background, we examine three aspects of the current state of replication studies in IS: (1) how many explicit replication studies in key IS research outlets have been published; (2) the attitudes of senior scholars, mostly prestigious IS journals’ editors, towards publishing replication research in their journals; and (3) a new policy proposal towards replication research broadly across all journals. We propose that all journals should take responsibility for publishing replications of theory or empirical results that have formerly been presented in that journal.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/0960085X.2021.1944822",
+      "url": "https://www.semanticscholar.org/paper/7e82822e4ef561314c59488c2b1d7810f69f2ec4"
+    }
+  ]
+}

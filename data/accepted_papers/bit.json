@@ -1,0 +1,62 @@
+{
+  "journal_id": "bit",
+  "journal_name": "Behaviour & Information Technology",
+  "papers": [
+    {
+      "title": "Passive resistance to health information technology implementation: the case of electronic medication management system",
+      "abstract": "Purpose – This study attempts to understand the factors that influence clinician resistance to the implementation of health information technology in a mandatory setting.Design/methodology/approach – A survey study was conducted with 202 clinicians regarding their perceptions of the implementation of electronic medication management systems (eMMS) in an Australian hospital. The data was collected during the initial roll-out of eMMS for model validation and quantitative analysis.Findings – The overall results indicated that performance expectancy, switching costs, and facilitating conditions are direct predictors of clinician resistance, whereas effort expectancy and social influence showed indirect effects on clinician resistance through performance expectancy or switching costs.Theoretical implications – The study is among the first study that investigates passive clinician resistance to the implementation of health information technology in a health organisation. This study also focused on opposition behaviour among under-examined degrees of resistance.Practical implications – This study provides some insights to the hospital management on how to mitigate clinician resistance in the implementation of health information technology.Research limitations/Future directions – Other types of clinician resistance, such as postponement and rejection, are not examined in this study. Future research on postponement behaviour and rejection behaviour is needed to have a more comprehensive view of clinician resistance.",
+      "year": 2022,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2022.2117081",
+      "url": "https://openalex.org/W4294796656"
+    },
+    {
+      "title": "Mobile cloud computing apps and information disclosure: the moderating roles of dispositional and behaviour-based traits",
+      "abstract": "The paradigm of developing mobile apps has shifted from native apps that store data on mobile devices to mobile cloud computing (MCC) apps that send data to the cloud. Transferring users’ data to the cloud provides several benefits, such as larger storage capacity and simultaneous access by multiple devices and users. However, storing data in the cloud also raises privacy concerns as users do not have direct control over their data. This study reports a privacy cost–benefit analysis including the moderating effects of dispositional traits (i.e. two personality meta-traits: stability and plasticity) and the behaviour-based trait (i.e. use experience) to understand information disclosure behaviour. The empirical study is based on a scenario-based survey (n = 807) from a diverse sample of MCC apps users. The results support the moderating effects of personality meta-traits; stability and plasticity differentially moderate the effects of perceived privacy risk and perceived value of data transfer to the cloud on information disclosure behaviour. Contradictory to prior research, prior use experience does not moderate the effects of the cost–benefit perceptions. The implications of research and practice are discussed.",
+      "year": 2021,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2021.1946591",
+      "url": "https://openalex.org/W3176967728"
+    },
+    {
+      "title": "Selective sharing and social bonding: a qualitative study of online health information behaviour among older adults in Shanghai",
+      "abstract": "The health information landscape has been revolutionised by the advent of social media, significantly affecting older adults’ access to and interaction with online health information. In this study, we examine how older adults interact with health information on social media. In total, 30 participants aged 60 years and older from Shanghai were interviewed, focusing on their health information-seeking behaviour, perceptions, and subsequent actions using a semi-structured, in-depth interview approach. Furthermore, in this study, we employed grounded theory to analyze the data, and the results revealed that older adults utilise a comprehensive cognitive process for evaluating health information. Information-sharing decisions among participants were significantly influenced by ethical considerations and a sense of responsibility. Selective sharing, particularly within close relationships, underscored the role of online health information in fostering connections. This study illuminates the multifaceted nature of older adults’ interactions with online health information and emphasises the significance of ethical considerations in sharing behaviours. Furthermore, this study provides practical implications for public health initiatives and regulatory measures to empower older adults to make informed decisions in an evolving digital healthcare landscape.",
+      "year": 2025,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2025.2494281",
+      "url": "https://openalex.org/W4409650543"
+    },
+    {
+      "title": "Uncovering associations between users' behaviour and their flow experience",
+      "abstract": "Flow experience is one of the most ambitious targets of any user interface designer. However, it has remained elusive to evaluate how well user interfaces give rise to flow experience outside conducting invasive self-reporting-based questionnaires, which remove the users from the flow experience and can't be massively applied. At the same time, otherwise, well-built systems do track the behaviour of users on the interface, and therefore, user behaviour data could act as a reliable proxy for assessing the experience of users. Currently, there is little empirical research or data about which indices of user behaviours might correspond with having a flow experience as well as the different psychological constituents of the flow experience. Therefore, facing the challenge of using users' behaviour data to model users' experience, we investigated the associations between users' behaviour data (e.g. mouse clicks, activity time in the system, and average response time) and their self-reported flow experience by using data mining (i.e. associations rules) analysing data from 204 subjects. Results demonstrate that the speed of users' actions negatively affects the flow experience antecedents while also positively affecting the loss of self-consciousness. Our study advances the literature, providing insights to identify users' flow experience through behaviour data.",
+      "year": 2023,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2023.2276822",
+      "url": "https://openalex.org/W4388445259"
+    },
+    {
+      "title": "Understanding security behaviour among healthcare professionals by comparing results from technology threat avoidance theory and protection motivation theory",
+      "abstract": "We investigate security behaviour among healthcare professionals while comparing upon two prevalent theories in information security (IS) research: Protection Motivation Theory (PMT) and Technology Threat Avoidance Theory (TTAT). Although IS research often uses these models, very few studies compare the two models using a diverse sample of 245 healthcare professionals. The data were analysed using partial least squares regression - structural equation modelling (PLS-SEM). Results indicated that both models were similarly robust at predicting security behaviour. Perceived severity and response efficacy positively influenced avoidance motivation (AM) for PMT. All factors of the threat appraisal arm of TTAT and safeguard efficacy played an influencing role on AM in TTAT. Response cost and self-efficacy were not supported in either model, providing us with potentially new insights into this specific population’s security intentions. With the addition of Perceived Threat, TTAT appears to be slightly more robust model with 64% of the variance explained by the given model while PMT explains only 60% of the variance. Given the ever-increasing risk of data breaches in healthcare, practical applications and implications of the study’s findings to health information technology (HIT) policy and infrastructure are also discussed.",
+      "year": 2024,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2024.2314255",
+      "url": "https://openalex.org/W4391741338"
+    },
+    {
+      "title": "An exploratory study of information re-finding behaviour modes of Chinese college students on social media: video diary analysis from Chinese platforms",
+      "abstract": "This study aims to explore college students’ information-re-finding behaviour in the context of social media by identifying different behaviour modes to enrich the research on the information behaviour of social media users. Thirty-two college students volunteered to record their re-finding process once it occurred within two weeks by the video diary method. One hundred and forty-six valid events were collected and analysed qualitatively and quantitatively. It was shown that the behaviour process of information re-finding on social media experienced six stages: scene triggering, information demand generating, social media selecting, re-finding, information confirmation and information processing. Forty-eight kinds of information re-finding modes were illustrated and summarised into seven categories according to where and how the information was finally found: following, chat record, keyword, favourites, history, personal dynamics and the like. From further analysis, it was proved that significant differences did exist between varied re-finding behaviour modes in information needs and re-finding time rather than information processing behaviour. The study could expand the traditional information search model into mixed timing by considering recalling and re-finding. Practically, it generates useful practical implications for the design of re-finding functions, information recommendation and memory services of social media.",
+      "year": 2024,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2024.2331261",
+      "url": "https://openalex.org/W4393055468"
+    },
+    {
+      "title": "The link between online gaming behaviour and unethical decision-making in emerging adults: the mediating roles of game cheating and moral disengagement",
+      "abstract": "Despite the substantial attention paid to the effects of game violence and game addiction, insufficient research has been conducted on other moral risks of gaming behaviour. Drawing upon the General Learning Model and the Differential Susceptibility to Media Effects Model, the current study utilised a survey approach to investigate the effect of online gameplay on emerging adults’ real-life unethical decision-making. The mediation analyses showed no direct effect of gaming intensity on unethical decision-making, but revealed two significant indirect effects: the specific indirect effect through game cheating and the serial indirect effect through game cheating and moral disengagement. Both the indirect effects were contingent upon the moderator of peer cheating. Specifically, the relationship between gaming intensity and unethical decision-making was positively significant at low levels of peer cheating and negatively significant at high levels. In addition to contributing to a broader view of the effects of online gameplay, this study also contributes to the literature on divergent gaming behaviours and online ethics.",
+      "year": 2022,
+      "source": "openalex_title_search",
+      "doi": "10.1080/0144929x.2022.2087539",
+      "url": "https://openalex.org/W4283028499"
+    }
+  ]
+}

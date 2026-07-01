@@ -1,0 +1,78 @@
+{
+  "journal_id": "ietsignalprocessing",
+  "journal_name": "IET Signal Processing",
+  "papers": [
+    {
+      "title": "Tensor methods for multisensor signal processing",
+      "abstract": "—Over the last two decades, tensor-based methods have received growing attention in the signal processing community. In this work, we propose a comprehensive overview of tensor-based models and methods for multisensor signal processing. We present for instance the Tucker decomposition, the Canonical Polyadic Decomposition (CPD), the Tensor-Train Decomposition (TTD), the Structured TTD, including Nested Tucker Train (NTT), as well as the associated optimization strategies. More precisely, we give synthetic descriptions of state-of-art estimators as the Alternating Least Square (ALS) algorithm, the High-Order SVD (HOSVD), and of more advanced algorithms as the Rectiﬁed ALS, the TT-SVD/TT-HSVD and the Joint dImensionally Reduction And Factor retrieval Estimator (JIRAFE) scheme. We illustrate the efﬁciency of the introduced methodological and algorithmic concepts in the context of three important and timely signal processing-based applications: the Direction-Of-Arrival (DOA) estimation based on sensor arrays, multidimensional harmonic retrieval and MIMO wireless communication systems.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-spr.2020.0373",
+      "url": "https://www.semanticscholar.org/paper/d6b0a119474c3cef9d350de15445622ef59d666b"
+    },
+    {
+      "title": "Weak Coherent Light Interference Heterodyne Detection Based on Time‐Domain Signal Analysis",
+      "abstract": "Weak coherent light interference heterodyne detection is the theoretical basis for fiber optic gyroscopes, optical coherence tomography, and optical time‐domain reflectometers. Classical statistical optics provides the signal model for weak coherent light interference. However, this theory does not describe signal acquisition and nonpolarization, which are significant in the analysis of heterodyne detection frequency, coherent length, and polarization mode dispersion (PMD). Consequently, it has difficulty solving signal processing problems related to coherent frequency and length analysis. This article proposed a time‐domain signal analysis method. The approach can describe the practical signal acquisition and the polarized direction interference and accurately obtain coherent frequency and length on weak coherent light interference heterodyne detection signals by integrating the interference signals of monochromatic light within the linewidth of weak coherent light. We obtained the final mode of the signals using MATLAB. We established an experimental system to validate the practical value of the approach in signal processing. The average deviation between the experimental and theoretical coherent frequency and length is 120.6 Hz/0.48% and −0.0072 μm/−0.06%, respectively. Compared with existing theory, the proposed method is advantageous for describing detector acquisition and has practical value in heterodyne detection analysis. The proposed method can be widely applied to the systems based on weak coherent interference.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sil2/9918739",
+      "url": "https://www.semanticscholar.org/paper/10df2ad65a829dd03a0fb7e348c853446f967da5"
+    },
+    {
+      "title": "Eigenvalue Based Detection by Combining Eigenvector‐Correlated Signal in Low SNR Environment",
+      "abstract": "Eigenvalue detection is extensively utilized in numerous applications, including spectrum sensing in cognitive radio. However, the characteristics of the Tracy–Widom ( TW2 ) distribution and its lack of accurate close‐form expression limit the detection performance based on the extreme eigenvalue. The paper introduces an eigenvector correlation (EVC) based detection. It extracts the eigenvalue of a weak component from the Marchenko–Pastur law (MP‐law) bulk by combining a priori known eigenvector‐correlated signal. The extracted eigenvalue then follows an easily analyzable and tractable Gaussian distribution according to the random matrix theory. The proposed method significantly improves sensing performance, which is theoretically analyzed and compared with traditional maximum eigenvalue‐based detection (MED) and trace‐based sensing. In addition, a cumulative EVC (CUM–EVC) is further developed for the multiple eigen‐component signal. Numerical results are presented to validate the theoretical analysis and demonstrate the reliability of the proposed detectors.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sil2/8880017",
+      "url": "https://www.semanticscholar.org/paper/af7ea6de0b1714c5e1beb2bee9a6a08a75538cfc"
+    },
+    {
+      "title": "Asynchronous Wireless Signal Modulation Recognition Based on In-Phase Quadrature Histogram",
+      "abstract": "Automatic modulation recognition is a key technology in the field of signal processing. Conventional recognition methods suffer from low recognition accuracy at low signal‐to‐noise ratios (SNR), and when the signal frequency is unstable or there is asynchronous sampling, the performance of conventional recognition methods will deteriorate or even fail. To address these challenges, deep learning‐based modulation mode recognition technique is investigated in this paper for low‐speed asynchronous sampled signals under channel conditions with varying SNR and delay. Firstly, the low‐speed asynchronous sampled signals are modeled, and their in‐phase quadrature components are used to generate a two‐dimensional asynchronous in‐phase quadrature histogram. Then, the feature parameters of this 2D image are extracted by radial basis function neural network (RBFNN) to complete the recognition of the modulation mode of the input signal. Finally, the accuracy of the method for seven modulation methods is verified by extensive simulations. The experimental results show that under the channel model of additive white Gaussian noise (AWGN), when the SNR of the input signal with low‐speed asynchronous sampling is 6 dB, more than 95% of the average recognition accuracy can be achieved, and the effectiveness and robustness of the proposed scheme are verified by comparative experiments.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/2024/9589239",
+      "url": "https://www.semanticscholar.org/paper/797e86df31ff45a8914ff3626eea5544744ae8e5"
+    },
+    {
+      "title": "A Novel Approach of Optimal Signal Streaming Analysis Implicated Supervised Feedforward Neural Networks",
+      "abstract": "The analysis and interpretation of enormous amounts of data generated by 5G networks present several challenges related to noise, precision, and feasibility validation. Therefore, this study aims to evaluate the effectiveness of channel equalisation in the network and enhance it by distributing signals over all subcarriers and symbols. The error‐free signal received ensures the reliable transmission of signals in the network connection. These simulations were undertaken to fulfil the needs of and adapt the transmission properties according to the specific conditions of the channel. The dataset consists of artificially generated radio waves to train signals through neural networks (NNs) and machine learning algorithms to detect errors properly. The primary objective is to achieve optimal signal performance. In this regard, an artificial neural network (ANN) was initially employed, explicitly utilising the back‐propagation technique and a feedforward multilayer perceptron (MLP). In addition, the signals were subjected to train using a real‐time simulator, employing feedforward neural network and support vector machine (SVM) to validate the proposed methodology. Feedforward MLP achieved the highest performance in simulations compared to SVM. The scheme is promising to achieve optimal signal performance in real‐time.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/2024/2819057",
+      "url": "https://www.semanticscholar.org/paper/ed998c37c150c5c8ac24a529c9d7528a8b8fa161"
+    },
+    {
+      "title": "A TC‐Based Multicomponent LFM Signal Characterization Method Under Impulsive Noise and Its Application",
+      "abstract": "The burst‐like and high‐amplitude characteristics of impulsive noise, which markedly differ from those of Gaussian noise, render methods based on the Gaussian assumption unable to accurately characterize signals under impulsive noise. Moreover, when dealing with multicomponent signal, existing impulsive noise suppression methods inevitably introduce cross‐term interference. To address these issues, this paper proposes an impulsive noise suppression method based on the torque clustering (TC) algorithm, and thus establishes an accurate representation of multicomponent linear frequency modulation (LFM) signal under impulsive noise. First, the theoretical analysis is conducted to elucidate the inherent limitations of existing noise suppression methods that inevitably cross‐term introduction. A novel impulsive noise suppression technique based on TC is developed, fundamentally eliminating cross‐term interference. Subsequently, two signal representation methods for multicomponent LFM signal under impulsive noise are proposed, namely, TC‐fractional Fourier transform (TC‐FRFT) and TC‐synchrosqueezing transform (TC‐SST). These methods enable accurate characterization of multicomponent LFM signal under impulsive noise, and facilitate precise extraction of signal features. Finally, a mathematical model for parameter estimation of multicomponent LFM signal is established using TC‐FRFT, enabling high‐precision estimation of center frequency and chirp rate in the presence of impulsive noise. Simulation results show that the proposed method can effectively suppress impulsive noise, avoid cross‐term interference in existing methods, and achieve accurate characterization of multicomponent LFM signal under impulsive noise. Furthermore, the proposed TC‐FRFT outperforms existing parameter estimation methods in terms of stability, accuracy, and robustness against noise.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1049/sil2/3471389",
+      "url": "https://www.semanticscholar.org/paper/a8e5aeda137c5eb980b13960e8c297f384e11218"
+    },
+    {
+      "title": "RF Signal Feature Extraction in Integrated Sensing and Communication",
+      "abstract": "Because of the open property of information sharing in integrated sensing and communication, it is inevitable to face security problems such as user information being tampered, eavesdropped, and copied. Radio frequency (RF) individual identification technology is an important means to solve its security problems at present. Whether using machine learning methods or current deep learning-based target fingerprint identification, its performance is based on how well the radio frequency features (RFF) are extracted. Since the received signal is affected by various factors, we believe that we should first find the intrinsic features that can describe the properties of the target, which is the key to enhance the RF fingerprint recognition. In this paper, we try to analyze the intrinsic characteristics of the components that influenced the signal by the transmitting source and derive a mathematical formula to describe the RF characteristics. We propose a method using dynamic wavelet transform and wavelet spectrum (DWTWS) to enhance RFF features. The performance of the proposed method was evaluated by experimental data. Using a support vector machine classifier, the recognition accuracy is 99.6% for 10 individuals at a signal-to-noise ratio (SNR) of 10 dB. In comparison with the dual-tree complex wavelet transform (DT-CWT) feature extraction method and the wavelet scattering transform method, the DWTWS method has increased the interclass distance of different individuals and enhanced the recognition accuracy. The DWTWS method is superior at low SNR, with performance improvements of 53.1% and 10.7% at 0 dB.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1049/2023/4251265",
+      "url": "https://www.semanticscholar.org/paper/7aa2221d67a49a9537dad93c4a809323c9945a77"
+    },
+    {
+      "title": "Automated system for weak periodic signal detection based on Duffing oscillator",
+      "abstract": "The periodic signals that have predictable and deterministic characteristics are used in the analysis and modelling of dynamical systems in diverse fields. These signals can be detected as the weak signals within the time series obtained from the measurable processes of dynamical systems. The Duffing oscillator is effective in detecting weak periodic signals with a very low signal-to-noise ratio. In this study, the authors present a method to automate the weak periodic signal detection of the Duffing oscillator using a quantitative index for the classification of the periodic and non-periodic signals. In this method, the authors use the wavelet scale index as the quantitative index in the classification of signals. Thus, they are able to plot the wavelet scale index spectrum of the Duffing oscillator where the frequency values of the weak periodic signals correspond to near-zero wavelet scale index parameters. First, the authors perform simulations using the method and detect weak periodic signals embedded in noise. Then, they employ two electroencephalogram signals to demonstrate the feasibility of the proposed method in the empirical data. Lastly, they compare the method to the periodogram power spectral density estimate based on fast Fourier transform.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-spr.2020.0203",
+      "url": "https://www.semanticscholar.org/paper/13a364b9fa7f826b8479fc4870e962e87d0bedd5"
+    },
+    {
+      "title": "Doppler processing in weather radar using deep learning",
+      "abstract": ": A deep learning approach to estimate the mean Doppler velocity and spectral width in weather radars is presented. It can operate in scenarios with and without the presence of ground clutter. The method uses a deep neural network with two branches, one for velocity and the other for spectral width estimation. Different network architectures are analysed and one is selected based on its validation performance, considering both serial and parallel implementations. Training is performed using synthetic data covering a wide range of possible scenarios. Monte Carlo realisations are used to evaluate the performance of the proposed method for different weather conditions. Results are compared against two standard methods, pulse-pair processing (PPP) for signals without ground clutter and Gaussian model adaptive processing (GMAP) for signals contaminated with ground clutter. Better estimates are obtained when comparing the proposed algorithm against GMAP and comparable results when compared against PPP. The performance is also validated using real weather data from the C-band radar RMA-12 located in San Carlos de Bariloche, Argentina. Once trained, the proposed method requires a moderate computational load and has the advantage of processing all the data at once, making it a good candidate for real-time implementations.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1049/iet-spr.2020.0095",
+      "url": "https://www.semanticscholar.org/paper/708374ff771f67a9c86bca5d2a9c30fe56d2a178"
+    }
+  ]
+}

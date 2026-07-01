@@ -1,0 +1,78 @@
+{
+  "journal_id": "sidma",
+  "journal_name": "SIAM Journal on Discrete Mathematics",
+  "papers": [
+    {
+      "title": "Inverse Problems for Discrete Heat Equations and Random Walks for a Class of Graphs",
+      "abstract": "We study the inverse problem of determining a finite weighted graph $(X,E)$ from the source-to-solution map on a vertex subset $B\\subset X$ for heat equations on graphs, where the time variable can be either discrete or continuous. We prove that this problem is equivalent to the discrete version of the inverse interior spectral problem, provided that there does not exist a nonzero eigenfunction of the weighted graph Laplacian vanishing identically on $B$. In particular, we consider inverse problems for discrete-time random walks on finite graphs. We show that under a novel geometric condition (called the Two-Points Condition), the graph structure and the transition matrix of the random walk can be uniquely recovered from the distributions of the first passing times on $B$, or from the observation on $B$ of one realization of the random walk.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1137/21m1439936",
+      "url": "https://www.semanticscholar.org/paper/df905f79d5d346555fea225f2f0b6fb3ec869416"
+    },
+    {
+      "title": "Invariant Chains in Algebra and Discrete Geometry",
+      "abstract": "We relate finite generation of cones, monoids, and ideals in increasing chains (the local situation) to equivariant finite generation of the corresponding limit objects (the global situation). For cones and monoids there is no analogue of Noetherianity as in the case of ideals and we demonstrate this in examples. As a remedy we find local-global correspondences for finite generation. These results are derived from a more general framework that relates finite generation under closure operations to equivariant finite generation under general families of maps. We also give a new proof that non-saturated Inc-invariant chains stabilize, closing a gap in the literature.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1137/20M1385652",
+      "url": "https://www.semanticscholar.org/paper/77aa027b90febd3b95a0df44c7839db677f6a79d"
+    },
+    {
+      "title": "Topology of Cut Complexes II",
+      "abstract": "We continue the study of the $k$-cut complex $\\Delta_k(G)$ of a graph $G$ initiated in the paper of Bayer, Denker, Jeli\\'c Milutinovi\\'c, Rowlands, Sundaram and Xue [Topology of cut complexes of graphs, SIAM J. on Discrete Math. 38(2): 1630--1675 (2024)]. We give explicit formulas for the $f$- and $h$-polynomials of the cut complex $\\Delta_k(G_1+G_2) $ of the disjoint union of two graphs $G_1$ and $G_2$, and for the homology representation of $\\Delta_k(K_m+K_n)$. We also study the cut complex of the squared path and the grid graph. Our techniques include tools from combinatorial topology, discrete Morse theory and equivariant poset topology.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1137/24M1676077",
+      "url": "https://www.semanticscholar.org/paper/29e038098a99a3a67c769482cf3b716df691cc27"
+    },
+    {
+      "title": "Longest Cycle above Erdős-Gallai Bound",
+      "abstract": "In 1959, Erdős and Gallai proved that every graph G with average vertex degree ad ( G ) ≥ 2 contains a cycle of length at least ad ( G ). We provide an algorithm that for k ≥ 0 in time 2 O ( k ) · n O (1) decides whether a 2-connected n -vertex graph G contains a cycle of length at least ad ( G ) + k . This resolves an open problem explicitly mentioned in several papers. The main ingredients of our algorithm are new graph-theoretical results interesting on their own.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1137/23m1558008",
+      "url": "https://www.semanticscholar.org/paper/75c065bd6e318d1e811a4f87750faf3b2a129d3f"
+    },
+    {
+      "title": "A Point-Variety Incidence Theorem over Finite Fields, and Its Applications",
+      "abstract": "Incidence problems between geometric objects is a key area of focus in the field of discrete geometry. Among them, the study of incidence problems over finite fields have received a considerable amount of attention in recent years. In this paper, by characterizing the singular values and singular vectors of the corresponding incidence matrix through group algebras, we prove a bound on the number of incidences between points and varieties of a certain form over finite fields. Our result leads to a new incidence bound for points and flats in finite geometries, which improves previous results for certain parameter regimes. As another application of our point-variety incidence bound, we extend a result on pinned distance problems by Phuong, Thang, and Vinh, and independently by Cilleruelo, Iosevich, Lund, Roche-Newton, and Rudnev, under a weaker condition.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1137/24m1686620",
+      "url": "https://www.semanticscholar.org/paper/26d5c4502632334f50afaab820ad738937633302"
+    },
+    {
+      "title": "Excluding a Clique or a Biclique in Graphs of Bounded Induced Matching Treewidth",
+      "abstract": "For a tree decomposition $\\mathcal{T}$ of a graph $G$, let $\\mu(\\mathcal{T})$ denote the maximum size of an induced matching in $G$ with the property that some bag of $\\mathcal{T}$ contains at least one endpoint of every edge of the matching. The induced matching treewidth of a graph $G$ is the minimum value of $\\mu(\\mathcal{T})$ over all tree decompositions $\\mathcal{T}$ of $G$. Classes of graphs with bounded induced matching treewidth admit polynomial-time algorithms for a number of problems, including INDEPENDENT SET, $k$-COLORING, ODD CYCLE TRANSVERSAL, and FEEDBACK VERTEX SET. In this paper, we focus on combinatorial properties of such classes. First, we show that graphs with bounded induced matching treewidth that exclude a fixed biclique as an induced subgraph have bounded tree-independence number, which is another well-studied parameter defined in terms of tree decompositions. This sufficient condition about excluding a biclique is also necessary, as bicliques have unbounded tree-independence number. Second, we show that graphs with bounded induced matching treewidth that exclude a fixed clique have bounded chromatic number, that is, classes of graphs with bounded induced matching treewidth are $\\chi$-bounded. The two results confirm two conjectures due to Lima et al. [ESA 2024].",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1137/24m1659960",
+      "url": "https://www.semanticscholar.org/paper/3b7a13f860941536ceaa0f66e877970d154adc75"
+    },
+    {
+      "title": "Topology of Cut Complexes of Graphs",
+      "abstract": "We define the $k$-cut complex of a graph $G$ with vertex set $V(G)$ to be the simplicial complex whose facets are the complements of sets of size $k$ in $V(G)$ inducing disconnected subgraphs of $G$. This generalizes the Alexander dual of a graph complex studied by Fr\\\"oberg (1990), and Eagon and Reiner (1998). We describe the effect of various graph operations on the cut complex, and study its shellability, homotopy type and homology for various families of graphs, including trees, cycles, complete multipartite graphs, and the prism $K_n \\times K_2$, using techniques from algebraic topology, discrete Morse theory and equivariant poset topology.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1137/23M1569034",
+      "url": "https://www.semanticscholar.org/paper/be71841d1630899f3b78ee0019e7a2b22daa3e8a"
+    },
+    {
+      "title": "A Menger-Type Theorem for Two Induced Paths",
+      "abstract": "We give an approximate Menger-type theorem for when a graph $G$ contains two $X-Y$ paths $P_1$ and $P_2$ such that $P_1 \\cup P_2$ is an induced subgraph of $G$. More generally, we prove that there exists a function $f(d) \\in O(d)$, such that for every graph $G$ and $X,Y \\subseteq V(G)$, either there exist two $X-Y$ paths $P_1$ and $P_2$ such that the distance between $P_1$ and $P_2$ is at least $d$, or there exists $v \\in V(G)$ such that the ball of radius $f(d)$ centered at $v$ intersects every $X-Y$ path.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1137/23M1573082",
+      "url": "https://www.semanticscholar.org/paper/34b49c8786113e9be2911857b0571b7dae8afc65"
+    },
+    {
+      "title": "Canonical Ramsey Numbers of Sparse Graphs",
+      "abstract": "The canonical Ramsey theorem of Erd\\H{o}s and Rado implies that for any graph $H$, any edge-coloring (with an arbitrary number of colors) of a sufficiently large complete graph $K_N$ contains a monochromatic, lexicographic, or rainbow copy of $H$. The least such $N$ is called the Erd\\H{o}s-Rado number of $H$, denoted by $ER(H)$. Erd\\H{o}s-Rado numbers of cliques have received considerable attention, and in this paper we extend this line of research by studying Erd\\H{o}s-Rado numbers of sparse graphs. For example, we prove that if $H$ has bounded degree, then $ER(H)$ is polynomial in $|V(H)|$ if $H$ is bipartite, but exponential in general. We also study the closely-related problem of constrained Ramsey numbers. For a given tree $S$ and given path $P_t$, we study the minimum $N$ such that every edge-coloring of $K_N$ contains a monochromatic copy of $S$ or a rainbow copy of $P_t$. We prove a nearly optimal upper bound for this problem, which differs from the best known lower bound by a function of inverse-Ackermann type.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1137/24m1714964",
+      "url": "https://www.semanticscholar.org/paper/d5312631b2a314f0fbf371b172230fcfcbbdb789"
+    }
+  ]
+}

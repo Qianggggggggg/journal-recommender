@@ -1,0 +1,62 @@
+{
+  "journal_id": "jgo",
+  "journal_name": "Journal of Global Optimization",
+  "papers": [
+    {
+      "title": "A two-phase sequential algorithm for global optimization of the standard quadratic programming problem",
+      "abstract": "We introduce a new sequential algorithm for the Standard Quadratic Programming Problem (StQP), which exploits a formulation of StQP as a Linear Program with Linear Complementarity Constraints (LPLCC). The algorithm is finite and guarantees at least in theory a $$\\delta $$ δ -approximate global minimum for an arbitrary small $$\\delta $$ δ , which is a global minimum in practice. The sequential algorithm has two phases. In Phase 1, Stationary Points (SP) with strictly decreasing objective function values are computed. Phase 2 is designed for giving a certificate of global optimality for the last SP computed in Phase 1. Two different Nonlinear Programming Formulations for LPLCC are proposed for each one of these phases, which are solved by efficient enumerative algorithms. New procedures for computing a lower bound for StQP are also proposed, which are easy to implement and give tight bounds in general. Computational experiments with a number of test problems from known sources indicate that the two-phase sequential algorithm is, in general, efficient in practice. Furthermore, the algorithm seems to be an efficient way to study the copositivity of a matrix by exploiting an StQP with this matrix.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-024-01423-y",
+      "url": "https://www.semanticscholar.org/paper/4d62cbb1175d4fb4a9d5169a9b83d6496b62521a"
+    },
+    {
+      "title": "A performance analysis of Basin hopping compared to established metaheuristics for global optimization",
+      "abstract": "During the last decades many metaheuristics for global numerical optimization have been proposed. Among them, Basin Hopping is very simple and straightforward to implement, although rarely used outside its original Physical Chemistry community. In this work, our aim is to compare Basin Hopping, and two population variants of it, with readily available implementations of the well known metaheuristics Differential Evolution, Particle Swarm Optimization, and Covariance Matrix Adaptation Evolution Strategy. We perform numerical experiments using the IOH profiler environment with the BBOB test function set and two difficult real-world problems. The experiments were carried out in two different but complementary ways: by measuring the performance under a fixed budget of function evaluations and by considering a fixed target value. The general conclusion is that Basin Hopping and its newly introduced population variant are almost as good as Covariance Matrix Adaptation on the synthetic benchmark functions and better than it on the two hard cluster energy minimization problems. Thus, the proposed analyses show that Basin Hopping can be considered a good candidate for global numerical optimization problems along with the more established metaheuristics, especially if one wants to obtain quick and reliable results on an unknown problem.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-024-01373-5",
+      "url": "https://www.semanticscholar.org/paper/c24c6547f587ebb8804fdca143be843d7468d098"
+    },
+    {
+      "title": "Global optimization of mixed-integer nonlinear programs with SCIP 8",
+      "abstract": "For over 10 years, the constraint integer programming framework SCIP has been extended by capabilities for the solution of convex and nonconvex mixed-integer nonlinear programs (MINLPs). With the recently published version 8.0, these capabilities have been largely reworked and extended. This paper discusses the motivations for recent changes and provides an overview of features that are particular to MINLP solving in SCIP. Further, difficulties in benchmarking global MINLP solvers are discussed and a comparison with several state-of-the-art global MINLP solvers is provided.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-023-01345-1",
+      "url": "https://www.semanticscholar.org/paper/fb909b4c1c0f4655ccc80b5af9d215cf7ebdb77e"
+    },
+    {
+      "title": "Global optimization: a machine learning approach",
+      "abstract": "Many approaches for addressing global optimization problems typically rely on relaxations of nonlinear constraints over specific mathematical primitives. This is restricting in applications with constraints that are implicit or consist of more general primitives. Trying to address such limitations, Bertsimas and Ozturk (2023) proposed OCTHaGOn as a way of solving very general global optimization problems by approximating the nonlinear constraints using hyperplane-based decision-trees and then using those trees to construct a unified MIO approximation of the original problem. We provide extensions to this approach, by (i) approximating the original problem using other MIO-representable ML models besides decision trees, such as gradient boosted trees, multi layer perceptrons and suport vector machines (ii) proposing adaptive sampling procedures for more accurate ML-based constraint approximations, (iii) utilizing robust optimization to account for the uncertainty of the sample-dependent training of the ML models, (iv) leveraging a family of relaxations to address the infeasibilities of the final MIO approximation. We then test the enhanced framework in 81 global optimization instances. We show improvements in solution feasibility and optimality in the majority of instances. We also compare against BARON, showing improved optimality gaps and solution times in more than 9 instances.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-024-01434-9",
+      "url": "https://www.semanticscholar.org/paper/9aefe88eb9e0929e8c1eb46ccc8f527d088d0cc7"
+    },
+    {
+      "title": "TREGO: a trust-region framework for efficient global optimization",
+      "abstract": "Efficient global optimization (EGO) is the canonical form of Bayesian optimization that has been successfully applied to solve global optimization of expensive-to-evaluate black-box problems. However, EGO struggles to scale with dimension, and offers limited theoretical guarantees. In this work, a trust-region framework for EGO (TREGO) is proposed and analyzed. TREGO alternates between regular EGO steps and local steps within a trust region. By following a classical scheme for the trust region (based on a sufficient decrease condition), the proposed algorithm enjoys global convergence properties, while departing from EGO only for a subset of optimization steps. Using extensive numerical experiments based on the well-known COCO bound constrained problems, we first analyze the sensitivity of TREGO to its own parameters, then show that the resulting algorithm is consistently outperforming EGO and getting competitive with other state-of-the-art black-box optimization methods.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-022-01245-w",
+      "url": "https://www.semanticscholar.org/paper/95a99f14305129042f1380e420b65abb02265b05"
+    },
+    {
+      "title": "Global optimization via optimal decision trees",
+      "abstract": "The global optimization literature places large emphasis on reducing intractable optimization problems into more tractable structured optimization forms. In order to achieve this goal, many existing methods are restricted to optimization over explicit constraints and objectives that use a subset of possible mathematical primitives. These are limiting in real-world contexts where more general explicit and black box constraints appear. Leveraging the dramatic speed improvements in mixed-integer optimization (MIO) and recent research in machine learning, we propose a new method to learn MIO-compatible approximations of global optimization problems using optimal decision trees with hyperplanes (OCT-Hs). This constraint learning approach only requires a bounded variable domain, and can address both explicit and inexplicit constraints. We solve the MIO approximation to find a near-optimal, near-feasible solution to the global optimization problem. We further improve the solution using a series of projected gradient descent iterations. We test the method on numerical benchmarks from the literature as well as real-world design problems, demonstrating its promise in finding global optima efficiently.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-023-01311-x",
+      "url": "https://www.semanticscholar.org/paper/352682d2e982971f1a6226acc23d1ca6e1e81279"
+    },
+    {
+      "title": "Lipschitz-inspired HALRECT algorithm for derivative-free global optimization",
+      "abstract": "This article considers a box-constrained global optimization problem for Lipschitz-continuous functions with an unknown Lipschitz constant. Motivated by the famous DIRECT (DIviding RECTangles), a new HALRECT (HALving RECTangles) algorithm is introduced. A new deterministic approach combines halving (bisection) with a new multi-point sampling scheme in contrast to trisection and midpoint sampling used in most existing DIRECT-type algorithms. A new partitioning and sampling scheme uses more comprehensive information on the objective function. Four different strategies for selecting potentially optimal hyper-rectangles are introduced to exploit the objective function’s information effectively. The original algorithm HALRECT and other introduced HALRECT variations (twelve in total) are tested and compared with the other twelve recently introduced DIRECT-type algorithms on 96 box-constrained benchmark functions from DIRECTGOLib v1.1, and 96 perturbed their versions. Extensive experimental results are advantageous compared to state-of-the-art DIRECT-type global optimization. New HALRECT approaches offer high robustness across problems of different degrees of complexity, varying from simple—uni-modal and low dimensional to complex—multi-modal and higher dimensionality.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10898-023-01296-7",
+      "url": "https://www.semanticscholar.org/paper/0ec74b7a30b13f1ad23f1c5b11d0626734e1a849"
+    }
+  ]
+}

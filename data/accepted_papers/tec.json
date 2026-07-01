@@ -1,0 +1,70 @@
+{
+  "journal_id": "tec",
+  "journal_name": "IEEE Transactions on Evolutionary Computation",
+  "papers": [
+    {
+      "title": "A Survey on Evolutionary Computation-Based Drug Discovery",
+      "abstract": "Drug discovery is an expensive and risky process. To combat the challenges in drug discovery, an increasing number of researchers and pharmaceutical companies recognize the benefits of utilizing computational techniques. Evolutionary computation (EC) offers promise as most drug discovery problems are essentially complex optimization problems beyond conventional optimization algorithms. EC methods have been widely applied to solve these complex optimization problems especially in lead compound generation and molecular virtual evaluation, substantially speeding up the process of drug discovery and development. This article presents a comprehensive survey of EC-based drug discovery methods. Particularly, a new taxonomy of the methods is provided and the advantages and limitations of the methods are reviewed. In addition, the potential future directions of EC-based drug discovery are discussed and the publicly available resources, including databases and computational tools are compiled for the convenience of researchers seeking to pursue this field.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3382145",
+      "url": "https://www.semanticscholar.org/paper/48e03a3a99cd0d44fb73c4a1d3128066b0060066"
+    },
+    {
+      "title": "Evolutionary Computation in the Era of Large Language Model: Survey and Roadmap",
+      "abstract": "Large language models (LLMs) have not only revolutionized natural language processing but also extended their prowess to various domains, marking a significant stride toward artificial general intelligence. The interplay between LLMs and evolutionary algorithms (EAs), despite differing in objectives and methodologies, share a common pursuit of applicability in complex problems. Meanwhile, EA can provide an optimization framework for LLM’s further enhancement under closed box settings, empowering LLM with flexible global search capacities. On the other hand, the abundant domain knowledge inherent in LLMs could enable EA to conduct more intelligent searches. Furthermore, the text processing and generative capabilities of LLMs would aid in deploying EAs across a wide range of tasks. Based on these complementary advantages, this article provides a thorough review and a forward-looking roadmap, categorizing the reciprocal inspiration into two main avenues: 1) LLM-enhanced EA and 2) EA-enhanced LLM. Some integrated synergy methods are further introduced to exemplify the complementarity between LLMs and EAs in diverse scenarios, including code generation, software engineering, neural architecture search, and various generation tasks. As the first comprehensive review focused on the EA research in the era of LLMs, this article provides a foundational stepping stone for understanding the collaborative potential of LLMs and EAs. The identified challenges and future directions offer guidance for researchers and practitioners to unlock the full potential of this innovative collaboration in propelling advancements in optimization and artificial intelligence. We have created a GitHub repository to index the relevant papers: https://github.com/wuxingyu-ai/LLM4EC.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3506731",
+      "url": "https://www.semanticscholar.org/paper/478f71f1cd9bad0435560544a9dce7ca49d97766"
+    },
+    {
+      "title": "Symbolic Regression-Assisted Offline Data-Driven Evolutionary Computation",
+      "abstract": "When solving optimization problems with expensive or implicit objective functions, evolutionary algorithms (EAs) commonly utilize surrogate models as cost-effective substitutes for evaluation. This category of algorithms is referred to as data-driven EAs (DDEAs). However, when constructing surrogate models, existing studies rely on the hand-crafted model structure, requiring prior knowledge while leading to the suboptimal fitting ability of the model. To address the issue, this article proposes a novel symbolic regression (SR)-assisted EA, namely SR-DDEA. SR-DDEA employs SR to automatically construct the model structure without prior knowledge and obtain accurate surrogates. Specifically, we develop an efficient gene expression programming algorithm to enhance the expressive ability of surrogates, assisted by a queue-based decoding strategy to improve the efficiency of the model calculations. We also employ a clustering-based selective ensemble method to maximize data utilization and obtain diverse models. Experimental findings on commonly employed benchmarks demonstrate that our algorithm surpasses other cutting-edge offline DDEAs on test problems of different scales and a practical aerodynamic airfoil design challenge.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3482326",
+      "url": "https://www.semanticscholar.org/paper/20fc3f906bedc570bff6b7074c1717b93b08eec4"
+    },
+    {
+      "title": "A Survey on Unbalanced Classification: How Can Evolutionary Computation Help?",
+      "abstract": "Unbalanced classification is an essential machine learning task, which has attracted widespread attention from both the academic and industrial communities due mainly to its broad applications. Evolutionary computation (EC) has contributed greatly to unbalanced classification. However, to the best of our knowledge, there have not been any comprehensive investigations on the strengths and weaknesses of alternative EC methods in addressing various challenging problems in unbalanced classification. This article reviews the literature which utilize EC techniques for unbalanced classification, with the aim of revealing the contributions of EC to unbalanced classification, providing an overview of recent advances, and identifying limitations of existing works. In addition, we present a series of real-world applications, and identify open challenges as well as possible research directions for the future.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2023.3257230",
+      "url": "https://www.semanticscholar.org/paper/4e7ecac7109166bf23468fd8adb5114ac0156a69"
+    },
+    {
+      "title": "A Survey on Evolutionary Computation for Computer Vision and Image Analysis: Past, Present, and Future Trends",
+      "abstract": "Computer vision (CV) is a big and important field in artificial intelligence covering a wide range of applications. Image analysis is a major task in CV aiming to extract, analyze and understand the visual content of images. However, image-related tasks are very challenging due to many factors, e.g., high variations across images, high dimensionality, domain expertise requirement, and image distortions. Evolutionary computation (EC) approaches have been widely used for image analysis with significant achievement. However, there is no comprehensive survey of existing EC approaches to image analysis. To fill this gap, this article provides a comprehensive survey covering all essential EC approaches to important image analysis tasks, including edge detection, image segmentation, image feature analysis, image classification, object detection, and others. This survey aims to provide a better understanding of evolutionary CV (ECV) by discussing the contributions of different approaches and exploring how and why EC is used for CV and image analysis. The applications, challenges, issues, and trends associated to this research field are also discussed and summarized to provide further guidelines and opportunities for future research.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2022.3220747",
+      "url": "https://www.semanticscholar.org/paper/ad82862b99028bf87eda454bf0f92788f19cdbac"
+    },
+    {
+      "title": "Multiobjective Mixed-Integer Quadratic Models: A Study on Mathematical Programming and Evolutionary Computation",
+      "abstract": "Within the current literature on multiobjective optimization, there is a scarcity of comparisons between equation-based white-box solvers to evolutionary black-box solvers. It is commonly held that when dealing with linear and quadratic models, equation-based deterministic solvers are generally the preferred choice. The present study aims at challenging this hypothesis, and we show that particularly in box-constrained mixed-integer (MI) problems it is worth employing evolutionary methods when the goal is to achieve a good approximation of a Pareto frontier. To do so, this article compares a mathematical programming approach with an evolutionary method for set-oriented Pareto front approximation of bi-objective quadratic MI optimization problems. The focus is on convex quadratic under-constrained models wherein the decision variables are either tightly or loosely bounded by box-constraints. Through an empirical assessment of families of quadratic models across varying Hessian forms, variable ranges, and condition numbers, the study compares the performance of the CPLEX-based diversity maximization approach to a state-of-the-art evolutionary multiobjective optimization meta-heuristic with MI mutation and crossover operators. We identify and explain strengths and weaknesses of both approaches when dealing with loosely bounded box-constraints, and prove a theorem regarding the potential undecidability of such multiobjective problems featuring unbounded integer decision variables. The empirical results systematically confirm that black-box and white-box solvers can be competitive, especially in the case of loose box-constraints.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3374519",
+      "url": "https://www.semanticscholar.org/paper/4b832102f9263d09a14a820b9497713f56fade0d"
+    },
+    {
+      "title": "Evolutionary Computation and Explainable AI: A Roadmap to Understandable Intelligent Systems",
+      "abstract": "Artificial intelligence methods are being increasingly applied across various domains, but their often opaque nature has raised concerns about accountability and trust. In response, the field of explainable AI (XAI) has emerged to address the need for human-understandable AI systems. Evolutionary computation (EC), a family of powerful optimization and learning algorithms, offers significant potential to contribute to XAI, and vice versa. This article provides an introduction to XAI and reviews current techniques for explaining machine learning (ML) models. We then explore how EC can be leveraged in XAI and examine existing XAI approaches that incorporate EC techniques. Furthermore, we discuss the application of XAI principles within EC itself, investigating how these principles can illuminate the behavior and outcomes of EC algorithms, their (automatic) configuration, and the underlying problem landscapes they optimize. Finally, we discuss open challenges in XAI and highlight opportunities for future research at the intersection of XAI and EC. Our goal is to demonstrate EC’s suitability for addressing current explainability challenges and to encourage further exploration of these methods, ultimately contributing to the development of more understandable and trustworthy ML models and EC algorithms.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3476443",
+      "url": "https://www.semanticscholar.org/paper/09a90d92a60cf8137ddf8d78208795136eac385f"
+    },
+    {
+      "title": "EvoX: A Distributed GPU-Accelerated Framework for Scalable Evolutionary Computation",
+      "abstract": "Inspired by natural evolutionary processes, evolutionary computation (EC) has established itself as a cornerstone of artificial intelligence. Recently, with the surge in data-intensive applications and large-scale complex systems, the demand for scalable EC solutions has grown significantly. However, most existing EC infrastructures fall short of catering to the heightened demands of large-scale problem solving. While the advent of some pioneering GPU-accelerated EC libraries is a step forward, they also grapple with some limitations, particularly in terms of flexibility and architectural robustness. In response, we introduce EvoX: a computing framework tailored for automated, distributed, and heterogeneous execution of EC algorithms. At the core of EvoX lies a unique programming model to streamline the development of parallelizable EC algorithms, complemented by a computation model specifically optimized for distributed GPU acceleration. Building upon this foundation, we have crafted an extensive library comprising a wide spectrum of 50+ EC algorithms for both single- and multi-objective optimization. Furthermore, the library offers comprehensive support for a diverse set of benchmark problems, ranging from dozens of numerical test functions to hundreds of reinforcement learning tasks. Through extensive experiments across a range of problem scenarios and hardware configurations, EvoX demonstrates robust system and model performances. EvoX is open source and accessible at: https://github.com/EMI-Group/EvoX.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TEVC.2024.3388550",
+      "url": "https://www.semanticscholar.org/paper/401e43955af440bc2e8d1641f71aaf59249a524a"
+    }
+  ]
+}

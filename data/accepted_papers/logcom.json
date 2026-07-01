@@ -1,0 +1,70 @@
+{
+  "journal_id": "logcom",
+  "journal_name": "Journal of Logic and Computation",
+  "papers": [
+    {
+      "title": "Propositional logic and modal logic - A connection via relational semantics",
+      "abstract": "In this paper, by slightly generalizing an observation of Dalla Chiara and Giuntini in their chapter on quantum logic in Handbook of Philosophical Logic, we propose a relational semantics for propositional language with negation and conjunction, which unifies the relational semantics of intuitionistic logic and that of ortho-logic. We study the semantic and syntactic consequence relations and prove the soundness and completeness theorems for five propositional logics: $\\textbf{BL}$, $\\textbf{PL}$, $\\textbf{IL}$, $\\textbf{OL}$ and $\\textbf{CL}$. Moreover, we prove that they can be translated into the modal logics $\\textbf{K}$, $\\textbf{T}$, $\\textbf{S4}$, $\\textbf{KTB}$ and $\\textbf{S5}$, respectively, and thus establish a systematic connection between propositional logics and modal logics. The paper ends with a discussion about the possibility and difficulty of incorporating disjunction into our framework.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exae060",
+      "url": "https://www.semanticscholar.org/paper/5412353788171c701e700e49b8a5487f0571f815"
+    },
+    {
+      "title": "Estimating event probabilities via signal temporal logic and first occurrence distributions",
+      "abstract": "Estimating the probability of events is a significant challenge in many fields, often requiring a probabilistic model or additional labels and tasks for accurate prediction. However, those methods have limited scalability or unnecessary computational resource consumption due to predicting unrelated values. To address these issues, we propose a novel approach that estimates event probabilities based on the distributions of their first occurrence in the time domain. By using Signal Temporal Logic formulas to describe events and applying an algorithm that estimates complex events’ probabilities through simple event occurrence distributions, this study presents an efficient approach that does not depend on high-precision prediction. We evaluate the performance of our method on simulated scenarios of unmanned aerial vehicle motion and autonomous driving.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exae019",
+      "url": "https://www.semanticscholar.org/paper/0d255d35b40d4fb4e6d54a96c4c605e6cebc4614"
+    },
+    {
+      "title": "Fuzzy bi-Gödel modal logic and its paraconsistent relatives",
+      "abstract": "We present an axiomatization of the fuzzy bi-Gödel modal logic ${\\textbf{K}\\textsf{biG}}^{\\textsf{f}}$ formulated in the language containing $\\triangle $ (Baaz Delta operator) and treating $-\\!-\\!< $ (co-implication) as the defined connective. We also consider two paraconsistent relatives of ${\\textbf{K}\\textsf{biG}}^{\\textsf{f}}$ — $\\textbf{K}\\textsf{G}^{2\\pm \\textsf{f}}$ and $\\textsf{G}^{2\\pm \\textsf{f}}_{\\blacksquare ,\\blacklozenge }$. These logics are defined on fuzzy frames with two valuations $e_{1}$ and $e_{2}$ standing for the support of truth and falsity, respectively, and equipped with two fuzzy relations$R^{+}$ and $R^{-}$ used to determine supports of truth and falsity of modal formulas. We construct embeddings of $\\textbf{K}\\textsf{G}^{2\\pm \\textsf{f}}$ and $\\textsf{G}^{2\\pm \\textsf{f}}_{\\blacksquare ,\\blacklozenge }$ into ${\\textbf{K}\\textsf{biG}}^{\\textsf{f}}$ and use them to obtain the characterization of $\\textbf{K}\\textsf{G}^{2}$- and $\\textsf{G}^{2}_{\\blacksquare ,\\blacklozenge }$-definable frames. Moreover, we study the transfer of ${\\textbf{K}\\textsf{biG}}^{\\textsf{f}}$ formulas into $\\textbf{K}\\textsf{G}^{2\\pm \\textsf{f}}$, i.e., formulas that are ${\\textbf{K}\\textsf{biG}}^{\\textsf{f}}$-valid on mono-relational frames $\\mathfrak{F}$ and $\\mathfrak{F}^{\\prime}$ iff they are $\\textbf{K}\\textsf{G}^{2\\pm \\textsf{f}}$-valid on their bi-relational counterparts. Finally, we establish $\\textsf{PSpace}$-completeness of all considered logics.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exae011",
+      "url": "https://www.semanticscholar.org/paper/416468dea0190ca869fe849a8fef0652efeca66d"
+    },
+    {
+      "title": "4DL: a four-valued Dynamic logic and its proof-theory",
+      "abstract": "Transition systems are often used to describe the behaviour of software systems. If viewed as a graph then, at their most basic level, vertices correspond to the states of a program and each edge represents a transition between states via the (atomic) action labelled. In this setting, systems are thought to be consistent and at each state formulas are evaluated as either true or false. On the other hand, when a structure of this sort—e.g. a map where states represent locations, some local properties are known and labelled transitions represent information available about different routes—is built resorting to multiple sources of information, it is common to find inconsistent or incomplete information regarding what holds at each state, both at the level of propositional variables and transitions. This paper aims at bringing together Belnap’s four values, Dynamic Logic and hybrid machinery such as nominals and the satisfaction operator, so that reasoning is still possible in face of contradicting evidence. Proof-theory for this new logic is explored by means of a terminating, sound and complete tableau system.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2203.17179",
+      "url": "https://www.semanticscholar.org/paper/a1a4a2daf1e95288989933af68ab13f03717fca5"
+    },
+    {
+      "title": "A comparison of three kinds of monotonic proof-theoretic semantics and the base-incompleteness of intuitionistic logic",
+      "abstract": "I deal with two approaches to proof-theoretic semantics: one based on argument structures and justifications, which I call reducibility semantics, and one based on consequence among (sets of) formulas over atomic bases, called base semantics. The latter splits in turn into a standard reading, and a variant of it put forward by Sandqvist. I prove some results which, when suitable conditions are met, permit one to shift from one approach to the other, and I draw some of the consequences of these results relative to the issue of completeness of (recursive) logical systems with respect to proof-theoretic notions of validity. This will lead me to focus on a notion of base-completeness, which I will discuss with reference to known completeness results for intuitionistic logic. The general interest of the proposed approach stems from the fact that reducibility semantics can be understood as a labelling of base semantics with proof-objects typed on (sets of) formulas for which a base semantics consequence relation holds, and which witness this very fact. Vice versa, base semantics can be understood as a type-abstraction of a reducibility semantics consequence relation obtained by removing the witness of the fact that this relation holds, and by just focusing on the input and output type of the relevant proof-object.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2501.03297",
+      "url": "https://www.semanticscholar.org/paper/e0a9c3080a9e19d30b180f632583c02912007fce"
+    },
+    {
+      "title": "On an inferential semantics for intuitionistic sentential logic",
+      "abstract": "Sandqvist’s base-extension semantics (B-eS) for intuitionistic sentential logic grounds meaning relative to bases (rather than, say, models), which are arbitrary sets of permitted inferences over sentences. While his soundness proof is standard, his completeness proof is quite unusual. It closely parallels a method introduced much earlier by Mints, who developed a resolution-based approach to intuitionistic logic using a systematic translation of formulas into sentential counterparts. In this short note, we highlight the connection between these two approaches and show that the soundness and completeness of B-eS follow directly from Mints’ theorem. While the result is modest, it reinforces the relevance of proof-search to proof-theoretic semantics and suggests that resolution methods have a deeper conceptual role in constructive reasoning than is often acknowledged.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exaf029",
+      "url": "https://www.semanticscholar.org/paper/d4d8bc045dc30a11029efe483fdfe90aa4b2dcab"
+    },
+    {
+      "title": "Uniform Lyndon interpolation for the pure logic of necessitation with a modal reduction principle",
+      "abstract": "We prove the uniform Lyndon interpolation property (ULIP) of some extensions of the pure logic of necessitation $\\mathbf{N}$. For any $m, n \\in \\mathbb{N}$, $\\mathbf{N}^+\\mathbf{A}_{m,n}$ is the logic obtained from $\\mathbf{N}$ by adding a single axiom $\\Box^n \\varphi \\to \\Box^m \\varphi$, $\\Diamond$-free modal reduction principle, together with a rule $\\frac{\\neg \\Box \\varphi}{\\neg \\Box \\Box \\varphi}$, required to make the logic complete with respect to its Kripke-like semantics. We first introduce a sequent calculus $\\mathbf{GN}^+\\mathbf{A}_{m,n}$ for $\\mathbf{N}^+\\mathbf{A}_{m,n}$ and show that it enjoys cut elimination, proving Craig and Lyndon interpolation properties as a consequence. We then introduce a general method, called propositionalization, that enables one to reduce ULIP of a logic to some weaker logic. Lastly, we construct a propositionalization of $\\mathbf{N}^+\\mathbf{A}_{m,n}$ into classical propositional logic $\\mathbf{Cl}$, proving ULIP as a corollary. We also prove ULIP of $\\mathbf{NA}_{m,n} = \\mathbf{N} + \\Box^n \\varphi \\to \\Box^m \\varphi$ and $\\mathbf{NRA}_{m,n} = \\mathbf{N} + \\Box^n \\varphi \\to \\Box^m \\varphi + \\frac{\\neg \\varphi}{\\neg \\Box \\varphi}$ in the same manner.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exaf048",
+      "url": "https://www.semanticscholar.org/paper/a7ba8db50895037cd1e86f7c4ae760f3d24a2180"
+    },
+    {
+      "title": "An Algebraic Extension of Intuitionistic Linear Logic: The L!S-Calculus and Its Categorical Model",
+      "abstract": "We introduce the ${{\\mathcal L}_!^{\\mathcal S}}$-calculus, a linear lambda-calculus extended with scalar multiplication and term addition, that acts as a proof language for intuitionistic linear logic. These algebraic operations enable the direct expression of linearity at the syntactic level, a property not typically available in standard proof-term calculi. Building upon previous work, we develop the ${{\\mathcal L}_{!}^{\\mathcal S}}$-calculus as an extension of the ${\\mathcal L}^{\\mathcal S}$-calculus with the ! modality. We prove key meta-theoretical properties—subject reduction, confluence, strong normalization and an introduction property—as well as preserve the expressiveness of the original ${\\mathcal L}^{\\mathcal S}$-calculus, including the encoding of vectors and matrices, and the correspondence between proof-terms and linear functions. A denotational semantics is provided in the framework of linear categories with biproducts, ensuring a sound and adequate interpretation of the calculus. This work is part of a broader programme aiming to build a measurement-free quantum programming language grounded in linear logic.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/logcom/exaf053",
+      "url": "https://www.semanticscholar.org/paper/77b2e71a0acd8945e85e5916073dd63bfc404d89"
+    }
+  ]
+}

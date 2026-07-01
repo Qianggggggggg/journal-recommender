@@ -1,0 +1,70 @@
+{
+  "journal_id": "ieeegeoscienceandremotesensingletters",
+  "journal_name": "IEEE Geoscience and Remote Sensing Letters",
+  "papers": [
+    {
+      "title": "Rotation Equivariant Convolution-based Network for Semantic Segmentation of High Spatial Resolution Remote Sensing Imagery",
+      "abstract": "Rotation equivariant convolution-based network for semantic segmentation of high spatial resolution remote sensing imagery. This paper proposes a novel rotation-equivariant convolutional network specifically designed for semantic segmentation of high spatial resolution remote sensing imagery. The proposed architecture incorporates rotational equivariance as an inductive bias, enabling the model to maintain consistent representations across arbitrary rotations of input images. This property is particularly beneficial for remote sensing applications where objects and land cover types may appear in arbitrary orientations. The network leverages group-equivariant convolutions based on the cyclic group C4 to achieve rotation equivariance while maintaining computational efficiency. Extensive experiments on benchmark remote sensing datasets demonstrate that the proposed method achieves superior segmentation accuracy compared to conventional CNN-based approaches, with particular advantages in handling rotated instances and maintaining boundary precision. The results indicate that incorporating geometric prior knowledge through equivariant representations significantly improves generalization performance in remote sensing image analysis tasks.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/LGRS.2026.3662255",
+      "url": ""
+    },
+    {
+      "title": "Multimodal-Aware Fusion Network for Referring Remote Sensing Image Segmentation",
+      "abstract": "Referring remote sensing image segmentation (RRSIS) is a novel visual task in remote sensing images segmentation, which aims to segment objects based on a given text description, with great significance in practical application. Previous studies fuse visual and linguistic modalities by explicit feature interaction, which fail to effectively excavate useful multimodal information from dual-branch encoder. In this letter, we design a multimodal-aware fusion network (MAFN) to achieve fine-grained alignment and fusion between the two modalities. We propose a correlation fusion module (CFM) to enhance multiscale visual features by introducing adaptive noise in transformer, and integrate cross-modal aware features. In addition, MAFN employs multiscale refinement convolution (MSRC) to adapt to the various orientations of objects at different scales to boost their representation ability to enhances segmentation accuracy. Extensive experiments have shown that MAFN is significantly more effective than the state of the art (SOTA) on RRSIS-D datasets. The source code is available at https://github.com/Roaxy/MAFN.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LGRS.2025.3527485",
+      "url": "https://www.semanticscholar.org/paper/f8ea3d0ccdde0d37b89eae1067e1e0b20ca2b3bc"
+    },
+    {
+      "title": "PPMamba: Enhancing Semantic Segmentation in Remote Sensing Imagery by SS2D",
+      "abstract": "Remote sensing semantic segmentation is a critical technology in the field of remote sensing image processing, with broad applications in environmental monitoring, urban planning, disaster assessment, and resource exploration. Despite the transformative impact of convolutional neural networks (CNNs) on this domain, CNN-based methods often encounter limitations due to their localized receptive fields, which struggle to capture the global context necessary for accurate segmentation in complex remote sensing imagery. In this letter, a novel approach is presented for remote sensing semantic segmentation using a mamba-based model named PPmamba. The PPmamba model integrates Resblock and PPmamba within an encoder-decoder framework to effectively capture both local and global contextual information from high-resolution remote sensing images. Leveraging the strengths of the Mamba architecture, our model employs selective scanning to efficiently process long sequences, overcoming the limitations of traditional CNNs and transformers in handling large-scale images with complex scenes. Extensive experiments on two benchmark datasets (Potsdam and Vaihingen) demonstrate the superiority of our PPmamba model against state-of-the-art models, achieving significant improvements in segmentation results. The codes will be available at https://github.com/Jerrymo59/PPMambaSeg.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/LGRS.2024.3507033",
+      "url": "https://www.semanticscholar.org/paper/305b2b7e62024c8757d72660112ee000dc9676bb"
+    },
+    {
+      "title": "ISAR Imaging of Maneuvering Targets via GRFT-MNPSO Algorithm",
+      "abstract": "In ISAR imaging of maneuvering targets, time-varying Doppler frequency and range cell migration pose challenges for obtaining focused ISAR images. To address these issues, an imaging algorithm called General Radon Fourier Transform-Modified Niching Particle Swarm Optimization (GRFT-MNPSO) with low computational complexity is proposed. First, this algorithm employs NPSO to distribute particles around the potential peaks of the received signal in the GRFT domain for preliminary search. Then, a hierarchical clustering algorithm is used to cluster these particles around each peak to form subpopulations. Subsequently, GRFT-PSO is applied to each subpopulation to refine the peak locations in the GRFT domain. Based on the estimated peak locations, high-quality ISAR images can be constructed. The proposed algorithm has low computational complexity while maintaining diversity, convergence and estimation accuracy, and performs well even in low SNR conditions. Experiments on both simulated and real data demonstrate the effectiveness and efficiency of the proposed algorithm.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/lgrs.2025.3649909",
+      "url": "https://doi.org/10.1109/lgrs.2025.3649909"
+    },
+    {
+      "title": "CircularMatch: Efficient Registration of Forest Terrestrial Point Clouds Using Circular Neighborhood Descriptor",
+      "abstract": "The morphological similarity of trees and the unstructured, complex spatial distribution in forest environments result in a scarcity of distinct features, posing significant challenges for point cloud registration. In this work, we introduce a novel, straightforward, and robust algorithm for forest point cloud registration. Initially, we extract instances of tree stems from the scene as key points, utilizing the spatial distribution of adjacent key points to impose robust constraints. Subsequently, we introduce a new feature descriptor named the Circular Neighborhood(CN) Descriptor. This descriptor models vectors and matrices for all key points, encoding the distance information of neighboring key points within various fan-shaped areas around each key point to establish a comprehensive set of scene descriptors. Building on this foundation, we developed an innovative feature descriptor matching algorithm that incorporates descriptor distribution consistency and frequency match scores along with a triangle bitwise comparison method. This approach evaluates the geometric consistency and reliability probabilities between descriptors. Ultimately, we generate a maximal matching set to gauge the visual similarity between two point clouds and accurately estimate their relative poses and transformation matrix. We benchmarked our method against state-of-the-art methods across four diverse datasets, and our findings demonstrate that the Circular Neighborhood Descriptor offers superior adaptability in dense forest environments and significantly enhances registration efficiency. To disseminate our discoveries and contribute to the community, we make our code available on GitHub.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/lgrs.2025.3650098",
+      "url": "https://doi.org/10.1109/lgrs.2025.3650098"
+    },
+    {
+      "title": "Multisource Remote Sensing Data Classification Based on Quadruple Agent Attention Assisted Modal Feature Perception",
+      "abstract": "The combined application of hyperspectral images (HSI) and light detection and ranging (LiDAR) data in land cover classification has always faced the challenge of balancing the heterogeneity and complementarity among heterogeneous data. Therefore, this has also become a hot research topic for the application of the fusion of various remote sensing data. This paper proposes a novel quadruple agent attention fusion and modal feature perception network (QATMPNet) framework to address this. Firstly, the proposed method employs a 2D inverted bottleneck convolution to extract features from two kinds of heterogeneous data. Subsequently, feature mapping is applied to construct a four-channel input interaction to enhance feature representation. Finally, a quadruple agent attention-guided fusion module (QAT) is designed to integrate features, and a multi-modal attention mechanism is utilized to capture multi-modal data interactions. The effectiveness of the proposed method was verified through experiments on three public remote sensing datasets.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/lgrs.2025.3649409",
+      "url": "https://doi.org/10.1109/lgrs.2025.3649409"
+    },
+    {
+      "title": "Dual-Stream Change Feature Disentanglement Network for Polar Glacier Change Detection in Remote Sensing Imagery",
+      "abstract": "Glacier change detection is vital for understanding climate dynamics and assessing environmental risks. However, existing change detection methods that indiscriminately model local details (change edges) and global context (change bodies) often yield incomplete edges and inconsistent interiors. To address this issue, we propose a dual-stream change feature disentanglement network (DCFDNet). At its core, the change feature disentanglement module (CFDM) explicitly disentangles change features into body and edge components using a learnable flow field. Building on this, the dual-stream change feature refinement (DCFR) scheme enhances the disentangled features through two complementary streams: the body consistency stream leverages large-kernel attention to enforce global spatial consistency of change bodies, while the edge integrity stream applies local graph modeling to sharpen fine-grained change edges. The fusion of both streams produces a unified change representation that maintains both body consistency and edge integrity. Experiments on a polar glacier dataset demonstrate that DCFDNet outperforms recent state-of-the-art methods, delivering coherent body regions and accurate edge localization under challenging polar conditions.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/lgrs.2025.3648923",
+      "url": "https://doi.org/10.1109/lgrs.2025.3648923"
+    },
+    {
+      "title": "Triple Collocation-Based Error Evaluation of FY-3G MWRI-RM and FY-3F MWRI-II Brightness Temperatures",
+      "abstract": "The recent launch of the Chinese FengYun-3G/3F (FY-3G/3F) satellites provides new opportunities for Earth observation enabled by their unique combination of non-sun-synchronous and sun-synchronous orbits. This study provides the first comprehensive evaluation of the Level-1 brightness temperature (BT) products from both the FY-3G MWRI-RM and FY-3F MWRI-II microwave imagers. Using a globally collocated dataset with the GPM Microwave Imager (GMI) as the reference, we assess the radiometric consistency through direct comparison and quantify the random errors of using the Triple Collocation (TC) method. Results show that both two sensors have high consistency and low systematic bias, with Mean Bias Deviations (MBD) generally below 1.0 K and Root Mean Square Deviations (RMSD) of lower than 3.0 K for most channels. Nevertheless, the TC results uncover a significant performance divergence in their random errors, particularly over land. Specifically, MWRI-II exhibits a high level of performance, with an overall Root Mean Square Error (RMSE) over barren land of 0.72 K, compared to 0.82 K for GMI. In contrast, while the MWRI-RM performs well over oceans, its TC-derived errors are substantially larger over vegetated land, reaching a peak RMSE of 4.67 K. The findings from this study suggest that the FY-3F MWRI-II BT has good potential in a wide range of scientific applications, while the FY-3G MWRI-RM BT, though valuable for oceanic studies, requires substantial refinement of its land surface processing to realize its full potential.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/lgrs.2025.3649405",
+      "url": "https://doi.org/10.1109/lgrs.2025.3649405"
+    }
+  ]
+}

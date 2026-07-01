@@ -1,0 +1,86 @@
+{
+  "journal_id": "ijufks",
+  "journal_name": "International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems",
+  "papers": [
+    {
+      "title": "Reflective Learning-Based Particle Swarm Optimization for Feature Selection",
+      "abstract": "Swarm intelligence (SI) algorithms are widely used in feature selection (FS) problems. Yet, they often get trapped in local optima and have limited search capability. To address these issues, this paper proposes a reflective learning-based particle swarm optimization (PSO) algorithm named RPSO for FS problems. The main goal is to develop an efficient FS method by using domain knowledge and historical update information. Initially, a novel hybrid initialization is designed, incorporating the maximal information coefficient (MIC), ReliefF, and random initialization to generate a high-quality initial population. An exploration and exploitation switch strategy accelerates convergence and prevents stagnation. An adaptive movement strategy improves particle updates by considering feature importance, thereby improving adaptability. Finally, a reflective learning strategy utilizes the historical update information of particles to guide particle movement, thereby enhancing algorithmic reliability. Experimental results on 20 benchmark datasets demonstrate that RPSO outperforms the original PSO and other comparison algorithms across key performance metrics, validating the effectiveness of the four designed strategies. Thus, RPSO is a promising SI algorithm for FS problems.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500248",
+      "url": "https://openalex.org/W7165672021"
+    },
+    {
+      "title": "A Novel Density Peaks Clustering based on Support Point and Nearest Neighbor Relationship",
+      "abstract": "Density peaks clustering (DPC) algorithm is a robust density-based clustering method that is extensively used to analyze datasets characterized by irregular structures and noise. However, it still has some issues. On the one hand, the local density of DPC may cause centers in low-density clusters to be easily ignored. On the other hand, the allocation method of DPC often leads to a chain reaction if the samples are assigned incorrectly. To address above issues, a novel density peaks clustering algorithm based on support point and nearest neighbor relationship (DPC-SN) is proposed. First, the local density is redefined to mitigate the impact of density variations between any two clusters. Second, the concept of boundary degree is presented to detect the boundary points. Then, a multi-step assignment method is proposed to assign non-center points by introducing the idea of shared nearest neighbor, which avoids continuous clustering error. Finally, DPC-SN is compared and analyzed with various typical clustering algorithms on synthetic and real datasets. The experimental results verify the effectiveness of the DPC-SN.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s021848852650025x",
+      "url": "https://openalex.org/W7165667150"
+    },
+    {
+      "title": "Optimal Feature Subset Selection for Uncertainty Classification: Precision Agriculture",
+      "abstract": "Uncertainty Classification, Optimal Feature Subset Selection, and Sequential problems are some of the critical problems in machine learning. The optimal feature subset in uncertainty classification plays a critical role. The main problem of classification is the handling of ambiguous data. Various classification methods decrease generalization performance if the ambiguity is present in the input features itself. This paper addresses the above problems by designing an Incremental Fuzzy Extreme Learning Machine algorithm (I-FELM) for batch and an Incremental Fuzzy Online Sequential Extreme Learning Machine algorithm (IF-OSFELM) for sequential input. The optimal feature subset is selected by using seven feature subset selection methods - F-Score, Students’ T-test, Kullback-Leibler divergence, Kolmogorov-Smirnov test, Information Gain, Symmetric uncertainty, and Gain Ratio. For fuzzification, the trapezoidal membership function is used. The experimental results are calculated for the proposed algorithms using the clinical data set. In order to check the efficiency of the proposed algorithms, two Precision Agriculture expert systems are developed: 1. IoT-based plant disease classification and 2. ML-based Crop Yield Prediction that helps the remote farmer with expert advice, in which the proposed algorithms are exploited. Statistical approaches are used for validation and hypothetical testing.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500236",
+      "url": "https://openalex.org/W7165692560"
+    },
+    {
+      "title": "High-Dimensional Discrete Fuzzy Numbers and their Application in Ranking Multi-Channel Uncertain Discrete Digital Information",
+      "abstract": "In this paper, some issues related to high-dimensional discrete fuzzy numbers are studied. Firstly, an enhancement has been made to the previously established theorem concerning the representation of one-dimensional, discrete fuzzy numerical entities, and the definition of high-dimensional discrete fuzzy numbers has been given based on the idea of this improved representation theorem. Then, we proposed a sufficient condition for a fuzzy set of [Formula: see text] to be an n-dimensional discrete fuzzy number in order to be used conveniently in application, and a special high-dimensional discrete fuzzy number is introduced based on this result. Subsequently, we derive the average computation formula for an n-cell discrete fuzzy number that arises from the combination of trapezoidal-shaped and triangular-shaped fuzzy numbers, and introduce a partial ordering relation within the n-dimensional discrete fuzzy number domain. In the end, we provide a case to clarify how our obtained findings can be harnessed to establish a priority order for objects that are characterized by multi-channel uncertain discrete digital data.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500224",
+      "url": "https://openalex.org/W7165658718"
+    },
+    {
+      "title": "CNN-RNN: A Hybrid Convolutional and Recurrent Neural Network Approach for Cross-Domain Sentiment Analysis Using the Webemo Dataset",
+      "abstract": "Globally, e-commerce and social media sites are rapidly improving every day. Social media is a dynamic platform where people can share their thoughts and feelings. Sentiment analysis plays a crucial role in understanding public sentiment. The existing method has some drawbacks, including difficulties in emotion detection and a small amount of data used for analysis. However, for cross-domain sentiment analysis using the WEBEmo dataset, the proposed model combines the convolutional neural network (CNN) and recurrent neural network (RNN) methods. This dataset contains both text and emoticon data. In the pre-processing stage, sentences are divided into individual tokens, which are then converted into numerical form using word embedding techniques such as Word2Vec and the GloVe process. Finally, padding is applied to ensure that each input preparation has an identical length. Convolutional layers are added to reduce dimensionality and extract local features from pre-processed data. Finally, the Long Short Term Memory (LSTM) approach is used to capture both long-range dependencies and context information. This hybrid model’s parameters are being tuned to improve sentiment analysis accuracy. The experimental results show that the proposed hybrid CNN-RNN model outperforms state-of-the-art methods on the WEBEmo dataset, with an accuracy of 96.02%. This model also provides numerous performance analyses. In contrast to DANN, this model improves cross-domain flexibility while overcoming the limitations of individual techniques like LSTM, RNN, and CNN. It is well-defined for sentimental analysis tasks that require both local and sequential feature learning.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500194",
+      "url": "https://openalex.org/W7162002145"
+    },
+    {
+      "title": "A Two-Stage Stochastic Programming Model for Home Health-Care Routing and Scheduling Problem",
+      "abstract": "This article explores the increasing need for home health care services (HHCS) in developed nations due to rising life expectancy and changing family structures. To this end, we introduce a sophisticated two-stage stochastic programming model designed for the HHCS. The main objective is to efficiently assign caregivers to patients and optimize their travel routes, a complex task made more challenging by factors such as the stochastic nature of patient service times and the need for caregivers to have specific skills to respond to diverse patient demands. The proposed model aims to minimize various costs, including those associated with caregivers, travel, service provision, and penalties for untimely arrivals (for early or late arrivals). Simultaneously, it seeks to maximize patient-caregiver preferences to enhance overall satisfaction and quality of care. One notable aspect of the model is its consideration of stochastic service times, providing a more resilient solution to the inherent unpredictability of HHCS. To validate the effectiveness of the proposed approach, the model undergoes rigorous testing using real-world data obtained from an actual HHC center. The experimental results demonstrate the superior cost efficiency of the proposed model compared to traditional deterministic models, showcasing its potential to significantly improve the overall effectiveness of HHCS in terms of resource allocation, service quality, and patient satisfaction.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500169",
+      "url": "https://openalex.org/W7161996948"
+    },
+    {
+      "title": "A Boosted Ensemble Framework with Bio-Inspired Optimization for Multivariate Classification of Structured Data",
+      "abstract": "This study presents a comprehensive machine learning framework that integrates advanced ensemble classifiers with bio-inspired optimization to perform high-accuracy classification of multivariate structured data. The proposed approach is applied to classify countries based on health, demographic, and economic indicators. Specifically, three state-of-the-art boosting models, Extreme Gradient Boosting (XGBoost), LightGBM, and Histogram-Based Gradient Boosting, are evaluated for their predictive performance. To improve generalization and accuracy, the Artificial Protozoa Optimization (APO) algorithm is employed for hyperparameter tuning. The resulting hybrid model, XGAO (XGBoost [Formula: see text] APO), achieved the highest classification accuracy of 0.988. A fast sensitivity analysis-based feature selection method was used to reduce dimensionality and enhance interpretability. Key features such as Adult Mortality, Diphtheria, and Population emerged as strong predictors. SHAP (SHapley Additive Explanations) analysis was conducted to provide insight into feature contributions, supporting transparency and model understanding. The study also visualized feature relationships using a correlation plot with clean labels to emphasize data distributions and interdependencies. Compared with baseline models and other recent techniques, the proposed framework demonstrated superior classification accuracy and robustness. The results validate the integration of gradient boosting and metaheuristic optimization as an effective strategy for interpretable and scalable classification on real-world tabular datasets. These contributions are particularly relevant to applications in socioeconomic analytics, intelligent decision support systems, and uncertainty modeling.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500200",
+      "url": "https://openalex.org/W7161997667"
+    },
+    {
+      "title": "Fuzzy Liu Regression Modelling Using α-Cut-Based Methods for Solving Multicollinearity Problem",
+      "abstract": "Liu regression, originally developed in the context of classical (crisp) statistics as a biased estimation method to mitigate multicollinearity, has not been previously extended to fuzzy regression frameworks. In this study, we propose a novel fuzzy adaptation of Liu regression, implemented within an [Formula: see text]-cut-based estimation structure. This approach provides a systematic methodology for selecting candidate values of the bias parameter d in fuzzy settings. While prior research has primarily concentrated on fuzzy Ridge regression, our work introduces and investigates fuzzy Liu regression for the first time using [Formula: see text]-cut-based estimation, offering a new strategy for addressing multicollinearity in fuzzy datasets. The proposed methodology evaluates 13 distinct formulas for the bias parameter d, comparing their performance against fuzzy OLS under the [Formula: see text]-cut paradigm. Extensive simulations and real-world data sets are employed to assess performance across varying levels of multicollinearity. Results consistently show that fuzzy Liu regression outperforms fuzzy OLS—even in low multicollinearity cases. Notably, the method converges to fuzzy OLS when [Formula: see text], maintaining theoretical coherence. These findings underscore the effectiveness of formula-driven bias selection and establish fuzzy Liu regression as a valuable tool in fuzzy regression analysis.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500182",
+      "url": "https://openalex.org/W7162033565"
+    },
+    {
+      "title": "Semantic Preserved Generative Adversarial Network-Driven Enhanced Candidate Generation for Efficient and Scalable Frequent Itemset Mining in Large-Scale Data Analytics",
+      "abstract": "Frequent itemset mining is a key task in data mining, particularly for analyzing customer purchase behavior in large-scale transaction datasets. This paper proposes a novel method called SPGAN-ECG-FISM-LSDA—Semantic Preserved Generative Adversarial Network-driven Enhanced Candidate Generation for Efficient and Scalable Frequent Itemset Mining. The approach begins by converting transaction data into bit vectors and generating compact candidate itemsets using subset discovery, thereby reducing memory usage and database scans. To model and predict customer purchasing behavior, a semantic-preserved GAN (SPGAN) is applied, and its parameters are optimized using the Shrike Optimization Algorithm (SOA) for enhanced accuracy and efficiency. The proposed approach is implemented in Python and evaluated against benchmark models such as EM-THUI-GA, FIFS-RMSA-DC, and EM-CLHUI-TQD. Experimental results demonstrate significant improvements in scanning time, processing time, and storage efficiency, confirming the effectiveness of the SPGAN-ECG-FISM-LSDA framework for large-scale data analytics.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500121",
+      "url": "https://openalex.org/W7143446125"
+    },
+    {
+      "title": "Market Segmentation Using a PSO-Based Multivariate Fuzzy Weighted Fuzzy K -Modes Algorithm with Probabilistic Distance",
+      "abstract": "This study introduces a new clustering method based on the multivariate fuzzy K-modes algorithm. The proposed algorithm incorporates attribute weights determined by Gini impurity, which evaluates the significance of attribute values in both within-cluster and between-cluster variances. Additionally, instead of relying on the Hamming distance, the probabilistic distance is employed to compute the dissimilarity between objects or between objects and their corresponding centroids. This study also utilizes a particle swarm optimization (PSO) algorithm to find the optimal centroids, replacing the random generation of initial centroids and ensuring the global optimization. Thus, the proposed algorithm is named the PSO-based multivariate fuzzy weighted fuzzy K-modes algorithm with probabilistic distance (PSO-MFWFKM-PD). The proposed algorithm is evaluated against other benchmark algorithms in terms of accuracy (AC) and Davies-Bouldin Index (DBI) using five benchmark datasets. The result demonstrate that PSO-MFWFKM-PD outperforms the other algorithms. Furthermore, the algorithm is applied to a real-world case study for market segmentation, utilizing a soft-drinks consumer dataset from Thailand collected through an online questionnaire. The results from this application are also promising.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1142/s0218488526500157",
+      "url": "https://openalex.org/W7143305532"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "journal_id": "apal",
+  "journal_name": "Annals of Pure and Applied Logic",
+  "papers": [
+    {
+      "title": "Constructive quantifier elimination with a focus on matrix rings",
+      "abstract": "We give a sufficient condition for a model theoretic structure B to ‘inherit’ quantifier elimination from another structure A . This yields an alternative proof of one of the main results from [8] , namely quantifier elimination for certain matrix rings. The original proof uses model theory, and while it is very elegant and insightful, the proof we propose is much shorter and provides a constructive algorithm.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103706",
+      "url": "https://doi.org/10.1016/j.apal.2025.103706"
+    },
+    {
+      "title": "A note on Erdős-Hajnal property for graphs with VC dimension ≤2",
+      "abstract": "Using a result in [6] and the proof of [2, Theorem 1.1] , we show that there is γ > 0 such that for any finite graph G with VC-dimension ≤2, G has a clique or an anti-clique of size ≥ | G | γ . We also show that the Erdős-Hajnal property for graphs with VC-dimension 1 can be proved using the δ -dimension technique in [4] , and we show that when E is a definable symmetric binary relation, [4, Theorem 1.3] can be proved without using Shelah's 2-rank.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103705",
+      "url": "https://doi.org/10.1016/j.apal.2025.103705"
+    },
+    {
+      "title": "Maximal sets without choice",
+      "abstract": "We show that it is consistent relative to ZF , that there is no well-ordering of R while a wide class of special sets of reals such as Hamel bases, transcendence bases, Vitali sets or Bernstein sets exists. To be more precise, we can assume that every projective hypergraph on R has a maximal independent set, among a few other things. For example, we get transversals for all projective equivalence relations. Moreover, this is possible while either DC ω 1 holds, or countable choice for reals fails. Assuming the consistency of an inaccessible cardinal, “projective” can even be replaced with “ L ( R ) ” and we can add that any instance of AC in L ( R ) has a choice function. This vastly strengthens the consistency results obtained in [6] , [11] or [15] .",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103694",
+      "url": "https://doi.org/10.1016/j.apal.2025.103694"
+    },
+    {
+      "title": "MA ( I ) and a failure of separation on the third level",
+      "abstract": "We present a method which forces the failure of Π 3 1 and Σ 3 1 -separation, while MA ( I ) holds, for I the family of indestructible ccc forcings. This shows that, in contrast to the assumption BPFA and ℵ 1 = ℵ 1 L which implies Π 3 1 -separation, that weaker forcing axioms do not decide separation on the third projective level.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103667",
+      "url": "https://doi.org/10.1016/j.apal.2025.103667"
+    },
+    {
+      "title": "Arrow algebras",
+      "abstract": "In this paper we introduce arrow algebras, simple algebraic structures which induce elementary toposes through the tripos-to-topos construction. This includes localic toposes as well as various realizability toposes, in particular, those realizability toposes which are obtained from partial combinatory algebras. Since there are many examples of arrow algebras and arrow algebras have a number of closure properties, including a notion of subalgebra given by a nucleus, arrow algebras provide a flexible tool for constructing toposes; we illustrate this by providing some general tools for creating toposes for Kreisel's modified realizability.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103664",
+      "url": "https://doi.org/10.1016/j.apal.2025.103664"
+    },
+    {
+      "title": "Univalent material set theory",
+      "abstract": "Homotopy type theory (HoTT) can be seen as a generalisation of structural set theory, in the sense that 0-types represent structural sets within the more general notion of types. For material set theory, we also have concrete models as 0-types in HoTT, but this does not currently have any generalisation to higher types. The aim of this paper is to give such a generalisation of material set theory to higher type levels within homotopy type theory. This is achieved by generalising the construction of the type of iterative sets to obtain an n -type universe of n -types. At level 1, this gives a connection between groupoids and multisets. More specifically, we define the notion of an ∈-structure as a type with an extensional binary type family and generalise the axioms of constructive set theory to higher type levels. There is a tight connection between the univalence axiom and the extensionality axiom of ∈-structures. Once an ∈-structure is given, its elements can be seen as representing types in the ambient type theory. A useful property of these structures is that an ∈-structure of n -types is itself an n -type, as opposed to univalent universes, which have higher type levels than the types in the universe. The theory has an alternative, coalgebraic formulation, in terms of coalgebras for a certain hierarchy of functors, P n , which generalises the powerset functor from sub-types to covering spaces and n -connected maps in general. The coalgebras which furthermore are fixed-points of their respective functors in the hierarchy are shown to model the axioms given in the first part. As concrete examples of models for the theory developed we construct the initial algebras of the P n functors. In addition to being an example of initial algebras of non-polynomial functors, this construction allows one to start with a univalent universe and get a hierarchy of ∈-structures which gives a stratified ∈-structure representation of that universe. These types are moreover n -type universes of n -types which contain all the usual types an type formers. The universes are cumulative both with respect to universe levels and with respect to type levels. The results are formalised in the proof-assistant Agda.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103662",
+      "url": "https://doi.org/10.1016/j.apal.2025.103662"
+    },
+    {
+      "title": "Transposition of variables is hard to axiomatize",
+      "abstract": "The function p x y that interchanges two logical variables x , y in formulas is hard to describe in the following sense. Let F denote the Lindenbaum–Tarski formula-algebra of a finite-variable first-order logic, endowed with p x y as a unary function. We prove that each equational axiom system for the equational theory of F has to contain, for each finite n , an equation that contains together with p x y at least n algebraic variables, and each of the operations ∃ , = , ∨ . This gives an answer to a problem raised by Johnson [ J. Symb. Logic ] in 1969: the class R P E A α of representable polyadic equality algebras of a finite dimension α ≥ 3 cannot be axiomatized by adding finitely many equations to the equational theory of representable cylindric algebras of dimension α . Consequences for proof systems of finite-variable logic and for defining equations of polyadic equality algebras are given. The proof uses a family of nonrepresentable polyadic equality algebras A n that are more and more nearly representable as n increases: their n -generated subalgebras as well as their proper reducts are representable. The lattice of subvarieties of R P E A α is investigated and new open problems are asked about the interplay between the transposition operations and about generalizability of the results to infinite dimensions.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103650",
+      "url": "https://doi.org/10.1016/j.apal.2025.103650"
+    },
+    {
+      "title": "The DeMorganization of a locale",
+      "abstract": "In 2009, Caramello proved that each topos has a largest dense subtopos whose internal logic satisfies De Morgan law (also known as the law of the weak excluded middle). This finding implies that every locale has a largest dense extremally disconnected sublocale, referred to as its DeMorganization. In this paper, we take the first steps in exploring the DeMorganization in the localic context, shedding light on its geometric nature by showing that it is always a fitted sublocale and by providing a concrete description. Explicit examples of DeMorganizations for toposes that do not satisfy De Morgan law are rather difficult to find. We present a contribution in that direction, with the main result of the paper showing that for any metrizable locale (without isolated points), its DeMorganization coincides with its Booleanization. This, in particular, implies that any extremally disconnected metric locale (without isolated points) must be Boolean, generalizing a well-known result for topological spaces to the localic setting.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.apal.2025.103634",
+      "url": "https://doi.org/10.1016/j.apal.2025.103634"
+    }
+  ]
+}

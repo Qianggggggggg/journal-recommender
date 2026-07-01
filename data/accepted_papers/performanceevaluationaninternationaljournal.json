@@ -1,0 +1,86 @@
+{
+  "journal_id": "performanceevaluationaninternationaljournal",
+  "journal_name": "Performance Evaluation: An International Journal",
+  "papers": [
+    {
+      "title": "Performance evaluation of containers for low-latency packet processing in virtualized network environments",
+      "abstract": "Packet processing in current network scenarios faces complex challenges due to the increasing prevalence of requirements such as low latency, high reliability, and resource sharing. Virtualization is a potential solution to mitigate these challenges by enabling resource sharing and on-demand provisioning; however, ensuring high reliability and ultra-low latency remains a key challenge. Since bare-metal systems are often impractical because of high cost and space usage, and the overhead of virtual machines (VMs) is substantial, we evaluate the utilization of containers as a potential lightweight solution for low-latency packet processing. Herein, we discuss the benefits and drawbacks and encourage container environments in low-latency packet processing when the degree of isolation of customer data is adequate and bare metal systems are unaffordable. Our results demonstrate that containers exhibit similar latency performance with more predictable tail-latency behavior than bare metal packet processing. Moreover, deciding which mainboard architecture to use, especially the cache division, is equally vital as containers are prone to higher latencies on more shared caches between cores especially when other optimizations cannot be used. We show that this has a higher impact on latencies within containers than on bare metal or VMs, resulting in the selection of hardware architectures following optimizations as a critical challenge. Furthermore, the results reveal that the virtualization overhead does not impact tail latencies.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.peva.2024.102442",
+      "url": "https://www.semanticscholar.org/paper/cbfb89d0fde3a55e21cb8dc83a4d6780c21c1520"
+    },
+    {
+      "title": "On the Quantum Performance Evaluation of Two Distributed Quantum Architectures",
+      "abstract": "Distributed quantum applications impose requirements on the quality of the quantum states that they consume. When analyzing architecture implementations of quantum hardware, characterizing this quality forms an important factor in understanding their performance. Fundamental characteristics of quantum hardware lead to inherent tradeoffs between the quality of states and traditional performance metrics such as throughput. Furthermore, any real-world implementation of quantum hardware exhibits time-dependent noise that degrades the quality of quantum states over time. Here, we study the performance of two possible architectures for interfacing a quantum processor with a quantum network. The first corresponds to the current experimental state of the art in which the same device functions both as a processor and a network device. The second corresponds to a future architecture that separates these two functions over two distinct devices. We model these architectures as continuous-time Markov chains and compare their quality of executing quantum operations and producing entangled quantum states as functions of their memory lifetimes, as well as the time that it takes to perform various operations within each architecture. As an illustrative example, we apply our analysis to architectures based on Nitrogen- Vacancy centers in diamond, where we find that for presentday device parameters one architecture is more suited to computation-heavy applications, and the other for networkheavy ones. We validate our analysis with the quantum network simulator NetSquid. Besides the detailed study of these architectures, a novel contribution of our work are several formulas that connect an understanding of waiting time distributions to the decay of quantum quality over time for the most common noise models employed in quantum technologies. This provides a valuable new tool for performance evaluation experts, and its applications extend beyond the two architectures studied in this work.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.peva.2021.102242",
+      "url": "https://www.semanticscholar.org/paper/72abb774f783c36807c9b7b32be9a5c7571c9487"
+    },
+    {
+      "title": "DeepComNet: Performance evaluation of network topologies using graph-based deep learning",
+      "abstract": "Modeling the performance of network protocols and communication networks generally relies on expert knowledge and understanding of the different elements of a network, their configuration, and the overall architecture and topology. Machine learning is often proposed as a tool to help modeling such complex systems. One drawback of this method is that high-level features are generally used – which require full understanding of the network protocols to be chosen, correctly engineered, and measured – and the approaches are generally limited to a given network topology. In this article, we present DeepComNet, an approach to address the challenges of working with machine learning by using lower-level features, namely only a description of the network architecture. Our main contribution is a method for applying deep learning on network topologies via the use of Graph Gated Neural Networks, a specialized recurrent neural network for graphs. Our approach enables us to make performance predictions based only on a graph-based representation of network topologies. To evaluate the potential of DeepComNet, we apply our approach to the tasks of predicting the throughput of TCP flows and the end-to-end latencies of UDP flows. In both cases, the same base model is used. Numerical results show that our approach is able to learn and predict performance properties of TCP and UDP flows with a median absolute relative error smaller than 1%, outperforming related methods from the literature by one order of magnitude.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PEVA.2018.12.003",
+      "url": "https://www.semanticscholar.org/paper/f362e2d5e898be3274e9c8f8705848ca82c12fba"
+    },
+    {
+      "title": "Design and performance evaluation of contention-based transmission schemes for URLLC services",
+      "abstract": "We investigate in this paper uplink transmission schemes for 5G Ultra-Reliable Low Latency Communications (URLLC) traffic. The URLLC class of services has been defined for applications requiring extremely stringent latency and reliability. We show that, in systems with episodic traffic and many users compared with the number of transmission resources, randomly transmitting multiple copies of a packet allows to meet the URLLC requirements. We first develop an analytical model for the packet loss rate for a contention based multiple transmission scheme where replica positions are assigned randomly and show that it allows to meet the performance requirements of URLLC for small enough user activity rate. We then propose an advanced replication scheme where positions for the different replicas are pre-allocated to users so that users have pairwise-distinct positions. We show that this advanced scheme achieves very high reliability with low resource consumption.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.peva.2020.102132",
+      "url": "https://www.semanticscholar.org/paper/ac45b19366343117e8e7e43082b8f62f0f89ca28"
+    },
+    {
+      "title": "Simulation and performance evaluation of mission critical dispatching systems",
+      "abstract": "Dispatching systems, where jobs are routed to servers immediately upon arrival, appear frequently in parallel computing systems of different scales. With a dynamic dispatching policy, the system is generally analytically intractable and performance evaluation is carried out by means of Monte Carlo simulations. A typical performance metric is the mean response time which is often easy to estimate. In contrast, we consider systems where events generating costs are extremely rare. In our reference system, jobs have deadlines for waiting time. When deadlines are loose when compared to the system’s load, novel rare event simulation techniques must be applied. We consider both conditioning and importance sampling to this end. In numerical examples, the proposed techniques decrease the simulation time by several orders of magnitude. We also discover interesting performance relationships among the classical dispatching policies; Random split (RND), Round-robin (RR), Join-the-shortest-queue (JSQ) and Least-work-left (LWL).",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PEVA.2019.102038",
+      "url": "https://www.semanticscholar.org/paper/cbe396bb32e06ae8507725da65cb69a70db15554"
+    },
+    {
+      "title": "Stepwise Migration of a Monolith to a Microservices Architecture: Performance and Migration Effort Evaluation",
+      "abstract": "The agility inherent to today's business promotes the definition of software architectures where the business entities are decoupled into modules and/or services. However, there are advantages in having a rich domain model, where domain entities are tightly connected, because it fosters an initial quick development. On the other hand, the split of the business logic into modules and/or services, its encapsulation through well-defined interfaces and the introduction of inter-service communication introduces a cost in terms of performance. In this paper we analyze the stepwise migrating of a monolith, using a rich domain object, into a microservice architecture, where a modular monolith architecture is used as an intermediate step. The impact on the migration effort and on performance is measured for both steps. Current state of the art analyses the migration of monolith systems to a microservices architecture, but we observed that migration effort and performance issues are already significant in the migration to a modular monolith. Therefore, a clear distinction is established for each one of the steps, which may inform software architects on the planning of the migration of monolith systems. In particular, the trade-offs of doing all the migration process or just migrating to a modular monolith.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.peva.2024.102411",
+      "url": "https://www.semanticscholar.org/paper/a430d6241ff7cdd9adf51347642f768a347dc151"
+    },
+    {
+      "title": "LLMEmu: A Lightweight Performance Emulator for High-Fidelity Distributed LLM Training",
+      "abstract": "The prohibitive cost of training trillion-parameter large language models (LLMs) necessitates low-cost emulation tools for distributed system optimization. In modern large-scale clusters, communication often becomes the primary bottleneck to scalability. However, existing emulators, such as vTrain and ASTRA-Sim, overlook dynamic network factors that significantly impact performance at scale, resulting in limited emulation accuracy. This work offers an efficient and reliable tool for training system optimization and parallel strategy exploration, considerably lowering the barrier to large-scale AI research. We present LLMEmu, a distributed training emulator that combines real kernel profiling and actual communication execution. First, computation is profiled through real CUDA kernel traces on GPU nodes to construct an operator-level latency lookup table, enabling GPUlike execution on CPU clusters. Second, inter-node communication is executed using communication library primitives (e.g., AllReduce, Send/Recv), triggered by communication anchors embedded in the execution graph, and implemented using a pluggable communication backend. LLMEmu can seamlessly model hybrid parallelism strategies and supports multiple collective algorithms. Its lightweight design incorporates gradient bucketing with latency reuse to minimize overhead while maintaining extensibility to various network interconnects. The effectiveness of LLMEmu is validated through its performance results, demonstrating an average prediction error of only 2.17% on 24-GPU clusters, which outperforms vTrain by 21.09%, and confirming its scalability in modeling training cost distributions across 128- node CPU emulations under varying network conditions.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3797823.3797829",
+      "url": "https://www.semanticscholar.org/paper/c53b01d02d8646768003fe6882f2e6c1d16577c8"
+    },
+    {
+      "title": "The last, the least, and the urgent: Fluid modeling and performance equivalence for scheduling policies in partial service queues with abandonment",
+      "abstract": "In several queueing systems, arriving tasks have both service and timing requirements, and depart whenever one of them is attained. In several applications, the partial work performed by the system on tasks during their stay is still useful, even if the task is not completed. We analyze these partial service queues with abandonment under a many-server setting and characterize the equilibrium performance of several policies through fluid models. In particular, we show that deadline-oblivious policies like Least-Attained-Service and Last-Come-First-Served exhibit the same equilibrium performance as Earliest-Deadline-First. This striking property means that designers may avoid the difficult job of estimating deadlines without performance penalties. The conclusions are validated by numerical experiments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3797823.3797824",
+      "url": "https://www.semanticscholar.org/paper/4778c90fe6027baa5a409e1cfa0ead3751d6b4f6"
+    },
+    {
+      "title": "Retransmission performance in a stochastic geometric cellular network model",
+      "abstract": "Suppose sender-receiver transmission links in a downlink network at given data rate are subject to fading, path-loss and inter-cell interference, and that transmissions either pass, suffer loss, or incur retransmission delay. We introduce a method to obtain the average activity level of the system required for handling the buffered work and from this derive the resulting coverage probability and key performance measures. The technique involves a family of stationary buffer distributions which is used to solving iteratively a nonlinear balance equation for the unknown busy-link probability and then identifying throughput, loss probability and delay. The results allow for straightforward numerical investigation of performance indicators, are in special cases explicit, and may be easily used to study the trade-off between reliability, latency, and data rate.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2306.16200",
+      "url": "https://www.semanticscholar.org/paper/0b502b3b02ca5c7748157041aed26bf65e414279"
+    },
+    {
+      "title": "I/O performance analysis of machine learning workloads on leadership scale supercomputer",
+      "abstract": "The popularity of machine learning technologies and frameworks has led to an increasingly large number of machine learning workloads running on high-performance computing (HPC) clusters. The ML workflows are readily being adopted in diverse computational fields such as Biology, Physics, Materials, and Computer Science. The I/O behavior of the emerging ML workloads distinctly differs from the traditional HPC workloads, such as simulation or checkpoint/restart-based HPC I/O behavior. Additionally, the ML workloads have also pushed for the utilization of GPUs or a combination of CPUs and GPUs in addition to using only CPUs for computational tasks. The diverse and complex I/O behavior of ML workloads requires extensive study and is critical for the efficient performance of various layers of the I/O stack and the overall performance of HPC workloads. This work aims to fill the gap in understanding the I/O behavior of emerging ML workloads by providing an in-depth analysis of ML jobs running on large-scale leadership HPC systems. In particular, we have analyzed the behavior of jobs based on the scale of the jobs, the science domains, and the processing units used by the ML jobs. The analysis was performed on 23,000 ML jobs collected from one year of Darshan logs running on Summit, which is one of the fastest supercomputers. We also collect the CPU and GPU usage of 15,165 ML jobs by merging the Darshan dataset with the power usage of the processing units on Summit. Therefore, this paper is able to provide a systematic I/O characterization of ML workloads on a leadership scale HPC machine to understand how the I/O behavior differs for workloads across various science domains, the scale of workloads",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.peva.2022.102318",
+      "url": "https://www.semanticscholar.org/paper/28d0aa5d4fd4956177bc1eea1fc4e56c4454c85e"
+    }
+  ]
+}

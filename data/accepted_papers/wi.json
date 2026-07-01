@@ -1,0 +1,86 @@
+{
+  "journal_id": "wi",
+  "journal_name": "Web Intelligence",
+  "papers": [
+    {
+      "title": "Improving Performance and Lifetime in Wireless Sensor Networks Using Multihop Routing",
+      "abstract": "This study introduces an optimization-based approach to improve the longevity and energy efficiency of wireless sensor networks (WSNs) while ensuring comprehensive target coverage. The suggested method categorizes sensor nodes into separate coverage sets to decrease duplicate data transmission and lower total energy consumption. During each operational period, a single coverage set is active, and a mixed integer linear programming (MILP) model is employed to optimize the selection of cluster heads and multi-hop routing. The model concurrently addresses clustering, routing, and variable sensing radii to enhance energy distribution among nodes. Simulation results indicate that the suggested strategy markedly prolongs network longevity compared to traditional strategies, such as T-LEACH. The analysis of the influence of differing coverage set quantities on network performance indicates that an optimal number of sets achieves a balance between energy conservation and effective coverage. The research presents an enhanced energy consumption model that incorporates both sensing and communication expenses. In comparison to baseline techniques, the proposed framework attains more consistent energy utilization and facilitates extended network operation without compromising monitoring precision. The amalgamation of coverage-aware scheduling, energy-aware clustering, and efficient routing offers a comprehensive solution for extending the lifespan of WSNs, with applicability in energy-limited monitoring applications.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261462608",
+      "url": "https://openalex.org/W7166196990"
+    },
+    {
+      "title": "Vul2Vec: Semantic-Enhanced Similarity Computing for Effective Vulnerability Retrieval",
+      "abstract": "Retrieving and analyzing vulnerability reports remains a critical challenge in cybersecurity, exacerbated by the exponential growth of disclosed vulnerabilities and the increasing complexity of Proof-of-Concept (PoC) reports. Confronted with massive numbers of vulnerability reports, automated tools and models are urgently required to facilitate the understanding and analysis of vulnerability reports and PoC reports, thereby supporting security professionals in filtering similar vulnerabilities and extracting critical vulnerability attributes. Existing methods for vulnerability semantic similarity either rely on rule-based keyword matching (failing to capture contextual nuances) or generic pre-trained language models, leading to suboptimal retrieval performance. To address these gaps, this work focuses on the semantic similarity analysis of vulnerability descriptions using semantic representation learning. To fully exploit the semantic information embedded in vulnerability reports, we propose a task-specific fine-tuned Sentence Transformer based model for calculating vulnerability semantic similarity. Our approach integrates domain-specific knowledge of vulnerability reports into the model training process, enabling it to capture nuanced semantic relationships unique to cybersecurity. On this basis, we further construct an end-to-end vulnerability retrieval system that uses our fine-tuned similarity model with Elasticsearch vector indexing, realizing intelligent retrieval of both vulnerability and PoC reports. Experimental results demonstrate that the proposed model captures domain knowledge more effectively, and the enriched semantic information significantly enhances the effectiveness of vulnerability report retrieval.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261451035",
+      "url": "https://openalex.org/W7162445666"
+    },
+    {
+      "title": "Predicting Student Performance Through Innovative Machine Learning Techniques",
+      "abstract": "The digital transformation in education, driven by platforms such as massive open online courses and virtual learning environments, has significantly broadened access to education globally. This study explores how machine learning (ML) can enhance and predict learning outcomes by identifying and supporting at-risk students through predictive models. The goal is to improve academic achievement by analyzing student profiles and addressing multiple contributing factors. In this research, ML classification models, specifically support vector classification (SVC), were employed along with two optimizers: the Ebola optimization algorithm and the attack-leave optimizer. The aim was to enhance the model's performance and prediction accuracy. The results indicate that in the training phase, the support vector-based ebola optimization (SVEO) model achieved an accuracy of 0.900, demonstrating moderate performance compared to the SVC model, which achieved an accuracy of 0.887. The support vector-based attack-leave optimization (SVAL) model, however, outperformed the others with the highest accuracy of 0.936.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261448332",
+      "url": "https://openalex.org/W7162207727"
+    },
+    {
+      "title": "Swarm Intelligence Driven Early Prediction of Heart Disease: A Novel Machine Learning Approach",
+      "abstract": "In recent years, machine learning (ML) models have become the top prediction options in agriculture, cybersecurity, healthcare, and finance, among other fields. ML models have assisted in the study of numerous disorders in medical research. Early diagnosis and health schedule management may prevent severe heart disease in many people. This study uses national government repository data to apply ML models to early heart disease detection. This research also introduces two novel models based on swarm intelligence, called ACOKNN (ant colony optimization with K-nearest neighbors) and ACOWNNBoost (ant colony optimization with weighted K-nearest neighbors), to improve heart disease early detection models. The suggested models pick features using ant colony optimization with traditional k-nearest neighbor and weighted k-nearest neighbor with XGBoost. The suggested models are evaluated with two datasets of varying capacity, and results are compared to various ML techniques based on precision, accuracy, recall, F1 score, and receiver operating characteristic area under the curve score. The investigation shows that the suggested model achieved 92% and 98% accuracy with Dataset-1 and 92.6% and 98.6% with Dataset-2.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261449418",
+      "url": "https://openalex.org/W7161136595"
+    },
+    {
+      "title": "Secure Recommendation Network of Educational Resources in Colleges and Universities Based on Boundary Value Improved Random Forest Algorithm",
+      "abstract": "This study proposes an improved random forest algorithm for an educational resource course recommendation network based on boundary value for the problems of low accuracy of educational resource recommendation network in universities, including weak ability to deal with boundary value, and poor adaptability in the face of complex educational environments and diversified user needs, the use of this network can be recommended for better educational resources. The research findings demonstrate that the algorithm error value of the improved random forest algorithm is better in the analysis of the matrix, the algorithm has the best algorithmic performance when the number of forests is 300, at the same time in the system test the algorithm can be smooth and safe through the test, the system in the home page resource recommendation and network performance, the improved algorithm test is good, the uploading and running time is less than 1 s, and the memory accounted for less than 40%. Algorithm model threshold at 0.10 and 0.15, the accuracy trend is the same as the threshold 0.05, while the larger the threshold the higher the accuracy. It can be seen that the improvement of the random forest algorithm can improve the accuracy rate of the current course recommendation, and at the same time, it can complete the course recommendation of the current educational resources, which has certain research significance for the research in this direction.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261449423",
+      "url": "https://openalex.org/W7161131724"
+    },
+    {
+      "title": "DKPKT: Dynamic Knowledge Perception for Temporal Knowledge Tracing",
+      "abstract": "Knowledge tracing (KT) is a core component of intelligent education systems, which aims to predict students’ future performance from their historical learning behaviors. Despite the remarkable progress brought by deep learning, existing models often struggle to effectively capture the dynamic evolution of students’ knowledge states, particularly the intertwined processes of knowledge-acquisition and -forgetting. To address this challenge, we propose the D ynamic K nowledge P erception for Temporal K nowledge T racing (DKPKT) model. DKPKT integrates two complementary modules: the interaction perception module employs a dynamic attention mechanism to extract key interaction features that signal shifts in knowledge states, and the knowledge perception module refines these representations by incorporating knowledge-forgetting and knowledge-acquisition factors, which enable more accurate modeling of knowledge dynamics over time. We evaluate DKPKT against several mainstream baseline models on three real-world educational datasets. Experimental results demonstrate that DKPKT achieves superior predictive performance, validating its effectiveness in modeling knowledge states and enhancing the accuracy of student performance prediction.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261449419",
+      "url": "https://openalex.org/W7161059595"
+    },
+    {
+      "title": "Blockchain Security and Privacy: Threats, Solutions, and Future Directions",
+      "abstract": "Blockchain is a decentralized, public, and distributed ledger designed to securely record and track transactions. It possesses the potential to transform various industries, including healthcare, supply chain management, and financial services, by enhancing transparency, efficiency, and trust. Despite its promise, blockchain development continues to face several challenges, particularly concerning security, scalability, and standardization. This paper provides a comprehensive analysis of blockchain technology, focusing on its quality of service (QoS), security mechanisms, and the latest frameworks and models shaping its evolution. Furthermore, it examines existing limitations and identifies key open research challenges that must be addressed for broader adoption. The findings suggest that blockchain can substantially improve operational efficiency and data integrity across multiple domains; however, realizing its full potential requires continued research and technological advancement to overcome current barriers.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261438151",
+      "url": "https://openalex.org/W7160015491"
+    },
+    {
+      "title": "Real-Time Discussion Transition and Main Theme Analyses for Teacher Support",
+      "abstract": "The effectiveness of group and online learning environments has been widely recognized. Hence, supporting teachers monitoring of group activities in online learning environments is increasingly important. In this study, we propose algorithms for analyzing discussion transitions and their main themes. The first algorithm aims to help teachers quickly identify groups that require intervention. It uses entities and Wikipedia data in the discussion texts to create models that capture continuously changing discussion content over time. The second algorithm aims to instantaneously identify the discussion topic of the group prior to teacher intervention. From the Wikipedia categories obtained regarding discussion transition analysis, the algorithm selects those with the highest probability of being appropriate for the discussion text. To evaluate the effectiveness of the proposed algorithms, we tested them on the W2E dataset, which includes topics comprising multiple events, and an actual discussion dataset. The results confirmed that the algorithms detected the discussion transitions and main themes with high accuracies.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261438366",
+      "url": "https://openalex.org/W7152557186"
+    },
+    {
+      "title": "Separate Reverse: A Gradient-Conflict-Free Training Framework for Multi-Exit Transformers",
+      "abstract": "Pretrained transformer models have demonstrated excellent performance on complex tasks. To improve their inference efficiency, recent studies have introduced the multi-exit mechanism, which enables early exiting through multiple intermediate classifiers. However, the deep architectures of pretrained transformers cause severe gradient conflicts during multi-exit fine-tuning, leading to degraded shallow-exit accuracy and reduced early-exit efficiency. To address this issue, we propose Separate Reverse, a multi-exit training strategy specifically designed for pretrained transformer models. The method iteratively integrates reverse iterative optimization and hierarchical knowledge distillation from deeper to shallower exits, maintaining pretrained parameter integrity, enhances the representation capacity of shallow exits, and coordinates gradient updates across exits to achieve a balanced optimization between shallow and deep classifiers. Experiments on multiple GLUE benchmark datasets using BERT demonstrate that our method significantly improves shallow-exit accuracy, maintains main-exit performance, and accelerates inference for simple samples by a large margin.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/24056456261426603",
+      "url": "https://openalex.org/W7135059949"
+    },
+    {
+      "title": "A Fuzzy Rule-Based Framework for Consumer Behavior Analytics",
+      "abstract": "Understanding consumer behavior is vital for businesses seeking to personalize services, optimize marketing strategies, and improve customer retention. However, analyzing such behavior at scale presents significant challenges due to the volume, velocity, and variety of data, as well as the need for accurate and interpretable prediction models. Traditional classification methods often fall short when applied to large-scale, high-dimensional behavioral datasets, leading to issues in scalability, accuracy, and real-time processing. To address these limitations, this paper introduces a novel framework for consumer behavior analysis using an Improved Fuzzy Classification with Bagging and MapReduce Coordination (IFCBMC) approach, specifically designed for big data environments. The primary objectives of this research are: (1) to develop a scalable classification model suitable for distributed data processing, (2) to enhance prediction accuracy through fuzzy rule-based learning, and (3) to evaluate the robustness of the proposed model against existing state-of-the-art classifiers. The process begins with data preprocessing, including cleaning and modified normalization, followed by distribution of the data across a MapReduce architecture to manage scale and speed. Extracted features from multiple data partitions (mappers) are aggregated and processed by an enhanced fuzzy rule-based classification model. To improve prediction robustness, a bagging ensemble strategy is applied, where multiple classifiers are trained on different data subsets, and the best-performing models are randomly selected and merged during the reduce phase. The proposed IFCBMC method outperforms all compared models, achieving the highest accuracy of 0.960, significantly surpassing traditional approaches such as LSTM (0.862), LINKNET (0.866), SQUEEZENET (0.858), SVM (0.863), DCNN (0.860), Bi-GRU (0.854), RNN (0.861), and DNN (0.860).",
+      "year": 2025,
+      "source": "openalex",
+      "doi": "10.1177/24056456251385734",
+      "url": "https://openalex.org/W4415592496"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "journal_id": "tplp",
+  "journal_name": "Theory and Practice of Logic Programming",
+  "papers": [
+    {
+      "title": "Towards Probabilistic Inductive Logic Programming with Neurosymbolic Inference and Relaxation",
+      "abstract": "Many inductive logic programming (ILP) methods are incapable of learning programs from probabilistic background knowledge, for example, coming from sensory data or neural networks with probabilities. We propose Propper, which handles flawed and probabilistic background knowledge by extending ILP with a combination of neurosymbolic inference, a continuous criterion for hypothesis selection (binary cross-entropy) and a relaxation of the hypothesis constrainer (NoisyCombo). For relational patterns in noisy images, Propper can learn programs from as few as 8 examples. It outperforms binary ILP and statistical models such as a graph neural network.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S1471068424000371",
+      "url": "https://www.semanticscholar.org/paper/c19591355c1936c814f25b7c0529acc784f200a5"
+    },
+    {
+      "title": "\"What if?\" in Probabilistic Logic Programming",
+      "abstract": "A ProbLog program is a logic program with facts that only hold with a specified probability. In this contribution, we extend this ProbLog language by the ability to answer “What if” queries. Intuitively, a ProbLog program defines a distribution by solving a system of equations in terms of mutually independent predefined Boolean random variables. In the theory of causality, Judea Pearl proposes a counterfactual reasoning for such systems of equations. Based on Pearl’s calculus, we provide a procedure for processing these counterfactual queries on ProbLog programs, together with a proof of correctness and a full implementation. Using the latter, we provide insights into the influence of different parameters on the scalability of inference. Finally, we also show that our approach is consistent with CP-logic, that is with the causal semantics for logic programs with annotated with disjunctions.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2305.15318",
+      "url": "https://www.semanticscholar.org/paper/10cf9f4262f3c0a18b592481a5d62ceb93701774"
+    },
+    {
+      "title": "A Survey of the Proof-Theoretic Foundations of Logic Programming",
+      "abstract": "Several formal systems, such as resolution and minimal model semantics, provide a framework for logic programming. In this article, we will survey the use of structural proof theory as an alternative foundation. Researchers have been using this foundation for the past 35 years to elevate logic programming from its roots in first-order classical logic into higher-order versions of intuitionistic and linear logic. These more expressive logic programming languages allow for capturing stateful computations and rich forms of abstractions, including higher-order programming, modularity, and abstract data types. Term-level bindings are another kind of abstraction, and these are given an elegant and direct treatment within both proof theory and these extended logic programming languages. Logic programming has also inspired new results in proof theory, such as those involving polarity and focused proofs. These recent results provide a high-level means for presenting the differences between forward-chaining and backward-chaining style inferences. Anchoring logic programming in proof theory has also helped identify its connections and differences with functional programming, deductive databases, and model checking.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s1471068421000533",
+      "url": "https://www.semanticscholar.org/paper/486638dba0c5993bff942973e3b2fc5a26c1e10f"
+    },
+    {
+      "title": "Logic-Based Benders Decomposition in Answer Set Programming for Chronic Outpatients Scheduling",
+      "abstract": "In answer set programming (ASP), the user can define declaratively a problem and solve it with efficient solvers; practical applications of ASP are countless and several constraint problems have been successfully solved with ASP. On the other hand, solution time usually grows in a superlinear way (often, exponential) with respect to the size of the instance, which is impractical for large instances. A widely used approach is to split the optimization problem into subproblems (SPs) that are solved in sequence, some committing to the values assigned by others, and reconstructing a valid assignment for the whole problem by juxtaposing the solutions of the single SPs. On the one hand, this approach is much faster due to the superlinear behavior; on the other hand, it does not provide any guarantee of optimality: committing to the assignment of one SP can rule out the optimal solution from the search space. In other research areas, logic-Based Benders decomposition (LBBD) proved effective; in LBBD, the problem is decomposed into a master problem (MP) and one or several SPs. The solution of the MP is passed to the SPs that can possibly fail. In case of failure, a no-good is returned to the MP that is solved again with the addition of the new constraint. The solution process is iterated until a valid solution is obtained for all the SPs or the MP is proven infeasible. The obtained solution is provably optimal under very mild conditions. In this paper, we apply for the first time LBBD to ASP, exploiting an application in health care as case study. Experimental results show the effectiveness of the approach. We believe that the availability of LBBD can further increase the practical applicability of ASP technologies.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2305.11969",
+      "url": "https://www.semanticscholar.org/paper/85b9da8a7b283db95eb301f13ed9855f94bf1f3d"
+    },
+    {
+      "title": "Reasoning about Complex Networks: A Logic Programming Approach",
+      "abstract": "Reasoning about complex networks has in recent years become an important topic of study due to its many applications: the adoption of commercial products, spread of disease, the diffusion of an idea, etc. In this paper, we present the MANCaLog language, a formalism based on logic programming that satisfies a set of desiderata proposed in previous work as recommendations for the development of approaches to reasoning in complex networks. To the best of our knowledge, this is the first formalism that satisfies all such criteria. We first focus on algorithms for finding minimal models (on which multi-attribute analysis can be done), and then on how this formalism can be applied in certain real world scenarios. Towards this end, we study the problem of deciding group membership in social networks: given a social network and a set of groups where group membership of only some of the individuals in the network is known, we wish to determine a degree of membership for the remaining group-individual pairs. We develop a prototype implementation that we use to obtain experimental results on two real world datasets, including a current social network of criminal gangs in a major U.S. city. We then show how the assignment of degree of membership to nodes in this case allows for a better understanding of the criminal gang problem when combined with other social network mining techniques including detection of sub-groups and identification of core group memberswhich would not be possible without further identification of additional group members.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.21236/ada591598",
+      "url": "https://www.semanticscholar.org/paper/7c9e4f5bd95102a13b1dc355f0c50463b4e2344f"
+    },
+    {
+      "title": "Applications of Intuitionistic Temporal Logic to Temporal Answer Set Programming",
+      "abstract": "The relationship between intuitionistic or intermediate logics and logic programming has been extensively studied, prominently featuring Pearce’s equilibrium logic and Osorio’s safe beliefs. Equilibrium logic admits a fixpoint characterization based on the logic of here-and-there, akin to theory completion in default and autoepistemic logics. Safe beliefs are similarly defined via a fixpoint operator, albeit under the semantics of intuitionistic or other intermediate logics. In this paper, we investigate the logical foundations of Temporal Answer Set Programming through the lens of Temporal Equilibrium Logic, a formalism combining equilibrium logic with linear-time temporal operators. We lift the seminal approaches of Pearce and Osorio to the temporal setting, establishing a formal correspondence between temporal intuitionistic logic and temporal logic programming. Our results deepen the theoretical underpinnings of Temporal Answer Set Programming and provide new avenues for research in temporal reasoning.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S147106842610043X",
+      "url": "https://www.semanticscholar.org/paper/29ecbb47eb71962694654070f0f8b4d374d60317"
+    },
+    {
+      "title": "Non-Termination of Logic Programs Using Patterns",
+      "abstract": "In this paper, we consider an approach introduced in term rewriting for the automatic detection of non-looping non-termination from patterns of rules. We adapt it to logic programing by defining a new unfolding technique that produces patterns describing possibly infinite sets of finite rewrite sequences. We present an experimental evaluation of our contributions that we implemented in our tool NTI (Non-Termination Inference).",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S1471068425100100",
+      "url": "https://www.semanticscholar.org/paper/245e14b62cb486eff1f60d8cd0ece7f735182062"
+    },
+    {
+      "title": "Integrating Cardinality Constraints into Constraint Logic Programming with Sets",
+      "abstract": "Formal reasoning about finite sets and cardinality is important for many applications, including software verification, where very often one needs to reason about the size of a given data structure. The Constraint Logic Programming tool $$\\{ log\\} $$ provides a decision procedure for deciding the satisfiability of formulas involving very general forms of finite sets, although it does not provide cardinality constraints. In this paper we adapt and integrate a decision procedure for a theory of finite sets with cardinality into $$\\{ log\\} $$ . The proposed solver is proved to be a decision procedure for its formulas. Besides, the new CLP instance is implemented as part of the $$\\{ log\\} $$ tool. In turn, the implementation uses Howe and King’s Prolog SAT solver and Prolog’s CLP(Q) library, as an integer linear programming solver. The empirical evaluation of this implementation based on +250 real verification conditions shows that it can be useful in practice. Under consideration in Theory and Practice of Logic Programming (TPLP)",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s1471068421000521",
+      "url": "https://www.semanticscholar.org/paper/57f354d6bc97985841f55ae2f3f51212ebe51263"
+    },
+    {
+      "title": "An asymptotic analysis of probabilistic logic programming with implications for expressing projective families of distributions",
+      "abstract": "Probabilistic logic programming is a major part of statistical relational artificial intelligence, where approaches from logic and probability are brought together to reason about and learn from relational domains in a setting of uncertainty. However, the behaviour of statistical relational representations across variable domain sizes is complex, and scaling inference and learning to large domains remains a significant challenge. In recent years, connections have emerged between domain size dependence, lifted inference and learning from sampled subpopulations. The asymptotic behaviour of statistical relational representations has come under scrutiny, and projectivity was investigated as the strongest form of domain size dependence, in which query marginals are completely independent of the domain size. In this contribution we show that every probabilistic logic program under the distribution semantics is asymptotically equivalent to an acyclic probabilistic logic program consisting only of determinate clauses over probabilistic facts. We conclude that every probabilistic logic program inducing a projective family of distributions is in fact everywhere equivalent to a program from this fragment, and we investigate the consequences for the projective families of distributions expressible by probabilistic logic programs.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s1471068421000314",
+      "url": "https://www.semanticscholar.org/paper/933c561450abeec8b4d42c085b420a37d2121bdb"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "positives_total": 85,
+  "positives_by_variant": {
+    "full_hybrid": 85
+  },
+  "positives_with_target_in_top50_count": 85,
+  "positives_with_target_in_top50_ratio": 1.0,
+  "retrieval_topk_80_warning": false,
+  "retrieval_topk_80_threshold": 0.8,
+  "positives_missing_route_features": {
+    "scope_bm25_rank": 37,
+    "scope_vector_rank": 7,
+    "typical_bm25_rank": 27,
+    "typical_vector_rank": 5,
+    "accepted_bm25_rank": 25,
+    "accepted_vector_rank": 8
+  },
+  "route_combination_counts": {
+    "scope_vector+typical_vector+accepted_bm25+accepted_vector": 8,
+    "scope_bm25+typical_vector+accepted_bm25": 1,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25": 2,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_vector": 8,
+    "typical_vector+accepted_vector": 1,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 26,
+    "scope_vector+typical_bm25+typical_vector+accepted_vector": 6,
+    "scope_vector+typical_bm25+accepted_vector": 1,
+    "scope_vector+typical_vector+accepted_vector": 3,
+    "scope_bm25+scope_vector+typical_vector+accepted_bm25+accepted_vector": 6,
+    "scope_vector+accepted_bm25+accepted_vector": 2,
+    "accepted_bm25+accepted_vector": 2,
+    "scope_vector+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 11,
+    "scope_bm25+scope_vector+typical_bm25+typical_vector": 1,
+    "scope_bm25+typical_bm25+typical_vector+accepted_vector": 1,
+    "scope_vector+typical_vector": 1,
+    "scope_bm25+scope_vector+typical_vector": 1,
+    "scope_bm25+typical_bm25+typical_vector+accepted_bm25+accepted_vector": 1,
+    "scope_bm25+scope_vector+typical_vector+accepted_vector": 1,
+    "typical_bm25+typical_vector": 1,
+    "scope_vector+typical_vector+accepted_bm25": 1
+  },
+  "input_ablation_json": "data/evaluation/results/retrieval_ablation_full_v2_90_after_openalex.json",
+  "output_jsonl": "data/training/ranker_train_26dim_v1.jsonl",
+  "max_negatives": 10,
+  "negatives_by_type": {
+    "hard_rule_top20": 900
+  },
+  "feature_schema": "26_dim_with_llm_evidence",
+  "evidence_snapshot": "data/evaluation/evidence/full-v2-90_evidence_20260604_222813.json"
+}

@@ -38,6 +38,9 @@ def build_index(
     embedding_client = OllamaEmbedding(
         base_url=app_config["ollama"]["base_url"],
         model=app_config["ollama"]["embedding_model"],
+        timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
+        show_progress=True,
+        progress_desc="Journal-profile embeddings",
     )
 
     # 构建 journal_profile 列表

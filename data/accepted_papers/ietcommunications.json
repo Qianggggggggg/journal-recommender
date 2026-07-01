@@ -1,0 +1,86 @@
+{
+  "journal_id": "ietcommunications",
+  "journal_name": "IET Communications",
+  "papers": [
+    {
+      "title": "Access Point Selection and Localization for Cluster-Based Realization of a Device-to-Device Cell-Free 6G Communications Network",
+      "abstract": "The increasing demand for ultra‐reliable, low‐latency, and high‐throughput connectivity in dense urban environments presents significant challenges for next‐generation 6G networks. Traditional cellular networks, with their fixed cell boundaries and centralized base station control, are inadequate to meet the dynamic needs of such environments. A promising solution is the cell‐free network architecture, where a distributed set of access points (APs) jointly serve users without fixed cell boundaries. However, efficient access point selection and accurate user localization are crucial to achieving high performance in such networks. This paper presents a decentralized approach using Belief‐Desire‐Intention eXtended (BDIx) agents for dynamic AP selection and localization within a cluster‐based cell‐free 6G communications network. Various clustering algorithms (K‐means, DBSCAN, self‐organizing maps, MeanShift, ClusterGAN, and Autoencoders) are evaluated for their ability to optimize network throughput, energy efficiency, and spectral utilization. A hybrid localization framework, such as centroid‐based, differential circles, and multilateration methods, is employed to achieve accurate user positioning. The results demonstrate that machine learning‐based clustering methods, notably Gaussian mixture model (GMM), self‐organizing map (SOM), and ClusterGAN, offer significant improvements in throughput (up to 46.3%) and power reduction (up to 32.8%) over traditional methods. Regarding localization, deep learning models such as MLP, CNN, and TCN outperform deterministic methods, achieving sub‐meter accuracy with minimal errors (MeanDist 0.999). Overall, the proposed solution enhances system scalability, energy efficiency, and positioning accuracy, establishing a promising foundation for future 6G networks. In our reference implementation, we instantiate the pipeline with a GMM for AP/UE clustering and a multilayer perceptron (MLP) regressor for localization.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.70096",
+      "url": "https://www.semanticscholar.org/paper/3399f5eba7fbde1746a91e9da58ed9950c666490"
+    },
+    {
+      "title": "UAVs-Assisted Low-Bit Quantized CF-mMIMO Systems With MmWave Communications Under MRC Detection",
+      "abstract": "The cell‐free massive multiple input multiple output (CF‐mMIMO) approach, due to its high coverage and the ability to attenuate the large‐scale fading impacts in wireless communications, has drawn a lot of attention. Additionally, because of their movement ability, low power, and low‐cost employed infrastructures, unmanned aerial vehicles (UAVs) are considered a promising technology to provide service on demand in various applications, deployed as either base stations (BSs) or user equipment (UEs). This paper considers a UAV‐equipped CF‐mMIMO wireless network, assuming millimetre‐wave (mmWave) connections between UAV‐BSs and ground users. Leveraging the additive quantisation noise model (AQNM), closed‐form expressions for the uplink data rate and energy efficiency (EE) under maximum ratio combining (MRC) detection are obtained. The impacts of effective parameters, including the UAV's altitude, the number of antennas, and the resolution of analogue‐to‐digital converters (ADCs), on system performance are investigated. Simulation results demonstrate that EE can be optimised for these factors to achieve the maximum value. In addition, the optimal number of quantisation bits to maximise EE is based on the number of antennas and the height of the UAVs. Comparing analytical results with accurate ones shows the accuracy of our approximations due to the same trend of variations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.70069",
+      "url": "https://www.semanticscholar.org/paper/4d0f2daf0d1a5d0309d56a5bff3a4718b419e1d1"
+    },
+    {
+      "title": "Noncoherent Reflecting Modulation for Reconfigurable Intelligent Surface-Based Communications",
+      "abstract": "Reconfigurable intelligent surface (RIS)‐based communication has emerged as a novel concept that can transform signal in a cost‐effective and energy‐efficient manner. However, the RIS system is confronted with the following several problems. First, the substantial number of reflecting elements complicates the estimating of channel state information (CSI). Second, passive RIS systems merely reflect signals to the receiver. The enhancements in bit error rate (BER) performance are insufficient. Third, the existing RIS systems only consider the influence of noise at the receiver. Nevertheless, in reality, the signal is affected by noise on both RIS and receiver. To address these limitations, a noncoherent reflecting modulation (NRM) system is designed in this paper. In the NRM system, the active RIS is adopted. It modifies not only the phase but also the amplitude, which significantly enhances the BER performance. Energy signals and differential techniques are employed, allowing the system to function without any CSI at the transmitter, RIS, or receiver. The simulation results demonstrate that NRM exhibits a 9 dB improvement in BER performance and exhibits superior noise resistance compared to the existing differential RIS system. The upper bound of the average symbol error probability is derived. Extensive simulations validate the superiority of the NRM scheme in scenarios such as 6G.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.70068",
+      "url": "https://www.semanticscholar.org/paper/cf6b31d393005a07f8592c48e133aeabc92936f2"
+    },
+    {
+      "title": "Shot Noise Optimal Receiver Filters for Coherent and Non-Coherent Fibre Optic Communications",
+      "abstract": "In this paper, we investigate optimal receiver filter design with respect to shot noise in both non‐coherent and coherent fibre optic communication systems. We derive analytical expressions for the moment‐generating function of filter output and the signal‐to‐shot noise power ratio (SSNR) for intensity modulation direct detection (IM/DD) and phase diversity homodyne (PDH) optical fibre communication systems, with arbitrary waveform and receiver filter considerations in the presence of shot noise. Closed‐form formulas are provided for the receiver filter structures that maximise the SSNR. The performance of SSNR is evaluated using return‐to‐zero (RZ) coding with rectangular and Gaussian pulse shapes across various receiver filter structures, including the ideal integrator, the RC model, and the matched filter. Our results indicate that the integrator, or its variations, is either optimal or near‐optimal for diverse IM/DD systems. However, matched filtering to the received pulse power becomes superior when dark current or d.c. bias power is prominent. For coherent PDH systems, matched filtering to the complex received pulse amplitude approaches near‐optimal performance provided the local oscillator (LO) power significantly exceeds the received signal power. When the LO power is much greater than the signal power, such systems can achieve double the SSNR of IM/DD systems, equivalent to twice the number of converted photoelectrons per symbol, thus nearing the quantum‐limit performance considering the photodetector quantum efficiency.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.70026",
+      "url": "https://www.semanticscholar.org/paper/1e43f871ea5e25c1fbbc439ca08da5cfff1926f6"
+    },
+    {
+      "title": "Relay-Assisted Communications Over Multi-Cluster Fluctuating Two-Ray Faded Channels",
+      "abstract": "In this paper, a decode‐and‐forward relay‐assisted device‐to‐device (D2D) network is examined over novel multi‐cluster fluctuating two‐ray (MFTR) fading channels. All communication links are functioning in terahertz (THz) conditions. Co‐channel interference (CCI) is considered as well. We assume an eavesdropper is also present near the receiver and overhears the relay's signal. With the help of characteristic functions, expressions of outage, success probability, capacity with outage, secrecy outage, probability of strictly positive secrecy capacity and intercept probability are presented. These expressions are functions of MFTR fading conditions, THz channel parameters and distances between various nodes in the system. Numerical results based on the derived expressions are discussed under various scenarios.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.70050",
+      "url": "https://www.semanticscholar.org/paper/b002e480937d9ca1d89e3cad53f4c63b0d1ce344"
+    },
+    {
+      "title": "Secure energy efficiency maximization for joint ITS and IRS assisted satellite downlink communications",
+      "abstract": "Satellite communications (SatCom) have been viewed as a promising technique to achieve ubiquitous global coverage in next‐generation wireless systems. This article investigates the secure energy efficient downlink transmission for SatCom where an intelligent transmissive surface‐aided transmitter is deployed at the satellite to perform energy efficient beamforming and an intelligent reflecting surface as well as a cooperative jammer are deployed on the ground to enhance the secure performance. The aim is to maximize the secure energy efficiency by jointly designing ITS beamforming, IRS phase shift, jammer precoding vector, and transmit power allocation. To develop a low‐complexity solution,first, an approximated concave lower bound of the non‐concave objective function is derived by utilizing Dinkelbach's method and a novel successive convex approximation technique. Then the reformulated problem is decoupled using alternating optimization algorithm and the subproblems are solved by adopting Riemannian manifold optimization, element‐wise block coordinate descent, Lagrange dual method and Karush–Kuhn–Tucker conditions. At last, simulation results demonstrate the effectiveness of the proposed scheme.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.12775",
+      "url": "https://www.semanticscholar.org/paper/c352e409559cef5d68f1d1b9d3f2704e8d2a2cb5"
+    },
+    {
+      "title": "Doppler spread analysis for suppressing channel time variation in high-mobility massive MIMO V2V communications",
+      "abstract": "Here, fast time‐varying channels of high‐mobility vehicle‐to‐vehicle communications for massive multiple‐input multiple‐output orthogonal frequency division multiplexing systems are considered. Large‐scale uniform linear arrays are configured at the transmitter and receiver to separate multiple angle domain Doppler frequency offsets based on transmit and receive beamforming with high spatial resolution. Then, each beamforming branch comprises only one dominant Doppler frequency offset. Next, the conventional channel estimation method is performed for each beamforming branch, and carry out maximum‐ratio‐combining for data detection. Power spectrum density and Doppler spread of the equivalent link between the transmitter and receiver are derived and regarded as the criterion for assessing the residual channel time variation caused by limited antennas in practice. Interestingly, a scaling law between the asymptotic Doppler spread and the number of transceiver antennas shows that asymptotic Doppler spread is proportional to the maximum Doppler frequency offset and decreases at the rate of , where and are the number of transmit and receive antennas, respectively. Simulation results confirm the validity of the proposed Doppler suppression framework in high‐mobility vehicle‐to‐vehicle communications.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.12696",
+      "url": "https://www.semanticscholar.org/paper/419eec0a47f5466e80af1907b094519e85b2b8a4"
+    },
+    {
+      "title": "Three‐dimensional geometry‐based channel modeling and simulations for reconfigurable intelligent surface‐assisted uav‐to‐ground MIMO communications",
+      "abstract": "Consisting of a large number of passive reflectors, reconfigurable intelligent surface (RIS) has gained traction as an approach to enhance communication quality. The specular reflection assumption is common when ideal conditions are considered. In this paper, an anomalous‐reflector model was found for each RIS reflection unit, deviating from the specular reflector assumption, and the impacts of the aperture area and radiation pattern of the RIS reflecting elements are taken into account. A three‐dimensional (3D) geometry‐based RIS‐assisted channel model is proposed for stochastic multiple‐input multiple‐output (MIMO) unmanned aerial vehicle (UAV)‐to‐ground communications. The RIS is deployed on an additional UAV in the proposed model, which assists the UAV transmitter for reflecting its own signals to the mobile receiver (MR) on the ground level, thereby boosting the quality of signal transmission. In order to achieve a perfect beam alignment towards the desired direction, the reflection phase is regulated by considering the propagation distances among UAV, RIS, and MR.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.12724",
+      "url": "https://www.semanticscholar.org/paper/9935b45c33cdda79905da64439e57dbf32859739"
+    },
+    {
+      "title": "Dual-user joint sensing and communications with time-divisioned bi-static radar",
+      "abstract": "Joint sensing and communications systems have gained significant research interest by merging sensing capabilities with communication functionalities. However, few works have examined the case of multiple users. This work investigates a dual‐user joint sensing and communications system, focusing on the interference between the users that explores the optimal performance trade‐offs through a time‐division approach. Bi‐static radar setting is considered. Two typical strategies under this approach are studied: one in which both users follow the same order of communications and then sensing, and the other in which the tasks are performed in opposite order at two users. In each strategy, the sum rate and the detection probability are evaluated and optimized. The results show that the opposite order strategy offers superior performance to the same order strategy, and they also quantify their performance difference. This research highlights the potential benefits of time‐division strategies and multiple users in joint sensing and communications systems.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.12820",
+      "url": "https://www.semanticscholar.org/paper/0d8fc549a7e29f61fa1ba3dec198e84c025766fb"
+    },
+    {
+      "title": "Deep learning in physical layer communications: Evolution and prospects in 5G and 6G networks",
+      "abstract": "With the rapid development of the communication industry in the fifth generation and the advance towards the intelligent society of the sixth generation wireless networks, traditional methods are unable to meet the ever‐growing demands for higher data rates and improved quality of service. Deep learning (DL) has achieved unprecedented success in various fields such as computer vision, large language model processing, and speech recognition due to its powerful representation capabilities and computational convenience. It has also made significant progress in the communication field in meeting stringent demands and overcoming deficiencies in existing technologies. The main purpose of this article is to uncover the latest advancements in the field of DL‐based algorithm methods in the physical layer of wireless communication, introduce their potential applications in the next generation of communication mechanisms, and finally summarize the open research questions.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cmu2.12669",
+      "url": "https://www.semanticscholar.org/paper/2b51fa1e698f1009d232c9fdf7e935a2b8a77adc"
+    }
+  ]
+}

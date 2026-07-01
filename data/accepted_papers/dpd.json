@@ -1,0 +1,78 @@
+{
+  "journal_id": "dpd",
+  "journal_name": "Distributed and Parallel Databases",
+  "papers": [
+    {
+      "title": "PatchIndex: exploiting approximate constraints in distributed databases",
+      "abstract": "Cloud data warehouse systems lower the barrier to access data analytics. These applications often lack a database administrator and integrate data from various sources, potentially leading to data not satisfying strict constraints. Automatic schema optimization in self-managing databases is difficult in these environments without prior data cleaning steps. In this paper, we focus on constraint discovery as a subtask of schema optimization. Perfect constraints might not exist in these unclean datasets due to a small set of values violating the constraints. Therefore, we introduce the concept of a generic PatchIndex structure, which handles exceptions to given constraints and enables database systems to define these approximate constraints. We apply the concept to the environment of distributed databases, providing parallel index creation approaches and optimization techniques for parallel queries using PatchIndexes. Furthermore, we describe heuristics for automatic discovery of PatchIndex candidate columns and prove the performance benefit of using PatchIndexes in our evaluation.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-021-07326-1",
+      "url": "https://www.semanticscholar.org/paper/b5aa5f8d048b8419cada7f9bc0e111a8a6d3ad97"
+    },
+    {
+      "title": "Self-adapting data migration in the context of schema evolution in NoSQL databases",
+      "abstract": "When NoSQL database systems are used in an agile software development setting, data model changes occur frequently and thus, data is routinely stored in different versions. The management of versioned data leads to an overhead potentially impeding the software development. Several data migration strategies exist that handle legacy data differently during data accesses, each of which can be characterized by certain advantages and disadvantages. Depending on the requirements for the software application, we evaluate and compare different migration strategies through metrics like migration costs and latency as well as precision and recall. Ideally, exactly that strategy should be selected whose characteristics fulfill service-level agreements and match the migration scenario, which depends on the query workload and the changes in the data model which imply an evolution of the database schema. In this paper, we present a methodology of self-adapting data migration, which automatically adjusts migration strategies and their parameters with respect to the migration scenario and service-level agreements, thereby contributing to the self-management of database systems and supporting agile development.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-021-07334-1",
+      "url": "https://www.semanticscholar.org/paper/99a64ea79a0476856ac982ba111feba4adf7a364"
+    },
+    {
+      "title": "Distributed arrays: an algebra for generic distributed query processing",
+      "abstract": "We propose a simple model for distributed query processing based on the concept of a distributed array. Such an array has fields of some data type whose values can be stored on different machines. It offers operations to manipulate all fields in parallel within the distributed algebra. The arrays considered are one-dimensional and just serve to model a partitioned and distributed data set. Distributed arrays rest on a given set of data types and operations called the basic algebra implemented by some piece of software called the basic engine. It provides a complete environment for query processing on a single machine. We assume this environment is extensible by types and operations. Operations on distributed arrays are implemented by one basic engine called the master which controls a set of basic engines called the workers. It maps operations on distributed arrays to the respective operations on their fields executed by workers. The distributed algebra is completely generic: any type or operation added in the extensible basic engine will be immediately available for distributed query processing. To demonstrate the use of the distributed algebra as a language for distributed query processing, we describe a fairly complex algorithm for distributed density-based similarity clustering. The algorithm is a novel contribution by itself. Its complete implementation is shown in terms of the distributed algebra and the basic algebra. As a basic engine the Secondo system is used, a rich environment for extensible query processing, providing useful tools such as main memory M-trees, graphs, or a DBScan implementation.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-021-07325-2",
+      "url": "https://www.semanticscholar.org/paper/a6b3d013844b2c669cd5523827684a7543fd0da5"
+    },
+    {
+      "title": "Cob: a leaderless protocol for parallel Byzantine agreement in incomplete networks",
+      "abstract": "In this paper we extend the Multidimensional Byzantine Agreement (MBA) Protocol, a leaderless Byzantine agreement for lists of arbitrary values, into a protocol suitable for wide gossiping networks: Cob. This generalization allows the consensus process to be run by an incomplete network of nodes provided with (non-synchronized) same-speed clocks. Not all nodes are active in every step, so the network size does not hamper the efficiency, as long as the gossiping broadcast delivers the messages to every node in reasonable time. These network assumptions model more closely real-life communication channels, so Cob may be applicable to a variety of practical problems, such as blockchain platforms implementing sharding. Cob has the same Bernoulli-like distribution that upper-bounds the number of steps as the MBA protocol. We prove its correctness and security assuming a supermajority of honest nodes in the network, and compare its performance with Algorand.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10619-022-07410-0",
+      "url": "https://www.semanticscholar.org/paper/6d0342e013031faa58b65ec028ed7f354b0702c7"
+    },
+    {
+      "title": "Accelerating machine learning queries with linear algebra query processing",
+      "abstract": "The rapid growth of large-scale machine learning (ML) models has led numerous commercial companies to utilize ML models for generating predictive results to help business decision-making. As two primary components in traditional predictive pipelines, data processing, and model predictions often operate in separate execution environments, leading to redundant engineering and computations. Additionally, the diverging mathematical foundations of data processing and machine learning hinder cross-optimizations by combining these two components, thereby overlooking potential opportunities to expedite predictive pipelines. In this paper, we propose an operator fusion method based on GPU-accelerated linear algebraic evaluation of relational queries. Our method leverages linear algebra computation properties to merge operators in machine learning predictions and data processing, significantly accelerating predictive pipelines by up to 317x. We perform a complexity analysis to deliver quantitative insights into the advantages of operator fusion, considering various data and model dimensions. Furthermore, we extensively evaluate linear algebra query processing and operator fusion utilizing the widely-used Star Schema and TPC-DI benchmarks. Through comprehensive evaluations, we demonstrate the effectiveness and potential of our approach in improving the efficiency of data processing and machine learning workloads on modern hardware.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10619-024-07451-7",
+      "url": "https://doi.org/10.1007/s10619-024-07451-7"
+    },
+    {
+      "title": "zk-Oracle: trusted off-chain compute and storage for decentralized applications",
+      "abstract": "Blockchain and Decentralized Applications (DApps) are increasingly important for creating trust and transparency in data storage and computation. However, on-chain transactions are often costly and slow. To overcome this challenge, off-chain nodes can be used to store and compute data. Unfortunately, this introduces the risk of untrusted nodes. To address this, authenticated data structures have been proposed, however, this ignores the compute of data from the raw data. We tackle this challenge by introducing zk-Oracle, which provides an efficient and trusted compute and storage off-chain. There is a challenge in using zero-knowledge proofs (zk-proof for short), which is the large proof generation time. We aim to overcome it with novel designs in zk-Oracle. zk-Oracle builds on zk-proofs technologies to achieve two goals. First, the computation of data structures from raw data and the corresponding proof generation is improved in terms of performance. Second, the verification on-chain is inexpensive and fast. Our experiments show that we can speed up zk-proof generation by up to $$550 \\times $$ faster than the baseline method.",
+      "year": 2024,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10619-024-07444-6",
+      "url": "https://doi.org/10.1007/s10619-024-07444-6"
+    },
+    {
+      "title": "SimCost: cost-effective resource provision prediction and recommendation for spark workloads",
+      "abstract": "Spark is one of the most popular big data analytical platforms. To save time, achieve high resource utilization, and remain cost-effective for Spark jobs, it is challenging but imperative for data scientists to configure suitable resource portions.In this paper, we investigate the proper parameter values that meet workloads’ performance requirements with minimized resource cost and resource utilization time. We propose SimCost , a simulation-based cost model, to predict the performance of jobs accurately. We achieve low-cost training by taking advantage of simulation framework , i.e., Monte Carlo simulation, which uses a small amount of data and resources to make a reliable prediction for larger datasets and clusters. Our method’s salient feature is that it allows us to invest low training costs while obtaining an accurate prediction. Through empirical experiments with 12 benchmark workloads, we show that the cost model yields less than 5% error on average prediction accuracy, and the recommendation achieves up to 6x resource cost saving.",
+      "year": 2023,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10619-023-07436-y",
+      "url": "https://doi.org/10.1007/s10619-023-07436-y"
+    },
+    {
+      "title": "Performance models of data parallel DAG workflows for large scale data analytics",
+      "abstract": "Directed Acyclic Graph (DAG) workflows are widely used for large-scale data analytics in cluster-based distributed computing systems. The performance model for a DAG on data-parallel frameworks (e.g., MapReduce) is a research challenge because the allocation of preemptable system resources among parallel jobs may dynamically vary during execution. This resource allocation variation during execution makes it difficult to accurately estimate the execution time. In this paper, we tackle this challenge by proposing a new cost model, called Bottleneck Oriented Estimation (BOE), to estimate the allocation of preemptable resources by identifying the bottleneck to accurately predict task execution time. For a DAG workflow, we propose a state-based approach to iteratively use the resource allocation property among stages to estimate the overall execution plan. Furthermore, to handle the skewness of various jobs, we refine the model with the order statistics theory to improve estimation accuracy. Extensive experiments were performed to validate these cost models with HiBench and TPC-H workloads. The BOE model outperforms the state-of-the-art models by a factor of five for task execution time estimation. For the refined skew-aware model, the average prediction error is under $$3\\%$$ when estimating the execution time of 51 hybrid analytics (HiBench) and query (TPC-H) DAG workflows.",
+      "year": 2023,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10619-023-07425-1",
+      "url": "https://doi.org/10.1007/s10619-023-07425-1"
+    },
+    {
+      "title": "Adaptive update handling for graph HTAP",
+      "abstract": "Hybrid transactional/analytical processing (HTAP) workloads on graph data can significantly benefit from GPU accelerators. However, to exploit the full potential of GPU processing, dedicated graph representations are necessary, which mostly make in-place updates difficult. In this paper, we discuss an adaptive update handling approach in a graph database system for HTAP workloads. We discuss and evaluate strategies for propagating transactional updates from an update-friendly table storage to a GPU-optimized sparse matrix format for analytics.",
+      "year": 2023,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s10619-023-07428-y",
+      "url": "https://doi.org/10.1007/s10619-023-07428-y"
+    }
+  ]
+}

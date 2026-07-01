@@ -1,0 +1,46 @@
+{
+  "journal_id": "sigpro",
+  "journal_name": "Signal Processing",
+  "papers": [
+    {
+      "title": "Pulse processing - Overview and challenges",
+      "abstract": "The detection of irregularly spaced pulses of non-negligible width is a fascinating yet under-explored topic in signal processing. It sits adjacent to other core topics such as radar and symbol detection yet has its own distinctive challenges. Even modern techniques such as compressed sensing perform worse than may be expected on pulse processing problems. Real-world applications include nuclear spectroscopy, flow cytometry, seismic signal processing and neural spike sorting, and these in turn have applications to environmental radiation monitoring, surveying, diagnostic medicine, industrial imaging, biomedical imaging, top-down proteomics, and security screening, to name just a few. This overview paper endeavours to position the pulse processing problem in the context of signal processing. It also describes some current challenges in the field.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2025.109978",
+      "url": "https://www.semanticscholar.org/paper/805abd901c8d202b7ac0c0bd80552cd744bd6baf"
+    },
+    {
+      "title": "An overview of ground-penetrating radar signal processing techniques for road inspections",
+      "abstract": "Ground-penetrating radar (GPR) was firstly used in traffic infrastructure surveys during the first half of the Seventies for testing in tunnel applications. From that time onwards, such non-destructive testing (NDT) technique has found exactly in the field of road engineering one of the application areas of major interest for its capability in performing accurate continuous profiles of pavement layers and detecting major causes of structural failure at traffic speed. This work provides an overview on the main signal processing techniques employed in road engineering, and theoretical insights and instructions on the proper use of the processing in relation to the quality of the data acquired and the purposes of the surveys. GPR is an increasingly used NDT technique in pavement applicationsProper choice of the signal processing techniques according to the GPR data sourceOverview of signal processing techniques to use prior to any post-processing stepOverview of signal processing techniques to perform after the GPR data collection",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2016.05.016",
+      "url": "https://www.semanticscholar.org/paper/b19d624e80c92f6a430792df8057825b84dbe5b2"
+    },
+    {
+      "title": "Decentralised signal processing on graphs via matrix inverse approximation",
+      "abstract": "In the processing of signals defined over graph domains, it is highly desirable to have algorithms that can be implemented in a decentralised manner, whereby each node only needs to exchange information within a localized subgraph of nodes. The most common example is when the subgraph consist of immediate neighbors and this allows for distributed processing. Many graph signal operators, in their original forms, are not amenable to distributed processing. To overcome this deficiency, a polynomial approximation is usually applied to the original operator to yield a distributed operator which is a matrix polynomial of the graph shift matrix. This approach however is only applicable when the original operator is a function of the graph shift matrix. In this paper, we propose a generalized approach to approximate graph signal operators that are not necessary functions of the shift matrix. The key idea here is to restrict the approximated matrix inverse to have small geodesic-width so that multiplication with the small geodesic-width matrix can be implemented in a decentralised manner. Furthermore, to increase the accuracy of the approximated operator, an iterative algorithm which also has the decentralised property and low computational complexity, is proposed. We apply the proposed approach to signal inpainting and signal reconstruction in filter banks. Numerical results verify the effectiveness of the proposed algorithm. The proposed algorithms can also be used to efficiently solve linear system of equations.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2019.07.010",
+      "url": "https://www.semanticscholar.org/paper/3b9e466173512db9504e04ba3137037e93d1967b"
+    },
+    {
+      "title": "Estimating the Laplacian matrix of Gaussian mixtures for signal processing on graphs",
+      "abstract": "Recent works in signal processing on graphs have been driven to estimate the precision matrix and to use it as the graph Laplacian matrix. The normalized elements of the precision matrix are the partial correlation coefficients which measure the pairwise conditional linear dependencies of the graph. However, the non-linear dependencies inherent in any non-Gaussian model cannot be captured. We propose in this paper a generalized partial correlation coefficient which is derived by assuming an underlying multivariate Gaussian Mixture Model of the observations. Exact and approximate methods are proposed to estimate the generalized partial correlation coefficients from estimates of the Gaussian Mixture Model parameters. Thus it may find application in any non-Gaussian scenario where the Laplacian matrix is to be learned from training signals.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2018.02.017",
+      "url": "https://www.semanticscholar.org/paper/dc75d4ebf3baf65c6ede464e190f10f961ed0dcd"
+    },
+    {
+      "title": "A signal processing methodology for assessing the performance of ASTM standard test methods for GPR systems",
+      "abstract": "Ground penetrating radar (GPR) is one of the most promising and effective non-destructive testing techniques (NDTs), particularly for the interpretation of the soil properties. Within the framework of international Agencies dealing with the standardization of NDTs, the American Society for Testing and Materials (ASTM) has published several standard test methods related to GPR, none of which is focused on a detailed analysis of the system performance, particularly in terms of precision and bias of the testing variable under consideration. This work proposes a GPR signal processing methodology, calibrated and validated on the basis of a consistent amount of data collected by means of laboratory-scale tests, to assess the performance of the above standard test methods for GPR systems. The (theoretical) expressions of the bias and variance of the estimation error are here investigated by a reduced Taylor's expansion up to the second order. Therefore, a closed form expression for theoretically tuning the optimal threshold according to a fixed target value of the GPR signal stability is proposed. Finally, the study is extended to GPR systems with different antenna frequencies to analyze the specific relationship between the frequency of investigation, the optimal thresholds, and the signal stability.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2016.06.030",
+      "url": "https://www.semanticscholar.org/paper/4b8daa4fc20d5de849b59bf0f9b065aafcce9e75"
+    }
+  ]
+}

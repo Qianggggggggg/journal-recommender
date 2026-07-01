@@ -2,7 +2,7 @@
 import json
 import logging
 import tenacity
-from typing import List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from ..journals.journal_model import Journal
 from ..papers.paper_model import PaperProfile
@@ -19,10 +19,26 @@ class LLMRankerError(Exception):
 class LLMRanker:
     """LLM 排序器（仅LLM，无规则降级）"""
 
-    def __init__(self, llm: MiniMaxLLM, system_prompt: str, user_prompt_template: str):
+    JSON_OUTPUT_CONTRACT = """
+
+【输出格式硬约束】
+只输出一个合法 JSON 对象，不要输出 Markdown，不要输出分析过程，不要使用 ```json 代码块。
+JSON 对象必须形如：
+{"rankings":[{"journal_id":"...","score":0.92,"reasons":["Scope对齐：..."],"confidence":0.88}]}
+除该 JSON 对象外不要添加任何额外文本。
+"""
+
+    def __init__(
+        self,
+        llm: MiniMaxLLM,
+        system_prompt: str,
+        user_prompt_template: str,
+        timeout_seconds: float = 200,
+    ):
         self.llm = llm
         self.system_prompt = system_prompt
         self.user_prompt_template = user_prompt_template
+        self.timeout_seconds = timeout_seconds
 
     @tenacity.retry(
         wait=tenacity.wait_exponential(multiplier=2, min=2, max=8),
@@ -35,9 +51,11 @@ class LLMRanker:
         candidates: List[Tuple[Journal, float, List[str]]],
         paper_profile: PaperProfile,
         top_k: int = 5,
+        retrieval_trace: Optional[Dict[str, dict]] = None,
     ) -> Tuple[List[Tuple[Journal, float, List[str], float]], str]:
         """LLM 精排（LLM驱动，重试3次）"""
-        # 构建期刊信息（精简字段，含 RuleScorer 参考信息）
+        # 构建期刊信息（精简字段，含 RuleScorer 参考信息）。
+        # 内部召回强度字段只用于评测诊断，不直接暴露给 LLM，避免精排被路由分数牵引。
         journals_info = []
         for idx, (journal, rule_score, reasons) in enumerate(candidates):
             journals_info.append({
@@ -70,21 +88,56 @@ class LLMRanker:
             total_candidates=len(candidates),
         )
 
-        # 调用 LLM（超时 300s，自动调整max_tokens）
+        # 调用 LLM（超时 200s，自动调整max_tokens）
         try:
-            response = self.llm.chat_auto(self.system_prompt, user_prompt, timeout=300)
+            response = self.llm.chat_auto(
+                self._system_prompt(),
+                user_prompt,
+                timeout=self.timeout_seconds,
+            )
         except Exception as e:
             raise LLMRankerError(f"LLM精排调用失败: {e}")
 
         # 解析结果
+        if not response.content or not response.content.strip():
+            usage = getattr(response, "usage", {}) or {}
+            raise LLMRankerError(f"LLM返回空响应，无法解析 JSON。usage={usage}")
+
         data = parse_json_response(response.content)
         if not data:
             raise LLMRankerError(f"LLM响应格式错误，无法解析: {response.content}")
 
-        rankings = data.get("rankings", [])
+        # 兼容处理：data 可能是 dict{"rankings": [...]} 或直接的列表 [...]
+        if isinstance(data, dict):
+            rankings = data.get("rankings", [])
+        elif isinstance(data, list):
+            rankings = data
+        else:
+            raise LLMRankerError(f"LLM响应格式错误，期望 dict 或 list，实际: {type(data)}")
+
+        if not isinstance(rankings, list) or not rankings:
+            raise LLMRankerError("LLM响应中的 rankings 为空")
+
+        for item in rankings:
+            if not isinstance(item, dict) or not isinstance(item.get("journal_id"), str):
+                raise LLMRankerError("LLM响应包含无效 ranking item")
+            if "score" in item and not isinstance(item["score"], (int, float)):
+                raise LLMRankerError("LLM ranking item 的 score 必须是数值")
+            if "confidence" in item and not isinstance(item["confidence"], (int, float)):
+                raise LLMRankerError("LLM ranking item 的 confidence 必须是数值")
+            if "reasons" in item and not isinstance(item["reasons"], list):
+                raise LLMRankerError("LLM ranking item 的 reasons 必须是列表")
 
         # 构建结果
-        rank_map = {r["journal_id"]: r for r in rankings}
+        candidate_ids = {journal.journal_id for journal, _, _ in candidates}
+        rank_map = {
+            item["journal_id"]: item
+            for item in rankings
+            if item["journal_id"] in candidate_ids
+        }
+        if not rank_map:
+            raise LLMRankerError("LLM rankings 没有匹配任何候选期刊")
+
         results = []
         for journal, rule_score, reasons in candidates:
             if journal.journal_id in rank_map:
@@ -99,3 +152,8 @@ class LLMRanker:
         # 按 LLM 分数排序
         results.sort(key=lambda x: x[1], reverse=True)
         return results[:top_k], "llm"
+
+    def _system_prompt(self) -> str:
+        if "【输出格式硬约束】" in self.system_prompt:
+            return self.system_prompt
+        return f"{self.system_prompt.rstrip()}{self.JSON_OUTPUT_CONTRACT}"

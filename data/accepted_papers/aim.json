@@ -1,0 +1,86 @@
+{
+  "journal_id": "aim",
+  "journal_name": "Artificial Intelligence in Medicine",
+  "papers": [
+    {
+      "title": "Artificial intelligence in medicine: past, present, and future",
+      "abstract": "Artificial intelligence is a powerful technology that promises to vastly improve the efficiency and effectiveness of health-care delivery, and usher in the era of precision medicine, transforming our everyday lives. It is helping accelerate basic biomedical research, delivering insights into disease pathophysiology, and guiding new treatment discovery. It is optimizing clinical trials and translational research, bringing us closer to new treatments faster. At a time when the health-care system is under more strain than ever, artificial intelligence promises to revolutionize health-care delivery by capitalizing on the totality of health-related data in order to optimize clinical decision-making for each individual and improve access to health-care for all. To deliver on these promises, we must bring together basic and applied researchers, engineers, and clinicians to address the many outstanding challenges in a timely and responsible manner. It is all of our duty to strive for the safe, fair, and efficient delivery of this technology to all.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00001-6",
+      "url": "https://www.semanticscholar.org/paper/7c306ea0804c25965f408cca070f0bba07f06c44"
+    },
+    {
+      "title": "Artificial intelligence in medicine: Technical basis and clinical applications",
+      "abstract": "There has been a revolution in the past decade as “deep learning” has begun to show high performance with robust reliability in the real world for many imaging tasks. Current deep learning technologies are being applied to medical imaging tasks with good results, which has prompted great interest in applying them broadly into clinical practice. This chapter describes the basic principles of deep learning methods and some common applications in medical imaging.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00002-8",
+      "url": "https://www.semanticscholar.org/paper/a39b5c275b7067d194015ffee5a13d4c95f5e69a"
+    },
+    {
+      "title": "Artificial intelligence in pain assessment and management for older adults: A scoping review.",
+      "abstract": "INTRODUCTION Conventional pain management strategies often fall short in addressing the complex needs of older adults with pain. Artificial intelligence (AI) represents a significant potential for advancing personalized, data-driven approaches. This review explores the literature on AI in pain management for older adults, showing trends and existing gaps. METHODS Following the PRISMA-ScR guidelines, five databases were searched using terms related to older adults, pain management, and artificial intelligence in peer-reviewed articles published between 2014 and 2025. Included studies were synthesized and reported using descriptive and narrative analyses. RESULTS A total of 96 studies were included. Machine learning was the most common AI method used (71, 74%), followed by deep learning (14, 14.6%), robotics (7, 7.3%), natural language processing (3, 3%), and rule-based systems (1, 1%). AI was primarily used for pain prediction (40, 41.7%) and classification (33, 34.4%), with fewer studies focusing on pain detection (6, 6.3%) or treatment optimisation (17, 17.7%). Input data types included clinical records (29, 30.2%), facial analysis (18, 18.8%), imaging (7, 7.3%), and video sequences (4, 4.2%). The most frequently studied pain types were chronic secondary musculoskeletal pain (30, 31%), chronic primary pain (13, 13.8%), and visceral pain (11, 11.7%). CONCLUSION AI applications for pain management in older adults are growing rapidly, with machine learning dominating prediction and classification tasks. Despite technical progress, most tools remain early-stage, rely on limited datasets, and lack aging-specific dynamics. Future research should prioritize diverse cohorts and inclusive algorithms to ensure these innovations translate into targeted pain care for older adults.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.artmed.2026.103455",
+      "url": "https://www.semanticscholar.org/paper/0b063744938e5415f4a68a9f0caa4d4a066a27c2"
+    },
+    {
+      "title": "Artificial intelligence in drug discovery for fungal diseases: a scoping review.",
+      "abstract": "BACKGROUND Fungal diseases represent a global health threat, with high mortality rates and growing antifungal resistance demanding new therapeutic strategies. Artificial intelligence (AI) has emerged as a key methodology to accelerate the costly and time-consuming process of drug discovery. OBJECTIVES To map the available evidence on the applications of AI methodologies in predicting biological activity for antifungal drug discovery and repurposing. METHODS This scoping review followed the Joanna Briggs Institute (JBI) methodology and is reported according to the PRISMA-ScR checklist. The protocol was registered on the Open Science Framework at DOI: 10.17605/OSF.IO/79TYS. A comprehensive search was conducted in PubMed, Scopus, and Web of Science for studies published until July 2025. RESULTS The review included 106 primary studies. The Prediction of Activity Spectra for Substances (PASS) was the most frequently employed method (50%), though a recent trend toward computationally more complex methods, such as ensemble models and deep learning, was observed. Four primary application areas were identified: designed molecules; mechanisms of action; omics data; and natural products. While these applications identified promising candidates, a gap exists between prediction and validation: only half of the studies performed in vitro experimental assays. Notably, studies employing advanced deep learning architectures were less likely to include experimental validation. CONCLUSION There is a reliance on accessible screening tools and a disconnection between advanced computational modeling and experimental confirmation. To bridge this translational gap, future research should prioritize the construction of more robust antifungal datasets and the integration of in silico predictions with prospective experimental validation.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.artmed.2026.103461",
+      "url": "https://www.semanticscholar.org/paper/6bc43bdaa40ee0b6d1e33308d7bb0494925b5667"
+    },
+    {
+      "title": "Artificial intelligence in cardiovascular imaging",
+      "abstract": "The emergence of artificial intelligence (AI) has sparked tremendous interest in the academic community, commercial industries, and society with wide-ranging applications from self-driving cars to automated voice recognition. With the explosive progress of AI, the field of cardiovascular imaging is no exception. Cardiovascular disease is one of the leading causes of mortality and morbidity, various diagnostic modalities play a paramount role in patient evaluation. As data originating form imaging and health care is becoming increasing complex for conventional statistics, this places us at a delicate crossroads. Machine learning (ML), a subset of AI, has shown significant promise and will help cardiovascular imaging transcend to new heights. In this review, we herein describe the role of ML to date in various imaging modalities for in cardiovascular disease.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00019-3",
+      "url": "https://www.semanticscholar.org/paper/196f258f02d7612e0b50dd9fadf97f6f37a46097"
+    },
+    {
+      "title": "Artificial intelligence in oncology",
+      "abstract": "Medical decisions can rely on a very large number of parameters, but it is traditionally considered that our cognitive capacity can only integrate up to five factors in order to take a decision. Oncologists will need to combine vast amount of clinical, biological, and imaging data to achieve state-of-the-art treatments. Data science and artificial intelligence (AI) will have an important role in the generation of models to predict outcome and guide treatments. A new paradigm of data-driven decision-making, reusing routine health-care data to provide decision support is emerging. This chapter explores the studies published in imaging, medical and radiation oncology and explains the technical challenges that need to be addressed before AI can be routinely used to treat cancer patients.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00018-1",
+      "url": "https://www.semanticscholar.org/paper/ee9c264603ce225d0628f15f7e9941956c5b18bf"
+    },
+    {
+      "title": "Artificial intelligence based techniques for brain tumor analysis: A systematic review.",
+      "abstract": "Brain tumors are formed when abnormal cells grow within the brain or its surrounding tissues. Approximately 400 people in Ireland receive a primary brain tumor diagnosis each year. In the US, this number increases to almost 90,000 individuals diagnosed each year. Timely diagnosis of brain tumor is essential to saving lives and significantly reducing treatment costs. To automate this process, different Artificial Intelligence (AI) techniques have been adopted to identify brain tumors in humans. Specifically, various deep learning algorithms have been used to segment and classify brain tumors. In this paper, a systematic review is conducted based on Kitchenham & Charters methodology. We selected seven research questions to identify commonly used methods, datasets, features, metrics, and Explainable AI (XAI) approaches for AI-based analysis of brain tumors. This process starts by sourcing papers that address these techniques via the IEEE Xplore and ACM biblographic databases between January 2013 and December 2024. The papers are then filtered using specifically designed inclusion and exclusion criteria. Out of 3950 papers sourced from two electronic databases, only 101 papers were selected for this review. In summary, despite a focus on segmentation and classification, our findings indicate that no AI methods have been fully adopted in clinical practice. Furthermore, none of the reviewed papers address the specific problem of weakly-supervised brain tumor segmentation, highlighting a clear research gap in the existing literature that warrants further investigation. Also, only four articles on XAI were identified. Given the importance of transparency in network predictions for brain tumor analyses, this fact supports the need for more research in this domain.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.artmed.2026.103460",
+      "url": "https://www.semanticscholar.org/paper/53e4f3d901f03f7b10bc0e947998ae0276a37032"
+    },
+    {
+      "title": "Artificial intelligence in radiology",
+      "abstract": "The interest in artificial intelligence (AI) has ballooned within radiology in the past few years primarily due to notable successes of deep learning. With the advances brought by deep learning, AI has the potential to recognize and localize complex patterns from different radiological imaging modalities, many of which even achieve comparable performance to human decision-making in recent applications. In this chapter, we review several AI applications in radiology for different anatomies: chest, abdomen, pelvis, as well as general lesion detection/identification that is not limited to specific anatomies. For each anatomy site, we focus on introducing the tasks of detection, segmentation, and classification with an emphasis on describing the technology development pathway with the aim of providing the reader with an understanding of what AI can do in radiology and what still needs to be done for AI to better fit in radiology. Combining with our own research experience of AI in medicine, we elaborate how AI can enrich knowledge discovery, understanding, and decision-making in radiology, rather than replacing the radiologist.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00014-4",
+      "url": "https://www.semanticscholar.org/paper/27f118cee683bdff070d9cb98f8557b5d18f80bd"
+    },
+    {
+      "title": "Artificial intelligence–enabled public health surveillance—from local detection to global epidemic monitoring and control",
+      "abstract": "Artificial intelligence (AI) techniques have been widely applied to infectious disease outbreak detection and early warning, trend prediction, and public health response modeling and assessment. Such public health surveillance and response tasks of major importance pose unique technical challenges such as data sparsity, lack of positive training samples, difficulty in developing baselines and quantifying the control measures, and interwoven dependencies between spatiotemporal elements and finer-grained risk analyses through contact and social networks. Traditional public health surveillance relies heavily on statistical techniques. Recent years have seen tremendous growth of AI-enabled methods, including but not limited to deep learning–based models, complementing statistical approaches. This chapter aims to provide a systematic review of these recent advances applying AI techniques to address public health surveillance and response challenges.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00022-3",
+      "url": "https://www.semanticscholar.org/paper/fb593b331ce334e7b3414ed2d8afda197467a3d2"
+    },
+    {
+      "title": "Artificial intelligence and interpretations in breast cancer imaging",
+      "abstract": "Medical decision-making in breast cancer image interpretation continues to evolve with synergistic advances in image acquisition systems (e.g., breast tomosynthesis), imaging protocols [e.g., multiparametric magnetic resonance imaging (MRI)], interpretation aids [artificial intelligence (AI)], and clinical tasks (use in response assessment). Advances in computers, in terms of both computing power and memory aspects, have led to a rapid increase in assessing the potential use of AI in various tasks in breast imaging, going beyond the initial use in computer-aided detection to include diagnosis, prognosis, response to therapy, and risk assessment, as well as in cancer discovery. AI methods are being developed for computer-aided detection (CADe) and diagnosis (CADx), for triaging (CADt), and for ultimate use as an autonomous reader, often with limited consideration for effect on radiologists' perception/cognitive performance and workflow. While the prospects of AI in breast cancer image interpretation are abundant and promising, they bring along challenges and trepidations. This chapter focuses on the role of AI in breast cancer image interpretation.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/B978-0-12-821259-2.00015-6",
+      "url": "https://www.semanticscholar.org/paper/669a988fdc38716a4df09447ab0ae26af9312fa3"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "journal_id": "ccf_thpc",
+  "journal_name": "CCF Transactions on High Performance Computing",
+  "papers": [
+    {
+      "title": "Trade-off topology design for hierarchical network based on job characteristics",
+      "abstract": "Supercomputers rely on the job scheduling and resource management (JSRM) system to allocate compute nodes for jobs. To reduce the job's communication overhead, the JSRM system relies on its detailed internal topology design to allocate closely-connected compute nodes. However, over-complicated topology designs are laborious for the JSRM system to parse, causing excessive scheduling overheads. The optimal node allocation and scheduling overhead cannot be reconciled, especially in ultra-scale supercomputers with increasingly sophisticated network topology. We perform a study on the production supercomputer with a two-dimensional fat-tree network, systematically analyze the underlying correlation among the node allocation, topology design and job characteristics, and present multiple trade-off designs to adapt to different scenarios. Our methods and insights about the topology design can be generalized to a large family of different topologies or even deployed directly in the systems using similar hierarchical networks. We propose three topology design guidelines based on the load of JSRM system, job size and communication characteristic, achieving a trade-off between the communication cost and the scheduling overhead. This study reveals that full topology details are not always necessary and a holistic investigation of the system and job characteristics is required when designing the topology.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s42514-024-00193-z",
+      "url": ""
+    },
+    {
+      "title": "Survey of storage systems in high performance computing",
+      "abstract": "As high performance computing (HPC) moves towards exascale, storage systems face core challenges such as data flooding, bandwidth bottlenecks, mixed load coordination, and performance cost balancing. This article systematically reviews the cutting-edge technologies of high performance storage systems, covering four aspects: storage architecture, hardware, software, and networking. At the architecture level, storage computing separation, distributed and hierarchical architectures decouple computing and storage resources, and optimize latency and scalability through high-speed networks. Typical cases include supercomputer systems such as Frontier and Fugaku. In terms of hardware, persistent memory, all flash array, and integrated storage and computing chips significantly improve throughput and reduce latency, while ZNS SSD and QLC technology optimize cost and lifespan. At the software level, distributed parallel file systems respond to massive small files and high concurrency access through burst buffering technology. In network communication, low latency protocols such as Slingshot, InfiniBand, and RoCE support TB level bandwidth, while CXL technology promotes storage resource pooling. In the future, photon interconnection, AI native architecture, and green energy-saving technologies will further promote the development of high performance storage towards efficiency and intelligence, to support ZB level storage requirements in scenarios such as Exascale computing and AI training.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42514-025-00268-5",
+      "url": "https://doi.org/10.1007/s42514-025-00268-5"
+    },
+    {
+      "title": "ZeroCopy: file system assisted container buffer migration in cloud computing system",
+      "abstract": "In cloud computing data centers, containerized tasks are regularly scheduled from one physical host to another due to resource management requirements such as handling machine failures, rebalancing server resources, and upgrading/scaling applications. After the container running in the source host is scheduled to the target host, it suffers from I/O performance degradation until the DRAM buffer is fully rebuilt. However, migrating the DRAM buffer from the source host to the target host could also introduce intolerable downtime of containerized tasks. Especially, as the DRAM buffer capacity of the application already increases to about dozens or hundreds of GB, the cost of downtime due to container migration becomes unacceptable. Many researchers have devoted themselves to developing an effective DRAM buffer warm-up scheme to avoid the cold bootstrap issue after container migration, such as pre-copy and post-copy schemes. However, the cold bootstrap and large-capacity buffer migration issues of container scheduling are still an open research problem. In this paper, motivated by the observation that the DRAM buffer is always flushed to the storage backend before starting the container in the target host, we proposed a scheme named ZeroCopy to utilize the file system to assist the DRAM buffer migration. ZeroCopy traverses the files in the DRAM buffer and flags these files when these files are flushed into the file system, and reloads these files into DRAM after starting the container in the target host. By this scheme, the container migration procedure does not require migrating data buffers and can start within an acceptable time. We conduct a series of experiments with public cloud traces to measure several key metrics on container migration. The results show that ZeroCopy outperforms these existing schemes. The average data transmission volume is reduced by about 6.25 times compared with state-of-the-art, and the downtime of container migration is also reduced by 31.8%.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s42514-025-00217-2",
+      "url": "https://doi.org/10.1007/s42514-025-00217-2"
+    },
+    {
+      "title": "Molecular docking-based computational platform for high-throughput virtual screening",
+      "abstract": "Structure-based virtual screening is a key, routine computational method in computer-aided drug design. Such screening can be used to identify potentially highly active compounds, to speed up the progress of novel drug design. Molecular docking-based virtual screening can help find active compounds from large ligand databases by identifying the binding affinities between receptors and ligands. In this study, we analyzed the challenges of virtual screening, with the aim of identifying highly active compounds faster and more easily than is generally possible. We discuss the accuracy and speed of molecular docking software and the strategy of high-throughput molecular docking calculation, and we focus on current challenges and our solutions to these challenges of ultra-large-scale virtual screening. The development of Web services helps lower the barrier to drug virtual screening. We introduced some related web sites for docking and virtual screening, focusing on the development of pre- and post-processing interactive visualization and large-scale computing.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s42514-021-00086-5",
+      "url": "https://www.semanticscholar.org/paper/b418114cb0f05e5b09b57920328262ad1c987e6d"
+    },
+    {
+      "title": "Adaptive sparse ternary gradient compression for distributed DNN training in edge computing",
+      "abstract": "In edge computing, though distributed training of Deep Neural Networks (DNNs) is expected to exchange massive gradients between parameter servers and working nodes, the high communication cost constrains the training speed. To break this limitation, gradient compression algorithms expect the ultimate compression ratio at the expense of the accuracy of the trained model. Therefore, new gradient compression techniques are necessary to ensure both communication efficiency and model accuracy. This paper introduces a novel technique—an Adaptive Sparse Ternary Gradient Compression (ASTC) scheme, which relies on the number of gradients in model layers to compress gradients. ASTC establishes the model compression selection criterion by gradients’ amount, compresses the network layer that meets the model’s standard, evaluates the gradients’ importance based on entropy to adaptively perform sparse compression, and finally conducts ternary quantization compression and a lossless code scheme on sparse gradients. Using public datasets (MNIST, CIFAR-10, Tiny ImageNet) and deep learning models (CNN, LeNet5, ResNet18) for experimental evaluation, we exhibit excellent results that the training efficiency of ASTC is about 1.6 times, 1.37 times, and 1.1 times higher than that of Top-1, AdaComp, and SBC, respectively. Furthermore, ASTC can be improved by an average of about 1.9%$$1.9\\%$$\\end{document} in training accuracy compared with the above approaches.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s42514-022-00091-2",
+      "url": "https://www.semanticscholar.org/paper/9708a1da4727934ff27b69b4a69c6c15a6b86702"
+    }
+  ]
+}

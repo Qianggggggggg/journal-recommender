@@ -1,0 +1,70 @@
+{
+  "journal_id": "tors",
+  "journal_name": "ACM Transactions on Recommender Systems",
+  "papers": [
+    {
+      "title": "Inclusive Recommender Systems: Addressing Needs of Users with ADHD",
+      "abstract": "Users’ experiences with technology are often shaped by their cognitive abilities, but formal evaluation of this phenomenon has been limited. In this study, we took a user-centered design approach with six participants with Attention Deficit Hyperactivity Disorder (ADHD) to evaluate their experiences with existing recommender systems and their needs for more inclusive recommenders. We found that while personalized recommendations helped our participants find community and social support, they also tended to impair participants’ impulsivity and self-regulation, impeding their daily lives. To address recommender systems’ lack of inclusivity, we co-designed two inclusive features: mode of use (focus/work versus explore) and notifications. The mode of use feature exemplifies users’ desire to explicitly enable or disable personalized recommendations to support self-regulation and reduce impulsivity. The notification feature represents a need to support ADHD users’ perception of time and memory. Our findings provide a first-person perspective of the recommender systems usage experiences of users with ADHD, and propose features to help make recommenders more inclusive of their needs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3769427",
+      "url": "https://www.semanticscholar.org/paper/d2fbcf104138d8008ee4e2d81d60561199595ef6"
+    },
+    {
+      "title": "Welcome to the Metrics Jungle: Organizational Stakeholder Perspectives on Evaluation of News Recommender Systems in Industry",
+      "abstract": "News recommender systems (NRSs) are increasingly implemented in the news industry to enhance digital distribution, yet their development and evaluation are shaped by a complex interplay of organizational stakeholders with diverse objectives. This study investigates the real-world complexities of NRS implementation, considering the multitude of objectives on the NRS provider side by exploring how different stakeholder groups —from journalistic, commercial, and tech logic— conceptualize NRS goals and assess their performance. Through 22 semi-structured expert interviews across four news organizations in Europe, we uncover a ‘jungle of metrics’ where an overabundance of data insights does not necessarily lead to better decision-making. While traditional accuracy-based metrics like click-through rate (CTR) remain widely used, they fail to capture the broader strategic objectives that guide NRS adoption in industry. This paper identifies a critical gap between current academic evaluations of NRS and the business key performance indicators (KPIs) used in practice. Rather than evaluating NRS in isolation, stakeholders assess their contribution to overarching organizational goals, including reach, engagement, conversion, and retention. Our findings highlight the need for a more nuanced, multi-stakeholder approach to NRS evaluation that aligns with both business imperatives and journalistic values.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3778173",
+      "url": "https://www.semanticscholar.org/paper/b1cf9bc002d07271d56aa288e157a550c6561472"
+    },
+    {
+      "title": "The Impact of Position and Contrast Effects in Recommender Systems on Consumer Behavior: A Field Experiment",
+      "abstract": "This study investigates how position and contrast effects influence user decision-making in recommender systems (RS). Since these effects can induce behavioral biases that affect consumer choices, understanding their influence on RS effectiveness is crucial. We conducted a randomized field experiment, comparing recommendation sets with only relevant items and sets with one relevant item surrounded by non-relevant contrasting items, while varying the relevant item's position across the recommendation list. Our results show that both the position of a focal item and its distinction from contrasting products significantly increase click-through rates (CTRs). Relevant items in second and third positions achieve higher CTRs than first position, while non-relevant contrasting items increased the relevant item CTR despite reducing overall CTR. This suggests that users are more likely to engage with recommendations that stand out. Our results challenge the assumption that the top position in a recommendation list is always the most beneficial by showing that lower positions can lead to higher CTRs. These findings provide strategies for retailers to highlight specific products while revealing fundamental trade-offs in recommendation system design. The study provides valuable insights for optimizing RS design, highlighting the importance of strategic placement and diversity to improve decision outcomes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3774912",
+      "url": "https://www.semanticscholar.org/paper/ee2b75451d6cff4aa4573c222dbc7d72cefd1fe2"
+    },
+    {
+      "title": "Recommender Systems for Good (RS4Good): Survey of Use Cases and a Call to Action for Research that Matters",
+      "abstract": "In the area of recommender systems, the vast majority of research efforts is spent on developing increasingly sophisticated recommendation models, also using increasingly more computational resources. Unfortunately, most of these research efforts target a very small set of application domains, mostly e-commerce and media recommendation. Furthermore, many of these models are never evaluated with users, let alone put into practice. The scientific, economic and societal value of much of these efforts by scholars therefore remains largely unclear. To achieve a stronger positive impact resulting from these efforts, we posit that we as a research community should more often address use cases where recommender systems contribute to societal good (RS4Good). In this opinion piece, we first discuss a number of examples where the use of recommender systems for problems of societal concern has been successfully explored in the literature. We then proceed by outlining a paradigmatic shift that is needed to conduct successful RS4Good research, where the key ingredients are interdisciplinary collaborations and longitudinal evaluation approaches with humans in the loop.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3746648",
+      "url": "https://www.semanticscholar.org/paper/8a9d14cf0b6cc031494a69d9136674b52051f420"
+    },
+    {
+      "title": "Performance-Driven QUBO for Recommender Systems on Quantum Annealers",
+      "abstract": "Quantum annealers offer a promising hardware platform for solving combinatorial optimization problems, especially those formulated as Quadratic Unconstrained Binary Optimization (QUBO). In this work, we propose PDQUBO (Performance-Driven Quadratic Unconstrained Binary Optimization), a QUBO-based feature selection method that is directly executable on quantum annealers. Unlike prior QUBO-based feature selection approaches on quantum annealers, PDQUBO explicitly quantifies the performance impact of both individual features and feature pairs on recommender system models. This alignment between QUBO optimization objectives and model performance ensures that the solution direction is closely tied to recommendation quality, making it well-suited for practical deployment on quantum hardware. Moreover, by leveraging counterfactual analysis, PDQUBO is model-agnostic and evaluation-metric-independent, making it broadly applicable across diverse recommender architectures and assessment criteria. In addition, we investigate the instability of quantum annealing on real quantum devices with respect to varying problem sizes and problem difficulties. Extensive experiments on real-world datasets demonstrate that PDQUBO consistently outperforms prior QUBO-based feature selection methods on quantum annealers. Furthermore, we compare PDQUBO against classical feature selection baselines on click-through rate (CTR) prediction tasks, showing its strong performance and highlighting the potential of using quantum annealers for real-world feature selection applications. Our findings suggest that integrating quantum optimization with counterfactual analysis provides a promising direction for effective feature selection in recommender systems.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3814611",
+      "url": "https://www.semanticscholar.org/paper/95b1442d32a2f95efa5a5decc5b32fb9a5b09a21"
+    },
+    {
+      "title": "Can Offline Metrics Measure Explanation Goals? A Comparative Survey Analysis of Offline Explanation Metrics in Recommender Systems",
+      "abstract": "In Recommender System (RS), explanations help users understand why items are recommended and can enhance a system’s transparency, persuasiveness, engagement, and trust, which are known as explanation goals. However, evaluating the effectiveness of explanation algorithms offline remains challenging because explanation goals are inherently subjective. We initially conducted a rapid literature review, which revealed that algorithms are often assessed using anecdotal evidence (offering convincing examples) or using metrics that do not align with human perception. From these results, we investigated whether the selection of item attributes (such as genres) and interacted items affects explanation goals in path-based explanations that connect interacted and recommended items. We used metrics that measure the diversity and popularity of attributes and the recency of item interactions to evaluate explanations from three state-of-the-art agnostic algorithms across six recommendation systems. We then performed an online user study to compare user perceptions of explanation goals and offline metrics. Our findings indicate that engagement is sensitive to users’ perceptions of diversity in explanations, whereas transparency, trust, and persuasiveness are influenced by perceptions of both popularity and diversity. However, offline metrics require refinement to more closely align with explanation goals and user understanding.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3779420",
+      "url": "https://www.semanticscholar.org/paper/a7ec6703f1798f2e719a0205bf41e8ac0370eec3"
+    },
+    {
+      "title": "Balancing Fairness and High Match Rates in Reciprocal Recommender Systems: A Nash Social Welfare Approach",
+      "abstract": "Matching platforms, such as online dating services and job recommendations, have become increasingly prevalent. For the success of these platforms, it is crucial to design reciprocal recommender systems (RRSs) that not only increase the total number of matches but also avoid creating unfairness among users. In this paper, we investigate the fairness of RRSs on matching platforms. From the perspective of fair division, we define the users’ opportunities to be recommended and establish the fairness concept of envy-freeness in the allocation of these opportunities. We first introduce the Social Welfare (SW) method, which approximately maximizes the number of matches, and show that it leads to significant unfairness in recommendation opportunities, illustrating the trade-off between fairness and match rates. To address this challenge, we propose the Nash Social Welfare (NSW) method, which alternately optimizes two NSW functions and achieves nearly envy-free recommendations. We further generalize the SW and NSW method to the α-SW method, which balances the trade-off between fairness and high match rates. Additionally, we develop a computationally efficient approximation algorithm for the SW/NSW/α-SW methods based on the Sinkhorn algorithm. Through extensive experiments on both synthetic datasets and two real-world datasets, we demonstrate the practical effectiveness of our approach.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3793538",
+      "url": "https://www.semanticscholar.org/paper/23e20d1a382835da2f3396c5cc4cdbc60c740946"
+    },
+    {
+      "title": "Exploring Personality-Aware Explanations for Recommender Systems",
+      "abstract": "Recommender systems guide users through vast amounts of data, yet recommendations can feel opaque and difficult to trust. Prior research shows that explanations help users become more confident and satisfied, and that explanation effectiveness depends not only on what is said but also on how it is communicated. This work investigates personality-aligned framings of explanations in a music recommender system. Using generative AI, we produce natural language explanations aligned with the Big Five personality traits alongside a feature-based baseline and examine whether linguistic framing shapes user perceptions beyond personalization. In a controlled study with N = 348 participants, users completed a Big Five inventory and evaluated music recommendations presented with six framing conditions. Results show that linguistic framing influences how users perceive recommendations, with some framings perceived as more persuasive, clearer, or more accurate than others. Effects vary across personality traits, but aligning framing with a user’s dominant trait does not consistently improve perceptions, while emotionally stable framings are broadly effective. These findings suggest that linguistic framing is a meaningful design parameter for recommender explanations, and that domain fit and emotional appropriateness, rather than user-trait matching, are the operative factors. We discuss implications for adaptive explanation design using generative AI.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3820894",
+      "url": "https://www.semanticscholar.org/paper/12c196d0b4cac47a3292b23b0ea44baa4f5a685b"
+    }
+  ]
+}

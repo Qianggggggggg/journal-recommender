@@ -1,0 +1,86 @@
+{
+  "journal_id": "jcs",
+  "journal_name": "Journal of Computer Security",
+  "papers": [
+    {
+      "title": "A survey of heterogeneous graph neural networks for cybersecurity anomaly detection",
+      "abstract": "Anomaly detection is a critical task in cybersecurity, where identifying insider threats, access violations, and coordinated attacks is essential for ensuring system resilience. Graph-based approaches have become increasingly important for modeling entity interactions, yet most rely on homogeneous and static structures, which limit their ability to capture the heterogeneity and temporal evolution of real-world environments. Heterogeneous graph neural networks (HGNNs) have emerged as a promising paradigm for anomaly detection by incorporating type-aware transformations and relation-sensitive aggregation, enabling more expressive modeling of complex cyber data. However, current research on HGNN-based anomaly detection remains fragmented, with diverse modeling strategies, limited comparative evaluation, and an absence of standardized benchmarks. To address this gap, we provide a comprehensive survey of HGNN-based anomaly detection methods in cybersecurity. We introduce a taxonomy that classifies approaches by anomaly type and graph dynamics, analyze representative models, and map them to key cybersecurity applications. We also review commonly used benchmark datasets and evaluation metrics, highlighting their strengths and limitations. Finally, we identify key open challenges related to modeling, data, and deployment, and outline promising directions for future research. This survey aims to establish a structured foundation for advancing HGNN-based anomaly detection toward scalable, interpretable, and practically deployable solutions.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261461764",
+      "url": "https://openalex.org/W7165957813"
+    },
+    {
+      "title": "GS-HF: An anomaly detection method for network traffic based on heterogeneous features and GraphSAGE",
+      "abstract": "With the rapid growth of network traffic, data has become increasingly complex and voluminous, posing significant challenges for accurate anomaly detection. Traditional deep learning approaches often fail to capture the rich interdependencies and heterogeneous nature of traffic features, limiting their effectiveness in identifying subtle or evolving abnormal patterns. To address these challenges, this paper proposes GS-HF (GraphSAGE with heterogeneous features), an anomaly detection framework. The method integrates both statistical and image-like features extracted from raw traffic data to capture multi-dimensional characteristics, and then constructs a graph based on the fused heterogeneous features to better represent relationships among traffic flows. An improved GraphSAGE model is applied for detection, incorporating Focal Loss to handle class imbalance in real-world anomaly datasets. Extensive experiments on multiple network traffic datasets demonstrate that GS-HF achieves superior detection performance compared to existing methods, highlighting its robustness and effectiveness in handling diverse and complex traffic patterns.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261449173",
+      "url": "https://openalex.org/W7161007296"
+    },
+    {
+      "title": "Decoding the privacy paradox: Moderating effects of privacy concerns on awareness of identity disclosure and protective behaviors on social media",
+      "abstract": "As privacy violations and data misuse on social media become more prevalent, understanding the drivers of effective privacy protection is critical. This study addresses the privacy paradox, the contradiction wherein users express high privacy concerns but fail to adopt protective behaviors. It examines how awareness of online identity disclosure influences two key protective actions: controlled use and identity masking, with a specific focus on the moderating role of online privacy concerns. Drawing on a quota-based sample of 1000 Pakistani social media users and employing structural equation modeling, the research finds that while greater awareness generally promotes proactive behaviors; however, this relationship is significantly moderated by privacy concerns. At lower concern levels, awareness strongly predicts protection; however, as concerns intensify, the positive effect of awareness significantly weakens, suggesting disengagement or privacy-fatigue. These insights clarify the conditional role of concerns and highlight the need for tailored privacy education and platform design.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261450069",
+      "url": "https://openalex.org/W7160846491"
+    },
+    {
+      "title": "Electromagnetic interference (EMI) backdoor: An EMI-based backdoor attack against computer vision systems",
+      "abstract": "Recently, computer vision systems, for example, smart traffic surveillance systems, facial recognition systems, etc., have significantly changed our daily life. Even though the neural networks in such systems are known to suffer from backdoor attacks, causing the backdoored models to behave well on benign samples but maliciously on controlled samples (with triggers applied to activate the backdoor), it is generally believed that most of the triggers, when used in physical attacks, are noticeable to victim users and not robust in various settings, such as different angles, distances, lighting conditions, etc. In this paper, we leverage electromagnetic interference (EMI) to produce a specific pattern distortion in images captured by the camera system and utilize the pattern distortion as the backdoor trigger. To avoid the overhead of manually collecting poisoned images, we introduce a simulation sample generation approach, converting clean images to poisoned ones by simulating the distortion caused by EMI against the camera system. Additionally, we propose a contrast loss function to enhance the generalization of backdoor features, improving triggers’ capability to activate the embedded backdoors. We conduct extensive physical experiments using diverse deep neural networks across various camera systems in different practical environments, achieving a 92.54% average backdoor success rate.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261417052",
+      "url": "https://openalex.org/W7138874032"
+    },
+    {
+      "title": "On the challenges of enhancing blockchain privacy",
+      "abstract": "Most blockchain and smart contract platforms store transactions publicly on the ledger. User accounts in these systems rely on public keys to prevent direct identification of the parties. However, various de-anonymization techniques have been used to disclose users’ data, highlighting the weakness of this approach. As a result, the implementation of certain decentralized applications is challenging, especially those involving personal and financial data. In this context, several solutions have been proposed to provide privacy for users of blockchain and smart contract applications. Nonetheless, implementing these solutions is not trivial and introduces additional challenges related to performance, transaction costs, and application complexity. This article describes the practical implementation of Miles2Coins, a blockchain application for buying and selling tokenized airline miles, and details the intricate process of integrating it with Anonymous Zether, a solution designed to provide privacy and anonymity for the parties involved in these transactions. The challenges faced during this integration are explored, revealing key limitations and highlighting the ongoing need for improved privacy approaches in this scenario.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261428398",
+      "url": "https://openalex.org/W7136736646"
+    },
+    {
+      "title": "Location-based access control system for mobile devices using bluetooth low energy technology",
+      "abstract": "The increasing presence of smart mobile devices in sensitive environments raises significant security and privacy concerns, particularly due to the unauthorized usage of built-in sensors such as cameras and microphones. However, space owners currently have limited means to enforce restrictions on mobile devices within their premises. To address this issue, we propose a novel location-based access control system utilizing bluetooth low energy (BLE) beacons to dynamically enforce security policies. The proposed system introduces the jumbo beacon concept, which enables fragmented transmission and reassembly of signed access control policies, overcoming BLE payload limitations. Unlike centralized enforcement models, our approach is fully decentralized, eliminating the need for a trusted central server and providing a flexible, scalable mechanism for enforcing fine-grained access policies. The system is implemented as a native security module within the Android operating system, ensuring tamper-resistant enforcement of policies while preventing unauthorized modifications. A proof-of-concept implementation demonstrates the system’s effectiveness, highlighting its real-time policy enforcement capabilities and resilience against adversarial threats. The results indicate that our approach offers a lightweight, scalable, and secure solution for enforcing location-based access control in dynamic environments.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261428667",
+      "url": "https://openalex.org/W7135014466"
+    },
+    {
+      "title": "Model-driven approach enabling formalization and conformance testing of attribute-based access control policies for business processes",
+      "abstract": "Access control policies (ACPs) are essential for creating a secure access control system. ACPs are often studied and specified based on access control models, such as attribute-based access control (ABAC). Moreover, the execution of business process instances is typically recorded in a business process event log. Ensuring conformance with ABAC policies for the process log at the time of post-execution is crucial. To perform conformance testing of ABAC policies for event logs, it is necessary to formalize the ABAC policies. However, this formalization is typically carried out manually, leading to low efficiency and maintainability, as well as a high risk of errors and difficulty in detecting them. Also, the top-down approach for ABAC policy engineering is often less feasible due to the challenges and costs associated with manually developing ABAC policies, which makes it difficult to document security requirements. Besides, there is a lack of an ABAC metamodel that supports the formalization and conformance testing of ABAC policies, and little attention is paid to constructing ABAC policies from existing event logs. This paper presents a fine-grained and highly automated model-driven framework enabling the formalization and conformance testing of ABAC policies for business processes. In our approach, an ABAC metamodel and its patterns are proposed to solve the problems mentioned above. The approach is experimented with and evaluated on three business processes: One simulated and two real-world processes.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261421496",
+      "url": "https://openalex.org/W7131643958"
+    },
+    {
+      "title": "SoK: Robust properties, robust abstractions and back-translations",
+      "abstract": "Many formal security criteria in fields like secure compilation (e.g. full abstraction and robust hyperproperty preservation), cryptography (e.g. security games, reduction proofs, and universal composability), and information flow control share a fundamental underlying structure. This underlying structure and related concepts also appear in broader contexts like denotational semantics and computational expressiveness, yet their connections are often overlooked. This paper identifies and systematizes this structure through robust properties (criteria holding in any context), robust abstractions (ensuring preservation of robust properties from abstract to concrete systems) and the new notion of non-degrading abstractions, which guarantees that the concrete system only exhibits concrete violations that are also present in the corresponding abstract system, thereby ensuring no new violations are introduced by the abstraction. By unifying concepts from different areas into a common framework, we highlight existing but underexplored connections, provide new insights and general results, and introduce a valuable perspective for understanding and advancing formal security.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x251409398",
+      "url": "https://openalex.org/W7131675137"
+    },
+    {
+      "title": "Fully adaptive MA-ABE supporting multi-fan-in circuits",
+      "abstract": "As a distributed extension of ciphertext-policy attribute-based encryption (CP-ABE), multi-authority ABE (MA-ABE) does not require the participation of a trusted central authority and has a wider application prospect in the decentralized background of the cloud computing environment. We propose the first MA-ABE scheme supporting multi-fan-in circuits and collusion-resistance on prime-order bilinear groups and prove the fully adaptive security based on the matrix decision Diffie-Hellman (MDDH) assumption. Compared with the only two fully adaptively secure MA-ABE schemes, our scheme enjoys shorter parameters, which has lower ciphertext and key size, and supports many-use of attribute.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x261418208",
+      "url": "https://openalex.org/W7129049172"
+    },
+    {
+      "title": "An expert-in-the-loop framework for unknown attack detection via open-set recognition",
+      "abstract": "Network intrusion detection is a crucial line of defense for protecting network security. Despite the significant advancements made by deep learning in this field, existing methods are primarily based on closed-set classification and are ineffective in detecting unknown attacks. To address this research gap, we propose an open-set recognition-based network intrusion detection method. We first provide a network traffic classification model based on open-set recognition, OpenPN , to classify known classes of network traffic and recognize unknown network traffic. Then we introduce a novel attack detection algorithm involving expert intervention, which reduces manual costs through expert verification and utilizes a density-based k-reciprocal nearest neighbor clustering algorithm for optimization. Finally, we perform continuous learning for the classes that have been verified as novel attacks. Extensive experiments conducted on three public datasets demonstrate that the proposed method outperforms existing methods in both closed-set classification and open-set recognition. In addition, the impact of each critical parameter on the performance of the relevant algorithms is comprehensively analyzed.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1177/0926227x251414058",
+      "url": "https://openalex.org/W7128482163"
+    }
+  ]
+}

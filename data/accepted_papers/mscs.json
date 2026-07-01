@@ -1,0 +1,78 @@
+{
+  "journal_id": "mscs",
+  "journal_name": "Mathematical Structures in Computer Science",
+  "papers": [
+    {
+      "title": "Mathematical structures in natural language semantics: Zawadowski’s contribution to linguistics",
+      "abstract": "We will place Zawadowski’s work on linguistic semantics in the historical context of the development of the field. Central to his linguistic work is the combination of model theoretic techniques in set theory with type theoretic techniques combined with a continuation semantics. This leads to elegant general treatments of well-known puzzles in the analysis of meaning in natural languages.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129526100577",
+      "url": "https://www.semanticscholar.org/paper/a18789998dfee77eff25e03ca710626fc3b5668e"
+    },
+    {
+      "title": "Formal p -category theory and normalization by evaluation in Rocq",
+      "abstract": "Traditional category theory is typically based on set-theoretic principles and ideas, which are often nonconstructive. An alternative approach to formalizing category theory is to use e -category theory, where hom sets become setoids. Our work reconsiders a third approach – p -category theory – from Čubrić et al. ( Mathematical Structures in Computer Science 8(2) 153–192, 1998) emphasizing a computational standpoint. We formalize in Rocq a modest library of p -category theory – where homs become subsetoids – and apply it to formalizing algorithms for normalization by evaluation, which are purely categorical but, surprisingly, do not use neutral and normal terms. Čubrić et al. ( Mathematical Structures in Computer Science 8(2) 153–192, 1998) establish only a soundness correctness property by categorical means; here, we extend their work by providing a categorical proof also for a strong completeness property. For this, we formalize the full universal property of the free Cartesian-closed category, which is not known to have been performed before. We further formalize a novel universal property of unquotiented simply typed $\\lambda$ -calculus syntax and apply this to a proof of correctness of a categorical normalization by evaluation algorithm. We pair the overall mathematical development with a formalization in the Rocq proof assistant, following the principle that the formalization exists for practical computation. Indeed, it permits extraction of synthesized normalization programs that compute (long) $\\beta$ $\\eta$ -normal forms of simply typed $\\lambda$ -terms together with a derivation of $\\beta$ $\\eta$ -conversion.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s0960129525100406",
+      "url": "https://www.semanticscholar.org/paper/9020abe2720d6e0372faeb1f56292a1793753c7f"
+    },
+    {
+      "title": "Categories for collection monads",
+      "abstract": "Manes (1998). Implementing Collection Classes with Monads. Mathematical Structures in Computer Science 8 (231–276) introduced the notion of a collection monad on the category of sets as a suitable semantics for collection types. The canonical example of collection monad is the finite powerset monad. In order to account for the algorithmic aspects, the category of sets should be replaced with categories whose arrows are maps computable by low-complexity algorithms. Inspired by realizability, we give a systematic way for constructing categories of small sets and low-complexity functions and define an analogue of collection monads on such categories.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129526100486",
+      "url": "https://www.semanticscholar.org/paper/7f1caf192155d80f713c78878932ab138fe3b3b5"
+    },
+    {
+      "title": "Indexed and fibered structures for partial and total correctness assertions",
+      "abstract": "Hoare Logic has a long tradition in formal verification and has been continuously developed and used to verify a broad class of programs, including sequential, object-oriented, and concurrent programs. Here we focus on partial and total correctness assertions within the framework of Hoare logic and show that a comprehensive categorical analysis of its axiomatic semantics needs the languages of indexed and fibered category theory. We consider Hoare formulas with local, finite contexts, of program and logical variables. The structural features of Hoare assertions are presented in an indexed setting, while the logical features of deduction are modeled in the fibered one.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129522000275",
+      "url": "https://www.semanticscholar.org/paper/a457366654428b98a2342c6560e4bfdf51d23b94"
+    },
+    {
+      "title": "Non-Hausdorff parallelized manifolds over geometric models of conservative programs",
+      "abstract": "Every directed graph $G$ induces a locally ordered metric space $\\mathcal{X}_{(G)}$ together with a local order $\\tilde {\\mathcal{X}}_{(G)}$ that is locally dihomeomorphic to the standard pospace $\\mathbb{R}$ ; both are related by a morphism ${\\beta }_{(G)} G:\\tilde {\\mathcal{X}}_{(G)}\\to {\\mathcal{X}}_{(G)}$ satisfying a universal property. The underlying set of $\\tilde {\\mathcal{X}_{(G)}}$ admits a non-Hausdorff atlas $\\mathcal{A}_{G}$ equipped with a non-vanishing vector field ${{f}}_{G}$ ; the latter is associated to $\\tilde {\\mathcal{X}}_{(G)}$ through the correspondence between local orders and cone fields on manifolds. The above constructions are compatible with Cartesian products, so the geometric model of a conservative program is lifted through ${{\\beta }_{G_1}} \\times \\cdots \\times {{\\beta }}_{G_n}$ to a subset $M$ of the parallelized manifold $\\mathcal{A}_{G_1} \\times \\cdots \\times \\mathcal{A}_{G_n}$ . By assigning the suitable norm to each tangent space of $\\mathcal{A}_{G_1} \\times \\cdots \\times \\mathcal{A}_{G_n}$ , the length of every directed smooth path $\\gamma$ on $M$ , i.e. $\\int {{|\\gamma '(t)|}}_{\\gamma (t)}dt$ , corresponds to the execution time of the sequence of multi-instructions associated to $\\gamma$ . This induces a pseudometric ${{d}}_{\\mathcal{A}}$ whose restrictions to sufficiently small open sets of $\\mathcal{A}_{G_1} \\times \\cdots \\times \\mathcal{A}_{G_n}$ (we refer to the manifold topology, which is strictly finer than the pseudometric topology) are isometric to open subspaces of ${\\mathbb{R}}^n$ with the $\\alpha$ -norm for some $\\alpha \\in [{{1}},{{\\infty }}]$ . The transition maps of $\\mathcal{A}_{G}$ are translations, so the representation of a tangent vector does not depend on the chart of $\\mathcal{A}_{G}$ in which it is represented; consequently, differentiable maps between open subsets of $\\mathcal{A}_{G_{1}} \\times \\cdots \\times \\mathcal{A}_{G_{n}}$ are handled as if they were maps between open subsets of ${\\mathbb{R}}^n$ . For every directed path $\\gamma$ on $M$ (possibly the representation of a sequence $\\sigma$ of multi-instructions), there is a shorter directed smooth path on $M$ that is arbitrarily close to $\\gamma$ , and that can replace $\\gamma$ as a representation of $\\sigma$ .",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s0960129525100169",
+      "url": "https://www.semanticscholar.org/paper/b48f62e5c604d237c2782c3b2421e56366c9dffc"
+    },
+    {
+      "title": "Errata to “Isomorphism theorems between models of mixed choice,” fixes and consequences",
+      "abstract": "The results of Section 3.1 of the 2017 paper “Isomorphism Theorems between Models of Mixed Choice” need an additional assumption when $\\bullet$ is “ $1$ .” If $\\bullet$ is nothing or “ $\\leq 1$ ,” no change is needed. Also, the mistake only applies to the angelic cases, namely to the maps $r_{{\\mathtt {A}}{\\mathtt {P}}}$ and $s^\\bullet _{{\\mathtt {A}}{\\mathtt {P}}}$ ; the demonic cases $r_{{\\mathtt {D}}{\\mathtt {P}}}$ and $s^\\bullet _{{\\mathtt {D}}{\\mathtt {P}}}$ are unaffected. If $\\bullet$ is “ $1$ ,” and in the angelic cases, instead of just assuming that $\\mathcal L X$ is locally convex, we need to additionally assume that $X$ is compact, or that $\\mathcal L X$ is locally convex-compact, sober, and topological – for example, if $X$ is core-compact – or that $X$ is LCS-complete, namely, a homeomorph of a $G_\\delta$ subspace of a locally compact sober space.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129525100200",
+      "url": "https://www.semanticscholar.org/paper/42e78b995fadc943224f976cfd0272d8c52464d7"
+    },
+    {
+      "title": "Strong well-filteredness of upper topology on sup-complete posets",
+      "abstract": "We first introduce and investigate a new class of $T_0$ -spaces – strong $R$ -spaces, which are stronger than both $R$ -spaces and strongly well-filtered spaces. It is proved that any sup-complete poset equipped with the upper topology is a strong $R$ -space, and the Hoare power space of a $T_0$ -space is a strong $R$ -space. Hence, the upper topology on a sup-complete poset is strongly well-filtered, and the Hoare power space of a $T_0$ -space is strongly well-filtered, which answers two problems recently posed by Xu.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/s0960129526100589",
+      "url": "https://www.semanticscholar.org/paper/be73b361702f7d28a1ee4b3f7b25f5183a568667"
+    },
+    {
+      "title": "On traces in categories of contractions",
+      "abstract": "Traced monoidal categories model processes that can feed their outputs back to their own inputs, abstracting iteration. The category of finite-dimensional Hilbert spaces with the direct sum tensor is not traced. But surprisingly, in 2014, Bartha showed that the monoidal subcategory of isometries is traced. The same holds for coisometries, unitary maps, and contractions. This suggests the possibility of feeding outputs of quantum processes back to their own inputs, analogous to iteration. In this paper, we show that Bartha’s result is not specifically tied to Hilbert spaces, but works in any dagger additive category with Moore–Penrose pseudoinverses (a natural dagger-categorical generalization of inverses).",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129525100431",
+      "url": "https://www.semanticscholar.org/paper/0c56de9672aaa8b927b2a434d50e8a5d8be7bbb1"
+    },
+    {
+      "title": "Inquisitive split and structural completeness",
+      "abstract": "In this paper, the notion of structural completeness is explored in the context of a generalized class of superintuitionistic logics that also involve systems that are not closed under uniform substitution. We just require that each logic must be closed under $D$ -substitutions assigning to atomic formulas only $\\vee$ -free formulas. For these systems, we introduce four different notions of structural completeness and study how they are related. We focus on superintuitionistic inquisitive logics that validate a schema called Split and have the disjunction property. In these logics, disjunction can be interpreted in the sense of inquisitive semantics as a question-forming operator. It is shown that a logic is structurally complete with respect to $D$ -substitutions if and only if it validates Split. Various consequences of this result are explored. For example, it is shown that every superintuitionistic inquisitive logic can be characterized by a Kripke model built from $D$ -substitutions. We also formulate an algebraic counterpart of this result that says that the Lindenbaum–Tarski algebra ${\\mathscr{H}}$ of any inquisitive logic can be embedded into the Heyting algebra formed from left ideals of endomorphisms on ${\\mathscr{H}}$ . Additionally, we resolve a conjecture concerning superintuitionistic inquisitive logics due to Miglioli et al. and show that a false conjecture about superintuitionistic logics due to Minari and Wroński becomes true in the broader space of regular generalized superintuitionistic logics.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0960129525000118",
+      "url": "https://www.semanticscholar.org/paper/9804d7bb763086fa52829841e99afc7af720c7d2"
+    }
+  ]
+}

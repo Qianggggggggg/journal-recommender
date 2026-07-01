@@ -1,0 +1,1026 @@
+{
+  "matched": [
+    {
+      "title": "Polyhedral Specification and Code Generation of Sp",
+      "venue": "ACM Transactions on Architecture and Code Optimization",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "ACM Transactions on Architecture and Code Optimization",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Enhancing Neural Network Reliability: Insights Fro",
+      "venue": "IEEE Transactions on Computers",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "IEEE Transactions on Computers",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Fair Coflow Scheduling via Controlled Slowdown",
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "KLNK: Expanding Page Boundaries in a Distributed S",
+      "venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "IEEE Transactions on Parallel and Distributed Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Generative AI for Self-Adaptive Systems: State of ",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A User Study on Explainable Online Reinforcement L",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+      "venue": "IEEE Transactions on Cloud Computing",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "IEEE Transactions on Cloud Computing",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Dynamic Reliability Management in Neuromorphic Com",
+      "venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "NORM: An FPGA-based Non-volatile Memory Emulation ",
+      "venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Trade-off topology design for hierarchical network",
+      "venue": "CCF Transactions on High Performance Computing",
+      "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+      "matched_journal_venue": "CCF Transactions on High Performance Computing",
+      "journal_subject_tags": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Multi-Objective Optimization for Multi-UAV-Assiste",
+      "venue": "IEEE Transactions on Mobile Computing",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "IEEE Transactions on Mobile Computing",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Goal-Oriented Medium Access with Distributed Belie",
+      "venue": "IEEE/ACM Transactions on Networking",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "IEEE/ACM Transactions on Networking",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Aligning Task- and Reconstruction-Oriented Communi",
+      "venue": "IEEE Journal on Selected Areas in Communications",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "IEEE Journal on Selected Areas in Communications",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Resilient Collaborative Caching for Multi-Edge Sys",
+      "venue": "IEEE/ACM Transactions on Networking",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "IEEE/ACM Transactions on Networking",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "IoT Firmware Version Identification Using Transfer",
+      "venue": "ACM Transactions on Internet Technology",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "ACM Transactions on Internet Technology",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "LNNIDS: A Hybrid Liquid Neural Network based IDS f",
+      "venue": "ACM Transactions on Internet Technology",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "ACM Transactions on Internet Technology",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A new hybrid approach combining GCN and LSTM for r",
+      "venue": "Computer Networks",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "Computer Networks",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A Constrained Shortest Path Scheme for Virtual Net",
+      "venue": "IEEE Transactions on Network and Service Management",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "IEEE Transactions on Network and Service Management",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Zero trust-based authentication for Inter-Satellit",
+      "venue": "Ad hoc Networks",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "Ad hoc Networks",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A novel model for optimal selection of relay bus w",
+      "venue": "Wireless Networks",
+      "metadata_area": "计算机网络",
+      "matched_journal_venue": "Wireless Networks",
+      "journal_subject_tags": [
+        "计算机网络"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A High-Throughput and Secure Coded Blockchain for ",
+      "venue": "IEEE Transactions on Dependable and Secure Computing",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "IEEE Transactions on Dependable and Secure Computing",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "RC-NVM: Recovery-Aware Reliability-Security Co-Des",
+      "venue": "IEEE Transactions on Dependable and Secure Computing",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "IEEE Transactions on Dependable and Secure Computing",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Rethinking Membership Inference Attacks Against Tr",
+      "venue": "IEEE Transactions on Information Forensics and Security",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "IEEE Transactions on Information Forensics and Security",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "TIMESAFE: Timing Interruption Monitoring and Secur",
+      "venue": "ACM Transactions on Privacy and Security",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "ACM Transactions on Privacy and Security",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "LTL-based runtime verification framework for cyber",
+      "venue": "Computers & Security",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "Computers & Security",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "CDDA-MD: An efficient malicious traffic detection ",
+      "venue": "Computers & Security",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "Computers & Security",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Distinguishing Natural and Computer-Generated Imag",
+      "venue": "Journal of Information Security and Applications",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "Journal of Information Security and Applications",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Analysis and Mitigation of Covert Timing Communica",
+      "venue": "Security and Communication Networks",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "Security and Communication Networks",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Enhancing vulnerability detection efficiency: An e",
+      "venue": "Journal of Information Security and Applications",
+      "metadata_area": "网络与信息安全",
+      "matched_journal_venue": "Journal of Information Security and Applications",
+      "journal_subject_tags": [
+        "网络与信息安全"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Socio-Technical Grounded Theory for Software Engin",
+      "venue": "IEEE Transactions on Software Engineering",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "IEEE Transactions on Software Engineering",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Decomposition-based Synthesis for Applying Divide-",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "ACM Transactions on Programming Languages and Systems",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Locally Abstract, Globally Concrete Semantics of C",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "ACM Transactions on Programming Languages and Systems",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Adversities in Abstract Interpretation - Accommoda",
+      "venue": "ACM Transactions on Programming Languages and Systems",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "ACM Transactions on Programming Languages and Systems",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Mitigating Noise in Quantum Software Testing Using",
+      "venue": "IEEE Transactions on Software Engineering",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "IEEE Transactions on Software Engineering",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Proactive–reactive microservice architecture globa",
+      "venue": "Journal of Systems and Software",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "Journal of Systems and Software",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Evolution of code technical debt in microservices ",
+      "venue": "Journal of Systems and Software",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "Journal of Systems and Software",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Applying bayesian data analysis for causal inferen",
+      "venue": "Empirical Software Engineering",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "Empirical Software Engineering",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Knowledge Management Strategies and Processes in A",
+      "venue": "International Journal of Software Engineering and Knowledge Engineering",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "International Journal of Software Engineering and Knowledge Engineering",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Supporting the identification of prevalent quality",
+      "venue": "Software Quality Journal",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "Software Quality Journal",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "On the correlation between architectural smells an",
+      "venue": "Software Quality Journal",
+      "metadata_area": "软件工程/系统软件/程序设计语言",
+      "matched_journal_venue": "Software Quality Journal",
+      "journal_subject_tags": [
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Unifying Large Language Models and Knowledge Graph",
+      "venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Database Repairing with Soft Functional Dependenci",
+      "venue": "ACM Transactions on Database Systems",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Database Systems",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "The Ring: Worst-case Optimal Joins in Graph Databa",
+      "venue": "ACM Transactions on Database Systems",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Database Systems",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Linking Entities across Relations and Graphs",
+      "venue": "ACM Transactions on Database Systems",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Database Systems",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Fair-RGNN: Mitigating Relational Bias on Knowledge",
+      "venue": "ACM Transactions on Knowledge Discovery from Data",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Knowledge Discovery from Data",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Enhancing Heterogeneous Knowledge Graph Completion",
+      "venue": "ACM Transactions on Knowledge Discovery from Data",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Knowledge Discovery from Data",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Order, subset construction and sequential pattern ",
+      "venue": "Information Sciences",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "Information Sciences",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Optimisation of multiple clustering based undersam",
+      "venue": "Information Sciences",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "Information Sciences",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Fairness and Diversity in Recommender Systems: A S",
+      "venue": "ACM Transactions on Intelligent Systems and Technology",
+      "metadata_area": "数据库/数据挖掘/内容检索",
+      "matched_journal_venue": "ACM Transactions on Intelligent Systems and Technology",
+      "journal_subject_tags": [
+        "数据库/数据挖掘/内容检索"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "NP-Hardness of Approximating Meta-Complexity: A Cr",
+      "venue": "SIAM Journal on Computing",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "SIAM Journal on Computing",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "hIPPYlib-MUQ: A Bayesian Inference Software Framew",
+      "venue": "ACM Transactions on Mathematical Software",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "ACM Transactions on Mathematical Software",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Ultrasparse Ultrasparsifiers and Faster Laplacian ",
+      "venue": "ACM Transactions on Algorithms",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "ACM Transactions on Algorithms",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A Simpler and Parallelizable O(sqrt(log n))-Approx",
+      "venue": "ACM Transactions on Algorithms",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "ACM Transactions on Algorithms",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Peeling Close to the Orientability Threshold Spati",
+      "venue": "ACM Transactions on Algorithms",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "ACM Transactions on Algorithms",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Stateless model checking for TSO and PSO",
+      "venue": "Acta Informatica",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "Acta Informatica",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Average-Case Rigidity Lower Bounds",
+      "venue": "Theory of Computing Systems",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "Theory of Computing Systems",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Improved Online Scheduling with Restarts on a Sing",
+      "venue": "Theory of Computing Systems",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "Theory of Computing Systems",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Control Structures in Computable Numberings and th",
+      "venue": "Theory of Computing Systems",
+      "metadata_area": "计算机科学理论",
+      "matched_journal_venue": "Theory of Computing Systems",
+      "journal_subject_tags": [
+        "计算机科学理论"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Instant neural graphics primitives with a multires",
+      "venue": "ACM Transactions on Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "ACM Transactions on Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "MoVer: Motion Verification for Motion Graphics Ani",
+      "venue": "ACM Transactions on Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "ACM Transactions on Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Real-time Multi-Map Saliency-Driven Gaze Behavior ",
+      "venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Interactive Volume Visualization via Multi-Resolut",
+      "venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "IEEE Transactions on Visualization and Computer Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Real-time Neural Appearance Models",
+      "venue": "ACM Transactions on Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "ACM Transactions on Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Low-Light Phase Retrieval With Implicit Generative",
+      "venue": "IEEE Transactions on Image Processing",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "IEEE Transactions on Image Processing",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "High-Similarity-Pass Attention for Single Image Su",
+      "venue": "IEEE Transactions on Image Processing",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "IEEE Transactions on Image Processing",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Neurosymbolic Models for Computer Graphics",
+      "venue": "Computer Graphics Forum",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Computer Graphics Forum",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Generalized Lipschitz Tracing of Implicit Surfaces",
+      "venue": "Computer Graphics Forum",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Computer Graphics Forum",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "SPaGS: Fast and Accurate 3D Gaussian Splatting for",
+      "venue": "Computer Graphics Forum",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Computer Graphics Forum",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A point-normal interpolatory subdivision scheme pr",
+      "venue": "Computer Aided Geometric Design",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Computer Aided Geometric Design",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Generative artificial intelligence: a systematic r",
+      "venue": "Multimedia Tools and Applications",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Multimedia Tools and Applications",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Rendering piecewise approximations of SDFs through",
+      "venue": "Computers & Graphics",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "Computers & Graphics",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Research on a multi‐scale degradation fusion netwo",
+      "venue": "IET Image Processing",
+      "metadata_area": "计算机图形学与多媒体",
+      "matched_journal_venue": "IET Image Processing",
+      "journal_subject_tags": [
+        "计算机图形学与多媒体"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Explanation in Artificial Intelligence: Insights f",
+      "venue": "Artificial Intelligence",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Artificial Intelligence",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Policy Gradient Methods in the Presence of Symmetr",
+      "venue": "Journal of Machine Learning Research",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Journal of Machine Learning Research",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Localisation of Regularised and Multiview Support ",
+      "venue": "Journal of Machine Learning Research",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Journal of Machine Learning Research",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Exploring the Effects of User-Agent and User-Desig",
+      "venue": "ACM Transactions on Applied Perception",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "ACM Transactions on Applied Perception",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "GazeFusion: Saliency-Guided Image Generation",
+      "venue": "ACM Transactions on Applied Perception",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "ACM Transactions on Applied Perception",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Incremental Learning Methodologies for Addressing ",
+      "venue": "Journal of Artificial Intelligence Research",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Journal of Artificial Intelligence Research",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Exploiting Domain-Specific Parallel Data on Multil",
+      "venue": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Feature selection based on multi-perspective dynam",
+      "venue": "Applied Intelligence",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Applied Intelligence",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Discovering top-k periodic and high-utility patter",
+      "venue": "Applied Intelligence",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Applied Intelligence",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Performance analysis of subsampled LiDAR point clo",
+      "venue": "Applied Intelligence",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Applied Intelligence",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "From classification to landmark-aware identificati",
+      "venue": "Neural Computing and Applications",
+      "metadata_area": "人工智能",
+      "matched_journal_venue": "Neural Computing and Applications",
+      "journal_subject_tags": [
+        "人工智能"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Cognitive Spillover in Human-AI Teams",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "ACM Transactions on Computer-Human Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "GUI Behaviors to Minimize Pointing-based Interacti",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "ACM Transactions on Computer-Human Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Achieving Symmetry in Synchronous Interaction in H",
+      "venue": "ACM Transactions on Computer-Human Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "ACM Transactions on Computer-Human Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Understanding user intent modeling for conversatio",
+      "venue": "User Modeling and User-Adapted Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "User Modeling and User-Adapted Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Synthesizing mmWave range-doppler data from videos",
+      "venue": "CCF Transactions on Pervasive Computing and Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "CCF Transactions on Pervasive Computing and Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Ironies of Generative AI: Understanding and Mitiga",
+      "venue": "International Journal of Human-Computer Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "International Journal of Human-Computer Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "The Role of Robot Competence, Autonomy, and Person",
+      "venue": "ACM Transactions on Human-Robot Interaction",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "ACM Transactions on Human-Robot Interaction",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "On-device indoor place prediction using WiFi-RTT a",
+      "venue": "Pervasive and Mobile Computing",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "Pervasive and Mobile Computing",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Edge computing and 5G network integration for mobi",
+      "venue": "Pervasive and Mobile Computing",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "Pervasive and Mobile Computing",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "In-bed gesture recognition to support the communic",
+      "venue": "Pervasive and Mobile Computing",
+      "metadata_area": "人机交互与普适计算",
+      "matched_journal_venue": "Pervasive and Mobile Computing",
+      "journal_subject_tags": [
+        "人机交互与普适计算"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Adaptive and Fair Transformation for Recoverable M",
+      "venue": "Journal of the ACM",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "Journal of the ACM",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A Survey on Stream-Based Architectures: From Accel",
+      "venue": "Proceedings of the IEEE",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "Proceedings of the IEEE",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "A Review of Safe Reinforcement Learning Methods fo",
+      "venue": "Proceedings of the IEEE",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "Proceedings of the IEEE",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "ChangeMamba: Remote Sensing Change Detection With ",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "EarthGPT: A Universal Multimodal Large Language Mo",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "IEEE Transactions on Geoscience and Remote Sensing",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Serverless Computing: A Technological and Architec",
+      "venue": "Journal of Computer Science and Technology",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "Journal of Computer Science and Technology",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Multi-modal Representation Learning Enables Accura",
+      "venue": "IEEE Journal of Biomedical and Health Informatics",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "IEEE Journal of Biomedical and Health Informatics",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Robust graph structure learning to improve multi-o",
+      "venue": "BMC Bioinformatics",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "BMC Bioinformatics",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    },
+    {
+      "title": "Rotation Equivariant Convolution-based Network for",
+      "venue": "IEEE Geoscience and Remote Sensing Letters",
+      "metadata_area": "交叉/综合/新兴",
+      "matched_journal_venue": "IEEE Geoscience and Remote Sensing Letters",
+      "journal_subject_tags": [
+        "交叉/综合/新兴"
+      ],
+      "reason": ""
+    }
+  ],
+  "not_found": [],
+  "mismatches": []
+}

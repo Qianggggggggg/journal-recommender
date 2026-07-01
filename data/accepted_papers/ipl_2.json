@@ -1,0 +1,70 @@
+{
+  "journal_id": "ipl_2",
+  "journal_name": "Information Processing Letters",
+  "papers": [
+    {
+      "title": "Representations of stably continuous semi-lattices by information systems and abstract bases",
+      "abstract": "In this paper, we introduce two new notions of S-continuous information systems and S-abstract bases which provide concrete representations of stably continuous semi-lattices. We shed light on how the states of an S-continuous information system and the round ideal completion of an S-abstract basis form a stably continuous semi-lattice, respectively. Then we obtain two representation theorems for stably continuous semi-lattices. What is more, we show the equivalence of the categories corresponding to these three structures.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ipl.2020.106036",
+      "url": "https://www.semanticscholar.org/paper/a85d7f068ecf2ac03e947e9a51e2b1d82b0e872a"
+    },
+    {
+      "title": "Practical committing attacks against Rocca-S",
+      "abstract": "This paper shows practical committing attacks against Rocca-S, an authenticated encryption with associated data scheme designed for 6G applications. Previously, the best complexity of the attack was 2 64 by Derbez et al. in ToSC 2024(1)/FSE 2024. We show that the committing attack against Rocca by Takeuchi et al. in ToSC 2024(2)/FSE 2025 can be applied to Rocca-S, where Rocca is an earlier version of Rocca-S. We show a concrete test vector of our attack. We also point out a committing attack that exploits equivalent keys.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106610",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106610"
+    },
+    {
+      "title": "The Steiner path aggregation problem",
+      "abstract": "In the Steiner Path Aggregation Problem , our goal is to aggregate paths in a directed network into a single arborescence without significantly disrupting the paths. In particular, we are given a directed multigraph with colored arcs, a root, and k terminals, each of which has a monochromatic path to the root. Our goal is to find an arborescence in which every terminal has a path to the root, and its path does not switch colors too many times. We give an efficient algorithm that finds such a solution with at most 2 log 4 3 ⁡ k color switches. Up to constant factors this is the best possible universal bound, as there are graphs requiring at least log 2 ⁡ k color switches.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106608",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106608"
+    },
+    {
+      "title": "Finding the cyclic covers of a string",
+      "abstract": "We introduce the concept of cyclic covers, which generalizes the classical notion of covers in strings. Given any string X , a factor W of X is called a cyclic cover if each position of X belongs to an occurrence of a cyclic shift of W in X . Two cyclic covers are distinct if one is not a cyclic shift of the other. The cyclic covers problem asks for all distinct cyclic covers of an input string X . We present an algorithm that solves the cyclic covers problem in O ( n log ⁡ n ) time, where n is the length of X . It is based on finding a well-structured set of standard occurrences of a constant number of factors of a cyclic cover candidate W , computing the regions of X covered by cyclic shifts of W , extending those factors, and taking the union of the results. • We introduce the cyclic cover problem. • Two cyclic covers are distinct if one is not a cyclic shift of the other. • The cyclic cover problem requires finding all distinct cyclic covers of X . • We show that for a string of length n, the cyclic cover problem can be solved in O ( n log ⁡ n ) time.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106594",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106594"
+    },
+    {
+      "title": "The longest common subsequence problem for small alphabets in the word RAM model",
+      "abstract": "Given two strings of lengths m and n , with m ≤ n , the longest common subsequence problem consists of computing a common subsequence of maximum length by deleting symbols from both strings. While the O ( m n ) algorithm devised in 1974 is optimal in the most general setting, algorithms that depend on parameters other than m and n have been proposed since then. In the word RAM model, let w be the word size, s be the alphabet size, d be the number of dominant symbol matches between the strings, and p be the length of the longest common subsequence. Fast algorithms for this problem have complexities O ( m n / log ⁡ n ) , O ( m n / w ) , O ( n s + min ⁡ ( p ( n − p ) , p m ) ) , O ( n log ⁡ s + d log ⁡ log ⁡ min ⁡ ( d , m n / d ) ) , O ( n s + min ⁡ ( d s , p m ) ) , and O ( n s + s ! 2 s + d log ⁡ s ) . In this work, we present an O ( n ( s + log ⁎ ⁡ n ) + min ⁡ ( d log ⁡ s , p m ) ) algorithm when s ∈ O ( w ) , and also an O ( n ( s + log ⁎ ⁡ n ) + d ) algorithm when s ≤ w which uses bitwise instructions that became recently available in modern processors.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106579",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106579"
+    },
+    {
+      "title": "Fair and truthful allocations under leveled valuations",
+      "abstract": "We study the problem of fairly allocating indivisible goods among agents which are equipped with leveled valuation functions. Such preferences, that have been studied before in economics and fair division literature, capture a simple and intuitive economic behavior; larger bundles are always preferred to smaller ones. We provide a fine-grained analysis for various subclasses of leveled valuations focusing on two extensively studied notions of fairness, (approximate) MMS and EFX. In particular, we present a general positive result, showing the existence of 2/3-MMS allocations under valuations that are both leveled and submodular. We also show how some of our ideas can be used beyond the class of leveled valuations; for the case of two submodular (not necessarily leveled) agents we show that there always exists a 2/3-MMS allocation, complementing a recent impossibility result. Then, we switch to the case of subadditive and fractionally subadditive leveled agents, where we are able to show tight (lower and upper) bounds of 1/2 on the approximation factor of MMS. Moreover, we show the existence of exact EFX allocations under general leveled valuations via a simple protocol that in addition satisfies several natural economic properties. Finally, we take a mechanism design approach and we propose protocols that are both truthful and approximately fair under leveled valuations. • We study various notions of fairness under leveled valuations. • Positive results regarding the existence of approximate MMS allocations. • We show the existence of exact EFX allocations under leveled valuations. • We explore the interplay of fairness and incentive compatibility for this class of valuations and show positive results.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106577",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106577"
+    },
+    {
+      "title": "A note on the complexity of one-sided crossing minimization of trees",
+      "abstract": "In 2011, Harrigan and Healy claimed that one-sided crossing minimization can be solved in polynomial time on trees [1] . We point out a counterexample to their claims, and show that one-sided crossing minimization is -hard for trees. • Pointing out a wrong claim about one-sided crossing minimization on trees in a previous paper. • Showing a counterexample for the aforementioned claim. • Showing NP-hardness for one-sided crossing minimization on trees.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106575",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106575"
+    },
+    {
+      "title": "A note on the method of equal shares",
+      "abstract": "The Method of Equal Shares (ES) is a popular approval-based multi-winner voting rule, which was originally proposed by Peters and Skowron. It satisfies several well-known representation axioms, like extended justified representation (EJR) and priceability, and it can be computed in polynomial time. Further, it has already been employed in several real participatory budgeting elections. In this note, we prove that ES is an instance of the EJR-Exact family of voting rules that also satisfy EJR and were proposed by Aziz et al. 2018 before the work of Peters and Skowron. • EJR-Exact is a broad family of approval-based multi-winner voting rules. • All the voting rules in the EJR-Exact family satisfy EJR and EJR+. • Many rules in the EJR-Exact family can be computed in polynomial time. • We prove that the popular Method of Equal Shares is a particular instance of this family.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ipl.2025.106576",
+      "url": "https://doi.org/10.1016/j.ipl.2025.106576"
+    }
+  ]
+}

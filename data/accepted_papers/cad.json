@@ -1,0 +1,30 @@
+{
+  "journal_id": "cad",
+  "journal_name": "Computer-Aided Design",
+  "papers": [
+    {
+      "title": "TabPFN for Zero-shot Parametric Engineering Design Generation",
+      "abstract": "Deep generative models for engineering design often require substantial computational cost, large training datasets, and extensive retraining when design requirements or datasets change, limiting their applicability in real-world engineering design workflow. In this work, we propose a zero-shot generation framework for parametric engineering design based on TabPFN, enabling conditional design generation using only a limited number of reference samples and without any task-specific model training or fine-tuning. The proposed method generates design parameters sequentially conditioned on target performance indicators, providing a flexible alternative to conventional generative models. The effectiveness of the proposed approach is evaluated on three engineering design datasets, i.e., ship hull design, BlendedNet aircraft, and UIUC airfoil. Experimental results demonstrate that the proposed method achieves competitive diversity across highly structured parametric design spaces, remains robust to variations in sampling, resolution and parameter dimensionality of geometry generation, and achieves a low performance error (e.g., less than 2% in generated ship hull designs'performance). Compared with diffusion-based generative models, the proposed framework significantly reduces computational overhead and data requirements while preserving reliable generation performance. These results highlight the potential of zero-shot, data-efficient generation as a practical and efficient tool for engineering design, enabling rapid deployment, flexible adaptation to new design settings, and ease of integration into real-world engineering workflows.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2602.02735",
+      "url": "https://www.semanticscholar.org/paper/d30958650777c0efbbcde7691eb54fed55747e29"
+    },
+    {
+      "title": "Sinkhorn-CPD: Robust point cloud registration via unbalanced entropic optimal transport",
+      "abstract": "Coherent Point Drift (CPD) is widely used for rigid point cloud registration because of its soft correspondences and closed-form parameter updates. However, CPD's target-side marginal constraint forces every observation, including outliers, to receive exactly unit probability mass. This assumption degrades registration accuracy under heavy outliers and partial overlap. Optimal transport (OT) methods can handle missing mass through unbalanced formulations, but require hand-tuned annealing schedules. In this paper, we propose Sinkhorn-CPD, which replaces CPD's target-side marginal constraint with dual Kullback-Leibler penalties, allowing the algorithm to discard outliers on both sides. The resulting formulation is a fully unbalanced entropic optimal transport problem, which can be efficiently solved by generalized Sinkhorn iterations. Moreover, Sinkhorn-CPD preserves the closed-form Procrustes and variance updates of CPD. In our method, the variance sigma^2 plays the role of the entropic regularization parameter, which induces an automatic annealing schedule from diffuse to sharp correspondences without manual temperature tuning. Experiments on synthetic, cross-category, and scan-to-CAD benchmarks show that Sinkhorn-CPD achieves state-of-the-art accuracy, with strong robustness to outliers and partial overlap.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cad.2026.104104",
+      "url": "https://www.semanticscholar.org/paper/873fe09380d850f9510db04537854c288e0d11ab"
+    },
+    {
+      "title": "Quasi-symmetric nets: a constructive approach to the equimodular elliptic type of Kokotsakis polyhedra",
+      "abstract": "A Kokotsakis polyhedron is a polyhedral mesh in three-dimensional Euclidean space formed by a central n-gonal face (the base), n quadrilateral faces each sharing one edge with the base, and n triangular faces inserted between every two adjacent quadrilaterals; it is called flexible if it admits a continuous deformation that preserves the rigidity of every face. This work investigates flexible Kokotsakis polyhedra with a quadrangular base (n = 4) of equimodular elliptic type, filling a significant gap in the literature by providing the first explicit constructions of this type together with an explicit algebraic characterization in terms of flat and dihedral angles. A straightforwardly constructible class of polyhedra - called quasi-symmetric nets (QS-nets) - is introduced, characterized by a symmetry relation among flat angles. It is shown that every elliptic QS-net has equimodular elliptic type and is flexible in real three-dimensional Euclidean space (rather than only in complex configuration spaces), except for a few exceptional choices of dihedral angles, and that its flexion admits a closed-form parameterization. Examples are constructed that are non-self-intersecting and belong exclusively to the equimodular elliptic type. To support applications in computational geometry, a numerical pipeline is developed that searches for candidate solutions, verifies them using the explicit algebraic characterization, and constructs and visualizes the resulting polyhedra; numerical validations achieve high precision. Taken together, these results provide constructive criteria, algorithms, and validated examples for the equimodular elliptic type, enabling the design of a broad range of flexible Kokotsakis mechanisms.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.cad.2026.104102",
+      "url": "https://www.semanticscholar.org/paper/8be07339c0701449edaf699260ce2a256dc85ca6"
+    }
+  ]
+}

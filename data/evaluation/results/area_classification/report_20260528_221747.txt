@@ -1,0 +1,154 @@
+======================================================================
+                         测试报告                          
+======================================================================
+
+测试时间: 2026-05-28 22:17:47
+测试论文数: 102
+并行线程数: 10
+
+📊 总体准确率
+   领域匹配: 68/102 (66.7%)
+   等级匹配: 42/102 (41.2%)
+
+📋 按领域统计
+   领域                                                  匹配     总数      匹配率
+   ----------------------------------------------------------------------
+   计算机图形学与多媒体                                        13/14     █████████░   92.9%
+   软件工程/系统软件/程序设计语言                                   9/11     ████████░░   81.8%
+   人工智能                                               6/11     █████░░░░░   54.5%
+   计算机体系结构/并行与分布计算/存储系统                               6/10     ██████░░░░   60.0%
+   计算机网络                                              5/10     █████░░░░░   50.0%
+   人机交互与普适计算                                          7/10     ███████░░░   70.0%
+   网络与信息安全                                            6/9      ██████░░░░   66.7%
+   数据库/数据挖掘/内容检索                                      7/9      ███████░░░   77.8%
+   计算机科学理论                                            7/9      ███████░░░   77.8%
+   交叉/综合/新兴                                           2/9      ██░░░░░░░░   22.2%
+
+📋 按CCF等级统计
+       等级       匹配     总数      匹配率
+   ------------------------------
+   CCF-A        10/37     ██░░░░░░░░   27.0%
+   CCF-B        25/33     ███████░░░   75.8%
+   CCF-C         7/32     ██░░░░░░░░   21.9%
+
+
+======================================================================
+                         详细评分报告                          
+======================================================================
+
+
+## CCF-A 级论文 (37 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Mitigating Noise in Quantum Software Testing Using A        ✓    0.808   2.5  2.5  2.0  2.5  2.5
+The Ring: Worst-case Optimal Joins in Graph Databa A        ✓    0.808   2.5  2.5  2.0  2.5  2.5
+NP-Hardness of Approximating Meta-Complexity: A Cr A        ✓    0.800   2.5  2.5  1.5  3.0  2.0
+Locally Abstract, Globally Concrete Semantics of C A        ✓    0.783   2.5  2.5  1.5  2.5  2.5
+Interactive Volume Visualization via Multi-Resolut A        ✓    0.783   2.0  2.5  2.5  2.5  2.5
+Decomposition-based Synthesis for Applying Divide- A        ✓    0.767   2.5  2.0  2.0  2.5  2.5
+Instant neural graphics primitives with a multires A        ✓    0.767   2.5  2.0  2.0  2.5  2.5
+Database Repairing with Soft Functional Dependenci A        ✓    0.742   2.5  2.0  1.5  2.5  2.5
+Achieving Symmetry in Synchronous Interaction in H A        ✓    0.742   2.5  2.0  1.5  2.5  2.5
+Polyhedral Specification and Code Generation of Sp A        ✓    0.725   2.5  2.0  1.5  2.5  2.0
+MoVer: Motion Verification for Motion Graphics Ani B        ✗    0.708   2.0  2.0  2.5  2.0  2.5
+Localisation of Regularised and Multiview Support  B        ✗    0.708   2.5  2.0  1.5  2.0  2.5
+Aligning Task- and Reconstruction-Oriented Communi B        ✗    0.700   2.0  2.0  2.0  2.5  2.0
+Cognitive Spillover in Human-AI Teams         B        ✗    0.692   2.0  2.0  1.5  2.5  2.5
+Adversities in Abstract Interpretation - Accommoda B        ✗    0.683   2.0  2.0  2.0  2.0  2.5
+Rethinking Membership Inference Attacks Against Tr B        ✗    0.675   2.0  2.0  1.5  2.5  2.0
+Fair Coflow Scheduling via Controlled Slowdown B        ✗    0.658   2.0  2.0  1.5  2.0  2.5
+Low-Light Phase Retrieval With Implicit Generative B        ✗    0.658   2.0  2.0  1.5  2.0  2.5
+GUI Behaviors to Minimize Pointing-based Interacti B        ✗    0.658   2.0  2.0  1.5  2.0  2.5
+Unifying Large Language Models and Knowledge Graph B        ✗    0.650   2.0  1.5  1.5  2.5  2.5
+Goal-Oriented Medium Access with Distributed Belie B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Multi-Objective Optimization for Multi-UAV-Assiste B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Resilient Collaborative Caching for Multi-Edge Sys B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Linking Entities across Relations and Graphs  B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Real-time Multi-Map Saliency-Driven Gaze Behavior  B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+High-Similarity-Pass Attention for Single Image Su B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Adaptive and Fair Transformation for Recoverable M B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+A Review of Safe Reinforcement Learning Methods fo B        ✗    0.642   1.5  2.0  1.5  2.5  2.5
+Socio-Technical Grounded Theory for Software Engin B        ✗    0.633   2.0  1.5  1.5  2.5  2.0
+Policy Gradient Methods in the Presence of Symmetr B        ✗    0.633   2.0  1.5  1.5  2.5  2.0
+A Survey on Stream-Based Architectures: From Accel B        ✗    0.625   1.5  2.0  1.5  2.5  2.0
+RC-NVM: Recovery-Aware Reliability-Security Co-Des B        ✗    0.617   2.0  1.5  1.5  2.0  2.5
+Enhancing Neural Network Reliability: Insights Fro B        ✗    0.600   2.0  1.5  1.5  2.0  2.0
+Real-time Neural Appearance Models            B        ✗    0.600   2.0  1.5  1.5  2.0  2.0
+A High-Throughput and Secure Coded Blockchain for  B        ✗    0.592   1.5  2.0  1.5  2.0  2.0
+Explanation in Artificial Intelligence: Insights f B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+KLNK: Expanding Page Boundaries in a Distributed S C        ✗    0.517   1.5  1.5  1.5  1.5  2.0
+
+## CCF-B 级论文 (33 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+GazeFusion: Saliency-Guided Image Generation  A        ✗    0.808   2.5  2.5  2.0  2.5  2.5
+A Simpler and Parallelizable O(sqrt(log n))-Approx A        ✗    0.783   2.5  2.5  1.5  2.5  2.5
+Understanding user intent modeling for conversatio A        ✗    0.758   2.0  2.5  2.0  2.5  2.5
+Applying bayesian data analysis for causal inferen A        ✗    0.725   2.0  2.5  2.0  2.0  2.5
+Ultrasparse Ultrasparsifiers and Faster Laplacian  A        ✗    0.725   2.5  2.0  1.5  2.5  2.0
+hIPPYlib-MUQ: A Bayesian Inference Software Framew B        ✓    0.717   2.0  2.0  2.0  2.5  2.5
+ChangeMamba: Remote Sensing Change Detection With  B        ✓    0.708   2.0  2.0  2.5  2.0  2.5
+Generalized Lipschitz Tracing of Implicit Surfaces B        ✓    0.704   2.2  2.0  1.8  2.2  2.2
+Evolution of code technical debt in microservices  B        ✓    0.692   2.0  2.0  1.5  2.5  2.5
+Proactive–reactive microservice architecture globa B        ✓    0.683   2.5  1.5  1.5  2.5  2.0
+Peeling Close to the Orientability Threshold Spati B        ✓    0.683   2.0  2.5  1.5  2.0  2.0
+CDDA-MD: An efficient malicious traffic detection  B        ✓    0.675   2.0  2.0  1.5  2.5  2.0
+EarthGPT: A Universal Multimodal Large Language Mo B        ✓    0.675   1.5  2.0  2.5  2.5  2.0
+SPaGS: Fast and Accurate 3D Gaussian Splatting for B        ✓    0.667   2.0  2.0  2.0  2.0  2.0
+Order, subset construction and sequential pattern  B        ✓    0.658   2.0  2.0  1.5  2.0  2.5
+Neurosymbolic Models for Computer Graphics    B        ✓    0.658   2.0  2.0  1.5  2.0  2.5
+Serverless Computing: A Technological and Architec B        ✓    0.658   2.0  2.0  1.5  2.0  2.5
+A User Study on Explainable Online Reinforcement L B        ✓    0.643   1.8  2.0  1.8  2.0  2.2
+Leakage-Suppressed Encrypted Keyword Queries over  B        ✓    0.642   2.0  2.0  1.5  2.0  2.0
+LNNIDS: A Hybrid Liquid Neural Network based IDS f B        ✓    0.642   2.0  2.0  1.5  2.0  2.0
+Fair-RGNN: Mitigating Relational Bias on Knowledge B        ✓    0.642   2.0  1.5  2.0  2.0  2.5
+IoT Firmware Version Identification Using Transfer B        ✓    0.617   2.0  1.5  1.5  2.0  2.5
+LTL-based runtime verification framework for cyber B        ✓    0.617   2.0  1.5  1.5  2.0  2.5
+Ironies of Generative AI: Understanding and Mitiga B        ✓    0.608   2.0  1.5  1.0  2.5  2.0
+Incremental Learning Methodologies for Addressing  B        ✓    0.575   1.0  2.0  1.5  2.5  2.0
+Synthesizing mmWave range-doppler data from videos B        ✓    0.567   2.0  1.5  1.5  1.5  2.0
+Generative AI for Self-Adaptive Systems: State of  B        ✓    0.567   1.5  1.5  1.5  2.0  2.5
+TIMESAFE: Timing Interruption Monitoring and Secur B        ✓    0.550   1.5  1.5  1.5  2.0  2.0
+A point-normal interpolatory subdivision scheme pr B        ✓    0.550   1.5  1.5  1.5  2.0  2.0
+Exploring the Effects of User-Agent and User-Desig B        ✓    0.550   1.5  1.5  1.5  2.0  2.0
+A new hybrid approach combining GCN and LSTM for r C        ✗    0.517   1.5  1.5  1.5  1.5  2.0
+Enhancing Heterogeneous Knowledge Graph Completion C        ✗    0.517   1.5  1.5  1.5  1.5  2.0
+Optimisation of multiple clustering based undersam C        ✗    0.517   1.5  1.5  1.5  1.5  2.0
+
+## CCF-C 级论文 (32 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Stateless model checking for TSO and PSO      A        ✗    0.792   2.5  2.5  2.0  2.5  2.0
+Average-Case Rigidity Lower Bounds            A        ✗    0.767   2.5  2.5  1.5  2.5  2.0
+Control Structures in Computable Numberings and th A        ✗    0.750   2.5  2.0  2.0  2.5  2.0
+Distinguishing Natural and Computer-Generated Imag B        ✗    0.700   2.0  2.0  2.0  2.5  2.0
+Improved Online Scheduling with Restarts on a Sing B        ✗    0.700   2.0  2.5  1.5  2.0  2.5
+On the correlation between architectural smells an B        ✗    0.675   1.8  2.2  1.8  2.2  2.2
+Multi-modal Representation Learning Enables Accura B        ✗    0.650   2.0  1.5  2.5  2.0  2.0
+A Constrained Shortest Path Scheme for Virtual Net B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Enhancing vulnerability detection efficiency: An e B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Performance analysis of subsampled LiDAR point clo B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Feature selection based on multi-perspective dynam B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+The Role of Robot Competence, Autonomy, and Person B        ✗    0.642   2.0  2.0  1.5  2.0  2.0
+Fairness and Diversity in Recommender Systems: A S B        ✗    0.642   2.0  1.5  2.0  2.0  2.5
+Trade-off topology design for hierarchical network B        ✗    0.608   1.5  2.0  1.5  2.0  2.5
+Knowledge Management Strategies and Processes in A B        ✗    0.608   1.5  2.0  1.5  2.0  2.5
+Dynamic Reliability Management in Neuromorphic Com B        ✗    0.600   2.0  1.5  1.5  2.0  2.0
+Zero trust-based authentication for Inter-Satellit B        ✗    0.600   2.0  1.5  1.5  2.0  2.0
+Research on a multi‐scale degradation fusion netwo B        ✗    0.600   2.0  1.5  1.5  2.0  2.0
+Robust graph structure learning to improve multi-o B        ✗    0.592   1.5  2.0  1.5  2.0  2.0
+Analysis and Mitigation of Covert Timing Communica B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+Generative artificial intelligence: a systematic r B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+On-device indoor place prediction using WiFi-RTT a B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+Edge computing and 5G network integration for mobi B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+In-bed gesture recognition to support the communic B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+Rotation Equivariant Convolution-based Network for B        ✗    0.550   1.5  1.5  1.5  2.0  2.0
+NORM: An FPGA-based Non-volatile Memory Emulation  C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+A novel model for optimal selection of relay bus w C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+Supporting the identification of prevalent quality C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+Rendering piecewise approximations of SDFs through C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+Discovering top-k periodic and high-utility patter C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+From classification to landmark-aware identificati C        ✓    0.517   1.5  1.5  1.5  1.5  2.0
+Exploiting Domain-Specific Parallel Data on Multil C        ✓    0.500   1.5  1.5  1.5  1.5  1.5
+
+📄 详细评分: data/evaluation/results/area_classification/detail_20260528_221747.json

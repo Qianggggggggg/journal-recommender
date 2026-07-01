@@ -1,0 +1,78 @@
+{
+  "journal_id": "tg",
+  "journal_name": "IEEE Transactions on Games",
+  "papers": [
+    {
+      "title": "2020 IEEE Conference on Games (CoG)",
+      "abstract": "Webmaster Event Chair Ruck Thawonmas (Ritsumeikan University, Japan) Kyung-Joong Kim (GIST, Korea) Fabio Zambetta (Royal Melbourne Institute of Technology, Australia) Kokolo Ikeda (Japan Advanced Institute of Science and Technology, Japan) Fotis Liarokapis (Masaryk University, Czech Republic) Jialin Liu (Southern University of Science and Technology, China) Youichiro Miyake (Square Enix, Japan) Foaad Khosmood (California Polytechnic State University, USA) África Periáñez (Inditex, Spain) Hyunsoo Park (NCSOFT, Korea) Florian Richoux (JFLI, CNRS, NII, Japan) Diego Perez Liebana (Queen Mary University of London, UK) Ryosuke Yamanishi (Ritsumeikan University, Japan) Kingkarn Sookhanaphibarn (Bangkok University, Thailand) Hisashi Handa (Kindai University, Japan) Tomohiro Harada (Tokyo Metropolitan University, Japan) Masayuki Otani (Kindai University, Japan) Kohei Matsumura (Ritsumeikan University, Japan) Takeshi Ito (The University of Electro-Communications, Japan) Yun-Gyung Cheong (Sungkyunkwan University, South Korea) Gillian Smith (Worcester Polytechnic Institute, USA) Pujana Paliyawan (Ritsumeikan University, Japan) Yudai Tsujino (Ritsumeikan University, Japan) 2020 IEEE Conference on Games (CoG)",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tg.2020.2980065",
+      "url": "https://www.semanticscholar.org/paper/b4bc1020c9289f416a3925e85d29e84ea97633a4"
+    },
+    {
+      "title": "A Comprehensive Review of Multiagent Reinforcement Learning in Video Games",
+      "abstract": "Recent advancements in multiagent reinforcement learning (MARL) have demonstrated its application potential in modern games. Beginning with foundational work and progressing to landmark achievements, such as AlphaStar in StarCraft II and OpenAI Five in Dota 2, MARL has proven capable of achieving superhuman performance across diverse game environments through techniques, such as self-play, supervised learning, and deep reinforcement learning. With its growing impact, a comprehensive review has become increasingly important in this field. This article aims to provide a thorough examination of MARL’s application from turn-based two-agent games to real-time multiagent video games, including popular genres, such as sports games, first-person shooter games, real-time strategy games and multiplayer online battle arena games. We further analyze critical challenges posed by MARL in video games, including nonstationary, partial observability, sparse rewards, team coordination, and scalability, and highlight successful implementations in games, such as Rocket League, Minecraft, Quake III Arena, StarCraft II, Dota 2, Honor of Kings, etc. This article offers insights into MARL in video game AI systems, proposes a novel method to estimate game complexity, and suggests future research directions to advance MARL and its applications in game development, inspiring further innovation in this rapidly evolving field.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2025.3588809",
+      "url": "https://www.semanticscholar.org/paper/b3e5656c246958cd45e110f4494f782d3ae1c621"
+    },
+    {
+      "title": "Toward Real-Time G-Buffer-Guided Style Transfer in Computer Games",
+      "abstract": "Artistic neural style transfer (NST) has achieved remarkable success for images. However, this is not the case for dynamic 3-D environments, such as computer games, where temporal coherence remains a challenge. Our article presents an approach that uses the G-buffer information available in a game pipeline to generate robust and temporally consistent in-game artistic stylizations based on a style reference image. We use a synthetic dataset created from open-source computer games and demonstrate that the utilization of depth, normals, and edge information enables the stylization process to be more aware of the geometric and semantic aspects of a game scene. The proposed approach builds on the previous work by injecting style transfer in the rendering pipeline while also utilizing G-buffer information during inference time to improve upon the stability of the stylizations, offering a controllable way to stylize computer games in terms of temporal coherence and content preservation. Qualitative and quantitative evaluations of our in-game stylization network demonstrate significantly higher temporal stability compared to existing style transfer approaches when stylizing 3-D computer games.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2024.3372829",
+      "url": "https://www.semanticscholar.org/paper/f1629fdde212c869fe879f88061013ae1a95244e"
+    },
+    {
+      "title": "Cultural Insights in Souls-Like Games: Analyzing Player Behaviors, Perspectives, and Emotions Across a Multicultural Context",
+      "abstract": "Souls-like games are one of the most popular and emerging genres in the contemporary gaming world. This study compared the behavioral characteristics, perspectives, and emotional expressions of players in Souls-like games from different cultural backgrounds, specifically examining the distinctions and commonalities among them. Natural language processing techniques were employed to analyze English, Chinese, and Russian reviews of 17 Souls-like games to investigate players' gaming experiences, including gameplay behaviors, game evaluations, and emotional experiences. The findings revealed significant disparities among players from different cultures in all three aspects of their engagement with Souls-like games. Specifically, these players exhibited significant culture-related variations in their behavioral characteristics toward Souls-like games. In terms of perspectives, English-speaking players tended to focus more on game optimization, whereas Chinese and Russian players paid greater attention to game combat design. Regarding emotional expressions, Chinese players were more prone to exhibit emotions of anger and disgust, while English and Russian players displayed a more neutral emotional stance. These cultural insights provide valuable information for game developers to better meet the needs and expectations of players from different cultural backgrounds. This study not only broadens our understanding of player behaviors and cultural influences but also lends robust support to cross-cultural gaming research.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2024.3366239",
+      "url": "https://www.semanticscholar.org/paper/88017a27526317a204fa7667c12c714427e09b5e"
+    },
+    {
+      "title": "User-Centric Locomotion Techniques for Virtual Reality Games: A Survey of User Needs and Issues",
+      "abstract": "Virtual reality (VR) video games that are played on a VR headset are becoming increasingly common in households, and though many games require players to navigate vast virtual spaces, most homes cannot provide a large enough physical space to encompass the entire virtual space. Thus, VR video games that require locomotion often provide users with alternative locomotion techniques. While teleportation or steering is typically used as a standard, new techniques can overcome remaining problems, such as motion sickness. However, a holistic perspective of user needs and issues regarding these techniques in practical situations has not been studied on a broad basis. To address this gap in the literature and contribute to future VR video game development and research, we conducted 16 semi-structured interviews and surveyed 88 participants to help explore issues regarding existing locomotion techniques. Our results revealed preferences related to teleportation versus steering and the postures that users adopt while playing VR video games, along with user needs for locomotion techniques in each posture.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2024.3498325",
+      "url": "https://www.semanticscholar.org/paper/30e40abbe4649f4d18ea1eb04575b7d3bae5cf62"
+    },
+    {
+      "title": "AdvMap: Crafting Adversarial Maps to Counter AI Aimbot in First-Person Shooter Games",
+      "abstract": "AI-based automatic aiming cheats (a.k.a., AI aimbots) have proliferated in First-Person Shooter games, which grant malicious users an unfair gameplay advantage. Since AI aimbots operate independently of game data and are developed using object detection algorithms, they are difficult to detect with traditional anti-cheating methods. To actively counter AI aimbots, we propose AdvMap, which introduces invisible adversarial perturbations into game scene elements. In optimizing these adversarial perturbations, we design a mixture-of-misleading loss function that increases the total target confidence score within each misleading bounding box. It mitigates the risk of segment missing even when AdvMap is obscured, thereby enhancing the robustness. Besides, an L1-norm constraint with a small scale is employed during each update of the adversarial perturbations, which preserves the fidelity of the game scene. In addition, to enable effective adaptation to interact with various elements within game environments, we introduce an image-subspace-based multidirectional optimization strategy. It enables the adversarial perturbations to adaptively fit into each element by leveraging the mapping relationship between the game's 3-D scenes and its corresponding 2-D images. Furthermore, we construct a comprehensive benchmark, which includes various FPS games with different graphics styles and perspectives. Extensive experimental results demonstrate the efficacy of our method in countering various AI aimbot tools on different state-of-the-art object detection methods.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2025.3537824",
+      "url": "https://www.semanticscholar.org/paper/6622b3373c7feb3fffcbcc66f18acfae36db8652"
+    },
+    {
+      "title": "Procedural Content Generation for Cooperative Games—A Systematic Review",
+      "abstract": "In this article, we conduct a systematic review on procedural content generation (PCG) for cooperative games. Our main goal was exploring the state of the art in this area of research, and, in particular, its application to level generation for cooperative games. Another objective was determining how generating content for cooperative games could be different from generating content for other types of games. Our results showed a lack of research in this particular application of PCG. Despite this, we found a variety of use cases of PCG for cooperative games, most of them related to autonomous generation and co-creative and mixed-initiative design. In addition, we found a variety of methods and techniques being used to generate levels for cooperative games that covered the broad categories we used to condense this information. Concerning the differences between generating content for cooperative games and generating content for other types of games, the studies we found suggested that PCG for cooperative games should take into account the design specificities of cooperative games—the types of tasks, cooperative game design patterns and game mechanics used to incentivize and support cooperative gameplay.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2025.3530419",
+      "url": "https://www.semanticscholar.org/paper/a5b607ee15572f231e638e55f7f4b3a7d73cca9c"
+    },
+    {
+      "title": "Crafting Usability in Neuro-Narrative Games: The Joint Influence of Imagery Perspectives and Task Sequences in BCI–VR System",
+      "abstract": "Neuro-narrative games represent an emerging integration of brain–computer interface (BCI) and virtual reality (VR) technologies, leveraging imagery perspective and motor imagery (MI) task sequence as two critical design factors. However, the individual and combined influences of these factors on system usability remain underexplored, especially regarding the interaction between first- and third-person perspectives and the structuring of MI task sequences. This article presents a unified evaluation framework that combines objective electroencephalogram-based usability metrics with subjective user feedback to provide a comprehensive assessment in a custom-designed, user-centered BCI–VR narrative game system. Employing a within-subject experimental design, we systematically examine the main and interaction effects of perspective and sequence structure, revealing that immersive VR can mitigate perspective-induced usability gaps and that fixed MI sequences reduce cognitive workload and enhance user performance. Conversely, mixed task sequences boost user motivation but lead to increased mental workload. These findings contribute actionable design guidelines for expanding accessible, engaging, and user-centered BCI-VR game experiences to a broader range of users, ultimately supporting the development of more effective neuro-narrative systems. Importantly, our approach bridges objective neural data with subjective user experience, paving the way for holistic usability evaluation in future BCI–VR applications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2025.3615465",
+      "url": "https://www.semanticscholar.org/paper/03f4efbec532bb9ee73caf2063642da7311f917f"
+    },
+    {
+      "title": "A Modular Framework for Automated Evaluation of Procedural Content Generation in Serious Games With Deep Reinforcement Learning Agents",
+      "abstract": "Serious games (SGs) are nowadays shifting focus to include procedural content generation (PCG) in the development process as a means of offering a personalized and enhanced player experience. However, the development of a framework to assess the impact of PCG techniques when integrated into SGs remains particularly challenging. This study proposes a methodology for the automated evaluation of PCG integration in SGs, incorporating deep reinforcement learning (DRL) game testing agents. To validate the proposed framework, a previously introduced SG featuring card game mechanics and incorporating three different versions of PCG for nonplayer character (NPC) creation has been deployed. Version 1 features random NPC creation, while versions 2 and 3 utilize a genetic algorithm approach. These versions are used to test the impact of different dynamic SG environments on the proposed framework’s agents. The obtained results highlight the superiority of the DRL game testing agents trained on versions 2 and 3 over those trained on version 1 in terms of win rate (i.e., number of wins per played games) and training time. More specifically, within the execution of a test emulating regular gameplay, both versions 2 and 3 peaked at a 97% win rate and achieved statistically significant higher (p = 0.009) win rates compared to those achieved in version 1 that peaked at 94% . Overall results advocate toward the proposed framework’s capability to produce meaningful data for the evaluation of procedurally generated content in SGs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TG.2025.3589439",
+      "url": "https://www.semanticscholar.org/paper/89f33c2da9f224049a66995378245a18aaa2ae5c"
+    }
+  ]
+}

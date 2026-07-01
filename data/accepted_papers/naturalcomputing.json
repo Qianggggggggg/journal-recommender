@@ -1,0 +1,54 @@
+{
+  "journal_id": "naturalcomputing",
+  "journal_name": "Natural Computing",
+  "papers": [
+    {
+      "title": "Reservoir computing quality: connectivity and topology",
+      "abstract": "We explore the effect of connectivity and topology on the dynamical behaviour of Reservoir Computers. At present, considerable effort is taken to design and hand-craft physical reservoir computers. Both structure and physical complexity are often pivotal to task performance, however, assessing their overall importance is challenging. Using a recently developed framework, we evaluate and compare the dynamical freedom (referring to quality) of neural network structures, as an analogy for physical systems. The results quantify how structure affects the behavioural range of networks. It demonstrates how high quality reached by more complex structures is often also achievable in simpler structures with greater network size. Alternatively, quality is often improved in smaller networks by adding greater connection complexity. This work demonstrates the benefits of using dynamical behaviour to assess the quality of computing substrates, rather than evaluation through benchmark tasks that often provide a narrow and biased insight into the computing quality of physical systems.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-020-09823-1",
+      "url": "https://www.semanticscholar.org/paper/73512d39e91e3c9fbe0c1af0eecb6418b09192ae"
+    },
+    {
+      "title": "On the power of boundary rule application in membrane computing",
+      "abstract": "In this paper, it is investigated how different features of membrane systems can be simulated by the boundary rule application. Firstly, it is discussed how the effect of maximally parallel mode can be obtained by non-cooperative boundary rules applied only in sequential mode, then it is also demonstrated how membrane dissolution, or the application of using promoters and inhibitors can be simulated.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-022-09925-y",
+      "url": "https://www.semanticscholar.org/paper/cd7264dff117e0e14edaac7fbc1fcbe7ea33aed8"
+    },
+    {
+      "title": "The representational entity in physical computing",
+      "abstract": "We have developed abstraction/representation (AR) theory to answer the question “When does a physical system compute?” AR theory requires the existence of a representational entity (RE), but the vanilla theory does not explicitly include the RE in its definition of physical computing. Here we extend the theory by showing how the RE forms a linked complementary model to the physical computing model. We show that the RE does not need to be a human brain, by demonstrating its use in the case of intrinsic computing in a non-human RE: a bacterium.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-020-09805-3",
+      "url": "https://www.semanticscholar.org/paper/4adfea4e6b4d1a0d75a04bb7b820aa83bec6069f"
+    },
+    {
+      "title": "A formalization of co-transcriptional splicing as an operation on formal languages",
+      "abstract": "RNA co-transcriptionality is the process where RNA sequences are spliced while being transcribed from DNA templates. This process holds potential as a key tool for molecular programming. Co-transcriptional folding has been shown to be programmable for assembling nano-scale RNA structures, and recent advances have proven its Turing universality. While post-transcriptional splicing has been extensively studied, co-transcriptional splicing is gaining attention for its potential to save resources and space in molecular systems. However, its unpredictability has limited its practical applications. In this paper, we focus on engineering co-transcriptional splicing, moving beyond natural occurrences to program RNA sequences that produce specific target sequences through DNA templates. We introduce contextual lariat deletion operations under three energy models—linear loop penalty, logarithmic loop penalty, and constantly bounded loop length—as well as bracketed contextual deletion, where deletion occurs solely based on context matching, without any structural constraints from hairpin loops. We examine the complexity of the template constructability problem associated with these operations and study the closure properties of the languages they generate, providing insights for RNA template design in molecular programming systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-025-10051-8",
+      "url": "https://www.semanticscholar.org/paper/6ff0567f7af53e46d96acdb467001defdffdb538"
+    },
+    {
+      "title": "Connectomes inform function: from time-varying dynamics to animal behaviour",
+      "abstract": "Structure guides computation in biological and artificial neural networks. However, the nature of the relationship between structure and function, in this context, is unclear. For example, there is still debate on whether constraining a network with biological detail confers a non-trivial functional advantage over a network without such constraints. To shine light on this topic, we highlight five experiments which employ biological constraints onto artificial neural networks using empirically-guided wiring diagrams, or connectomes, from an adult fruit fly, a larval zebrafish, and from the Mammalian MRI (MaMI) dataset, and impose these onto reservoir-based recurrent neural networks, while studying changes in performance and prediction dynamics on synthetic and naturalistic time series data. We observe that fly-constrained networks are better at making predictions from chaotic input data, and in executing multiple mutually exclusive tasks simultaneously, all with a robustness to hyperparameter variations, some of which may lead to chaos. Separately, we find that the global clustering coefficient of the fly network improves performance and variance on time-varying predictions. We also report that an empirical functional connectome from the optomotor response circuitry of a larval zebrafish validates its own behaviour, and that this is interrupted by rewiring. Finally, using the MaMI dataset, we determine that rewiring degrades multifunctional capacity, and that more multifunctional networks have a higher mean degree centrality. Collectively, these findings suggest that biological topology constraints confer distinct advantages to arbitrarily-weighted networks.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-025-10020-1",
+      "url": "https://www.semanticscholar.org/paper/d40e04e9c22897a385fa807c90372bb53df6592a"
+    },
+    {
+      "title": "On the complexity of freezing automata networks of bounded pathwidth",
+      "abstract": "An automata network is a graph of entities, each holding a state from a finite set and evolving according to a local update rule which depends only on its neighbors in the network’s graph. It is freezing if there is an order on the states such that the state evolution of any node is non-decreasing in any orbit. They are commonly used to model epidemic propagation, diffusion phenomena like bootstrap percolation or cristal growth. Previous works have established that, under the hypothesis that the network graph is of bounded treewidth, many problems that can be captured by trace specifications at individual nodes admit efficient algorithms. In this paper we study the even more restricted case of a network of bounded pathwidth and show two hardness results that somehow illustrate the complexity of freezing dynamics under such a strong graph constraint. First, we show that the trace specification checking problem is NL-complete. Second, we show that deciding first order properties of the orbits augmented with a reachability predicate is NP-hard.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11047-025-10058-1",
+      "url": "https://www.semanticscholar.org/paper/f261e1ab741e7be961e33a8c96f74c6dd780126c"
+    }
+  ]
+}

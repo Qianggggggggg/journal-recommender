@@ -1,0 +1,78 @@
+{
+  "journal_id": "machinevisionandapplications",
+  "journal_name": "Machine Vision and Applications",
+  "papers": [
+    {
+      "title": "A computer vision system for recognition and defect detection for reusable containers",
+      "abstract": "Small load carriers (SLCs) are standardized reusable containers used to transport and protect customer goods in many manufacturers. Throughout the life cycle of the SLCs, they will be collected, manually checked for defects (wear, cracks, and residue on the surface), and cleaned by specialized logistic companies. Human operators in small to medium-sized companies manually evaluate the defects due to the variety and degree of possible defects and varying customer needs. This manual evaluation is not scalable and prone to errors. This work aims to fill this gap by proposing a computer vision system that can recognize the SLC type for inventory management and perform defect detection automatically. First, we develop a camera portal, consisting of standard components, that capture the relevant surfaces of the SLC. A labeled dataset of 17,530 images of 34 different SLCs with their defect status was recorded using this camera portal. We trained a classification model (ConvNeXt) using our dataset to predict the different types of SLCs achieving 100% class prediction accuracy. For defect detection, we explore eight state-of-the-art (SOTA) anomaly detection models that achieved high rankings in the MVTec industrial anomaly detection benchmark. These models are trained using default hyperparameters and the two highest-scoring models were chosen and fine-tuned. The best-fine-tuned models based on “Area under the Receiver Operating Characteristic Curve (AUROC)” are PatchCore (0.811) and DRAEM (0.748). These results indicate that there is still potential for improvement in the automation of defect detection of SLCs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-024-01636-x",
+      "url": "https://www.semanticscholar.org/paper/f7021fdf575ab87475d82fa89c5da9303b9c8cd0"
+    },
+    {
+      "title": "Vision-based power line cables and pylons detection for low flying aircraft",
+      "abstract": "Power lines are dangerous for low-flying aircraft, especially in low-visibility conditions. Thus, a vision-based system able to analyze the aircraft’s surroundings and to provide the pilots with a “second pair of eyes” can contribute to enhancing their safety. To this end, we develop a deep learning approach to jointly detect power line cables and pylons from images captured at distances of several hundred meters by aircraft-mounted cameras. In doing so, we combine a modern convolutional architecture with transfer learning and a loss function adapted to curvilinear structure delineation. We use a single network for both detection tasks and demonstrate its performance on two benchmarking datasets. We have also integrated it within an onboard system and run it inflight. We show with our experiments that it outperforms the prior distant cable detection method by Stambler et al. (in: International Conference on Robotics and Automation, 2019) on both datasets, while also successfully detecting pylons, given their annotations are available for the data.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-025-01664-1",
+      "url": "https://www.semanticscholar.org/paper/114a01602fbe69f4dc6f35504112f8c1c868cb52"
+    },
+    {
+      "title": "OmniGlasses: an optical aid for stereo vision CNNs to enable omnidirectional image processing",
+      "abstract": "Stereo vision is a key technology for 3D scene reconstruction from image pairs. Most approaches process perspective images from commodity cameras. These images, however, have a very limited field of view and only picture a small portion of the scene. In contrast, omnidirectional images, also known as fisheye images, exhibit a much larger field of view and allow a full 3D scene reconstruction with a small amount of cameras if placed carefully. However, omnidirectional images are strongly distorted which make the 3D reconstruction much more sophisticated. Nowadays, a lot of research is conducted on CNNs for omnidirectional stereo vision. Nevertheless, a significant gap between estimation accuracy and throughput can be observed in the literature. This work aims to bridge this gap by introducing a novel set of transformations, namely OmniGlasses. These are incorporated into the architecture of a fast network, i.e., AnyNet, originally designed for scene reconstruction on perspective images. Our network, Omni-AnyNet, produces accurate omnidirectional distance maps with a mean absolute error of around 13 cm at 48.4 fps and is therefore real-time capable.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-024-01534-2",
+      "url": "https://www.semanticscholar.org/paper/60eef091570e18ffff41ac5a6048043169940a60"
+    },
+    {
+      "title": "Visual complexity of urban streetscapes: human vs computer vision",
+      "abstract": "Understanding visual complexity of urban environments may improve urban design strategies and limit visual pollution due to advertising, road signage, telecommunication systems and machinery. This paper aims at quantifying visual complexity specifically in urban streetscapes, by submitting a collection of geo-referenced photographs to a group of more than 450 internet users. The average complexity ranking issued from this survey was compared with a set of computer vision predictions, attempting to find the optimal match. Overall, a computer vision indicator matching comprehensively the survey outcome did not clearly emerge from the analysis, but a set of perceptual hypotheses demonstrated that some categories of stimuli are more relevant. The results show how images with contrasting colour regions and sharp edges are more prone to drive the feeling of high complexity.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-023-01484-1",
+      "url": "https://www.semanticscholar.org/paper/dfa4f5b31c7706a6ae927592bb3932acddb9b8bf"
+    },
+    {
+      "title": "Neuro-augmented vision for evolutionary robotics",
+      "abstract": "This paper presents neuro-augmented vision for evolutionary robotics (NAVER), which aims to address the two biggest challenges in camera-equipped robot evolutionary controllers. The first challenge is that camera images typically require many inputs from the controller, which greatly increases the complexity of optimising the search space. The second challenge is that evolutionary controllers often cannot bridge the reality gap between simulation and the real world. This method utilises a variational autoencoder to compress the camera image into smaller input vectors that are easier to manage, while still retaining the relevant information of the original image. Automatic encoders are also used to remove unnecessary details from real-world images, in order to better align with images generated by simple visual simulators. NAVER is used to evolve the controller of a robot, which only uses camera inputs to navigate the maze based on visual cues and avoid collisions. The experimental results indicate that the controller evolved in simulation and transferred to the physical robot, where it successfully performed the same navigation task. The controller can navigate the maze using only visual information. The controller responds to visual cues and changes its behaviour accordingly. NAVER has shown great potential as it has successfully completed (so far) the most complex vision-based task controller in evolutionary robotics literature.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-023-01453-8",
+      "url": "https://www.semanticscholar.org/paper/e976c1ac3fc10d8ba6e571df1d82bc13c837410c"
+    },
+    {
+      "title": "Vision-based approach to assess performance levels while eating",
+      "abstract": "The elderly population is increasing at a rapid rate, and the need for effectively supporting independent living has become crucial. Wearable sensors can be helpful, but these are intrusive as they require adherence by the elderly. Thus, a semi-anonymous (no image records) vision-based non-intrusive monitoring system might potentially be the answer. As everyone has to eat, we introduce a first investigation into how eating behavior might be used as an indicator of performance changes. This study aims to provide a comprehensive model of the eating behavior of individuals. This includes creating a visual representation of the different actions involved in the eating process, in the form of a state diagram, as well as measuring the level of performance or decay over time during eating. Also, in studies that involve humans, getting a generalized model across numerous human subjects is challenging, as indicative features that parametrize decay/performance changes vary significantly from person to person. We present a two-step approach to get a generalized model using distinctive micro-movements, i.e., (1) get the best features across all subjects (all features are extracted from 3D poses of subjects) and (2) use an uncertainty-aware regression model to tackle the problem. Moreover, we also present an extended version of EatSense, a dataset that explores eating behavior and quality of motion assessment while eating.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-023-01475-2",
+      "url": "https://www.semanticscholar.org/paper/0804c35f6f38b3ac3eb22ebb659c675513a1b176"
+    },
+    {
+      "title": "Deep understanding of shopper behaviours and interactions using RGB-D vision",
+      "abstract": "In retail environments, understanding how shoppers move about in a store’s spaces and interact with products is very valuable. While the retail environment has several favourable characteristics that support computer vision, such as reasonable lighting, the large number and diversity of products sold, as well as the potential ambiguity of shoppers’ movements, mean that accurately measuring shopper behaviour is still challenging. Over the past years, machine-learning and feature-based tools for people counting as well as interactions analytic and re-identification were developed with the aim of learning shopper skills based on occlusion-free RGB-D cameras in a top-view configuration. However, after moving into the era of multimedia big data, machine-learning approaches evolved into deep learning approaches, which are a more powerful and efficient way of dealing with the complexities of human behaviour. In this paper, a novel VRAI deep learning application that uses three convolutional neural networks to count the number of people passing or stopping in the camera area, perform top-view re-identification and measure shopper–shelf interactions from a single RGB-D video flow with near real-time performances has been introduced. The framework is evaluated on the following three new datasets that are publicly available: TVHeads for people counting, HaDa for shopper–shelf interactions and TVPR2 for people re-identification. The experimental results show that the proposed methods significantly outperform all competitive state-of-the-art methods (accuracy of 99.5% on people counting, 92.6% on interaction classification and 74.5% on re-id), bringing to different and significative insights for implicit and extensive shopper behaviour analysis for marketing applications.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-020-01118-w",
+      "url": "https://www.semanticscholar.org/paper/a35a5ba83346bb9e2bbd70fea84957038bb788b5"
+    },
+    {
+      "title": "Deep learning-based object recognition in multispectral satellite imagery for real-time applications",
+      "abstract": "Satellite imagery is changing the way we understand and predict economic activity in the world. Advancements in satellite hardware and low-cost rocket launches have enabled near-real-time, high-resolution images covering the entire Earth. It is too labour-intensive, time-consuming and expensive for human annotators to analyse petabytes of satellite imagery manually. Current computer vision research exploring this problem still lack accuracy and prediction speed, both significantly important metrics for latency-sensitive automatized industrial applications. Here we address both of these challenges by proposing a set of improvements to the object recognition model design, training and complexity regularisation, applicable to a range of neural networks. Furthermore, we propose a fully convolutional neural network (FCN) architecture optimised for accurate and accelerated object recognition in multispectral satellite imagery. We show that our FCN exceeds human-level performance with state-of-the-art 97.67% accuracy over multiple sensors, it is able to generalize across dispersed scenery and outperforms other proposed methods to date. Its computationally light architecture delivers a fivefold improvement in training time and a rapid prediction, essential to real-time applications. To illustrate practical model effectiveness, we analyse it in algorithmic trading environment. Additionally, we publish a proprietary annotated satellite imagery dataset for further development in this research field. Our findings can be readily implemented for other real-time applications too.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-021-01209-2",
+      "url": "https://www.semanticscholar.org/paper/55ed2aa478f8c1ff0bda598d6f7f4980c75b444d"
+    },
+    {
+      "title": "Deep learning applications in pulmonary medical imaging: recent updates and insights on COVID-19",
+      "abstract": "Shortly after deep learning algorithms were applied to Image Analysis, and more importantly to medical imaging, their applications increased significantly to become a trend. Likewise, deep learning applications (DL) on pulmonary medical images emerged to achieve remarkable advances leading to promising clinical trials. Yet, coronavirus can be the real trigger to open the route for fast integration of DL in hospitals and medical centers. This paper reviews the development of deep learning applications in medical image analysis targeting pulmonary imaging and giving insights of contributions to COVID-19. It covers more than 160 contributions and surveys in this field, all issued between February 2017 and May 2020 inclusively, highlighting various deep learning tasks such as classification, segmentation, and detection, as well as different pulmonary pathologies like airway diseases, lung cancer, COVID-19 and other infections. It summarizes and discusses the current state-of-the-art approaches in this research domain, highlighting the challenges, especially with COVID-19 pandemic current situation.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00138-020-01101-5",
+      "url": "https://www.semanticscholar.org/paper/045fe5b1cbc5c19baa97e14636a7207d71770601"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "journal_id": "ieeetransactionsonreliability",
+  "journal_name": "IEEE Transactions on Reliability",
+  "papers": [
+    {
+      "title": "Overdispersion Effects on Reliability Test Planning",
+      "abstract": "The impact of overdispersion on the design of optimal reliability demonstration test plans for beta-binomial models with Weibull, gamma, and lognormal lifetime distributions is analyzed. Assuming limited producer and consumer risks, fixed-duration test plans with minimal sample sizes and optimal-duration test plans with minimum costs based on failure count data are determined by solving the corresponding nonlinear programming problems when the fluctuation of the failure probability is described by a beta distribution. If the test time is fixed, the overdispersion effect on the optimal sample size and decision criterion is important in most situations. The influence is less relevant when the engineer also wants to find the minimum-cost test time. Optimal-duration plans usually outperform fixed-duration schemes in terms of costs and robustness against overdispersion. The use of lot inspection schemes with optimal reliability test times is strongly recommended when the presence of overdispersed failure count data is suspected. Applications of the developed methodology to the manufacturing of microelectronic chips and semiconductor lasers are provided for illustrative and comparative purposes.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2022.3195055",
+      "url": "https://www.semanticscholar.org/paper/f446550da0b18235a2d0e92810a84c84ab238ef3"
+    },
+    {
+      "title": "Bayesian Reliability Assessment of Permanent Magnet Brake Under Small Sample Size",
+      "abstract": "Permanent magnet brakes (PMBs) have diverse applications in automotive, robotics, medical devices, and aerospace industries. However, evaluating the reliability of PMBs is challenging due to their complex construction and limited data availability. This article proposes a bivariate Wiener model to capture the degradation patterns of two key performance characteristics of PMBs, and introduces an objective Bayesian method to analyze degradation data with small sample sizes. The derivation of Jeffery prior and reference priors for different ordering groups, along with the verification of posterior propriety, are presented. A rejection sampling embedded Monte Carlo algorithm is employed to obtain Bayesian estimates of model parameters, reliability, and mean-time-to-failure of PMBs. Simulation study results demonstrate the superiority of the objective Bayesian method over the maximum likelihood approach, particularly when dealing with small sample sizes. Finally, the proposed method is applied to assess the reliability of PMBs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3381072",
+      "url": "https://www.semanticscholar.org/paper/edcfc022fa9c67f0ad80b899eee207cf228cbc0d"
+    },
+    {
+      "title": "Sensor Self-Declaration of Numeric Data Reliability in Internet of Things",
+      "abstract": "Since diverse noises and irregularities impact on sensor data, self-declaration of sensor data reliability is crucial for advancing Internet of Things applications and industrial automation. Relevant works on reliability include sensor self-attribution of data confidence, and self-diagnosis of sensor faults using temporal data redundancy or neighboring sensor data. Models are built on edge devices and then transferred to sensors. Overall, the existing methods are computationally expensive, require real-time data from other sensors and incur considerable transmission overhead. Therefore, they are not suitable for independent sensor data reliability assessment. Addressing these issues, we introduce an independent reliability self-declaration method for sensors. Two Kalman filter-inspired, block-based lightweight algorithms are designed that handle isolated and burst noises and estimate block data reliability. Moreover, a conceptual model to dynamically adjust block size is proposed leveraging noise level and maximum TCP/IP packet size to reduce data transmissions. The reliability levels are conveyed using TCP header reserved bits to avoid communication overhead. The approach was tested using water quality monitoring (WQM) and healthcare application datasets. Results show, for burst noise, our lightweight and scalable approach attains superior accuracy in WQM (89.06%) and healthcare (82.63%) for five-level reliability estimation. A real-world deployment using an Arduino-based sensor node demonstrates the feasibility of the approach for in-sensor operation.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3416967",
+      "url": "https://www.semanticscholar.org/paper/41c87d1d3fe4550f645a7894374609725efae3e2"
+    },
+    {
+      "title": "Dynamic Reliability Assessment Model for IoT-Enabled Smart Offshore Wind Farm",
+      "abstract": "Offshore wind farm is one of the most promising applications in the Internet of Things (IoT), due to being energy-renewable and resources-unlimited. However, the reliability monitoring and maintenance models of power equipment based on communication paths and sensors are still immature in the smart offshore wind farm (SOWF). Based on the hierarchical architecture and end-to-end communication, a dynamic reliability assessment model (DRAM) is proposed for SOWFs. First, based on the IoT hierarchy, a four-stage network is developed to represent the relationship or dependencies between diverse devices in a complex SOWF. Second, a two-layer DRAM with forward monitoring (FM) and lateral protection (LP) is proposed. The FM encompasses a sensor network-based state-monitoring phase (monitoring weather data like temperature and wind speed), and a data-monitoring phase (monitoring the reliability-related data like reception power and data processing speed). The LP includes a signal-protection mode (LP-I) ensuring that virtual machines read the data and issue protection orders before turbine failures to minimize losses, and a radius-maintenance model (LP-II) performing maintenance of the failed turbine nodes. Simulation results show that the optimal maintenance strategy based on DRAM outperforms the benchmark maintenance method for traditional wind grids.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3428870",
+      "url": "https://www.semanticscholar.org/paper/8018fb9149b5b9a52ed9b614c49f9fedd82bba4a"
+    },
+    {
+      "title": "A Comparative Study on Reliability Analysis Methods for Safety Critical Systems Using Petri-Nets and Dynamic Flowgraph Methodology: A Case Study of Nuclear Power Plant",
+      "abstract": "Safety-critical systems (SCSs) of nuclear power plants (NPPs) are being designed and developed to meet high dependability requirements. Fault tree analysis (FTA) is widely used for risk and reliability analysis of NPPs. However, fault trees (FTs) are static and have only limited capability to represent dynamic systems. FTA is also not capable of modeling non-binary logic and or modelling the system's evolution in time. Dynamic reliability methods are being developed to deal with such limitations. Time series Markov chains and dynamic flowgraph methodology are the dynamic reliability methods alternate to traditional FTA, which can be used for the system performance analysis. In this article, Time series Markov chains and DFM methods, for the system reliability predictions for the SCS of NPP are compared. The benefits of the proposed method are brought out to the traditional methods. The approach is applied on passive residual heat removal system of pressurized heavy water reactor under the station blackout scenario.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tr.2021.3109059",
+      "url": "https://www.semanticscholar.org/paper/9546dfe7b82eb1d5490d6e34293c65bfb5d673a1"
+    },
+    {
+      "title": "q-Weibull Distributions: Perspectives and Applications in Reliability Engineering",
+      "abstract": "Lifetime distributions, such as Weibull and log-logistic distributions, are critical for parametric and semi-parametric analysis in reliability engineering. This article promotes a promising but understated distribution, q-Weibull distribution, to the reliability engineering community by providing new perspectives and demonstrating potential applications. We interpreted the physical meanings of the parameter “q” from multiple perspectives, including internal interactions in nonextensive mechanics, dependence among components in a series system, and the frailty (heterogeneity) in field failure data. Also, we showed that q-Weibull distributions belong to a closed function family under three different operations: minimal ordered statistics, accelerated failure time and proportional hazards for modeling accelerated life test data. Then, q-Weibull distributions are found to be an interpolation between Weibull and log-logistics distributions, and an interpolation between Weibull and Power law distributions. Moreover, this article presented a new approach to estimating parameters more accurately and robustly, by combing maximum likelihood estimation and robust linear regression. Finally, q-Weibull distributions show superior performance for a list of reliability applications, such as modeling lifetime, material strength, accelerated life test, frailty in field failure data, repairable systems, and reliability growth. To promote wider usage of this lifetime distribution, we open source all the codes for parameter estimations and reliability applications and all the datasets collected.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3448289",
+      "url": "https://www.semanticscholar.org/paper/4e01cdc746b41c1cd94874a1a6115faf6658aa9a"
+    },
+    {
+      "title": "Positioning Accuracy Analysis of Industrial Robots Based on Non-Probabilistic Time-Dependent Reliability",
+      "abstract": "A novel method for positioning accuracy analysis based on non-probabilistic time-dependent reliability is proposed for industrial robots with multisource uncertainties. To overcome the limitation of the probabilistic method in analyzing fewer samples, in this article, we consider uncertain parameters as unknown-but-bounded (UBB). The interval transformation matrix of robots and the uncertain position of the end-effectors are accurately estimated using the proposed method based on the Denavit–Hartenberg (D–H) method for forward kinematics of industrial robots. According to the Delaunay triangulation method combined with the interval method, the positioning accuracy analysis method is investigated to accurately estimate the trajectory bounds, which is more suitable for the complex trajectory of the robotic end-effector. A novel reliability method for positioning accuracy based on a non-probabilistic time-dependent model is proposed to analyze the reliability of positional accuracy in industrial robots. The interval process model and the first-passage theory are applied to constitute the non-probabilistic time-dependent reliability with different dimensions and various thresholds, which are more appropriate for the positioning accuracy analysis of industrial robots with lines, curves, and spiral trajectories. The proposed method is verified using two numerical examples compared with the Monte Carlo simulations (MCS).",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2023.3292089",
+      "url": "https://www.semanticscholar.org/paper/19cdc1ec0b722987af6942b2395a97a299e69052"
+    },
+    {
+      "title": "An Efficient System Reliability Analysis Method Based on Evidence Theory With Parameter Correlations",
+      "abstract": "With the ever-increasing complexity and scale of advanced modern engineering systems, multifailure modes coupling and input parameter correlations become important and inevitable challenges that hinder efficient reliability analysis of complex mechanical systems. To tackle this problem, in this article, a system reliability analysis method based on evidence theory considering parameter correlations is proposed. First, the optimal Copula function is selected by the Akaike information criterion using existing samples and the joint basic probability assignment considering parameter correlations is calculated. Second, engineering systems with multifailure modes are divided into series systems or parallel systems. The corresponding belief and plausibility measures of system reliability are derived, respectively. Moreover, support vector regression models are constructed by Latin hypercube sampling and genetic algorithm to replace the real performance functions. Therefore, the probability interval consisting of belief and plausibility measures is obtained through fewer performance function calls. Finally, two numerical examples and an engineering application of a 6-DoF industrial robot are exemplified to verify the effectiveness of the currently proposed method.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3391252",
+      "url": "https://www.semanticscholar.org/paper/a5a72340fe4f98cb7df6b36f7b418b760c216c4e"
+    },
+    {
+      "title": "Reliable-RPL: A Reliability-Aware RPL Protocol Using Trust-Based Blockchain System for Internet of Things",
+      "abstract": "Routing protocol for low-power and lossy network (RPL) is a routing protocol for resource-constrained Internet of Things (IoT) network devices. RPL has become a widely adopted protocol for routing in low-powered device networks. However, it lacks essential security features, including end-to-end security, robust authentication, and intrusion detection capabilities. Blockchain is a decentralized and immutable digital ledger that records transactions across multiple computers. It provides privacy, transparency, security, and trust. In this work, we proposed a blockchain-based reliable RPL protocol called reliable-RPL, which uses node reliability, link reliability, and relative trust scores of RPL-enabled IoT devices. The parent selection and network topology formulation are based on the proposed reliability-aware objective function. A lightweight ECC-based scheme performs registration, identification, and authentication of RPL-enabled IoT devices. The consistent topological updates from these authenticated IoT devices are used to secure routing paths in RPL-enabled networks. Using a modified trickle algorithm, we employed a reputation-based trust system that monitors and labels malicious nodes based on their reliable activities. The novelty of the proposed framework relies on integrating Contiki-NG (as fronted for IoT network simulation) and Hyperledger Fabric (as a backend for blockchain-based device authentication and trust-based attack resilience regarding rank, replay, sinkhole, and route poisoning attacks). The experimental evaluation of reliable-RPL has demonstrated its effectiveness compared to state-of-the-art methods regarding significant performance metrics, including packet loss, routing overhead, and throughput on Hyperledger Caliper.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3508652",
+      "url": "https://www.semanticscholar.org/paper/96ee5beca2ba87f21f25a5022a27a097015eeab6"
+    },
+    {
+      "title": "Comprehensive Reliability Review and Assessment of Switched-Capacitor Step-Up DC–DC Converters",
+      "abstract": "Due to the deficiencies of the traditional pulsewidth modulation dc–dc boost converter to achieve high voltage gain values, many capacitive and magnetic approaches have been suggested. As a promising solution, the switched-capacitor (SC) cells are employed to increase the voltage boosting capability, even at low/medium duty cycles, which accordingly removes the concerns originated from components' parasitic elements. In the literature, comprehensive investigations have been performed on the traditional SC boost converters from different viewpoints of step-up capability, efficiency, number of components, design considerations, and cost. Meanwhile, several papers investigate the reliability of boost converters only at a fixed operating point, but the extensive reliability analysis of these converters is still missed. This article provides comprehensive investigations on the effects of different operational or design parameters, such as input voltage, duty cycle, gain, switching frequency, output power, load resistance, and lifetime on the reliability of the traditional SC boost converters as well as their failure rate sensitivity. Based on the provided results, the maximum reliability can be accomplished by choosing optimal values for the converters' operational or design parameters. The provided theoretical analysis has been confirmed by the simulation and experimental results.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TR.2024.3421329",
+      "url": "https://www.semanticscholar.org/paper/24242037b948536ea38c59323e1740fbfac4e740"
+    }
+  ]
+}

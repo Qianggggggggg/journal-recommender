@@ -1,0 +1,70 @@
+{
+  "journal_id": "ijkm",
+  "journal_name": "International Journal of Knowledge Management",
+  "papers": [
+    {
+      "title": "A Retrospective Analysis of the International Journal of Knowledge Management",
+      "abstract": "The International Journal of Knowledge Management (IJKM) has been providing a platform for research in knowledge management since 2005. This study assesses its 15-year milestone and lends insight into the major trends in the establishment and development of the journal. The primary objective of this paper is to present an overview of the intellectual structure of the IJKM using bibliometric analysis. The paper focuses on the leading trends of the journal over the years and traces the subsequent developments. Using the Scopus database, the bibliographic data of the journal was extracted in order to highlight the major influences in its growth history and the central themes of the journal employing different bibliometric tools. Analysis of the content and context of the journal illustrates the inclusive nature of knowledge management research in the journal. The IJKM provides an important context for interdisciplinary and international research and draws attention from a wide section of the academic community for the research it showcases.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.2020100101",
+      "url": "https://www.semanticscholar.org/paper/c8373f2e0c45ab5649a2ab6e5acd2ab5fc6ac6d1"
+    },
+    {
+      "title": "Application of Art-Based Knowledge Management in Preschool Education",
+      "abstract": "This article explores the integration of art-based knowledge management in preschool education using cloud computing and immersive technologies, like augmented reality (AR) and virtual reality. The proposed system combines optical character recognition, 3D modeling, physically based rendering, and artificial intelligence to create interactive AR picture books and virtual galleries, supporting cross-disciplinary learning. Smart wearable devices are integrated to provide personalized feedback and real-time progress management, enhancing the learning experience. Experimental results show that this approach significantly promotes children's cognitive development and knowledge creation, with small classes achieving 75% progress and large classes reaching 100%. Interaction frequencies varied from 0.14 to 0.20 times per minute, and technology evaluations indicated high effectiveness in learning outcomes and resource management. The findings suggest that combining cloud computing with AR/virtual reality technologies creates an immersive, interdisciplinary environment conducive to innovative preschool education.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.385604",
+      "url": "https://www.semanticscholar.org/paper/9dfcb932ed4b1216eb04e433c47b0bdefd4c62f2"
+    },
+    {
+      "title": "A Knowledge Management Perspective on Optimizing College English Teaching in the Modern Information Technology Ecosystem",
+      "abstract": "In today's digital era, modern information technology is fundamentally reshaping the ways in which knowledge is created, captured, transferred, and applied in educational settings. This paper adopts a knowledge management perspective to explore how information technology can enhance both teaching effectiveness and student learning in college English classrooms. By integrating knowledge sharing, organizational learning, and cognitive approaches with internet technology–based strategies, the study proposes practical methods to promote effective teaching practices. Leveraging a support vector machine algorithm enhanced with an active learning strategy, an evaluation model is developed to assess instructional quality by comprehensively considering factors such as organizational culture and knowledge transfer behaviors. Experimental results demonstrate that the proposed algorithm achieves classification accuracies of 96.21% on the Zoo dataset and 94.36% on the Iris dataset.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.380957",
+      "url": "https://www.semanticscholar.org/paper/d035797d3145a6716a2aeaf6b2ede40ccafe7cda"
+    },
+    {
+      "title": "The Construction of a \"Four-Chain\" Economic System Driven by Knowledge Management: A Case Study of Guangxi",
+      "abstract": "Building a regional innovation system is crucial to improving economic competitiveness, and Guangxi faces challenges in integrating the “four chains”. This study aims to analyze regional differences in the integration of the Four Chains in Guangxi, explore the key role of knowledge management, and propose strategies to promote regional economic innovation and sustainable development. This study collected industry data from Guangxi and used big data analysis to assess the current status of the four-chain integration. The study found that Guangxi lacks knowledge management-led industry integration, and regional development imbalance constrains the development of all parties. Therefore, knowledge management plays a central role in promoting four-chain integration. It is recommended to strengthen the construction of the education chain, promote the integration of industry and education, establish a cross-regional resource integration mechanism, attract high-end talents, enhance the innovation capacity, and build a regional collaborative development model centered on knowledge management.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.371202",
+      "url": "https://www.semanticscholar.org/paper/d189c37545c8870e1808dfde023be9a29797e312"
+    },
+    {
+      "title": "Strategic Knowledge Management in Food Crisis Communication",
+      "abstract": "The intersection of knowledge management and crisis communication is essential for enhancing organizational resilience, especially in the food industry. This paper examines how knowledge management frameworks, including situational crisis communication theory, facilitate the effective dissemination of critical information during crises. Fresh Express, Tyson Foods, JBS Foods, and Costco case studies illustrate how knowledge-sharing platforms and real-time data exchange mitigate risks and build consumer trust. Failures, such as delays in the 2019 Escherichia coli outbreak, highlight the urgent need for robust data management. Leveraging organizational learning and memory, companies can navigate crises, like product recalls and supply chain disruptions, while aligning crisis communication with long-term recovery. This research underscores the strategic importance of integrating global knowledge networks, emerging technologies, and innovative management practices to enhance transparency, collaboration, and operational stability in high-stakes environments.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.380734",
+      "url": "https://www.semanticscholar.org/paper/a69e82bd8d0d761607cd40414ded4d3866dd9277"
+    },
+    {
+      "title": "Optimization of Human-Computer Interaction Collaborative Translation System for AI-Oriented Knowledge Management",
+      "abstract": "With the continuous progress of artificial intelligence (AI) technology, the field of knowledge management is facing new opportunities and challenges. The purpose of this study is to improve the efficiency and user experience of collaborative translation system by optimizing the design of human-computer interaction interface and then promote knowledge sharing and transformation in a multilingual environment. This paper uses principal component analysis to extract features, uses genetic algorithm to select features, and then introduces enhanced scalar calculation algorithm (ESCA) to improve system performance. The experimental results show that compared with traditional methods, the ESCA method proposed in this study shows significant advantages in key indicators such as accuracy and calculation time; the accuracy is as high as 98%. In addition, this paper provided new tools and support for knowledge management. The research not only opens up a new way for HCI interface optimization, but also contributes to the development of AI-driven knowledge management system.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.388949",
+      "url": "https://www.semanticscholar.org/paper/4630f65f126c1de9523ce7041bb68ec9df43c6d1"
+    },
+    {
+      "title": "Knowledge Management Practice and Organizational Performance in the Context of International Schools",
+      "abstract": "This exploratory study delves into three private international schools' knowledge management (KM) practices amidst the Covid-19 pandemic. Utilizing Gold et al.'s KM framework, the research examines the applicability of this model in the unique industrial context of international schools and explores the potential influence of KM on organizational performance within this context. The findings highlight that teachers proficient in articulating KM processes and infrastructure perceive their schools as more successful in the international education landscape. As schools transition back to in-person learning, leaders and stakeholders are urged to evaluate their KM practices and consider targeted initiatives to cultivate specific competencies, fostering a sustainable competitive advantage and enhancing both financial and non-financial firm performance. This study's originality lies in examining KM practices in international schools during the pandemic, stimulating conversations among school leaders and stakeholders to optimize knowledge management in the post-pandemic era.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.336925",
+      "url": "https://www.semanticscholar.org/paper/cc7cc8230707fcd64ba7d73f0ed7d4d74a0c3f36"
+    },
+    {
+      "title": "An Accounting Knowledge Management System That Fosters Innovation and Performance: The Case of UAE Organisations",
+      "abstract": "This study investigates the impact of Accounting Knowledge Management (AKM) systems on innovation and performance in UAE organisations, in line with the country's vision to become a global financial hub. By using Structural Equation Modelling (SEM) on data from various UAE firms, the research uncovers a strong positive relationship between knowledge sharing in accounting and both financial and non-financial outcomes, fostering overall organisational innovation. Interestingly, non-financial improvements like customer satisfaction may not always lead directly to financial gains, suggesting a need for UAE firms to find a strategic balance. This study contributes valuable insights to the academic discourse on knowledge management, offering UAE organisations evidence-based recommendations to leverage AKM for sustained innovation and growth. These findings serve as a benchmark for other organisations aiming to optimise knowledge management systems to enhance performance across multiple dimensions.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.4018/ijkm.365909",
+      "url": "https://www.semanticscholar.org/paper/5dde70fb0553025f4c0f25dcba19def41f70e43c"
+    }
+  ]
+}

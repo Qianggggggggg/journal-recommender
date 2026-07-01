@@ -1,0 +1,78 @@
+{
+  "journal_id": "tifs",
+  "journal_name": "IEEE Transactions on Information Forensics and Security",
+  "papers": [
+    {
+      "title": "Rethinking Membership Inference Attacks Against Transfer Learning",
+      "abstract": "Transfer learning, successful in knowledge translation across related tasks, faces a substantial privacy threat from membership inference attacks (MIAs). These attacks, despite posing significant risk to ML model's training data, remain limited-explored in transfer learning. The interaction between teacher and student models in transfer learning has not been thoroughly explored in MIAs, potentially resulting in an under-examined aspect of privacy vulnerabilities within transfer learning. In this paper, we propose a new MIA vector against transfer learning, to determine whether a specific data point was used to train the teacher model while only accessing the student model in a white-box setting. Our method delves into the intricate relationship between teacher and student models, analyzing the discrepancies in hidden layer representations between the student model and its shadow counterpart. These identified differences are then adeptly utilized to refine the shadow model's training process and to inform membership inference decisions effectively. Our method, evaluated across four datasets in diverse transfer learning tasks, reveals that even when an attacker only has access to the student model, the teacher model's training data remains susceptible to MIAs. We believe our work unveils the unexplored risk of membership inference in transfer learning.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TIFS.2024.3401234",
+      "url": ""
+    },
+    {
+      "title": "AST-SafeSec: Adaptive Stress Testing for Safety and Security Co-Analysis of Cyber-Physical Systems",
+      "abstract": "Cyber-physical systems are becoming more intelligent with the adoption of heterogeneous sensor networks and machine learning capabilities that deal with an increasing amount of input data. While this complexity aims to solve problems in various domains, it adds new challenges for the system assurance. One issue is the rise in the number of abnormal behaviors that affect system performance due to possible sensor faults and attacks. The combination of safety risks, which are usually caused by random sensor faults and security risks that can happen during any random system state, makes the full coverage testing of the cyber-physical system challenging. Existing techniques are inadequate to deal with complex safety and security co-risks against cyber-physical systems. In this paper, we propose AST-SafeSec, an analysis methodology for both safety and security aspects that utilizes reinforcement learning to identify the most likely adversarial paths at various normal or failure states of a cyber-physical system that can influence system behavior through its sensor data. The methodology is evaluated using an autonomous vehicle scenario by incorporating a security attack into the stochastic sensor elements of a vehicle. Evaluation results show that the methodology analyzes the interaction of malicious attacks with random faults and identifies the incident caused by the interactions and the most likely path that leads to the incident.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2023.3309160",
+      "url": "https://www.semanticscholar.org/paper/0d18aee122fb3d46b8ecd644b142a40a170ce7e4"
+    },
+    {
+      "title": "Molecular Barcoding as a Defense Against Benchtop Biochemical Attacks on DNA Fingerprinting and Information Forensics",
+      "abstract": "DNA fingerprinting can offer remarkable benefits, especially for point-of-care diagnostics, information forensics, and analysis. However, the pressure to drive down costs is likely to lead to cheap untrusted solutions and a multitude of unprecedented risks. These risks will especially emerge at the frontier between the cyberspace and DNA biology. To address these risks, we perform a forensic-security assessment of a typical DNA-fingerprinting flow. We demonstrate, for the first time, benchtop analysis of biochemical-level vulnerabilities in flows that are based on a standard quantification assay known as polymerase chain reaction (PCR). After identifying potential vulnerabilities, we realize attacks using benchtop techniques to demonstrate their catastrophic impact on the outcome of the DNA fingerprinting. We also propose a countermeasure, in which DNA samples are each uniquely barcoded (using synthesized DNA molecules) in advance of PCR analysis, thus demonstrating the feasibility of our approach using benchtop techniques. We discuss how molecular barcoding could be utilized within a cyber-biological framework to improve DNA-fingerprinting security against a wide range of threats, including sample forgery. We also present a security analysis of the DNA barcoding mechanism from a molecular biology perspective.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2020.2994742",
+      "url": "https://www.semanticscholar.org/paper/9883aa3e131b9e363b6f55d7bf7500f472602b1c"
+    },
+    {
+      "title": "DPNM: A Differential Private Notary Mechanism for Privacy Preservation in Cross-Chain Transactions",
+      "abstract": "Notary cross-chain transaction technologies have obtained broad affirmation from industry and academia as they can avoid data islands and enhance chain interoperability. However, the increased privacy concern in data sharing makes the participants hesitate to upload sensitive information without the trust foundation of the external network. To address this issue, this paper proposes a differential private notary mechanism (DPNM) to preserve privacy in blockchain interoperations. It establishes a fully trusted notary organization to conduct data perturbation before replying query to the external blockchain network. In addition, the DPNM contains two built-in privacy budget allocation schemes: Efficiency priority scheme (EPS) and Privacy priority scheme (PPS). These schemes unify the privacy preferences among different nodes based on multi-node consensus in the decentralized environment. The EPS can generate noise linearly and work efficiently, and the PPS reflects better on nodes’ preferences. This paper utilizes several metrics including mechanism errors, elapsed time, latency, and gas consumption to evaluate the performance of DPNM compared to the traditional mechanisms. The experiment results indicate that the proposed mechanism can meet privacy preferences among different nodes and provide better utility with little extra cost.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2025.3527357",
+      "url": "https://www.semanticscholar.org/paper/b66f94aa2e2b16320480b4c83cbd44e678f1a1c3"
+    },
+    {
+      "title": "Physical Layer-Based Device Fingerprinting for Wireless Security: From Theory to Practice",
+      "abstract": "The identification of the devices from which a message is received is part of security mechanisms to ensure authentication in wireless communications. Conventional authentication approaches are cryptography-based, which, however, are usually computationally expensive and not adequate in the Internet of Things (IoT), where devices tend to be low-cost and with limited resources. This paper provides a comprehensive survey of physical layer-based device fingerprinting, which is an emerging device authentication for wireless security. In particular, this article focuses on hardware impairment-based identity authentication and channel features-based authentication. They are passive techniques that are readily applicable to legacy IoT devices. Their intrinsic hardware and channel features, algorithm design methodologies, application scenarios, and key research questions are extensively reviewed here. The remaining research challenges are discussed, and future work is suggested that can further enhance the physical layer-based device fingerprinting.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2025.3570118",
+      "url": "https://www.semanticscholar.org/paper/22e08eb7913ce541e5465854600d17ceb75903e0"
+    },
+    {
+      "title": "PolyShard: Coded Sharding Achieves Linearly Scaling Efficiency and Security Simultaneously",
+      "abstract": "Today’s blockchain designs suffer from a trilemma claiming that no blockchain system can simultaneously achieve decentralization, security, and performance scalability. For current blockchain systems, as more nodes join the network, the efficiency of the system (computation, communication, and storage) stays constant at best. A leading idea for enabling blockchains to scale efficiency is the notion of sharding: different subsets of nodes handle different portions of the blockchain, thereby reducing the load for each individual node. However, existing sharding proposals achieve efficiency scaling by compromising on trust - corrupting the nodes in a given shard will lead to the permanent loss of the corresponding portion of data. In this paper, we settle the trilemma by demonstrating a new protocol for coded storage and computation in blockchains. In particular, we propose PolyShard: “polynomially coded sharding” scheme that achieves information-theoretic upper bounds on the efficiency of the storage, system throughput, as well as on trust, thus enabling a truly scalable system. We provide simulation results that numerically demonstrate the performance improvement over state of the arts, and the scalability of the PolyShard system. Finally, we discuss potential enhancements, and highlight practical considerations in building such a system.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2020.3009610",
+      "url": "https://www.semanticscholar.org/paper/e3a3f4f60f1713aec318840840ae310d9f82f8d9"
+    },
+    {
+      "title": "Multi-Leader Byzantine Fault Tolerance in Blockchain: Performance and Security",
+      "abstract": "Byzantine Fault Tolerance (BFT) protocols are a critical research area in distributed systems and blockchain consensus due to their capacity to deliver high throughput and low latency. Traditional BFT protocols typically rely on a single leader to propose transactions and aggregate votes, which often creates a bottleneck due to the leader’s limited communication and computational capacities. The introduction of multi-leader BFT has the potential to mitigate this issue by increasing system parallelism. However, existing approaches fail to address the challenge of electing multiple leaders and lack a comprehensive analysis of the relationship between the number of leaders, security constraints, and system throughput. In this paper, we study the performance and security of multi-leader BFT protocols. Initially, we introduce a secret multi-leader election method resistant to corruption attacks where selected leaders’ identities remain unknown to others until they proposes transactions. Then, we present specific multi-leader BFT constructions that support a pipelined processing methods, realizing high processing parallelism and optimized throughput. Besides, a cross-leader view-change mechanism is designed for multi-leader BFT to enable efficient replacement of malicious leaders. Furthermore, we analyze the impact of the number of leaders on security and demonstrate that our proposals meet the required security standards. Experimental results reveal that the system achieves a throughput of up to 101 ktx/sec with 128 nodes, highlighting the potential of multi-leader BFT to significantly enhance the performance of blockchain systems.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2026.3657099",
+      "url": "https://www.semanticscholar.org/paper/77ce67e427eed11a66c59a2b80213f0846a19010"
+    },
+    {
+      "title": "Semantic Entropy Can Simultaneously Benefit Transmission Efficiency and Channel Security of Wireless Semantic Communications",
+      "abstract": "Recently proliferated deep learning-based semantic communications (DLSC) focus on how transmitted symbols efficiently convey a desired meaning to the destination. However, the sensitivity of neural models and the openness of wireless channels cause the DLSC system to be extremely fragile to various malicious attacks. This inspires us to ask a question: “Can we further exploit the advantages of transmission efficiency in wireless semantic communications while also alleviating its security disadvantages?”. Keeping this in mind, we propose SemEntropy, a novel method that answers the above question by exploring the semantics of data for both adaptive transmission and physical layer encryption. Specifically, we first introduce semantic entropy, which indicates the expectation of various semantic scores regarding the transmission goal of the DLSC. Equipped with such semantic entropy, we can dynamically assign informative semantics to Orthogonal Frequency Division Multiplexing (OFDM) subcarriers with better channel conditions in a fine-grained manner. We also use the entropy to guide semantic key generation to safeguard communications over open wireless channels. By doing so, both transmission efficiency and channel security can be simultaneously improved. Extensive experiments over various benchmarks show the effectiveness of the proposed SemEntropy. We discuss the reason why our proposed method benefits secure transmission of DLSC, and also give some interesting findings, e.g., SemEntropy can keep the semantic accuracy remain 95% with 60% less transmission.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2025.3534562",
+      "url": "https://www.semanticscholar.org/paper/a11f2dd96cdf7ac6b629311843cfff511ddc20da"
+    },
+    {
+      "title": "Dynamic Searchable Symmetric Encryption With Strong Security and Robustness",
+      "abstract": "Dynamic Searchable Symmetric Encryption (DSSE) is a prospective technique in the field of cloud storage for secure search over encrypted data. A DSSE client can issue update queries to an honest-but-curious server for adding or deleting his ciphertexts to or from the server and delegate keyword search over those ciphertexts to the server. Numerous investigations focus on achieving strong security, like forward-and-Type-I−-backward security, to reduce the information leakage of DSSE to the server as much as possible. However, the existing DSSE with such strong security cannot keep search correctness and stable security (or robustness, in short) if irrational queries are issued by the client, like duplicate add or delete queries and the delete queries for removing non-existed entries, to the server unintentionally. Hence, this work proposes two new DSSE schemes, named $\\mathtt {SR-DSSE}_{a}$ and $\\mathtt {SR-DSSE}_{b}$ , respectively. Both two schemes achieve forward-and-Type-I−-backward security while keeping robustness when irrational queries are issued. In terms of performance, $\\mathtt {SR-DSSE}_{a}$ has more efficient communication costs and roundtrips than $\\mathtt {SR-DSSE}_{b}$ . In contrast, $\\mathtt {SR-DSSE}_{b}$ has a more efficient search performance than $\\mathtt {SR-DSSE}_{a}$ . Its search performance is close to the existing DSSE scheme with the same security but fails to achieve robustness.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIFS.2024.3350330",
+      "url": "https://www.semanticscholar.org/paper/8ca73bab428a778cb229ede6fb13a795651862b2"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "journal_id": "tip",
+  "journal_name": "IEEE Transactions on Image Processing",
+  "papers": [
+    {
+      "title": "Low-Light Phase Retrieval With Implicit Generative Priors",
+      "abstract": "Phase retrieval (PR) is fundamentally important in scientific imaging and is crucial for nanoscale techniques like coherent diffractive imaging (CDI). Low radiation dose imaging is essential for applications involving radiation-sensitive samples. However, most PR methods struggle in low-dose scenarios due to high shot noise. Recent advancements in optical data acquisition setups, such as in-situ CDI, have shown promise for low-dose imaging, but they rely on a time series of measurements, making them unsuitable for single-image applications. Similarly, data-driven phase retrieval techniques are not easily adaptable to data-scarce situations. Zero-shot deep learning methods based on pre-trained and implicit generative priors have been effective in various imaging tasks but have shown limited success in PR. In this work, we propose low-dose deep image prior (LoDIP), which combines in-situ CDI with the power of implicit generative priors to address single-image low-dose phase retrieval. Quantitative evaluations demonstrate LoDIP's superior performance in this task and its applicability to real experimental scenarios.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "High-Similarity-Pass Attention for Single Image Super-Resolution",
+      "abstract": "Recent developments in the field of non-local attention (NLA) have led to a renewed interest in self-similarity-based single image super-resolution (SISR). Researchers usually use the NLA to explore non-local self-similarity (NSS) in SISR and achieve satisfactory reconstruction results. However, a surprising phenomenon that the reconstruction performance of the standard NLA is similar to that of the NLA with randomly selected regions prompted us to revisit NLA. In this paper, we first analyzed the attention map of the standard NLA from different perspectives and discovered that the resulting probability distribution always has full support for every local feature, which implies a statistical waste of assigning values to irrelevant non-local features, especially for SISR which needs to model long-range dependence with a large number of redundant non-local features. Based on these findings, we introduced a concise yet effective soft thresholding operation to obtain high-similarity-pass attention (HSPA), which is beneficial for generating a more compact and interpretable distribution. Furthermore, we derived some key properties of the soft thresholding operation that enable training our HSPA in an end-to-end manner. The HSPA can be integrated into existing deep SISR models as an efficient general building block. In addition, to demonstrate the effectiveness of the HSPA, we constructed a deep high-similarity-pass attention network (HSPAN) by integrating a few HSPAs in a simple backbone. Extensive experimental results demonstrate that HSPAN outperforms state-of-the-art approaches on both quantitative and qualitative evaluations.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1109/TIP.2023.3348293",
+      "url": ""
+    },
+    {
+      "title": "Low-Rank Quaternion Approximation for Color Image Processing",
+      "abstract": "Low-rank matrix approximation (LRMA)-based methods have made a great success for grayscale image processing. When handling color images, LRMA either restores each color channel independently using the monochromatic model or processes the concatenation of three color channels using the concatenation model. However, these two schemes may not make full use of the high correlation among RGB channels. To address this issue, we propose a novel low-rank quaternion approximation (LRQA) model. It contains two major components: first, instead of modeling a color image pixel as a scalar in conventional sparse representation and LRMA-based methods, the color image is encoded as a pure quaternion matrix, such that the cross-channel correlation of color channels can be well exploited; second, LRQA imposes the low-rank constraint on the constructed quaternion matrix. To better estimate the singular values of the underlying low-rank quaternion matrix from its noisy observation, a general model for LRQA is proposed based on several nonconvex functions. Extensive evaluations for color image denoising and inpainting tasks verify that LRQA achieves better performance over several state-of-the-art sparse representation and LRMA-based methods in terms of both quantitative metrics and visual quality.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIP.2019.2941319",
+      "url": "https://www.semanticscholar.org/paper/ec7b2a641b26e9977644bfbf0417ed680f3760d9"
+    },
+    {
+      "title": "Adversarial Training for Solving Inverse Problems in Image Processing",
+      "abstract": "Inverse problems are a group of important mathematical problems that aim at estimating source data $x$ and operation parameters $z$ from inadequate observations $y$ . In the image processing field, most recent deep learning-based methods simply deal with such problems under a pixel-wise regression framework (from $y$ to $x$ ) while ignoring the physics behind. In this paper, we re-examine these problems under a different viewpoint and propose a novel framework for solving certain types of inverse problems in image processing. Instead of predicting $x$ directly from $y$ , we train a deep neural network to estimate the degradation parameters $z$ under an adversarial training paradigm. We show that if the degradation behind satisfies some certain assumptions, the solution to the problem can be improved by introducing additional adversarial constraints to the parameter space and the training may not even require pair-wise supervision. In our experiment, we apply our method to a variety of real-world problems, including image denoising, image deraining, image shadow removal, non-uniform illumination correction, and underdetermined blind source separation of images or speech signals. The results on multiple tasks demonstrate the effectiveness of our method.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIP.2021.3053398",
+      "url": "https://www.semanticscholar.org/paper/89f27f28f6398a1a96d9cdc8aad3e667f547727d"
+    },
+    {
+      "title": "A Framework for Hexagonal Image Processing Using Hexagonal Pixel-Perfect Approximations in Subpixel Resolution",
+      "abstract": "Image processing in hexagonal lattice has many advantages rather than square lattice. Researchers have addressed benefits of hexagonal structure in applications such as binarization, rotation, scaling and edge detection. Approximately all existing hardwares for capturing and displaying images are based on square lattice. Therefore, the best way for using advantages of hexagonal lattice is to find a proper software approach to convert square pixels to hexagonal ones. This paper presents a hexagonal platform based on interpolation which addresses three existing hexagonal challenges including imperfect hexagonal shape, inaccurate intensity level of hexagonal pixels and lower resolution in hexagonal space. The proposed interpolation is computed by overlaps between square and hexagonal pixels. Overlap types are formulated mathematically in 8 separate cases. Each overlap case is detected automatically and used to compute final gray-level intensity of hexagonal pixels. It is mathematically and experimentally shown that the proposed method satisfies necessary conditions for square-to-hexagonal conversion. The proposed scheme is evaluated on synthetic and real images with 10 different levels of noise in interpolation and edge detection applications. In synthetic images, the proposed method achieves the best figure of merit (FOM) 99.92% and 98.67% in high and low SNRs 100 and 20, respectively. Also, the proposed method outperforms existing state of the art hexagonal lattices with interclass correlation coefficient (ICC) 84.18% and mean rating 7.7 (out of 9) in real images.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIP.2021.3073328",
+      "url": "https://www.semanticscholar.org/paper/6d2d8d2d35b71112c52496bcd4d547fa31dc081f"
+    },
+    {
+      "title": "Controllable Image Processing via Adaptive FilterBank Pyramid",
+      "abstract": "Traditional image processing operators often provide some control parameters to tweak the final results. Recently, different convolutional neural networks have been used to approximate or improve these operators. However, in those methods, one single model can only handle one operator of a specific parameter value and does not support parameter tuning. In this paper, we propose a new plugin module, “Adaptive Filterbank Pyramid”, which can be inserted into a backbone network to support multiple operators and continuous parameter tuning. Our module explicitly represents one operator with one filterbank pyramid. To generate the results of a specific operator, the corresponding filterbank pyramid is convolved with the intermediate feature pyramid produced by the backbone network. The weights of the filterbank pyramid are directly regressed by another sub-network, which is jointly trained with the backbone network and adapted to the input parameter, thus enabling continuous parameter tuning. We applied the proposed module for a large variety of image processing tasks, including image smoothing, image denoising, image deblocking, image enhancement and neural style transfer. Experiments show that our method is generalized to different types of image processing tasks and different backbone network structures. Compared to the single-operator-single-parameter baseline, our method can produce comparable results but is significantly more efficient in both training and testing.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIP.2020.3009844",
+      "url": "https://www.semanticscholar.org/paper/bc2c5fa98bedb68e1723efa46b97e44c5f101587"
+    }
+  ]
+}

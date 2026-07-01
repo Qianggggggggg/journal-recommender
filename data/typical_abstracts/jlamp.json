@@ -1,0 +1,27 @@
+{
+  "journal_id": "jlamp",
+  "journal_name": "Journal of Logical and Algebraic Methods in Programming",
+  "ccf_rating": "C",
+  "abstracts": [
+    {
+      "method_type": "理论分析型",
+      "novelty_level": "范式创新",
+      "abstract": "This paper introduces a foundational framework unifying logic programming with categorical semantics through a novel interpretation of proof search as coend computation. Unlike traditional approaches that treat logic programs as formulas or as transition systems, we propose viewing them as enriched functors over a category of contexts, enabling a compositional account of resolution that naturally accommodates cut-elimination and hypothetical reasoning. Our framework establishes that SLD-resolution corresponds to a specific class of dinatural transformations, revealing deep connections between proof-theoretic concepts and category-theoretic constructs such as profunctors and optics. We demonstrate that this perspective yields a uniform treatment of binding structures, scope, and resource consumption without resorting to operational artifacts. The categorical characterization enables us to derive compositional correctness criteria for logic programs and to reason about program equivalence at the semantic level. This work constitutes a paradigm shift in how we understand the relationship between proof theory and programming language semantics, opening new avenues for integrating declarative programming with modern algebraic methods."
+    },
+    {
+      "method_type": "理论分析型",
+      "novelty_level": "显著改进",
+      "abstract": "We present a substantial advancement in the type theory underpinning process algebras by introducing a refined behavioral type system that captures quantitative timing and resource consumption properties beyond existing approaches. Our system extends the classical session type framework with affine temporal constraints, enabling specifications that were previously expressible only through external annotations or separate analysis phases. The key innovation lies in a novel subtyping relation that accounts for both temporal refinement and branching behavior, preserving deadlock-freedom guarantees while offering significantly greater specification flexibility. We establish a rich theory of type preservation under reduction and prove soundness of the subtyping relation through a novel logical relation based on timed game semantics. The formalism is demonstrated through extended case studies in concurrent workflow specification, showing practical improvements in both expressiveness and error detection capability. This work significantly extends the scope of static verification for concurrent systems within the algebraic methods tradition."
+    },
+    {
+      "method_type": "系统设计型",
+      "novelty_level": "范式创新",
+      "abstract": "We present RefinementForge, the first automated verification system implementing a novel refinement calculus based on the theory of directed complete partial orders with interactive witnesses. Unlike existing refinement tools that operate primarily on state-based specifications, our system supports a genuinely relational refinement framework where program correctness is expressed through monotone relations between concrete and abstract behaviors. The architecture combines a custom domain-specific language for specification with an efficient SMT-based checking engine that exploits the lattice structure of refinement relations. Key contributions include a compositional verification methodology that scales to modular specifications and a decision procedure for the refinement relation that handles continuity requirements automatically. The system has been evaluated on a comprehensive benchmark suite including classic data refinement problems, concurrent algorithm verification, and real-time system specifications. Our approach fundamentally shifts the paradigm of refinement-based verification by providing native support for continuous data domains."
+    },
+    {
+      "method_type": "系统设计型",
+      "novelty_level": "显著改进",
+      "abstract": "We describe an optimized implementation of symbolic model checking for parameterized concurrent systems, achieving order-of-magnitude improvements in both time and space complexity over state-of-the-art tools. Our approach combines counterexample-guided abstraction refinement with a novel symbolic representation based on existentially quantified Boolean formulas that exploit regularity in communication protocols. The key algorithmic contribution is a semi-canonical representation of transition relations that enables aggressive sharing and incremental computation across refinement iterations. We present a complete tool chain, Veriflux, that accepts specifications in an extended variant of process algebras and produces either verification certificates or minimal counterexamples in a form suitable for interactive inspection. Extensive experimental evaluation on benchmarks from the literature demonstrates that our approach scales to systems with thousands of concurrent components while maintaining complete precision. The implementation makes sophisticated model checking techniques accessible for practical verification of distributed algorithms and communication protocols."
+    }
+  ]
+}

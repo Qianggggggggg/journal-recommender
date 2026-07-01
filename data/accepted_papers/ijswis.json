@@ -1,0 +1,86 @@
+{
+  "journal_id": "ijswis",
+  "journal_name": "International Journal on Semantic Web and Information Systems",
+  "papers": [
+    {
+      "title": "CR4PD Course Recommendations for Professional Development in Thailand's Qualification Framework",
+      "abstract": "Technological advancements have significantly transformed the labor market, driving an increased demand for upskilling and reskilling. While online education offers opportunities to acquire the necessary qualifications, the abundance of options makes selecting appropriate courses challenging. Existing recommendation systems primarily focus on formal education, often neglecting the needs of non-formal education. To address this gap, this study proposes an ontology-based course recommendation system that integrates Thailand's Professional Qualification Framework (TPQI) with an ontological framework to support personalized learning pathways. The system recommends courses aligned with the skills required for specific occupations, helping learners achieve their career goals. The proposed ontology is modeled using the Web Ontology Language (OWL) and is implemented within a web-based application specifically designed to integrate seamlessly with it. Instances were created to validate the ontology's ability to answer the defined competency questions (CQs), thereby demonstrating the completeness of the proposed model. The web-based application was further evaluated by 19 participants familiar with the data science profession to assess the relevance of the recommendations and the system's usability. The results indicated a high level of user satisfaction among participants, suggesting the system's potential usability and relevance within the scope of the proof-of-concept study. Participant feedback also identified potential areas for enhancement, including the incorporation of pre-examination features for skill verification and the extension of the framework to support international occupational standards.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.413707",
+      "url": "https://openalex.org/W7165679405"
+    },
+    {
+      "title": "Deep Learning-Based Intelligent Decision Support System for Crop Recommendation",
+      "abstract": "Agriculture is the backbone of national food security and sustainable economic development, which requires performance analysis of the correct crop choice based on soil nutrients and environmental conditions. However, traditional crop selection heavily depends on farmers' experience and is not necessarily data driven. To tackle this issue, this study proposes an intelligent decision support system for crop recommendation based on deep learning techniques. Factors such as nitrogen, phosphorus, potassium, soil power of hydrogen, rainfall, and temperature were used to predict suitable crop selection. Several architectures—such as convolutional neural networks-1D, long short-term memory, residual deep multilayer perceptron, Wide and Deep, and ResNet-1D—were evaluated and compared. Among them, the highest performance was achieved by ResNet-1D, with 93.61% accuracy and very high precision, recall, and F1-score values. The system supports precision agriculture by leveraging local data to improve decision making and has been implemented as a Streamlit-based web application that allows real-time recommendations for crops.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.412483",
+      "url": "https://openalex.org/W7164387726"
+    },
+    {
+      "title": "Semantic-Aware Multi-Scale Contrastive Learning for UAV Tiny Object Tracking",
+      "abstract": "Unmanned aerial vehicle-based visual systems are essential for tasks such as reconnaissance, disaster monitoring, and traffic analysis; however, tracking remains challenging due to tiny targets, background clutter, and interference from similar objects. The authors propose multi-scale contrastive discrimination tracking, a transformer-based framework for tiny object tracking that integrates three modules: multi-scale detail enhancement, contrastive discrimination attention model for suppressing background interference via contrastive discrimination, and instance decoupling enhancement module for reducing feature coupling and identity drift among similar instances. Experiments on DTB70 and VisDrone2018 show that multi-scale contrastive discrimination tracking achieves 87.9% precision and a 67.4% success rate, surpassing state-of-the-art methods by 2.3% and 2.4%, respectively, while running at 185 frames per second on GPU with only 4.2 GMac and 11.2M parameters, demonstrating strong potential for resource-constrained unmanned arial vehicle deployment.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.411908",
+      "url": "https://openalex.org/W7163916634"
+    },
+    {
+      "title": "Semantic-Aware Multimodal Optimization and Policy Learning for Intelligent Product Design Systems",
+      "abstract": "As modern product design becomes increasingly complex and personalized, integrating heterogeneous data into automated optimization remains a critical challenge. Current generative methods frequently fail to balance high-dimensional semantic customization with strict performance requirements, resulting in structurally flawed designs. The Semantic-Aware Generative Multimodal Optimization System (GMOS-SGP) proposed herein addresses this dichotomy by fusing visual, textual, and structural inputs through a multimodal perception encoding module. This unified representation drives a conditional variational generator, while a policy-guided adaptive reinforcement agent, supported by a dual surrogate model, ensures reliability through closed-loop feedback. Results from the ScanNet dataset indicate superior geometric accuracy, with GMOS-SGP achieving 87.10% Intersection over Union and a 91.54% F-score, supporting its viability for real-time industrial workflows.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.411888",
+      "url": "https://openalex.org/W7163547664"
+    },
+    {
+      "title": "Knowledge-Infused Diffusion Framework for Intelligent Homestay Redesign From User Feedback",
+      "abstract": "With the rapid growth of online short-term rental platforms, user reviews provide valuable insights into homestay experiences. However, existing studies mainly rely on sentiment analysis or satisfaction modeling, producing abstract evaluations that are difficult to translate into actionable spatial redesign solutions. To address this issue, this paper proposes EdiDiffusion, a diffusion-based framework for localized experience-driven redesign. The method takes user reviews and homestay design images as inputs to build an end-to-end pipeline from experience perception to visual redesign. An evidence-grounded edit plan aligns review semantics with spatial evidence to generate structured edit plans. Based on this representation, a constraint-guided local diffusion editor performs localized redesign through conditional diffusion constrained by spatial evidence, functional requirements, and style priors. Experimental results demonstrate improved semantic responsiveness, editing accuracy, and style consistency.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.411869",
+      "url": "https://openalex.org/W7163330000"
+    },
+    {
+      "title": "Intelligent Bayesian Optimization for Semantic-Aware Energy Conversion System Design",
+      "abstract": "The study presents an intelligent Bayesian optimization framework with semantic-aware decision-making for designing coupled material–process energy conversion systems. A Gaussian process surrogate with heteroscedastic noise modeling encodes experimental uncertainty, while a composite acquisition function fusing expected improvement, probability of improvement, and upper confidence bound, together with an adaptive diversity penalty, dynamically balances exploration and exploitation via real-time model diagnostics. Applied to optimizing five fabrication variables of a near-infrared-to-visible upconversion layer in inverted perovskite solar cells, the closed-loop campaign identifies optimal conditions within six rounds starting from 16 initial experiments, yielding a champion device with 22.41% efficiency and 24.52 mA cm-2 short-circuit current density, gains of 13.18% and 8.4% over the control. The adaptive strategy outperforms a fixed-policy baseline and reduces trials by three orders of magnitude versus grid search, establishing a generalizable artificial intelligence–driven methodology for engineering optimization.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.411202",
+      "url": "https://openalex.org/W7162649648"
+    },
+    {
+      "title": "Semantic AI-Driven Framework for Pumped Storage Scheduling and Price Forecasting",
+      "abstract": "Under market-oriented electricity operations, pumped storage hydropower scheduling is influenced by multi-source market signals, system states, and risk disturbances. However, price volatility and temporal uncertainty make efficient operation difficult. Existing methods often separate market perception from strategy generation, resulting in limited interpretability and decision support. To address this issue, we propose an integrated framework for pumped storage revenue optimization. Specifically, an Anchor-driven Structural Modeling Framework is designed to semantically organize heterogeneous market and operational data and capture dynamic dependencies for robust market state perception. Based on structured state representations, a large language model is introduced to generate dynamic scheduling strategies. CVaR and operational constraints are further incorporated to ensure risk awareness and practical feasibility. Experimental results show improved forecasting accuracy, risk control, and overall revenue.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.411200",
+      "url": "https://openalex.org/W7162688931"
+    },
+    {
+      "title": "Multimodal Cyberbullying Detection on Social Media Using LLMs",
+      "abstract": "This study explores automated cyberbullying detection across major social networks and messaging platforms using state-of-the-art large language models in a zero-shot, multimodal setting. Models including LLaMA 4, Gemma 3, and GeminiAI were evaluated on images and videos without domain-specific fine-tuning. The system assigned a continuous score (0–10) to indicate the presence of cyberbullying across four categories: revenge porn, happy slapping, racism, and body shaming. Experiments on over 5,000 multimedia samples from Telegram, Reddit, and X (formerly Twitter) showed that large language model-based approaches achieve competitive performance, with Gemma 3-12B emerging as the most stable, accurate, and ethically compliant model. The results also highlighted the critical role of prompt engineering and multimodal context in detecting subtle or implicit online aggression.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.409891",
+      "url": "https://openalex.org/W7160961224"
+    },
+    {
+      "title": "Semantic-Aware Temporal Modeling for Intelligent Classroom Behavior Detection",
+      "abstract": "Classroom behavior detection is pivotal in smart education, enabling real-time assessment of students' engagement and learning states. Existing methods struggle to distinguish visually similar behaviors and to ensure temporal consistency in video predictions. To address these challenges, the authors propose the Behavior-Aware Semantic-Temporal Detector (BASTDet), a novel framework that enhances semantic discrimination and temporal stability for classroom behavior detection. BASTDet has two key components: the Behavior-Aware Semantic Attention Block (BSAB) and the Temporal Mamba Module (TMM). BSAB improves semantic separability through learnable prototypes and text-guided embeddings, while TMM captures long-range temporal dependencies to produce consistent frame-level predictions. Experiments on the public SCB-Dataset (a classroom behavior benchmark) show that BASTDet achieves 95.8% mean average precision at 86.2 frames per second, outperforming state-of-the-art methods in both accuracy and efficiency. These results confirm that BASTDet is an effective and efficient solution for real-time classroom behavior understanding, with practical value for intelligent education systems.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.408114",
+      "url": "https://openalex.org/W7155411773"
+    },
+    {
+      "title": "Semantic-Enhanced Risk-Aware Dual-Layer Privacy-Preserving Verifiable Access Control for OT Systems",
+      "abstract": "Industrial operational technology systems are becoming more intelligent and interconnected, requiring remote maintenance and multiparty collaboration. While traditional approaches improve efficiency, they introduce risks like data leakage and unauthorized operations. Existing access control schemes struggle with compliance verification and auditing while ensuring privacy. A novel access control scheme was proposed that combines zero-knowledge proof with the publicly verifiable covert security model. The scheme features a dual-layer verification mechanism: a basic layer using zero-knowledge proof to protect identities and permissions during remote maintenance and an enhanced layer for high-risk operations that uses oblivious transfer and digital signatures to detect malicious behavior and generate cheating certificates. Security analysis showed the scheme ensures privacy, access legitimacy, and non-repudiation. Experiments demonstrated the scheme had faster proof generation and verification compared to existing methods with effective malicious behavior detection and accountability.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.4018/ijswis.408111",
+      "url": "https://openalex.org/W7155395910"
+    }
+  ]
+}

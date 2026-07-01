@@ -1,0 +1,70 @@
+{
+  "journal_id": "dse",
+  "journal_name": "Data Science and Engineering",
+  "papers": [
+    {
+      "title": "A Survey of Traffic Prediction: from Spatio-Temporal Data to Intelligent Transportation",
+      "abstract": "Intelligent transportation (e.g., intelligent traffic light) makes our travel more convenient and efficient. With the development of mobile Internet and position technologies, it is reasonable to collect spatio-temporal data and then leverage these data to achieve the goal of intelligent transportation, and here, traffic prediction plays an important role. In this paper, we provide a comprehensive survey on traffic prediction, which is from the spatio-temporal data layer to the intelligent transportation application layer. At first, we split the whole research scope into four parts from bottom to up, where the four parts are, respectively, spatio-temporal data, preprocessing, traffic prediction and traffic application. Later, we review existing work on the four parts. First, we summarize traffic data into five types according to their difference on spatial and temporal dimensions. Second, we focus on four significant data preprocessing techniques: map-matching, data cleaning, data storage and data compression. Third, we focus on three kinds of traffic prediction problems (i.e., classification, generation and estimation/forecasting). In particular, we summarize the challenges and discuss how existing methods address these challenges. Fourth, we list five typical traffic applications. Lastly, we provide emerging research challenges and opportunities. We believe that the survey can help the partitioners to understand existing traffic prediction problems and methods, which can further encourage them to solve their intelligent transportation applications.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-020-00151-z",
+      "url": "https://www.semanticscholar.org/paper/d9a4708426fa6d07704f256aa0ea45dd2c24d8fd"
+    },
+    {
+      "title": "Budget-Constrained Runtime Allocation of Linked Data Services in Stream Processing",
+      "abstract": "Stream processing requires integrating with background knowledge in order to become rich knowledge. As a promising approach, it is getting important to combine streaming data with linked open data. However, since linked data change dynamically, it is impossible to synchronize their distributed data sources perfectly and seamlessly. To reduce the high cost of the synchronization, the materialized views (or views) that store local copies of remote sources are used but may degrade the accuracy of stream processing. To balance response time against accuracy, recent works manage a refresh budget—that is, the limited cost allocated for updating views over remote sources. However, they fail to allocate a refresh budget and produce a low accuracy when a tight deadline is given. To solve the problem, we propose an efficient method of allocating a refresh budget to view updates. The proposed method updates views both in the background and on demand. Experimental results with real and synthetic data sets show that the proposed method achieves superiority in terms of answer staleness, resource utilization, and refresh budget usage.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-024-00277-4",
+      "url": "https://www.semanticscholar.org/paper/696f2d89dd296bc2f1d29da4ca67279177676c1c"
+    },
+    {
+      "title": "Efficient Top-k Frequent Itemset Mining on Massive Data",
+      "abstract": "Top-k frequent itemset mining (top-k FIM) plays an important role in many practical applications. It reports the k itemsets with the highest supports. Rather than the subtle minimum support threshold specified in FIM, top-k FIM only needs the more understandable parameter of the result number. The existing algorithms require at least two passes of scan on the table, and incur high execution cost on massive data. This paper develops a prefix-partitioning-based PTF algorithm to mine top-k frequent itemsets efficiently, where each prefix-based partition keeps the transactions sharing the same prefix item. PTF can skip most of the partitions directly which cannot generate any top-k frequent itemsets. Vertical mining is developed to process the partitions of vertical representation with the high-support-first principle, and only a small fraction of the items are involved in the processing of the partitions. Two improvements are proposed to reduce execution cost further. Hybrid vertical storage mode maintains the prefix-based partitions adaptively and the candidate pruning reduces the number of the explored candidates. The extensive experimental results show that, on massive data, PTF can achieve up to 1348.53 times speedup ratio and involve up to 355.31 times less I/O cost compared with the state-of-the-art algorithms.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-024-00241-2",
+      "url": "https://www.semanticscholar.org/paper/bd87f86d4af81b3432a4145c84a8f663f4e6c751"
+    },
+    {
+      "title": "A Comprehensive Survey on Deep Learning Techniques in Educational Data Mining",
+      "abstract": "Educational Data Mining (EDM) has emerged as a vital field of research, which harnesses the power of computational techniques to analyze educational data. With the increasing complexity and diversity of academic data, Deep Learning techniques have shown significant advantages in addressing the challenges associated with analyzing and modeling this data. Existing studies are scattered across various domains, making it challenging to gain a comprehensive understanding of how Deep Learning techniques can transform educational practices. This survey aims to systematically review the state-of-the-art in EDM with Deep Learning. We begin by providing a brief introduction to EDM and Deep Learning, highlighting their relevance in the context of modern education. Next, we present a detailed review of Deep Learning techniques applied in four typical educational scenarios, including knowledge tracing, student behavior detection, performance prediction, and personalized recommendation. Furthermore, a comprehensive overview of public datasets and processing tools for EDM is provided. Finally, we point out emerging trends and future directions, aiming to guide researchers and practitioners in advancing the field of EDM.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-025-00303-z",
+      "url": "https://www.semanticscholar.org/paper/85446c1e14932bbf5898225ae248964aa32a155c"
+    },
+    {
+      "title": "Computing Prominent Skyline on Massive Data",
+      "abstract": "In many practical applications, skyline query is an important operation to return the pareto optimal tuples, which provides a candidate set for the optimum. On massive data, skyline often reports too many results, the users will be overwhelmed and be difficult to find the desired information easily. This paper devises P-skyline to reduce the size of the returned results. Given the approximation factor, P-skyline only generates the prominent skyline results by the definition of p-dominance. To the best of our knowledge, this paper is the first work to study P-skyline problem. This paper first proposes a baseline algorithm, which requires one full table scan to compute the results. It is found that baseline algorithm incurs a relatively high execution cost on massive data. Then, PSTP algorithm is proposed, which consists of two stages: candidate acquisition and refinement. On the presorted table, PSTP utilizes selective retrieval and selective checking to process P-skyline with much lower I/O cost and computation cost. The extensive experimental results, conducted on synthetic and real-life data sets, show that PSTP can compute P-skyline on massive data efficiently.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-024-00259-6",
+      "url": "https://www.semanticscholar.org/paper/de1f2c0a888aa5349c5b841403e914681a8c6280"
+    },
+    {
+      "title": "A Strategy for Predicting the Performance of Supervised and Unsupervised Tabular Data Classifiers",
+      "abstract": "Machine Learning algorithms that perform classification are increasingly been adopted in Information and Communication Technology (ICT) systems and infrastructures due to their capability to profile their expected behavior and detect anomalies due to ongoing errors or intrusions. Deploying a classifier for a given system requires conducting comparison and sensitivity analyses that are time-consuming, require domain expertise, and may even not achieve satisfactory classification performance, resulting in a waste of money and time for practitioners and stakeholders. This paper predicts the expected performance of classifiers without needing to select, craft, exercise, or compare them, requiring minimal expertise and machinery. Should classification performance be predicted worse than expectations, the users could focus on improving data quality and monitoring systems instead of wasting time in exercising classifiers, saving key time and money. The prediction strategy uses scores of feature rankers, which are processed by regressors to predict metrics such as Matthews Correlation Coefficient (MCC) and Area Under ROC-Curve (AUC) for quantifying classification performance. We validate our prediction strategy through a massive experimental analysis using up to 12 feature rankers that process features from 23 public datasets, creating additional variants in the process and exercising supervised and unsupervised classifiers. Our findings show that it is possible to predict the value of performance metrics for supervised or unsupervised classifiers with a mean average error (MAE) of residuals lower than 0.1 for many classification tasks. The predictors are publicly available in a Python library whose usage is straightforward and does not require domain-specific skill or expertise.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-024-00264-9",
+      "url": "https://www.semanticscholar.org/paper/dfb002c9c5de267605a38bb172c2ad70d4a85b16"
+    },
+    {
+      "title": "Construct Trip Graphs by Using Taxi Trajectory Data",
+      "abstract": "The trip graph, which can model the residents’ taxi demands, consists of vertices used to indicate trips and edges used to indicate the follow-up relationships between trips. A trip $$v_j$$ v j is a tight follow-up trip of another trip $$v_i$$ v i , if a taxi can arrive at the departure location of $$v_j$$ v j within a time threshold $$\\delta$$ δ after it finishes $$v_i$$ v i . However, for big cities, there are a large amount of trips every day and it is time consuming to construct a trip graph. In this paper, we propose efficient algorithms to construct trip graphs for big cities. When constructing a trip graph, the most expensive step is to connect the vertices if the tight follow-up relationships exist. To find out the tight follow-up trips fast, we design an index considering both spatial and temporal constraints. To designate appropriate search areas, we propose efficient methods to determine the distance-based search areas and the traffic-based search areas. We conduct experiments on real datasets, i.e., the taxi trajectories of Shanghai in 2015. The experimental results show that our algorithm can construct the trip graph about 40 times faster than the straightforward method. We also demonstrate the usages of the trip graph in green transportation applications, i.e., the minimum fleet analysis and the minimum total “idle” mileage analysis.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s41019-023-00205-y",
+      "url": "https://www.semanticscholar.org/paper/ea5ce05d7a57ca144853669afbcd8191bf3080b3"
+    },
+    {
+      "title": "Retrieval-Augmented Generation for AI-Generated Content: A Survey",
+      "abstract": "Advancements in model algorithms, the growth of foundational models, and access to high-quality datasets have propelled the evolution of Artificial Intelligence Generated Content (AIGC). Despite its notable successes, AIGC still faces hurdles such as updating knowledge, handling long-tail data, mitigating data leakage, and managing high training and inference costs. Retrieval-Augmented Generation (RAG) has recently emerged as a paradigm to address such challenges. In particular, RAG introduces the information retrieval process, which enhances the generation process by retrieving relevant objects from available data stores, leading to higher accuracy and better robustness. In this paper, we comprehensively review existing efforts that integrate RAG technique into AIGC scenarios. We first classify RAG foundations according to how the retriever augments the generator, distilling the fundamental abstractions of the augmentation methodologies for various retrievers and generators. This unified perspective encompasses all RAG scenarios, illuminating advancements and pivotal technologies that help with potential future progress. We also summarize additional enhancements methods for RAG, facilitating effective engineering and implementation of RAG systems. Then from another view, we survey on practical applications of RAG across different modalities and tasks, offering valuable references for researchers and practitioners. Furthermore, we introduce the benchmarks for RAG, discuss the limitations of current RAG systems, and suggest potential directions for future research. Github: https://github.com/PKU-DAIR/RAG-Survey.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2402.19473",
+      "url": "https://www.semanticscholar.org/paper/ab15463babf98fffc6f683fe2026de0725b5e1a9"
+    }
+  ]
+}

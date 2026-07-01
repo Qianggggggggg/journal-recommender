@@ -1,0 +1,239 @@
+{
+  "timestamp": "20260526_183410",
+  "mode": "abstract",
+  "top_k": 5,
+  "total_count": 8,
+  "metrics": {
+    "hit_at_1": 1,
+    "hit_at_3": 2,
+    "hit_at_5": 2,
+    "hit_at_10": 2,
+    "area_match_count": 5,
+    "level_match_count": 3,
+    "coarse_hit_count": 8,
+    "coarse_hit_in_rule_top10_count": 2,
+    "area_subject_tag_match_count": 6,
+    "level_a_count": 0,
+    "level_a_hit_at_5": 0,
+    "level_b_count": 7,
+    "level_b_hit_at_5": 2,
+    "level_c_count": 1,
+    "level_c_hit_at_5": 0,
+    "level_d_count": 0,
+    "level_d_hit_at_5": 0
+  },
+  "by_area": {
+    "人工智能": {
+      "total": 4,
+      "hit": 1,
+      "area_match": 3
+    },
+    "计算机网络": {
+      "total": 1,
+      "hit": 1,
+      "area_match": 1
+    },
+    "计算机体系结构/并行与分布计算/存储系统": {
+      "total": 3,
+      "hit": 0,
+      "area_match": 1
+    }
+  },
+  "by_level": {
+    "A": {
+      "total": 2,
+      "hit": 2
+    },
+    "B": {
+      "total": 4,
+      "hit": 0
+    },
+    "C": {
+      "total": 2,
+      "hit": 0
+    }
+  },
+  "paper_results": [
+    {
+      "arxiv": "1706.07269",
+      "title": "Explanation in Artificial Intelligence: Insights f",
+      "venue": "Artificial Intelligence",
+      "ccf_level": "A",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "International Journal of Human-Computer Studies",
+        "Artificial Intelligence",
+        "Journal of Artificial Intelligence Research",
+        "Cognition",
+        "Science China Information Sciences"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "paper_strength": 0.6666666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2405.07418",
+      "title": "Exploring the Effects of User-Agent and User-Desig",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "ACM Transactions on Computer-Human Interaction",
+        "International Journal of Human-Computer Studies",
+        "Virtual Reality & Intelligent Hardware",
+        "IEEE Transactions on Affective Computing",
+        "The Computer Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.5,
+      "quality_level": "C",
+      "ccf_research_area": [
+        "人机交互与普适计算"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2407.04191",
+      "title": "GazeFusion: Saliency-Guided Image Generation",
+      "venue": "ACM Transactions on Applied Perception",
+      "ccf_level": "B",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Computer Vision and Image Understanding",
+        "International Journal of Pattern Recognition and Artificial Intelligence",
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "International Journal of Human-Computer Studies",
+        "The Computer Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.6333333333333333,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机图形学与多媒体",
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2412.19522",
+      "title": "Exploiting Domain-Specific Parallel Data on Multil",
+      "venue": "ACM Transactions on Asian and Low-Resource Language Information Processing",
+      "ccf_level": "C",
+      "research_area": "人工智能",
+      "recommended_journals": [
+        "Natural Language Engineering",
+        "Journal of Machine Learning Research",
+        "Computer Speech & Language",
+        "Machine Learning",
+        "Expert Systems with Applications"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.5416666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2404.15292",
+      "title": "Multi-Objective Optimization for Multi-UAV-Assiste",
+      "venue": "IEEE Transactions on Mobile Computing",
+      "ccf_level": "A",
+      "research_area": "计算机网络",
+      "recommended_journals": [
+        "IEEE Transactions on Mobile Computing",
+        "Journal of Network and Computer Applications",
+        "IEEE Transactions on Cloud Computing",
+        "Journal of Global Optimization",
+        "The Computer Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": true,
+      "paper_strength": 0.5833333333333334,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机网络",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": true
+    },
+    {
+      "arxiv": "2512.04680",
+      "title": "Generative AI for Self-Adaptive Systems: State of ",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "ccf_level": "B",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "Engineering Applications of Artificial Intelligence",
+        "The Computer Journal",
+        "Journal of Artificial Intelligence Research",
+        "Expert Systems with Applications",
+        "Proceedings of the ACM on Human-Computer Interaction"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.575,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "交叉/综合/新兴",
+        "软件工程/系统软件/程序设计语言"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2307.04098",
+      "title": "A User Study on Explainable Online Reinforcement L",
+      "venue": "ACM Transactions on Autonomous and Adaptive Systems",
+      "ccf_level": "B",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "Proceedings of the ACM on Human-Computer Interaction",
+        "Journal of Machine Learning Research",
+        "Machine Learning",
+        "Neural Computing and Applications",
+        "The Computer Journal"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.6416666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "人工智能",
+        "交叉/综合/新兴"
+      ],
+      "area_subject_tag_match": false
+    },
+    {
+      "arxiv": "2105.02038",
+      "title": "Dynamic Reliability Management in Neuromorphic Com",
+      "venue": "ACM Journal on Emerging Technologies in Computing Systems",
+      "ccf_level": "C",
+      "research_area": "计算机体系结构/并行与分布计算/存储系统",
+      "recommended_journals": [
+        "IEEE Transactions on Reliability",
+        "ACM Transactions on Computer Systems",
+        "Proceedings of the IEEE",
+        "IEEE Transactions on Dependable and Secure Computing",
+        "Journal of the ACM"
+      ],
+      "coarse_hit": true,
+      "coarse_hit_in_rule_top10": false,
+      "paper_strength": 0.6166666666666666,
+      "quality_level": "B",
+      "ccf_research_area": [
+        "计算机体系结构/并行与分布计算/存储系统"
+      ],
+      "area_subject_tag_match": true
+    }
+  ]
+}

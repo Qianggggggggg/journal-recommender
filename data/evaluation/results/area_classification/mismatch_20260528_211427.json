@@ -1,0 +1,206 @@
+[
+  {
+    "title": "Leakage-Suppressed Encrypted Keyword Queries over ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "predicted_areas": [
+      "网络与信息安全"
+    ]
+  },
+  {
+    "title": "A User Study on Explainable Online Reinforcement L",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "predicted_areas": [
+      "人工智能"
+    ]
+  },
+  {
+    "title": "Generative AI for Self-Adaptive Systems: State of ",
+    "metadata_area": "计算机体系结构/并行与分布计算/存储系统",
+    "predicted_areas": [
+      "软件工程/系统软件/程序设计语言"
+    ]
+  },
+  {
+    "title": "LNNIDS: A Hybrid Liquid Neural Network based IDS f",
+    "metadata_area": "计算机网络",
+    "predicted_areas": [
+      "网络与信息安全"
+    ]
+  },
+  {
+    "title": "Resilient Collaborative Caching for Multi-Edge Sys",
+    "metadata_area": "计算机网络",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "A new hybrid approach combining GCN and LSTM for r",
+    "metadata_area": "计算机网络",
+    "predicted_areas": [
+      "网络与信息安全"
+    ]
+  },
+  {
+    "title": "Zero trust-based authentication for Inter-Satellit",
+    "metadata_area": "计算机网络",
+    "predicted_areas": [
+      "网络与信息安全"
+    ]
+  },
+  {
+    "title": "A High-Throughput and Secure Coded Blockchain for ",
+    "metadata_area": "网络与信息安全",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "RC-NVM: Recovery-Aware Reliability-Security Co-Des",
+    "metadata_area": "网络与信息安全",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "Distinguishing Natural and Computer-Generated Imag",
+    "metadata_area": "网络与信息安全",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "Proactive–reactive microservice architecture globa",
+    "metadata_area": "软件工程/系统软件/程序设计语言",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "Locally Abstract, Globally Concrete Semantics of C",
+    "metadata_area": "软件工程/系统软件/程序设计语言",
+    "predicted_areas": [
+      "计算机科学理论"
+    ]
+  },
+  {
+    "title": "Optimisation of multiple clustering based undersam",
+    "metadata_area": "数据库/数据挖掘/内容检索",
+    "predicted_areas": [
+      "网络与信息安全"
+    ]
+  },
+  {
+    "title": "Peeling Close to the Orientability Threshold Spati",
+    "metadata_area": "计算机科学理论",
+    "predicted_areas": [
+      "数据库/数据挖掘/内容检索"
+    ]
+  },
+  {
+    "title": "hIPPYlib-MUQ: A Bayesian Inference Software Framew",
+    "metadata_area": "计算机科学理论",
+    "predicted_areas": [
+      "交叉/综合/新兴"
+    ]
+  },
+  {
+    "title": "Generative artificial intelligence: a systematic r",
+    "metadata_area": "计算机图形学与多媒体",
+    "predicted_areas": [
+      "人工智能"
+    ]
+  },
+  {
+    "title": "Exploring the Effects of User-Agent and User-Desig",
+    "metadata_area": "人工智能",
+    "predicted_areas": [
+      "人机交互与普适计算"
+    ]
+  },
+  {
+    "title": "GazeFusion: Saliency-Guided Image Generation",
+    "metadata_area": "人工智能",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "Performance analysis of subsampled LiDAR point clo",
+    "metadata_area": "人工智能",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "From classification to landmark-aware identificati",
+    "metadata_area": "人工智能",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "Synthesizing mmWave range-doppler data from videos",
+    "metadata_area": "人机交互与普适计算",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "Understanding user intent modeling for conversatio",
+    "metadata_area": "人机交互与普适计算",
+    "predicted_areas": [
+      "交叉/综合/新兴"
+    ]
+  },
+  {
+    "title": "Edge computing and 5G network integration for mobi",
+    "metadata_area": "人机交互与普适计算",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统",
+      "计算机网络"
+    ]
+  },
+  {
+    "title": "A Survey on Stream-Based Architectures: From Accel",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "Adaptive and Fair Transformation for Recoverable M",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  },
+  {
+    "title": "EarthGPT: A Universal Multimodal Large Language Mo",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "ChangeMamba: Remote Sensing Change Detection With ",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "计算机图形学与多媒体"
+    ]
+  },
+  {
+    "title": "Rotation Equivariant Convolution-based Network for",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "人工智能"
+    ]
+  },
+  {
+    "title": "Serverless Computing: A Technological and Architec",
+    "metadata_area": "交叉/综合/新兴",
+    "predicted_areas": [
+      "计算机体系结构/并行与分布计算/存储系统"
+    ]
+  }
+]

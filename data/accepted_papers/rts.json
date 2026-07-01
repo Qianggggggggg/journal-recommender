@@ -1,0 +1,78 @@
+{
+  "journal_id": "rts",
+  "journal_name": "Real-Time Systems",
+  "papers": [
+    {
+      "title": "A comprehensive survey of industry practice in real-time systems",
+      "abstract": "This paper presents results and observations from a survey of 120 industry practitioners in the field of real-time embedded systems. The survey provides insights into the characteristics of the systems being developed today and identifies important trends for the future. It extends the results from the survey data to the broader population that it is representative of, and discusses significant differences between application domains. The survey aims to inform both academics and practitioners, helping to avoid divergence between industry practice and academic research. The value of this research is highlighted by a study showing that the aggregate findings of the survey are not common knowledge in the real-time systems community.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-021-09376-1",
+      "url": "https://www.semanticscholar.org/paper/f353ac9b7097fd1e6bccda260f851f97c9d7d93a"
+    },
+    {
+      "title": "Robust and accurate regression-based techniques for period inference in real-time systems",
+      "abstract": "With the growth in complexity of real-time embedded systems, there is an increasing need for tools and techniques to understand and compare the observed runtime behavior of a system with the expected one. Since many real-time applications require periodic interactions with the environment, one of the fundamental problems in guaranteeing their temporal correctness is to be able to infer the periodicity of certain events in the system. The practicability of a period inference tool, however, depends on both its accuracy and robustness (also its resilience) against noise in the output trace of the system, e.g., when the system trace is impacted by the presence of aperiodic tasks, release jitters, and runtime variations in the execution time of the tasks. This work (i) presents the first period inference framework that uses regression-based machine-learning (RBML) methods, and (ii) thoroughly investigates the accuracy and robustness of different families of RBML methods in the presence of uncertainties in the system parameters. We show, on both synthetically generated traces and traces from actual systems, that our solutions can reduce the error of period estimation by two to three orders of magnitudes w.r.t. the state of the art.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-022-09385-8",
+      "url": "https://www.semanticscholar.org/paper/c11d273c3a66128b00be091cf23dcbb52b6b12fc"
+    },
+    {
+      "title": "Evaluating virtualization for fog monitoring of real-time applications in mixed-criticality systems",
+      "abstract": "Technological advances in embedded systems and the advent of fog computing led to improved quality of service of applications of cyber-physical systems. In fact, the deployment of such applications on powerful and heterogeneous embedded systems, such as multiprocessors system-on-chips (MPSoCs), allows them to meet latency requirements and real-time operation. Highly relevant to the industry and our reference case-study, the challenging field of nuclear fusion deploys the aforementioned applications, involving high-frequency control with hard real-time and safety constraints. The use of fog computing and MPSoCs is promising to achieve safety, low latency, and timeliness of such control. Indeed, on one hand, applications designed according to fog computing distribute computation across hierarchically organized and geographically distributed edge devices, enabling timely anomaly detection during high-frequency sampling of time series, and, on the other hand, MPSoCs allow leveraging fog computing and integrating monitoring by deploying tasks on a flexible platform suited for mixed-criticality software, leading to so-called mixed criticality systems (MCSs). However, the integration of such software on the same MPSoC opens challenges related to predictability and reliability guarantees, as tasks interfering with each other when accessing the same shared MPSoC resources may introduce non-deterministic latency, possibly leading to failures on account of deadline overruns. Addressing the design, deployment, and evaluation of MCSs on MPSoCs, we propose a model-based system development process that facilitates the integration of real-time and monitoring software on the same platform by means of a formal notation for modeling the design and deployment of MPSoCs. The proposed notation allows developers to leverage embedded hypervisors for monitoring real-time applications and guaranteeing predictability by isolation of hardware resources. Providing evidence of the feasibility of our system development process and evaluating the industry-relevant class of nuclear fusion applications, we experiment with a safety-critical case-study in the context of the ITER nuclear fusion reactor. Our experimentation involves the design and evaluation of several prototypes deployed as MCSs on a virtualized MPSoC, showing that deployment choices linked to the monitor placement and virtualization configurations (e.g., resource allocation, partitioning, and scheduling policies) can significantly impact the predictability of MCSs in terms of Worst-Case Execution Times and other related metrics.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-023-09410-4",
+      "url": "https://www.semanticscholar.org/paper/9480f2a69e55df31be1d00daaf39968e2b0fe207"
+    },
+    {
+      "title": "A real-time vital control module to increase capabilities of railway control systems in highly automated train operations",
+      "abstract": "Recent advances in technology and railway have led to the introduction of systems and infrastructures capable of driving trains automatically. The Automatic Train Operation (ATO) system has been optimized for active human supervision. The next challenge is to realize ATO systems capable of achieving unsupervised operations on the mainlines. However, at this aim, additional safety functionalities should be provided. In this paper, we propose a pioneer hardware/software Vital Control Module (VCM) architecture capable of expanding the control capabilities of the existing train control system. The VCM includes a Printed Circuit Board (PCB), to be integrated into the cabin equipment, managed by a reliable and safe hard Real-Time Operating System (RTOS). Both hardware and software are developed to be compliant with related safety standards. The VCM integrates an application logic that acts as an on-board equipment control core, assessing the overall operativity in real-time, and promptly issuing emergency brakes if hazardous situations occur. The application logic has been developed with a model-based approach via Simulink/Stateflow tool and implemented as a C-script on the Xilinx Ultrascale + core housed on the PCB. We have used two testbeds to evaluate the VCM performance. Experimental results showed that the Worst-Case Response Time (WCRT) by the application logic is 13.6 times smaller than the most limiting specification-related deadline. The achieved earliness (− 1.8 ms out of 2 ms of deadline) allows for the easy expansion of VCM’s train protection capabilities in the future. Results from the second testbed showed that the VCM can intervene to mitigate hazardous situations ~ 2 times faster than the current automatic train protection systems according to the related standard.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-023-09401-5",
+      "url": "https://www.semanticscholar.org/paper/944389a5107f56dcc6301b9fa644cd2c4ff30566"
+    },
+    {
+      "title": "Efficiently bounding deadline miss probabilities of Markov chain real-time tasks",
+      "abstract": "In real-time systems analysis, probabilistic models, particularly Markov chains, have proven effective for tasks with dependent executions. This paper improves upon an approach utilizing Gaussian emission distributions within a Markov task execution model that analyzes bounds on deadline miss probabilities for tasks in a reservation-based server. Our method distinctly addresses the issue of runtime complexity, prevalent in existing methods, by employing a state merging technique. This not only maintains computational efficiency but also retains the accuracy of the deadline-miss probability estimations to a significant degree. The efficacy of this approach is demonstrated through the timing behavior analysis of a Kalman filter controlling a Furuta pendulum, comparing the derived deadline miss probability bounds against various benchmarks, including real-time Linux server metrics. Our results confirm that the proposed method effectively upper-bounds the actual deadline miss probabilities, showcasing a significant improvement in computational efficiency without significantly sacrificing accuracy.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-024-09431-7",
+      "url": "https://www.semanticscholar.org/paper/d91b72bbab046fbf7427a9864ff490b8f9fec551"
+    },
+    {
+      "title": "Real-time scheduling for parallel tasks with resource reclamation",
+      "abstract": "This paper considers the real-time scheduling of a parallel task with reclaiming computing resources, which can be utilized for soft real-time tasks or switching to low-energy mode to save energy. Existing works allocate a rectangular piece of computing resources based on the worst-case characterizations of the task to guarantee the deadline, which inherently incurs severe resource wasting due to coarse-grained resource allocation. To address this resource-wasting problem, this paper proposes the ladder-like resource allocation (i.e., a series of rectangular pieces of computing resources). To characterize the ladder-like resource allocation, we present two concepts called resource distribution and allocation vector, which serve as the interfaces between hard and soft real-time tasks. For the former, we derive schedulability tests under the given two interfaces; for the latter, we discuss the methods of determining the two interfaces to reclaim computing resources. This paper is the first work to fully explore the concept of ladder-like resource allocation and its potential consequences on computing resources, soft real-time tasks, and energy. Experiments demonstrate that the proposed approach can effectively reclaim more computing resources than existing approaches while maintaining hard real-time guarantees.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-024-09421-9",
+      "url": "https://www.semanticscholar.org/paper/12081fe8a1d849f09ba7594c6b382092c826f697"
+    },
+    {
+      "title": "Optimal scheduling of measurement-based parallel real-time tasks",
+      "abstract": "In this work we consider a measurement-based model for parallel real-time tasks represented by the work and span parameters of directed acyclic graphs, with different bounds for nominal and overload scenarios. We address the corresponding real-time scheduling problem and propose an optimal scheduling strategy with a derived tight bound on the maximum response time of a task.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-020-09346-z",
+      "url": "https://www.semanticscholar.org/paper/44a6bd2e5a00d2122d7d72ad19ef69543028ca44"
+    },
+    {
+      "title": "Partial-order reduction in reachability-based response-time analyses of limited-preemptive DAG tasks",
+      "abstract": "Response-time analysis (RTA) has been a means to evaluate the temporal correctness of real-time systems since the 1970 s. While early analyses were successful in capturing the exact upper bound on the worst-case response-time (WCRT) of systems with relatively simple computing platforms and task activation models, nowadays we see that most existing RTAs either become pessimistic or do not scale well as systems become more complex (e.g., parallel tasks running on a multicore platform). To make a trade-off between accuracy and scalability, recently, a new reachability-based RTA, called schedule-abstraction graph (SAG), has been proposed. The analysis is at least three orders of magnitude faster than other exact RTAs based on UPPAAL. However, it still has a fundamental limitation in scalability as it suffers from state-space explosion when there are large uncertainties in the timing parameters of the input jobs (e.g., large release jitters or execution-time variations). This could impede its applicability to large industrial use cases, or to be integrated with automated tools that explore alternative design choices. In this paper, we improve the scalability of the SAG analysis by introducing partial-order reduction rules that avoid combinatorial exploration of all possible scheduling decisions. We include systems with dependent and independent task execution models (i.e., with and without precedence constraint). Our empirical evaluations show that the proposed solution is able to reduce the runtime by five orders of magnitude and the number of explored states by 98% in comparison to the original SAG analysis. These achievements come only at a negligible cost of an over-estimation of 0.1% on the actual WCRT. We applied our solution on an automotive case study showing that it is able to scale to realistic systems made of hundreds of tasks for which the original analysis fails to finish.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-023-09398-x",
+      "url": "https://www.semanticscholar.org/paper/fb6a391dbfd46e68417be1126e3246cc4fdcb00b"
+    },
+    {
+      "title": "Many suspensions, many problems: a review of self-suspending tasks in real-time systems",
+      "abstract": "In general computing systems, a job (process/task) may suspend itself whilst it is waiting for some activity to complete, e.g., an accelerator to return data. In real-time systems, such self-suspension can cause substantial performance/schedulability degradation. This observation, first made in 1988, has led to the investigation of the impact of self-suspension on timing predictability, and many relevant results have been published since. Unfortunately, as it has recently come to light, a number of the existing results are flawed. To provide a correct platform on which future research can be built, this paper reviews the state of the art in the design and analysis of scheduling algorithms and schedulability tests for self-suspending tasks in real-time systems. We provide (1) a systematic description of how self-suspending tasks can be handled in both soft and hard real-time systems; (2) an explanation of the existing misconceptions and their potential remedies; (3) an assessment of the influence of such flawed analyses on partitioned multiprocessor fixed-priority scheduling when tasks synchronize access to shared resources; and (4) a discussion of the computational complexity of analyses for different self-suspension task models.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11241-018-9316-9",
+      "url": "https://www.semanticscholar.org/paper/3f4fc12b617b9f3156d64e84b6fa891fb257f736"
+    }
+  ]
+}

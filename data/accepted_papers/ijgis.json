@@ -1,0 +1,82 @@
+{
+  "journal_id": "ijgis",
+  "journal_name": "International Journal of Geographical Information Science",
+  "papers": [
+    {
+      "title": "Geographical information science for the United Nations’ 2030 agenda for sustainable development",
+      "abstract": "The United Nations General Assembly adopted the 2030 Agenda for sustainable development goal in 2015 for a prosperous and inclusive future for all. Reflecting on the contributions of IJGIS publications to sustainability, this editorial draws the intellectual relevance of GIScience to the UN sustainable development goals (SDGs). GIScience, with its body of GIScience knowledge and knowledge production, has much to contribute to addressing the shortfalls recognized by the 2019 UN High-Level Political Forum on Sustainable Development. The COVID-19 pandemic threatens sustainability in many ways, but it also signifies the decreases of environmental pollutants by reducing human activities and elicits the latent social and health inequalities. This editorial highlights opportunities for GIScience contributions to the UN SDGs, outlines research challenges of the UN SDGs to GIScience, and welcomes submissions of GIScience research on UN SDGs to IJGIS.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2020.1766244",
+      "arxiv": "",
+      "corpus_id": 219480074,
+      "url": "https://www.semanticscholar.org/paper/fdc3545fadeb91f8f2d0a3e91207a75b3d12dfbd"
+    },
+    {
+      "title": "GIS-KG: building a large-scale hierarchical knowledge graph for geographic information science",
+      "abstract": "An organized knowledge base can facilitate the exploration of existing knowledge and the detection of emerging topics in a domain. Knowledge about and around Geographic Information Science and its associated system technologies (GIS) is complex, extensive and emerging rapidly. Taking the challenge, we built a GIS knowledge graph (GIS-KG) by (1) merging existing GIS bodies of knowledge to create a hierarchical ontology and then (2) applying deep-learning methods to map GIS publications to the ontology. We conducted several experiments on information retrieval to evaluate the novelty and effectiveness of the GIS-KG. Results showed the robust support of GIS-KG for knowledge search of existing GIS topics and potential to explore emerging research themes.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2021.2005795",
+      "arxiv": "",
+      "corpus_id": 244686664,
+      "url": "https://www.semanticscholar.org/paper/055e12e420afb4fed25ed93badc169716f600c20"
+    },
+    {
+      "title": "Spatial social networks in geographic information science",
+      "abstract": "A spatial social network (SSN) can be defined as a set of agent-based connections that are embedded in geographic space. SSNs range in size from small networks of connections within a group of people in a small area or a set of hundreds of millions of online connections in a global social network. This field of study is especially interesting because it requires metrics from both the field of social network analysis and spatial analysis and requires exploration and understanding of the domains of sociology and computational social science (Uitermark and Van Meeteren 2021). A classic bridge between the two disciplines of geography and sociology has been, traditionally, the use of demographic data, and mapping socio-economic data. As such the practice of SSN modeling and analysis are native to both geographers and sociologists. With more data on GPS traces and location-based social media (LBSM) illustrating spatial interaction between individuals, GIScientists are faced with new questions about where particular social interactions occur, and why. The latter question of why is still under-researched. Geo-tagged social media data capture a considerable portion of place relations by reporting the activities, events, and issues that relate to each another. Yet, fifteen years into mobility and LBSM studies, GIScientists still analyze data by testing out new metrics to find ‘patterns’ in data and purport to ‘understand’ behavior. These research objectives expose weaknesses in GIS tools and approaches, and a struggle to develop actionable insights from big data on what people did/do. Our community is good at answering where, when, and how – but the why is usually assumed, whispered, or ignored, and the so what (for humans) is absent. We do not dig deep enough into questions about the motivations behind activities and the impacts of behavior. To do so, GIScientists should consult people who understand human behavior, as our colleagues in spatial cognition who link psychology and geography have done. Comprehensive findings on ‘why’ interactions occur may require more than just the big datasets, but also surveys, interviews, discussions with practitioners, and interactions with researchers who study decision-making and behavioral economics. Outside of mobility and GPS-based social networks, social networks specifically provide a new kind of linkage for geographers: personal relationships. Accordingly, in this special issue, we called for spatial social networks where nodes are individuals and edges signify a meaningful relationship between individuals. These SNs are geographic when nodes include geospatial information so they can be embedded within a GISystem and associated with other spatial datasets. The opportunity to focus on SSNs that evidence personal relationships is both scary and exciting; it is scary because personal relationships are complicated, often private, and difficult to represent. Yet, they are exciting because they can tell us more about why humans connect with one another, attend events, settle in locations, move to new locations, and form opinions about place and space. They tell us INTERNATIONAL JOURNAL OF GEOGRAPHICAL INFORMATION SCIENCE 2021, VOL. 35, NO. 12, 2375–2379 https://doi.org/10.1080/13658816.2021.2001722",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2021.2001722",
+      "url": "https://www.semanticscholar.org/paper/8f6fa6db54b8ae1caedda7e806fe6ef4f7b6d6d8"
+    },
+    {
+      "title": "Benford’s law and geographical information – the example of OpenStreetMap",
+      "abstract": "Few laws about geographical information are known, partly because geographical information is inherently complex. Tobler’s first law of Geography and, to a lesser degree, also his second law are among the rare exceptions. In this article, we explore the validity of Benford’s law in the context of the example of OpenStreetMap. More specifically, we compare the distribution of several numerical features of geographical entities to the Benford distribution. It is demonstrated that the numerical features examined are in accordance with Benford’s law to a varying degree with little variation between the types of geographical entities. Spatial patterns in the deviation from Benford’s law are shown to be similar for some aspects but to strongly differ for other ones. We show that many aspects of the data tend to deviate more than average from the Benford distribution in Africa, Greenland, smaller island countries, and, to a lesser degree, in South America. Also, the scale-dependency of Benford’s law is explored. Motivated by the use of Benford’s law to detect indications for fraud in economic and other datasets, future prospects and limitations to systematically develop intrinsic data quality measures are discussed.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2020.1829627",
+      "url": "https://www.semanticscholar.org/paper/904aa540acb721a0a5a273e582287f2aa6508577"
+    },
+    {
+      "title": "Incremental spatiotemporal flow colocation quotient: a new spatiotemporal association analysis method for geographical flows",
+      "abstract": "Analyzing spatiotemporal associations between different types of geographical flows across multiple scales is crucial for understanding the dynamic relationships between them. However, few spatiotemporal association analysis methods exist for geographical flows. Moreover, this analysis also faces the challenge that patterns at larger scales are biased by the cumulative effects from smaller scales if a series of spatial and temporal thresholds at multiple scales is used. Furthermore, spurious results arise if the joint population distribution pattern is not considered. To address these problems, this paper proposes an incremental spatiotemporal flow colocation quotient (ISTFCLQ), which aims to detect spatiotemporal associations between two types of flows across multiple spatial and temporal distance intervals by considering the joint population distribution pattern. The ISTFCLQ designs both global and local indicators for measuring the overall spatiotemporal association patterns of flows and their local association patterns, respectively. Synthetic data tests verified that the ISTFCLQ can effectively reduce cumulative effects and remove biases from the joint population distribution pattern, identifying the exact scale of association patterns. A case study of Xiamen Island taxi and ride-hailing trip data demonstrated the applicability of the ISTFCLQ in analyzing spatiotemporal competition patterns between taxi and ride-hailing services.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2024.2445180",
+      "url": "https://www.semanticscholar.org/paper/97124a8a521cad097826e64b5a52c7a5ba989506"
+    },
+    {
+      "title": "L-function of geographical flows",
+      "abstract": "Geographical flow (hereafter flow) can be modeled as an orderly connected point pair composed of an origin (O) and a destination (D). Aggregation is the most common form of spatial heterogeneity of flows, which we define as their deviation from complete spatial randomness (CSR), and the aggregation scale is an important indicator for its perception. Nevertheless, quantifying the aggregation scale of flows is still an unsolved problem. In this paper, we propose the L-function for flows as a solution, derive theoretical null models of the K-function and L-function in a flow space. We conduct simulation experiments to validate the L-function and its capability to detect aggregation scales. Finally, we apply the solution in a case study with taxi data in Beijing and identify nine aggregation scales of taxi OD flows, ranging from 170 m to 22.1 km. These scales correspond to three classes: less than 300 m, from 600 m to 700 m and more than 1500 m. The classes are related to the sizes of the urban facilities where the dominant flow clusters occur, indicating that the L-function in flow space can detect the aggregation scale of flows at the building scale, the block scale and the district scale.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2020.1749277",
+      "url": "https://www.semanticscholar.org/paper/f265c74a820ac5d0b07ce6b700010ed5169b408a"
+    },
+    {
+      "title": "Geographical and temporal density regression",
+      "abstract": "Spatial heterogeneity and correlation are two primary geographical effects of spatial data. Geographically weighted regression (GWR) and its extensions were proposed to quantitively analyze the heterogeneous features in data relationships. An integrative distance metric is usually adopted to calculate proximity-based weights for model calibration for these techniques. However, it could be defective when dealing with higher dimensional data, eg spatio-temporal data (3-D), and geographical flow data (4-D). This study proposes a new local model, namely geographical and temporal density regression (GTDR), to deal with objects of flexible dimensions by reconsidering the spatial weights and experimental investigation of GWR. We use a Nelder-Mead algorithm to optimize each kernel function’s bandwidth for every dimension. To validate its performance, we conduct three sets of simulation experiments with 2-D, 3-D, and 4-D data, respectively, and compare them to conventional techniques. Results indicate the apparent advantages of GTDR in treating each dimension individually instead of calculating an integrative distance in traditional ways, such as spatio-temporal or flow distances. All in all, the GTDR technique shows a promising ability in fitting data with higher and diverse dimensions, and exploring heterogeneities in temporal, spatial, spatio-temporal or more complex structural data relationships.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2025.2466110",
+      "url": "https://www.semanticscholar.org/paper/d19f35065c8b75e01ff7496b12035cb61068e6db"
+    },
+    {
+      "title": "Spatiotemporal proximity analysis of heterogeneous and heterochronous time-geographical entities",
+      "abstract": "Time geography is an elegant framework for analyzing human activity–travel behaviors across temporal and spatial dimensions. At the core of this framework are the concepts of space–time paths, which represent historical trajectories, and space–time prisms, which define potential future activity spaces. However, most studies examine space–time paths and prisms in isolation, overlooking the integrative nature of time geography as a theoretical framework that incorporates the past, present, and future within a continuous temporal dimension. This study addresses this gap by developing novel methods for measuring and querying the spatiotemporal proximity of these heterogeneous and heterochronous time-geographic entities. To operationalize these methods, a GIS tool was implemented to support the local density analysis of time-geographic entities. Comprehensive computational experiments were conducted to validate the developed methods using large-scale, network-constrained, and time-geographic datasets. The developed methods exhibited high computational efficiency (approximately 2 s) in computing the local density for each path within extensive prism collections. The experimental results demonstrate the effectiveness of the developed methods in analyzing and visualizing the local density of historical paths in the near future. The methods offer new insights into space–time interactions, advancing research in human mobility forecasting and spatial decision-making.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2025.2465752",
+      "url": "https://www.semanticscholar.org/paper/11a50790ddb7992c661cc3d66456a49a88c6152f"
+    },
+    {
+      "title": "Spatial ensemble learning for predicting the potential geographical distribution of invasive species",
+      "abstract": "Understanding the geographical distribution of invasive species is beneficial for preventing and controlling biological invasions. A global model is often constructed with existing species distribution models (SDMs) to describe the relationships between environmental characteristics and species distributions. Because of the spatial variations in environmental characteristics, it may be difficult for a single SDM to obtain an accurate result in any given location or area. Therefore, a spatial ensemble learning method for predicting the potential geographical distribution of invasive species is presented in this study. The method mainly includes two types of learners: one learner is a base learner used to predict the geographical distribution of invasive species, and the other learner is a spatial ensemble learner for combining predictions from different base learners. In this research, spatial ensemble learning is used to predict the geographical distribution of Erigeron annuus in the Yangtze River Economic Belt, China. The kappa coefficient and AUC (area under the receiver operating characteristic curve) obtained with the spatial ensemble learner are 0.88 and 0.94, respectively, and these values are greater than those obtained using three base learners and other ensemble strategies. This demonstrates the feasibility and effectiveness of spatial ensemble learning.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/13658816.2024.2376325",
+      "url": "https://www.semanticscholar.org/paper/1439cf76978f5714d502380419033aa4e335b9b1"
+    }
+  ]
+}

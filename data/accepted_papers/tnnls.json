@@ -1,0 +1,78 @@
+{
+  "journal_id": "tnnls",
+  "journal_name": "IEEE Transactions on Neural Networks and learning systems",
+  "papers": [
+    {
+      "title": "IEEE TRANSACTIONS ON NEURAL NETWORKS AND LEARNING SYSTEMS Publication Information",
+      "abstract": "IEEE TRANSACTIONS ON NEURAL NETWORKS AND LEARNING SYSTEMS is published by the IEEE Computational Intelligence Society. Members may subscribe to this TRANSACTIONS for $29.00 per year. IEEE student members may subscribe for $15.00 per year. Nonmembers may subscribe for $5,400.00. For information on receiving this TRANSACTIONS, write to the IEEE Service Center at the address below. Member copies of Transactions/Journals are for personal use only. For more information about this TRANSACTIONS see http://www.ieee-cis/org/pubs/tnnls. Editor-in-Chief HAIBO HE (e-mail: ieeetnnls@gmail.com) Dept. of Electrical, Computer, and Biomedical Engineering University of Rhode Island Kingston, RI 02881, USA",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/tnnls.2019.2960913",
+      "url": "https://www.semanticscholar.org/paper/89ddf468bdb7438de5dced72f928d33de78e8a50"
+    },
+    {
+      "title": "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects",
+      "abstract": "A convolutional neural network (CNN) is one of the most significant networks in the deep learning field. Since CNN made impressive achievements in many areas, including but not limited to computer vision and natural language processing, it attracted much attention from both industry and academia in the past few years. The existing reviews mainly focus on CNN’s applications in different scenarios without considering CNN from a general perspective, and some novel ideas proposed recently are not covered. In this review, we aim to provide some novel ideas and prospects in this fast-growing field. Besides, not only 2-D convolution but also 1-D and multidimensional ones are involved. First, this review introduces the history of CNN. Second, we provide an overview of various convolutions. Third, some classic and advanced CNN models are introduced; especially those key points making them reach state-of-the-art results. Fourth, through experimental analysis, we draw some conclusions and provide several rules of thumb for functions and hyperparameter selection. Fifth, the applications of 1-D, 2-D, and multidimensional convolution are covered. Finally, some open issues and promising directions for CNN are discussed as guidelines for future work.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2021.3084827",
+      "url": "https://www.semanticscholar.org/paper/1de68f12db136526116c6ac7064fd13965f2c966"
+    },
+    {
+      "title": "Trainable Delays in Time Delay Neural Networks for Learning Delayed Dynamics",
+      "abstract": "In this article, the connection between time delay systems and time delay neural networks (TDNNs) is presented from a continuous-time perspective. TDNNs are utilized to learn the nonlinear dynamics of time delay systems from trajectory data. The concept of TDNN with trainable delay (TrTDNN) is established, and training algorithms are constructed for learning the time delays and the nonlinearities simultaneously. The proposed techniques are tested on learning the dynamics of autonomous systems from simulation data and on learning the delayed longitudinal dynamics of a connected automated vehicle (CAV) from real experimental data.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2024.3379020",
+      "url": "https://www.semanticscholar.org/paper/d635c0b60d1f4c8a5aa325ac89d03ad5522aa533"
+    },
+    {
+      "title": "Deep Neural Networks and Tabular Data: A Survey",
+      "abstract": "Heterogeneous tabular data are the most commonly used form of data and are essential for numerous critical and computationally demanding applications. On homogeneous datasets, deep neural networks have repeatedly shown excellent performance and have therefore been widely adopted. However, their adaptation to tabular data for inference or data generation tasks remains highly challenging. To facilitate further progress in the field, this work provides an overview of state-of-the-art deep learning methods for tabular data. We categorize these methods into three groups: data transformations, specialized architectures, and regularization models. For each of these groups, our work offers a comprehensive overview of the main approaches. Moreover, we discuss deep learning approaches for generating tabular data and also provide an overview over strategies for explaining deep models on tabular data. Thus, our first contribution is to address the main research streams and existing methodologies in the mentioned areas while highlighting relevant challenges and open research questions. Our second contribution is to provide an empirical comparison of traditional machine learning methods with 11 deep learning approaches across five popular real-world tabular datasets of different sizes and with different learning objectives. Our results, which we have made publicly available as competitive benchmarks, indicate that algorithms based on gradient-boosted tree ensembles still mostly outperform deep learning models on supervised learning tasks, suggesting that the research progress on competitive deep learning models for tabular data is stagnating. To the best of our knowledge, this is the first in-depth overview of deep learning approaches for tabular data; as such, this work can serve as a valuable starting point to guide researchers and practitioners interested in deep learning with tabular data.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2022.3229161",
+      "url": "https://www.semanticscholar.org/paper/3acff13163f51765bb36147f6107967765509d9b"
+    },
+    {
+      "title": "Backpropagation-Based Learning Techniques for Deep Spiking Neural Networks: A Survey",
+      "abstract": "With the adoption of smart systems, artificial neural networks (ANNs) have become ubiquitous. Conventional ANN implementations have high energy consumption, limiting their use in embedded and mobile applications. Spiking neural networks (SNNs) mimic the dynamics of biological neural networks by distributing information over time through binary spikes. Neuromorphic hardware has emerged to leverage the characteristics of SNNs, such as asynchronous processing and high activation sparsity. Therefore, SNNs have recently gained interest in the machine learning community as a brain-inspired alternative to ANNs for low-power applications. However, the discrete representation of the information makes the training of SNNs by backpropagation-based techniques challenging. In this survey, we review training strategies for deep SNNs targeting deep learning applications such as image processing. We start with methods based on the conversion from an ANN to an SNN and compare these with backpropagation-based techniques. We propose a new taxonomy of spiking backpropagation algorithms into three categories, namely, spatial, spatiotemporal, and single-spike approaches. In addition, we analyze different strategies to improve accuracy, latency, and sparsity, such as regularization methods, training hybridization, and tuning of the parameters specific to the SNN neuron model. We highlight the impact of input encoding, network architecture, and training strategy on the accuracy–latency tradeoff. Finally, in light of the remaining challenges for accurate and efficient SNN solutions, we emphasize the importance of joint hardware–software codevelopment.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2023.3263008",
+      "url": "https://www.semanticscholar.org/paper/2abffb753d9b27aff6b4d0e9bab0f937bdce4a08"
+    },
+    {
+      "title": "Physics-Informed Neural Networks for Solving Forward and Inverse Problems in Complex Beam Systems",
+      "abstract": "This article proposes a new framework using physics-informed neural networks (PINNs) to simulate complex structural systems that consist of single and double beams based on Euler–Bernoulli and Timoshenko theories, where the double beams are connected with a Winkler foundation. In particular, forward and inverse problems for the Euler–Bernoulli and Timoshenko partial differential equations (PDEs) are solved using nondimensional equations with the physics-informed loss function. Higher order complex beam PDEs are efficiently solved for forward problems to compute the transverse displacements and cross-sectional rotations with less than $1e-3$ % error. Furthermore, inverse problems are robustly solved to determine the unknown dimensionless model parameters and applied force in the entire space–time domain, even in the case of noisy data. The results suggest that PINNs are a promising strategy for solving problems in engineering structures and machines involving beam systems.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2023.3310585",
+      "url": "https://www.semanticscholar.org/paper/28dd40e544c8278299623682ad4daaa14241e09d"
+    },
+    {
+      "title": "Physics-Informed Neural Networks With Weighted Losses by Uncertainty Evaluation for Accurate and Stable Prediction of Manufacturing Systems",
+      "abstract": "The state prediction of key components in manufacturing systems tends to be risk-sensitive tasks, where prediction accuracy and stability are the two key indicators. The physics-informed neural networks (PINNs), which integrate the advantages of both data-driven models and physics models, are deemed as an effective approach and research trends for stable prediction; however, the potential advantages of PINN are limited for the situations with inaccurate physics models or noisy data, where the balancing of the weights of the data-driven model and physics model is very important for improving the performance of PINN, and it is also a challenge urgently to be addressed. This article proposed a kind of PINN with weighted losses (PNNN-WLs) by uncertainty evaluation for accurate and stable prediction of manufacturing systems, where a novel weight allocation strategy based on uncertainty evaluation by quantifying the variance of prediction errors is proposed, and an improved PINN framework is established for accurate and stable prediction. The proposed approach is verified with open datasets on tool wear prediction, and experimental results show that the prediction accuracy and stability could be obviously improved over existing methods.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2023.3247163",
+      "url": "https://www.semanticscholar.org/paper/b2a3b43a0411477cb02521e7b6d419db8d040ec8"
+    },
+    {
+      "title": "Learning From Noisy Labels With Deep Neural Networks: A Survey",
+      "abstract": "Deep learning has achieved remarkable success in numerous domains with help from large amounts of big data. However, the quality of data labels is a concern because of the lack of high-quality labels in many real-world scenarios. As noisy labels severely degrade the generalization performance of deep neural networks, learning from noisy labels (robust training) is becoming an important task in modern deep learning applications. In this survey, we first describe the problem of learning with label noise from a supervised learning perspective. Next, we provide a comprehensive review of 62 state-of-the-art robust training methods, all of which are categorized into five groups according to their methodological difference, followed by a systematic comparison of six properties used to evaluate their superiority. Subsequently, we perform an in-depth analysis of noise rate estimation and summarize the typically used evaluation methodology, including public noisy datasets and evaluation metrics. Finally, we present several promising research directions that can serve as a guideline for future studies.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2022.3152527",
+      "url": "https://www.semanticscholar.org/paper/5ffe9b1d8219438f0343995ad3ea1a888e3d9f8e"
+    },
+    {
+      "title": "Dynamically Weighted Balanced Loss: Class Imbalanced Learning and Confidence Calibration of Deep Neural Networks",
+      "abstract": "Imbalanced class distribution is an inherent problem in many real-world classification tasks where the minority class is the class of interest. Many conventional statistical and machine learning classification algorithms are subject to frequency bias, and learning discriminating boundaries between the minority and majority classes could be challenging. To address the class distribution imbalance in deep learning, we propose a class rebalancing strategy based on a class-balanced dynamically weighted loss function where weights are assigned based on the class frequency and predicted probability of ground-truth class. The ability of dynamic weighting scheme to self-adapt its weights depending on the prediction scores allows the model to adjust for instances with varying levels of difficulty resulting in gradient updates driven by hard minority class samples. We further show that the proposed loss function is classification calibrated. Experiments conducted on highly imbalanced data across different applications of cyber intrusion detection (CICIDS2017 data set) and medical imaging (ISIC2019 data set) show robust generalization. Theoretical results supported by superior empirical performance provide justification for the validity of the proposed dynamically weighted balanced (DWB) loss function.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TNNLS.2020.3047335",
+      "url": "https://www.semanticscholar.org/paper/96f350e5a03276b865b3668110f3f37909646f11"
+    }
+  ]
+}

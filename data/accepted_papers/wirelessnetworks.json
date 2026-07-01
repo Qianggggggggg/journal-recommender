@@ -1,0 +1,62 @@
+{
+  "journal_id": "wirelessnetworks",
+  "journal_name": "Wireless Networks",
+  "papers": [
+    {
+      "title": "A novel model for optimal selection of relay bus with maximum link reliability in VANET using hybrid fuzzy niching grey wolf optimization",
+      "abstract": "Enhancing the reliability of Vehicular Ad-hoc Networks (VANETs) is a challenging objective due to the dynamic topology, high mobility, and frequent disconnections. This paper introduces a novel Fuzzy-based Grey Wolf Optimization (FGWO) algorithm to solve the optimal relay bus selection problem in VANETs to maximize link reliability. A hybrid Fuzzy-Niching Grey Wolf Optimization (FNGWO) is developed to select the optimal cluster head and relay bus. The link reliability is ensured by considering the optimal relay bus based on a fitness function that includes the distance between vehicles, the speed difference, the direction of movement, and the received signal strength. The performance of the proposed FGWO algorithm is compared with existing algorithms, including particle swarm optimization (PSO), ant colony optimization (ACO), and genetic algorithm (GA). The simulation results demonstrate that the proposed FGWO algorithm achieves higher reliability and lower delay compared to existing algorithms.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1007/s11276-024-03860-9",
+      "url": ""
+    },
+    {
+      "title": "Angularly phase shifted propagation channels for MIMO N $$\\times $$ N",
+      "abstract": "The aim of this paper is to define new uncorrelated propagation channels for Multiple-Input-Multiple-Output (MIMO) purposes by producing angular phase differences in the transmission. The phase difference can be created such that the radiation power of the signal does not change when selecting correct values for real and imaginary parts of the complex value $$a+jb$$ . This results in the same signal amplitudes, i.e., coverage area or antenna power radiation pattern, but multi path signal components are received with phase differences. These phase differences then allow uncorrelated propagation channels to be used in MIMO N $$\\times $$ N. In 5G/6G mobile networks, mostly only line-of-sight (LOS) connections between base stations and mobiles are available at very high frequencies, and small cell implementations with MIMO are needed to maximize the system capacity. However, MIMO has performance limitations in LOS environments due to lacking the required phase difference between MIMO channels when traditional antenna space separation is used. Thus, these new uncorrelated channels are especially needed in high-capacity small cell implementations but also in nearly LOS-type environments, as on highways. Ray-tracing simulations were done at 28 GHz frequency in a small cell LOS environment to show the impact of angular phase differences. Fast fading statistics and signal cross-correlations were analyzed to see the potential of utilizing MIMO N $$\\times $$ N in LOS propagation paths. MIMO system capacities were calculated for different MIMO configurations, and these results were compared with the results of traditional spatially separated configurations. The simulated results showed that sufficient angular phase difference offers independent propagation channels in a small cell LOS environment with cross-correlation factors of 0.01–0.44. These low correlated propagation channels yielded a capacity increase of 3.44–3.88 times from SISO to MIMO 4 $$\\times $$ 4 with one polarization and with different directional antennas. This capacity was even 95 % higher than the capacity with only spatially separated directional antennas.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1007/s11276-025-04067-2",
+      "url": "https://doi.org/10.1007/s11276-025-04067-2"
+    },
+    {
+      "title": "An efficient privacy-preserving recommender system in wireless networks",
+      "abstract": "Recommender systems have been widely used for implementing personalised content on many mobile online services to reduce computational overload and preserve wireless data for users. The underlying mechanisms used for building recommender systems analyse data collected from users to make recommendations. This poses concerns over the privacy of data from users as both service providers and the cloud will have access. Privacy-preserving recommender systems protect user information by incorporating various cryptographic mechanisms to prevent accessing the data. However, existing works are not practical due to the use of heavy cryptography. In this paper, we propose an efficient privacy-preserving recommender system that takes advantage of clustering to improve efficiency. Using a secure clustering mechanism, user data are assigned to multiple clusters before being fed into the recommendation. Our proposed protocols are privacy-preserving and do not leak information that could be used to identify a data subject. The experiments show that our system is efficient and accurate.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11276-022-03130-6",
+      "url": "https://www.semanticscholar.org/paper/8d8751209fe0770d57df380ec24c54fdc07dce24"
+    },
+    {
+      "title": "An intelligent access algorithm for large scale multihop wireless networks based on mean field game",
+      "abstract": "In a distributed wireless network with a large number of nodes, competitive access of nodes may result in the deterioration of throughput and energy. Therefore, in this paper we propose an intelligent access algorithm based on the mean field game (MFG). First, we formulate the competitive access process between nodes as a game Query ID=\"Q1\" Text=\"Please check and confirm that the authors and their respective affiliations have been correctly identified and amend if necessary.\" process by a stochastic differential game model, which maximizes the energy efficiency of nodes and obtain the optimal behavior strategy while meeting the requirements of channel access. However, as the number of nodes increases, the dimension of the matrix used to characterize the interaction between nodes becomes too large, which increases the complexity of the solution procedure. Therefore, we introduce the MFG and the interaction between nodes can be approximately transformed into the interaction between nodes and the mean field, which not only reduces the complexity, but also reduces the computational overhead. In addition, the HJB-FPK equation is solved to obtain the Nash equilibrium of the MFG. Finally, a backoff strategy based on the Markov model is proposed, and the node obtains the corresponding backoff strategy according to the network situation and its own state. Simulation results show that the proposed algorithm has good performances on optimizing network throughput and energy efficiency for a large scale multi-hop wireless network.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11276-022-03025-6",
+      "url": "https://www.semanticscholar.org/paper/b1affb66dcfba2f34069ee198f136a9f4e40d1fc"
+    },
+    {
+      "title": "Privacy-enhancing data aggregation and data analytics in wireless networks for a large class of distributed queries",
+      "abstract": "Privacy-enhancing techniques and protocols for data aggregation and analytics in wireless networks require the development of novel methods for efficient and privacy-preserving computation of distributed queries with the protection of outcomes from active attackers. Previous approaches to secure privacy-preserving computation of distributed queries incur significant communication overhead and cannot be applied to big data. This paper proposes two solutions to the problem of efficient and privacy-preserving computation of distributed queries with the protection of outcomes from active outsider attackers for a new large class of distributed statistical or numerical queries. This class contains many useful statistics and is larger than other classes considered in the literature previously. We propose two protocols for the Protection of data from Active Attackers (PAA) in the case of distributed privacy-preserving computation: PAA applying Shamir’s Secret Sharing (PAA-SSS) and PAA applying homomorphic encryption (PAA-HE). The PAA-HE protocol combines the use of ElGamal and Paillier encryption schemes in one system. Theoretical analysis and experimental results show that both protocols outperform alternative approaches. PAA-HE provides stronger protection and is more efficient than PAA-SSS.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11276-022-03108-4",
+      "url": "https://www.semanticscholar.org/paper/63f5d98046d3fc5036e87473c5440ec997b513e1"
+    },
+    {
+      "title": "Optimal trajectory UAV path design based on bezier curves with multi-hop cluster selection in wireless networks",
+      "abstract": "In the past decade, multi-UAV systems have gained significant attention and companies from in various fields. The main aims of growing such systems are able to operate in a coordinated way in complicated situations. To encompass and increase the speed of the applications, this research proposed optimization with intelligence. In the existing work, it does not detect the collision effectively. In this work, the Particle Swarm Optimization algorithm based on fast matching square is proposed for flightpath planning in Multi-UAVs is used. A distributed full coverage optimal route design is derived using the particle swarm optimization (PSO) technique, and a trajectory planner is built utilizing a dynamic fitness function. We applied the PSO technique for every UAV individually to achieve active fitness, maximizing the fitness function while reducing the cost function. The novelty of this work is using the dynamic fitness function for PSO while selecting optimal data. Fast matching square FM2 helps to detect the collision and avoid collisions between the paths. The suggested method generates an optimal path for multi-UAVs and updates the maps for swarms of UAVs. According to experimental findings, the suggested PSO-FM2 outperforms the previous FOA in aspects of convergence and accuracy. Finally, the proposed method is compared with existing algorithms such as MSFOA and PSO.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11276-022-03208-1",
+      "url": "https://www.semanticscholar.org/paper/9f84a62f9ca6a0cd6d1db8323f0dafd4c1da49be"
+    },
+    {
+      "title": "Improved 3D localization algorithm for large scale wireless sensor networks",
+      "abstract": "As localization represents the main core of various wireless sensor network applications, several localization algorithms have been suggested in wireless sensor network research. In this article, we put forward an iterative bounding box algorithm enhanced by a Kalman filter to refine the unknown node’s estimated position. In fact, several research efforts are currently in progress to extend the 2D positioning algorithm in WSNs to 3D that reflects reality and the most practical applications. Subsequently, we replace a large number of GPS-equipped anchors with a single mobile anchor. In our studies, we consider the type of range-free sensor network exploiting the wireless sensors connectivity. We assess the performance of our algorithm using exhaustive experiments on several isotropic and anisotropic topologies. Our proposed algorithm can fulfill the joint goals of algorithm transparency and accuracy for various scenarios by evaluating parameters such as localization accuracy whilst changing other simulation parameters such as the effect of communication range, mobile anchor node position and sensor node deployment topology. It has been proven by the results of the experiments that the proposed algorithm effectively reduces the location error without requiring more equipment or increasing the communication cost.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11276-023-03265-0",
+      "url": "https://www.semanticscholar.org/paper/0c687f66ed07376397c5dbf1975bf5d728d533c8"
+    }
+  ]
+}

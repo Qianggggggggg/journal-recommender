@@ -7,13 +7,39 @@ minimax:
   api_key: "${MINIMAX_API_KEY}"
   base_url: "https://api.minimax.chat"
   model: "MiniMax-M2.7"
-  temperature: 0.7
+  temperature: 0.2
 
 ollama:
   base_url: "http://localhost:11434"
   embedding_model: "qwen3-embedding:4b"
+  embedding_query_instruction: "Given a manuscript title and abstract, retrieve journal descriptions and published papers that best match its research topic, methods, application domain, and publication scope."
+  timeout_seconds: 180
 
 candidate_generator:
+  retrieval_target: "typical_abstracts"  # scope_text | typical_abstracts
+  weighting_strategy: "fixed"            # fixed | gating
+  gating_model_path: "data/models/gating_network.pt"
+  fusion_strategy: "weighted_minmax"     # weighted_minmax | rrf | weighted_rrf
+  hybrid_scope_weight: 0.65
+  hybrid_typical_weight: 0.35
+  identity_anchor_weight: 0.10
+  accepted_paper_weight: 0.20
+  rrf_k: 60
+  route_top_k:
+    title:
+      bm25: 22
+      vector: 22
+      text: 16
+    abstract:
+      bm25: 28
+      vector: 56
+      text: 14
+      accepted_bm25: 28
+      accepted_vector: 56
+    full:
+      bm25: 32
+      vector: 32
+      text: 16
   merge_weights:
     bm25: 0.45
     vector: 0.35
@@ -23,3 +49,73 @@ data:
   journal_store_path: "data/processed/journals.jsonl"
   faiss_index_path: "data/processed/journals_index.faiss"
   metadata_path: "data/processed/journals_metadata.parquet"
+  typical_abstracts_dir: "data/typical_abstracts"
+  typical_abstracts_faiss_path: "data/processed/typical_abstracts_index.faiss"
+  typical_abstracts_metadata_path: "data/processed/typical_abstracts_metadata.parquet"
+  accepted_papers_dir: "data/accepted_papers"
+  accepted_papers_faiss_path: "data/processed/accepted_papers_index.faiss"
+  accepted_papers_metadata_path: "data/processed/accepted_papers_metadata.parquet"
+
+ranking:
+  strategy: "llm"               # llm | two_tower | two_stage
+  llm_ranker_timeout_seconds: 720
+  use_two_tower: false          # ablation switch
+  use_cross_encoder: false      # ablation switch
+  two_tower_model_path: "data/models/two_tower_ranker.pt"
+  cross_encoder_model_path: "data/models/cross_ranker.pt"
+  # 6.3: Evidence-based role ranker. When evidence_role.enabled=true and
+  # snapshot_path points to a valid file, the pipeline uses
+  # LLMEvidenceRoleRanker (which reads evidence from the snapshot
+  # instead of calling LLM at recommendation time). When enabled but
+  # snapshot is missing, falls back to llm_direct.
+  llm_direct:
+    enabled: false               # 2026-06-24: LLMRanker 直接精排已永久禁用;生产路径强制走 evidence_role
+  evidence_role:
+    enabled: true               # 必为 true;LLMRanker fallback 路径已移除
+    snapshot_path: "data/evaluation/evidence/holdout240_evidence_20260606_143232.json"           # 可选 cache:为空或不存在时,LLMEvidenceRoleRanker 自动实时抽 evidence
+    prior_source: "learned"      # rule | learned (learned needs LTR rerank)
+    evidence_weight: 0.55        # v3p baseline winner (e=0.55, p=0.35, l=0.10)
+    prior_weight: 0.35           # linear rank prior from LTR
+    ltr_score_weight: 0.10       # raw LTR score as 3rd formula component
+    prompt_version: "v1"         # PRODUCTION DEFAULT 2026-06-16: v2 prompt (CCF-tier calibration)
+    # Ablation knob: max LLM精排 candidate pool size.
+    # 20 = top-20 only, no补位 (current production).
+    # 30 = top-30 with补位 for C-tier rescue (was a 2026-06-10 ablation).
+    # Pipeline.py:45 default = 30 if yaml missing.
+    llm_max_candidates: 20
+  llm_anchor_guard:
+    enabled: true
+    protect_rule_rank: 5
+    max_score_gap: 0.08
+  rule_scorer:
+    scope_boundary_evidence: 0.35
+    typical_scope_synergy: 0.08
+    typical_only_penalty: 0.08
+    retrieval_rank_prior: 1.80
+    strong_scope_rank_bonus: 1.00
+    strong_typical_rank_bonus: 0.00
+    scope_typical_confirm_bonus: 0.60
+    multi_route_bonus: 0.40
+    research_area_match: 0.50
+    ccf_research_area_match: 0.50
+  # 5.3 — learned reranker (Task 5.3 baseline). Default OFF.
+  # v1 = pure rerank within llm_candidates (no score blend).
+  # blend_with_* fields are reserved for 5.4 ablation; not consumed in 5.3.
+  learned_reranker:
+    enabled: true
+    model_path: "data/models/learning_to_ranker_660_post_reindex_16dim_lr.json"
+    blend_with_rule_score: 0.30  # reserved; not consumed by 5.3 v1
+    blend_with_llm_score: 0.20   # reserved; not consumed by 5.3 v1
+
+  # P-counterfactual 2026-06-16: experimental ablation flags.
+  # Set skip_quality_assessment=true to bypass the LLM quality_assessor
+  # call (saves 240 LLM calls per holdout240 run). Tests whether the
+  # quality signal is actually doing anything in the final ranking.
+  #
+  # 2026-06-16 holdout240 counterfactual result:
+  #   skip=false: 154/240 (A=60, B=54, C=40)  ← baseline File2
+  #   skip=true:  154/240 (A=60, B=54, C=40)  ← 198/240 recs differ, 8 hit outcomes net to 0
+  # Conclusion: quality_assessor call is net-zero on aggregate but adds 82% rerank churn.
+  # Kept as opt-in for future ablation; default remains false.
+  experimental:
+    skip_quality_assessment: true

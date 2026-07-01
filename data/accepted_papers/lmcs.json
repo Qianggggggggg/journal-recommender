@@ -1,0 +1,78 @@
+{
+  "journal_id": "lmcs",
+  "journal_name": "Logical Methods in Computer Science",
+  "papers": [
+    {
+      "title": "Empirical Measures and Strong Laws of Large Numbers in Categorical Probability",
+      "abstract": "The Glivenko--Cantelli theorem is a uniform version of the strong law of large numbers. It states that for every IID sequence of random variables, the empirical measure converges to the underlying distribution (in the sense of uniform convergence of the CDF). In this work, we provide tools to study such limits of empirical measures in categorical probability. We propose two axioms, namely permutation invariance and empirical adequacy, that a morphism of type $X^{\\mathbb{N}} \\to X$ should satisfy to be interpretable as taking an infinite sequence as input and producing a sample from its empirical measure as output. Since not all sequences have a well-defined empirical measure, such \\emph{empirical sampling morphisms} live in quasi-Markov categories, which, unlike Markov categories, allow for partial morphisms. Given an empirical sampling morphism and a few other properties, we prove representability as well as abstract versions of the de Finetti theorem, the Glivenko--Cantelli theorem and the strong law of large numbers. We provide several concrete constructions of empirical sampling morphisms as partially defined Markov kernels on standard Borel spaces. Instantiating our abstract results then recovers the standard Glivenko--Cantelli theorem and the strong law of large numbers for random variables with finite first moment. Our work thus provides a joint proof of these two theorems in conjunction with the de Finetti theorem from first principles.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:13)2026",
+      "url": "https://www.semanticscholar.org/paper/4690884be4de8c4af9649b78e5a30047110f4786"
+    },
+    {
+      "title": "Encoding Peano Arithmetic in a Minimal Fragment of Separation Logic",
+      "abstract": "Separation logic is successful for software verification of heap-manipulating programs. Numbers are necessary to be added to separation logic for verification of practical software where numbers are important. However, properties of the validity such as decidability and complexity for separation logic with numbers have not been fully studied yet. This paper presents the translation of Pi-0-1 formulas in Peano arithmetic to formulas in a small fragment of separation logic with numbers, which consists only of the intuitionistic points-to predicate, 0 and the successor function. Then this paper proves that a formula in Peano arithmetic is valid in the standard model if and only if its translation in this fragment is valid in the standard interpretation. As a corollary, this paper also gives a perspective proof for the undecidability of the validity in this fragment. Since Pi-0-1 formulas can describe consistency of logical systems and non-termination of computations, this result also shows that these properties discussed in Peano arithmetic can also be discussed in such a small fragment of separation logic with numbers.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:22)2026",
+      "url": "https://www.semanticscholar.org/paper/6d4d2389dad1d69f66d4d85f201627348db3774d"
+    },
+    {
+      "title": "On NP ∩ coNP proof complexity generators",
+      "abstract": "Motivated by the theory of proof complexity generators we consider the following $Σ^p_2$ search problem $\\mbox{DD}_P$ determined by a propositional proof system $P$: given a $P$-proof $π$ of a disjunction $\\bigvee_i α_i$, no two $α_i$ having an atom in common, find $i$ such that $α_i \\in \\mbox{TAUT}$. We formulate a hypothesis (ST) that for some strong proof system $P$ the problem $\\mbox{DD}_P$ is not solvable in the student-teacher model with a $p$-time student and a constant number of rounds. The hypothesis follows from the existence of hard one-way permutations. We prove, using a model-theoretic assumption, that (ST) implies $NP \\neq coNP$. The assumption concerns the existence of extensions of models of a bounded arithmetic theory and it is open at present if it holds.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:14)2026",
+      "url": "https://www.semanticscholar.org/paper/2d98235e807e313707b8656c369f73dc39e50e44"
+    },
+    {
+      "title": "Rule-Based Graph Programs Matching the Time Complexity of Imperative Algorithms",
+      "abstract": "We report on recent advances in rule-based graph programming, which allow us to match the time complexity of some fundamental imperative graph algorithms. In general, achieving the time complexity of graph algorithms implemented in conventional languages using a rule-based graph-transformation language is challenging due to the cost of graph matching. Previous work demonstrated that with rooted rules, certain algorithms can be implemented in the graph programming language GP 2 such that their runtime matches the time complexity of imperative implementations. However, this required input graphs to have a bounded node degree and (for some algorithms) to be connected. In this paper, we overcome these limitations by enhancing the graph data structure generated by the GP 2 compiler and exploiting the new structure in programs. We present three case studies: the first program checks whether input graphs are connected, the second program checks whether input graphs are acyclic, and the third program solves the single-source shortest-paths problem for graphs with integer edge-weights. The first two programs run in linear time on (possibly disconnected) input graphs with arbitrary node degrees. The third program runs in time $O(nm)$ on arbitrary input graphs, matching the time complexity of imperative implementations of the Bellman-Ford algorithm. For each program, we formally prove its correctness and time complexity, and provide runtime experiments on various graph classes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:20)2026",
+      "url": "https://www.semanticscholar.org/paper/6fc30095b0acf9f5b2419fe7cd3ea101de855faf"
+    },
+    {
+      "title": "A Scalable Game-Theoretic Approach for Selecting Security Controls from Standardized Catalogues",
+      "abstract": "Selecting the combination of security controls that will most effectively protect a system's assets is a difficult task. If the wrong controls are selected, the system may be left vulnerable to cyber-attacks that can impact the confidentiality, integrity, and availability of critical data and services. In practical settings, as standardized control catalogues can be quite large, it is not possible to select and implement every control possible. Instead, considerations, such as budget, effectiveness, and dependencies among various controls, must be considered to choose a combination of security controls that best achieve a set of system security objectives. In this paper, we present a game-theoretic approach for selecting effective combinations of security controls based on expected attacker profiles and a set budget. The control selection problem is set up as a two-person zero-sum one-shot game. Valid control combinations for selection are generated using an algebraic formalism to account for dependencies among selected controls. Using a software tool, we apply the approach on a fictional Canadian military system with Canada's standardized control catalogue, ITSG-33. Through this case study, we demonstrate the approach's scalability to assist in selecting an effective set of security controls for large systems. The results illustrate how a security analyst can use the proposed approach and supporting tool to guide and support decision-making in the control selection activity when developing secure systems of all sizes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:7)2026",
+      "url": "https://www.semanticscholar.org/paper/f0b8c3a4d82d0845044167e8856c2d4081c4aafe"
+    },
+    {
+      "title": "Epistemic Skills: Reasoning about Knowledge and Oblivion",
+      "abstract": "This paper presents a class of epistemic logics that captures the dynamics of acquiring knowledge and descending into oblivion, while incorporating concepts of group knowledge. The approach is grounded in a system of weighted models, introducing an ``epistemic skills'' metric to represent the epistemic capacities tied to knowledge updates. Within this framework, knowledge acquisition is modeled as a process of upskilling, whereas oblivion is represented as a consequence of downskilling. The framework further enables exploration of ``knowability'' and ``forgettability,'' defined as the potential to gain knowledge through upskilling and to lapse into oblivion through downskilling, respectively. Additionally, it supports a detailed analysis of the distinctions between epistemic de re and de dicto expressions. The computational complexity of the model checking and satisfiability problems is examined, offering insights into their theoretical foundations and practical implications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:21)2026",
+      "url": "https://www.semanticscholar.org/paper/9348c8bdea2b7f8de9939dfa21f0f546c758d534"
+    },
+    {
+      "title": "Prover-Adversary games for systems over (non-deterministic) branching programs",
+      "abstract": "We introduce Pudlak-Buss style Prover-Adversary games to characterise proof systems reasoning over deterministic branching programs (BPs) and non-deterministic branching programs (NBPs). Our starting points are the proof systems eLDT and eLNDT, for BPs and NBPs respectively, previously introduced by Buss, Das and Knop. We prove polynomial equivalences between these proof systems and the corresponding games we introduce. This crucially requires access to a form of negation of branching programs which, for NBPs, requires us to formalise a non-uniform version of the Immerman-Szelepcsenyi theorem that coNL = NL. Thanks to the techniques developed, we further obtain a proof complexity theoretic version of Immerman-Szelepcsenyi, showing that eLNDT is polynomially equivalent to systems over boundedly alternating branching programs.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:18)2026",
+      "url": "https://www.semanticscholar.org/paper/bc1612560a7cdb0daacd3e9fa1fae6c4e749a5e6"
+    },
+    {
+      "title": "Computation by infinite descent made explicit",
+      "abstract": "We introduce a non-wellfounded proof system for intuitionistic logic extended with inductive and co-inductive definitions, based on a syntax in which fixpoint formulas are annotated with explicit variables for ordinals. We explore the computational content of this system, in particular we introduce a notion of computability and show that every valid proof is computable. As a consequence, we obtain a normalization result for proofs of what we call finitary formulas. A special case of this result is that every proof of a sequent of the appropriate form represents a unique function on natural numbers. Finally, we derive a categorical model from the proof system and show that least and greatest fixpoint formulas correspond to initial algebras and final coalgebras respectively.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2506.22206",
+      "url": "https://www.semanticscholar.org/paper/7e682dc2ab17b2a44b6fc68e181abab99be8a4ea"
+    },
+    {
+      "title": "Knowledge Problems in Protocol Analysis: Extending the Notion of Subterm Convergent",
+      "abstract": "We introduce a new form of restricted term rewrite system, the graph-embedded term rewrite system. These systems, and thus the name, are inspired by the graph minor relation and are more flexible extensions of the well-known homeomorphic-embedded property of term rewrite systems. As a motivating application area, we consider the symbolic analysis of security protocols, and more precisely the two knowledge problems defined by the deduction problem and the static equivalence problem. In this field restricted term rewrite systems, such as subterm convergent ones, have proven useful since the knowledge problems are decidable for such systems. Many of the same decision procedures still work for examples of systems which are \"beyond subterm convergent\". However, the applicability of the corresponding decision procedures to these examples must often be proven on an individual basis. This is due to the problem that they don't fit into an existing syntactic definition for which the procedures are known to work. Here we show that many of these systems belong to a particular subclass of graph-embedded convergent systems, called contracting convergent systems. On the one hand, we show that the knowledge problems are decidable for the subclass of contracting convergent systems. On the other hand, we show that the knowledge problems are undecidable for the class of graph-embedded systems. Going further, we compare and contrast these graph embedded systems with several notions and properties already known in the protocol analysis literature. Finally, we provide several combination results, both for the combination of multiple contracting convergent systems, and then for the combination of contracting convergent systems with particular permutative equational theories.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.46298/lmcs-22(2:15)2026",
+      "url": "https://www.semanticscholar.org/paper/e00247a388b2af0ee83b4dabf3685d6f38a6b4e0"
+    }
+  ]
+}

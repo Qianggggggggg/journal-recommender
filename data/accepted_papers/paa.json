@@ -1,0 +1,78 @@
+{
+  "journal_id": "paa",
+  "journal_name": "Pattern Analysis and Applications",
+  "papers": [
+    {
+      "title": "Unsupervised Change Detection Driven by Floating References: A Pattern Analysis Approach",
+      "abstract": "The Earth’s environment is continually changing due to both human and natural factors. Timely identification of the location and kind of change is of paramount importance in several areas of application. Because of that, remote sensing change detection is a topic of great interest. The development of precise change detection methods is a constant challenge. This study introduces a novel unsupervised change detection method based on data clustering and optimization. The proposal is less dependent on radiometric normalization than classical approaches. We carried experiments with remote sensing images and simulated datasets to compare the proposed method with other unsupervised well-known techniques. At its best, the proposal improves by 50% the accuracy concerning the second best technique. Such improvement is most noticeable with uncalibrated data. Experiments with simulated data reveal that the proposal is better than all other compared methods at any practical significance level. The results show the potential of the proposed method.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-020-00954-w",
+      "url": "https://www.semanticscholar.org/paper/38d238fe6dec7594a5426a9e2bf48dfa4779879d"
+    },
+    {
+      "title": "Component-based face recognition using statistical pattern matching analysis",
+      "abstract": "The aim of this research is to develop a fusion concept to component-based face recognition algorithms for features analysis of binary facial components (BFCs), which are invariant to illumination, expression, pose variations and partial occlusion. To analyze the features, using statistical pattern matching concepts, which are the combination of Chi-square (CSQ), Hu moment invariants (HuMIs), absolute difference probability of white pixels (AbsDifPWPs) and geometric distance values (GDVs) have been proposed for face recognition. The individual grayscale face image is cropped by applying the Viola–Jones face detection algorithm from a face database having variations in illumination, appearance, pose and partial occlusion with complex backgrounds. Doing illumination correction through histogram linearization technique, the grayscale face components such as eyes, nose and mouth regions are extracted using the 2D geometric positions. The binary face image is created by applying cumulative probability distribution function with Otsu adaptive thresholding method and then extracted BFCs such as eyes, nose and mouth regions. Five statistical pattern matching tools such as the standard deviation of CSQ values with probability of white pixels (PWPs), standard deviation of HuMIs with Hu’s seven moment invariants, AbsDifPWPs and GDVs are developed for recognition purpose. GDVs are determined between two similar facial corner points (FCPs) and nine FCPs are extracted from binary whole face and BFCs. Pixel Intensity Values (PIVs) which are determined using L2 norms from grayscale values of the whole face and grayscale values of the face components. Experiment is performed using BioID Face Database on the basis of these pattern matching tools and appropriate threshold values with logical and conditional operators and gives the best expected results from true positive rate perspective.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-020-00895-4",
+      "url": "https://www.semanticscholar.org/paper/92ac15e765686a4f925d83cd05cac194dd4eb123"
+    },
+    {
+      "title": "TabMixer: advancing tabular data analysis with an enhanced MLP-mixer approach",
+      "abstract": "Tabular data, prevalent in relational databases and spreadsheets, is fundamental across fields like healthcare, engineering, and finance. Despite significant advances in tabular data learning, critical challenges remain: handling missing values, addressing class imbalance, enabling transfer learning, and facilitating feature incremental learning beyond traditional supervised paradigms. We introduce TabMixer, an innovative model that enhances the multilayer perceptron (MLP) mixer architecture to address these challenges. TabMixer incorporates a self-attention mechanism, making it versatile across various learning scenarios including supervised learning, transfer learning, and feature incremental learning. Extensive experiments on eight public datasets demonstrate TabMixer’s superior performance over existing state-of-the-art methods. Notably, TabMixer achieved substantial improvements in ANOVA AUC across all scenarios: a 4% increase in supervised learning (0.840 to 0.881), 8% in transfer learning (0.803 to 0.872), and 4% in feature incremental learning (0.806 to 0.843). TabMixer demonstrates high computational efficiency and scalability through reduced floating-point operations and learnable parameters. Moreover, it exhibits strong resilience to missing values and class imbalances through both its architectural design and optional preprocessing enhancements. These results establish TabMixer as a promising model for tabular data analysis and a valuable tool for diverse applications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-025-01423-y",
+      "url": "https://www.semanticscholar.org/paper/d9811f3203aa7425ff468f50842d12afca3f5270"
+    },
+    {
+      "title": "Multi-channel spectrograms for speech processing applications using deep learning methods",
+      "abstract": "Time–frequency representations of the speech signals provide dynamic information about how the frequency component changes with time. In order to process this information, deep learning models with convolution layers can be used to obtain feature maps. In many speech processing applications, the time–frequency representations are obtained by applying the short-time Fourier transform and using single-channel input tensors to feed the models. However, this may limit the potential of convolutional networks to learn different representations of the audio signal. In this paper, we propose a methodology to combine three different time–frequency representations of the signals by computing continuous wavelet transform, Mel-spectrograms, and Gammatone spectrograms and combining then into 3D-channel spectrograms to analyze speech in two different applications: (1) automatic detection of speech deficits in cochlear implant users and (2) phoneme class recognition to extract phone-attribute features. For this, two different deep learning-based models are considered: convolutional neural networks and recurrent neural networks with convolution layers.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-020-00921-5",
+      "url": "https://www.semanticscholar.org/paper/4f84e768d98edd9e19d2a2b4f762dca612314fad"
+    },
+    {
+      "title": "Coronavirus disease 2019 (COVID-19): survival analysis using deep learning and Cox regression model",
+      "abstract": "Coronavirus (COVID-19) is one of the most serious problems that has caused stopping the wheel of life all over the world. It is widely spread to the extent that hospital places are not available for all patients. Therefore, most hospitals accept patients whose recovery rate is high. Machine learning techniques and artificial intelligence have been deployed for computing infection risks, performing survival analysis and classification. Survival analysis (time-to-event analysis) is widely used in many areas such as engineering and medicine. This paper presents two systems, Cox_COVID_19 and Deep_ Cox_COVID_19 that are based on Cox regression to study the survival analysis for COVID-19 and help hospitals to choose patients with better chances of survival and predict the most important symptoms (features) affecting survival probability. Cox_COVID_19 is based on Cox regression and Deep_Cox_COVID_19 is a combination of autoencoder deep neural network and Cox regression to enhance prediction accuracy. A clinical dataset for COVID-19 patients is used. This dataset consists of 1085 patients. The results show that applying an autoencoder on the data to reconstruct features, before applying Cox regression algorithm, would improve the results by increasing concordance, accuracy and precision. For Deep_ Cox_COVID_19 system, it has a concordance of 0.983 for training and 0.999 for testing, but for Cox_COVID_19 system, it has a concordance of 0.923 for training and 0.896 for testing. The most important features affecting mortality are, age, muscle pain, pneumonia and throat pain. Both Cox_COVID_19 and Deep_ Cox_COVID_19 prediction systems can predict the survival probability and present significant symptoms (features) that differentiate severe cases and death cases. But the accuracy of Deep_Cox_Covid_19 outperforms that of Cox_Covid_19. Both systems can provide definite information for doctors about detection and intervention to be taken, which can reduce mortality.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-021-00958-0",
+      "url": "https://www.semanticscholar.org/paper/e24656277306f44d5e5f832668f018e46d3e4508"
+    },
+    {
+      "title": "On the learning of vague languages for syntactic pattern recognition",
+      "abstract": "The method of the learning of vague languages which represent distorted/ambiguous patterns is proposed in the paper. The goal of the method is to infer the quasi-context-sensitive string grammar which is used in our model as the generator of patterns. The method is an important component of the multi-derivational model of the parsing of vague languages used for syntactic pattern recognition.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-022-01120-0",
+      "url": "https://www.semanticscholar.org/paper/42801e017eb0c6ea77b4fca73d7be9e0a1de53cc"
+    },
+    {
+      "title": "Automatic detection of coronavirus disease (COVID-19) using X-ray images and deep convolutional neural networks",
+      "abstract": "The 2019 novel coronavirus disease (COVID-19), with a starting point in China, has spread rapidly among people living in other countries and is approaching approximately 101,917,147 cases worldwide according to the statistics of World Health Organization. There are a limited number of COVID-19 test kits available in hospitals due to the increasing cases daily. Therefore, it is necessary to implement an automatic detection system as a quick alternative diagnosis option to prevent COVID-19 spreading among people. In this study, five pre-trained convolutional neural network-based models (ResNet50, ResNet101, ResNet152, InceptionV3 and Inception-ResNetV2) have been proposed for the detection of coronavirus pneumonia-infected patient using chest X-ray radiographs. We have implemented three different binary classifications with four classes (COVID-19, normal (healthy), viral pneumonia and bacterial pneumonia) by using five-fold cross-validation. Considering the performance results obtained, it has been seen that the pre-trained ResNet50 model provides the highest classification performance (96.1% accuracy for Dataset-1, 99.5% accuracy for Dataset-2 and 99.7% accuracy for Dataset-3) among other four used models.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-021-00984-y",
+      "url": "https://www.semanticscholar.org/paper/df7cb367e86d01ab52b600ddd3012d59cc302c7a"
+    },
+    {
+      "title": "Ultra-fast computation of fractal dimension for RGB images",
+      "abstract": "The fractal dimension (FD) is a quantitative parameter widely used to analyze digital images in many application fields such as image segmentation, feature extraction, object recognition, texture analysis, and image compression and denoising, among many others. A variety of algorithms have been previously proposed for estimating the FD, however most of them are limited to binary or gray-scale images only. In recent years, several authors have proposed algorithms for computing the FD of color images. Nevertheless, almost all these methods are computationally inefficient when analyzing large images. Nowadays, color images can be very large in size, and there is a growing trend toward even larger datasets. This implies that the time required to calculate the FD of such datasets can become extremely long. In this paper we present a very efficient GPU algorithm, implemented in CUDA, for computing the FD of RGB color images. Our solution is an extension to RGB of the differential box-counting (DBC) algorithm for gray-scale images. Our implementation simplifies the box-counting computation to very simple operations which are easily combined across iterations. We evaluated our algorithm on two distinct hardware/software platforms using a set of images of increasing size. The performance of our method was compared against two recent FD algorithms for RGB images: a fast box-merging GPU algorithm, and the most advanced approach based on extending the DBC method. The results showed that our GPU algorithm performed very well and achieved speedups of up to 7.9× and 6172.6× regarding these algorithms, respectively. In addition, our algorithm achieved average error rates similar to those obtained by the two reference algorithms when estimating the FD for synthetic images with known FD values, and even outperformed them when processing large images. These results suggest that our GPU algorithm offers a highly reliable and ultra-fast solution for estimating the FD of color images.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-025-01415-y",
+      "url": "https://www.semanticscholar.org/paper/d11ade796ebe0f05d81d43e18fee54146f85c920"
+    },
+    {
+      "title": "Focalize K-NN: an imputation algorithm for time series datasets",
+      "abstract": "The effective use of time series data is crucial in business decision-making. Temporal data reveals temporal trends and patterns, enabling decision-makers to make informed decisions and prevent potential problems. However, missing values in time series data can interfere with the analysis and lead to inaccurate conclusions. Thus, our work proposes a Focalize K-NN method that leverages time series properties to perform missing data imputation. This approach shows the benefits of taking advantage of correlated features and temporal lags to improve the performance of the traditional K-NN imputer. A similar approach could be employed in other methods. We tested this approach with two datasets, various parameter and feature combinations, and observed that it is beneficial in scenarios with disjoint missing patterns. Our findings demonstrate the effectiveness of Focalize K-NN for imputing missing values in time series data. The more noticeable benefits of our methods occur when there is a high percentage of missing data. However, as the amount of missing data increases, so does the error.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10044-024-01262-3",
+      "url": "https://www.semanticscholar.org/paper/857bcbe213f962449c6d84dd3ad6d7792562c320"
+    }
+  ]
+}

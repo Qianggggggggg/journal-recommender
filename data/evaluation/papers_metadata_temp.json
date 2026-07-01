@@ -1,0 +1,1286 @@
+[
+  {
+    "title": "Concentration without Independence via Information Measures",
+    "abstract": "We propose a novel approach to concentration inequalities for sums of dependent random variables, using information-theoretic measures to capture dependencies. The method provides tight bounds that go beyond classical martingale-based approaches.",
+    "venue": "IEEE Transactions on Information Theory",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Walkin' Robin: Walk on Stars with Robin Boundary Conditions",
+    "abstract": "Numerous scientific and engineering applications require solutions to boundary value problems (BVPs) involving elliptic partial differential equations, such as the Laplace or Poisson equations, on geometrically intricate domains. We develop a Monte Carlo method for solving such BVPs with arbitrary first-order linear boundary conditions—Dirichlet, Neumann, and Robin. Our method directly generalizes the walk on stars (WoSt) algorithm, which previously tackled only the first two types of boundary conditions, with a few simple modifications. Unlike conventional numerical methods, WoSt does not need finite element meshing or global solves. Similar to Monte Carlo rendering, it instead computes pointwise solution estimates by simulating random walks along star-shaped regions inside the BVP domain, using efficient ray-intersection and distance queries.",
+    "venue": "ACM Transactions on Graphics",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机图形学与多媒体"],
+    "external_ids": {}
+  },
+  {
+    "title": "From microfacets to participating media: A unified theory of light transport with stochastic geometry",
+    "abstract": "Stochastic geometry models have enjoyed immense success in graphics for modeling interactions of light with complex phenomena such as participating media, rough surfaces, fibers, and more. Although each of these models operates on the same principle of replacing intricate geometry by a random process and deriving the average light transport across all instances thereof, they are each tailored to one specific application and are fundamentally distinct. In this paper, we derive a theory of light transport on stochastic implicit surfaces, a geometry model capable of expressing deterministic geometry, microfacet surfaces, participating media, and an exciting new continuum in between containing aggregate appearance, non-classical media, and more. Our model naturally supports spatial correlations, missing from most existing stochastic models. Our theory paves the way for tractable rendering of scenes in which all geometry is described by the same stochastic model.",
+    "venue": "ACM Transactions on Graphics",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机图形学与多媒体"],
+    "external_ids": {}
+  },
+  {
+    "title": "Test Input Prioritization for Graph Neural Networks",
+    "abstract": "This paper proposes a test input prioritization technique for Graph Neural Networks (GNNs). The approach uses node ranking metrics to identify high-risk inputs that are more likely to cause misclassifications, thereby improving testing efficiency for GNN-based systems. Experimental results on several GNN models and benchmark datasets demonstrate the effectiveness of the proposed method in reducing testing costs while maintaining fault detection capability.",
+    "venue": "IEEE Transactions on Software Engineering",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Provably Secure Decisions Based on Potentially Malicious Information",
+    "abstract": "There are various security-critical decisions routinely made, based on information provided by peers: routing messages, user reports, sensor data, navigational information, blockchain updates, etc. Jury theorems were proposed in sociology to make decisions based on information from peers, which assume peers may be mistaken with some probability. We focus on attackers in a system, which manifest as peers that strategically report fake information to manipulate decision-making. We define the property of robustness: a lower bound probability of deciding correctly, regardless of what information attackers provide. When peers are independently selected, we propose an optimal, robust decision mechanism called Most Probable Realisation (MPR). When peer collusion affects source selection, we prove that generally, it is NP-hard to find an optimal decision scheme. We propose multiple heuristic decision schemes that can achieve optimality for some collusion scenarios.",
+    "venue": "IEEE Transactions on Dependable and Secure Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Reliable Computation by Large-Alphabet Formulas in the Presence of Noise",
+    "abstract": "We present two new positive results for reliable computation using formulas over physical alphabets of size q > 2. First, we show that for logical alphabets of size l = q the threshold for denoising using gates subject to q-ary symmetric noise with error probability ε is strictly larger than that for Boolean computation, and we show that reliable computation is possible as long as signals remain distinguishable, i.e. ε < (q-1)/q, in the limit of large fan-in k → ∞. We also determine the point at which generalized majority gates with bounded fan-in fail, and show in particular that reliable computation is possible for ε < (q-1)/(q(q+1)) in the case of q prime and fan-in k = 3. Secondly, we provide an example where l < q, showing that reliable Boolean computation, l = 2, can be performed using 2-input ternary, q = 3, logic gates subject to symmetric ternary noise of strength ε < 1/6 by using the additional alphabet element for error signaling.",
+    "venue": "IEEE Transactions on Information Theory",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Optimal AoI for Systems With Queueing Delay in Both Forward and Backward Directions",
+    "abstract": "Age-Of-Information (AoI) is a metric that focuses directly on the application-layer objectives, and a canonical AoI minimization problem is the update-through-queues models. Existing results in this direction fall into two categories: The open-loop setting for which the sender is oblivious of the packet departure time, versus the closed-loop setting for which the decision is based on instantaneous Acknowledgment (ACK). Neither setting perfectly reflects modern networked systems, which almost always rely on feedback that experiences some delay. Motivated by this observation, this work subjects the ACK traffic to a second queue so that the closed-loop decision is made based on delayed feedback. Near-optimal schedulers have been devised, which smoothly transition from the instantaneous-ACK to the open-loop schemes depending on how long the feedback delay is. The results quantify the benefits of delayed feedback for AoI minimization in the update-through-queues systems.",
+    "venue": "IEEE/ACM Transactions on Networking",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "Scalable Real-Time Bandwidth Fairness in Switches",
+    "abstract": "Network operators want to enforce fair bandwidth sharing between users without solely relying on congestion control running on end-user devices. However, in edge networks (e.g., 5G), the number of user devices sharing a bottleneck link far exceeds the number of queues supported by today's switch hardware; even accurately tracking per-user sending rates may become too resource-intensive. Meanwhile, traditional software-based queuing on CPUs struggles to meet the high throughput and low latency demanded by 5G users. We propose a per-user bandwidth limit enforcer that runs fully in the data plane of commodity switches. The enforcer tracks each user's approximate traffic rate and compares it against a bandwidth limit, which is iteratively updated via a real-time feedback loop to achieve max-min fairness across users. Using a novel sketch data structure, it avoids storing per-user state, and therefore scales to thousands of slices and millions of users. Furthermore, it supports network slicing, where each slice has a guaranteed share of the bandwidth that can be scavenged by other slices when under-utilized. Evaluation shows it can achieve fair bandwidth allocation within 3.1ms, 13x faster than prior data-plane hierarchical schedulers.",
+    "venue": "IEEE/ACM Transactions on Networking",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "A Comprehensive Survey of Continual Learning: Theory, Method and Application",
+    "abstract": "To cope with real-world dynamics, an intelligent system needs to incrementally acquire, update, accumulate, and exploit knowledge throughout its lifetime. This ability, known as continual learning, provides a foundation for AI systems to develop themselves adaptively. In a general sense, continual learning is explicitly limited by catastrophic forgetting, where learning a new task usually results in a dramatic performance drop of the old tasks. Beyond this, increasingly numerous advances have emerged in recent years that largely extend the understanding and application of continual learning. In this work, we present a comprehensive survey of continual learning, seeking to bridge the basic settings, theoretical foundations, representative methods, and practical applications.",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "GraphZeppelin: How to Find Connected Components (Even When Graphs Are Dense, Dynamic, and Massive)",
+    "abstract": "Finding the connected components of a graph is a fundamental problem with uses throughout computer science and engineering. The task of computing connected components becomes more difficult when graphs are very large, or when they are dynamic, meaning the edge set changes over time subject to a stream of edge insertions and deletions. This paper presents GraphZeppelin, a novel approach for maintaining connected components in dynamic graphs with high efficiency and scalability, supporting both dense updates and massive graph sizes.",
+    "venue": "ACM Transactions on Database Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Detection of Correlated Random Vectors",
+    "abstract": "This paper considers the problem of detecting whether two sets of random vectors are correlated or not. The proposed framework uses information-theoretic measures to characterize the correlation structure and develop efficient detection algorithms. Theoretical analysis establishes the fundamental limits of detection, and experiments on synthetic and real datasets validate the effectiveness of the proposed approach.",
+    "venue": "IEEE Transactions on Information Theory",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Spreadsheets on Interactive Surfaces: Breaking through the Grid with the Pen",
+    "abstract": "Spreadsheet programs for interactive surfaces have limited manipulations capabilities and are often frustrating to use. One key reason is that the spreadsheet grid creates a layer that intercepts most user input events, making it difficult to reach the cell values that lie underneath. We conduct an analysis of commercial spreadsheet programs and an elicitation study to understand what users can do and what they would like to do with spreadsheets on interactive surfaces. Informed by these, we design interaction techniques that leverage the precision of the pen to mitigate friction between the different layers. These enable more operations by direct manipulation on and through the grid, targeting not only cells and groups of cells, but values and substrings within and across cells as well.",
+    "venue": "ACM Transactions on Computer-Human Interaction",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "vCNN: Verifiable Convolutional Neural Network Based on zk-SNARKs",
+    "abstract": "This paper proposes a technique to cryptographically verify the computational results of convolutional neural networks (CNNs), primarily used for image recognition. While existing AI models operated like a 'black box,' making it difficult to verify the reliability of their results, this research solves this problem by utilizing zk-SNARKs, a zero-knowledge proof technology. Notably, this research achieved a breakthrough by significantly reducing the high computational complexity inherent in zk-SNARKs-based verification methods, which previously faced challenges in practical implementation.",
+    "venue": "IEEE Transactions on Dependable and Secure Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "GraphTunnel: Robust DNS Tunnel Detection Based on DNS Recursive Resolution Graph",
+    "abstract": "DNS tunnels, due to their versatility and concealment, have become a preferred method for attackers to execute Command and Control (C&C) attacks, posing a significant security threat to terminal devices. This paper proposes GraphTunnel, a framework based on graph neural networks for detecting DNS tunnels and identifying tunneling tools. It delves into the correlations among DNS resolutions to construct paths that represent the recursive resolution process of DNS. By using central nodes that denote the gateways, these paths are connected and transformed into graph structures. Experimental results demonstrate that in non-wildcard DNS scenarios, GraphTunnel achieves a 100% accuracy in DNS tunnel detection, encompassing unknown DNS tunnels. Even in high false-positive environments caused by wildcard DNS, GraphTunnel maintains an F1-Score of 99.78%.",
+    "venue": "IEEE Transactions on Information Forensics and Security",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Low-Light Phase Retrieval With Implicit Generative Priors",
+    "abstract": "We propose low-dose deep image prior (LoDIP), which combines in-situ coherent diffraction imaging (CDI) with the power of implicit generative priors to address single-image low-dose phase retrieval. This work demonstrates that implicit neural representations can effectively regularize the ill-posed phase retrieval problem under extremely low-light conditions, achieving high-quality reconstructions with minimal measurements.",
+    "venue": "IEEE Transactions on Image Processing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机图形学与多媒体"],
+    "external_ids": {}
+  },
+  {
+    "title": "Transfer Learning in Bandits With Latent Continuity",
+    "abstract": "This work investigates transfer learning in multi-armed bandit problems where tasks exhibit latent continuity across a continuous space. The proposed algorithm leverages this continuity to transfer knowledge between related tasks, achieving improved regret bounds compared to learning each task independently. Theoretical analysis and experimental results demonstrate the benefits of exploiting latent structure for efficient transfer in sequential decision-making.",
+    "venue": "IEEE Transactions on Information Theory",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Dark Patterns in Augmented and Virtual Reality",
+    "abstract": "Dark Patterns are deceptive designs that influence a user's interactions with an interface to benefit someone other than the user. Prior work has identified dark patterns in WIMP interfaces and ubicomp environments, but how dark patterns can manifest in Augmented and Virtual Reality (collectively XR) requires more attention. This paper conducted ten co-design workshops with 20 experts in XR and deceptive design. Participants co-designed 42 scenarios containing dark patterns. In the co-designed scenarios, we identified ten novel dark patterns in addition to 39 existing ones, as well as ten examples in which specific characteristics associated with XR potentially amplified the effect dark patterns could have on users. Based on our findings and prior work, we present a classification of XR-specific properties that facilitate dark patterns: perception, spatiality, physical/virtual barriers, and XR device sensing.",
+    "venue": "ACM Transactions on Computer-Human Interaction",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "AIM: Automatic Input Selection for Metamorphic Testing of Web Systems",
+    "abstract": "Although the security testing of Web systems can be automated by generating crafted inputs, solutions to automate the test oracle, i.e., vulnerability detection, remain difficult to apply in practice. This paper proposes AIM, an approach that automatically selects inputs to reduce testing costs while preserving vulnerability detection capabilities. AIM includes a clustering-based black-box approach to identify similar inputs based on their security properties, a novel genetic algorithm to efficiently select diverse inputs while minimizing their total cost, and a problem-reduction component to reduce the search space and speed up the minimization process. Evaluation on Jenkins and Joomla shows that AIM reduced metamorphic testing time by 84% for Jenkins and 82% for Joomla, while preserving the same level of vulnerability detection.",
+    "venue": "IEEE Transactions on Software Engineering",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "A Family of Centrality Measures for Graph Data Based on Subgraphs",
+    "abstract": "We present the theoretical foundations and first experimental study of a new approach in centrality measures for graph data. The main principle is straightforward: the more relevant subgraphs around a vertex, the more central it is in the network. We formalize the notion of 'relevant subgraphs' by choosing a family of subgraphs that, given a graph G and a vertex v, assigns a subset of connected subgraphs. This paper provides both theoretical analysis of the properties of these centrality measures and experimental evaluation on real-world graph datasets.",
+    "venue": "ACM Transactions on Database Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Read/write fence-free work-stealing with multiplicity",
+    "abstract": "It has been shown that any nonblocking algorithm must use at least one fence. This paper considers work-stealing with multiplicity, a relaxation in which every task is taken by at least one process, and any process can take any task at most once. The proposed algorithm achieves fence-free work-stealing while maintaining correctness guarantees, providing improved performance on relaxed memory consistency models.",
+    "venue": "Journal of Parallel and Distributed Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Federated In-Network Machine Learning for Privacy-Preserving IoT Traffic Analysis",
+    "abstract": "This article proposes FLIP4: an efficient federated learning-based framework for in-network traffic analysis that ensures prompt mitigation and minimal impact on services in the presence of false alerts. The approach enables privacy-preserving collaborative learning across network devices without sharing raw traffic data, addressing key challenges in IoT security monitoring.",
+    "venue": "ACM Transactions on Internet Technology",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "Scalable Similarity-Aware Test Suite Minimization with Reinforcement Learning",
+    "abstract": "This paper proposes TripRL, a novel technique that integrates traditional criteria such as statement coverage and fault detection ability with test coverage similarity into an Integer Linear Program (ILP), to produce a diverse reduced test suite with high test effectiveness. The approach uses reinforcement learning to optimize the minimization process, achieving better results than existing greedy and ILP-based methods.",
+    "venue": "ACM Transactions on Software Engineering and Methodology",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Reliable Node Similarity Matrix Guided Contrastive Graph Clustering",
+    "abstract": "This paper proposes a novel contrastive graph clustering method guided by reliable node similarity matrices. The approach addresses the challenge of noisy graph structures by constructing more robust similarity measures, leading to improved clustering performance on benchmark graph datasets. Experiments demonstrate significant improvements over existing graph clustering methods.",
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Vision Transformer Inspired Automated Vulnerability Repair",
+    "abstract": "This paper presents Vision Transformer inspired automated vulnerability repair approach that leverages transformer architectures to learn patterns of vulnerable code and generate patches. The method achieves state-of-the-art performance on standard vulnerability repair benchmarks, demonstrating the effectiveness of attention mechanisms for code understanding and transformation tasks in software security.",
+    "venue": "ACM Transactions on Software Engineering and Methodology",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Equilibrium in the Computing Continuum through Active Inference",
+    "abstract": "This paper proposes using active inference, a framework from computational neuroscience, to achieve equilibrium in computing continuum environments. The approach enables distributed systems to self-organize and maintain stability under varying workloads and resource availability. Experimental results on edge-cloud continuum scenarios show improved resource utilization and reduced latency compared to traditional optimization-based methods.",
+    "venue": "Future Generation Computer Systems",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Low-latency and reliable event collection in network measurement",
+    "abstract": "This paper addresses the challenge of low-latency and reliable event collection in network measurement systems. The proposed method balances timeliness and completeness of event reporting through adaptive sampling and buffering strategies. Evaluation on real network traces shows that the approach achieves microsecond-level latency while maintaining high collection reliability.",
+    "venue": "Journal of Network and Computer Applications",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "Polynomial-time server allocation algorithm in delay-sensitive internet-of-things monitoring services",
+    "abstract": "This paper proposes a polynomial-time algorithm for a server allocation problem in delay-sensitive Internet-of-Things (IoT) monitoring services. The algorithm efficiently assigns monitoring tasks to edge servers while meeting stringent latency requirements, with theoretical guarantees on optimality under certain conditions. Simulation results demonstrate significant reduction in average response time compared to baseline methods.",
+    "venue": "Computer Networks",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "Learn to CROSS: Neural Network-Enabled Adaptive Offloading for Effective Resource Utilization in Edge Computing",
+    "abstract": "This paper explores neural network-enabled adaptive offloading strategies for edge computing environments. The proposed CROSS framework learns optimal task partitioning decisions based on runtime resource conditions, achieving better resource utilization across edge devices while meeting application latency constraints. Experimental evaluation on real edge computing testbeds demonstrates significant improvements over static and heuristic-based offloading approaches.",
+    "venue": "Journal of Parallel and Distributed Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  }
+]
+[
+  {
+    "title": "Dual-Mode: Fine-Equalization and Data-Compensation for Low-Power Dual-Edge NAND Flash Memory",
+    "abstract": "This paper proposes Dual-Mode, a novel approach combining fine-equalization and data-compensation techniques to improve read performance and reduce power consumption in dual-edge NAND flash memory. Experimental results show up to 35% reduction in read latency and 28% power savings compared to state-of-the-art methods.",
+    "venue": "ACM Transactions on Storage",
+    "year": 2023,
+    "ccf_level": "A",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Enhancing Flash Storage Reliability through Adaptive RAIN with Machine Learning Predictions",
+    "abstract": "We present an adaptive Redundant Array of Independent NAND (RAIN) scheme that uses lightweight machine learning to predict block failure probabilities, dynamically adjusting parity distribution for optimal reliability and performance. Real-device evaluations demonstrate 42% reduction in uncorrectable errors with only 5% write amplification overhead.",
+    "venue": "IEEE Transactions on Computers",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Accelerating Sparse Matrix Multiplication on GPU via Adaptive Tile Partitioning",
+    "abstract": "This work introduces a novel tiling strategy for sparse matrix multiplication on GPUs that adaptively selects tile shapes based on non-zero pattern analysis. Compared to cuSPARSE, the proposed method achieves up to 2.8x speedup on irregular sparse matrices while maintaining compatibility with existing GPU architectures.",
+    "venue": "IEEE Transactions on Parallel and Distributed Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Hybrid Memory Management for Heterogeneous Memory Systems with Non-Volatile DIMMs",
+    "abstract": "We propose a hybrid memory management system that automatically migrates cold pages to non-volatile DIMMs while retaining hot data in DRAM, using a lightweight page-access predictor. Evaluation on real workloads shows 31% energy reduction and 18% performance improvement over conventional NUMA-based approaches.",
+    "venue": "ACM Transactions on Computer Systems",
+    "year": 2023,
+    "ccf_level": "A",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Revisiting Cache Replacement Policies for Graph Processing Workloads",
+    "abstract": "This paper analyzes the inefficiency of classical LRU and LFU policies for graph processing, and proposes a graph-aware replacement policy that leverages vertex access patterns. Experiments on large graph benchmarks show reduction in cache misses by up to 44% compared to the best prior policy.",
+    "venue": "ACM Transactions on Architecture and Code Optimization",
+    "year": 2023,
+    "ccf_level": "A",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Energy-Efficient Scheduling for Real-Time Mixed-Criticality Systems on Heterogeneous Multicores",
+    "abstract": "We address the problem of scheduling mixed-criticality tasks on heterogeneous multicore platforms with energy constraints. The proposed algorithm, EEMC, combines criticality-aware partitioning with dynamic voltage and frequency scaling. Simulation results demonstrate up to 40% energy savings while meeting all deadline constraints.",
+    "venue": "ACM Transactions on Embedded Computing Systems",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Runtime Reconfiguration of FPGA-Based Accelerators for Deep Learning Inference",
+    "abstract": "This paper presents a runtime reconfiguration framework for FPGA-based deep learning accelerators that dynamically switches between model variants based on input complexity and latency requirements. Implementation on a Xilinx Alveo card achieves 2.1x throughput improvement over static configuration without accuracy loss.",
+    "venue": "ACM Transactions on Reconfigurable Technology and Systems",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Phoenix: A Low-Latency Cloud Storage System with Erasure Coding and Proactive Recovery",
+    "abstract": "We design Phoenix, a cloud storage system that uses predictive analysis to anticipate node failures and proactively reconstruct lost data before actual failures occur. Trace-driven simulations show 67% reduction in average recovery time and 53% lower tail latency compared to reactive erasure-coding systems.",
+    "venue": "IEEE Transactions on Cloud Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Performance Modeling of GPU Kernels Using Stochastic Petri Nets",
+    "abstract": "This paper introduces a stochastic Petri net framework for modeling the execution behavior of GPU kernels, accounting for warp scheduling, memory divergence, and occupancy. The model predicts kernel execution time with average error below 8% across a range of CUDA benchmarks, enabling fast design-space exploration.",
+    "venue": "Performance Evaluation",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Secure and Efficient Multi-Cloud Storage with Verifiable Erasure Coding",
+    "abstract": "We propose a protocol for storing data across multiple cloud providers that ensures confidentiality, integrity, and availability even if some providers are compromised. The scheme uses verifiable erasure coding with homomorphic hashing. Implementation shows 2.3x overhead reduction compared to prior Byzantine-fault-tolerant storage systems.",
+    "venue": "IEEE Transactions on Dependable and Secure Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Privacy-Preserving Federated Learning with Differential Privacy and Secure Aggregation",
+    "abstract": "We present a federated learning framework that integrates local differential privacy with secure multiparty computation to protect both model updates and participant identities. Extensive evaluation on benchmark datasets shows that the framework achieves strong privacy guarantees with model accuracy degradation of less than 2%.",
+    "venue": "ACM Transactions on Privacy and Security",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Automated Generation of IDS Signatures from Network Flows using Sequence-to-Sequence Models",
+    "abstract": "This paper proposes a deep learning-based method to automatically generate intrusion detection signatures from raw network flow data, reducing the manual effort of security analysts. The Seq2Seq model learns to translate flow features into Snort-compatible rules, achieving 94% detection rate on CICIDS2017 with a false positive rate below 1%.",
+    "venue": "Computers & Security",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Lattice-Based Group Signatures with Efficient Revocation for Vehicular Networks",
+    "abstract": "We propose a lattice-based group signature scheme that supports efficient revocation without updating all users' keys, suitable for vehicular ad-hoc networks. The scheme is post-quantum secure and achieves signature size of 2.4 KB with 15 ms verification time on an embedded device.",
+    "venue": "Designs, Codes and Cryptography",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Side-Channel Attacks on ARM TrustZone via Cache Timing Analysis",
+    "abstract": "We demonstrate a practical side-channel attack against ARM TrustZone secure world applications using cache timing probes from an unprivileged normal-world process. The attack recovers RSA private keys within 5 minutes on a standard smartphone, revealing previously unknown leakage paths in TrustZone implementations.",
+    "venue": "IET Information Security",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Risk-Aware Access Control: A Quantitative Framework for Healthcare Systems",
+    "abstract": "This paper introduces a risk-aware access control model that dynamically adjusts permissions based on real-time assessment of access risk factors such as user behavior, data sensitivity, and environmental context. Deployment in a simulated electronic health record system reduces unauthorized access attempts by 72% while maintaining clinical workflow efficiency.",
+    "venue": "Journal of Information Security and Applications",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Formal Verification of Smart Contract Access Control Using Theorem Proving",
+    "abstract": "We present a methodology to formally verify access control policies in Ethereum smart contracts using the Coq proof assistant. The approach automatically extracts access control models from Solidity bytecode and verifies properties such as role-based separation and privilege escalation resistance. Verified contracts incur only 12% gas overhead.",
+    "venue": "Security and Communication Networks",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Compiler-Directed Memory Disambiguation for Speculative Optimization in C++",
+    "abstract": "We propose a compiler technique that uses profile-guided speculation to disambiguate memory accesses in C++ programs, enabling more aggressive optimizations such as vectorization and reordering. Implementation in LLVM achieves 1.6x speedup on SPEC CPU 2017 benchmarks with no safety violations in 99% of tested cases.",
+    "venue": "ACM Transactions on Programming Languages and Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Generative Model-Based Test Generation for Autonomous Driving Software",
+    "abstract": "We introduce a test generation framework that uses conditional generative models to produce realistic and challenging driving scenarios for autonomous vehicle software. The generated tests expose 3.5x more safety-critical bugs than random or coverage-guided fuzzing on the Apollo driving stack.",
+    "venue": "IEEE Transactions on Software Engineering",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Dynamic Program Slicing for JavaScript with Callback-Aware Dependencies",
+    "abstract": "We present a dynamic slicing technique for JavaScript that accurately captures dependencies caused by asynchronous callbacks and event loops. The method reduces slice size by 57% on average compared to traditional call-graph-based slicing, and scales to large web applications.",
+    "venue": "ACM Transactions on Software Engineering and Methodology",
+    "year": 2023,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Microservice Fault Localization via Trace Anomaly Detection with Graph Neural Networks",
+    "abstract": "This paper proposes a graph neural network model that learns normal interaction patterns among microservices from distributed traces, and identifies anomalous edges that indicate fault locations. Evaluation on a cloud-native benchmark shows 91% top-3 localization accuracy, outperforming existing trace-based methods by 24%.",
+    "venue": "IEEE Transactions on Services Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Automated Program Repair for Concurrency Bugs Using Reinforcement Learning",
+    "abstract": "We develop an automated repair technique for concurrency bugs that uses reinforcement learning to explore patch spaces of lock insertion and reordering. The system repairs 68% of known concurrency bugs from a benchmark set with generated patches that pass all original and additional concurrency tests.",
+    "venue": "Automated Software Engineering",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Mining Software Repositories for API Misuse Patterns with Large Language Models",
+    "abstract": "We utilize pre-trained code language models to mine API misuse patterns from millions of GitHub repositories. The extracted patterns are used to detect violations in new code, achieving 87% precision and 79% recall on a benchmark of known API misuses across Java and Python ecosystems.",
+    "venue": "Empirical Software Engineering",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Refactoring Recommendations for Technical Debt Repayment Using Multi-Objective Optimization",
+    "abstract": "This paper presents a multi-objective optimization framework that recommends refactoring sequences to minimize technical debt repayment cost while maximizing code quality improvements. Applied to 15 open-source projects, the recommendations reduce interest payments by 41% compared to developer-selected refactorings.",
+    "venue": "Journal of Systems and Software",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Requirements Elicitation for AI-Enabled Systems: A Case Study in Healthcare",
+    "abstract": "We report a multi-year case study on eliciting requirements for an AI-based diagnostic assistant in a hospital setting. The study identifies seven recurring challenges, including explainability, data drift, and human-in-the-loop validation, and provides a pattern language for documenting AI system requirements.",
+    "venue": "Requirements Engineering",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Mutation Testing for Deep Learning Models by Fault Injection on Activation Functions",
+    "abstract": "We propose a mutation testing framework for deep neural networks that injects faults into activation functions to simulate realistic training and inference errors. The framework identifies 34% more weak points than neuron-level mutation on MNIST and CIFAR-10 models, and suggests that softmax and ReLU are most critical layers.",
+    "venue": "Software Testing, Verification and Reliability",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Service-Oriented Architecture Migration for Legacy Monoliths: A Pattern-Based Approach",
+    "abstract": "We present a catalog of 12 migration patterns for transforming monolithic applications into microservices, validated through four industrial case studies. The patterns cover decomposition, data management, and communication, and reduce migration effort by an average of 38% compared to ad-hoc approaches.",
+    "venue": "Service Oriented Computing and Applications",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "WebAssembly Module Integration Testing with Symbolic Execution",
+    "abstract": "We implement a symbolic execution engine for WebAssembly modules to detect integration bugs across module boundaries. The tool finds 47 previously unknown bugs in popular Wasm modules from the WebAssembly System Interface ecosystem, including memory leaks and type confusion vulnerabilities.",
+    "venue": "Journal of Web Engineering",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Adaptive Differentially Private Stochastic Gradient Descent with Dynamic Privacy Budget Allocation",
+    "abstract": "We propose an adaptive DP-SGD algorithm that dynamically allocates privacy budgets across training iterations based on gradient sensitivity estimates. The method achieves 15% higher model accuracy at the same epsilon-delta privacy guarantees compared to uniform budget allocation on image classification tasks.",
+    "venue": "IEEE Transactions on Knowledge and Data Engineering",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Efficient Graph Similarity Search using Hierarchical Partition and Pruning",
+    "abstract": "We design a graph similarity search index that partitions graphs into hierarchical summaries and uses tight lower-bound pruning to reduce candidate set size. Experiments on million-scale graph databases show 100x faster query processing than state-of-the-art methods with perfect recall.",
+    "venue": "ACM Transactions on Database Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Auto-Schema: Automatically Generating Database Schemas from Natural Language Descriptions",
+    "abstract": "We present Auto-Schema, a system that translates natural language descriptions of data requirements into relational database schemas with functional dependencies and indexes. Using a fine-tuned large language model, the system achieves 89% accuracy on the Spider dataset extension for schema generation.",
+    "venue": "ACM Transactions on Information Systems",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  }
+]
+[
+  {
+    "title": "StreamJoin: Adaptive Window Join Processing on Distributed Data Streams",
+    "abstract": "We propose StreamJoin, a distributed stream join operator that adaptively selects between hash join and sort-merge join based on stream characteristics and resource availability. Experiments on Flink show 2.4x throughput improvement over static join strategies for fluctuating input rates.",
+    "venue": "The VLDB Journal",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Contrastive Learning for Time Series Anomaly Detection with Interpretable Explanations",
+    "abstract": "This paper presents a contrastive learning framework for unsupervised time series anomaly detection that learns to distinguish normal patterns from anomalous ones without labeled data. The framework also generates explanations using attention weights, achieving 96% F1-score on the Server Machine Dataset.",
+    "venue": "ACM Transactions on Knowledge Discovery from Data",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Semantic Web Reasoning over Large Knowledge Graphs with Approximation and Incremental Updates",
+    "abstract": "We develop a reasoning engine for OWL 2 RL that scales to billion-triple knowledge graphs using approximation techniques and incremental update processing. The engine answers conjunctive queries with 92% completeness in under 5 seconds, compared to minutes for complete reasoners.",
+    "venue": "Journal of Web Semantics",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "GeoSocialRec: Location-Aware Point-of-Interest Recommendation with Social Influence Modeling",
+    "abstract": "We propose a recommendation model that integrates geographical proximity, social network influence, and temporal patterns for next POI prediction. Using a graph neural network, the model achieves 18% higher hit rate than state-of-the-art on Foursquare and Gowalla datasets.",
+    "venue": "GeoInformatica",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Explainable Matrix Factorization with Prototype-Based Reasoning",
+    "abstract": "This paper introduces an explainable matrix factorization model for collaborative filtering that generates user- and item-specific prototypes to justify recommendations. User studies show that the explanations increase user trust by 42% compared to latent factor models without explanation.",
+    "venue": "Data Mining and Knowledge Discovery",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "FAST: Federated Asynchronous Stochastic Gradient Descent with Adaptive Compression",
+    "abstract": "We propose a federated learning algorithm that uses asynchronous updates with adaptive gradient compression to reduce communication overhead. Experiments on cross-device federated settings show 3.1x speedup over synchronous FedAvg while maintaining similar accuracy on CIFAR-10.",
+    "venue": "Distributed and Parallel Databases",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Keyword Search over Relational Databases Using Pre-trained Language Models",
+    "abstract": "We design a keyword search system for relational databases that uses BERT-based relevance ranking to map keywords to SQL queries. The system achieves 84% precision on the WikiSQL benchmark without prior schema knowledge, outperforming traditional IR-based approaches.",
+    "venue": "Journal of Intelligent Information Systems",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Online Learning of Submodular Functions for Influence Maximization in Social Networks",
+    "abstract": "We study the problem of learning unknown submodular influence functions in social networks through online exploration and exploitation. The proposed algorithm achieves sublinear regret bounds and outperforms greedy seed selection by 25% in estimated influence spread on real Twitter cascades.",
+    "venue": "SIAM Journal on Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Computational Complexity of Approximate Nash Equilibrium in Polymatrix Games",
+    "abstract": "This paper establishes new hardness results for computing approximate Nash equilibria in polymatrix games. We show that finding an ε-Nash equilibrium is PPAD-complete even for ε as large as 0.5, settling an open question in algorithmic game theory.",
+    "venue": "Information and Computation",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Lower Bounds for Dynamic Graph Connectivity Under Edge Deletions",
+    "abstract": "We prove new lower bounds for dynamic graph connectivity under the OMv (Online Matrix-Vector multiplication) conjecture. Specifically, any data structure with polylogarithmic update time must have query time Ω(n^{1-o(1)}) in the worst case, tightening previous results.",
+    "venue": "ACM Transactions on Algorithms",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Dependent Type Theory with a Primitive Equality Reflection Rule",
+    "abstract": "We extend Martin-Löf type theory with a primitive equality reflection rule that internalizes propositional equality as definitional equality under certain conditions. The resulting system is shown to be consistent via a realizability model and enables more convenient formalization of higher-dimensional structures.",
+    "venue": "Logical Methods in Computer Science",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Quantum Query Complexity of Boolean Functions with Symmetric Promise",
+    "abstract": "We analyze the quantum query complexity of Boolean functions when the input is promised to have certain symmetric properties. For threshold functions, we provide optimal algorithms achieving quadratic speedup over classical bounds, using a novel Fourier analysis on the symmetric group.",
+    "venue": "ACM Transactions on Quantum Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neural Radiance Fields for Dynamic Scene Reconstruction from Monocular Video",
+    "abstract": "We present a method to reconstruct dynamic 3D scenes from single monocular video using time-conditioned neural radiance fields with deformation priors. Compared to prior NeRF-based methods, we reduce training time by 70% and achieve higher fidelity on the Dynamic NeRF dataset.",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Visual Prompt Learning for Vision-Language Models: A Multi-Task Perspective",
+    "abstract": "This paper investigates visual prompt learning for adapting vision-language models to downstream tasks. We propose a multi-task prompt learning framework that learns shared visual prompts across related tasks, improving few-shot accuracy by 8% on average over single-task prompt tuning on 11 datasets.",
+    "venue": "International Journal of Computer Vision",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Sample-Efficient Reinforcement Learning with Nonparametric Reward Modeling",
+    "abstract": "We propose a reinforcement learning algorithm that uses Gaussian processes to model unknown reward functions, enabling sample-efficient exploration in continuous state spaces. The method achieves near-optimal regret bounds and requires 60% fewer samples than deep RL baselines on Mujoco control tasks.",
+    "venue": "Journal of Machine Learning Research",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Open-Vocabulary Object Detection via Language-Guided Region Proposal Refinement",
+    "abstract": "We present a method for open-vocabulary object detection that refines class-agnostic region proposals using contrastive language-image pre-training. On the LVIS benchmark, the approach achieves 32.5% mask AP on novel categories, improving over the prior state-of-the-art by 7.2 points.",
+    "venue": "International Journal of Computer Vision",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Multi-Agent Reinforcement Learning for Decentralized Traffic Signal Control",
+    "abstract": "We design a decentralized multi-agent RL framework for traffic signal control where each intersection learns independently but uses graph attention to share information. Simulated on a 100-intersection network, the method reduces average waiting time by 28% compared to centralized RL and 41% over fixed-time control.",
+    "venue": "Autonomous Agents and Multi-Agent Systems",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neuro-Symbolic Program Synthesis from Few-Shot Demonstrations",
+    "abstract": "We propose a neuro-symbolic synthesis engine that combines a large language model for candidate generation with a symbolic verifier for correctness. On the DreamCoder benchmark, the system solves 76% of tasks with 3 demonstrations, surpassing pure neural methods by 22%.",
+    "venue": "Machine Learning",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Transformer-Based Multimodal Affective Computing with Cross-Attention Fusion",
+    "abstract": "This paper presents a transformer architecture that fuses facial video, speech, and physiological signals for emotion recognition using cross-attention mechanisms. On the CMU-MOSEI benchmark, the model achieves 84.2% weighted F1-score, outperforming previous state-of-the-art by 5.6%.",
+    "venue": "IEEE Transactions on Affective Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Genetic Programming for Automatic Feature Engineering in High-Dimensional Classification",
+    "abstract": "We propose a genetic programming framework that evolves feature construction pipelines to improve classification accuracy on high-dimensional datasets. On 15 UCI datasets, the method reduces dimensionality by 70% while improving accuracy by 12% over raw features using an SVM classifier.",
+    "venue": "Evolutionary Computation",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Federated Multi-Task Learning with Personalized Model Aggregation",
+    "abstract": "We introduce a federated learning approach for multi-task settings where each client has a personalized model aggregated from a global mixture of expert models. On the FEMNIST dataset, the method achieves 4% higher accuracy than FedAvg with the same communication budget.",
+    "venue": "Neural Computation",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Knowledge-Based Verification of DNN Property Violations via Abstraction Refinement",
+    "abstract": "This paper presents a verification framework that uses abstract interpretation and symbolic reasoning to certify the absence of adversarial examples for deep neural networks. The tool verifies 92% of robust properties on MNIST with an average runtime of 3 seconds per property.",
+    "venue": "Journal of Automated Reasoning",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Interpretable Knowledge Tracing with Attentional States and Concept Prerequisite Graphs",
+    "abstract": "We develop a knowledge tracing model that uses graph attention to capture prerequisite relationships among concepts, producing interpretable student skill mastery estimates. On three real-world datasets, the model achieves higher AUC than DKT and provides concept-level explanations.",
+    "venue": "International Journal of Intelligent Systems",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neural Machine Translation for Extremely Low-Resource Languages with Back-Translation and Denoising",
+    "abstract": "We propose a training pipeline for NMT that combines back-translation with denoising autoencoding, enabling translation with as few as 1000 parallel sentences. On the Flores-101 benchmark for low-resource language pairs, the method improves BLEU by 9.8 points over baseline transformer.",
+    "venue": "Machine Translation",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Eye-Tracking for User Authentication on Mobile Devices: A Deep Learning Approach",
+    "abstract": "We design an authentication system that uses eye-tracking data from front-facing cameras, processed by a temporal convolutional network, to verify user identity. On a dataset of 120 users, the system achieves 2.3% equal error rate with only 3 seconds of gaze data.",
+    "venue": "Behaviour & Information Technology",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Context-Aware Smart Home Control via Voice Interaction with Semantic Parsing",
+    "abstract": "This paper presents a voice-controlled smart home system that uses semantic parsing to interpret natural language commands with contextual information such as room and device states. User studies show 95% task completion rate and 40% reduction in required utterances compared to keyword-based systems.",
+    "venue": "Personal and Ubiquitous Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Privacy-Preserving Location Sharing in Pervasive Computing using Differential Privacy and Obfuscation",
+    "abstract": "We propose a location privacy mechanism that combines differential privacy with geometric obfuscation to protect user trajectories while maintaining utility for location-based services. Experiments on real GPS traces show a 3x improvement in privacy-utility tradeoff compared to random perturbation.",
+    "venue": "Pervasive and Mobile Computing",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Collaborative Robots in Assembly Lines: A Human-Robot Interaction Study",
+    "abstract": "We conducted a user study with 50 assembly line workers to evaluate a collaborative robot assistant for complex assembly tasks. Results show that the robot reduces errors by 34% and increases task speed by 22%, but also increases mental workload for novice users.",
+    "venue": "ACM Transactions on Human-Robot Interaction",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Computational Phenotyping of Alzheimer's Disease from Multimodal EHR Data Using Graph Neural Networks",
+    "abstract": "We present a graph neural network model that integrates longitudinal electronic health records, imaging, and genetic data to predict Alzheimer's progression. The model achieves 88% AUC for 3-year conversion prediction, outperforming standard MLP and random forest baselines.",
+    "venue": "Journal of Biomedical Informatics",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Blockchain-Based Decentralized Federated Learning with On-Chain Aggregation",
+    "abstract": "We design a blockchain-based federated learning system where model updates are aggregated via smart contracts, eliminating the need for a central server. The system scales to 1000 participants with final model accuracy within 95% of centralized FedAvg on the CIFAR-10 dataset.",
+    "venue": "Blockchain: Research and Applications",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Adaptive Cruise Control Optimization Using Deep Reinforcement Learning and Real-World Traffic Data",
+    "abstract": "We develop an adaptive cruise control system trained with deep reinforcement learning on large-scale real-world driving data. The policy reduces fuel consumption by 14% compared to commercial ACC systems while maintaining safety and comfort metrics in simulation.",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Automated Lung Nodule Segmentation in CT Scans Using Attention-Based U-Net with Contrastive Learning",
+    "abstract": "We propose a segmentation network for lung nodules that uses a U-Net with attention gates and contrastive pre-training. On the LIDC-IDRI dataset, the model achieves 91.2% Dice score, a 5% improvement over standard U-Net, with fewer false positives.",
+    "venue": "IEEE Transactions on Medical Imaging",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Path Planning for Autonomous Mobile Robots in Dynamic Environments Using Model Predictive Control",
+    "abstract": "We present a real-time path planning algorithm for mobile robots that uses model predictive control to navigate dynamic obstacles with uncertainty. On a differential drive robot, the planner achieves 99% collision-free navigation at speeds up to 1.5 m/s in cluttered corridors.",
+    "venue": "IEEE Transactions on Robotics",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Large-Scale Drug-Target Interaction Prediction with Graph Convolutional Networks and Molecular Fingerprints",
+    "abstract": "We combine graph convolutional networks and extended connectivity fingerprints to predict drug-target interactions on a scale of 10 million pairs. The model achieves AUROC of 0.96 on the Davis benchmark and identifies 15 novel interactions validated by docking.",
+    "venue": "PLOS Computational Biology",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Green Edge Computing: Energy-Aware Task Offloading with Renewable Energy Harvesting",
+    "abstract": "We formulate a joint optimization of task offloading and renewable energy usage in edge computing systems, solving it via Lyapunov optimization. Simulation shows 32% reduction in grid energy consumption compared to baseline while maintaining latency constraints.",
+    "venue": "IEEE Transactions on Sustainable Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Resilient Routing in Hybrid RF/FSO UAV Networks using Reinforcement Learning",
+    "abstract": "We propose a routing protocol for UAV networks that dynamically switches between RF and FSO links based on weather conditions, trained with deep Q-learning. Field tests show 99.5% packet delivery ratio under simulated fog and rain, compared to 84% for static routing.",
+    "venue": "Ad Hoc Networks",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "SIoT-Defender: A Lightweight Intrusion Detection System for Social Internet of Things",
+    "abstract": "We develop a lightweight IDS for SIoT networks using ensemble learning with feature selection that runs on resource-constrained devices. Evaluation on a real SIoT testbed shows 97% detection rate with 1.2% false positives and latency under 50ms per packet.",
+    "venue": "Wireless Networks",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "High-Confidence Path Planning for Autonomous Vehicles using Formal Verification",
+    "abstract": "We integrate model checking into a path planning framework to guarantee collision avoidance under bounded uncertainty. Verified paths are generated in real-time for highway merging scenarios, with formal safety certificates verified in under 100ms.",
+    "venue": "High-Confidence Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Code Generation for Scientific Computing from Mathematical Descriptions using Transformer Models",
+    "abstract": "We train a transformer model to generate efficient Fortran and C code from mathematical problem descriptions, targeting linear algebra and PDE solvers. On the Math2Code benchmark, the model produces functionally correct code in 67% of cases, reducing manual coding time by an estimated 55%.",
+    "venue": "Journal of Functional Programming",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Explainable Recommendation through Counterfactual User Simulation",
+    "abstract": "We introduce a method to generate explanations for recommendations by simulating counterfactual user preferences using generative models. User studies indicate that counterfactual explanations increase user satisfaction by 31% compared to feature-based explanations on movie and product datasets.",
+    "venue": "ACM Transactions on Recommender Systems",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Differential Privacy for Spatial Crowdsourcing with Dynamic Task Allocation",
+    "abstract": "We propose a differentially private mechanism for spatial crowdsourcing that protects worker locations while enabling efficient task assignment. The mechanism achieves ε=0.5 privacy with only 12% utility loss compared to non-private assignment on real-world taxi data.",
+    "venue": "GeoInformatica",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Scalable Distributed Graph Processing with Adaptive Vertex-Centric Execution",
+    "abstract": "We design a distributed graph processing engine that dynamically switches between vertex-centric and edge-centric execution modes based on workload skewness. On PowerGraph benchmarks, the system achieves 1.8x speedup over static GraphLab without increasing memory usage.",
+    "venue": "Journal of Parallel and Distributed Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  }
+]
+[
+  {
+    "title": "StreamJoin: Adaptive Window Join Processing on Distributed Data Streams",
+    "abstract": "We propose StreamJoin, a distributed stream join operator that adaptively selects between hash join and sort-merge join based on stream characteristics and resource availability. Experiments on Flink show 2.4x throughput improvement over static join strategies for fluctuating input rates.",
+    "venue": "The VLDB Journal",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Contrastive Learning for Time Series Anomaly Detection with Interpretable Explanations",
+    "abstract": "This paper presents a contrastive learning framework for unsupervised time series anomaly detection that learns to distinguish normal patterns from anomalous ones without labeled data. The framework also generates explanations using attention weights, achieving 96% F1-score on the Server Machine Dataset.",
+    "venue": "ACM Transactions on Knowledge Discovery from Data",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Semantic Web Reasoning over Large Knowledge Graphs with Approximation and Incremental Updates",
+    "abstract": "We develop a reasoning engine for OWL 2 RL that scales to billion-triple knowledge graphs using approximation techniques and incremental update processing. The engine answers conjunctive queries with 92% completeness in under 5 seconds, compared to minutes for complete reasoners.",
+    "venue": "Journal of Web Semantics",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "GeoSocialRec: Location-Aware Point-of-Interest Recommendation with Social Influence Modeling",
+    "abstract": "We propose a recommendation model that integrates geographical proximity, social network influence, and temporal patterns for next POI prediction. Using a graph neural network, the model achieves 18% higher hit rate than state-of-the-art on Foursquare and Gowalla datasets.",
+    "venue": "GeoInformatica",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Explainable Matrix Factorization with Prototype-Based Reasoning",
+    "abstract": "This paper introduces an explainable matrix factorization model for collaborative filtering that generates user- and item-specific prototypes to justify recommendations. User studies show that the explanations increase user trust by 42% compared to latent factor models without explanation.",
+    "venue": "Data Mining and Knowledge Discovery",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "FAST: Federated Asynchronous Stochastic Gradient Descent with Adaptive Compression",
+    "abstract": "We propose a federated learning algorithm that uses asynchronous updates with adaptive gradient compression to reduce communication overhead. Experiments on cross-device federated settings show 3.1x speedup over synchronous FedAvg while maintaining similar accuracy on CIFAR-10.",
+    "venue": "Distributed and Parallel Databases",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Keyword Search over Relational Databases Using Pre-trained Language Models",
+    "abstract": "We design a keyword search system for relational databases that uses BERT-based relevance ranking to map keywords to SQL queries. The system achieves 84% precision on the WikiSQL benchmark without prior schema knowledge, outperforming traditional IR-based approaches.",
+    "venue": "Journal of Intelligent Information Systems",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Online Learning of Submodular Functions for Influence Maximization in Social Networks",
+    "abstract": "We study the problem of learning unknown submodular influence functions in social networks through online exploration and exploitation. The proposed algorithm achieves sublinear regret bounds and outperforms greedy seed selection by 25% in estimated influence spread on real Twitter cascades.",
+    "venue": "SIAM Journal on Computing",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Computational Complexity of Approximate Nash Equilibrium in Polymatrix Games",
+    "abstract": "This paper establishes new hardness results for computing approximate Nash equilibria in polymatrix games. We show that finding an ε-Nash equilibrium is PPAD-complete even for ε as large as 0.5, settling an open question in algorithmic game theory.",
+    "venue": "Information and Computation",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Lower Bounds for Dynamic Graph Connectivity Under Edge Deletions",
+    "abstract": "We prove new lower bounds for dynamic graph connectivity under the OMv (Online Matrix-Vector multiplication) conjecture. Specifically, any data structure with polylogarithmic update time must have query time Ω(n^{1-o(1)}) in the worst case, tightening previous results.",
+    "venue": "ACM Transactions on Algorithms",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Dependent Type Theory with a Primitive Equality Reflection Rule",
+    "abstract": "We extend Martin-Löf type theory with a primitive equality reflection rule that internalizes propositional equality as definitional equality under certain conditions. The resulting system is shown to be consistent via a realizability model and enables more convenient formalization of higher-dimensional structures.",
+    "venue": "Logical Methods in Computer Science",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Quantum Query Complexity of Boolean Functions with Symmetric Promise",
+    "abstract": "We analyze the quantum query complexity of Boolean functions when the input is promised to have certain symmetric properties. For threshold functions, we provide optimal algorithms achieving quadratic speedup over classical bounds, using a novel Fourier analysis on the symmetric group.",
+    "venue": "ACM Transactions on Quantum Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机科学理论"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neural Radiance Fields for Dynamic Scene Reconstruction from Monocular Video",
+    "abstract": "We present a method to reconstruct dynamic 3D scenes from single monocular video using time-conditioned neural radiance fields with deformation priors. Compared to prior NeRF-based methods, we reduce training time by 70% and achieve higher fidelity on the Dynamic NeRF dataset.",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Visual Prompt Learning for Vision-Language Models: A Multi-Task Perspective",
+    "abstract": "This paper investigates visual prompt learning for adapting vision-language models to downstream tasks. We propose a multi-task prompt learning framework that learns shared visual prompts across related tasks, improving few-shot accuracy by 8% on average over single-task prompt tuning on 11 datasets.",
+    "venue": "International Journal of Computer Vision",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Sample-Efficient Reinforcement Learning with Nonparametric Reward Modeling",
+    "abstract": "We propose a reinforcement learning algorithm that uses Gaussian processes to model unknown reward functions, enabling sample-efficient exploration in continuous state spaces. The method achieves near-optimal regret bounds and requires 60% fewer samples than deep RL baselines on Mujoco control tasks.",
+    "venue": "Journal of Machine Learning Research",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Open-Vocabulary Object Detection via Language-Guided Region Proposal Refinement",
+    "abstract": "We present a method for open-vocabulary object detection that refines class-agnostic region proposals using contrastive language-image pre-training. On the LVIS benchmark, the approach achieves 32.5% mask AP on novel categories, improving over the prior state-of-the-art by 7.2 points.",
+    "venue": "International Journal of Computer Vision",
+    "year": 2024,
+    "ccf_level": "A",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Multi-Agent Reinforcement Learning for Decentralized Traffic Signal Control",
+    "abstract": "We design a decentralized multi-agent RL framework for traffic signal control where each intersection learns independently but uses graph attention to share information. Simulated on a 100-intersection network, the method reduces average waiting time by 28% compared to centralized RL and 41% over fixed-time control.",
+    "venue": "Autonomous Agents and Multi-Agent Systems",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neuro-Symbolic Program Synthesis from Few-Shot Demonstrations",
+    "abstract": "We propose a neuro-symbolic synthesis engine that combines a large language model for candidate generation with a symbolic verifier for correctness. On the DreamCoder benchmark, the system solves 76% of tasks with 3 demonstrations, surpassing pure neural methods by 22%.",
+    "venue": "Machine Learning",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Transformer-Based Multimodal Affective Computing with Cross-Attention Fusion",
+    "abstract": "This paper presents a transformer architecture that fuses facial video, speech, and physiological signals for emotion recognition using cross-attention mechanisms. On the CMU-MOSEI benchmark, the model achieves 84.2% weighted F1-score, outperforming previous state-of-the-art by 5.6%.",
+    "venue": "IEEE Transactions on Affective Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Genetic Programming for Automatic Feature Engineering in High-Dimensional Classification",
+    "abstract": "We propose a genetic programming framework that evolves feature construction pipelines to improve classification accuracy on high-dimensional datasets. On 15 UCI datasets, the method reduces dimensionality by 70% while improving accuracy by 12% over raw features using an SVM classifier.",
+    "venue": "Evolutionary Computation",
+    "year": 2023,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Federated Multi-Task Learning with Personalized Model Aggregation",
+    "abstract": "We introduce a federated learning approach for multi-task settings where each client has a personalized model aggregated from a global mixture of expert models. On the FEMNIST dataset, the method achieves 4% higher accuracy than FedAvg with the same communication budget.",
+    "venue": "Neural Computation",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Knowledge-Based Verification of DNN Property Violations via Abstraction Refinement",
+    "abstract": "This paper presents a verification framework that uses abstract interpretation and symbolic reasoning to certify the absence of adversarial examples for deep neural networks. The tool verifies 92% of robust properties on MNIST with an average runtime of 3 seconds per property.",
+    "venue": "Journal of Automated Reasoning",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Interpretable Knowledge Tracing with Attentional States and Concept Prerequisite Graphs",
+    "abstract": "We develop a knowledge tracing model that uses graph attention to capture prerequisite relationships among concepts, producing interpretable student skill mastery estimates. On three real-world datasets, the model achieves higher AUC than DKT and provides concept-level explanations.",
+    "venue": "International Journal of Intelligent Systems",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Neural Machine Translation for Extremely Low-Resource Languages with Back-Translation and Denoising",
+    "abstract": "We propose a training pipeline for NMT that combines back-translation with denoising autoencoding, enabling translation with as few as 1000 parallel sentences. On the Flores-101 benchmark for low-resource language pairs, the method improves BLEU by 9.8 points over baseline transformer.",
+    "venue": "Machine Translation",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["人工智能"],
+    "external_ids": {}
+  },
+  {
+    "title": "Eye-Tracking for User Authentication on Mobile Devices: A Deep Learning Approach",
+    "abstract": "We design an authentication system that uses eye-tracking data from front-facing cameras, processed by a temporal convolutional network, to verify user identity. On a dataset of 120 users, the system achieves 2.3% equal error rate with only 3 seconds of gaze data.",
+    "venue": "Behaviour & Information Technology",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Context-Aware Smart Home Control via Voice Interaction with Semantic Parsing",
+    "abstract": "This paper presents a voice-controlled smart home system that uses semantic parsing to interpret natural language commands with contextual information such as room and device states. User studies show 95% task completion rate and 40% reduction in required utterances compared to keyword-based systems.",
+    "venue": "Personal and Ubiquitous Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Privacy-Preserving Location Sharing in Pervasive Computing using Differential Privacy and Obfuscation",
+    "abstract": "We propose a location privacy mechanism that combines differential privacy with geometric obfuscation to protect user trajectories while maintaining utility for location-based services. Experiments on real GPS traces show a 3x improvement in privacy-utility tradeoff compared to random perturbation.",
+    "venue": "Pervasive and Mobile Computing",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Collaborative Robots in Assembly Lines: A Human-Robot Interaction Study",
+    "abstract": "We conducted a user study with 50 assembly line workers to evaluate a collaborative robot assistant for complex assembly tasks. Results show that the robot reduces errors by 34% and increases task speed by 22%, but also increases mental workload for novice users.",
+    "venue": "ACM Transactions on Human-Robot Interaction",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["人机交互与普适计算"],
+    "external_ids": {}
+  },
+  {
+    "title": "Computational Phenotyping of Alzheimer's Disease from Multimodal EHR Data Using Graph Neural Networks",
+    "abstract": "We present a graph neural network model that integrates longitudinal electronic health records, imaging, and genetic data to predict Alzheimer's progression. The model achieves 88% AUC for 3-year conversion prediction, outperforming standard MLP and random forest baselines.",
+    "venue": "Journal of Biomedical Informatics",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Blockchain-Based Decentralized Federated Learning with On-Chain Aggregation",
+    "abstract": "We design a blockchain-based federated learning system where model updates are aggregated via smart contracts, eliminating the need for a central server. The system scales to 1000 participants with final model accuracy within 95% of centralized FedAvg on the CIFAR-10 dataset.",
+    "venue": "Blockchain: Research and Applications",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Adaptive Cruise Control Optimization Using Deep Reinforcement Learning and Real-World Traffic Data",
+    "abstract": "We develop an adaptive cruise control system trained with deep reinforcement learning on large-scale real-world driving data. The policy reduces fuel consumption by 14% compared to commercial ACC systems while maintaining safety and comfort metrics in simulation.",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Automated Lung Nodule Segmentation in CT Scans Using Attention-Based U-Net with Contrastive Learning",
+    "abstract": "We propose a segmentation network for lung nodules that uses a U-Net with attention gates and contrastive pre-training. On the LIDC-IDRI dataset, the model achieves 91.2% Dice score, a 5% improvement over standard U-Net, with fewer false positives.",
+    "venue": "IEEE Transactions on Medical Imaging",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Path Planning for Autonomous Mobile Robots in Dynamic Environments Using Model Predictive Control",
+    "abstract": "We present a real-time path planning algorithm for mobile robots that uses model predictive control to navigate dynamic obstacles with uncertainty. On a differential drive robot, the planner achieves 99% collision-free navigation at speeds up to 1.5 m/s in cluttered corridors.",
+    "venue": "IEEE Transactions on Robotics",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Large-Scale Drug-Target Interaction Prediction with Graph Convolutional Networks and Molecular Fingerprints",
+    "abstract": "We combine graph convolutional networks and extended connectivity fingerprints to predict drug-target interactions on a scale of 10 million pairs. The model achieves AUROC of 0.96 on the Davis benchmark and identifies 15 novel interactions validated by docking.",
+    "venue": "PLOS Computational Biology",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["交叉/综合/新兴"],
+    "external_ids": {}
+  },
+  {
+    "title": "Green Edge Computing: Energy-Aware Task Offloading with Renewable Energy Harvesting",
+    "abstract": "We formulate a joint optimization of task offloading and renewable energy usage in edge computing systems, solving it via Lyapunov optimization. Simulation shows 32% reduction in grid energy consumption compared to baseline while maintaining latency constraints.",
+    "venue": "IEEE Transactions on Sustainable Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  },
+  {
+    "title": "Resilient Routing in Hybrid RF/FSO UAV Networks using Reinforcement Learning",
+    "abstract": "We propose a routing protocol for UAV networks that dynamically switches between RF and FSO links based on weather conditions, trained with deep Q-learning. Field tests show 99.5% packet delivery ratio under simulated fog and rain, compared to 84% for static routing.",
+    "venue": "Ad Hoc Networks",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "SIoT-Defender: A Lightweight Intrusion Detection System for Social Internet of Things",
+    "abstract": "We develop a lightweight IDS for SIoT networks using ensemble learning with feature selection that runs on resource-constrained devices. Evaluation on a real SIoT testbed shows 97% detection rate with 1.2% false positives and latency under 50ms per packet.",
+    "venue": "Wireless Networks",
+    "year": 2023,
+    "ccf_level": "C",
+    "research_area": ["计算机网络"],
+    "external_ids": {}
+  },
+  {
+    "title": "High-Confidence Path Planning for Autonomous Vehicles using Formal Verification",
+    "abstract": "We integrate model checking into a path planning framework to guarantee collision avoidance under bounded uncertainty. Verified paths are generated in real-time for highway merging scenarios, with formal safety certificates verified in under 100ms.",
+    "venue": "High-Confidence Computing",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["网络与信息安全"],
+    "external_ids": {}
+  },
+  {
+    "title": "Code Generation for Scientific Computing from Mathematical Descriptions using Transformer Models",
+    "abstract": "We train a transformer model to generate efficient Fortran and C code from mathematical problem descriptions, targeting linear algebra and PDE solvers. On the Math2Code benchmark, the model produces functionally correct code in 67% of cases, reducing manual coding time by an estimated 55%.",
+    "venue": "Journal of Functional Programming",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["软件工程/系统软件/程序设计语言"],
+    "external_ids": {}
+  },
+  {
+    "title": "Explainable Recommendation through Counterfactual User Simulation",
+    "abstract": "We introduce a method to generate explanations for recommendations by simulating counterfactual user preferences using generative models. User studies indicate that counterfactual explanations increase user satisfaction by 31% compared to feature-based explanations on movie and product datasets.",
+    "venue": "ACM Transactions on Recommender Systems",
+    "year": 2024,
+    "ccf_level": "C",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Differential Privacy for Spatial Crowdsourcing with Dynamic Task Allocation",
+    "abstract": "We propose a differentially private mechanism for spatial crowdsourcing that protects worker locations while enabling efficient task assignment. The mechanism achieves ε=0.5 privacy with only 12% utility loss compared to non-private assignment on real-world taxi data.",
+    "venue": "GeoInformatica",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["数据库/数据挖掘/内容检索"],
+    "external_ids": {}
+  },
+  {
+    "title": "Scalable Distributed Graph Processing with Adaptive Vertex-Centric Execution",
+    "abstract": "We design a distributed graph processing engine that dynamically switches between vertex-centric and edge-centric execution modes based on workload skewness. On PowerGraph benchmarks, the system achieves 1.8x speedup over static GraphLab without increasing memory usage.",
+    "venue": "Journal of Parallel and Distributed Computing",
+    "year": 2024,
+    "ccf_level": "B",
+    "research_area": ["计算机体系结构/并行与分布计算/存储系统"],
+    "external_ids": {}
+  }
+]

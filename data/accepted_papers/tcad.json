@@ -1,0 +1,78 @@
+{
+  "journal_id": "tcad",
+  "journal_name": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+  "papers": [
+    {
+      "title": "Automated Topology Synthesis of Analog Integrated Circuits With Frequency Compensation",
+      "abstract": "Analog circuit topology synthesis suffers from weak synthesis capability and low-synthesis efficiency, which result in a bottleneck toward its practical industrial applications. This article presents a proximal-policy-optimization-based circuit topology synthesis framework, which features a superior convergence rate. To further promote its synthesis efficiency, we have improved a deterministic optimization method by incorporating a bias-aware scheme and group concept, which is applied as a filter to eliminate the undesirable topologies in the early evaluation stage. Moreover, a graph-based refinement scheme is proposed to perform deterministically on the generated circuit topologies, which can efficiently add frequency compensation circuits. Compared with the state-of-the-art approaches, our proposed method not only boosts the synthesis efficiency by at least 3 times but also enhances the synthesis capability with a deterministic compensation scheme, showcasing significant advancement of performance efficacy.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2024.3462904",
+      "url": "https://www.semanticscholar.org/paper/ebfcb20805e03b7b199f3e20b3d08a976ee4e6cc"
+    },
+    {
+      "title": "LiDAR 2.0: Hierarchical Curvy Waveguide Detailed Routing for Large-Scale Photonic Integrated Circuits",
+      "abstract": "Driven by innovations in photonic computing and interconnects, photonic integrated circuit (PIC) designs advance and grow in complexity. Traditional manual physical design processes have become increasingly cumbersome. Available PIC layout tools are mostly schematic-driven, which has not alleviated the burden of manual waveguide planning and layout drawing. Previous research in PIC automated routing is largely adapted from electronic design, focusing on high-level planning and overlooking photonic-specific constraints such as curvy waveguides, bending, and port alignment. As a result, they fail to scale and cannot generate DRV-free layouts, highlighting the need for dedicated electronic–photonic design automation (EPDA) tools to streamline PIC physical design. In this work, we present LiDAR , the first automated PIC detailed router for large-scale designs. It features a grid-based, curvy-aware A ${}^{\\ast }$ engine with adaptive crossing insertion, congestion-aware net ordering, and insertion-loss optimization. To enable routing in more compact and complex designs, we further extend our router to hierarchical routing as LiDAR 2.0. It introduces redundant-bend elimination, crossing-space preservation, and routing order refinement for improved conflict resilience. We also develop and open-source a YAML-based PIC intermediate representation (PIC IR) and diverse benchmarks, including TeMPO, GWOR, and Bennes, which feature hierarchical structures and high crossing densities. Evaluations across various benchmarks show that LiDAR 2.0 produces nearly DRV-free layouts, achieving up to 16% lower insertion loss (IL) and $7.69\\times $ speedup over prior methods on spacious cases, and 9% lower IL with $6.95\\times $ speedup over LiDAR 1.0 on compact cases. Our codes are open-sourced at https://github.com/ScopeX-ASU/LiDAR",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2025.3624197",
+      "url": "https://www.semanticscholar.org/paper/5133593e639f06cc5b3012226d878eb164a2bbe6"
+    },
+    {
+      "title": "TopoSizing: An LLM-aided Framework of Topology-based Understanding and Sizing for AMS Circuits",
+      "abstract": "Analog and mixed-signal circuit design remains challenging due to the shortage of high-quality data and the difficulty of embedding domain knowledge into automated flows. Traditional black-box optimization achieves sampling efficiency but lacks circuit understanding, which often causes evaluations to be wasted in low-value regions of the design space. In contrast, learning-based methods embed structural knowledge but are case-specific and costly to retrain. Recent attempts with large language models show potential, yet they often rely on manual intervention, limiting generality and transparency. We propose TopoSizing, an end-to-end framework that performs robust circuit understanding directly from raw netlists and translates this knowledge into optimization gains. Our approach first applies graph algorithms to organize circuits into a hierarchical device-module-stage representation. LLM agents then execute an iterative hypothesis-verification-refinement loop with built-in consistency checks, producing explicit annotations. Verified insights are integrated into Bayesian optimization through LLM-guided initial sampling and stagnation-triggered trust-region updates, improving efficiency while preserving feasibility.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2509.14169",
+      "url": "https://www.semanticscholar.org/paper/f2e303cd4adca4732d478630f92b205ff9d54932"
+    },
+    {
+      "title": "Benchmarking of Machine Learning Methods for Multiscale Thermal Simulation of Integrated Circuits",
+      "abstract": "Multiscale thermal analysis in integrated systems is required for capturing both device-level and circuit-level dynamics. Traditional analysis with finite element (FE) models can be accelerated by using machine learning (ML) methods. In this article, a performance benchmarking between three ML methods for thermal simulation is carried out: 1) artificial neural networks (ANNs); 2) proper orthogonal decomposition with radial basis functions (POD-RBFs); and 3) finally, POD-RBF-ANN is used as a hybrid ML method. The (dis)advantages of the different methods are demonstrated for the thermal simulation of a multiscale photonic chip. The ML models are trained with FE data for both linear and nonlinear dynamics and are tested for inter- and extra-polation prediction accuracy. A computational speed increase with a factor >7500 compared to FE is obtained. Furthermore, ANNs prove to be the best suited for the simulation of nonlinear dynamics. POD-RBF is the best method for minimizing training time and combining the best of both methods in POD-RBF-ANN creates an ML model with a short training phase and highly accurate predictions.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2022.3216549",
+      "url": "https://www.semanticscholar.org/paper/f6a580e0391ac51c6479840ae771a265770100be"
+    },
+    {
+      "title": "Automated Design of Analog Circuits Using Reinforcement Learning",
+      "abstract": "Analog and mixed-signal (AMS) blocks are often a crucial and time-consuming part of System-on-Chip (SoC) design, primarily due to a manual circuit and layout iterations. Existing automated solutions for selecting circuit parameters for a given target specification are often not efficient, accurate, or reliable. In order for an automated sizing tool to be practical, we posit that it must: 1) return valid results for a large range of target specifications; 2) understand where and why it is unable to meet certain specifications; 3) consider true layout parasitic simulations for complete end-to-end design; and 4) be automated, allowing most of the design effort to fall on the tool. In this article, we address these critical points by establishing an automated reinforcement learning framework, AutoCkt, by 1) successfully deploying it on a complex two-stage transimpedance amplifier and two-stage folded cascode with biasing in the 16-nm FinFet technology; 2) implementing a new combined distribution deployment algorithm to improve efficiency; 3) analyzing in-depth the efficacy of the trained agent; and 4) demonstrating the functionality of this tool when considering a topology that is highly sensitive to layout parasitics. Our algorithm not only successfully reaches unique, valid, and practical performances, but also does so in state-of-the-art run time, up to 38X more efficient than prior work. In addition, our tool averages just four parasitic simulations obtained by using the Berkeley Analog Generator, to achieve a target specification post-layout for the folded cascode. AutoCkt successfully generates LVS-passed designs with validation in process corner variation results.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2021.3120547",
+      "url": "https://www.semanticscholar.org/paper/6674599fa609b03c4e0236fcb54ada4595532ea4"
+    },
+    {
+      "title": "Correlated Bayesian Model Fusion: Efficient High-Dimensional Performance Modeling of Analog/RF Integrated Circuits Over Multiple Corners",
+      "abstract": "Efficient high-dimensional performance modeling of analog/RF circuits over multiple corners is an important-yet-challenging task. In this article, we propose a novel performance modeling approach for analog/RF circuits, referred to as correlated Bayesian model fusion (C-BMF). The key idea is to encode the correlation information for both model template and coefficient magnitude among different corners by using a unified prior distribution. Next, the prior distribution is combined with a few simulation samples via Bayesian inference to efficiently determine the unknown model coefficients. Two circuit examples designed in a commercial 40-nm CMOS process demonstrate that C-BMF achieves about $2\\times $ cost reduction over the traditional state-of-the-art modeling technique without surrendering any accuracy.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2022.3174170",
+      "url": "https://www.semanticscholar.org/paper/3914993dcb2807dbb99431aeb526ccb5e74e8089"
+    },
+    {
+      "title": "Method for the Computer-Aided Schematic Design and Simulation of Hydrogel-Based Microfluidic Systems",
+      "abstract": "We present an approach to the schematic design and time-dependent simulation of microfluidic systems that are composed of basic components, such as pumps, channels, mixing junctions, and valves. For the schematic capture and the simulation, the Cadence Virtuoso design framework is employed, with the components modeled by Verilog-AMS. The pressures and flow rates are calculated with the help of the hydraulic analogy between electronics and fluidics. Signal flow quantities are used to express the flow of chemical concentration. Our focus is on systems employing chemofluidic transistors, i.e., hydrogel-based microvalves that facilitate autonomous flow control without the need for an external control unit. Our approach also covers layout editing by the use of programmed cells. The utility of the approach is exemplified by the successful top-down design of a chemofluidic oscillator circuit and by the functionally correct simulation of a chemofluidic SR flip-flop.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2019.2925354",
+      "url": "https://www.semanticscholar.org/paper/a2dfa755e81c2b3bbec2b11764fa4e4fd1fdcb96"
+    },
+    {
+      "title": "ILRM: Imitation Learning-Based Resource Management for Integrated CPU–GPU Edge Systems With Renewable Energy Sources",
+      "abstract": "This letter focuses on integrated CPU-GPU edge systems with renewable energy sources and studies the resource management problem to minimize the energy consumption of real-time tasks while ensuring temperature and reliability constraints. We propose an imitation learning (IL)-based resource management scheme, ILRM, implemented in two phases: 1) offline Oracle generation and 2) online IL. In the offline phase, we design a fast-converging heuristic to generate near-optimal solutions (i.e., Oracles) for training an online prediction model. In the online phase, we realize IL using the trained model that predicts the resource configuration policies for the incoming task sets to be scheduled. A data aggregation method is also developed to enhance the robustness of the prediction model. We validate ILRM through extensive experiments on both simulated and real integrated CPU-GPU edge platforms.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2024.3513892",
+      "url": "https://www.semanticscholar.org/paper/0bafd650c0eb56be3df45e444c7a2e6006c7e955"
+    },
+    {
+      "title": "Computer-Aided Design of a Switchable True Time Delay (TTD) Line With Shunt Open-Stubs",
+      "abstract": "This paper presents a new technique to design switchable true time delay (TTD) lines using periodic shunt open-stubs, shorter than a quarter wavelength at the highest frequency of interest. Structural parameters are obtained by minimizing the group delay variation and maximizing the return loss over the operating band. Advantages of the proposed design are low insertion loss, higher 1 dB compression point, and less number of switches compared to the conventional designs. To verify the proposed technique, 2-states and 8-states TTD lines are fabricated for L- and S-band applications. For the 8-states delay networks, measured insertion losses are smaller than 1.9 dB at 3 GHz. Return losses are more than 10 dB over 1–4 GHz band. Measured maximum time delay is 84 ps for the 8-states delay lines with a step size of 10 ps. All the TTDs operate as linear device at least up to 23 dBm.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TCAD.2018.2818731",
+      "url": "https://www.semanticscholar.org/paper/115b40fe9108dd4f394ecfd08b2baae5854b824f"
+    }
+  ]
+}

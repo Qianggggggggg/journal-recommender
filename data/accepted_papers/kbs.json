@@ -1,0 +1,70 @@
+{
+  "journal_id": "kbs",
+  "journal_name": "Knowledge-Based Systems",
+  "papers": [
+    {
+      "title": "A decision model for blockchain applicability into knowledge-based conversation system",
+      "abstract": "Conversation systems usually suffer from the challenge of knowledge management from multiple human experts. The current mechanism used in knowledge-based conversation system is always based on centralized servers, which may be problematic in terms of transparency and security. Blockchain solutions are currently being proposed improve the security and efficiency in different domains. However, there are various blockchain platforms with different characteristics, and conversation system implemented using blockchain platform is not in place yet. In this paper, we clearly identified the requirement analysis of knowledge-based conversation system and present a decision model for identify the best fitting blockchain platform for knowledge-based conversation system. In the proposed method, multiple measurements including Analytical Hierarchy Process (AHP), Fuzzy analytical hierarchy process (FAHP), and Fuzzy Technique for Order Preference by Similarity to Ideal Solution (FTOPSIS) are utilized to analyze and create consistent result together, which can be used for the selection of blockchain platforms and improve the efficiency of the decision-making process.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.KNOSYS.2021.106791",
+      "url": "https://www.semanticscholar.org/paper/64f28fcec037954740e70cf6145e0d01564bb6f9"
+    },
+    {
+      "title": "An interpretable knowledge-based decision support system and its applications in pregnancy diagnosis",
+      "abstract": "This paper aims to propose an interpretable knowledge-based decision support system (IKBDSS) that will assist physicians to predict the risk level of a disease. Our system enables to integrate both historical cases extracted from database and opinions provided by different experts in order to set up a medical knowledge base and provide relevant advises by inferring from the knowledge base. To present various experts’ opinions, the Multi-granularity Linguistic Term Sets (MLTS) model is used to address the ambiguity and intangibility of knowledge. Our work mainly focuses on knowledge acquisition, similarity degree calculation and consistency checking process. It is worth mentioning that a criterion weights calculation method is introduced to objectively obtain the weights based on knowledge from experts, rather than subjectively predefined. The developed system leads to a better performance in specificity, sensitivity and F 1 score compared to other methods in the literature. To conclude, our work contributes to: (1) The development of a medical decision support system to combine clinical records and domain knowledge to predict diagnosis. (2) The decision-making process ensures interpretability, which increases the reliability of our system in terms of being a decision supporter. (3) The criterion weights are calculated based on the professional knowledge presented in MLTS form, and this process improves the capacity of providing diagnostic recommendations.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.KNOSYS.2021.106835",
+      "url": "https://www.semanticscholar.org/paper/a9677bdbe7c4078c49548997edcf1ce4143951fa"
+    },
+    {
+      "title": "Global EM-driven optimization of multi-band antennas using knowledge-based inverse response-feature surrogates",
+      "abstract": "Electromagnetic simulation tools have been playing an increasing role in the design of contemporary antenna structures. The employment of electromagnetic analysis ensures reliability of evaluating antenna characteristics but also incurs considerable computational expenses whenever massive simulations are involved (e.g., parametric optimization, uncertainty quantification). This high cost is the most serious bottleneck of simulation-driven design procedures, and may be troublesome even for local tuning of geometry parameters, let alone global optimization. On the one hand, globalized search is often necessary because the design problem might be multimodal (i.e., the objective function features multiple local optima) or a reasonably good initial design may not be available. On the other hand, the computational efficiency of popular algorithmic approaches, primarily, nature-inspired population-based algorithms, is generally poor. Combining metaheuristics procedures with surrogate modelling techniques and sequential sampling methods alleviates the problem to a certain extent but modelling of nonlinear antenna responses over broad frequency ranges is extremely challenging, and the aforementioned solutions are normally limited to rather simple structures described by a few parameters. This paper proposes a novel approach to global optimization of multi-band antennas. The major component of the presented framework is the knowledge-based inverse surrogate constructed at the level of response features (e.g., frequency and level locations of the antenna resonances). The surrogate facilitates decision-making process of inexpensive identification of the most promising regions of the parameter space, and a rendition of the good-quality initial design for further local tuning. Our methodology is validated using three examples of dual- and triple-band antennas. The average optimization cost is only 150 full-wave antenna analyses while ensuring precise allocation of the antenna resonances at the target frequencies. This performance is demonstrated superior over both local optimizers and population-based metaheuristics.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.KNOSYS.2021.107189",
+      "url": "https://www.semanticscholar.org/paper/2fec7cd0f49e238bdd4506d9c2c8d992ddcbe51d"
+    },
+    {
+      "title": "Risk assessment modeling for knowledge based and startup projects based on feasibility studies: A Bayesian network approach",
+      "abstract": "The start of any business requires investment. The risks involved in this pathway are one of the biggest barriers in each investment. Feasibility studies are one of the most common methods in analyzing an investment plan, but this method does not respond to the risk value of any plan. Therefore the present study aims to calculate the risk of a project through a feasibility study. To this end, Bayesian networks have attracted much attention as a powerful method for modeling decision making under uncertainty conditions in different domains. This paper presents a Bayesian network modeling framework that obtains the project risk by calculating uncertainty in net present value of projects. This model provides a powerful method for analyzing risk scenarios and their impact on the project success. This model can be used as a basis for assessing the risks of innovative projects whose feasibility study has been performed.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.KNOSYS.2021.106992",
+      "url": "https://www.semanticscholar.org/paper/9cfde636aa9c6e1f368cfcf0cdc1ba3615d8f801"
+    },
+    {
+      "title": "Risk-informed knowledge-based design for road infrastructure in an extreme environment",
+      "abstract": "Risk-based design is an essential strategy for enhancing the safety performance of road infrastructure during its operation stage. However, conventional risk-based design generally considers the risk of a single type of disaster, which is insufficient for assessing the multi-hazard risk of the road infrastructure in an extreme environment. In this study, a synthesis method, the risk-informed knowledge-based analytical method (RKAM) for multi-hazard risk assessment, is proposed for the road infrastructure. The RKAM uses risk mapping techniques and the as low as reasonably practicable (ALARP) principle. Expert knowledge is utilized in order to overcome the scarcity of historical data. The RKAM is applied to the Tuoba–Qamdo Highway project in the Qinghai–Tibet Plateau of China to assess the overall risks of causalities and structural damages caused by traffic accidents, fire accidents, and landslide disasters. The results of this case study show the capabilities of RKAM to generate a synthesis assessment of the expected loss by multi-hazard disasters, which provides valuable information for selecting the most appropriate design of road infrastructure.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.knosys.2021.106741",
+      "url": "https://www.semanticscholar.org/paper/bedb52206b5e43b454178a982a90db15f6d5635d"
+    },
+    {
+      "title": "A knowledge-based heterogeneity characterization framework for 3D steam-assisted gravity drainage reservoirs",
+      "abstract": "In typical field-scale steam-assisted gravity drainage (SAGD) projects, shale barriers would often act as flow barriers that may adversely impact the ensuing steam chamber development. Efficient inference and proper representation of such heterogeneities from production data remain challenging. A novel hybrid knowledge-based workflow for 3D SAGD heterogeneity inference is presented. A convolutional neural network (CNN) proxy model is integrated with the genetic algorithm (GA) to infer shale parameters. A total number of 1000 heterogeneous 3D cases are constructed and subjected to numerical simulation and the corresponding production data is recorded. A dataset is assembled from the simulation results corresponding to these 1000 cases to train a set of CNN-based proxy models: discrete wavelet transform (DWT) is applied to parameterize a 3D reservoir model and the corresponding production time-series data. A GA-based workflow is introduced to infer the unknown shale barrier arrangement from a given (known) production profile by searching for a set of shale barrier parameters that would minimize the difference between the known profile and the predictions. The proposed workflow would yield an ensemble of 3D models of shale barrier distribution that are consistent with the actual production histories. The proposed methodology is tested with cases involving both idealized and irregularly-shaped shale barrier configurations. The proposed hybrid characterization workflow provides a robust and computationally-efficient alternative for inferring uncertain 3D heterogeneous features and can be easily extended to solve other similar inverse problems in various engineering fields.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.knosys.2019.105327",
+      "url": "https://www.semanticscholar.org/paper/6f40ccdfabbe63b1461e915e939e6230464cf33f"
+    },
+    {
+      "title": "Knowledge based domain adaptation for semantic segmentation",
+      "abstract": "Domain adaptation for semantic segmentation is a challenging problem for two reasons. One reason is that annotating labels is an extremely high cost work. Another reason is that the domain gap between the source and target domains limits the performance of semantic segmentation. In this paper, we propose an unsupervised knowledge based domain adaptation method for semantic segmentation. The proposed method consists of three steps. First, the common knowledge is loaded from the source and target domains. Then, the loaded knowledge is filtered according to the specific input image. In the end, the filtered knowledge is fused with the high-level features to guide domain adaptation. Our main contributions are: (1) a first novel knowledge based domain adaptation approach for semantic segmentation and (2) a triangular constraint for knowledge loading, in which the semantic vectors are smoothly imported. Experimental results on three datasets indicate that our method achieves competitive results in some scenarios compared with the state-of-the-art approaches.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.knosys.2019.105444",
+      "url": "https://www.semanticscholar.org/paper/f43203729f45497c810293dad19f53800076f2d1"
+    },
+    {
+      "title": "Fault tolerating multi-tenant service-based systems with dynamic quality",
+      "abstract": "The rapid development of multi-tenant service-based systems (SBSs) is mainly due to the popularity of cloud computing. SBS combines the existing services in the form of business processes to meet the needs of multiple tenants. There are two kinds of services: functional and non-functional. Multiple services can have the same functionality while changing their non-functional properties, or QoS (Quality of Service). QoS value is an important criterion for service selection or recommendation. In the existing work, QoS value in service selection or recommendation is regarded as a constant. However, in the dynamic and volatile cloud environment, the performance of services may fluctuate due to various factors (e.g. techniques of service studied, network conditions, etc.). A constant value does not reflect the consistency of the service. This paper proposes FT4MTS-D (fault-tolerant strategies for multi-tenant service-based systems with dynamic quality), a novel method that evaluates the criticality of dynamic cost-effective fault tolerance strategies for multi-tenant service-based systems. First, the consistency of each given service is evaluated based on the feature vector of the cloud model. Second, this paper measures the consistency of given service by the sensitivity of probability degradation of an SBS in comparison to the probability degradation of that service. The goal is to find the critical services in the SBS and then determine the optimal fault-tolerant strategy for the given service. The experimental results show that FT4MTS-D has obvious advantages compared with several existing representative methods.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.knosys.2020.105715",
+      "url": "https://www.semanticscholar.org/paper/0ab3e9e6704fe01d2124aa11ea3d59d3c464f195"
+    }
+  ]
+}

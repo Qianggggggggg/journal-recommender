@@ -1,0 +1,62 @@
+{
+  "journal_id": "bioinformatics",
+  "journal_name": "Bioinformatics",
+  "papers": [
+    {
+      "title": "Semantic Overlapping in Translational Bioinformatics Applied to the Matching between Clinical Trial Eligibility Criteria and Patient Needs",
+      "abstract": ": Software technologies play an important role in defining clinical trials, their eligibility criteria and recruitment process, in which patient enrol to a trial if they satisfy eligibility criteria. In this research we address the problem of semantic overlapping between eligibility criteria and patient needs through a software architectural model which houses a specific computational model based on reasoning upon the overlapping semantics. The architectural model is deployed using semantic technologies in order to explore the meaning of the relationships between trials, eligibility criteria and patient needs. The novelty is in the reusability and thus converting of the existing conceptual models on deriving eligibility criteria, available in literature, into the proposed OWL model, which can serve any clinical trial and requirements patients may have. This paper is written by computer scientists interested in manipulating semantics of data through computational models using modern software technologies. It serves as an invitation to researchers from the biomedical and translational informatics to debate the future of software support in managing clinical trials.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.5220/0009406503150322",
+      "url": "https://www.semanticscholar.org/paper/1d4fa123365b519b26f9d76bb785ac9d26a51c38"
+    },
+    {
+      "title": "GLiNER-BioMed: a suite of efficient models for open biomedical named entity recognition",
+      "abstract": "Motivation Biomedical named entity recognition (NER) presents unique challenges due to specialized vocabularies, the sheer volume of entities, and the continuous emergence of novel entities. Traditional NER models, constrained by fixed taxonomies and human annotations, struggle to generalize beyond predefined entity types. Results To address these issues, we introduce GLiNER-BioMed, a domain-adapted suite of GLiNER models for biomedicine. Our approach first distills the annotation capabilities of large language models (LLMs) into a smaller, more efficient model, enabling the generation of high-coverage biomedical NER data. We subsequently train two GLiNER architectures, uni- and bi-encoder, at multiple scales to balance computational efficiency and performance. Experiments on eight biomedical datasets demonstrate that GLiNER-BioMed achieved state-of-the-art zero-shot performance (micro-F1 59.77%), exceeding the strongest baseline by 5.96 points (P < .001). In few-shot learning, the bi-encoder variant reached 70.39% (10-shot), consistently outperforming the strongest baseline across all settings (P < .05). Our findings show that the uni-encoder GLiNER-BioMed achieves the strongest zero-shot performance, while the bi-encoder offers superior few-shot gains and substantially higher inference throughput (+39%–568%), making it well-suited to annotation-limited, latency-sensitive, or large-label-space settings. Ablation studies further indicate that combining synthetic biomedical pre-training with general-domain post-training is essential for capturing domain-specific knowledge while maintaining precision-recall balance. Availability and implementation The source code, datasets, and models are publicly available at https://github.com/ds4dh/GLiNER-biomed.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag322",
+      "url": "https://www.semanticscholar.org/paper/314982b9dfa68a9b19ba0208d7903499cdd9187b"
+    },
+    {
+      "title": "Hotgenes: an R package for reducing bottlenecks in bulk omics data exploration and collaboration.",
+      "abstract": "SUMMARY A critical part of omics analysis is the transition from early data exploration to final interpretation, often including different analytical platforms and the proliferation of figures, tables, and files. To minimize potential errors and delays that can occur during this process, we have developed an R package called \"Hotgenes\" that contains a wide range of flexible utilities available in a single modular Shiny application. With Hotgenes, differential expression results generated from bulk omics platforms can be imported and shared among collaborators with minimal coding. Furthermore, the modular Hotgenes user interface can be customized by advanced users to fit the needs of their evolving pipelines. AVAILABILITY AND IMPLEMENTATION Hotgenes is implemented in R and is freely available at https://github.com/pfizer-opensource/Open-Hotgenes. A permanent archived version is available at https://doi.org/10.5281/zenodo.20129460. SUPPLEMENTARY INFORMATION Supplementary data are available at Bioinformatics online.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag434",
+      "url": "https://www.semanticscholar.org/paper/0bdde4317df1e466607b4829816c48ff0c119f91"
+    },
+    {
+      "title": "Trimmomatic: a decade of feature-rich, high-performance NGS read preprocessing",
+      "abstract": "Motivation Trimmomatic is a widely adopted tool for preprocessing high-throughput sequencing data, particularly from Illumina platforms. Since its original publication in 2014, the volume and complexity of sequencing data have increased dramatically, necessitating continuous tool evolution. Results We present the substantial updates to Trimmomatic over the past decade. Key enhancements include a robust multithreading model for high-performance parallel processing, parallel GZIP/BZIP2 compression, and a suite of new trimming and filtering steps to provide users with more flexible quality control. Usability has been significantly improved through automatic PHRED encoding detection and simplified file handling. The codebase has also been modernized including Maven support, and continuous integration to ensure long-term sustainability and community contributions. These updates solidify Trimmomatic’s role as an efficient, flexible, and essential tool in modern bioinformatics pipelines. Availability Trimmomatic remains open-source under the GPL V3 license, with the latest version available at https://github.com/usadellab/Trimmomatic and also on our website https://www.plabipd.de/trimmomatic_main.html (DOI: https://doi.org/10.5281/zenodo.18678155).",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag331",
+      "url": "https://www.semanticscholar.org/paper/00ce3821039717662c21273faac815d63376c12d"
+    },
+    {
+      "title": "VisPan: real-time visualisation of multiplex amplicon-based sequencing panels for rapid syndromic surveillance and pathogen detection",
+      "abstract": "Motivation Infectious diseases persist as a major global public health challenge. Diverse factors, including climate change, globalization, deforestation, human-animal interactions, lifestyle choices, and various biological factors, can contribute to their emergence and reemergence. Rapid detection and characterization of (re)emerging pathogens are therefore critical for effective outbreak management and for enhancing our understanding of epidemics by monitoring the transmission, spread, evolution, and genomics of pathogens. In this context, next-generation sequencing technologies (NGS), particularly long-read platforms such as Oxford Nanopore Technologies (ONT), have opened new avenues for real-time pathogen monitoring. However, the bioinformatics bottleneck remains a challenge, emphasizing the need for efficient, accessible, and user-friendly analysis tools. Results Here, we present a tool adapted from the RAMPART software that enables real-time data visualisation of multiplex PCR syndromic panels combined with Oxford Nanopore sequencing. This real-time analysis enables rapid pathogen detection, from raw data acquisition to taxonomic assignment, within minutes. The interface offers dynamic visual tracking of the sequencing run and amplicon coverage, facilitating immediate insights during diagnostic workflows. Validation experiments confirmed the system’s reliability, accurately identifying all pathogens present in complex clinical or environmental samples. This tool provides an integrated, user-friendly solution for genomic pathogen surveillance in field or clinical settings.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag351",
+      "url": "https://www.semanticscholar.org/paper/e45ff871727912e2976fc38e0fb6bf55d1cea636"
+    },
+    {
+      "title": "Inferring the qualities of protein–RNA models with graph transformers",
+      "abstract": "Motivation Breakthrough advancements in protein tertiary and quaternary structure prediction have accelerated structural bioinformatics research activity and drug development processes. However, many biological mechanisms involve more complicated interactions, such as those between amino and nucleic acids. Predicting the structure of protein–RNA complexes is highly relevant and challenging due to data scarcity and experimental difficulties. Understanding and interpreting these interactions can yield crucial insights into various human diseases and biological phenomena. Thus, quality assessment methods that specifically evaluate protein–RNA complex models can provide significant utility in this emerging area of protein–RNA structural bioinformatics research. Results We propose a novel graph transformer-based approach named complex quality assessment of RNA and protein (CARP) to infer multiple quality perspectives of protein–RNA complex models. For a single protein–RNA complex model, in one shot, CARP simultaneously predicts multiple overall fold, overall interface, and per-protein–RNA interface quality estimates. When evaluated against a non-redundant protein–RNA docking benchmark, our methods demonstrated obvious improved performance compared to almost all of the existing scoring tools, particularly when ordering and selecting the highest quality decoys. Furthermore, CARP consistently selected higher quality models relative to other predictors when tested on CASP16 targets. Specifically, CARP-predicted global interface and global protein–RNA interface qualities were ranked first and second, respectively, based on the selected top-3 models over all ten CASP16 protein–RNA complex targets. CARP also showed a strong ability, compared to both existing tools and AlphaFold3 self-estimates, in selecting high quality AlphaFold3 models. Availability and implementation CARP is freely available at github.com/zwang-bioinformatics/CARP/.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag202",
+      "url": "https://www.semanticscholar.org/paper/9393eff9176237e3f6214b618e37aa727b1ddcec"
+    },
+    {
+      "title": "PhyloNaP: a user-friendly database of Phylogeny for Natural Product-producing enzymes.",
+      "abstract": "SUMMARY Phylogenetic analysis is widely used to predict enzyme function, yet building annotated and reusable trees is labor-intensive and requires extensive knowledge about the specific enzymes. Existing resources rarely cover biosynthetic enzymes and lack the context needed for meaningful analysis.We present PhyloNaP, the first large-scale resource dedicated to phylogenies of biosynthetic enzymes. PhyloNaP provides ∼51,000 annotated and interactive trees enriched with chemical, functional, and taxonomic information. Users can classify their own sequences via phylogenetic placement, enabling functional inference in an evolutionary context. A contribution portal allows the community to submit curated trees. By combining scale, breadth of annotation, and interactive functionality, PhyloNaP fills a major gap in bioinformatics resources for enzyme discovery and annotation, with immediate applications to secondary metabolism and beyond. AVAILABILITY AND IMPLEMENTATION Freely available on the web at https://phylonap.cs.uni-tuebingen.de. SUPPLEMENTARY INFORMATION Supplementary data are available at Bioinformatics online.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1093/bioinformatics/btag393",
+      "url": "https://www.semanticscholar.org/paper/fe945871aacb79f2e7f3d4ee5efff24b7d919b30"
+    }
+  ]
+}

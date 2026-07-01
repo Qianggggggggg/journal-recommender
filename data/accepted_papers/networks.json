@@ -1,0 +1,86 @@
+{
+  "journal_id": "networks",
+  "journal_name": "Networks",
+  "papers": [
+    {
+      "title": "Sub‐Tree Scheduling for Wireless Sensor Networks With Partial Coverage: Complexity and Polynomial‐Size Formulations",
+      "abstract": "Given an undirected graph G$$ G $$ whose edge weights change over s$$ s $$ time slots, the sub‐tree scheduling for wireless sensor networks with partial coverage asks to partition the vertices of G$$ G $$ in s$$ s $$ non‐empty trees such that the total weight of the trees is minimized. In this article, we show that the problem is NP‐hard in both the cases where s$$ s $$ (i)$$ (i) $$ is part of the input and (ii)$$ (ii) $$ is a fixed instance parameter. In both our proofs we reduce the cardinality of the Steiner tree problem. Then, in order to provide easy‐to‐implement and effective computational tools to benchmark heuristics, we introduce new polynomial‐size integer linear programming formulations for the problem. Being defined by a polynomial number of variables and constraints, the formulations can be used to address instances of the problem by means of off‐the‐shelf mixed‐integer linear programming solvers with minimum implementation efforts. All proposed formulations share the property that the integrality requirement can be relaxed on subsets of variables. This enables several algorithmic choices to solve the models, including Benders' decomposition approaches and branch‐and‐bound with specific branching priorities. We experimentally identify the best resolution method for each formulation. Moreover, the experimental results obtained on benchmark instances of the problem, compared against those reported in the literature, support the effectiveness arising from using the new proposed formulations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22265",
+      "url": "https://www.semanticscholar.org/paper/7f217a8aa3f304564fa4d152acba6648d637bdbe"
+    },
+    {
+      "title": "A lasso-alternative to Dijkstra's algorithm for identifying short paths in networks",
+      "abstract": "We revisit the problem of finding the shortest path between two selected vertices of a graph and formulate this as an ‐regularized regression—Least Absolute Shrinkage and Selection Operator (lasso). We draw connections between a numerical implementation of this lasso formulation, using the so‐called LARS algorithm, and a more established algorithm known as the bi‐directional Dijkstra. Appealing features of our formulation include the applicability of the Alternating Direction of Multiplier Method (ADMM) to the problem to identify short paths, and a relatively efficient update to topological changes.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2511.22745",
+      "url": "https://www.semanticscholar.org/paper/fe99db0b86e5aac06f42c60f1cda5f57b624f1c8"
+    },
+    {
+      "title": "Virtual network function reconfiguration in 5G networks: An optimization perspective",
+      "abstract": "One of the major challenges in managing 5G networks is the reconfiguration of network slices. The task covers in particular reconfiguration and relocation of virtual network functions (VNFs) so as to match the service requirements of the slices and the availability of resources of the data centers. In this article, we study in deep the problem of optimal VNFs reconfiguration analyzing a number of its variants. We define two exact, compact integer linear programming formulations of the VNFs reconfiguration problem, and derive two approximate solution algorithms, one of them based on the column generation method. Numerical tests and comparisons illustrate the performance of the algorithms and the quality of the provided solutions.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22212",
+      "url": "https://www.semanticscholar.org/paper/7074095575731632ed54d97b544009a3e7707871"
+    },
+    {
+      "title": "Finding conserved low‐diameter subgraphs in social and biological networks",
+      "abstract": "The analysis of social and biological networks often involves modeling clusters of interest as cliques or their graph‐theoretic generalizations. The k$$ k $$ ‐club model, which relaxes the requirement of pairwise adjacency in a clique to length‐bounded paths inside the cluster, has been used to model cohesive subgroups in social networks and functional modules or complexes in biological networks. However, if the graphs are time‐varying, or if they change under different conditions, we may be interested in clusters that preserve their property over time or under changes in conditions. To model such clusters that are conserved in a collection of graphs, we consider a cross‐graph k$$ k $$‐club model, a subset of nodes that forms a k$$ k $$ ‐club in every graph in the collection. In this article, we consider the canonical optimization problem of finding a cross‐graph k$$ k $$ ‐club of maximum cardinality in a graph collection. We develop integer programming approaches to solve this problem. Specifically, we introduce strengthened formulations, valid inequalities, and branch‐and‐cut algorithms based on delayed constraint generation. The results of our computational study indicate the significant benefits of using the approaches we introduce.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22246",
+      "url": "https://www.semanticscholar.org/paper/e14a82230cc12d44164cdc7f98fabf169935ee22"
+    },
+    {
+      "title": "Robustness Assessment of Public Transport Networks in Various Graph Representations: Systematic Review, Decision Support, and Case Study",
+      "abstract": "The analysis of certain properties of the underlying graph of a public transport network generates insights about the network's structure. Hereby, the choice of the graph representation depends on a trade‐off between complexity reduction and information preservation to adequately model a public transport network. The structure of the graph determines the robustness of the network and how resilient it is to disturbances like the breakdowns of stations. In this article, local and global properties of a graph are examined, which can be utilized as robustness indicators for long‐term infrastructure planning, as well as the interplay with the choice of the graph representation, data availability, and assessment method. Furthermore, decision support is provided to guide the evaluation of the robustness of real‐world public transport networks from multiple perspectives using open data sources. These concepts are illustrated in a case study for the rapid transit and subway system in Hamburg, Germany.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.70021",
+      "url": "https://www.semanticscholar.org/paper/1b78c42043104e842506aec8d5cb8abbef88e6dc"
+    },
+    {
+      "title": "Energy‐Efficient Resource Allocation in RIS‐Based 6G Networks",
+      "abstract": "Reconfigurable Intelligent Surface (RIS) is emerging as a potential solution for Tera Hertz communication. It supports a re‐configurable and smart wireless environment by enhancing the signal strength and reflecting it to the desired receiver which aids in improving energy efficiency. This article presents a novel mathematical framework of a mixed integer nonlinear programming (MINLP) problem to maximize the energy efficiency (EE) of a RIS‐based multi‐user network having a multi‐antenna base station (BS). The formulated problem is a concave fractional programming problem (CFP) which is transformed into a concave program using the proposed Charnes–Cooper transformation (CCT). MINLP problems are generally NP‐hard in nature and their complexity increases with the number of users, therefore, an outer approximation algorithm (OAA) is applied which gives.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.70048",
+      "url": "https://www.semanticscholar.org/paper/9d4effe6d18ac2777bc077069021da6fead85ce9"
+    },
+    {
+      "title": "On optimally solving sub‐tree scheduling for wireless sensor networks with partial coverage: A branch‐and‐cut algorithm",
+      "abstract": "Given a wireless sensor network, we consider the problem to minimize its total energy consumption over consecutive time slots with respect to communication activities. Nonempty and disjoint subsets of nodes are required to be active and connected under a tree topology configuration in the different time slots, and each network node must be active in a unique time slot. Moreover, the power required by the same pair of network nodes to communicate on the associated direct channel may vary in the different time slots. The problem has been recently introduced in the literature under the name Sub‐Tree Scheduling for Wireless Sensor Networks with Partial Coverage. We focus on the exact solution of the problem. We present a branch‐and‐cut (BC) algorithm based on a novel integer linear programming formulation which allows avoiding the introduction of symmetries in the solution space. In particular, the algorithm relies on an efficient and nontypical separation algorithm for known valid inequalities, and on an easy‐to‐implement primal bound heuristic. The effectiveness of the BC algorithm is empirically shown through an extensive experimental analysis involving 300 newly generated benchmark instances with up to 200 network nodes and 8 time slots. Additionally, the experimental results show that the BC algorithm represents a valid computational tool to benchmark the performance of heuristics addressing the problem, and can be used in practice, as an heuristic solver, to tackle problem instances that are not too large.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22145",
+      "url": "https://www.semanticscholar.org/paper/7d7dccc6d60e992c350ee799e49a17dfab700b15"
+    },
+    {
+      "title": "Topology reconstruction using time series data in telecommunication networks",
+      "abstract": "We consider Hybrid fiber‐coaxial (HFC) networks in which data is transmitted from a root node to a set of customers using a series of splitters and coaxial cable lines that make up a tree. The physical locations of the components in a HFC network are always known but frequently the cabling is not. This makes cable faults difficult to locate and resolve. In this study we consider time series data received by customer modems to reconstruct the topology of HFC networks. We assume that the data can be translated into a series of events, and that two customers sharing many connections in the network will observe many similar events. This approach allows us to use maximum parsimony to minimize the total number of character‐state changes in a tree based on observations in the leaf nodes. Furthermore, we assume that nodes located physically close to each other have a larger probability of being closely connected. Hence, our objective is a weighted sum of data distance and physical distance. A variable‐neighborhood search heuristic is presented for minimizing the combined distance. Furthermore, three greedy heuristics are proposed for finding an initial solution. Computational results are reported for both real‐life and synthetic network topologies using simulated customer data with various degrees of random background noise. We are able to reconstruct large topologies with a very high precision.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22196",
+      "url": "https://www.semanticscholar.org/paper/430657b2db9788a7aba9c90023b0f3fb20f4e367"
+    },
+    {
+      "title": "Min–max optimization of node‐targeted attacks in service networks",
+      "abstract": "This article considers resilience of service networks that are composed of service and control nodes to node‐targeted attacks. Two complementary problems of selecting attacked nodes and placing control nodes reflect the interaction between the network operator and the network attacker. This interaction can be analyzed within the framework of game theory. Considering the limited performance of the previously introduced iterative solution algorithms based on non‐compact problem models, new compact integer programming formulations of the node attack optimization problem are proposed, which are based on the notion of pseudo‐components and on a bilevel model. The efficiency of the new formulations is illustrated by the numerical study that uses two reference networks (medium‐size and large‐size), and a wide range of the sizes of attacks and controllers placements.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22191",
+      "url": "https://www.semanticscholar.org/paper/731e07efb6f15fc212b4dd01301e458023198fad"
+    },
+    {
+      "title": "Provision of maximum connectivity resiliency with minimum cost to telecommunication networks through third‐party networks",
+      "abstract": "In telecommunication networks, full connectivity resilience to multiple link failures is too costly as it requires a network topology with too many redundant links. Alternatively, the connectivity resilience of a telecommunications network can be improved by resorting to available third‐party networks for temporary additional connectivity until the failing links are restored. In this approach, some nodes of the network must be selected in advance to act as gateway nodes to the third‐party networks when a multiple link failure event occurs. For a given network topology and a cost associated with each node to turn it into a gateway node to each of the third‐party networks, the aim is to select the gateway nodes providing maximum connectivity resilience at minimum cost. The Gateway Node Selection is defined as a bi‐objective optimization problem such that its Pareto‐optimal solutions represent different trade‐offs between cost and connectivity resilience. In this work, the connectivity resilience is modeled by the Critical Link Detection optimization problem. An exact optimization algorithm is proposed, based on a row generation algorithm and on set cover cuts. The computational results demonstrate the effectiveness of the proposed algorithm on four well‐known telecommunication network topologies.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1002/net.22148",
+      "url": "https://www.semanticscholar.org/paper/c04782a8ca0168b7ef56d015733507e2e5c549cb"
+    }
+  ]
+}

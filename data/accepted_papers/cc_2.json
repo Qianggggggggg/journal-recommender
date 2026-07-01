@@ -1,0 +1,78 @@
+{
+  "journal_id": "cc_2",
+  "journal_name": "Computational complexity",
+  "papers": [
+    {
+      "title": "The Computational Complexity of Plethysm Coefficients",
+      "abstract": "In two papers, Bürgisser and Ikenmeyer (STOC 2011, STOC 2013) used an adaption of the geometric complexity theory (GCT) approach by Mulmuley and Sohoni (Siam J Comput 2001, 2008) to prove lower bounds on the border rank of the matrix multiplication tensor. A key ingredient was information about certain Kronecker coefficients. While tensors are an interesting test bed for GCT ideas, the far-away goal is the separation of algebraic complexity classes. The role of the Kronecker coefficients in that setting is taken by the so-called plethysm coefficients: These are the multiplicities in the coordinate rings of spaces of polynomials. Even though several hardness results for Kronecker coefficients are known, there are almost no results about the complexity of computing the plethysm coefficients or even deciding their positivity. In this paper, we show that deciding positivity of plethysm coefficients is NP-hard and that computing plethysm coefficients is #P-hard. In fact, both problems remain hard even if the inner parameter of the plethysm coefficient is fixed. In this way, we obtain an inner versus outer contrast: If the outer parameter of the plethysm coefficient is fixed, then the plethysm coefficient can be computed in polynomial time. Moreover, we derive new lower and upper bounds and in special cases even combinatorial descriptions for plethysm coefficients, which we consider to be of independent interest. Our technique uses discrete tomography in a more refined way than the recent work on Kronecker coefficients by Ikenmeyer, Mulmuley, and Walter (Comput Compl 2017). This makes our work the first to apply techniques from discrete tomography to the study of plethysm coefficients. Quite surprisingly, that interpretation also leads to new equalities between certain plethysm coefficients and Kronecker coefficients.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-020-00198-4",
+      "url": "https://www.semanticscholar.org/paper/f1f0b9fd7604c572d37632c4e010ab72c7678ab3"
+    },
+    {
+      "title": "The Complexity of Finding Fair Independent Sets in Cycles",
+      "abstract": "Let G be a cycle graph and let $$V_1,\\ldots,V_m$$ V 1 , … , V m be a partition of its vertex set into m sets. An independent set S of G is said to fairly represent the partition if $$|S \\cap V_i| \\geq \\frac{1}{2} \\cdot |V_i| -1$$ | S ∩ V i | ≥ 1 2 · | V i | - 1 for all $$i \\in [m]$$ i ∈ [ m ] . It is known that for every cycle and every partition of its vertex set, there exists an independent set that fairly represents the partition (Aharoni et al. 2017). We prove that the problem of finding such an independent set is PPA -complete. As an application, we show that the problem of finding a monochromatic edge in a Schrijver graph, given a succinct representation of a coloring that uses fewer colors than its chromatic number, is PPA -complete as well. The work is motivated by the computational aspects of the `cycle plus triangles' problem and of its extensions.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-022-00233-6",
+      "url": "https://www.semanticscholar.org/paper/3c343360be8cf8983886ef01af5ba773e4b9445f"
+    },
+    {
+      "title": "A lower bound on determinantal complexity",
+      "abstract": "The determinantal complexity of a polynomial P ∈ F[x1,..., xn] over a field F is the dimension of the smallest matrix M whose entries are affine functions in F[x1,...,xn] such that P = Det(M). We prove that the determinantal complexity of the polynomial Σni=1 xni is at least 1.5n − 3. For every n-variate polynomial of degree d, the determinantal complexity is trivially at least d, and it is a long standing open problem to prove a lower bound which is super linear in max{n, d}. Our result is the first lower bound for any explicit polynomial which is bigger by a constant factor than max{n, d}, and improves upon the prior best bound of n + 1, proved by Alper, Bogart and Velasco [2] for the same polynomial.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-022-00228-3",
+      "url": "https://www.semanticscholar.org/paper/9a240eb4ca6765b8080b2988e723a6cca523725e"
+    },
+    {
+      "title": "On Blocky Ranks Of Matrices",
+      "abstract": "A matrix is blocky if it is a \"blowup\" of a permutation matrix. The blocky rank of a matrix M is the minimum number of blocky matrices that linearly span M. Hambardzumyan, Hatami and Hatami defined blocky rank and showed that it is connected to communication complexity and operator theory. We describe additional connections to circuit complexity and combinatorics, and we prove upper and lower bounds on blocky rank in various contexts.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-024-00248-1",
+      "url": "https://www.semanticscholar.org/paper/b29a6d4b0f2578342510792117e309021adc6aae"
+    },
+    {
+      "title": "The Landscape of Communication Complexity Classes",
+      "abstract": "We prove several results which, together with prior work, provide a nearly-complete picture of the relationships among classical communication complexity classes between P$${\\mathsf{P}}$$\\end{document} and PSPACE$${\\mathsf{PSPACE}}$$\\end{document}, short of proving lower bounds against classes for which no explicit lower bounds were already known. Our article also serves as an up-to-date survey on the state of structural communication complexity. Among our new results we show that MA⊈ZPPNP[1]$${\\mathsf{MA} \\not\\subseteq \\mathsf{ZPP}^{\\mathsf{NP}[1]}}$$\\end{document}, that is, Merlin–Arthur proof systems cannot be simulated by zero-sided error randomized protocols with one NP$${\\mathsf{NP}}$$\\end{document} query. Here the class ZPPNP[1]$$\\mathsf{ZPP}^{\\mathsf{NP}[1]}$$\\end{document} has the property that generalizing it in the slightest ways would make it contain AM∩coAM$${\\mathsf{AM} \\cap \\mathsf{coAM}}$$\\end{document}, for which it is notoriously open to prove any explicit lower bounds. We also prove that US⊈ZPPNP[1]$${\\mathsf{US} \\not\\subseteq \\mathsf{ZPP}^{\\mathsf{NP}[1]}}$$\\end{document}, where US$${\\mathsf{US}}$$\\end{document} is the class whose canonically complete problem is the variant of set-disjointness where yes-instances are uniquely intersecting. We also prove that US⊈coDP$${\\mathsf{US} \\not\\subseteq \\mathsf{coDP}}$$\\end{document}, where DP$${\\mathsf{DP}}$$\\end{document} is the class of differences of two NP$${\\mathsf{NP}}$$\\end{document} sets. Finally, we explore an intriguing open issue: Are rank-1 matrices inherently more powerful than rectangles in communication complexity? We prove a new separation concerning PP$${\\mathsf{PP}}$$\\end{document} that sheds light on this issue and strengthens some previously known separations.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-018-0166-6",
+      "url": "https://www.semanticscholar.org/paper/f2f68a63144663233fa8266c63762839e02658b0"
+    },
+    {
+      "title": "Quantum versus Randomized Communication Complexity, with Efficient Players",
+      "abstract": "We study a new type of separations between quantum and classical communication complexity, separations that are obtained using quantum protocols where all parties are efficient , in the sense that they can be implemented by small quantum circuits, with oracle access to their inputs. Our main result qualitatively matches the strongest known separation between quantum and classical communication complexity Gavinsky (2016) and is obtained using a quantum protocol where all parties are efficient. More precisely, we give an explicit partial Boolean function f over inputs of length N , such that: (1) f can be computed by a simultaneous-message quantum protocol with communication complexity polylog( N ) (where at the beginning of the protocol Alice and Bob also have polylog( N ) entangled EPR pairs). (2) Any classical randomized protocol for f , with any number of rounds, has communication complexity at least $$\\tilde{\\Omega}\\left(N^{1/4}\\right)$$ Ω ~ N 1 / 4 . (3) All parties in the quantum protocol of Item (1) (Alice, Bob and the referee) can be implemented by quantum circuits of size polylog( N ) (where Alice and Bob have oracle access to their inputs). Items (1), (2) qualitatively match the strongest known separation between quantum and classical communication complexity, proved by Gavinsky (2016). Item (3) is new. (Our result is incomparable to the one of Gavinsky. While he obtained a quantitatively better lower bound of $$\\Omega\\left(N^{1/2}\\right)$$ Ω N 1 / 2 in the classical case, the referee in his quantum protocol is inefficient). Exponential separations of quantum and classical communication complexity have been studied in numerous previous works, but to the best of our knowledge the efficiency of the parties in the quantum protocol has not been addressed, and in most previous separations the quantum parties seem to be inefficient. The only separations that we know of that have efficient quantum parties are the recent separations that are based on lifting Göös et al. (2017), Chattopadhyay et al. (2019a). However, these separations seem to require quantum protocols with at least two rounds of communication, so they imply a separation of two-way quantum and classical communication complexity, but they do not give the stronger separations of simultaneous-message quantum communication complexity vs. two-way classical communication complexity (or even one-way quantum communication complexity vs. two-way classical communication complexity). Our proof technique is completely new, in the context of communication complexity, and is based on techniques from Raz & Tal (2019). Our function f is based on a lift of the forrelation problem, using xor as a gadget.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-022-00232-7",
+      "url": "https://www.semanticscholar.org/paper/a65682a52689140ddb40ede28609a657308ccf08"
+    },
+    {
+      "title": "The complexity of approximating the complex-valued Potts model",
+      "abstract": "We study the complexity of approximating the partition function of the q-state Potts model and the closely related Tutte polynomial for complex values of the underlying parameters. Apart from the classical connections with quantum computing and phase transitions in statistical physics, recent work in approximate counting has shown that the behaviour in the complex plane, and more precisely the location of zeros, is strongly connected with the complexity of the approximation problem, even for positive real-valued parameters. Previous work in the complex plane by Goldberg and Guo focused on q = 2, which corresponds to the case of the Ising model; for q > 2, the behaviour in the complex plane is not as well understood and most work applies only to the real-valued Tutte plane. Our main result is a complete classification of the complexity of the approximation problems for all non-real values of the parameters, by establishing #P-hardness results that apply even when restricted to planar graphs. Our techniques apply to all q ≥$$\\geq$$\\end{document} 2 and further complement/refine previous results both for the Ising model and the Tutte plane, answering in particular a question raised by Bordewich, Freedman, Lovász and Welsh in the context of quantum computations.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-021-00218-x",
+      "url": "https://www.semanticscholar.org/paper/ae77e51cb58c4371c49b02930c313a0482408c96"
+    },
+    {
+      "title": "Communication Complexity with Small Advantage",
+      "abstract": "We study problems in randomized communication complexity when the protocol is only required to attain some small advantage over purely random guessing, i.e., it produces the correct output with probability at least ϵ$$\\epsilon$$\\end{document} greater than one over the codomain size of the function. Previously, Braverman and Moitra (in: Proceedings of the 45th symposium on theory of computing (STOC), ACM, pp 161–170, 2013) showed that the set-intersection function requires Θ(ϵn)$$\\Theta(\\epsilon{n})$$\\end{document} communication to achieve advantage ϵ$$\\epsilon$$\\end{document}. Building on this, we prove the same bound for several variants of set-intersection: (1) the classic “tribes” function obtained by composing with And (provided 1/ϵ$$1/\\epsilon$$\\end{document} is at most the width of the And), and (2) the variant where the sets are uniquely intersecting and the goal is to determine partial information about (say, certain bits of the index of) the intersecting coordinate.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-020-00192-w",
+      "url": "https://www.semanticscholar.org/paper/32aa9e5759b4ed818c88127f8d97743481f3ce46"
+    },
+    {
+      "title": "The Complexity of Approximating complex-valued Ising and Tutte partition functions",
+      "abstract": "We study the complexity of approximately evaluating the Ising and Tutte partition functions with complex parameters. Our results are partly motivated by the study of the quantum complexity classes BQP and IQP. Recent results show how to encode quantum computations as evaluations of classical partition functions. These results rely on interesting and deep results about quantum computation in order to obtain hardness results about the difficulty in (classically) evaluating the partition functions for certain fixed parameters. The motivation for this paper is to study more comprehensively the complexity of (classically) approximating the Ising and Tutte partition functions with complex parameters. Partition functions are combinatorial in nature, and quantifying their approximation complexity does not require a detailed understanding of quantum computation. Using combinatorial arguments, we give the first full classification of the complexity of multiplicatively approximating the norm and additively approximating the argument of the Ising partition function for complex edge interactions (as well as of approximating the partition function according to a natural complex metric). We also study the norm approximation problem in the presence of external fields, for which we give a complete dichotomy when the parameters are roots of unity. Previous results were known just for a few such points, and we strengthen these results from BQP-hardness to #P-hardness. Moreover, we show that computing the sign of the Tutte polynomial is #P-hard at certain points related to the simulation of BQP. Using our classifications, we then revisit the connections to quantum computation, drawing conclusions that are a little different from (and incomparable to) ones in the quantum literature, but along similar lines.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s00037-017-0162-2",
+      "url": "https://www.semanticscholar.org/paper/9b9cab418847bc8e81b96abeea641643a42bcfe2"
+    }
+  ]
+}

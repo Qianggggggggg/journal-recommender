@@ -1,0 +1,78 @@
+{
+  "journal_id": "connectionscience",
+  "journal_name": "Connection Science",
+  "papers": [
+    {
+      "title": "Hybrid CNN XGBoost intrusion detection approach tuned by modified sine cosine algorithm towards better cloud security",
+      "abstract": "Cloud computing (CC) delivers processing power and data storage on demand. It is one of the most significant computer science technologies, contributing to healthcare, industry, and the Internet of Things. One of CC's biggest security concerns are intrusion detection and separating harmful from legitimate communication, similar to computer networks. Although a wide range of intrusion detection systems is available today, they often suffer from misclassification issues, where the system can fail to recognize an attack as a threat or to mark normal traffic as malicious. This research proposes classifying network traffic using a convolutional neural network and extreme gradient boosting model. Additionally, a modified sine cosine algorithm is used to tune model hyperparameters for optimal performance. The presented framework was tested on major real-world TON IoT intrusion detection datasets. The proposed optimizer is compared to many recent metaheuristics in a matched experimental setting. The simulation results show that the suggested technique is superior to other methods for both datasets, with the best-performing optimized models achieving an accuracy of 96.667 on Windows 10 and 98.6731 on Windows 7 simulation.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2025.2549581",
+      "url": "https://www.semanticscholar.org/paper/61476a511d8dd65360e19c6284b4bf7c099badb4"
+    },
+    {
+      "title": "A novel deep learning model for stock market prediction using a sentiment analysis system from authoritative financial website’s data",
+      "abstract": "The use of deep learning, specifically time series neural networks, in predicting stock market trends has emerged as a significant use case in financial analysis. However, the complex interrelationships and instability of the stock market have made the timely and accurate prediction of its behaviour as a confronting endeavour. To address this difficulty, in this research work a stock market index prediction model called SenT-In, which combines the with a sentiment awareness model. A sentiment awareness model using Convolutional Neural Networks (CNN) and Gated Recurrent Unit (GRU) is proposed to calculate the sentiment index of a large volume of news articles collected from reputable financial websites. In addition, a sentiment attention method is developed to combine stock data and news sentiment index as the input for training and predicting using the SenT-In network, which is both simple and efficient. The proposed model is evaluated in four different stock market datasets which include FSTE, SSE, Nifty 50 and S&P 500. On comparing the results with conventional deep learning algorithms such as GRU, LSTM, CNN and SVM, proposed SenT-In outperforms existing methods in accuracy with 9%, F1-Score with 7%, AUC-ROC curve with 13% and PR-AUC curve with 9% efficiency (on average).",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2025.2455070",
+      "url": "https://www.semanticscholar.org/paper/57e14ef3d6ed65276b6e318f3782bed9da3340f4"
+    },
+    {
+      "title": "Comparative linguistic analysis framework of human-written vs. machine-generated text",
+      "abstract": "Writing content with the assistance of artificial intelligence has increased in popularity and influenced every domain, yet the challenge of understanding the differences between machine-generated and human-authored writing remains. To address this issue, our research aims to propose a detailed framework for deciphering the characteristics of machine-written language by identifying distinct linguistic features, analyzing stylistic differences, evaluating sentiment consistency, and validating the performance of selected generative models in replicating human writing across different types of writing. Using free resources from Hugging Face, we selected three models: GPT-Neo 1.3B, Qwen2.5-1.5B-Instruct, and BloomZ-560M, and employed them without fine-tuning in a Google Colab environment using a consistent prompt. These models were used to generate introductions for corresponding human-authored texts. We compared the extracted features of 2,121 texts, using visualisation methods such as histograms, boxplots and Q-Q plots, alongside the Shapiro–Wilk test and the non-parametric Kruskal – Wallis test and Dunn’s post-hoc test. Our findings highlight both the advancements of open-source text-generating models and the persistent gaps in replicating the depth and richness of human writing, providing and contributing to the knowledge about artificial intelligence and its progress in the generative field, supporting the validation of open-source text-generative models through statistical comparisons.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2025.2507183",
+      "url": "https://www.semanticscholar.org/paper/59054cae7909e5f1b0c78becebad3f563349fe4f"
+    },
+    {
+      "title": "Towards enhanced assessment question classification: a study using machine learning, deep learning, and generative AI",
+      "abstract": "This study aims to benchmark the performance of machine learning (ML), deep learning (DL), and generative AI (GenAI) models in categorising assessment questions based on Bloom’s Taxonomy. Previous studies have lacked comprehensive investigations into the performance of these approaches. Further, the GenAI remains unexplored, offering a promising avenue for groundbreaking explorations. Therefore, we explore the effectiveness of various ML models by incorporating domain-specific term weighting and utilising word embeddings. The study also analyses the performance of Recurrent Neural Networks (RNNs) and Convolutional Neural Network (CNN) with and without bidirectional connections, as well as an approach that combines RNNs and CNN. Furthermore, we evaluate several transformer-based models by fine-tuning them alongside GenAI models text-davinci-003, gpt-3.5-turbo, PaLM2, and Gemini Pro in zero-shot classification settings. The results demonstrate that ML models outperformed DL models, achieving a best accuracy of 0.871 and F1 score of 0.872. Additionally, domain-specific term weighting is found to be superior to word embeddings. Furthermore, most ML and DL models performed better than GenAI models, with GenAI models achieving a best accuracy of 0.618 and a best F1 score of 0.627. Therefore, the outcome suggests considering the ML models with domain-specific term weighting as benchmark models in future research.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2024.2445249",
+      "url": "https://www.semanticscholar.org/paper/ac02c32f96357ab295d62658835f77f01400b084"
+    },
+    {
+      "title": "Classification of heart sound signals with Whisper model",
+      "abstract": "Heart sounds, or phonocardiograms (PCG), are important for diagnosing cardiovascular conditions, providing a non-invasive means to assess heart function through auscultation. Accurate classification of PCG signals can facilitate early detection of cardiac abnormalities, significantly improving patient outcomes. However, the complexity and variability of heart sound recordings present significant challenges for traditional classification methods, necessitating advanced approaches that can effectively handle the nuances of cardiac acoustics. This paper introduces a novel transfer learning approach that adapts OpenAI's Whisper model, originally designed for robust speech recognition, to the task of heart sound classification. In particular, we employ Whisper's encoder architecture to effectively capture acoustic features that generalize to cardiac auscultation, making it a promising candidate for PCG analysis. To tailor the model for this specialized task, we implement a modified encoder architecture optimized for heart sound characteristics. We process the input to the model using a Log-Mel spectrogram pipeline specifically designed to highlight the unique acoustic properties of PCG signals. Experimental results demonstrate that the adapted Whisper model achieves state-of-the-art performance, surpassing existing methods in both accuracy and robustness.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2025.2449943",
+      "url": "https://www.semanticscholar.org/paper/f5e9127f8f67189a813a57b9abdba16f5305211f"
+    },
+    {
+      "title": "NAS-YOLOX: a SAR ship detection using neural architecture search and multi-scale attention",
+      "abstract": "Due to the advantages of all-weather capability and high resolution, synthetic aperture radar (SAR) image ship detection has been widely applied in the military, civilian, and other domains. However, SAR-based ship detection suffers from limitations such as strong scattering of targets, multiple scales, and background interference, leading to low detection accuracy. To address these limitations, this paper presents a novel SAR ship detection method, NAS-YOLOX, which leverages the efficient feature fusion of the neural architecture search feature pyramid network (NAS-FPN) and the effective feature extraction of the multi-scale attention mechanism. Specifically, NAS-FPN replaces the PAFPN in the baseline YOLOX, greatly enhances the fusion performance of the model’s multi-scale feature information, and a dilated convolution feature enhancement module (DFEM) is designed and integrated into the backbone network to improve the network’s receptive field and target information extraction capabilities. Furthermore, a multi-scale channel-spatial attention (MCSA) mechanism is conceptualised to enhance focus on target regions, improve small-scale target detection, and adapt to multi-scale targets. Additionally, extensive experiments conducted on benchmark datasets, HRSID and SSDD, demonstrate that NAS-YOLOX achieves comparable or superior performance compared to other state-of-the-art ship detection models and reaches best accuracies of 91.1% and 97.2% on AP0.5, respectively.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2023.2257399",
+      "url": "https://www.semanticscholar.org/paper/bfe48b014b09a230ccaa43f0d1d751e4dd2c081d"
+    },
+    {
+      "title": "Software defect prediction using wrapper-based dynamic arithmetic optimization for feature selection",
+      "abstract": "Software Defect Prediction (SDP) empowers the creators to diagnose and unscramble defects in the introductory legs of the software evolution process to reduce the effort and cost invested in creating high-quality software. Feature Selection (FS) is critical to pinpoint the most pertinent features for defect prediction. This paper intends to employ a peculiar wrapper-based FS mode, dubbed DAOAFS, rooted on the dynamic arithmetic optimization algorithm (DAOA). Subsequently, this work evaluates the competence of the proposed FS mode using ten benchmark NASA datasets on four supervised learning classifiers, namely NB, DT, SVM, and KNN using accuracy and error curve as the standard performance measure metrics. This paper also correlates the proposed FS mode's conduct with existing FS techniques based on widely utilized meta-heuristic approaches such as GA, PSO, DE, ACO, FA, and SWO. This work employed Friedman and Holm test to ratify the proposed FS mode's statistical connotation. The investigatory outcomes supported the assertion that the recommended DAOAFS mode was effective in enhancing the efficacy of the defect forecasting model by achieving the highest mean accuracy of 94.76%. The findings also revealed that the proposed approach established its supremacy over the other studied FS techniques with bettered veracity in most instances.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2025.2461080",
+      "url": "https://www.semanticscholar.org/paper/20261afafe1c4d68df02eaea5f4810a9eae5a5b4"
+    },
+    {
+      "title": "An image encryption algorithm based on multi-layered chaotic maps and its security analysis",
+      "abstract": "This study introduces a novel symmetric image encryption algorithm that employs a multi-layered architecture of chaotic maps, incorporating both confusion and diffusion components. The selected chaotic maps, namely Aizawa, Ricker, Sine-Circle, and Chirikov, have been well-established as effective sources of chaos in the existing literature. Within the proposed algorithm, these chaotic maps are strategically utilised in distinct layers to enhance the security of the encrypted image. The algorithm demonstrates applicability to real-world scenarios, distinguished by its simplicity, high-speed performance, and low computational complexity. The efficacy of the method is underlined by its dependence on both original images and secret keys, rendering it resilient against brute force and differential attacks. Rigorous experimentation, encompassing correlation, histogram analysis, NBCR, NPCR, UACI, PSNR, and NIST values, establishes the proposed encryption algorithm's robustness and security against diverse attack modalities, including differential and statistical approaches. These findings position the algorithm as a compelling solution for safeguarding sensitive information in various practical applications.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2024.2312108",
+      "url": "https://www.semanticscholar.org/paper/3d89a121d90c4c295419ea98a67da8b2c3d0e898"
+    },
+    {
+      "title": "A multimodal hybrid parallel network intrusion detection model",
+      "abstract": "With the rapid growth of Internet data traffic, the means of malicious attack become more diversified. The single modal intrusion detection model cannot fully exploit the rich feature information in the massive network traffic data, resulting in unsatisfactory detection results. To address this issue, this paper proposes a multimodal hybrid parallel network intrusion detection model (MHPN). The proposed model extracts network traffic features from two modalities: the statistical information of network traffic and the original load of traffic, and constructs appropriate neural network models for each modal information. Firstly, a two-branch convolutional neural network is combined with Long Short-Term Memory (LSTM) network to extract the spatio-temporal feature information of network traffic from the original load mode of traffic, and a convolutional neural network is used to extract the feature information of traffic statistics. Then, the feature information extracted from the two modalities is fused and fed to the CosMargin classifier for network traffic classification. The experimental results on the ISCX-IDS 2012 and CIC-IDS-2017 datasets show that the MHPN model outperforms the single-modal models and achieves an average accuracy of 99.98 $ \\% $ %. The model also demonstrates strong robustness and a positive sample recognition rate.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1080/09540091.2023.2227780",
+      "url": "https://www.semanticscholar.org/paper/570c40bb0b84fe9591a5771a05e4c61ab0546e15"
+    }
+  ]
+}

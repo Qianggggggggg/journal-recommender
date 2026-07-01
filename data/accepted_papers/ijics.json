@@ -1,0 +1,78 @@
+{
+  "journal_id": "ijics",
+  "journal_name": "International Journal of Information and Computer Security",
+  "papers": [
+    {
+      "title": "Introducing virtue ethics concepts into the decision processes of information systems trusted workers: a Delphi study",
+      "abstract": "Human factors affect the incorporation and efficiency of information systems security (ISS). This study examined various factors which affect and shape the ethical perspectives and decision making processes of individuals with access to personal, sensitive, and classified information maintained in information systems. A two-round web-based Delphi survey was completed by a ten member panel of ISS subject matter experts who were convened to identify and establish the key indicators of four virtue ethics based formative constructs for ISS trusted worker decision making and conduct. Consensus was reached on the applicability of a set of indicators for each construct. The high level of agreement among panel members indicates that these constructs can be used to promote conceptual thinking about the influences and implications to the ISS culture in an organisation. The controls lay the foundation for future research as they can be incorporated into a new theoretical model of ISS trusted worker ethical behaviour.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2020.10025656",
+      "url": "https://www.semanticscholar.org/paper/e00430f90478843a34fd44f0c4e91fa37938faa9"
+    },
+    {
+      "title": "The prediction of network security situation based on deep learning method",
+      "abstract": "Network security situational awareness is one of the important issues in the research of network space security technology. In this paper, deep learning technology is applied to analyse and learn network data, generate counter network by classification for sample amplification, use sparse noise reduction autoencoder for feature selection, and then use LSTM for deep learning model of security situation prediction. After the experiment proved that the proposed model based on sparse noise reduction is not balanced since the encoder-LSTM network security situation prediction model can solve various level attacks against a small number, using the model prediction results accurately in predicting regional security situation has the advantage for a longer time. In order to solve the above problems, the network security management becomes passive to active, adapting measures in advance.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2021.116941",
+      "url": "https://www.semanticscholar.org/paper/7781ccd9506df3b5ccad88967fae596e761bdb05"
+    },
+    {
+      "title": "Sustainable wireless clouds with security assurance",
+      "abstract": "The smart technology development being an entailment to have an improved quality of living under clean environment, with enhanced social, economic development, public safety and efficient governing would be made possible by the cloud computing, that pillars the smart planning with enhanced decision making and service provisioning. The smart developments must be well planned with the sustainable wireless cloud and should be supported by evaluating, analysing and synthesising to manage with the enormous data flow from diverse fields. This dataflow management that is subjected to threats causing data loss and data mishandling is efficiently prevented by the preventive measures undertaken in the proposed system of security assurance to regulate continuous data transmission to permitted users with authentication, encryption and decryption. The proposed system is validated in CloudSim with regard to throughput and delay to ensure the systems reliability and timely perfect delivery.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1504/IJICS.2021.113171",
+      "url": "https://www.semanticscholar.org/paper/e6d12e2ee26959b781b572d0b072267b02b7236e"
+    },
+    {
+      "title": "Advanced security of two-factor authentication system using stego QR code",
+      "abstract": "Many financial institutions are trying to protect their customers by offering improved and more secure technologies for authentication. One of the most common is two-factor authentication (2FA), which presents many vulnerabilities that allow attackers to retrieve confidential information such as mobile transaction authentication (mTAN). Thus, according to NIST (National Institute of Standards and Technology), 2FA based on SMS is deprecated and aims to find a secure communication channel other than SMS. Therefore in this paper, we propose a 2FA communication channel based on steganography in the QR-code. So, the mTAN can only be read by a specific scanner that implements the technique of extracting the hidden information while having the shared key and the public information in the QR-code readable by the standard scanners. Finally, we implement our proposed method and then do the test by simulating a line banking service.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1504/IJICS.2020.10020446",
+      "url": "https://www.semanticscholar.org/paper/7fad933b416aa9cfb733ac42de0871517f37864d"
+    },
+    {
+      "title": "Scrutinising internet banking security solutions",
+      "abstract": "Internet-banking is a crucial service offered by financial Institutions and has gained popularity at a high pace. Owing to the increasing usage of this service, it is being frequently targeted by adversaries. The login process by the user is one of the main points that are at risk of this assault. Hence, a robust security mechanism is essential for warding off those risks. Among other security solutions, a typical arrangement presently employed is the one-time password (OTP), i.e., passwords that remain valid for a single exchange or session. However, the majority of these password generation and processing mechanisms do not fulfil the requirement of usability and/or scalability and hence can be considered as less reliable/fragile. This paper reviews the security mechanisms in E-banking. The pros and con of OTP as well as other non-OTP security solutions have been presented. Finally, the prominence of open issues have been elucidated.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2020.10026783",
+      "url": "https://www.semanticscholar.org/paper/2c041eff11b0af6b309820575c56eee818c67bbf"
+    },
+    {
+      "title": "Password security by encryption using an extended ADFGVX cipher",
+      "abstract": "Login will be the critical step for most of the web users for the user authentication. As hackers utilizing a variety of techniques to steal the passwords, it is recommended to offer secured transmission of passwords to the servers from the client system. Current web developers are using common traditional hashing techniques for securing passwords over the network. However, hashing techniques are vulnerable to several attacks like brute-force attack, dictionary attack, and birthday attack. This paper implemented password security with an easy and robust transposition based encryption technique using an extended ADFGVX cipher. The proposed cipher uses two 7 × 6 Polybius squares for encryption to accommodate common characters of the password along with the random key for encryption. Finally, this study considered four metrics for performance evaluation and compared the proposed method with the state-of-art techniques. It is found that the proposed method performed excellently regarding complexity for cracking password and satisfactorily concerning execution time.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2019.10023477",
+      "url": "https://www.semanticscholar.org/paper/e82405c2b5cee37a803a10d0d8f44ac3b0596f49"
+    },
+    {
+      "title": "Reconfigurable design and implementation of nonlinear Boolean function for cloud computing security platform",
+      "abstract": "Nonlinear Boolean function plays a pivotal role in the stream cipher algorithms and cloud computing security platforms. Based on the analysis of multiple algorithms, this paper proposes a hardware structure of reconfigurable nonlinear Boolean function. This structure can realise the number of variables and AND terms less than 80 arbitrary nonlinear Boolean function in stream cipher algorithms. The entire architecture is verified on the FPGA platform and synthesised under the 0.18 μm CMOS technology, the clock frequency reaches 248.7 MHz, the result proves that the design is propitious to carry out the most nonlinear Boolean functions in stream ciphers which have been published, compared with other designs, the structure can achieve relatively high flexibility, and it has an obvious advantage in the area of circuits and processing speed.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1504/IJICS.2019.098201",
+      "url": "https://www.semanticscholar.org/paper/5985fc88c0f6c1fb7515a98f4ae664dd6e3ff1b5"
+    },
+    {
+      "title": "ExOShim: preventing memory disclosure using execute-only kernel code",
+      "abstract": "Information leakage and memory disclosure are major threats to the security in modern computer systems. If an attacker is able to obtain the binary-code of an application, it is possible to reverseengineer the source-code, uncover vulnerabilities, craft exploits, and patch together code-segments to produce code-reuse attacks. These issues are particularly concerning when the application is an operating system because they open the door to privilegeescalation and exploitation techniques that provide kernel-level access. This paper describes ExOShim: a 325-line, lightweight “shim” layer, using Intel’s commodity virtualization features, that prevents memory disclosures by rendering all kernel code execute-only. This technology, when combined with nondeterministic refresh and load-time diversity, prevents disclosure of kernel code on time-scales that facilitate kernel-level exploit development. The proof-of-concept prototype described here has been demonstrated on a 64-bit microkernel. It is evaluated using metrics that quantify its code size and complexity, associated runtime performance costs, and its effectiveness in thwarting information leakage. ExOShim provides complete execute-only protection for kernel code at a runtime-performance overhead of only 0.86%. The concepts are general and can also be applied to render application code execute-only.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2022.10045415",
+      "url": "https://www.semanticscholar.org/paper/76e0615a502289231b5f19207ef90ed387c0462c"
+    },
+    {
+      "title": "An improved co-designed AES-ECC cryptosystem for secure data transmission",
+      "abstract": "Asymmetric cryptography is inherently slow because of its associated complex computing, while symmetric cryptography is speedy. However, the latter is suffering from a serious gap which is secure key exchange. To deal with this problem, we suggest an efficient hybrid AES-ECC cryptosystem combining the benefits of the symmetric advanced encryption standard (AES) to speed-up data encryption and the asymmetric elliptic curve cryptography (ECC) to secure the symmetric key session interchange. The proposed hybrid AES-ECC cryptosystem uses a co-design approach and relies on AES-ECC optimisations. We fundamentally mix the matrix multiplication of the AES MixColumns with the S-box allowing for very fast software implementation (on NIOS-II processor). Then, we propose an optimised ECC hardware architecture based on Lopez-Dahab scalar multiplication (on Cyclone IV.E). The implementation results of the proposed cryptosystem afford an interesting trade-off between area, speed, and power and can be used for information and computer security.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1504/ijics.2020.10028859",
+      "url": "https://www.semanticscholar.org/paper/88b105d3401fff1353a34b8ff85e77391130bf9f"
+    }
+  ]
+}

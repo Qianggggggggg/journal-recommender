@@ -1,0 +1,86 @@
+{
+  "journal_id": "jfp",
+  "journal_name": "Journal of Functional Programming",
+  "papers": [
+    {
+      "title": "How much is in a square? Calculating functional programs with squares",
+      "abstract": "Experience in teaching functional programming (FP) on a relational basis has led the author to focus on a graphical style of expression and reasoning in which a geometric construct shines: the (semi) commutative square. In the classroom this is termed the “magic square” (MS), since virtually everything that we do in logic, FP, database modeling, formal semantics and so on fits in some MS geometry. The sides of each magic square are binary relations and the square itself is a comparison of two paths, each involving two sides. MSs compose and have a number of useful properties. Among several examples given in the paper ranging over different application domains, free-theorem MSs are shown to be particularly elegant and productive. Helped by a little bit of Galois connections, a generic, induction-free theory for ${\\mathsf{foldr}}$ and $\\mathsf{foldl}$ is given, showing in particular that ${\\mathsf{foldl} \\, {{s}}{}\\mathrel{=}\\mathsf{foldr}{({flip} \\unicode{x005F}{s})}{}}$ holds under conditions milder than usually advocated.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796825000012",
+      "url": "https://www.semanticscholar.org/paper/c31064c719dde2ed00ab092830c4d9f90eef86a1"
+    },
+    {
+      "title": "Fault-tolerant functional reactive programming (extended version)",
+      "abstract": "Highly critical application domains, like medicine and aerospace, require the use of strict design, implementation, and validation techniques. Functional languages have been used in these domains to develop synchronous dataflow programming languages for reactive systems. Causal stream functions and functional reactive programming (FRP) capture the essence of those languages in a way that is both elegant and robust. To guarantee that critical systems can operate under high stress over long periods of time, these applications require clear specifications of possible faults and hazards, and how they are being handled. Modeling failure is straightforward in functional languages, and many functional reactive abstractions incorporate support for failure or termination. However, handling unknown types of faults, and incorporating fault tolerance into FRP, requires a different construction and remains an open problem. This work demonstrates how to extend an existing functional reactive framework with fault tolerance features. At value level, we tag faulty signals with reliability and probability information and use random testing to inject faults and validate system properties encoded in temporal logic. At type level, we tag components with the kinds of faults they may exhibit and use type-level programming to obtain compile-time guarantees of key aspects of fault tolerance. Our approach is powerful enough to be used in systems with realistic complexity, and flexible enough to be used to guide system analysis and design, validate system properties in the presence of faults, perform runtime monitoring, and study the effects of different fault tolerance mechanisms.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796820000118",
+      "url": "https://www.semanticscholar.org/paper/6ca7aaf98298b1350b64985516792432f60ae38a"
+    },
+    {
+      "title": "Runtime verification and validation of functional reactive systems",
+      "abstract": "Many types of interactive applications, including reactive systems implemented in hardware, interactive physics simulations and games, raise particular challenges when it comes to testing and debugging. Reasons include de facto lack of reproducibility and difficulties of automatically generating suitable test data. This paper demonstrates that certain variants of functional reactive programming (FRP) implemented in pure functional languages can mitigate such difficulties by offering referential transparency at the level of whole programs. This opens up for a multi-pronged approach for assisting with testing and debugging that works across platforms, including assertions based on temporal logic, recording and replaying of runs (also from deployed code), and automated random testing using QuickCheck. When combined with extensible forms of FRP that allow for constrained side effects, it allows us to not only validate software simulations but to analyse the effect of faults in reactive systems, confirm the efficacy of fault tolerance mechanisms and perform software- and hardware-in-the-loop testing. The approach has been validated on non-trivial systems implemented in several existing FRP implementations, by means of careful debugging using a tool that allows the test or simulation under scrutiny to be controlled, moving along the execution time line, and pin-pointing of violations of assertions on personal computers as well as external devices.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796820000210",
+      "url": "https://www.semanticscholar.org/paper/625c4eeca4b01b7bf00940e0c8b3dcc9df371f27"
+    },
+    {
+      "title": "Programming and reasoning about actors that share state",
+      "abstract": "Actor languages realize concurrency via message passing, which most of the time is easy to use. Empirical code inspection provides evidence, however, that on occasion, programmers wish to have an actor share some of its state with others. The dataspace model adds a tightly controlled state-exchange mechanism, dubbed dataspace, to the actor model for just this purpose. Experience with dataspaces suggests that this form of sharing calls for linguistic constructs that allow programmers to state temporal aspects of actor conversations. In response, this paper presents the facet notation: its theory, its type system, its behavioral type system, and some first experiences with an implementation.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796824000091",
+      "url": "https://www.semanticscholar.org/paper/1a9322883aa87a7f15a1cff76112feaf7dc2c324"
+    },
+    {
+      "title": "Inductive Synthesis of Structurally Recursive Functional Programs from Non-recursive Expressions",
+      "abstract": "We present a novel approach to synthesizing recursive functional programs from input-output examples. Synthesizing a recursive function is challenging because recursive subexpressions should be constructed while the target function has not been fully defined yet. We address this challenge by using a new technique we call block-based pruning. A block refers to a recursion- and conditional-free expression (i.e., straight-line code) that yields an output from a particular input. We first synthesize as many blocks as possible for each input-output example, and then we explore the space of recursive programs, pruning candidates that are inconsistent with the blocks. Our method is based on an efficient version space learning, thereby effectively dealing with a possibly enormous number of blocks. In addition, we present a method that uses sampled input-output behaviors of library functions to enable a goal-directed search for a recursive program using the library. We have implemented our approach in a system called Trio and evaluated it on synthesis tasks from prior work and on new tasks. Our experiments show that Trio outperforms prior work by synthesizing a solution to 98% of the benchmarks in our benchmark suite.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3571263",
+      "url": "https://www.semanticscholar.org/paper/3939de4954a2241985c2150804ddb30ef0e417a7"
+    },
+    {
+      "title": "Programming language semantics: It’s easy as 1,2,3",
+      "abstract": "Programming language semantics is an important topic in theoretical computer science, but one that beginners often find challenging. This article provides a tutorial introduction to the subject, in which the language of integers and addition is used as a minimal setting in which to present a range of semantic concepts in simple manner. In this setting, it is easy as 1,2,3.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796823000072",
+      "url": "https://www.semanticscholar.org/paper/d0c98dd416a168c66f7cc2dd5e22045fadaaef78"
+    },
+    {
+      "title": "Explainable dynamic programming",
+      "abstract": "In this paper, we present a method for explaining the results produced by dynamic programming (DP) algorithms. Our approach is based on retaining a granular representation of values that are aggregated during program execution. The explanations that are created from the granular representations can answer questions of why one result was obtained instead of another and therefore can increase the confidence in the correctness of program results. Our focus on dynamic programming is motivated by the fact that dynamic programming offers a systematic approach to implementing a large class of optimization algorithms which produce decisions based on aggregated value comparisons. It is those decisions that the granular representation can help explain. Moreover, the fact that dynamic programming can be formalized using semirings supports the creation of a Haskell library for dynamic programming that has two important features. First, it allows programmers to specify programs by recurrence relationships from which efficient implementations are derived automatically. Second, the dynamic programs can be formulated generically (as type classes), which supports the smooth transition from programs that only produce result to programs that can run with granular representation and also produce explanations. Finally, we also demonstrate how to anticipate user questions about program results and how to produce corresponding explanations automatically in advance.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796821000083",
+      "url": "https://www.semanticscholar.org/paper/9981c50a30fea31b23f64b2acf8f196744aac307"
+    },
+    {
+      "title": "Fregel: a functional domain-specific language for vertex-centric large-scale graph processing",
+      "abstract": "The vertex-centric programming model is now widely used for processing large graphs. User-defined vertex programs are executed in parallel over every vertex of a graph, but the imperative and explicit message-passing style of existing systems makes defining a vertex program unintuitive and difficult. This article presents Fregel, a purely functional domain-specific language for processing large graphs and describes its model, design, and implementation. Fregel is a subset of Haskell, so Haskell tools can be used to test and debug Fregel programs. The vertex-centric computation is abstracted using compositional programming that uses second-order functions on graphs provided by Fregel. A Fregel program can be compiled into imperative programs for use in the Giraph and Pregel+ vertex-centric frameworks. Fregel’s functional nature without side effects enables various transformations and optimizations during the compilation process. Thus, the programmer is freed from the burden of program optimization, which is manually done for existing imperative systems. Experimental results for typical examples demonstrated that the compiled code can be executed with reasonable and promising performance.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796821000277",
+      "url": "https://www.semanticscholar.org/paper/673f7655d4a87ac123584f8c0843e2fb4a23ab53"
+    },
+    {
+      "title": "Cubical agda: a dependently typed programming language with univalence and higher inductive types",
+      "abstract": "Proof assistants based on dependent type theory provide expressive languages for both programming and proving within the same system. However, all of the major implementations lack powerful extensionality principles for reasoning about equality, such as function and propositional extensionality. These principles are typically added axiomatically which disrupts the constructive properties of these systems. Cubical type theory provides a solution by giving computational meaning to Homotopy Type Theory and Univalent Foundations, in particular to the univalence axiom and higher inductive types. This paper describes an extension of the dependently typed functional programming language Agda with cubical primitives, making it into a full-blown proof assistant with native support for univalence and a general schema of higher inductive types. These new primitives make function and propositional extensionality as well as quotient types directly definable with computational content. Additionally, thanks also to copatterns, bisimilarity is equivalent to equality for coinductive types. This extends Agda with support for a wide range of extensionality principles, without sacrificing type checking and constructivity.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3341691",
+      "url": "https://www.semanticscholar.org/paper/c8403c01c7c85f85161da778c1549dc203c3c689"
+    },
+    {
+      "title": "Extensional equality preservation and verified generic programming",
+      "abstract": "In verified generic programming, one cannot exploit the structure of concrete data types but has to rely on well chosen sets of specifications or abstract data types (ADTs). Functors and monads are at the core of many applications of functional programming. This raises the question of what useful ADTs for verified functors and monads could look like. The functorial map of many important monads preserves extensional equality. For instance, if $$f,g \\, : \\, A \\, \\to \\, B$$ are extensionally equal, that is, $$\\forall x \\in A$$ , $$f \\, x = g \\, x$$ , then $$map \\, f \\, : \\, List \\, A \\to List \\, B$$ and $$map \\, g$$ are also extensionally equal. This suggests that preservation of extensional equality could be a useful principle in verified generic programming. We explore this possibility with a minimalist approach: we deal with (the lack of) extensional equality in Martin-Löf’s intensional type theories without extending the theories or using full-fledged setoids. Perhaps surprisingly, this minimal approach turns out to be extremely useful. It allows one to derive simple generic proofs of monadic laws but also verified, generic results in dynamical systems and control theory. In turn, these results avoid tedious code duplication and ad-hoc proofs. Thus, our work is a contribution toward pragmatic, verified generic programming.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1017/S0956796821000204",
+      "url": "https://www.semanticscholar.org/paper/168189ea1296b66f711f50f5beb1d9972bc010c7"
+    }
+  ]
+}

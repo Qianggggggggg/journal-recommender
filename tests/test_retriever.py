@@ -8,6 +8,16 @@ from src.retriever.candidate_generator import CandidateGenerator
 from src.papers.paper_model import PaperProfile
 
 
+class DummyRetriever:
+    def __init__(self, results):
+        self.results = results
+        self.calls = []
+
+    def retrieve(self, query, top_k=30):
+        self.calls.append({"query": query, "top_k": top_k})
+        return self.results[:top_k]
+
+
 def test_bm25_retriever():
     """测试 BM25 召回"""
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -59,3 +69,276 @@ def test_candidate_generator_merge():
         candidates = generator.generate("deep learning artificial intelligence", profile, top_k=10)
         assert len(candidates) <= 10
         assert all(isinstance(j, Journal) for j in candidates)
+
+
+def test_scope_text_mode_does_not_use_typical_routes():
+    """scope_text 模式保持消融基线，不混入 typical 摘要召回。"""
+    store = JournalStore()
+    scope_journal = Journal(
+        journal_id="scope",
+        journal_name="Scope Journal",
+        journal_profile="scope boundary",
+    )
+    typical_journal = Journal(
+        journal_id="typical",
+        journal_name="Typical Journal",
+        journal_profile="semantic expansion",
+    )
+    store.add_journals([scope_journal, typical_journal])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(scope_journal, 10.0)]),
+        retrieval_target="scope_text",
+        typical_bm25_retriever=DummyRetriever([(typical_journal, 10.0)]),
+    )
+
+    candidates, trace = generator.generate_with_trace(
+        "scope boundary",
+        PaperProfile(title="scope boundary"),
+        top_k=10,
+    )
+
+    assert [j.journal_id for j in candidates] == ["scope"]
+    assert "scope_bm25" in trace["scope"]["routes"]
+    assert trace["scope"]["retrieval_rank"] == 1
+    assert all(not route.startswith("typical_") for route in trace["scope"]["routes"])
+
+
+def test_typical_mode_mixes_scope_and_typical_routes_with_trace():
+    """typical_abstracts 模式用 scope 做边界，用 typical 做语义补召回。"""
+    store = JournalStore()
+    scope_journal = Journal(
+        journal_id="scope",
+        journal_name="Scope Journal",
+        journal_profile="scope boundary",
+    )
+    typical_journal = Journal(
+        journal_id="typical",
+        journal_name="Typical Journal",
+        journal_profile="semantic expansion",
+    )
+    store.add_journals([scope_journal, typical_journal])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(scope_journal, 10.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(typical_journal, 10.0)]),
+        typical_text_retriever=DummyRetriever([(typical_journal, 8.0)]),
+    )
+
+    candidates, trace = generator.generate_with_trace(
+        "semantic expansion",
+        PaperProfile(title="semantic expansion"),
+        top_k=10,
+    )
+
+    candidate_ids = {j.journal_id for j in candidates}
+    assert {"scope", "typical"} <= candidate_ids
+    assert "scope_bm25" in trace["scope"]["routes"]
+    assert "typical_bm25" in trace["typical"]["routes"]
+    assert "typical_text" in trace["typical"]["routes"]
+    assert "identity_anchor" in trace["typical"]["routes"]
+    assert all("retrieval_rank" in trace[journal_id] for journal_id in candidate_ids)
+
+
+def test_candidate_generator_uses_configured_route_top_k():
+    """正式粗排参数应能从配置覆盖每路召回数量。"""
+    store = JournalStore()
+    journal = Journal(journal_id="target", journal_name="Target Journal", journal_profile="target")
+    store.add_journal(journal)
+    bm25 = DummyRetriever([(journal, 1.0)])
+    typical_bm25 = DummyRetriever([(journal, 1.0)])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=bm25,
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=typical_bm25,
+        route_top_k={"abstract": {"bm25": 40, "vector": 56, "text": 14}},
+    )
+
+    generator.generate_with_trace(
+        "target",
+        PaperProfile(title="target"),
+        mode="abstract",
+        top_k=10,
+    )
+
+    assert bm25.calls[0]["top_k"] == 40
+    assert typical_bm25.calls[0]["top_k"] == 40
+
+
+def test_diagnostic_journal_trace_keeps_wide_rank_outside_top_k():
+    """评估诊断期刊即使不进最终 top_k，也要保留宽召回 trace。"""
+    store = JournalStore()
+    first = Journal(journal_id="first", journal_name="First Journal", journal_profile="dominant match")
+    target = Journal(
+        journal_id="target",
+        journal_name="Target Journal",
+        journal_profile="diagnostic match",
+    )
+    store.add_journals([first, target])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(first, 10.0), (target, 9.0)]),
+        retrieval_target="scope_text",
+    )
+
+    candidates, trace = generator.generate_with_trace(
+        "diagnostic match",
+        PaperProfile(title="diagnostic match"),
+        top_k=1,
+        diagnostic_journal_ids=["target"],
+    )
+
+    assert [j.journal_id for j in candidates] == ["first"]
+    assert "target" in trace
+    assert trace["target"]["wide_retrieval_rank"] == 2
+    assert "retrieval_rank" not in trace["target"]
+
+
+# ---------------------------------------------------------------------------
+# 任务 3.3:accepted-paper 路由接入 CandidateGenerator
+# ---------------------------------------------------------------------------
+
+
+def test_accepted_bm25_route_is_attached_when_retriever_injected():
+    """注入 accepted_bm25_retriever 后,trace 必须有 accepted_bm25 路由。"""
+    store = JournalStore()
+    scope_journal = Journal(journal_id="scope", journal_name="Scope J", journal_profile="boundary")
+    accepted_journal = Journal(journal_id="acc", journal_name="Accepted J", journal_profile="accepted profile")
+    store.add_journals([scope_journal, accepted_journal])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(scope_journal, 10.0)]),
+        retrieval_target="typical_abstracts",
+        typical_bm25_retriever=DummyRetriever([(accepted_journal, 5.0)]),
+        accepted_bm25_retriever=DummyRetriever([(accepted_journal, 12.0)]),
+    )
+
+    candidates, trace = generator.generate_with_trace(
+        "accepted profile",
+        PaperProfile(title="accepted profile"),
+        top_k=10,
+    )
+
+    candidate_ids = {j.journal_id for j in candidates}
+    assert "acc" in candidate_ids
+    assert "accepted_bm25" in trace["acc"]["routes"]
+
+
+def test_accepted_vector_route_is_attached_when_retriever_injected():
+    """注入 accepted_embedding_retriever 后,trace 必须有 accepted_vector 路由。"""
+    store = JournalStore()
+    accepted_journal = Journal(journal_id="acc", journal_name="Accepted J", journal_profile="accepted profile")
+    store.add_journal(accepted_journal)
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([]),
+        retrieval_target="typical_abstracts",
+        accepted_embedding_retriever=DummyRetriever([(accepted_journal, 9.0)]),
+    )
+
+    _, trace = generator.generate_with_trace(
+        "accepted profile",
+        PaperProfile(title="accepted profile"),
+        top_k=5,
+    )
+
+    assert "accepted_vector" in trace["acc"]["routes"]
+
+
+def test_accepted_routes_disabled_when_no_retriever_injected():
+    """index 缺失 (retriever 为 None) 时,推荐流程不能崩,trace 中也不应出现 accepted 路由。"""
+    store = JournalStore()
+    journal = Journal(journal_id="any", journal_name="Any J", journal_profile="any")
+    store.add_journal(journal)
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([(journal, 1.0)]),
+        retrieval_target="typical_abstracts",
+        # accepted_bm25_retriever / accepted_embedding_retriever 都不传
+    )
+
+    candidates, trace = generator.generate_with_trace(
+        "any",
+        PaperProfile(title="any"),
+        top_k=5,
+    )
+
+    assert any(j.journal_id == "any" for j in candidates)
+    routes = trace["any"]["routes"]
+    assert "accepted_bm25" not in routes
+    assert "accepted_vector" not in routes
+
+
+def test_accepted_route_top_k_config_is_respected():
+    """route_top_k.abstract.accepted_bm25 / accepted_vector 应该顶到对应 retriever。"""
+    store = JournalStore()
+    journal = Journal(journal_id="acc", journal_name="Accepted J", journal_profile="profile")
+    store.add_journal(journal)
+
+    accepted_bm25 = DummyRetriever([(journal, 1.0)])
+    accepted_vector = DummyRetriever([(journal, 0.9)])
+
+    generator = CandidateGenerator(
+        store,
+        bm25_retriever=DummyRetriever([]),
+        retrieval_target="typical_abstracts",
+        accepted_bm25_retriever=accepted_bm25,
+        accepted_embedding_retriever=accepted_vector,
+        route_top_k={"abstract": {"bm25": 28, "vector": 56, "text": 14,
+                                   "accepted_bm25": 33, "accepted_vector": 55}},
+    )
+
+    generator.generate_with_trace(
+        "anything",
+        PaperProfile(title="anything"),
+        mode="abstract",
+        top_k=10,
+    )
+
+    assert accepted_bm25.calls[0]["top_k"] == 33
+    assert accepted_vector.calls[0]["top_k"] == 55
+
+
+def test_accepted_paper_weight_scales_route_contribution():
+    """accepted_paper_weight 必须显式调控 accepted route 在融合中的权重。
+
+    通过比较 trace 中 accepted_bm25 路由的 ``weighted_score`` 来直接锁住权重的
+    实际作用,不依赖最终候选排序 (排序还掺杂 normalize/boundary_bonus 等其他
+    因素)。
+    """
+    store = JournalStore()
+    target = Journal(journal_id="acc", journal_name="Accepted J", journal_profile="acc")
+    other = Journal(journal_id="other", journal_name="Other J", journal_profile="other")
+    store.add_journals([target, other])
+
+    def _trace_with(weight):
+        gen = CandidateGenerator(
+            store,
+            bm25_retriever=DummyRetriever([(other, 5.0)]),
+            retrieval_target="typical_abstracts",
+            accepted_bm25_retriever=DummyRetriever([(target, 100.0), (other, 50.0)]),
+            accepted_paper_weight=weight,
+        )
+        _, trace = gen.generate_with_trace(
+            "x", PaperProfile(title="x"), top_k=10,
+        )
+        return trace["acc"]["routes"]["accepted_bm25"]["weighted_score"]
+
+    weighted_zero = _trace_with(0.0)
+    weighted_high = _trace_with(0.9)
+
+    # weight=0 时 accepted 路由的贡献必须为 0
+    assert weighted_zero == 0.0
+    # weight>0 时贡献必须为正
+    assert weighted_high > 0.0
+    # weight 越大贡献越大
+    assert weighted_high > weighted_zero

@@ -1,0 +1,62 @@
+{
+  "journal_id": "pmc",
+  "journal_name": "Pervasive and Mobile Computing",
+  "papers": [
+    {
+      "title": "Edge computing and 5G network integration for mobility-aware service deployments",
+      "abstract": "The integration of edge computing and 5G networks enables mobility-aware service deployments. This paper presents a comprehensive solution for deploying services in mobility scenarios, leveraging edge computing capabilities and 5G network features. We propose a framework that dynamically adapts service placement based on user mobility patterns and network conditions, ensuring low-latency access and seamless service continuity. The proposed approach is evaluated through extensive simulations, demonstrating significant improvements in service response time and handover performance compared to traditional cloud-based solutions.",
+      "year": 2026,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.pmcj.2025.102134",
+      "url": ""
+    },
+    {
+      "title": "In-bed gesture recognition to support the communication of people with Aphasia",
+      "abstract": "People with language impairments can have difficulties expressing themselves to others, leading to major limitations to their safety, independence, and quality of life in general. Aphasia is an example of an acquired language impairment that affects many people (around 2 million in the United States), being commonly caused by stroke, but also by other brain injuries. Several augmentative and alternative communication solutions are available to help people with communication difficulties, but they are generally not suitable for all contexts of use (e.g., lying in bed). In the scope of the “APH-ALARM” project, which aimed at developing solutions to support people with Aphasia, we envision a system for the bedroom that enables conveying messages to be sent to a caregiver or relative, for example. Focusing on gesture input, in this contribution, we investigated if smartwatch sensors and machine learning (ML) can be used to recognise arm gestures executed while lying. We explored different factors, namely the feature set, size of the sliding window used for feature extraction, and ML classifier. The results obtained with data gathered from ten subjects are promising, with the best factor combinations for the user-independent solution leading to a mean macro F1 score of 94% or 95%. They demonstrate the potential of using wearables to develop a gesture input modality for the in-bed scenario, which can also potentially be extended to other contexts (e.g., sitting in a bed, chair, or sofa, or standing). This research also provides useful insights that inform future work, including the development and deployment of communication support systems that can benefit not only people with communication difficulties (e.g., more independence), but also those caring for them (e.g., more peace of mind).",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.pmcj.2024.102029",
+      "url": ""
+    },
+    {
+      "title": "MyDigitalFootprint: An extensive context dataset for pervasive computing applications at the edge",
+      "abstract": "The widespread diffusion of connected smart devices has greatly contributed to the rapid expansion and evolution of the Internet at its edge, where personal mobile devices follow the behavior of their human users and interact with other smart objects located in the surroundings. In such a scenario, the user context is represented by a large variety of information that can rapidly change, and the ability of personal mobile devices to locally process this data is fundamental to make the system able to quickly adapt its behavior to the current situation. This ability, in practice, can be represented by a single elaboration process integrated in the final user application, or by a middleware platform aimed at implementing different context processing and reasoning to support third-party applications. However, the lack of public datasets that take into account the complexity of the user context in the mobile environment strongly limits the advance of the research in this field. In this paper, we present MyDigitalFootprint, a novel large-scale dataset composed of smartphone embedded sensors data, physical proximity information, and Online Social Networks interactions aimed at supporting multimodal context-recognition and social relationships modeling. The dataset includes two months of measurements and information collected from the personal mobile devices of 31 volunteer users, in their natural environment, without limiting their usual behavior. Existing public datasets generally consist of a limited set of context data, aimed at optimizing specific application domains (human activity recognition is the most common example). On the contrary, our dataset contains a comprehensive set of information describing the user context in the mobile environment. In order to demonstrate the efficacy of the proposed dataset, we present three context-aware applications based on different machine learning tasks: (i) a social link prediction algorithm based on physical proximity data, (ii) the recognition of daily-life activities based on smartphone-embedded sensors data, and (iii) a pervasive context-aware recommender system. To the best of our knowledge, this is the first large-scale dataset containing such heterogeneity of information, representing an invaluable source of data to validate new research in mobile and edge computing.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.pmcj.2020.101309",
+      "url": "https://www.semanticscholar.org/paper/024d24a8b6913b2a6a0bfe9906d7464a6cf36ea8"
+    },
+    {
+      "title": "Joint radio and local resources optimization for tasks offloading with priority in a Mobile Edge Computing network",
+      "abstract": "Computation offloading within Mobile Edge Computing (MEC) networks is a promising new technique, especially in the 5G era. This technique offers leading-edge services to the users of Smart Mobile Devices (SMDs) to reduce the processing time and battery drain. Thus, SMDs tend to offload their heavy processing tasks to preserve battery power and benefit from an important processing power. However, in the era of the Internet of Things (IoT), several subscribers will compete for the available provided resources. Thus, we consider subscribers with a priority property fixed by their contracts with the service provider. In this work, we study a multi-server MEC network with multiple base stations where each one is equipped with a MEC server and provides offloading services to nearby users. Accordingly, we consider the energy consumption, the critical situations of radio resources’ insufficiency as well as a penalty function based on the SMDs’ priority. Therefore, we formulated a bi-objective optimization problem that jointly minimizes the overall energy consumption and the penalty function while allocating the local processing frequencies for the SMDs, their transmit powers and the radio resources allocated by the Base Station (BS). Consequently, based on the weighted aggregation approach, we propose and study a heuristic solution called Resources Allocation with Priority Devices (RAPD). Finally, simulation experiments were realized to study the RAPD solution performance compared to some effective state of the art solutions, and the simulation results in terms of decision-making time, energy and penalty are very promising.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PMCJ.2021.101368",
+      "url": "https://www.semanticscholar.org/paper/c42438f8aabcaa019c6c7cfa4684cb5452606916"
+    },
+    {
+      "title": "Traffic analysis and resource adaptation in large-scale 5G multi-layer edge networks",
+      "abstract": "In this research, we propose automating network management through data-driven intelligence, with a particular focus on anomalies and network traffic during specific events or periods. We analyze a large dataset collected by Orange mobile network operator in France with the goal of forecasting mobile demand for different classes of services. To model the underlying network infrastructure, we introduce a model for the underlying network based on a hierarchy of virtualization layers and slices. Building on this model, we propose algorithms to optimize the resources allocated to network slices and traffic distribution within the operator’s network. Network performance is evaluated as the fraction of time the mobile traffic is within the capacity of the network. Our results demonstrate that dynamic reallocation of resources among slices, and dynamic load balancing (traffic shaping) between nodes notably improves network performance. These results provide insights into critical aspects related to future 5G network management.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.pmcj.2025.102158",
+      "url": "https://doi.org/10.1016/j.pmcj.2025.102158"
+    },
+    {
+      "title": "RTXBEE: Real-time communication module for critical Internet of Things applications",
+      "abstract": "The Internet of Things concept has expanded to a large area of applications evolving to the point of providing even real-time support. Critical applications become increasingly suitable at the Edge Layer where real-time operations need to be supported at both node and network level thus communication becomes crucial. This paper presents a real-time communication solution based on the highly popular XBee modules. We describe a predictable and modular driver for such modules along with a full communication platform ready to be integrated into an IoT design for real-time applications. The proposed communication module has been implemented at prototype level and successfully validated through an extensive set of simulations and experiments.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.pmcj.2025.102133",
+      "url": "https://doi.org/10.1016/j.pmcj.2025.102133"
+    },
+    {
+      "title": "Listen to the road: acoustic traffic monitoring on edge platforms via Lightweight Noise Spectrogram Transformer (LNST)",
+      "abstract": "Accurate real-time traffic flow monitoring is crucial for intelligent transportation systems (ITS), enabling optimized traffic management, urban planning, and policy-making. However, conventional methods face cost, deployment, weather, and privacy challenges. Addressing these shortcomings, this study investigates the potential of utilizing ubiquitous traffic noise, an inherently accessible, cost-efficient, non-intrusive, and privacy-preserving signal, as a viable data source. We propose the Lightweight Noise Spectrogram Transformer (LNST), a novel deep learning model for analyzing traffic noise spectrograms as a Proof of Concept. LNST leverages the Transformer architecture's self-attention mechanism to effectively capture long-range temporal and spectral dependencies crucial for interpreting complex traffic acoustics. Trained and evaluated on diverse urban traffic scenarios, LNST demonstrates significant advantages. Experimental results show it consistently outperforms baseline models, achieving superior prediction accuracy (MSE, MAE, R²). Furthermore, through transfer learning and model pruning, LNST achieves high computational efficiency with substantially fewer parameters and faster inference speeds. Its lighter design also ensures its feasibility for deployment on resource-constrained edge computing platforms. This work validates the practicality of acoustic sensing for traffic monitoring and presents an accurate, computationally efficient, and LNST as a cost-effective, easily deployable, and privacy-respecting solution, offering a valuable supplementary tool for advancing ITS.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.pmcj.2025.102132",
+      "url": "https://doi.org/10.1016/j.pmcj.2025.102132"
+    }
+  ]
+}

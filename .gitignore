@@ -26,6 +26,8 @@ venv/
 
 data/raw/
 data/processed/
+data/evaluation/results/
+data/evaluation/clean_typical_abstracts/
 *.faiss
 *.parquet
 *.jsonl
@@ -34,3 +36,4 @@ data/processed/
 .vscode/
 *.swp
 *.swo
+.DS_Store

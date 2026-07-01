@@ -1,0 +1,86 @@
+{
+  "journal_id": "jmlr",
+  "journal_name": "Journal of Machine Learning Research",
+  "papers": [
+    {
+      "title": "Policy Gradient Methods in the Presence of Symmetries and State Abstractions",
+      "abstract": "We present a new policy gradient method, called Symplectic Policy Optimization (SPO), which exploits symmetries and state abstractions. We study the problem of exploiting symmetry in the context of reinforcement learning. We show that the presence of symmetries can be used to reduce the dimension of the state space. We then use this reduction to design a policy gradient algorithm that can learn a policy that is invariant under the symmetry. We show that our algorithm can learn a policy that is optimal in the reduced space and we provide a convergence analysis. We also show that the algorithm can be used to learn a policy that is robust to small perturbations. We demonstrate the effectiveness of the algorithm on a set of benchmark tasks.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "Localisation of Regularised and Multiview Support Vector Machine Learning",
+      "abstract": "We prove some representer theorems for a localised version of a semisupervised, manifold regularised and multiview support vector machine learning problem introduced by H.Q. Minh, L. Bazzani, and V. Murino, Journal of Machine Learning Research, 17(2016) 1-72, that involves operator valued positive semidefinite kernels and their reproducing kernel Hilbert spaces. The results concern general cases when convex or nonconvex lossfunctions and finite or infinite dimensional underlying Hilbert spaces are considered. We show that the general framework allows infinite dimensional Hilbert spaces and nonconvex loss functions for some special cases, in particular in case the loss functions are Gâteaux differentiable. Detailed calculations are provided for the exponential least squares loss functions that lead to systems of partially nonlinear equations for which some Newton's approximation methods based on the interior point method can be used. Some numerical experiments are performed on a toy model that illustratethe tractability of the methods that we propose.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "title": "sklvq : Scikit Learning Vector Quantization",
+      "abstract": "The sklvq package is an open-source Python implementation of a set of learning vector quantization (LVQ) algorithms. In addition to providing the core functionality for the GLVQ, GMLVQ, and LGMLVQ algorithms, sklvq is distinctive by putting emphasis on its modular and customizable design. Not only resulting in a feature-rich implementation for users but enabling easy extensions of the algorithms for researchers. The theory behind this design is described in this paper. To facilitate adoptions and inspire future contributions, sklvq is publicly available on Github (under the BSD license) and can be installed through the Python package index (PyPI). Next to being well-covered by automated testing to ensure code quality, it is accompanied by detailed online documentation. The documentation covers usage examples and provides an in-depth API including theory and scientific references.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3206436985"
+    },
+    {
+      "title": "Contrastive estimation reveals topic posterior information to linear models",
+      "abstract": "Contrastive learning is an approach to representation learning that utilizes naturally occurring similar and dissimilar pairs of data points to find useful embeddings of data. In the context of document classification under topic modeling assumptions, we prove that contrastive learning is capable of recovering a representation of documents that reveals their underlying topic posterior information to linear models. We apply this procedure in a semi-supervised setup and demonstrate empirically that linear classifiers with these representations perform well in document classification tasks with very few training examples.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3216584681"
+    },
+    {
+      "title": "Learning with semi-definite programming: statistical bounds based on fixed point analysis and excess risk curvature",
+      "abstract": "Many statistical learning problems have recently been shown to be amenable to Semi-Definite Programming (SDP), with community detection and clustering in Gaussian mixture models as the most striking instances Javanmard et al. (2016). Given the growing range of applications of SDP-based techniques to machine learning problems, and the rapid progress in the design of efficient algorithms for solving SDPs, an intriguing question is to understand how the recent advances from empirical process theory and Statistical Learning Theory can be leveraged for providing a precise statistical analysis of SDP estimators. In the present paper, we borrow cutting edge techniques and concepts from the Learning Theory literature, such as fixed point equations and excess risk curvature arguments, which yield general estimation and prediction results for a wide class of SDP estimators. From this perspective, we revisit some classical results in community detection from Guedon and Vershynin (2016) and Fei and Chen (2019), and we obtain statistical guarantees for SDP estimators used in signed clustering, angular group synchronization (for both multiplicative and additive models) and MAX-CUT. Our theoretical findings are complemented by numerical experiments for each of the three problems considered, showcasing the competitiveness of the SDP estimators.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3205586389"
+    },
+    {
+      "title": "Bifurcation Spiking Neural Network",
+      "abstract": "Spiking neural networks (SNNs) has attracted much attention due to its great potential of modeling time-dependent signals. The firing rate of spiking neurons is decided by control rate which is fixed manually in advance, and thus, whether the firing rate is adequate for modeling actual time series relies on fortune. Though it is demanded to have an adaptive control rate, it is a non-trivial task because the control rate and the connection weights learned during the training process are usually entangled. In this paper, we show that the firing rate is related to the eigenvalue of the spike generation function. Inspired by this insight, by enabling the spike generation function to have adaptable eigenvalues rather than parametric control rates, we develop the Bifurcation Spiking Neural Network (BSNN), which has an adaptive firing rate and is insensitive to the setting of control rates. Experiments validate the effectiveness of BSNN on a broad range of tasks, showing that BSNN achieves superior performance to existing SNNs and is robust to the setting of control rates.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3214991241"
+    },
+    {
+      "title": "From Fourier to Koopman: Spectral Methods for Long-term Time Series Prediction",
+      "abstract": "We propose spectral methods for long-term forecasting of temporal signals stemming from linear and nonlinear quasi-periodic dynamical systems. For linear signals, we introduce an algorithm with similarities to the Fourier transform but which does not rely on periodicity assumptions, allowing for forecasting given potentially arbitrary sampling intervals. We then extend this algorithm to handle nonlinearities by leveraging Koopman theory. The resulting algorithm performs a spectral decomposition in a nonlinear, data-dependent basis. The optimization objective for both algorithms is highly non-convex. However, expressing the objective in the frequency domain allows us to compute global optima of the error surface in a scalable and efficient manner, partially by exploiting the computational properties of the Fast Fourier Transform. Because of their close relation to Bayesian Spectral Analysis, uncertainty quantification metrics are a natural byproduct of the spectral forecasting methods. We extensively benchmark these algorithms against other leading forecasting methods on a range of synthetic experiments as well as in the context of real-world power systems and fluid flows.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3129071058"
+    },
+    {
+      "title": "Sparse Popularity Adjusted Stochastic Block Model",
+      "abstract": "In the present paper we study a sparse stochastic network enabled with a block structure. The popular Stochastic Block Model (SBM) and the Degree Corrected Block Model (DCBM) address sparsity by placing an upper bound on the maximum probability of connections between any pair of nodes. As a result, sparsity describes only the behavior of network as a whole, without distinguishing between the block-dependent sparsity patterns. To the best of our knowledge, the recently introduced Popularity Adjusted Block Model (PABM) is the only block model that allows to introduce a {\\it structural sparsity} where some probabilities of connections are identically equal to zero while the rest of them remain above a certain threshold. The latter presents a more nuanced view of the network.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3205521290"
+    },
+    {
+      "title": "Residual Energy-Based Models for Text",
+      "abstract": "Current large-scale auto-regressive language models display impressive fluency and can generate convincing text. In this work we start by asking the question: Can the generations of these models be reliably distinguished from real text by statistical discriminators? We find experimentally that the answer is affirmative when we have access to the training data for the model, and guardedly affirmative even if we do not. This suggests that the auto-regressive models can be improved by incorporating the (globally normalized) discriminators into the generative process. We give a formalism for this using the Energy-Based Model framework, and show that it indeed improves the results of the generative models, measured both in terms of perplexity and in terms of human evaluation.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3129157811"
+    },
+    {
+      "title": "Mode-wise Tensor Decompositions: Multi-dimensional Generalizations of CUR Decompositions",
+      "abstract": "Low rank tensor approximation is a fundamental tool in modern machine learning and data science. In this paper, we study the characterization, perturbation analysis, and an efficient sampling strategy for two primary tensor CUR approximations, namely Chidori and Fiber CUR. We characterize exact tensor CUR decompositions for low multilinear rank tensors. We also present theoretical error bounds of the tensor CUR approximations when (adversarial or Gaussian) noise appears. Moreover, we show that low cost uniform sampling is sufficient for tensor CUR approximations if the tensor has an incoherent structure. Empirical performance evaluations, with both synthetic and real-world datasets, establish the speed advantage of the tensor CUR approximations over other state-of-the-art low multilinear rank tensor approximations.",
+      "year": 2021,
+      "source": "openalex_fill_20260617",
+      "doi": "",
+      "url": "https://openalex.org/W3191767165"
+    }
+  ]
+}

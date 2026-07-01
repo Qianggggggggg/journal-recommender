@@ -1,0 +1,86 @@
+{
+  "journal_id": "vrih",
+  "journal_name": "Virtual Reality & Intelligent Hardware",
+  "papers": [
+    {
+      "title": "From embodied AI to cobodied AI: Foundations and frontiers",
+      "abstract": "This paper presents a systematic review and technical revisit of recent developments in embodied AI. We comprehensively synthesize current dominant paradigms, representative architectures, and pivotal advancements around five core modules: (1) perception and understanding, (2) reasoning and decision making, (3) control and action, (4) modeling and learning (e.g., VLA (vision-language-action) and WM (world models)), and (5) data and simulation. This analysis establishes a structured and cutting-edge panoramic view of embodied AI technology. Building on this foundation, we explore the transition from embodied AI to a new paradigm of deep human-AI collaboration. Anchored in the original concept of cobodied AI, we adopt a human-centered technical perspective to systematically investigate this paradigm shift. Specifically, we discuss breakthroughs in critical dimensions such as perceptual alignment, collaborative decision-making, action guidance, and bidirectional mutual learning. These efforts aim to realize three core characteristics: human-centered egocentric grounding, dual-mode cognitive integration, and physical co-embodiment. To our knowledge, this work constitutes the first systematic construction of a technical framework and implementation roadmap for realizing cobodied AI, building upon advances in embodied AI but fundamentally reorienting intelligence around the human body and intent, providing a foundational reference for future research in this domain.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.03.001",
+      "url": "https://openalex.org/W7161144914"
+    },
+    {
+      "title": "DG-4DGS: deformation-graph-constrained 4D Gaussian splatting for temporally stable dynamic rendering",
+      "abstract": "Accurately representing and rendering dynamic scenes over time remains a central challenge in neural rendering and computer graphics. Existing dynamic Gaussian-based methods often suffer from limited temporal consistency, flickering under fast motion, and poor adaptability to non-human structures. To address these issues, we propose DG-4DGS, a deformation-graph-constrained 4D Gaussian splatting framework for temporally stable dynamic rendering. The method anchors all Gaussians in a canonical space and enforces cross-frame geometric alignment through a deformation graph. Based on neighborhood-consistency features, a multi-head residual decoder refines position, rotation/scale, and color attributes to achieve fine-detail fidelity without relying on online densification or pruning. Compared with 4DGS and avatar-based approaches, DG-4DGS achieves higher PSNR (peak signal-to-noise ratio) and SSIM (structural similarity index measure) scores and significantly smaller model size on both the TalkBody4D (human) and Horse (non-human) datasets. It effectively suppresses temporal flickering and cross-frame drift in high-frequency regions such as hair strands, cloth wrinkles, and limb extremities. The framework does not depend on parametric templates, facilitating extension to non-human and complex clothing scenarios, though its performance still depends on deformation-tracking quality and neighborhood topology selection.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.04.001",
+      "url": "https://openalex.org/W7161139081"
+    },
+    {
+      "title": "From architecture to evaluation: A comprehensive review of video generation techniques",
+      "abstract": "The rapid developments of artificial intelligence have significantly impacted daily life and content production modes. In the field of video generation, researchers are now exploring this emerging technique with innovative approaches, aiming to produce videos of higher quality, longer duration, and greater diversity. Currently, numerous video generation algorithms have been developed using different architecture designs. Unlike image generation, video generation requires maintaining consistency across both spatial and temporal dimensions while ensuring aesthetic quality and dynamic coherence, making it a more challenging task. In this survey, we provide a systematic review of existing video generation methods, tracing their evolution across different architectural paradigms. We further categorize recent models by their control conditions (e.g., text-to-video, image-to-video, multi-modal guidance) and summarize their unique theoretical foundations, architectural designs, and algorithmic innovations. In the meantime, we review the commonly used video datasets and analyze their applicability to different tasks. We also present evaluations of representative models to offer a more comprehensive perspective. Our goal is to provide a clear and concise overview of these algorithms, offering insights to support future breakthroughs in video generation.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.03.002",
+      "url": "https://openalex.org/W7161148064"
+    },
+    {
+      "title": "Synchronizing virtual backgrounds with monocular camera motion: A novel panoramic framework for video conferencing",
+      "abstract": "We present a novel 360° panoramic video conferencing system that dynamically synchronizes virtual backgrounds with real-time camera motion, addressing the limitations of static backgrounds in conventional systems. By integrating robust human segmentation, monocular visual odometry (VO), and virtual environment rendering, our method achieves seamless alignment between foreground participants and immersive 3D virtual scenes. Unlike prior approaches that suffer from foreground-background desynchronization during camera rotations or user movements, our framework estimates camera rotation in 3-DoF using a hybrid pipeline combining feature-based patch tracking and pose smoothing, while ignoring translation artifacts to maintain stability. This work bridges the gap between computational efficiency and MR-driven telepresence, offering a practical solution for next-generation virtual collaboration.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.01.003",
+      "url": "https://openalex.org/W7161131805"
+    },
+    {
+      "title": "Review of extrinsic parameter calibration of LiDAR and camera",
+      "abstract": "LiDAR and camera are two of the most common sensors used in the fields of robot perception, autonomous driving, augmented reality, and virtual reality, where these sensors are widely used to perform various tasks such as odometry estimation and 3D reconstruction. Fusing the information from these two sensors can significantly increase the robustness and accuracy of these perception tasks. The extrinsic calibration between cameras and LiDAR is a fundamental prerequisite for multimodal systems. Recently, extensive studies have been conducted on the calibration of extrinsic parameters. Although several calibration methods facilitate sensor fusion, a comprehensive summary for researchers and, especially, non-expert users is lacking. Thus, we present an overview of extrinsic calibration and discuss diverse calibration methods from the perspective of calibration system design. Based on the calibration information sources, this study classifies these methods as target-based or targetless. For each type of calibration method, further classification was performed according to the diverse types of features or constraints used in the calibration process, and their detailed implementations and key characteristics were introduced. Thereafter, calibration-accuracy evaluation methods are presented. Finally, we comprehensively compare the advantages and disadvantages of each calibration method and suggest directions for practical applications and future research.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2025.12.004",
+      "url": "https://openalex.org/W7135218791"
+    },
+    {
+      "title": "Enhancing SS-OCT 3D image reconstruction: A real-time system with stripe artifact suppression and GPU parallel acceleration",
+      "abstract": "Optical coherence tomography (OCT), particularly Swept-Source OCT, is widely employed in medical diagnostics and industrial inspections owing to its high-resolution imaging capabilities. However, Swept-Source OCT 3D imaging often suffers from stripe artifacts caused by unstable light sources, system noise, and environmental interference, posing challenges to real-time processing of large-scale datasets. To address this issue, this study introduces a real-time reconstruction system that integrates stripe-artifact suppression and parallel computing using a graphics processing unit. This approach employs a frequency-domain filtering algorithm with adaptive anti-suppression parameters, dynamically adjusted through an image quality evaluation function and optimized using a convolutional neural network for complex frequency-domain feature learning. Additionally, a graphics processing unit integrated 3D reconstruction framework is developed, enhancing data processing throughput and real-time performance via a dual-queue decoupling mechanism. Experimental results demonstrate significant improvements in structural similarity (0.92), peak signal-to-noise ratio (31.62 dB), and stripe suppression ratio (15.73 dB) compared with existing methods. On the RTX 4090 platform, the proposed system achieved an end-to-end delay of 94.36 milliseconds, a frame rate of 10.3 frames per second, and a throughput of 121.5 million voxels per second, effectively suppressing artifacts while preserving image details and enhancing real-time 3D reconstruction performance.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2025.12.003",
+      "url": "https://openalex.org/W7135223770"
+    },
+    {
+      "title": "Botanical tree reconstruction from a single image via 3D GAN-based skeletonization",
+      "abstract": "Background 3D botanical tree reconstruction from a single image plays a vital role in the field of computer graphics. However, accurately capturing the intricate branching patterns and detailed morphologies of trees remains a challenge. Methods In this study, we proposed a novel approach for single-image tree reconstruction using a conditional generative adversarial network to infer the 3D skeleton of a tree in the form of a 2D skeleton depth map. Based on the 2D skeleton depth map, a corresponding branching structure (3D skeleton) that inherits the tree shape in the input image and leaves can be generated using a procedural modeling technique. Result Experimental results show that the proposed method accurately reconstructs diverse tree structures across species. Both quantitative and qualitative evaluations demonstrate improved skeleton completeness, branching accuracy, and visual realism over baseline methods, while requiring no user input. Conclusions Our proposed approach for generating lifelike 3D tree models from a single image with no user input shows its proficiency in achieving efficient and reliable reconstruction. These results showcase the capability of the proposed model to recreate complex tree architectures while capturing their visual authenticity.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2023.08.009",
+      "url": "https://openalex.org/W7135243737"
+    },
+    {
+      "title": "The role of digital twin technology in physiotherapy and rehabilitation practice",
+      "abstract": "Digital twin technology, that creates virtual replicas of physical entities using real-time data and simulation models, has emerged as a transformative innovation across multiple healthcare domains. Its application in physiotherapy and rehabilitation represents a paradigm shift from traditional therapeutic approaches to personalized data-driven interventions that optimize patient outcomes. This narrative review examines the current applications, benefits, challenges, and future prospects of digital twin technology in physiotherapy and rehabilitation, providing a comprehensive analysis of the manner in which this technology is reshaping clinical practice and patient care. A narrative review approach was employed, systematically searching PubMed, IEEE Xplore, Scopus, and Web of Science databases. Studies describing digital twin applications, development methodologies, clinical implementations, and theoretical frameworks in physiotherapy and rehabilitation contexts were included. Digital twin technology demonstrates significant potential in personalizing rehabilitation programs, enabling real-time monitoring of patient progress, predicting treatment outcomes, and facilitating remote therapeutic interventions. Current applications span musculoskeletal rehabilitation, neurological recovery, post-surgical care, and sports injury management. Key benefits include enhanced treatment precision, improved patient engagement, reduced healthcare costs, and accelerated recovery times. However, implementation faces challenges including technological complexity, data privacy concerns, interoperability issues, and the need for substantial infrastructure investment. Digital twin technology represents a promising frontier in physiotherapy and rehabilitation, offering unprecedented opportunities for personalized, efficient, and effective patient care. Successful integration requires addressing the current limitations while fostering interdisciplinary collaboration between clinicians, engineers, and data scientists.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.01.002",
+      "url": "https://openalex.org/W7135218396"
+    },
+    {
+      "title": "Enhanced CT-CBCT image registration for orthopedic surgery: Integrating rigid-elastic motion models",
+      "abstract": "Computed tomography (CT) and cone-beam computed tomography (CBCT) image registration play pivotal roles in computer-assisted navigation for orthopedic surgery. Traditional methods often apply uniform deformation models, neglecting the biomechanical differences between rigid structures and soft tissues, which compromises registration accuracy, especially during significant bone displacements. To address this issue, we introduce RE-Reg, a rigid-elastic CT-CBCT image registration framework that jointly learns rigid bone motion and soft tissue deformation. RE-Reg incorporates a rigid alignment (RA) module to estimate global bone motion and an elastic deformation (ED) module to model soft tissue deformation, preserving bony structures through bone shape preservation (BSP) loss. Our comprehensive evaluation on publicly available datasets demonstrates that RE-Reg significantly outperforms existing methods in terms of registration accuracy and rigid bone structure preservation, achieving a 1.3% improvement in Dice similarity coefficient (DSC) and a 23% reduction in rigid bone deformation ( % Δ vol ) compared with the best baseline. This framework not only enhances anatomical fidelity but also ensures biomechanical plausibility and provides a valuable tool for image-guided orthopedic surgery. This code is available at https://github.com/Zq-Huang/RE-Reg.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2026.01.001",
+      "url": "https://openalex.org/W7135188513"
+    },
+    {
+      "title": "Augmented reality surgical navigation: Clinical applications, key technologies, and future directions",
+      "abstract": "Surgical navigation has evolved significantly through advances in augmented reality, virtual reality, and mixed reality, improving precision and safety across many clinical applications, including neurosurgery, maxillofacial, spinal, and arthroplasty procedures. By integrating preoperative imaging with real-time intraoperative data, these systems provide dynamic guidance, reduce radiation exposure, and minimize tissue damage. Key challenges persist, including intraoperative registration accuracy, flexible tissue deformation, respiratory compensation, and real-time imaging quality. Emerging solutions include artificial intelligence-driven segmentation, deformation-field modeling, and hybrid registration techniques. Future developments will include lightweight, portable systems, improved non-rigid registration algorithms, and greater clinical adoption. Despite advances in rigid-tissue applications, soft-tissue navigation requires additional innovation to address motion variability and registration reliability, ultimately advancing minimally invasive surgery and precision medicine.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.vrih.2025.12.002",
+      "url": "https://openalex.org/W7135229648"
+    }
+  ]
+}

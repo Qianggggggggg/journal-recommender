@@ -1,0 +1,14 @@
+{
+  "journal_id": "computationalintelligence",
+  "journal_name": "Computational Intelligence",
+  "papers": [
+    {
+      "title": "New Heuristics for Stable LDA Parameter Search",
+      "abstract": "The Latent Dirichlet Allocation (LDA) algorithm automatically extracts latent topics from a textual corpus, but configuring its parameters can be difficult and time‐consuming. Optimization algorithms can help determine the best parameters, but not necessarily the optimal ones. This research proposes a framework that estimates near‐optimal parameters for the corpus under analysis and provides a way to justify the final model selection. To achieve this goal, we evaluated different combinations of fitness functions (traditional and novel) to guide the Genetic Algorithms (GA) to identify the quasi‐optimal LDA parameters. A stability analysis is conducted to evaluate the quality of the parameters. The results show that different combinations of GA and fitness function can identify the expected number of latent topics and extract more distinct topics than traditional ones. However, using only combinations of different GA and fitness functions does not automatically produce the most stable results. We show that, instead of blindly relying on metaheuristic procedures, a thorough stability analysis is necessary to evaluate the quality of the parameters and obtain an optimal model. Finally, the choice of the fitness function should be based on the parameter tuning runtime and its ability to discover latent topics.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1111/coin.70237",
+      "url": "https://openalex.org/W7164168386"
+    }
+  ]
+}

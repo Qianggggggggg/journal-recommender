@@ -1,0 +1,867 @@
+"""Tests for scripts/build_ranking_training_data.py (Task 4.1.f + 4.3)."""
+import json
+from pathlib import Path
+
+import pytest
+
+from scripts.build_ranking_training_data import (
+    _build_negatives,
+    _classify_negative,
+    _extract_route_combination,
+    build_training_report,
+    build_training_rows,
+)
+from src.ranker.feature_builder import FEATURE_NAMES, MISSING_RANK_SENTINEL
+
+
+def _make_features(value: float) -> list:
+    return [float(value)] * len(FEATURE_NAMES)
+
+
+def test_classify_negative_returns_none_for_gold():
+    """jid == target_jid → None(表示这是正样本,不属于负样本分类)。"""
+    journals = {"a": {"subject_tags": ["ai"]}, "b": {"subject_tags": ["ai"]}}
+    assert _classify_negative("a", "a", ["a", "b"], journals) is None
+
+
+def test_classify_negative_returns_hard_when_in_rule_top20():
+    """出现在 rule_top20 的非 gold 期刊 → hard_rule_top20。"""
+    journals = {"a": {"subject_tags": ["ai"]}, "b": {"subject_tags": ["cv"]}}
+    assert _classify_negative("b", "a", ["a", "b"], journals) == "hard_rule_top20"
+
+
+def test_classify_negative_returns_same_area_when_subject_tags_overlap():
+    """非 rule_top20 但 subject_tags 与 gold 重叠 → same_area。"""
+    journals = {"a": {"subject_tags": ["ai"]}, "b": {"subject_tags": ["ai", "ml"]}}
+    assert _classify_negative("b", "a", ["a"], journals) == "same_area"
+
+
+def test_classify_negative_returns_easy_other_otherwise():
+    """既不在 rule_top20 也不在同领域 → easy_other。"""
+    journals = {"a": {"subject_tags": ["ai"]}, "b": {"subject_tags": ["graphics"]}}
+    assert _classify_negative("b", "a", ["a"], journals) == "easy_other"
+
+
+def test_build_negatives_respects_max_negatives_cap():
+    """负样本数不能超过 max_negatives。"""
+    journals = {}
+    cands = [f"j{i}" for i in range(20)]
+    result = _build_negatives(cands, "gold", [], journals, max_negatives=5)
+    assert len(result) == 5
+    # 全是 easy_other(没 journals 信息,也没 rule_top20)
+    assert all(t == "easy_other" for _, t in result)
+
+
+def test_build_negatives_prioritizes_hard_then_same_area_then_easy():
+    """hard > same_area > easy_other 的优先级必须实现。"""
+    journals = {
+        "gold": {"subject_tags": ["ai"]},
+        "hard1": {"subject_tags": ["cv"]},
+        "hard2": {"subject_tags": ["graphics"]},
+        "same1": {"subject_tags": ["ai"]},
+        "easy1": {"subject_tags": ["security"]},
+        "easy2": {"subject_tags": ["theory"]},
+    }
+    cands = ["hard1", "hard2", "same1", "easy1", "easy2"]
+    rule_top20 = ["gold", "hard1", "hard2"]
+    result = _build_negatives(cands, "gold", rule_top20, journals, max_negatives=2)
+    jids = [jid for jid, _ in result]
+    assert jids == ["hard1", "hard2"]  # 优先级最高先填
+
+
+def test_build_training_rows_emits_positive_and_negatives():
+    """每篇 paper 应产出 1 个正样本(若 gold 在 features 中)+ 至多 10 个负样本。
+
+    2026-06-26: dead features (same_gold_area, same_parsed_ccf_area,
+    candidate_in_accepted_corpus) 已删除。Base schema 是 16-dim。
+    """
+    ablation = {
+        "variants": {
+            "hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": [
+                    {
+                        "title": "Paper 1",
+                        "target_journal_id": "gold",
+                        "candidate_features": {
+                            "gold": _make_features(0.9),
+                            "neg_hard": _make_features(0.5),
+                            "neg_easy": _make_features(0.1),
+                        },
+                        "rule_top5": ["gold", "neg_hard"],
+                    }
+                ],
+            }
+        }
+    }
+    journals = {
+        "gold": {"subject_tags": ["ai"]},
+        "neg_hard": {"subject_tags": ["cv"]},
+        "neg_easy": {"subject_tags": ["graphics"]},
+    }
+    rows = list(build_training_rows(ablation, journals, max_negatives=10))
+    # 1 positive + 2 negatives = 3
+    assert len(rows) == 3
+    pos_rows = [r for r in rows if r["label"] == 1]
+    neg_rows = [r for r in rows if r["label"] == 0]
+    assert len(pos_rows) == 1
+    assert pos_rows[0]["journal_id"] == "gold"
+    assert pos_rows[0]["negative_type"] == "gold"
+    # 16-dim schema, no dead features
+    assert len(pos_rows[0]["features"]) == 16
+    assert neg_rows[0]["negative_type"] == "hard_rule_top20"
+    assert neg_rows[1]["negative_type"] == "easy_other"
+
+
+def test_build_training_rows_skips_paper_without_gold_in_features():
+    """如果 gold 期刊不在 candidate_features 中(完全没召回),该 paper 只产负样本。"""
+    ablation = {
+        "variants": {
+            "hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": [
+                    {
+                        "title": "Paper missed",
+                        "target_journal_id": "gold",
+                        "candidate_features": {
+                            "neg1": _make_features(0.3),
+                        },
+                        "rule_top5": ["neg1"],
+                    }
+                ],
+            }
+        }
+    }
+    journals = {"gold": {"subject_tags": ["ai"]}, "neg1": {"subject_tags": ["cv"]}}
+    rows = list(build_training_rows(ablation, journals))
+    # 没有正样本,只有 1 个负样本
+    assert all(r["label"] == 0 for r in rows)
+    assert len(rows) == 1
+
+
+def test_build_training_rows_respects_max_negatives_per_paper():
+    """max_negatives=3 时,每篇 paper 最多 1 正 + 3 负 = 4 行。"""
+    ablation = {
+        "variants": {
+            "hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": [
+                    {
+                        "title": f"P{i}",
+                        "target_journal_id": "gold",
+                        "candidate_features": {
+                            "gold": _make_features(0.9),
+                            **{f"n{j}": _make_features(0.1) for j in range(10)},
+                        },
+                        "rule_top5": ["gold"],
+                    }
+                    for i in range(2)
+                ],
+            }
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, max_negatives=3))
+    # 2 papers × (1 positive + 3 negatives) = 8
+    assert len(rows) == 8
+    # 每篇 paper 恰好 4 行
+    from collections import Counter
+    counts = Counter(r["paper_id"] for r in rows)
+    assert counts["P0"] == 4
+    assert counts["P1"] == 4
+
+
+def test_build_training_rows_filters_variants():
+    """only_variants=['full_hybrid'] 时,只处理 full_hybrid,跳过 hybrid。
+
+    2026-06-26: 16-dim schema, no dead features.
+    """
+    ablation = {
+        "variants": {
+            "hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": [
+                    {"title": "P", "target_journal_id": "g", "candidate_features": {"g": _make_features(0.5)}, "rule_top5": []}
+                ],
+            },
+            "full_hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": [
+                    {"title": "P", "target_journal_id": "g", "candidate_features": {"g": _make_features(0.9)}, "rule_top5": []}
+                ],
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, only_variants=["full_hybrid"]))
+    assert len(rows) == 1
+    assert rows[0]["variant"] == "full_hybrid"
+    # 16-dim schema; verify features is exactly 16 elements of 0.9
+    # same_ccf_level (idx 14) is recomputed from gold_journal_meta; with empty
+    # journals_by_id, paper_ccf_target_level="", so same_ccf_level=0.0.
+    expected_features = [0.9] * len(FEATURE_NAMES)
+    expected_features[FEATURE_NAMES.index("same_ccf_level")] = 0.0
+    assert rows[0]["features"] == expected_features
+    assert len(rows[0]["features"]) == 16
+
+
+# ---- Task 4.3: sidecar report + 80% warning ----
+
+
+def _ablation_with_paper_features(papers: list) -> dict:
+    """构造 ablation-like 数据,每条 paper 有 retrieval_rank + candidate_features。"""
+    return {
+        "variants": {
+            "hybrid": {
+                "feature_names": list(FEATURE_NAMES),
+                "paper_results": papers,
+            }
+        }
+    }
+
+
+def test_extract_route_combination_returns_present_routes_sorted():
+    """_extract_route_combination 从 features 向量中提取"实际出现"的 route 集合,排序后用 + 连接。"""
+    # 构造 features: scope_bm25=3 (有), scope_vector=999 (缺), typical_bm25=5 (有), accepted_bm25=999 (缺)
+    feats = [MISSING_RANK_SENTINEL] * len(FEATURE_NAMES)
+    feats[FEATURE_NAMES.index("scope_bm25_rank")] = 3.0
+    feats[FEATURE_NAMES.index("typical_bm25_rank")] = 5.0
+    combination = _extract_route_combination(feats)
+    # 应当返回 sorted 的非空 routes: "scope_bm25+typical_bm25"
+    assert combination == "scope_bm25+typical_bm25"
+
+
+def test_extract_route_combination_returns_empty_when_no_routes():
+    """所有 route 都缺失时,返回空字符串(防止组合成空标签)。"""
+    feats = [MISSING_RANK_SENTINEL] * len(FEATURE_NAMES)
+    assert _extract_route_combination(feats) == ""
+
+
+def test_build_training_report_warns_when_fewer_than_80pct_positives_in_top50():
+    """如果 < 80% 正样本的 retrieval_rank <= 50,retrieval_topk_80_warning=True。"""
+    papers = [
+        {"title": "P1", "retrieval_rank": 10, "target_journal_id": "g1", "candidate_features": {"g1": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P2", "retrieval_rank": 5, "target_journal_id": "g2", "candidate_features": {"g2": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P3", "retrieval_rank": 30, "target_journal_id": "g3", "candidate_features": {"g3": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P4", "retrieval_rank": 999, "target_journal_id": "g4", "candidate_features": {"g4": _make_features(0.9)}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    assert report["positives_with_target_in_top50_count"] == 3
+    assert abs(report["positives_with_target_in_top50_ratio"] - 0.75) < 1e-6
+    assert report["retrieval_topk_80_warning"] is True
+
+
+def test_build_training_report_no_warning_when_above_80pct_threshold():
+    """≥ 80% 正样本 retrieval_rank <= 50 时,warning=False。"""
+    papers = [
+        {"title": "P1", "retrieval_rank": 10, "target_journal_id": "g1", "candidate_features": {"g1": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P2", "retrieval_rank": 5, "target_journal_id": "g2", "candidate_features": {"g2": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P3", "retrieval_rank": 30, "target_journal_id": "g3", "candidate_features": {"g3": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P4", "retrieval_rank": 40, "target_journal_id": "g4", "candidate_features": {"g4": _make_features(0.9)}, "rule_top5": []},
+        {"title": "P5", "retrieval_rank": 999, "target_journal_id": "g5", "candidate_features": {"g5": _make_features(0.9)}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    # 4/5 = 80% (>= 80%,不报警)
+    assert report["positives_with_target_in_top50_count"] == 4
+    assert abs(report["positives_with_target_in_top50_ratio"] - 0.8) < 1e-6
+    assert report["retrieval_topk_80_warning"] is False
+
+
+def test_build_training_report_counts_positives_missing_route_features():
+    """统计正样本中 route 特征为哨兵(999)的数量;按 feature 分桶计数。"""
+    # 3 个正样本: P1 没有 accepted_bm25,P2 没有 accepted_bm25,P3 有 accepted_bm25
+    papers = [
+        {
+            "title": "P1", "retrieval_rank": 5, "target_journal_id": "g1",
+            "candidate_features": {"g1": [999.0] * len(FEATURE_NAMES)},  # 全缺失
+            "rule_top5": [],
+        },
+        {
+            "title": "P2", "retrieval_rank": 5, "target_journal_id": "g2",
+            "candidate_features": {"g2": [999.0] * len(FEATURE_NAMES)},  # 全缺失
+            "rule_top5": [],
+        },
+        {
+            "title": "P3", "retrieval_rank": 5, "target_journal_id": "g3",
+            "candidate_features": {"g3": _make_features(0.9)},  # 全部非哨兵
+            "rule_top5": [],
+        },
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    # P1, P2 在 scope_bm25_rank 上是 999(哨兵),P3 不是
+    scope_bm25_idx = FEATURE_NAMES.index("scope_bm25_rank")
+    # 检查每个 route feature 的缺失计数
+    missing = report["positives_missing_route_features"]
+    assert missing["scope_bm25_rank"] == 2  # P1, P2 缺失
+    assert missing["accepted_bm25_rank"] == 2  # P1, P2 也缺失
+    # P3 的所有 route 都存在,所以对于 P3 涉及的所有 route 缺失计数应为 2
+    # 但 accepted_vector_rank 也是 2(P1, P2 缺失)
+    assert missing["accepted_vector_rank"] == 2
+
+
+def test_build_training_report_counts_route_combinations():
+    """route combination 分布:对正样本统计"哪些 route 命中",按 string 计数。"""
+    # P1: scope_bm25 命中 → "scope_bm25"
+    feats_p1 = [MISSING_RANK_SENTINEL] * len(FEATURE_NAMES)
+    feats_p1[FEATURE_NAMES.index("scope_bm25_rank")] = 3.0
+    # P2: scope_bm25 + typical_bm25 → "scope_bm25+typical_bm25"
+    feats_p2 = [MISSING_RANK_SENTINEL] * len(FEATURE_NAMES)
+    feats_p2[FEATURE_NAMES.index("scope_bm25_rank")] = 2.0
+    feats_p2[FEATURE_NAMES.index("typical_bm25_rank")] = 7.0
+    # P3: 仅 typical_bm25 → "typical_bm25"
+    feats_p3 = [MISSING_RANK_SENTINEL] * len(FEATURE_NAMES)
+    feats_p3[FEATURE_NAMES.index("typical_bm25_rank")] = 4.0
+
+    papers = [
+        {"title": "P1", "retrieval_rank": 5, "target_journal_id": "g1", "candidate_features": {"g1": feats_p1}, "rule_top5": []},
+        {"title": "P2", "retrieval_rank": 5, "target_journal_id": "g2", "candidate_features": {"g2": feats_p2}, "rule_top5": []},
+        {"title": "P3", "retrieval_rank": 5, "target_journal_id": "g3", "candidate_features": {"g3": feats_p3}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    combinations = report["route_combination_counts"]
+    assert combinations["scope_bm25"] == 1
+    assert combinations["scope_bm25+typical_bm25"] == 1
+    assert combinations["typical_bm25"] == 1
+
+
+def test_build_training_report_includes_positive_and_negative_counts():
+    """report 必须包含正负样本计数(per variant 与 overall)。"""
+    papers = [
+        {"title": "P1", "retrieval_rank": 5, "target_journal_id": "g1", "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    rows = list(build_training_rows(ablation, {}))
+    pos_rows = [r for r in rows if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    assert report["positives_total"] == 1
+    assert report["positives_by_variant"] == {"hybrid": 1}
+
+
+def test_build_training_report_includes_dead_feature_nonzero_counts():
+    """2026-06-26: sidecar report 必须含 dead_feature_nonzero 计数(4 features)。
+
+    验证 4 个 key 都存在,key 类型为 int。无 pos rows 时全 0。
+    """
+    papers = [
+        {"title": "P1", "retrieval_rank": 5, "target_journal_id": "g1", "candidate_features": {"g1": _make_features(0.9)}, "rule_top5": []},
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    pos_rows = [r for r in build_training_rows(ablation, {}) if r["label"] == 1]
+    report = build_training_report(ablation, pos_rows)
+    assert "dead_feature_nonzero" in report
+    nz = report["dead_feature_nonzero"]
+    assert set(nz.keys()) == {
+        "same_gold_area", "same_parsed_ccf_area",
+        "same_ccf_level", "candidate_in_accepted_corpus",
+    }
+    for v in nz.values():
+        assert isinstance(v, int)
+
+
+def test_build_training_report_counts_dead_features_when_overlap_exists():
+    """2026-06-26: 4 dead features (same_gold_area, same_parsed_ccf_area,
+    same_ccf_level, candidate_in_accepted_corpus) 已从 schema 删除。
+
+    本测试现在验证 schema 已不再含这些 features;sidecar report 不再统计它们。
+    """
+    paper_title = "Paper X"
+    target_jid = "gold_j"
+    candidate_features = _make_16_dim_base_features([target_jid])
+    papers_by_title = {
+        paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI", "ML"], "A"),
+    }
+    accepted_jid_set = {target_jid}
+    ablation = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation, journals_by_id, max_negatives=0,
+        accepted_jid_set=accepted_jid_set,
+        papers_by_title=papers_by_title,
+    ))
+    pos_rows = [r for r in rows if r["label"] == 1]
+    # 16-dim base schema, dead features 已删除
+    assert len(pos_rows[0]["features"]) == 16
+    assert "same_gold_area" not in pos_rows[0]["feature_names"]
+    assert "candidate_in_accepted_corpus" not in pos_rows[0]["feature_names"]
+
+
+# ---------------------------------------------------------------------------
+# Task 6.4 — 22-dim schema with LLM evidence lookup
+# ---------------------------------------------------------------------------
+
+
+def test_build_training_rows_outputs_16_dim_by_default():
+    """No evidence_lookup → 16-dim schema (2026-06-26: 16-dim, was 19-dim).
+
+    The ablation JSON may carry legacy 19/20-dim candidate_features (paper_strength
+    position); build_training_rows must trim idx 18 (paper_strength) before
+    writing the row so output is always 16-dim.
+    """
+    papers = [
+        {
+            "title": "P1", "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    rows = list(build_training_rows(ablation, {}))
+    assert all(len(r["features"]) == 16 for r in rows), (
+        f"expected 16-dim base, got {[len(r['features']) for r in rows]}"
+    )
+    assert all(r["feature_names"] == FEATURE_NAMES for r in rows)
+
+
+def test_build_training_rows_appends_6_evidence_fields_when_lookup_supplied():
+    """With evidence_lookup, each row's features become 22-dim and
+    feature_names switches to FEATURE_NAMES_WITH_LLM_EVIDENCE.
+
+    The snapshot key is ``title | venue`` (both casefold-normalized),
+    mirroring ``precompute_evidence._paper_key``. Lookup is keyed off
+    the paper's (title, venue) pair, not the title alone.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    papers = [
+        {
+            "title": "Paper One", "venue": "Journal of Foo",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    evidence_lookup = {
+        "paper one | journal of foo": {
+            "g1": {
+                "scope_fit": 0.9, "method_fit": 0.8,
+                "application_fit": 0.7, "journal_position_fit": 0.85,
+                "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+            },
+            "n1": {
+                "scope_fit": 0.2, "method_fit": 0.3,
+                "application_fit": 0.4, "journal_position_fit": 0.25,
+                "too_broad_penalty": 0.0, "too_narrow_penalty": 0.0,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    assert all(len(r["features"]) == 22 for r in rows), (
+        f"expected 22-dim (was 25), got {[len(r['features']) for r in rows]}"
+    )
+    assert all(r["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE for r in rows)
+    # The 6 appended evidence values match the snapshot (2026-06-26: at idx 16+, was 19+)
+    g1_row = next(r for r in rows if r["journal_id"] == "g1" and r["label"] == 1)
+    assert g1_row["features"][16:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05], (
+        f"evidence expected at idx 16-21, got {g1_row['features'][16:]}"
+    )
+    n1_row = next(r for r in rows if r["journal_id"] == "n1")
+    assert n1_row["features"][16:] == [0.2, 0.3, 0.4, 0.25, 0.0, 0.0]
+
+
+def test_build_training_rows_uses_neutral_defaults_for_missing_evidence():
+    """When the snapshot has no entry for (paper, journal_id), the row
+    uses neutral defaults (fit=0.5, penalty=0.0)."""
+    from src.ranker.feature_builder import LLM_EVIDENCE_FEATURE_NAMES
+
+    papers = [
+        {
+            "title": "P1", "venue": "V1",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9), "n1": _make_features(0.1)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    # Lookup only has g1, not n1
+    evidence_lookup = {
+        "p1 | v1": {
+            "g1": {
+                "scope_fit": 0.9, "method_fit": 0.8, "application_fit": 0.7,
+                "journal_position_fit": 0.85, "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1_row = next(r for r in rows if r["journal_id"] == "g1")
+    n1_row = next(r for r in rows if r["journal_id"] == "n1")
+    # 2026-06-26: 16-dim base; evidence slice starts at len(FEATURE_NAMES)
+    base_dim = len(FEATURE_NAMES)
+    assert g1_row["features"][base_dim:] == [0.9, 0.8, 0.7, 0.85, 0.1, 0.05]
+    # n1 falls back to neutral: 4 fits at 0.5, 2 penalties at 0.0
+    expected_neutral = [
+        0.5, 0.5, 0.5, 0.5,  # fits
+        0.0, 0.0,  # penalties
+    ]
+    assert n1_row["features"][base_dim:] == expected_neutral
+    # Sanity: 6 evidence values in the order declared in LLM_EVIDENCE_FEATURE_NAMES
+    assert len(n1_row["features"][base_dim:]) == len(LLM_EVIDENCE_FEATURE_NAMES)
+
+
+def test_build_training_rows_uses_neutral_defaults_for_invalid_evidence_values():
+    """Out-of-range or non-numeric evidence values must NOT be passed through
+    to training data; they fall back to neutral defaults (matches the
+    ranker's runtime behavior, so train/inference agree on bad-input policy)."""
+    papers = [
+        {
+            "title": "P1", "venue": "V1",
+            "retrieval_rank": 5,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    # scope_fit=1.5 is out of [0,1]; method_fit="bad" is non-numeric
+    evidence_lookup = {
+        "p1 | v1": {
+            "g1": {
+                "scope_fit": 1.5, "method_fit": "bad", "application_fit": 0.6,
+                "journal_position_fit": -0.1, "too_broad_penalty": "x",
+                "too_narrow_penalty": None,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1 = next(r for r in rows if r["journal_id"] == "g1")
+    # All 6 fields fell back to defaults (only application_fit=0.6 was valid)
+    # 2026-06-26: 16-dim base; evidence slice starts at len(FEATURE_NAMES)
+    base_dim = len(FEATURE_NAMES)
+    assert g1["features"][base_dim:] == [0.5, 0.5, 0.6, 0.5, 0.0, 0.0]
+
+
+def test_build_training_rows_uses_title_only_key_when_venue_empty():
+    """When ``venue`` is empty, the snapshot's paper_key is ``title | ''
+    (empty venue, trailing separator). The lookup mirrors this exact
+    format so it stays in sync with how precompute_evidence stores keys.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    papers = [
+        {
+            "title": "Standalone Paper", "venue": "",
+            "retrieval_rank": 1,
+            "target_journal_id": "g1",
+            "candidate_features": {"g1": _make_features(0.9)},
+            "rule_top5": [],
+        }
+    ]
+    ablation = _ablation_with_paper_features(papers)
+    evidence_lookup = {
+        "standalone paper | ": {  # mirrors precompute_evidence._paper_key
+            "g1": {
+                "scope_fit": 0.7, "method_fit": 0.6, "application_fit": 0.5,
+                "journal_position_fit": 0.4, "too_broad_penalty": 0.0, "too_narrow_penalty": 0.0,
+            },
+        }
+    }
+    rows = list(build_training_rows(ablation, {}, evidence_lookup=evidence_lookup))
+    g1 = next(r for r in rows if r["journal_id"] == "g1")
+    assert g1["features"][16:] == [0.7, 0.6, 0.5, 0.4, 0.0, 0.0], (
+        f"expected evidence at idx 16-21, got {g1['features'][16:]}"
+    )
+    # Schema is 22-dim (2026-06-26: 16 base + 6 evidence = 22, was 25/26)
+    assert len(g1["features"]) == 22, (
+        f"expected 22-dim (was 25), got {len(g1['features'])}"
+    )
+    assert g1["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: Accepted Corpus LTR — 4 dead features recompute
+# (same_gold_area, same_parsed_ccf_area, same_ccf_level, candidate_in_accepted_corpus)
+# ---------------------------------------------------------------------------
+
+
+def _make_19_dim_base_features(
+    journal_ids: list, accepted_jid_set: set = None
+) -> dict:
+    """兼容名 (旧测试可能还在引用);内部走 16-dim 实现。"""
+    return _make_16_dim_base_features(journal_ids, accepted_jid_set)
+
+
+def _make_16_dim_base_features(
+    journal_ids: list, accepted_jid_set: set = None
+) -> dict:
+    """Build a 16-dim base feature vector per jid (2026-06-26: 16-dim, was 19-dim).
+
+    Schema (per src/ranker/feature_builder.py):
+      0:retrieval_rank, 1:rule_rank, 2:rule_score,
+      3-8: scope/typical/accepted bm25/vector rank (999 sentinel = missing)
+      9:route_count, 10:has_scope_route, 11:has_typical_route,
+      12:has_accepted_route, 13:has_identity_anchor,
+      14:same_ccf_level, 15:journal_ccf_numeric
+    (2026-06-26: 删 4 dead/noise features: same_gold_area, same_parsed_ccf_area,
+    candidate_in_accepted_corpus, journal_tier_weight)
+    """
+    accepted_jid_set = accepted_jid_set or set()
+    out = {}
+    for jid in journal_ids:
+        feats = [999.0] * 16
+        feats[0] = 1.0   # retrieval_rank
+        feats[1] = 999.0  # rule_rank (missing)
+        feats[2] = 0.0   # rule_score
+        # 3-8 stay 999
+        feats[9] = 0.0   # route_count
+        feats[10] = 0.0  # has_scope_route
+        feats[11] = 0.0  # has_typical_route
+        feats[12] = 0.0  # has_accepted_route
+        feats[13] = 0.0  # has_identity_anchor
+        feats[14] = 0.0  # same_ccf_level (will be overwritten by build_training_rows)
+        feats[15] = 0.0  # journal_ccf_numeric
+        out[jid] = feats
+    return out
+
+
+def _make_journal_meta(jid: str, subject_tags: list, ccf_rating: str) -> dict:
+    return {
+        "journal_id": jid,
+        "journal_name": jid.upper(),
+        "subject_tags": subject_tags,
+        "ccf_rating": ccf_rating,
+    }
+
+
+def _make_paper_meta(title: str, research_area: list, ccf_research_area: list = None) -> dict:
+    return {
+        "title": title,
+        "research_area": research_area,
+        "ccf_research_area": ccf_research_area if ccf_research_area is not None else research_area,
+    }
+
+
+def _ablation_with_one_paper(
+    paper_title: str, target_jid: str, candidate_jids: list,
+    candidate_features: dict, rule_top20: list = None,
+) -> dict:
+    return {
+        "variants": {
+            "full_hybrid": {
+                "feature_names": None,  # 让 build_training_rows 走 FEATURE_NAMES
+                "paper_results": [
+                    {
+                        "title": paper_title,
+                        "venue": "",
+                        "retrieval_rank": 1,
+                        "target_journal_id": target_jid,
+                        "rule_top20": rule_top20 or [target_jid],
+                        "candidate_features": candidate_features,
+                    }
+                ],
+            }
+        }
+    }
+
+
+def test_same_gold_area_computed_when_research_area_overlaps():
+    """2026-06-26: same_gold_area feature 已删除。验证 schema 中不再含此 feature。
+
+    Schema 是 16-dim,不含 same_gold_area / same_parsed_ccf_area /
+    candidate_in_accepted_corpus。
+    """
+    paper_title = "Test Paper A"
+    target_jid = "gold_j"
+    candidate_features = _make_16_dim_base_features([target_jid])
+    papers_by_title = {
+        paper_title: _make_paper_meta(paper_title, research_area=["AI"]),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI", "ML"], "A"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation_data, journals_by_id, max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "same_gold_area" not in pos["feature_names"]
+    assert len(pos["features"]) == 16
+
+
+def test_same_parsed_ccf_area_computed_when_ccf_area_overlaps():
+    """2026-06-26: same_parsed_ccf_area feature 已删除。"""
+    paper_title = "Test Paper B"
+    target_jid = "gold_j"
+    candidate_features = _make_16_dim_base_features([target_jid])
+    papers_by_title = {
+        paper_title: _make_paper_meta(
+            paper_title,
+            research_area=["machine learning"],
+            ccf_research_area=["人工智能"],
+        ),
+    }
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["人工智能", "机器学习"], "A"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation_data, journals_by_id, max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "same_parsed_ccf_area" not in pos["feature_names"]
+
+
+def test_same_ccf_level_is_zero_without_explicit_user_target():
+    """Gold venue CCF must not leak into a feature unavailable at inference."""
+    paper_title = "Test Paper C"
+    target_jid = "gold_j"   # ccf A
+    other_a_jid = "other_a"  # ccf A
+    other_b_jid = "other_b"  # ccf B
+    candidate_jids = [target_jid, other_a_jid, other_b_jid]
+    candidate_features = _make_19_dim_base_features(candidate_jids)
+
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {
+        target_jid: _make_journal_meta(target_jid, ["AI"], "A"),
+        other_a_jid: _make_journal_meta(other_a_jid, ["AI"], "A"),
+        other_b_jid: _make_journal_meta(other_b_jid, ["AI"], "B"),
+    }
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, candidate_jids, candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=2,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    feature_names = rows[0]["feature_names"]
+    idx = feature_names.index("same_ccf_level")
+
+    by_jid = {r["journal_id"]: r for r in rows}
+    assert by_jid[target_jid]["features"][idx] == 0.0
+    assert by_jid[other_a_jid]["features"][idx] == 0.0
+    assert by_jid[other_b_jid]["features"][idx] == 0.0
+
+
+def test_candidate_in_accepted_corpus_set_when_jid_in_corpus():
+    """2026-06-26: candidate_in_accepted_corpus feature 已删除。"""
+    paper_title = "Test Paper D"
+    target_jid = "in_corpus_j"
+    candidate_features = _make_16_dim_base_features([target_jid])
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    accepted_jid_set = {target_jid}
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation_data, journals_by_id, max_negatives=0,
+        accepted_jid_set=accepted_jid_set,
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "candidate_in_accepted_corpus" not in pos["feature_names"]
+
+
+def test_base_features_19_dim_not_20():
+    """2026-06-26: base features are 16-dim (was 19/20-dim)."""
+    paper_title = "Test Paper E"
+    target_jid = "gold_j"
+    candidate_features = _make_16_dim_base_features([target_jid])
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+    rows = list(build_training_rows(
+        ablation_data, journals_by_id, max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert len(pos["features"]) == 16
+    assert len(pos["feature_names"]) == 16
+
+
+def test_no_paper_strength_in_feature_names():
+    """2026-06-26: paper_strength is gone from feature_names."""
+    paper_title = "Test Paper F"
+    target_jid = "gold_j"
+    candidate_features = _make_19_dim_base_features([target_jid])
+    papers_by_title = {paper_title: _make_paper_meta(paper_title, research_area=["AI"])}
+    journals_by_id = {target_jid: _make_journal_meta(target_jid, ["AI"], "A")}
+    ablation_data = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], candidate_features,
+        rule_top20=[target_jid],
+    )
+
+    rows = list(build_training_rows(
+        ablation_data=ablation_data,
+        journals_by_id=journals_by_id,
+        max_negatives=0,
+        accepted_jid_set=set(),
+        papers_by_title=papers_by_title,
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert "paper_strength" not in pos["feature_names"]
+
+
+# ---------------------------------------------------------------------------
+# 2026-06-26: 23-dim plan — decouple tier/area via --enable-tier-exclusivity
+# ---------------------------------------------------------------------------
+
+
+def test_build_training_rows_default_22_dim_without_tier_exclusivity_flag():
+    """2026-06-26: Without --enable-tier-exclusivity, output is 22-dim (no area_exclusivity, no journal_tier_weight).
+
+    Schema: 16 base + 6 evidence = 22-dim. The 27→23 change drops journal_tier_weight
+    AND only adds area_exclusivity when the new CLI flag is set.
+    """
+    from src.ranker.feature_builder import FEATURE_NAMES_WITH_LLM_EVIDENCE
+
+    paper_title = "Paper X"
+    target_jid = "gold_j"
+    # 16-dim base + 6 evidence = 22-dim
+    candidate_features = [999.0] * 16 + [0.5, 0.5, 0.5, 0.5, 0.0, 0.0]
+    ablation = _ablation_with_one_paper(
+        paper_title, target_jid, [target_jid], {target_jid: candidate_features},
+        rule_top20=[target_jid],
+    )
+    evidence_lookup = {"paper x | ": {target_jid: {
+        "scope_fit": 0.9, "method_fit": 0.8, "application_fit": 0.7,
+        "journal_position_fit": 0.85, "too_broad_penalty": 0.1, "too_narrow_penalty": 0.05,
+    }}}
+    # Default path: no --enable-tier-exclusivity flag → 22-dim
+    rows = list(build_training_rows(
+        ablation,
+        {target_jid: _make_journal_meta(target_jid, ["AI"], "A")},
+        max_negatives=0,
+        evidence_lookup=evidence_lookup,
+        papers_by_title={paper_title: _make_paper_meta(paper_title, research_area=["AI"])},
+        accepted_jid_set=set(),
+    ))
+    pos = next(r for r in rows if r["label"] == 1)
+    assert len(pos["features"]) == 22, f"expected 22, got {len(pos['features'])}"
+    assert pos["feature_names"] == FEATURE_NAMES_WITH_LLM_EVIDENCE
+    # No tier/area features
+    assert "area_exclusivity" not in pos["feature_names"]
+    assert "journal_tier_weight" not in pos["feature_names"]

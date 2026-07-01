@@ -1,0 +1,66 @@
+{
+  "journal_id": "iwc",
+  "journal_name": "Interacting with Computers",
+  "papers": [
+    {
+      "title": "Designing for Sustained Motivation: A Review of Self-Determination Theory in Behaviour Change Technologies",
+      "abstract": "Recent years have seen a surge in applications and technologies aimed at motivating users to achieve personal goals and improve their wellbeing. However, these often fail to promote long-term behaviour change, and sometimes even backfire. We consider how self-determination theory (SDT), a metatheory of human motivation and wellbeing, can help explain why such technologies fail, and how they may better help users internalize the motivation behind their goals and make enduring changes in their behaviour. In this work, we systematically reviewed 15 papers in the ACM Digital Library that apply SDT to the design of behaviour change technologies (BCTs). We identified 50 suggestions for design features in BCTs, grounded in SDT, that researchers have applied to enhance user motivation. However, we find that SDT is often leveraged to optimize engagement with the technology itself rather than with the targeted behaviour change per se. When interpreted through the lens of SDT, the implication is that BCTs may fail to cultivate sustained changes in behaviour, as users’ motivation depends on their enjoyment of the intervention, which may wane over time. An underexplored opportunity remains for designers to leverage SDT to support users to internalize the ultimate goals and value of certain behaviour changes, enhancing their motivation to sustain these changes in the long term.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2402.00121",
+      "arxiv": "2402.00121",
+      "corpus_id": 267365321,
+      "url": "https://www.semanticscholar.org/paper/53f9d44513d11d2b5cc825ee1c3706dc48c64381"
+    },
+    {
+      "title": "Designing assistive technologies for and with neurodivergent users: considerations from research practice",
+      "abstract": "To be accessible for neurodivergent users, interactive technologies must be designed and developed with the close involvement of end users. However, traditional HCI methods often fail to properly engage neurodivergent users, particularly during the early design phases. To characterize the design challenges and propose techniques to address methodological limitations that currently hinder access to neurodivergent users, in this paper, we make the following contributions: (1) a systematic literature review identifying gaps and opportunities in methodologies for designing interactive technologies for neurodivergent individuals; (2) an online survey gathering insights, challenges, and recommendations from researchers and practitioners for more neuroinclusive practices; and (3) case studies demonstrating adaptive interview methods integrating visual aids and interactive sketching to deeply engage neurodivergent participants. From the literature review, we found that involving neurodivergent users in design enhances engagement to ensure that technology meets their needs, and fosters collaboration and trust for neuroinclusive outcomes. From the survey, we conclude that design studies lack the involvement of neurodivergent older adults, community partnerships are essential for successful recruitment and reduced attrition, and qualitative methods are more commonly employed. The case studies presented demonstrate the feasibility and potential of adaptive interview methods, including visual aids and interactive sketching, to engage neurodivergent participants deeply in the design process. We conclude by discussing common challenges faced and offering practical recommendations for more inclusive and effective design practices in HCI, ultimately promoting greater representation and improved assistive technologies tailored to neurodivergent individuals.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf037",
+      "arxiv": "",
+      "corpus_id": 281900294,
+      "url": "https://www.semanticscholar.org/paper/ff7ba98fd9236b86cf94b4ae51a5e2fa4683b4b7"
+    },
+    {
+      "title": "Designing AI-Powered Chatbots for Dementia Care in Peru: Stakeholder Engagement and Field Observations",
+      "abstract": "In Peru, dementia caregivers face burnout, depression, stress and financial strain. Addressing their needs involves tackling the intricacies of resourcing, caregiving and managing emotional burdens. Chatbots could serve as a viable support mechanism for these issues in regions with limited resources. We study the perceptions of dementia caregivers in Peru regarding a chatbot tailored to offer care navigation and emotional support. We divided the study into four phases: the initial stage encompassed engaging stakeholders to understand potential design challenges; the second stage focused on the design of ‘Ana’, a chatbot for dementia caregivers; the third stage assessed the chatbot through interviews and a caregiver satisfaction survey and the fourth stage gathered contextual insights through a field study for culturally-sensitive recommendations for ‘Ana’. The findings reveal that caregivers seek immediate access to information on handling behavioural symptoms and a platform for emotional release. Moreover, ‘Ana’ was tested in two configurations—one employed predefined conversation patterns, while the other harnessed generative AI for more dynamic responses. Participants preferred the generative AI alternative of ‘Ana’ as it was perceived to be more empathic and human-like. The participants valued the generative approach despite knowing the potential risk of receiving inaccurate information. Lastly, the field observations challenge the practicality of offering care navigation due to the lack of resources available in the health system and highlight that ‘Ana’ needs to be accessible for the varying educational and technological literacy levels present in Peru. However, we found that WhatsApp could be leveraged to overcome the accessibility challenges due to its pervasiveness in Peruvian society and that Community Health Workers could play a vital role in dementia care interventions.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwae057",
+      "url": "https://www.semanticscholar.org/paper/25b13a320cee0f24e0243616fb2cc4eb91d5332d"
+    },
+    {
+      "title": "Not Just a Number: A Multidimensional Approach to Ageing in HCI",
+      "abstract": "The focus on managing problems that can arise for older adults has meant that extant HCI and Ageing research has not given the concepts of “age”’ and “ageing” the explicit theoretical attention they deserve. Attending to this gap, we critically examine a ten-year corpus of CHI publications through the lens of an existing typology that we have further developed to analyse how age is understood, interpreted, and constructed in the field of HCI. Our resulting multidimensional typology of age in HCI elucidates the distinctive characteristics of older adults considered when designing with and for this user group, but also highlights the need for a more critical, reflexive, social constructivist approach to age in HCI. Applying this approach, we explore age as a multidimensional system of stratification to better understand the phenomenon of the age-based digital divide.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf050",
+      "url": "https://www.semanticscholar.org/paper/fe84a52f2b33006bb664f75b1e8bb685fcdd2b70"
+    },
+    {
+      "title": "Introducing the INSPIRE Framework: Guidelines From Expert Librarians for Search and Selection in HCI Literature",
+      "abstract": "Formalized literature reviews are crucial in human–computer interaction (HCI) because they synthesize research and identify unsolved problems. However, current practices lack transparency when reporting details of a literature search. This restricts replicability. This paper introduces the INSPIRE framework for HCI research. It focuses on the search stage in literature reviews to support a search that prioritizes transparency and quality-of-fit to a research question. It was developed based on guiding principles for successful searches and precautions advised by librarian experts in HCI (n=8) for search strategies in (primarily systematic) literature reviews. We discuss how their advice aligns with the HCI field and their concerns about computational AI tools assisting or automating these reviews. Based on their advice, the framework outlines pivotal stages in conducting a literature search. These essential stages are: (1) defining research goals, (2) navigating relevant databases and (3) using searching techniques (like divergent and convergent searching) to identify a set of relevant studies. The framework also emphasizes the importance of team involvement, transparent reporting, and a flexible, iterative approach to refining the search terms.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf001",
+      "url": "https://www.semanticscholar.org/paper/1f7e2d3dc4c9750de9e40e09f6fb79011d703ef9"
+    },
+    {
+      "title": "A Step Toward Formalising Visual Data Analysis Practices in Human Computer Interaction",
+      "abstract": "Visual data is an integral part of qualitative research, yet it is not always clear to researchers how to use or interpret it once gathered. Existing methods for qualitative data analysis largely rely on textual approaches such as thematic analysis, or grounded theory. Open coding is a term that is frequently used to describe a analysis that follows a logical—yet undocumented—process, but these can often be applied ad hoc, and are necessarily created after the fact of data collection. Researchers often develop their own ways of interrogating visual data, but can struggle to prove the legitimacy of not employing an existing approach. This article outlines a proven and replicable process for the analysis of static visual imagery that has been developed by the author and utilised together with research collaborators over a seven year period. The approach, which I call Annotated Visual Analysis (AVA), can be used for sketched or artistic data from participants or in first person, subjective research, in order to generate insight, gather requirements or confirm hypotheses. Here, I outline five case studies using the approach in differing contexts, in order to demonstrate its applicability, and outline the process and guidelines so that other researchers might employ the method. I also discuss the need for other researchers using visual methods to share and consolidate their forms of analysis to develop knowledge for use by others in the field.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwae063",
+      "url": "https://www.semanticscholar.org/paper/8ff5fc3932a4540dc9c012ac7ce1c33c0b10346f"
+    },
+    {
+      "title": "Using the Smileyometer to measure UX with children",
+      "abstract": "Since 2002, the Smileyometer has been much used for measuring UX with children, and limitations, extensions, and idiosyncrasies of it have been reported. We summarise this body of work drawing out the interesting observations and commentaries. Adapting the Smileyometer for small children, considering the effect on scores when rating a sequence of activities or products, and understanding how children might discriminate between products or services are three emerging themes that we examine in case studies. These studies show that adapting the Smileyometer for use with young children is possible, that an order effect can exist when rating items one after the other and this merits further investigation and that the tool does facilitate discrimination. We conclude with three guidelines to assist researchers in getting the best out of the tool by considering preparation, completion, and reporting when choosing the Smileyometer as a tool.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1093/iwc/iwaf016",
+      "url": "https://www.semanticscholar.org/paper/4ed020830a73c2de76b8171ee9b4e1362b488bd0"
+    }
+  ]
+}

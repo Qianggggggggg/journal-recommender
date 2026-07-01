@@ -1,0 +1,70 @@
+{
+  "journal_id": "jgitm",
+  "journal_name": "Journal of Global Information Technology Management",
+  "papers": [
+    {
+      "title": "Heterogeneous effects of information and communication technology development on digital financial consumer protection: Evidence from the global sample",
+      "abstract": "This study primarily examines the influence of Information and Communication Technology (ICT) on Digital Financial Consumer Protection (DFCP), utilizing a dataset spanning 88 countries globally from 2014 to 2018, within the context of consumer welfare under diverse socioeconomic conditions. The research confirms a positive relationship between information and communication technology (ICT) evolution and digital finance consumer protection (DFCP) in OECD countries with inclusive institutions, competitive markets, and solid educational foundations. Conversely, a negative correlation is observed between ICT growth and DFCP in countries with moderate gender inequality. The study further confirms that ICT development positively influences DFCP due to contextual conditions (i.e. cybersecurity index, political stability, higher educational level, and market quality). Policy implications emphasize the need to address information inequality and protect consumer rights in the digital era. Measures to curb market monopolies of major tech companies and combat unauthorized data usage are recommended. Additionally, enhancing digital literacy is crucial for harnessing the benefits of ICT and promoting financial consumer welfare. Establishing a practical code of conduct aligned with market needs is also essential for ensuring consumer protection.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2024.2410676",
+      "url": "https://www.semanticscholar.org/paper/4fcd064ac73cb805ff87fc24e076538c38014882"
+    },
+    {
+      "title": "AI Agents and Agentic Systems: Redefining Global it Management",
+      "abstract": "Artificial Intelligence (AI) agents represent a transformative advancement in global Information Technology (IT) management, introducing autonomous, goal-driven systems capable of reasoning, adapting, and executing decisions across distributed IT ecosystems. By leveraging Large Language Models (LLMs) and advanced AI frameworks, they enhance operational efficiency, decision-making, and cross-border IT collaboration. Their impact spans finance, healthcare, supply chain management, and enterprise IT services, where they act as virtual team members, automating infrastructure management, optimizing workflows, and ensuring 24/7 global system continuity. Despite these benefits, challenges persist in trust management, ethical accountability, and legacy system integration. As AI agents take on complex roles, concerns over safety, security, transparency, bias, and decision-making accountability become critical for many organizations. This study examines these complexities from a global IT perspective. We review the recent research and propose a research agenda that explores the ethical, operational, and strategic implications of AI agents in modern IT ecosystems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2025.2524286",
+      "url": "https://www.semanticscholar.org/paper/7c26f028e67cb4614c189279e9a3afabc192dab6"
+    },
+    {
+      "title": "Effectiveness of Top-Tier Information Technology Software Service Companies: A Multi-Component Perspective",
+      "abstract": "Information Technology (IT) firms are structured internally into various components to provide customized services to their customers. Owing to the significance of internal structure, the objective of the paper is to study quarterly efficiency of five IT software companies (Infosys, Tata Consultancy Services (TCS), Wipro, Cognizant and Accenture) based on components like FSI (Banking, Financial, Securities, and Insurance), MFG (Manufacturing), RCL (Retail, Consumer Packaged Goods, and Logistics), ERU (Energy, Utilities and Resources), CME (Communication, Media, and Entertainment) and LSH (Life Sciences and Health Care Services) using multi-component data envelopment analysis. Results obtained establish that Infosys is the most efficient company followed by Cognizant and Accenture while TCS and Wipro are inefficient in some of the components. Empirical results show that the companies performed efficiently in FSI, RCL and CME components whereas ERU, LSH and MFG components require improvement. Further, the geography-wise efficiency trends indicate that the selected companies are more efficient in the rest of the world as compared to the European and North American regions. These findings will help IT firms in identifying their inefficient components and provide guidance in formulating strategies for improvements. Moreover, other domestic and foreign firms may also learn from the findings of the study.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2021.1914496",
+      "url": "https://www.semanticscholar.org/paper/a60638f30d8552942255e19a71c64e4c3b23878e"
+    },
+    {
+      "title": "Information Technology and Gender Economic Inclusion in Sub-Saharan Africa",
+      "abstract": "This study investigates how ICT affects gender economic inclusion via gender parity education channels. We examine the issue using data from 49 countries in sub–Saharan Africa for the period 2004–2018 divided into: (i) 42 countries for the period 2004–2014; and (ii) 49 countries for the period 2008-2018. Given the overwhelming evidence of negative net effects in the first sample, an extended analysis is used to establish thresholds of ICT penetration that nullify the established net negative effects. We found that in order to enhance female labor force participation, the following ICT thresholds are worthwhile for the secondary education channel: 165 mobile phone penetration per 100 people, 21.471 internet penetration per 100 people and 3.475 fixed broadband subscriptions per 100 people. For the same outcome of inducing a positive effect on female labor force participation, a 31.966 internet penetration per 100 people threshold, is required for the mechanism of tertiary school education. These computed thresholds have economic meaning and policy relevance because they are within the established ICT policy ranges. In the second sample, a mobile phone penetration threshold of 122.20 per 100 people is needed for the tertiary education channel to positively affect female labor force participation.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2021.1914497",
+      "url": "https://www.semanticscholar.org/paper/120d1b5150d015e26389258bf0ca396f58051d59"
+    },
+    {
+      "title": "GenAI’s Impact on Global IT Management: A Multi-Expert Perspective and Research Agenda",
+      "abstract": "Generative AI (GenAI) is disrupting global IT management and challenging established practice. The increasing use of GenAI technology is redefining localization, transforming existing workforce roles, outsourcing strategy, and team dynamics. Simultaneously, GenAI’s security complexities have prompted the rethinking of existing risk frameworks to meet a new set of challenges from GenAI enhanced cyber threats. This article explores these complex and converging factors, providing a roadmap to address GenAI’s significant impact on global IT management. We advocate the responsible adoption of GenAI and importance of building resilient, value-driven, globally consistent IT ecosystems able to adapt to the significant challenges and opportunities from the use of GenAI.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2025.2454192",
+      "url": "https://www.semanticscholar.org/paper/9c4ef299c45fbab4a195b3eebd36088068f2d34b"
+    },
+    {
+      "title": "Impact of information and communication technology on financial development: An International view",
+      "abstract": "Any economy’s growth depends on finance sector expansion. Information and Communication technology (ICT) is crucial to a successful financial system in the digital age. In recent years, numerous researchers have empirically examined the relationship between ICT and financial development; however, these studies are confined to certain economies or areas and overlook the multi-layered dimensions of both ICT and FD. An in-depth analysis of ICT’s effect on Financial Development (FD) is done in the present study by utilizing the new additional indicators, considering the depth and efficiency dimensions on the panel data set of 114 economies for 2000–2021 worldwide. Specifically, the most advanced panel data methods, named cross-sectionally autoregressive distributive lag (CS-ÅRDL) and Dumitrescu-Ηurlin panel causality techniques to empirically elaborate on how ICT infrastructure measured by internet users, mobile cellular users, fixed telephone, and broadband subscriptions influence the FD globally. Based on the results of the adopted methodology, there are significant and long-run relationships among the ICT, gross fixed capital formation (GFCF), unemployment (UT), and financial development (FD). To exhibit the CS-ARDL’s resilience concerning the study factors, robustness analysis was also carried out using panel correlated standard errors (PCSE) and feasible generalized least squares (FGLS). Taking into account the empirical findings of the ICT-FD-based study; finally, we proposed several sensible policy implications, their main implementation difficulties, possible cures, and some feasible suggestions for subsequent studies.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2025.2520713",
+      "url": "https://www.semanticscholar.org/paper/95236799ffb23b1806cab540a14b0baeb355362d"
+    },
+    {
+      "title": "Transforming Technology for Global Business Acceleration and Change Management",
+      "abstract": "The majority of global problems and organizational challenges are byproducts of poor human attitude and behavior (Stibe, Roderer, Reisinger, & Nystrom, 2019). Every crucial domain in our lives continuously provides evidence of how things are getting unbalanced despite the progress in building increasingly capable technological innovations, such as artificial intelligence, blockchain, augmented reality, autonomous vehicles, and drones, just to name a few. Managers and employees often look for and find reasons outside of themselves for why there are weak performing organizations and global environmental issues. Societies, communities, businesses, organizations, and industries, basically everyone, need help in making their transformations succeed and sustain positive directions (Waddell, Creed, Cummings, & Worley, 2019). Many people want to change, but it is also well known how often their new year’s resolutions end in February. People tend to perceive changes as something difficult, impossible, and mystical, thus are willing to avoid them. Such attitude naturally leads to poor decisions and consequent behavioral outcomes for societies and corporations. While transformation research has gained more traction in multiple contexts over the last several years (Malar, Arvidsson, & Holmstrom, 2019), this particular transforming work is emerging as an inevitable response to the ever-growing imbalance in our lives across the globe. Advanced information technologies are being continuously developed to make our lives better and businesses grow. However, the fundamental question still remains: With all the evolving information technology, has there been significant success in achieving happier societies and strong organizations?",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2020.1752077",
+      "url": "https://www.semanticscholar.org/paper/db8fe59c21d05aebad0c4ee33645c5744337ade9"
+    },
+    {
+      "title": "Information Security Risk Management in IT Outsourcing – A Quarter-century Systematic Literature Review",
+      "abstract": "Information Security Risk Management (ISRM) in Information Technology Outsourcing (ITO) is among the most critical and under-studied areas of ITO research. This study investigates the body of knowledge focusing on ISRM in ITO by conducting a systematic literature review (SLR) and analyzes 63 papers published between 1994 and 2020. The findings suggest that developing conceptual models or providing commentary is the most popular methodology. Most studies collect data from secondary sources instead of industry. A majority of the studies neither investigate any specific industry nor ITO orientation, i.e., client or service providers. Information security risks (ISRs) from the literature are categorized into 27 types. Most ISRs belong to operations practice, while lack of staff loyalty is the least investigated type of ISRs. Theories, frameworks and models discussed in the literature are explored. A critical analysis of the findings is conducted to identify the gaps and future directions. Since most of the literature is based on conceptual work, it is hard for practitioners to apply this knowledge in the industry unless validated by further research. Specialized literature from the perspectives of ITO orientation, industry type and demographics is required to investigate focused issues and develop accurate knowledge of ISRM in ITO.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1080/1097198X.2021.1993725",
+      "url": "https://www.semanticscholar.org/paper/274a51441082cbde2ad6c9c4d4f08e8e566c3c19"
+    }
+  ]
+}

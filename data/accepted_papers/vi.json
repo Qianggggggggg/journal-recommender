@@ -1,0 +1,86 @@
+{
+  "journal_id": "vi",
+  "journal_name": "Visual Informatics",
+  "papers": [
+    {
+      "title": "A theoretical model for pattern discovery in visual analytics",
+      "abstract": "The word ‘pattern’ frequently appears in the visualisation and visual analytics literature, but what do we mean when we talk about patterns? We propose a practicable definition of the concept of a pattern in a data distribution as a combination of multiple interrelated elements of two or more data components that can be represented and treated as a unified whole. Our theoretical model describes how patterns are made by relationships existing between data elements. Knowing the types of these relationships, it is possible to predict what kinds of patterns may exist. We demonstrate how our model underpins and refines the established fundamental principles of visualisation. The model also suggests a range of interactive analytical operations that can support visual analytics workflows where patterns, once discovered, are explicitly involved in further data analysis.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2020.12.002",
+      "url": "https://www.semanticscholar.org/paper/1e0d3d862d94b4624d14e31dcf8c95bf25cabed3"
+    },
+    {
+      "title": "Towards better analysis of machine learning models: A visual analytics perspective",
+      "abstract": "Interactive model analysis, the process of understanding, diagnosing, and refining a machine learning model with the help of interactive visualization, is very important for users to efficiently solve real-world artificial intelligence and data mining problems. Dramatic advances in big data analytics have led to a wide variety of interactive model analysis tasks. In this paper, we present a comprehensive analysis and interpretation of this rapidly developing area. Specifically, we classify the relevant work into three categories: understanding, diagnosis, and refinement. Each category is exemplified by recent influential work. Possible future research opportunities are also explored and discussed.",
+      "year": 2017,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.VISINF.2017.01.006",
+      "url": "https://www.semanticscholar.org/paper/9bd71d6b87d9e5b8394dc6bc8bc2fca7b7deb083"
+    },
+    {
+      "title": "Toward flexible visual analytics augmented through smooth display transitions",
+      "abstract": ": Visualizing big and complex multivariate data is challenging. To address this challenge, we propose flexible visual analytics (FVA) with the aim to mitigate visual complexity and interaction complexity challenges in visual analytics, while maintaining the strengths of multiple perspectives on the studied data. At the heart of our proposed approach are transitions that fluidly transform data between user-relevant views to offer various perspectives and insights into the data. While smooth display transitions have been already proposed, there has not yet been an interdisciplinary discussion to systematically conceptualize and formalize these ideas. As a call to further action, we argue that future research is necessary to develop a conceptual framework for flexible visual analytics. We discuss preliminary ideas for prioritizing multi-aspect visual representations and multi-aspect transitions between them, and consider the display user for whom such depictions are produced and made available for visual analytics. With this contribution we aim to further facilitate visual analytics on complex data sets for varying data exploration tasks and purposes based on different user characteristics and data use contexts. Abstract Visualizing big and complex multivariate data is challenging. To address this challenge, we propose ﬂexible visual analytics (FVA) with the aim to mitigate visual complexity and interaction complexity challenges in visual analytics, while maintaining the strengths of multiple perspectives on the studied data. At the heart of our proposed approach are transitions that ﬂuidly transform data between user-relevant views to oﬀer various perspectives and insights into the data. While smooth display transitions have been already proposed, there has not yet been an interdisciplinary discussion to systematically conceptualize and formalize these ideas. As a call to further action, we argue that future research is necessary to develop a conceptual framework for ﬂexible visual analytics. We discuss preliminary ideas for prioritizing multi-aspect visual representations and multi-aspect transitions between them, and consider the display user for whom such depictions are produced and made available for visual analytics. With this contribution we aim to further facilitate visual analytics on complex data sets for varying data exploration tasks and purposes based on diﬀerent user characteristics and data use contexts.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2021.06.004",
+      "url": "https://www.semanticscholar.org/paper/217cb2394310280a737d77a16b0462569c624de4"
+    },
+    {
+      "title": "Comparative Visual Analytics for Assessing Medical Records with Sequence Embedding",
+      "abstract": "Machine learning for data-driven diagnosis has been actively studied in medicine to provide better healthcare. Supporting analysis of a patient cohort similar to a patient under treatment is a key task for clinicians to make decisions with high confidence. However, such analysis is not straightforward due to the characteristics of medical records: high dimensionality, irregularity in time, and sparsity. To address this challenge, we introduce a method for similarity calculation of medical records. Our method employs event and sequence embeddings. While we use an autoencoder for the event embedding, we apply its variant with the self-attention mechanism for the sequence embedding. Moreover, in order to better handle the irregularity of data, we enhance the self-attention mechanism with consideration of different time intervals. We have developed a visual analytics system to support comparative studies of patient records. To make a comparison of sequences with different lengths easier, our system incorporates a sequence alignment method. Through its interactive interface, the user can quickly identify patients of interest and conveniently review both the temporal and multivariate aspects of the patient records. We demonstrate the effectiveness of our design and system with case studies using a real-world dataset from the neonatal intensive care unit of UC Davis.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2020.04.001",
+      "url": "https://www.semanticscholar.org/paper/eeab539846ade5ba94cc3c93167962985aea6a7a"
+    },
+    {
+      "title": "A Visual Analytics System for Multi-model Comparison on Clinical Data Predictions",
+      "abstract": "There is a growing trend of applying machine learning methods to medical datasets in order to predict patients' future status. Although some of these methods achieve high performance, challenges still exist in comparing and evaluating different models through their interpretable information. Such analytics can help clinicians improve evidence-based medical decision making. In this work, we develop a visual analytics system that compares multiple models' prediction criteria and evaluates their consistency. With our system, users can generate knowledge on different models' inner criteria and how confidently we can rely on each model's prediction for a certain patient. Through a case study of a publicly available clinical dataset, we demonstrate the effectiveness of our visual analytics system to assist clinicians and researchers in comparing and quantitatively evaluating different machine learning methods.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2020.04.005",
+      "url": "https://www.semanticscholar.org/paper/84f06dc400edca82c5b3f2e605cc31b65bc48e24"
+    },
+    {
+      "title": "Visual exploration of latent space for traditional Chinese music",
+      "abstract": "Generating compact and effective numerical representations of data is a fundamental step for many machine learning tasks. Traditionally, handcrafted features are used but as deep learning starts to show its potential, using deep learning models to extract compact representations becomes a new trend. Among them, adopting vectors from the model’s latent space is the most popular. There are several studies focused on visual analysis of latent space in NLP and computer vision. However, relatively little work has been done for music information retrieval (MIR) especially incorporating visualization. To bridge this gap, we propose a visual analysis system utilizing Autoencoders to facilitate analysis and exploration of traditional Chinese music. Due to the lack of proper traditional Chinese music data, we construct a labeled dataset from a collection of pre-recorded audios and then convert them into spectrograms. Our system takes music features learned from two deep learning models (a fully-connected Autoencoder and a Long Short-Term Memory (LSTM) Autoencoder) as input. Through interactive selection, similarity calculation, clustering and listening, we show that the latent representations of the encoded data allow our system to identify essential music elements, which lay the foundation for further analysis and retrieval of Chinese music in the future.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2020.04.003",
+      "url": "https://www.semanticscholar.org/paper/61f8a72ba657d050469cc372de76ec1186f9dfd6"
+    },
+    {
+      "title": "USEVis: Visual analytics of attention-based neural embedding in information retrieval",
+      "abstract": "Neural attention-based encoders, which effectively attend sentence tokens to their associated context without being restricted by long-term distance or dependency, have demonstrated outstanding performance in embedding sentences into meaningful representations (embeddings). The Universal Sentence Encoder (USE) is one of the most well-recognized deep neural network (DNN) based solutions, which is facilitated with an attention-driven transformer architecture and has been pre-trained on a large number of sentences from the Internet. Besides the fact that USE has been widely used in many downstream applications, including information retrieval (IR), interpreting its complicated internal working mechanism remains challenging. In this work, we present a visual analytics solution towards addressing this challenge. Specifically, focused on semantics and syntactics (concepts and relations) that are critical to domain clinical IR, we designed and developed a visual analytics system, i.e., USEVis. The system investigates the power of USE in effectively extracting sentences’ semantics and syntactics through exploring and interpreting how linguistic properties are captured by attentions. Furthermore, by thoroughly examining and comparing the inherent patterns of these attentions, we are able to exploit attentions to retrieve sentences/documents that have similar semantics or are closely related to a given clinical problem in IR. By collaborating with domain experts, we demonstrate use cases with inspiring findings to validate the contribution of our work and the effectiveness of our system.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.VISINF.2021.03.003",
+      "url": "https://www.semanticscholar.org/paper/b7a3899a3b63eb65198075a321a520effba669d8"
+    },
+    {
+      "title": "Steering data quality with visual analytics: The complexity challenge",
+      "abstract": "Data quality management, especially data cleansing, has been extensively studied for many years in the areas of data management and visual analytics. In the paper, we first review and explore the relevant work from the research areas of data management, visual analytics and human-computer interaction. Then for different types of data such as multimedia data, textual data, trajectory data, and graph data, we summarize the common methods for improving data quality by leveraging data cleansing techniques at different analysis stages. Based on a thorough analysis, we propose a general visual analytics framework for interactively cleansing data. Finally, the challenges and opportunities are analyzed and discussed in the context of data and humans.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.VISINF.2018.12.001",
+      "url": "https://www.semanticscholar.org/paper/d2ce6fc25b33f1a1abbab6c3c0a8257b9a4c1164"
+    },
+    {
+      "title": "PerformanceVis: Visual analytics of student performance data from an introductory chemistry course",
+      "abstract": "We present PerformanceVis, a visual analytics tool for analyzing student admission and course performance data and investigating homework and exam question design. Targeting a university-wide introductory chemistry course with nearly 1000 student enrollment, we consider the requirements and needs of students, instructors, and administrators in the design of PerformanceVis. We study the correlation between question items from assignments and exams, employ machine learning techniques for student grade prediction, and develop an interface for interactive exploration of student course performance data. PerformanceVis includes four main views (overall exam grade pathway, detailed exam grade pathway, detailed exam item analysis, and overall exam & homework analysis) which are dynamically linked together for user interaction and exploration. We demonstrate the effectiveness of PerformanceVis through case studies along with an ad-hoc expert evaluation. Finally, we conclude this work by pointing out future work in this direction of learning analytics research.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.visinf.2019.10.004",
+      "url": "https://www.semanticscholar.org/paper/37c1226e2abe58048884ad57d00b74151f536391"
+    },
+    {
+      "title": "A survey on visual analysis of ocean data",
+      "abstract": "A major challenge in analysis of huge amounts of ocean data is the complexity of the data and the inherent complexity of ocean dynamic processes. Interactive visual analysis serves as an efficient complementary approach for the detection of various phenomena or patterns, and correlation exploring or comparing multiple variables in researchers daily work. Firstly, this paper presents a basic concept of the ocean data produced from numerous measurement devices or computer simulations. The characteristics of ocean data and the related data processing techniques are also described. Secondly, the main tasks of ocean data analysis are introduced. Based on the main analysis tasks in the field of oceanography, the survey emphasizes related interactive visualization techniques and tools from four aspects: visualization of multiple ocean environmental elements and multivariate analysis, ocean phenomena identification and tracking, patterns or correlation discovery, ensembles and uncertainties exploration. Finally, the opportunities are discussed for future studies.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.VISINF.2019.08.001",
+      "url": "https://www.semanticscholar.org/paper/7dad73a647ad978f148a81f712df4c93f2c0fe88"
+    }
+  ]
+}

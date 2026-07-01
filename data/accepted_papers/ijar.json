@@ -1,0 +1,78 @@
+{
+  "journal_id": "ijar",
+  "journal_name": "International Journal of Approximate Reasoning",
+  "papers": [
+    {
+      "title": "Qualitative reasoning in a two-layered framework",
+      "abstract": "The reasoning with qualitative uncertainty measures involves comparative statements about events in terms of their likeliness without necessarily assigning an exact numerical value to these events. The paper is divided into two parts. In the first part, we formalise reasoning with the qualitative counterparts of capacities, belief functions, and probabilities, within the framework of two-layered logics. Namely, we provide two-layered logics built over the classical propositional logic using a unary belief modality $\\Be$ that connects the inner layer to the outer one where the reasoning is formalised by means of G\\\"{o}del logic. We design their Hilbert-style axiomatisations and prove their completeness. In the second part, we discuss the paraconsistent generalisations of the logics for qualitative uncertainty that take into account the case of the available information being contradictory or inconclusive.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2022.12.011",
+      "url": "https://www.semanticscholar.org/paper/4aa4d04d825c7e04384349bf67bba0e8686847f5"
+    },
+    {
+      "title": "Multiple multidimensional linguistic reasoning algorithm based on property-oriented linguistic concept lattice",
+      "abstract": "Aiming at the difficult problems of dealing with mass linguistic information in uncertain environment, this paper mainly focuses on a linguistic reasoning algorithm based on property-oriented linguistic concept lattice by combining concept lattice and neural network. Specifically, we present a property-oriented linguistic concept lattice to express linguistic information between concepts based on linguistic term set. Furthermore, we are devoted to the study of rule extraction of fuzzy linguistic formal decision context by constructing property-oriented linguistic decision concepts. In order to obtain more decision knowledge from known linguistic rules, an extension method of linguistic decision rules is developed, which takes advantage of the dominance relation between similar rules on the premise of consistent property-oriented linguistic decision rules. In addition, we construct a multiple multidimensional linguistic reasoning model for predicting uncertain decision information. Moreover, we input a multiple multidimensional linguistic reasoning model with property-oriented linguistic decision information into neural network to obtain unknown decision results, which can not only improve the accuracy of inference results but also reduce the loss of linguistic information. Finally, some experiments are conducted to demonstrate the efficiency of the proposed method.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.11.006",
+      "url": "https://www.semanticscholar.org/paper/1706fa828c6624914e475f33240ddb604c1da034"
+    },
+    {
+      "title": "A logical reasoning based decision making method for handling qualitative knowledge",
+      "abstract": "Successful decision-making analysis needs to take both advantages of human analysts and computers, and human knowledge is usually expressed in a qualitative way. Computer based approaches are good at handling quantitative data, while it is still challenging on how to well structure qualitative knowledge and incorporate them as part of decision analytics. This paper develops a logical reasoning based decision-making framework for handling qualitative human knowledge. In this framework, an algebraic structure is adopted for modelling qualitative human knowledge in a systematic way, and a logic based approximate reasoning method is then proposed for inferring the final decision based on the structured qualitative knowledge. By taking a non-classical logic as its formal foundation, the proposed logical reasoning based decision making method is able to model and infer with qualitative human knowledge directly without numerical approximation in a strict way.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.11.003",
+      "url": "https://www.semanticscholar.org/paper/9297f288df54637f186d2ba6c1061dedbd18db4e"
+    },
+    {
+      "title": "Limited approximate bisimulations and the corresponding rough approximations",
+      "abstract": "To measure the similarity of nodes in the neighboring subgraphs, Milner introduced the notion of k-limited bisimilarity. Recently, as a weaker vision of k-limited bisimilarity, the notion of k-limited similarity was proposed and applied to graph pattern matching. (Bi)simulations have been widely used in comparing the behavior of fuzzy transition systems. In order to study the (bi)simulation semantics of labeled fuzzy transition systems in the residuated lattice-valued logic setting, we introduce an extension of labeled approximation spaces, called the quantitative fuzzy approximation spaces (QFASs), whose labels are equipped with a residuated lattice-valued equality relation. In a QFAS, we define a new notion of limited approximate similarity, to quantify to what extent one state is simulated by another in the neighboring subgraphs, and provide its properties. Based on the new notion, we give a definition of limited approximate simulation and discuss its properties. Then we introduce an ordered pair of relations, one on the state (vertex) set (limited approximate simulation) and one on the edge (transition) set induced by the relation on state set, called VE limited approximate simulation in this paper. We also present a new notion of limited approximate bisimilarity in a QFAS, to quantify to what extent two states are similar in the neighboring subgraphs, and give its properties. One main contribution of the paper is to give a condition for two states to be limited approximate bisimilar and investigate the degree of similarity between two states in a QFAS. Finally, we discuss the relationships between the rough approximations based on the underlying crisp relation induced by underlying labeled fuzzy relation and the rough approximations based on limited approximate bisimilarity.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.12.005",
+      "url": "https://www.semanticscholar.org/paper/67fff3a3158f502f99778affcc9ec33a3a1e305a"
+    },
+    {
+      "title": "Belief rule mining using the evidential reasoning rule for medical diagnosis",
+      "abstract": "A belief rule mining approach is proposed to generate belief rules with a customized set of criteria by mining from multiple belief rules that are trained using data with varied sets of criteria. As the theoretical basis of the belief rule mining approach, the key concepts are defined, including the weights and reliabilities of cases, criteria, models, and belief rules. Based on the key concepts, multiple sub-models composed of belief rules with varied sets of criteria are initialized and optimized. Then, the optimized sub-models are integrated using the evidential reasoning rule into belief rules with a customized set of criteria. In the belief rule mining process, the weights and reliabilities of the sub-models are considered according to the weight and reliability calculation procedures of models proposed in this study. The proposed approach is used to help diagnose thyroid nodules with 527 medical cases, in which its applicability is demonstrated. By comparative experiments, the diagnostic correctness of the proposed approach is verified to be higher than those of the directly-optimized model and the approach without the consideration of reliability.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.12.009",
+      "url": "https://www.semanticscholar.org/paper/5f23c380b948724842cdbc81e396020a333d05ce"
+    },
+    {
+      "title": "Interval-valued fuzzy reasoning full implication algorithms based on the t-representable t-norm",
+      "abstract": "Interval-valued fuzzy reasoning plays a vital role in intelligent systems with the performance of effectively reducing the loss of fuzzy information and reflecting the vagueness and uncertainty in information processing. However the existing reasoning algorithms were developed based on some special interval-valued t-norms which limits the usability and adaptation of these algorithms. This study proposes general reasoning algorithms on the basis of interval-valued fuzzy sets, that is the interval-valued fuzzy reasoning triple I algorithms based on the left-continuous t-representable t-norm T T 1 , T 2 . Furthermore, the interval-valued R -type triple I solutions of the interval-valued fuzzy reasoning triple I algorithms are given. We show that the proposed algorithms possess the reducibility. Finally, some robustness results of the interval-valued fuzzy reasoning triple I algorithms based on the left-continuous interval-valued t-representable t-norm are proved.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.03.009",
+      "url": "https://www.semanticscholar.org/paper/51682eaa34e8707dd2c16ad8ba7cfb9bbb99446b"
+    },
+    {
+      "title": "Simple contrapositive assumption-based argumentation part II: Reasoning with preferences",
+      "abstract": "Simple contrapositive assumption-based argumentation frameworks are a general setting for structured argumentation, providing a robust approach to reasoning with arguments and counter-arguments. In this paper we extend these frameworks with priorities and introduce some new results concerning the Dung’s semantics of the resulting formalisms",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2021.08.008",
+      "url": "https://www.semanticscholar.org/paper/d620bb33f7b18845c150ed15986ec79ffd8570ad"
+    },
+    {
+      "title": "Rough set reasoning using answer set programs",
+      "abstract": "Reasoning about uncertainty is one of the main cornerstones of Knowledge Representation. Formal representations of uncertainty are numerous and highly varied due to different types of uncertainty intended to be modeled such as vagueness, imprecision and incompleteness. There is a rich body of theoretical results that has been generated for many of these approaches. It is often the case though, that pragmatic tools for reasoning with uncertainty lag behind this rich body of theoretical results. Rough set theory is one such approach for modeling incompleteness and imprecision based on indiscernibility and its generalizations. In this paper, we provide a pragmatic tool for constructively reasoning with generalized rough set approximations that is based on the use of Answer Set Programming ( Asp ). We provide an interpretation of answer sets as (generalized) approximations of crisp sets (when possible) and show how to use Asp solvers as a tool for reasoning about (generalized) rough set approximations situated in realistic knowledge bases. The paper includes generic Asp templates for doing this and also provides a case study showing how these techniques can be used to generate reducts for incomplete Information Systems. Complete, ready to run clingo Asp code is provided in the Appendix, for all programs considered. These can be executed for validation purposes in the clingo Asp solver.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2020.12.010",
+      "url": "https://www.semanticscholar.org/paper/cee6b489db66e660c14b7760bc15229498a1ae20"
+    },
+    {
+      "title": "Bayesianize fuzziness in the statistical analysis of fuzzy data",
+      "abstract": "Fuzzy data, prevalent in social sciences and other fields, capture uncertainties arising from subjective evaluations and measurement imprecision. Despite significant advancements in fuzzy statistics, a unified inferential regression-based framework remains undeveloped. Hence, we propose a novel approach for analyzing bounded fuzzy variables within a regression framework. Building on the premise that fuzzy data result from a process analogous to statistical coarsening, we introduce a conditional probabilistic approach that links observed fuzzy statistics (e.g., mode, spread) to the underlying, unobserved statistical model, which depends on external covariates. The inferential problem is addressed using Approximate Bayesian methods, mainly through a Gibbs sampler incorporating a quadratic approximation of the posterior distribution. Simulation studies and applications involving external validations are employed to evaluate the effectiveness of the proposed approach for fuzzy data analysis. By reintegrating fuzzy data analysis into a more traditional statistical framework, this work provides a significant step toward enhancing the interpretability and applicability of fuzzy statistical methods in many applicative contexts.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ijar.2025.109495",
+      "url": "https://www.semanticscholar.org/paper/8dc5970edd041a0183f743eb5895728e0d2ec7cd"
+    }
+  ]
+}

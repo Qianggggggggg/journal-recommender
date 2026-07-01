@@ -1,0 +1,86 @@
+{
+  "journal_id": "tap",
+  "journal_name": "ACM Transactions on Applied Perception",
+  "papers": [
+    {
+      "title": "Exploring the Effects of User-Agent and User-Designer Similarity in Virtual Human Design to Promote Mental Health Intentions for College Students",
+      "abstract": "Virtual humans (i.e., embodied conversational agents) have the potential to support college students’ mental health, particularly in Science, Technology, Engineering, and Mathematics (STEM) fields where students are at a heightened risk of mental disorders such as anxiety and depression. A comprehensive understanding of students, considering their cultural characteristics, experiences, and expectations, is crucial for creating timely and effective virtual human interventions. To this end, we conducted a user study with 481 computer science students from a major university in North America, exploring how they co-designed virtual humans to support mental health conversations for students similar to them. Our findings suggest that computer science students who engage in co-design processes of virtual humans tend to create agents that closely resemble them demographically—agent-designer demographic similarity. Key factors influencing virtual human design included age, gender, ethnicity, and the matching between appearance and voice. We also observed that the demographic characteristics of virtual human designers, especially ethnicity and gender, tend to be associated with those of the virtual humans they designed. Finally, we provide insights concerning the impact of user-designer demographic similarity in virtual humans’ effectiveness in promoting mental health conversations when designers’ characteristics are shared explicitly or implicitly. Understanding how virtual humans’ characteristics serve users’ experiences in mental wellness conversations and the similarity-attraction effects between agents, users, and designers may help tailor virtual humans’ design to enhance their acceptance and increase their counseling effectiveness.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2405.07418.pdf"
+    },
+    {
+      "title": "GazeFusion: Saliency-Guided Image Generation",
+      "abstract": "Diffusion models offer unprecedented image generation power given just a text prompt. While emerging approaches for controlling diffusion models have enabled users to specify the desired spatial layouts of the generated content, they cannot predict or control where viewers will pay more attention due to the complexity of human vision. Recognizing the significance of attention-controllable image generation in practical applications, we present a saliency-guided framework to incorporate the data priors of human visual attention mechanisms into the generation process. Given a user-specified viewer attention distribution, our control module conditions a diffusion model to generate images that attract viewers’ attention toward the desired regions. To assess the efficacy of our approach, we performed an eye-tracked user study and a large-scale model-based saliency analysis. The results evidence that both the cross-user eye gaze distributions and the saliency models’ predictions align with the desired attention distributions. Lastly, we outline several applications, including interactive design of saliency guidance, attention suppression in unwanted regions, and adaptive generation for varied display/viewing conditions.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "",
+      "url": "https://arxiv.org/pdf/2407.04191.pdf"
+    },
+    {
+      "title": "Investigating the Perception of Facial Anonymization Techniques in 360° Videos",
+      "abstract": "In this work, we investigate facial anonymization techniques in 360° videos and assess their influence on the perceived realism, anonymization effect, and presence of participants. In comparison to traditional footage, 360° videos can convey engaging, immersive experiences that accurately represent the atmosphere of real-world locations. As the entire environment is captured simultaneously, it is necessary to anonymize the faces of bystanders in recordings of public spaces. Since this alters the video content, the perceived realism and immersion could be reduced. To understand these effects, we compare non-anonymized and anonymized 360° videos using blurring, black boxes, and face-swapping shown either on a regular screen or in a head-mounted display (HMD). Our results indicate significant differences in the perception of the anonymization techniques. We find that face-swapping is the most realistic and least disruptive; however, participants raised concerns regarding the effectiveness of the anonymization. Furthermore, we observe that presence is affected by facial anonymization in HMD condition. Overall, the results underscore the need for facial anonymization techniques that balance both photo-realism and a sense of privacy.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3695254",
+      "url": "https://www.semanticscholar.org/paper/8dc46df049b04a440d6b91c954abd10fafe5b900"
+    },
+    {
+      "title": "Can You Tell Real from Fake Face Images? Perception of Computer-Generated Faces by Humans",
+      "abstract": "With recent advances in machine learning and big data, it is now possible to create synthetic images that look real. Face generation is often of particular interest, as faces can be used for various purposes. However, improper use of such content can lead to the dissemination of false information, such as fake news, and thus pose a threat to society. This work studies whether people believe the truthfulness of faces using eye tracking and self-reports, including free-form textual explanations when participants encounter real and computer-generated faces. We used three different datasets for our evaluations, and our experimental results show that while people are relatively better at identifying the truthfulness of real faces and faces generated by earlier machine learning algorithms with different gazing behaviors in viewing and rating phases, they perform less accurately when deciding the truthfulness of synthetic face images that are generated by newer algorithms. Our findings provide important insights for society and policymakers.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3696667",
+      "url": "https://www.semanticscholar.org/paper/95c2415957c5a16879d20f1f3738c799d358d963"
+    },
+    {
+      "title": "Understanding the Impact of Visual and Kinematic Information on the Perception of Physicality Errors",
+      "abstract": "Errors that arise due to a mismatch in the dynamics of a person’s motion and the visualized movements of their avatar in virtual reality are termed “physicality errors” to distinguish them from simple physical errors, such as footskate. Physicality errors involve plausible motions, but with dynamic inconsistencies. Even with perfect tracking and ideal virtual worlds, such errors are inevitable in virtual reality whenever a person adopts an avatar that does not match their own proportions or lifts a virtual object that appears heavier than the movement of their hand. This study investigates people’s sensitivity to physicality errors to understand when they are likely to be noticeable and need to be mitigated. It uses a simple, well-understood exercise of a dumbbell lift to explore the impact of motion kinematics and varied sources of visual information, including changing body size, changing the size of manipulated objects, and displaying muscular strain. Results suggest that kinematic (motion) information has a dominant impact on perception of effort, but visual information, particularly the visual size of the lifted object, has a strong impact on perceived weight. This can lead to perceptual mismatches that reduce perceived naturalness. Small errors may not be noticeable, but large errors reduce naturalness. Further results are discussed, which inform the requirements for animation algorithms.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3660636",
+      "url": "https://www.semanticscholar.org/paper/72f4ea4ed1fc6d589657de0e43715c460f265940"
+    },
+    {
+      "title": "Exploring the Effects of Self-Overlapping Spaces on Distance Perception and Action Judgments",
+      "abstract": "Self-overlapping spaces, also known as impossible spaces, are a design mechanic in virtual reality (VR) that allows a user to naturally walk through an environment that is larger than the physical space available to them. Prior work has focused on generating these spaces and evaluating when their self-overlapping nature is detectable. Comparatively, little work has evaluated how the self-overlapping nature of these spaces impacts users’ spatial understanding and whether any misperceptions carry over into altered action judgments. We present a study evaluating how self-overlapping spaces influence action judgments related to relative distances within the virtual environment. Participants were presented with a variety of self-overlapping spaces and, after exploring them, were asked to judge which of the two locations was closer to their current position in the environment. Participants’ were more likely to make correct decisions as the relative difference in distance between the two locations increased; however, this effect was affected by both the amount of overlap present in a particular environment and by the relative position from which they made their decision.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3695632",
+      "url": "https://www.semanticscholar.org/paper/00e704ce5a2a541cf901d4dac526212cd19c75e6"
+    },
+    {
+      "title": "Calibrated Passability Perception in Virtual Reality Transfers to Augmented Reality",
+      "abstract": "As applications for virtual reality (VR) and augmented reality (AR) technology increase, it will be important to understand how users perceive their action capabilities in virtual environments. Feedback about actions may help to calibrate perception for action opportunities (affordances) so that action judgments in VR and AR mirror actors’ real abilities. Previous work indicates that walking through a virtual doorway while wielding an object can calibrate the perception of one’s passability through feedback from collisions. In the current study, we aimed to replicate this calibration through feedback using a different paradigm in VR while also testing whether this calibration transfers to AR. Participants held a pole at 45°and made passability judgments in AR (pretest phase). Then, they made passability judgments in VR and received feedback on those judgments by walking through a virtual doorway while holding the pole (calibration phase). Participants then returned to AR to make posttest passability judgments. Results indicate that feedback calibrated participants’ judgments in VR. Moreover, this calibration transferred to the AR environment. In other words, after experiencing feedback in VR, passability judgments in VR and in AR became closer to an actor’s actual ability, which could make training applications in these technologies more effective.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3613450",
+      "url": "https://www.semanticscholar.org/paper/21e695564ed093f67daf8307cb1b3077fd39f039"
+    },
+    {
+      "title": "On Human-like Biases in Convolutional Neural Networks for the Perception of Slant from Texture",
+      "abstract": "Depth estimation is fundamental to 3D perception, and humans are known to have biased estimates of depth. This study investigates whether convolutional neural networks (CNNs) can be biased when predicting the sign of curvature and depth of surfaces of textured surfaces under different viewing conditions (field of view) and surface parameters (slant and texture irregularity). This hypothesis is drawn from the idea that texture gradients described by local neighborhoods—a cue identified in human vision literature—are also representable within convolutional neural networks. To this end, we trained both unsupervised and supervised CNN models on the renderings of slanted surfaces with random Polka dot patterns and analyzed their internal latent representations. The results show that the unsupervised models have similar prediction biases as humans across all experiments, while supervised CNN models do not exhibit similar biases. The latent spaces of the unsupervised models can be linearly separated into axes representing field of view and optical slant. For supervised models, this ability varies substantially with model architecture and the kind of supervision (continuous slant vs. sign of slant). Even though this study says nothing of any shared mechanism, these findings suggest that unsupervised CNN models can share similar predictions to the human visual system. Code: github.com/brownvc/Slant-CNN-Biases.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3613451",
+      "url": "https://www.semanticscholar.org/paper/154e91e9c7e7d981aa39327d248d6d728176b1ad"
+    },
+    {
+      "title": "Effect of Subthreshold Electrotactile Stimulation on the Perception of Electrovibration",
+      "abstract": "Electrovibration is used in touch enabled devices to render different textures. Tactile sub-modal stimuli can enhance texture perception when presented along with electrovibration stimuli. Perception of texture depends on the threshold of electrovibration. In the current study, we have conducted a psychophysical experiment on 13 participants to investigate the effect of introducing a subthreshold electrotactile stimulus (SES) to the perception of electrovibration. Interaction of tactile sub-modal stimuli causes masking of a stimulus in the presence of another stimulus. This study explored the occurrence of tactile masking of electrovibration by electrotactile stimulus. The results indicate the reduction of electrovibration threshold by 12.46% and 6.75% when the electrotactile stimulus was at 90% and 80% of its perception threshold, respectively. This method was tested over a wide range of frequencies from 20 Hz to 320 Hz in the tuning curve, and the variation in percentage reduction with frequency is reported. Another experiment was conducted to measure the perception of combined stimuli on the Likert scale. The results showed that the perception was more inclined towards the electrovibration at 80% of SES and was indifferent at 90% of SES. The reduction in the threshold of electrovibration reveals that the effect of tactile masking by electrotactile stimulus was not prevalent under subthreshold conditions. This study provides significant insights into developing a texture rendering algorithm based on tactile sub-modal stimuli in the future.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3599970",
+      "url": "https://www.semanticscholar.org/paper/4b3766f4bb495857dc5f853c36cf54ca20c9aa3b"
+    },
+    {
+      "title": "Improving the Perception of Mid-air Tactile Shapes with Spatio-temporally-modulated Tactile Pointers",
+      "abstract": "Ultrasound mid-air haptic (UMH) devices can remotely render vibrotactile shapes on the skin of unequipped users, e.g., to draw haptic icons or render virtual object shapes. Spatio-temporal modulation (STM), the state-of-the-art UMH shape-rendering method, provides large freedom in shape design and produces the strongest possible stimuli for this technology. Yet, STM shapes are often reported to be blurry, complicating shape identification. Dynamic tactile pointers (DTP) were recently introduced as a technique to overcome this issue. By tracing a contour with an amplitude-modulated focal point, they significantly improve shape identification accuracy over STM, but at the cost of much lower stimulus intensity. Building upon this, we propose spatio-temporally-modulated Tactile Pointers (STP), a novel method for rendering clearer and sharper UMH shapes while at the same time producing strong vibrotactile sensations. We ran two human participant experiments, which show that STP shapes are perceived as significantly stronger than DTP shapes, while shape identification accuracy is significantly improved over STM and on par with that obtained with DTP. Our work has implications for effective shape rendering with UMH and provides insights that could inform future psychophysical investigation into vibrotactile shape perception in UMH.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3611388",
+      "url": "https://www.semanticscholar.org/paper/d2f4deb4e539d5feaa34f6773f88f2d2de5d6b4e"
+    }
+  ]
+}

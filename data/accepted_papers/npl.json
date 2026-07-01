@@ -1,0 +1,78 @@
+{
+  "journal_id": "npl",
+  "journal_name": "Neural Processing Letters",
+  "papers": [
+    {
+      "title": "A Survey of Encoding Techniques for Signal Processing in Spiking Neural Networks",
+      "abstract": "Biologically inspired spiking neural networks are increasingly popular in the field of artificial intelligence due to their ability to solve complex problems while being power efficient. They do so by leveraging the timing of discrete spikes as main information carrier. Though, industrial applications are still lacking, partially because the question of how to encode incoming data into discrete spike events cannot be uniformly answered. In this paper, we summarise the signal encoding schemes presented in the literature and propose a uniform nomenclature to prevent the vague usage of ambiguous definitions. Therefore we survey both, the theoretical foundations as well as applications of the encoding schemes. This work provides a foundation in spiking signal encoding and gives an overview over different application-oriented implementations which utilise the schemes.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-021-10562-2",
+      "url": "https://www.semanticscholar.org/paper/6aaf4578dae3c5c972e5c0281d97d6c57f1ed5f4"
+    },
+    {
+      "title": "WACSO: Wolf Crow Search Optimizer for Convolutional Neural Network Hyperparameter Optimization",
+      "abstract": "Convolutional Neural Networks (CNNs) experience performance and training efficiency changes according to the selection of correct hyperparameters. The research presents WACSO which combines Crow Search Optimization with Grey Wolf Optimizer to improve Convolutional Neural Networks hyperparameter selection through a hybrid metaheuristic algorithm. The hybrid algorithm WACSO uses exploration parts from CSO together with GWO exploitation mechanics to obtain optimized performance. WACSO reaches higher classification accuracy than traditional optimization algorithms when performing tests on the MNIST and CIFAR-10 datasets along with Random Search and particle swarm optimization and genetic algorithms and standalone CSO and standalone GWO. The best classification results reached 98.9% accuracy levels on MNIST along with 91.5% accuracy levels on CIFAR-10. The final outcomes of this system depend on the combination of model structure along with dataset challenges and available computational power. The investigation demonstrates that mixing algorithms drawn from nature can lead to successful CNN hyperparameter optimization. The promising outcomes of WACSO depend on multiple variables including computation expenses and sensitive parameter adjustments and universal result adaptability between different datasets and network setups. Research into WACSO should expand to involve longer evaluations across multiple datasets and various models to confirm widespread usage.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-025-11740-2",
+      "url": "https://www.semanticscholar.org/paper/1b8d78eeab7900977aad6f7c491b8a960096060f"
+    },
+    {
+      "title": "Gated Fusion Adaptive Graph Neural Network for Urban Road Traffic Flow Prediction",
+      "abstract": "Accurate prediction of traffic flow plays an important role in maintaining traffic order and traffic safety, which is a key task in the application of intelligent transportation systems (ITS). However, the urban road network has complex dynamic spatial correlation and nonlinear temporal correlation, and achieving accurate traffic flow prediction is a highly challenging task. Traditional methods use sensors deployed on roads to construct the spatial structure of the road network and capture spatial information by graph convolution. However, they ignore that the spatial correlation between nodes is dynamically changing, and using a fixed adjacency matrix cannot reflect the real road spatial structure. To overcome these limitations, this paper proposes a new spatial-temporal deep learning model: gated fusion adaptive graph neural network (GFAGNN). GFAGNN first extracts long-term dependencies on raw data through stacking expansion causal convolution, Then the spatial features of the dynamics are learned by adaptive graph attention network and adaptive graph convolutional network respectively, Finally the fused information is passed through a lightweight channel attention to extract temporal features. The experimental results on two public data sets show that our model can effectively capture the spatiotemporal correlation in traffic flow prediction. Compared with GWNET-conv model on METR-LA dataset, the three indexes in the 60-minute task prediction improved by 2.27%,2.06% and 2.13%, respectively.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11479-2",
+      "url": "https://www.semanticscholar.org/paper/0bfeaf3e75de25afb70aa87726a2687a9bdf2f14"
+    },
+    {
+      "title": "Projective Synchronization of Inertial Quaternion-Valued Neural Networks via Non-reduced Order Approach",
+      "abstract": "In this article, the issue on projective synchronization of delayed inertial quaternion-valued neural networks (IQVNNs) is investigated. Different from most existing literature, we adopt the non-reduced order approach to deal with IQVNNs described by second order differential equations. By introducing a novel Lyapunov functional, several sufficient criteria are presented in component form to ensure the projective synchronization between master–slave systems. A numerical experiment demonstrates the feasibility of control strategy as well as the correctness of theoretical results.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11523-1",
+      "url": "https://www.semanticscholar.org/paper/331bbb878087ccf856a667aa8e755acf25d5dd9d"
+    },
+    {
+      "title": "Privacy-Preserving Text Classification on Deep Neural Network",
+      "abstract": "With the explosive growth of Internet information, the classification of massive Internet data plays a very important role in real life. Text classification has been widely used in spam text recognition, intention recognition, text matching, named entity recognition, and other fields. At present, many enterprises provide APIs for text classification for users. Users can upload their data to the cloud server deployed by service providers for analysis, and return the final classification results. However, there is a risk of user data and model leakage in this process. To solve this problem, we propose a privacy-preserving text classification scheme using CKKS fully homomorphic encryption scheme and self-attention mechanism model in the multi-party security computing scenario. Our scheme ensures that user can achieve efficient encrypted data analysis under the premise of their data security, and user must be authorized by the service provider to use the model. Finally, compared with the experimental results of the previous research on privacy text classification under fully homomorphic encryption, the implementation improves the accuracy by 7.97% at most and speed-ups 282.4 times for inference at most, and we ensure the security of the protocol participants.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-025-11738-w",
+      "url": "https://www.semanticscholar.org/paper/74303919874129789b0616075b39046fabdb41f1"
+    },
+    {
+      "title": "A Hybrid Model Based on Convolutional Neural Network and Long Short-Term Memory for Multi-label Text Classification",
+      "abstract": "Multi-label text classification (MLTC) is a popular method for organizing electronic documents, which is crucial for accessing and processing data. As the number of classes increases, learning multi-label data will be challenging. The number of possible states for various labels increases exponentially, and learning algorithms in single-label data cannot be used to solve these problems. In the meantime, using single-label data algorithms could be very time-consuming. In MLTC, complexity costs should be reduced. Deep-learning neural networks that can learn intricate patterns are used in many real-world problems because of their high power and accuracy. This paper proposed a hybridization of the long short-term memory (LSTM) neural network and the convolutional neural network (CNN) method for MLTC. The proposed model uses LSTM to enhance CNN to improve the proposed model’s accuracy. Also, the competitive search algorithm (CSA) is used to improve the LSTM hyperparameters. The LSTM hyperparameters play an important role in increasing the detection accuracy. The CSA algorithm finds the best values for the hyperparameters by searching the problem space. It was tested on four different datasets of multi-label texts: Reuters-21578, RCV1-v2, EUR-Lex, and Bookmarks. The result showed that the proposed model performed better than CNN and LSTM-CSA in terms of accuracy percentage and that it has improved by an average of more than 10%. Also, the results show that the LSTM-CSA model has higher detection accuracy compared to LSTM—Gradient-based optimizer (GBO) and LSTM—whale optimization algorithm (WOA).",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11500-8",
+      "url": "https://www.semanticscholar.org/paper/66077b691b5d50430493a28ef8322d290d0ecb73"
+    },
+    {
+      "title": "GNNCL: A Graph Neural Network Recommendation Model Based on Contrastive Learning",
+      "abstract": "In the field of recommendation algorithms, the representation learning for users and items has evolved from using single IDs or historical interactions to utilizing higher-order neighbors. This can be achieved by modeling the user–item interaction graph to capture user preferences for items. Despite the promising results achieved by these algorithms, they still suffer from the issue of data sparsity. In order to mitigate the impact of data sparsity, contrastive learning has been adopted in graph collaborative filtering to enhance performance. However, current recommendation algorithms using contrastive learning yield uneven representations after data augmentation and do not consider the potential relationships among users (or items). To address these challenges, we propose a graph neural network-based recommendation model that integrates contrastive learning (GNNCL). This model combines data augmentation with added noise and the exploration of semantic neighbors for nodes. For the structural neighbors on the interaction graph, we introduce a novel and straightforward contrastive learning approach, abandoning previous graph augmentation methods, and introducing uniform noise into the embedding space to create contrastive views. To unearth potential semantic neighbor relationships in the semantic space, we assume that users with similar representations possess semantic neighbor relationships and merge these semantic neighbors into the prototype contrastive learning. We utilize a clustering algorithm to obtain prototypes for users and items and employ the EM algorithm for prototype contrastive learning. Experimental results validate the effectiveness of our approach. Particularly, on the Yelp2018 and Amazon-book datasets, our method exhibits significant performance improvements compared to basic graph collaborative filtering models.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11545-9",
+      "url": "https://www.semanticscholar.org/paper/d5091af1413d47cb69c457458986ea18dbdfe303"
+    },
+    {
+      "title": "Event-triggered finite-time dissipative control for fractional-order neural networks with uncertainties",
+      "abstract": "In this paper, the focus is on addressing the problems of designing an event-triggered finite-time dissipative control strategy for fractional-order neural networks (FONNs) with uncertainties. Firstly, the Zeno behavior of the fractional-order neural networks model is discussed. Utilizing inequality techniques, we calculate a positive lower bound for inter-execution intervals, which serves to resolve issues related to infinite triggering and sampling. Secondly, we formulate an event-triggered control scheme to solve the finite-time dissipative control problems. Through the application of finite-time boundedness theory, fractional-order calculus properties, and linear matrix inequality techniques, we derive sufficient conditions for the existence of such an event-triggered finite-time dissipative state-feedback control for the considered systems. Finally, a numerical example is given to demonstrate the effectiveness of the proposed methodology.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11510-6",
+      "url": "https://www.semanticscholar.org/paper/7f8a7f8aea2cbf1237c6b8aa75cb2ae190a241c6"
+    },
+    {
+      "title": "Neural Data Augmentation for Legal Overruling Task: Small Deep Learning Models vs. Large Language Models",
+      "abstract": "Deep learning models produce impressive results in any natural language processing applications when given a better learning strategy and trained with large labeled datasets. However, the annotation of massive training data is far too expensive, especially in the legal domain, due to the need for trained legal professionals. Data augmentation solves the problem of learning without labeled big data. In this paper, we employ pre-trained language models and prompt engineering to generate large-scale pseudo-labeled data for the legal overruling task using 100 data samples. We train small recurrent and convolutional deep-learning models using this data and fine-tune a few other transformer models. We then evaluate the effectiveness of the models, both with and without data augmentation, using the benchmark dataset and analyze the results. We also test the performance of these models with the state-of-the-art GPT-3 model under few-shot setting. Our experimental findings demonstrate that data augmentation results in better model performance in the legal overruling task than models trained without augmentation. Furthermore, our best-performing deep learning model trained on augmented data outperforms the few-shot GPT-3 by 18% in the F1-score. Additionally, our results highlight that the small neural networks trained with augmented data achieve outcomes comparable to those of other large language models.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s11063-024-11574-4",
+      "url": "https://www.semanticscholar.org/paper/013d41c224856bfe91745b4a7599d1a8cb8dd80d"
+    }
+  ]
+}

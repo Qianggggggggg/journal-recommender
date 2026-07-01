@@ -1,0 +1,78 @@
+{
+  "journal_id": "jvcir",
+  "journal_name": "Journal of Visual Communication and Image Representation",
+  "papers": [
+    {
+      "title": "Massive-scale image retrieval based on deep visual feature representation",
+      "abstract": "This paper proposes an image retrieval algorithm towards massive-scale multimedia data. In order to be consistent with human visual system, we first design a color attention function to describe the important of different image patches. Subsequently, we combine color and texture to construct candidate regions, which will be fed into a deep neural network (DNN) for deep representation extraction. Then, we design a similarity function to calculate the distance among different images, where top-ranking images are considered as the required images. Experimental results show the effectiveness and robustness of our proposed method.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2019.102738",
+      "url": "https://www.semanticscholar.org/paper/08cc4a45205a15083281ccb7fa4493fe1c6ea1ea"
+    },
+    {
+      "title": "Water leakage image recognition of shield tunnel via learning deep feature representation",
+      "abstract": "With the development of urban metro, the research on structural diseases of shield tunnels has been becoming a hot research topic, especially the leakage water diseases. Deep learning-based algorithms have shown impressive performance in image processing domain, such as image classification, image recognition or image retrieval. In this paper, we propose a novel image recognition algorithm for water leakage diseases of shield tunnels based on deep learning algorithm. Water leakage images are classified into six categories, each of which are extracted deep representation for image recognition. We compare our method with Otsu algorithm (OA), Region Growing Algorithm (RGA), and Watershed Algorithm (WA) to show the effectiveness of our proposed method.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2019.102708",
+      "url": "https://www.semanticscholar.org/paper/e0e598010753855ccb9bd6e31a67ac824aea38d0"
+    },
+    {
+      "title": "Multi-focus image fusion based on multi-scale sparse representation",
+      "abstract": "Although colorful information in natural scenes can be collected, due to the limitation of camera depth of field, it is hard to capture an image with all-in-focus. Sparse representation (SR)-based methods have shown their powerful potentiality and ability in multi-focus image fusion. However, because of sparse coding and information compress, the existing fusion methods based on SR are imperfect to seize the rich details and significant texture information in source images. As a result, a fusion method based on multi-scale sparse representation for registered multi-focus images (MIF-MsSR) is proposed in this paper, where an adaptive fusion rule for sparse coefficients is presented. At first, source images are processed by multi-scale decomposition and sub-images with different scales can be obtained. According to image features with different richness in these sub-images, dictionaries with different sizes and redundancy are thereby trained. By comprehensively considering the relationships of focused areas, out-of-focused areas and boundary areas between the source images, an adaptive fusion rule based on l 0 − max and Sum Modified Laplacian (SML) is proposed. Finally, a fused image with all-in-focus can be obtained by sparse reconstruction and inverse multi-scale decomposition. Excessive experiments on multi-focus images have demonstrated that the proposed MIF-MsSR not only reserves the integrity of the information in source images, but also has better fusion performance on subjective and objective indicators than other state-of-the-art methods.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2021.103328",
+      "url": "https://www.semanticscholar.org/paper/08300db3b1181da5fffb8d704b7aba977f17bdcf"
+    },
+    {
+      "title": "Deep image compression with multi-stage representation",
+      "abstract": "While deep learning-based image compression methods have shown impressive coding performance, most existing methods are still in the mire of two limitations: (1) unpredictable compression efficiency gain when adopting convolutional neural networks with different depths, and (2) lack of an accurate model to estimate the entropy during the training process. To address these two problems, in this paper, a deep multi-stage representation based image compression (MSRIC) method is proposed. Owing to this architecture, the detail information of shallow stages and the compact information of deep stages can be utilized for image reconstruction. Furthermore, a data-dependent channel-wised factorized probability model (DCFPM) is adopted to increase the accuracy of entropy estimation. Experimental results indicate that the proposed method guarantees better perceptual performance at a wide range of bit-rates. Also, ablation studies are carried out to validate the above mentioned technologies.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2021.103226",
+      "url": "https://www.semanticscholar.org/paper/78d01b1a55eb7b0898fe7944f3dcaab45da2dc74"
+    },
+    {
+      "title": "Cross-domain representation learning by domain-migration generative adversarial network for sketch based image retrieval",
+      "abstract": "Sketch based image retrieval (SBIR), which uses free-hand sketches to search the images containing similar objects/scenes, is attracting more and more attentions as sketches could be got more easily with the development of touch devices. However, this task is difficult as the huge differences between sketches and images. In this paper, we propose a cross-domain representation learning framework to reduce these differences for SBIR. This framework aims to transfer sketches to images with the information learned both in the sketch domain and image domain by the proposed domain migration generative adversarial network (DMGAN). Furthermore, to reduce the representation gap between the generated images and natural images, a similarity learning network (SLN) is also proposed with the new designed loss function incorporating semantic information. Extensive experiments have been done from different aspects, including comparison with state-of-the-art methods. The results show that the proposed DMGAN and SLN really work for SBIR.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2020.102835",
+      "url": "https://www.semanticscholar.org/paper/52bf9793d36223406d76831b91548d41a0b15509"
+    },
+    {
+      "title": "Blind tone mapped image quality assessment with image segmentation and visual perception",
+      "abstract": "With tone mapping, high dynamic range (HDR) image contents can be displayed on low dynamic range (LDR) display devices, in which some important visual information may be distorted. Thus, the tone mapped image (TMI) quality assessment is one of important issues in HDR image/video processing fields. Considering the difference of visual distortion degrees between the flat and complex regions in TMI, and considering that high-quality TMI should preserve as much information as possible of its original HDR image especially in the high/low luminance regions, this paper proposes a new blind TMI quality assessment method with image segmentation and visual perception. First, we design different features to describe the distortion of TMI’s different regions with two kinds of TMI segmentation. Then, considering that there lacks an efficient algorithm to quantify the importance of features, a feature clustering scheme is designed to eliminate the poor effect feature components in the extracted features to improve the effectiveness of the selected features. Finally, considering the diversity of tone mapping operator (TMO), which may cause global and local distortion of TMI, some other global features are also combined. At last, a final feature vector is formed to synthetically describe the distortion in TMI and used to blindly predict the TMI’s quality. Experimental results in the public ESPL-LIVE HDR database show that the Pearson linear correlation coefficient and Spearman rank order correlation coefficient of the proposed method reach 0.8302 and 0.7887, respectively, which is superior to the state-of-the-art blind TMI quality assessment methods, and it means that the proposed method is highly consistent with human visual perception.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2020.102752",
+      "url": "https://www.semanticscholar.org/paper/698917842be854e1975c52455086fa2b4e8d1720"
+    },
+    {
+      "title": "R2RNet: Low-light Image Enhancement via Real-low to Real-normal Network",
+      "abstract": "Images captured in weak illumination conditions could seriously degrade the image quality. Solving a series of degradation of low-light images can effectively improve the visual quality of images and the performance of high-level visual tasks. In this study, a novel Retinex-based Real-low to Real-normal Network (R2RNet) is proposed for low-light image enhancement, which includes three subnets: a Decom-Net, a Denoise-Net, and a Relight-Net. These three subnets are used for decomposing, denoising, contrast enhancement and detail preservation, respectively. Our R2RNet not only uses the spatial information of the image to improve the contrast but also uses the frequency information to preserve the details. Therefore, our model acheived more robust results for all degraded images. Unlike most previous methods that were trained on synthetic images, we collected the first Large-Scale Real-World paired low/normal-light images dataset (LSRW dataset) to satisfy the training requirements and make our model have better generalization performance in real-world scenes. Extensive experiments on publicly available datasets demonstrated that our method outperforms the existing state-of-the-art methods both quantitatively and visually. In addition, our results showed that the performance of the high-level visual task (i.e. face detection) can be effectively improved by using the enhanced results obtained by our method in low-light conditions. Our codes and the LSRW dataset are available at: https://github.com/abcdef2000/R2RNet.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2022.103712",
+      "url": "https://www.semanticscholar.org/paper/6901507cbaaa2fca80ac1ced76c40217a6850568"
+    },
+    {
+      "title": "Hypergraph-regularized sparse representation for single color image super resolution",
+      "abstract": "Sparsity-based single image super resolution method generates the High-Resolution (HR) output via a corresponding dictionary from the Low-Resolution (LR) input. However, most of these existing methods ignore the complementary information from color channels, which causes the loss of a valid prior and the limitation of HR image quality improvement. In this paper, hypergraph regularization is first incorporated with Joint Color Dictionary Training (JCDT) model and HR image reconstruction (HRIR) model. A novel Hypergraph-regularized Sparse coding-based Super Resolution (HG-ScSR) is proposed. This regularization can not only focus on the illuminance information, but also exploit the self-channel and cross-channel information of three color RGB channels from high-resolution image patches. Especially, the complex relationship is explored among every color image patch pixel and the consistency of the similar pixels is enforced. Both simulated and real data experiments verify the higher performance of the proposed HG-ScSR.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2020.102951",
+      "url": "https://www.semanticscholar.org/paper/5a72d54527ffce2ed0051c1f8da42672a5fa2c96"
+    },
+    {
+      "title": "Video action recognition based on visual rhythm representation",
+      "abstract": "Advances in video acquisition and storage technologies have promoted a great demand for automatic recognition of actions. The use of cameras for security and surveillance purposes has applications in several scenarios, such as airports, parks, banks, stations, roads, hospitals, supermarkets, industries, stadiums, schools. An inherent difficulty of the problem is the complexity of the scene under usual recording conditions, which may contain complex background and motion, multiple people on the scene, interactions with other actors or objects, and camera motion. Most recent databases are built primarily with shared recordings on YouTube and with snippets of movies, situations where these obstacles are not restricted. Another difficulty is the impact of the temporal dimension since it expands the size of the data, increasing computational cost and storage space. In this work, we present a methodology of volume description using the Visual Rhythm (VR) representation. This technique reshapes the original volume of the video into an image, where two-dimensional descriptors are computed. We investigated different strategies for constructing the representation by combining configurations in several image domains and traversing directions of the video frames. From this, we propose two feature extraction methods, Naive Visual Rhythm (Naive VR) and Visual Rhythm Trajectory Descriptor (VRTD). The first approach is the straightforward application of the technique in the original video volume, forming a holistic descriptor that considers action events as patterns and formats in the visual rhythm image. The second variation focuses on the analysis of small neighborhoods obtained from the process of dense trajectories, which allows the algorithm to capture details unnoticed by the global description. We tested our methods in eight public databases, one of hand gestures (SKIG), two in first person (DogCentric and JPL), and five in third person (Weizmann, KTH, MuHAVi, UCF11 and HMDB51). The results show that the developed techniques are able to extract motion elements along with format and appearance information, achieving competitive accuracy rates compared to state-of-the-art action recognition approaches.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jvcir.2020.102771",
+      "url": "https://www.semanticscholar.org/paper/49278c84a9c0204319a62073d1d42556dee3ff4e"
+    }
+  ]
+}

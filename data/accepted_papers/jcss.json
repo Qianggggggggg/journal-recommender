@@ -1,0 +1,86 @@
+{
+  "journal_id": "jcss",
+  "journal_name": "Journal of Computer and System Sciences",
+  "papers": [
+    {
+      "title": "A faster algorithm for constructing the frequency difference consensus tree",
+      "abstract": "A consensus tree is a phylogenetic tree that summarizes the evolutionary relationships inferred from a collection of phylogenetic trees with the same set of leaf labels. Among the many types of consensus trees that have been proposed in the last fifty years, the frequency difference consensus tree is one of the more finely resolved types that retains a large amount of information. This article presents a new deterministic algorithm for constructing the frequency difference consensus tree. Given k phylogenetic trees with identical sets of n leaf labels, it runs in O ( k n log ⁡ n ) time, improving the best previously known solution. Furthermore, we demonstrate that the implementation of our algorithm is faster in practice than the prior implementations for the same problem.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103831",
+      "url": "https://openalex.org/W7165158530"
+    },
+    {
+      "title": "Temporal graph realization with bounded stretch",
+      "abstract": "A periodic temporal graph, in its simplest form, is a graph in which every edge appears exactly once in the first Δ time steps, and then it reappears recurrently every Δ time step, where Δ is a given period length. From a network design perspective, a crucial task is to assign the time-labels on the edges in a way that optimizes some criterion. In this paper we introduce a very natural optimality criterion that captures how the temporal distances of all vertex pairs are “stretched”, compared to their distances in the underlying static graph. Given a static graph G, the task is to assign to each edge one time-label between 1 and Δ such that, in the resulting periodic temporal graph with period Δ, the duration of the fastest temporal path from any vertex u to any other vertex v is at most α times the distance between u and v in G. Here, the value of α measures how much the shortest paths are allowed to be stretched once we assign the periodic time-labels. Our results span three different directions: First, we provide a series of approximation and NP-hardness results. Second, we provide approximation and fixed-parameter algorithms. Among them, we provide a simple algorithm which guarantees an approximation strictly smaller than Δ. Third, we consider a parameterized local search extension of the problem where we are given the temporal labeling of the graph, but we are allowed to change the time-labels of at most k edges.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103814",
+      "url": "https://openalex.org/W7160265932"
+    },
+    {
+      "title": "Exact and heuristic computation of the scanwidth of directed acyclic graphs",
+      "abstract": "To measure the tree-likeness of a directed acyclic graph (DAG), a new width parameter that considers the directions of the arcs was recently introduced: scanwidth . We present the first algorithm that efficiently computes the exact scanwidth of general DAGs. For DAGs with one root and scanwidth k it runs in O ( k ⋅ n k ⋅ m ) time. The algorithm also functions as an FPT algorithm with complexity O ( 2 4 ℓ − 1 ⋅ ℓ ⋅ n + n 2 ) for phylogenetic networks of level- ℓ , a type of DAG used to depict evolutionary relationships among species. Our algorithm performs well in practice, being able to compute the scanwidth of synthetic networks up to 30 reticulations and 100 leaves within 500 seconds. Furthermore, we propose a heuristic that obtains an average practical approximation ratio of 1.5 on these networks. While we prove that the scanwidth is bounded from below by the treewidth of the underlying undirected graph, experiments suggest that for networks the parameters are close in practice.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103802",
+      "url": "https://openalex.org/W7143787441"
+    },
+    {
+      "title": "Online interval scheduling with predictions",
+      "abstract": "In online interval scheduling, the input is an online sequence of intervals, and the goal is to accept a maximum number of non-overlapping intervals. In the more general disjoint path allocation problem, the input is a sequence of requests, each consisting of pairs of vertices of a known graph, and the goal is to accept a maximum number of requests forming edge-disjoint paths between accepted pairs. We study a setting with a potentially erroneous prediction specifying the set of requests forming the input sequence and provide tight upper and lower bounds on the competitive ratios of online algorithms as a function of the prediction error. We also present asymptotically tight trade-offs between consistency (competitive ratio with error-free predictions) and robustness (competitive ratio with adversarial predictions) of interval scheduling algorithms. Finally, we provide experimental results on real-world scheduling workloads that confirm our theoretical analysis.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103795",
+      "url": "https://openalex.org/W7135220600"
+    },
+    {
+      "title": "Parameterized analysis of the cops and robber problem",
+      "abstract": "Pursuit-evasion games have been intensively studied for several decades due to their numerous applications in artificial intelligence, robot motion planning, database theory, distributed computing, and algorithmic theory. Cops and Robber ( CnR ) is one of the most well-known pursuit-evasion games played on graphs, where multiple cops pursue a single robber . The aim is to compute the cop number of a graph, k , which is the minimum number of cops that ensures the capture of the robber. From the viewpoint of parameterized complexity, CnR is W[2]-hard parameterized by k [Fomin et al., TCS, 2010]. Thus, we study structural parameters of the input graph. We begin with the vertex cover number ( vcn ). First, we establish that k ≤ vcn 3 + 1 . Second, we prove that CnR parameterized by vcn is FPT by designing an exponential kernel. We complement this result by showing that it is unlikely for CnR parameterized by vcn to admit a polynomial compression. We extend our exponential kernels to the parameters cluster vertex deletion number and deletion to stars number , and design a linear vertex kernel for neighborhood diversity . Additionally, we extend all of our results to several well-studied variations of CnR .",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103781",
+      "url": "https://openalex.org/W7127596857"
+    },
+    {
+      "title": "Rectilinear-upward planarity testing of digraphs",
+      "abstract": "A rectilinear-upward planar drawing of a digraph G is a crossing-free drawing of G where each edge is either a horizontal or a vertical segment, and such that no directed edge points downward. Rectilinear-Upward Planarity Testing is the problem of deciding whether a digraph G admits a rectilinear-upward planar drawing. We study the complexity of Rectilinear-Upward Planarity Testing and provide several algorithmic results. Precisely, we prove that: ( i ) the problem is NP-complete, even if G is biconnected; ( i i ) it can be solved in linear time when an upward planar embedding of G is fixed; ( i i i ) the problem is polynomial-time solvable for biconnected digraphs of treewidth at most two, i.e., for digraphs whose underlying undirected graph is a series-parallel graph; ( i v ) the problem is fixed-parameter tractable (namely, fixed-parameter linear) for all biconnected graphs, when parameterized by the number of sources and sinks in the digraph. • We study the algorithmic complexity of a problem that combines two well-established topics in graph drawing, namely rectilinear planar drawings and upward planar drawings. This problems, called rectilinear-upward planarity testing, asks to decide whether an input planar di-graph admits a planar drawing where each edge is either a horizontal or a vertical segment, and no edge points downwards. • We prove that rectilinear-upward planarity testing is NP-complete, even for biconnected digraphs. • We provide a linear-time algorithm for rectilinear-upward planarity testing of digraphs with a fixed upward planar embedding. • We provide a quadratic-time algorithm for rectilinear-upward planarity testing of biconnected partial 2-trees (i.e., digraphs whose underlying undirected graph is series-parallel) in the variable embedding setting. • We provide a fixed-parameter linear (FPL) algorithm for rectilinear- upward planarity testing of general biconnected digraphs in the variable embedding setting.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103775",
+      "url": "https://openalex.org/W7127452502"
+    },
+    {
+      "title": "Deterministic performance guarantees for bidirectional BFS on real-world networks",
+      "abstract": "A common speedup technique for shortest path queries in graphs is bidirectional search, i.e., performing a forward search from the start and a backward search from the destination until a common vertex is found. In practice, this leads to massive performance improvements on some real-world networks, while saving only a constant factor on other networks. So far, only few studies have attempted to explain the apparent asymptotic speedups on some networks using average-case analysis on certain models of real-world networks. In this paper we provide a new perspective on this, by analyzing deterministic properties that allow theoretical analysis while being easily checked on any particular instance. We prove that these parameters imply sublinear running time for bidirectional BFS in several regimes, some of which are tight. Furthermore, we perform experiments on a large set of real-world networks and show that our parameters capture the concept of practical running time well. • Demonstrates Efficiency of Bidirectional Searches: Highlights how bidirectional breadth-first search significantly accelerates shortest path queries in certain real-world networks. • Establishes Sublinear Running Time Parameters: Proves that certain identified parameters result in sublinear running times for bidirectional breadth-first search in various scenarios, including some optimal conditions. • Validates with Real-World Network Experiments: Empirically tests and confirms the relevance of these parameters in capturing practical running times through experiments on a diverse set of real-world networks.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103774",
+      "url": "https://openalex.org/W7127348125"
+    },
+    {
+      "title": "On the complexity of computing the co-lexicographic width of a regular language",
+      "abstract": "Co-lex partial orders (Cotumaccio et al., SODA 2021 and Journal of the ACM 2023) are a powerful tool to index finite automata, with applications to regular expression matching, generalizing Wheeler orders (Gagie et al., Theoretical Computer Science 2017). The co-lex width p of an automaton naturally measures how sortable its states are w.r.t. the co-lexicographic order among its accepted strings. Automata of co-lex width p can be compressed to O ( log ⁡ p ) bits per edge and admit regular expression matching in time proportional to p 2 per matched character. The deterministic co-lex width of a regular language L is the smallest width of such a co-lex order, among all DFAs recognizing L . Since languages of small co-lex width admit efficient solutions to hard computational problems on the language, computing the co-lex width of a language is relevant in applications. Previous work shows that the deterministic co-lex width p of a language L can be computed in m O ( p ) , given as input any DFA A with m transitions accepting L . For constant p (in particular Wheeler languages, where p = 1 ), the constant in the exponent is large and the exact complexity remains unknown. In this work, using new techniques, we show that one can decide in O ( m p ) if the deterministic co-lex width of the language recognized by a given minimum DFA is strictly smaller than p ≥ 2 . We complement this with a matching conditional lower bound based on the Strong Exponential Time Hypothesis. Hence, our paper essentially settles the complexity of the problem.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103759",
+      "url": "https://openalex.org/W7125472482"
+    },
+    {
+      "title": "Complexity of deciding the equality of matching numbers",
+      "abstract": "A matching is said to be disconnected if the saturated vertices induce a disconnected subgraph and induced if the saturated vertices induce a 1-regular graph. The disconnected and induced matching numbers are defined as the maximum cardinality of such matchings, respectively, and are known to be NP-hard to compute. In this paper, we study the relationship between these two parameters and the matching number. In particular, we discuss the complexity of two decision problems; first: deciding if the matching number and disconnected matching number are equal; second: deciding if the disconnected matching number and induced matching number are equal. We show that given a bipartite graph with diameter four, deciding if the matching number and disconnected matching number are equal is NP-complete; the same holds for bipartite graphs with maximum degree three. We characterize diameter three graphs with equal matching number and disconnected matching number, which yields a polynomial time recognition algorithm. Afterwards, we show that deciding if the induced and disconnected matching numbers are equal is co-NP-complete for bipartite graphs of diameter 3. When the induced matching number is large enough compared to the maximum degree, we characterize graphs where these parameters are equal, which results in a polynomial time algorithm for bounded degree graphs.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103760",
+      "url": "https://openalex.org/W7125381513"
+    },
+    {
+      "title": "Quantum data structure for range minimum query",
+      "abstract": "Given an array a [ 1 . . n ] , the Range Minimum Query (RMQ) problem is to maintain a data structure that supports RMQ queries: given a range [ l , r ] , find the index of the minimum element among a [ l . . r ] , i.e., arg min i ∈ [ l , r ] a [ i ] . In this paper, we propose a quantum data structure that supports RMQ queries and range updates, with an optimal time complexity Θ ˜ ( n q ) for performing q = O ( n ) operations without preprocessing, compared to the classical Θ ˜ ( n + q ) . 1 As an application, we obtain a time-efficient quantum algorithm for k -minimum finding without the use of quantum random access memory .",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1016/j.jcss.2026.103756",
+      "url": "https://openalex.org/W7119539716"
+    }
+  ]
+}

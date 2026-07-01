@@ -1,0 +1,78 @@
+{
+  "journal_id": "image",
+  "journal_name": "Signal Processing: Image Communication",
+  "papers": [
+    {
+      "title": "Signal Processing on Higher-Order Networks: Livin' on the Edge ... and Beyond",
+      "abstract": "In this tutorial, we provide a didactic treatment of the emerging topic of signal processing on higher-order networks. Drawing analogies from discrete and graph signal processing, we introduce the building blocks for processing data on simplicial complexes and hypergraphs, two common higher-order network abstractions that can incorporate polyadic relationships. We provide brief introductions to simplicial complexes and hypergraphs, with a special emphasis on the concepts needed for the processing of signals supported on these structures. Specifically, we discuss Fourier analysis, signal denoising, signal interpolation, node embeddings, and nonlinear processing through neural networks, using these two higher-order network models. In the context of simplicial complexes, we specifically focus on signal processing using the Hodge Laplacian matrix, a multi-relational operator that leverages the special structure of simplicial complexes and generalizes desirable properties of the Laplacian matrix in graph signal processing. For hypergraphs, we present both matrix and tensor representations, and discuss the trade-offs in adopting one or the other. We also highlight limitations and potential research avenues, both to inform practitioners and to motivate the contribution of new researchers to the area.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2021.108149",
+      "url": "https://www.semanticscholar.org/paper/92b9404d282033f3a3c7542bb400d2f5dd78e51e"
+    },
+    {
+      "title": "Adaptive sign algorithm for graph signal processing",
+      "abstract": "Efficient and robust online processing technique of irregularly structured data is crucial in the current era of data abundance. In this paper, we propose a graph/network version of the classical adaptive Sign algorithm for online graph signal estimation under impulsive noise. Recently introduced graph adaptive least mean squares algorithm is unstable under non-Gaussian impulsive noise and has high computational complexity. The Graph-Sign algorithm proposed in this work is based on the minimum dispersion criterion and therefore impulsive noise does not hinder its estimation quality. Unlike the recently proposed graph adaptive least mean p-th power algorithm, our Graph-Sign algorithm can operate without prior knowledge of the noise distribution. The proposed Graph-Sign algorithm has a faster run time because of its low computational complexity compared to the existing adaptive graph signal processing algorithms. Experimenting on steady-state and time-varying graph signals estimation utilizing spectral properties of bandlimitedness and sampling, the Graph-Sign algorithm demonstrates fast, stable, and robust graph signal estimation performance under impulsive noise modeled by alpha stable, Cauchy, Student's t, or Laplace distributions.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2022.108662",
+      "url": "https://www.semanticscholar.org/paper/1f93678e193b76b45d9d387e340231b9679102ad"
+    },
+    {
+      "title": "Modelling and studying the effect of graph errors in graph signal processing",
+      "abstract": "The first step for any graph signal processing (GSP) procedure is to learn the graph signal representation, i.e., to capture the dependence structure of the data into an adjacency matrix. Indeed, the adjacency matrix is typically not known a priori and has to be learned. However, it is learned with errors. A little attention has been paid to modelling such errors in the adjacency matrix, and studying their effects on GSP methods. However, modelling errors in the adjacency matrix will enable both to study the graph error effects in GSP and to develop robust GSP algorithms. In this paper, we therefore introduce practically justifiable graph error models. We also study, both analytically when possible and numerically, the graph error effect on the performance of GSP methods in different types of problems such as filtering of graph signals and independent component analysis of graph signals (graph decorrelation).",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2021.108256",
+      "url": "https://www.semanticscholar.org/paper/a27807fef0592327bd5667e0d0ee312d3cbba9f3"
+    },
+    {
+      "title": "Recursive linearly constrained Wiener filter for robust multi-channel signal processing",
+      "abstract": "This article introduces a new class of recursive linearly constrained minimum variance estimators (LCMVEs) that provides additional robustness to modeling errors. To achieve that robustness, a set of non-stationary linear constraints are added to the standard LCMVE that allow for a closed form solution that becomes appealing in sequential implementations of the estimator. Indeed, a key point of such recursive LCMVE is to be fully adaptive in the context of sequential estimation as it allows optional constraints addition that can be triggered by a preprocessing of each new observation or external information on the environment. This methodology has significance in the popular problem of linear regression among others. Particularly, this article considers the general class of partially coherent signal (PCS) sources, which encompasses the case of fully coherent signal (FCS) sources. The article derivates the recursive LCMVE for this type of problems and investigates, analytically and through simulations, its robustness against mismatches on linear discrete state-space models. Both errors on system matrices and noise statistics uncertainty are considered. An illustrative multi-channel array processing example is treated to support the discussion, where results in different model mismatched scenarios are provided with respect to the standard case with only FCS sources.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2019.107291",
+      "url": "https://www.semanticscholar.org/paper/723f1f66675265b8481aceb57080270cd5c3f5e1"
+    },
+    {
+      "title": "Alternative signal processing of complementary waveform returns for range sidelobe suppression",
+      "abstract": "It has been an important technique to reduce sidelobes for processing nonzero Doppler target returns under Golay complementary waveforms. While the pointwise minimization processor in our early work shows an enhanced performance on the suppression of range sidelobes compared with existing approaches, it has a reduced detection probability to target with location uncertainties. In this paper, we present an alternative processing method which combines the radar returns in two separated pairs of Golay complementary waveforms through a pointwise addition processor. Our simulation result shows that this alternative method has a similar performance to that of the pointwise minimum processor for range sidelobes suppression and computational complexity but results in an improved target detection probability, with an acceptable decrease on the peak to peak-sidelobe ratio.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2019.02.012",
+      "url": "https://www.semanticscholar.org/paper/2565ef97e4a993bf21e546904b3a8c29980163ba"
+    },
+    {
+      "title": "Signal processing on graphs: Case of sampling in Paley-Wiener spaces",
+      "abstract": "Given a weighted undirected graph, this paper focuses on the sampling problem of uniquely recovering Paley–Wiener functions from a sampled set of vertices. In accordance with the measures of connectivity introduced by Pesenson [30], we address two optimization problems related to discrete sampling on graphs via the so-called uniqueness sets, namely: (i) determining the maximal bandwidth of the signal, which can be perfectly reconstructed by a sampling subset of vertices with a cardinality smaller than a given value; (ii) finding the minimal sampling subset of graph vertices, which guarantees the complete reconstruction of at least a required signal bandwidth. In this sense, two integer linear programs are provided together with their complexity and solution approach. Since the uniqueness sets are described in terms of Poincare-Wirtinger type inequalities, the used approximation of the true cut-off-frequency K S is only a lower bound of the Poincare constant, through which the removable subset of vertices is characterized. In spite of this limitation, conducted computational experiments illustrate, however, a considerable decision support and a practical interest, as well as, highlight the pertinence of the used measure K S against the true cut-off-frequency for signal sampling on graphs.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2018.05.016",
+      "url": "https://www.semanticscholar.org/paper/4b9f390d8b0f3456ccffcca0bf56816fe7c5e285"
+    },
+    {
+      "title": "Moment-matching array processing technique for diffuse source estimation",
+      "abstract": "Direction of Arrival (DOA) estimation is a fundamental problem in signal processing. Diffuse sources, whose power density cannot be represented with a single angular coordinate, are usually characterized based on prior assumptions, which associate the source angular density with a specific set of functions. However, these assumptions can lead to significant estimation biases when they are incorrect. This paper introduces the Moment-Matching Estimation Technique (MoMET), a low-complexity method for estimating the mean DOA, spread, and power of a narrow diffuse source without requiring prior knowledge on the source distribution. The unknown source density is characterized by its mean DOA and its first central moments, which are estimated through covariance matching techniques which fit the empirical covariance of the measurements to that modeled from the moments. The MoMET parameterization is robust to incorrect model assumptions, and numerically efficient. The asymptotic bias and covariance of the new estimator are derived and its performance is demonstrated through simulations.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.sigpro.2026.110629",
+      "url": "https://www.semanticscholar.org/paper/90e1eae4e7c2ab199389e147964bc7c221ac4cfa"
+    },
+    {
+      "title": "Grab-n-Pull: A max-min fractional quadratic programming framework with applications in signal and information processing",
+      "abstract": "In this work, we propose and study a novel optimization framework (which we call Grab-n-Pull, or in abbreviated form, GnP) for signal design problems involving max-min fractional quadratic programming. Such optimization problems occur frequently in various subareas of signal and information processing. Using a penalized version of the original design problem, we derive a simplified quadratic reformulation of the problem in terms of the signal (to be designed). Each iteration of the proposed design framework consists of a combination of power method-like iterations and the Gram-Schmidt process, and as a result, enjoys a low computational cost. Particularly, the numerical examples show that the proposed method outperforms the widely used semidefinite relaxation approach in terms of both the quality of approximate solutions and the computational cost. Moreover, the suggested approach can handle various types of signal constraints such as total-power, per-antenna power, unimodularity, or discrete-phase requirements—an advantage which is not shared by other existing approaches in the literature.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2019.02.006",
+      "url": "https://www.semanticscholar.org/paper/6ddd15f8058272cd0c47670cf70c0677f56c75b8"
+    },
+    {
+      "title": "Difference operators and generalized discrete fractional transforms in signal and image processing",
+      "abstract": "The fractional Fourier transform (FrFT) is a major tool in signal and image processing. Since its computation for analog signals includes the evaluation of improper integrals involving e − x 2 , x ∈ R , several methods have been proposed to approximate the FrFT for various signals. These methods include spectral decomposition techniques, which are based on the theory of second-order self-adjoint operators. This approach led to a tremendous stream of research on various spectral decomposition methods, including multiparameter and randomized transforms. In this paper, we introduce generalized discrete transforms that extend the known discrete-type transforms and introduce new types as well. The derivations are carried out in both unitary and non-unitary settings. The strengths of the proposed transforms are demonstrated through numerical simulations and applications in image encryption and watermarking.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.SIGPRO.2018.04.023",
+      "url": "https://www.semanticscholar.org/paper/2aa3d082a27b04ed410eaf6bf8c86aa407fe196f"
+    }
+  ]
+}

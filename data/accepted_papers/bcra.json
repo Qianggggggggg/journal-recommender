@@ -1,0 +1,86 @@
+{
+  "journal_id": "bcra",
+  "journal_name": "Blockchain: Research and Applications",
+  "papers": [
+    {
+      "title": "Integrating Blockchain technology within an Information Ecosystem",
+      "abstract": "Context: Blockchain-based Information Ecosystems (BBIEs) are a type of information ecosystem in which blockchain technology is used to provide a trust mechanism among parties and to manage shared business logic, breaking the traditional scheme of Information Ecosystems dominated by a leading company and leveraging the decentralization of data management, information flow, and business logic. Objective: In this paper, we propose architecture and technical aspects concerning the creation of a BBIE, underlining the advantages supplied and the logic decomposition among the business and storage components. Method: The requirements are derived from the current needs of the collaborative business and the data collected by surveying practitioners. To get these needs we followed the Grounded Theory research approach. We validate our architectural schema against a case study dealing with the management of a wine supply chain, also involving different companies and supervision authorities. Results: The proposed solution integrates blockchain-based applications with the existing information system as a module of the ecosystem, leveraging on the low costs, scalability, and high-level security because of the restricted access to the network. Conclusion: We must go a long way in deepening and refining the possibilities offered by technology in supporting innovative multi-organizational business models. BBIEs can contribute substantially to paving the way in such a direction.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.bcra.2024.100225",
+      "url": "https://www.semanticscholar.org/paper/b0a2ac863a3a1e5d4cf16ea16798e8e1ede07b65"
+    },
+    {
+      "title": "BlockHDFS: Blockchain-integrated Hadoop distributed file system for secure provenance traceability",
+      "abstract": "Hadoop Distributed File System (HDFS) is one of the widely used distributed file systems in Big Data analysis for frameworks such as Hadoop. It is used to manage a large volume of data with low-cost commodity hardware. However, vulnerabilities in HDFS can be exploited for nefarious activities, as the security seems to be inconsistent and not of a priority in the original design. Therefore, there is a need for security for files in Hadoop and a trusted way to check the authenticity of such files. This paper aims to improve the security of HDFS using a blockchain-enabled approach called BlockHDFS. Specifically, the proposed BlockHDFS uses the enterprise-level Hyperledger Fabric platform to capitalize on files’ metadata for building trusted data security and traceability in HDFS.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.bcra.2021.100032",
+      "url": "https://www.semanticscholar.org/paper/10bf5e38e0e612a61304a6537553df8b5bd1d2f4"
+    },
+    {
+      "title": "Analyzing Voting Power in Decentralized Governance: Who controls DAOs?",
+      "abstract": "We empirically study the state of three prominent DAO governance systems on the Ethereum blockchain: Compound, Uniswap and ENS. In particular, we examine how the voting power is distributed in these systems. Using a comprehensive dataset of all governance token holders, delegates, proposals and votes, we analyze who holds the voting rights and how they are used to influence governance decisions.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2204.01176",
+      "url": "https://www.semanticscholar.org/paper/0d50888d6b3e9578bcf6d7485f071a7335f1b41e"
+    },
+    {
+      "title": "Blockchain and smart contracts for secure and transparent salary grade structure management",
+      "abstract": ": Blockchain technology benefits companies in handling various use cases, including real estate, voting, fitness tracking, intellectual rights, the Internet of Things (IoTs), and vaccine distribution. Several technologies proposed in the literature seek to support businesses, enterprises, and state institutions in improving their operations and services, primarily in the financial sector. Although the existing technologies provide the needed service, the “trust” issue remains challenging. This differs from salary management in some state institutions in developing countries, such as Ghana. This paper presents a novel approach by implementing a permissioned blockchain-based system using Hyperledger Fabric integrated with RSA encryption to address the transparency, trust, and fraud challenges in salary-grade structure management. Unlike existing blockchain payroll applications, this work explicitly targets the salary grade adjustment processes within state institutions, providing a real-world prototype validated with actual agency data. In this paper, we implemented the blockchain technology for salary management. We use the Hyperledger Fabric platform to build a trusted platform to aid State Institution X ( siX ) in sharing data, validating transactions, securing data, and auditing transactions among its stakeholders— a prototype design aimed at reducing the wage bill and ensuring transparency in the public service payroll. The results showed that blockchain operations increased transparency in the payroll system among stakeholders by 100%. The application developed was secure and could track all the changes made by the relevant stakeholders in salary management.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.55092/blockchain20250011",
+      "url": "https://www.semanticscholar.org/paper/827551c85c6e9eb9f511bc1f04ef06275e32e98b"
+    },
+    {
+      "title": "PolyLink: A Blockchain Based Decentralized Edge AI Platform for LLM Inference",
+      "abstract": "The rapid advancement of large language models (LLMs) in recent years has revolutionized the AI landscape. However, the deployment model and usage of LLM services remain highly centralized, creating significant trust issues and costs for end users and developers. To address these issues, we propose PolyLink, a blockchain-based decentralized AI platform that decentralizes LLM development and inference. Specifically, PolyLink introduces a decentralized crowdsourcing architecture that supports single-device and cross-device model deployment and inference across heterogeneous devices at the edge. Moreover, to ensure the inference integrity, we design the TIQE protocol, which combines a lightweight cross-encoder model and an LLM-as-a-Judge for a high-accuracy inference evaluation. Lastly, we integrate a comprehensive token-based incentive model with dynamic pricing and reward mechanisms for all participants. We have deployed PolyLink and conducted an extensive real-world evaluation through geo-distributed deployment across heterogeneous devices. Results indicate that the inference and verification latency is practical. Our security analysis demonstrates that the system is resistant to model degradation attacks and validator corruptions. PolyLink is now available at https://github.com/IMCL-PolyLink/PolyLink.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain67634.2025.00023",
+      "url": "https://www.semanticscholar.org/paper/ac7c47331017cc4100a9aacbbd525d9806be2b42"
+    },
+    {
+      "title": "Taming Smart Contracts With Blockchain Transaction Primitives: A Possibility?",
+      "abstract": "Decentralized applications (DApps) rely heavily on user-programmed transaction protocols called “smart contracts” as fundamental building blocks for implementation. Such user-programmed transactions become necessary due to the limited out-of-the-box transaction types typically offered natively by blockchain platforms. While smart contracts offer significant flexibility and customizability in implementing transaction be-havior, they also come with significant usability and performance limitations that may impede the adoption of blockchains in specific application contexts. Motivated by the success enjoyed by database systems due to the systemization of a reasonable set of system-supported primitives, we consider the possibility of a similar approach for blockchains. Specifically, we utilize a combination of manual and automatic methods to analyze 93GB of transaction data from the Ethereumblockchain to understand whether there are transaction patterns that emerge and can be considered candidates for such automation within blockchains. We provide an overview of the implementation strategy for such transactions. The results of our analysis provide strong indicators in support of this approach.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain62396.2024.00085",
+      "url": "https://www.semanticscholar.org/paper/5e9aa224ad56393e85e5312184c06fea13337251"
+    },
+    {
+      "title": "Enhancing Liquidity in Blockchain-Based IoT Data Trading through Semi-Fungible Tokens",
+      "abstract": "The economic potential of vast IoT data remains largely underutilized due to market illiquidity, which arises from a mismatch between traditional liquidity definitions and IoT data’s unique characteristics (e.g., anti-rivalrous, combinatorial, perishable). To address this, we propose the Data Asset Liquidity Index (DALI), a novel multidimensional liquidity framework for blockchain-based IoT data trading. We also introduce a decentralized trading mechanism leveraging ERC3525 Semi-Fungible Tokens (SFTs). This approach facilitates granular data tokenization, enabling flexible trading and reducing friction. We further enhance this mechanism with intelligent device grouping, advanced SFT merging functionalities, and a novel device package trading system, allowing for even more flexible and efficient data transactions. Through theoretical analysis and a case study, we demonstrate how SFTs enhance key DALI components, fostering a more efficient IoT data market.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain67634.2025.00019",
+      "url": "https://www.semanticscholar.org/paper/bbe1a3bad0ac0c4b2b067185168f4b736501cb7c"
+    },
+    {
+      "title": "ZKPU: A Novel NVMe-Based Accelerator for Scaling Zero-Knowledge Proofs in Blockchain Systems",
+      "abstract": "Zero-Knowledge Proofs (ZKPs) are becoming a foundational technology for scalable and privacy-preserving blockchain systems, especially through applications like zkRollups. However, the computational intensity of proof generation continues to limit real-world deployment. We present ZKPU, a hardware-software co-designed ZK accelerator that combines native NVMe integration—ensuring seamless compatibility across existing server and edge infrastructure—with a modular RISC-V System-on-Chip (SoC) architecture that opens the path to eliminating host–device communication bottlenecks. ZKPU is designed to flexibly support a wide range of ZK workloads; in this work, we demonstrate its capabilities by implementing and optimizing multi-scalar multiplication (MSM), a core bottleneck in many zk-SNARK systems. Built using the Chipyard framework and equipped with dedicated modular arithmetic units, ZKPU achieves significant performance and energy efficiency improvements over CPU, GPU, and FPGA baselines. Our results highlight ZKPU as a practical and forward-compatible foundation for scalable ZK acceleration in modern decentralized systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain67634.2025.00037",
+      "url": "https://www.semanticscholar.org/paper/bbf50b2025ac7da0a41bbb9c70c3f1c03e8b588c"
+    },
+    {
+      "title": "Privacy-Preserving and Incentive-Driven Relay-Based Framework for Cross-Domain Blockchain Interoperability",
+      "abstract": "Interoperability is essential for transforming blockchains from isolated networks into collaborative ecosystems, unlocking their full potential. While significant progress has been made in public blockchain interoperability, bridging permissioned and permissionless blockchains poses unique challenges due to differences in access control, architectures, and security requirements. This paper introduces a blockchain-agnostic framework to enable interoperability between permissioned and permissionless networks. Leveraging cryptographic techniques, the framework ensures secure data exchanges. Its lightweight architectural design simplifies implementation and maintenance, while the integration of Clover and Dandelion++ protocols enhances transaction anonymity. Performance evaluations demonstrate the framework’s effectiveness in achieving secure and efficient interoperability by measuring the resource usage, the forwarding time, the throughput, and the availability of the system across heterogeneous blockchain ecosystems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain67634.2025.00035",
+      "url": "https://www.semanticscholar.org/paper/8f8612e78d956a02349ed2b0f09f30ee8d54c831"
+    },
+    {
+      "title": "A Blockchain-Based Access Control Architecture Using Non-Transferable NFTs and Gas-Efficient IPFS URI Management",
+      "abstract": "This paper presents a decentralized authorization framework that employs non-transferable Non-Fungible Tokens (NFTs), also known as soul-bound tokens (SBTs), to deliver tamper-resistant, identity-bound access control. Access rights are permanently linked to a user's blockchain wallet and can be upgraded via metadata updates without reminting, enabling dynamic tier management while preventing resale or delegation. The architecture combines an ERC-721 smart contract backend with a decentralized front-end interface for wallet-based authentication and administrator-controlled content distribution. Implementation on the Binance Smart Chain test network demonstrates secure and cost-effective access management with tiered content control. An experimental evaluation quantifies the gas costs associated with NFT minting, tier upgrades, and InterPlanetary File System (IPFS) metadata storage. Results show that using the native Base32 encoding of IPFS content identifiers reduces storage gas costs by approximately 6% compared to the previously standard Bitcoin-style Base58 encoding. Furthermore, shorter uniform resource identifiers (URIs) avoid costly expansions of the storage slots of the Ethereum Virtual Machine (EVM), which can increase transaction costs by 20,000 gas per slot. These findings provide practical guidelines for designing scalable and cost-effective NFT-based authorization systems. Source code and implementation details are available on GitHub.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/Blockchain67634.2025.00025",
+      "url": "https://www.semanticscholar.org/paper/d7d6bd1af8137900931e542c58d68bacb86df64b"
+    }
+  ]
+}

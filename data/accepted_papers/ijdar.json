@@ -1,0 +1,70 @@
+{
+  "journal_id": "ijdar",
+  "journal_name": "International Journal on Document Analysis and Recognition",
+  "papers": [
+    {
+      "title": "In-domain versus out-of-domain transfer learning for document layout analysis",
+      "abstract": "Data availability is a big concern in the field of document analysis, especially when working on tasks that require a high degree of precision when it comes to the definition of the ground truths on which to train deep learning models. A notable example is represented by the task of document layout analysis in handwritten documents, which requires pixel-precise segmentation maps to highlight the different layout components of each document page. These segmentation maps are typically very time-consuming and require a high degree of domain knowledge to be defined, as they are intrinsically characterized by the content of the text. For this reason in the present work, we explore the effects of different initialization strategies for deep learning models employed for this type of task by relying on both in-domain and cross-domain datasets for their pre-training. To test the employed models we use two publicly available datasets with heterogeneous characteristics both regarding their structure as well as the languages of the contained documents. We show how a combination of cross-domain and in-domain transfer learning approaches leads to the best overall performance of the models, as well as speeding up their convergence process.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-024-00497-4",
+      "url": "https://www.semanticscholar.org/paper/74cd5a2922385f7e3d73ce6f273d01d85585cb1c"
+    },
+    {
+      "title": "SemiDocSeg: harnessing semi-supervised learning for document layout analysis",
+      "abstract": "Document Layout Analysis (DLA) is the process of automatically identifying and categorizing the structural components (e.g. Text, Figure, Table, etc.) within a document to extract meaningful content and establish the page’s layout structure. It is a crucial stage in document parsing, contributing to their comprehension. However, traditional DLA approaches often demand a significant volume of labeled training data, and the labor-intensive task of generating high-quality annotated training data poses a substantial challenge. In order to address this challenge, we proposed a semi-supervised setting that aims to perform learning on limited annotated categories by eliminating exhaustive and expensive mask annotations. The proposed setting is expected to be generalizable to novel categories as it learns the underlying positional information through a support set and class information through Co-Occurrence that can be generalized from annotated categories to novel categories. Here, we first extract features from the input image and support set with a shared multi-scale feature acquisition backbone. Then, the extracted feature representation is fed to the transformer encoder as a query. Later on, we utilize a semantic embedding network before the decoder to capture the underlying semantic relationships and similarities between different instances, enabling the model to make accurate predictions or classifications with only a limited amount of labeled data. Extensive experimentation on competitive benchmarks like PRIMA, DocLayNet, and Historical Japanese (HJ) demonstrate that this generalized setup obtains significant performance compared to the conventional supervised approach.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-024-00473-y",
+      "url": "https://www.semanticscholar.org/paper/d6620aac677bd4a64af32e32ceb00408b35b6d45"
+    },
+    {
+      "title": "Neural models for semantic analysis of handwritten document images",
+      "abstract": "Semantic analysis of handwritten document images offers a wide range of practical application scenarios. A sequential combination of handwritten text recognition (HTR) and a task-specific natural language processing system offers an intuitive solution in this domain. However, this HTR-based approach suffers from the problem of error propagation. An HTR-free model, which avoids explicit text recognition and solves the task end-to-end, tackles this problem, but often produces poor results. A possible reason for this is that it does not incorporate largely pre-trained semantic word embeddings, which turn out to be one of the most powerful advantages in the textual domain. In this work, we propose an HTR-based and an HTR-free model and compare them on a variety of segmentation-based handwritten document image benchmarks including semantic word spotting, named entity recognition, and question answering. Furthermore, we propose a cross-modal knowledge distillation approach to integrate semantic knowledge from textually pre-trained word embeddings into HTR-free models. In a series of experiments, we investigate optimization strategies for robust semantic word image representation. We show that the incorporation of semantic knowledge is beneficial for HTR-free approaches in achieving state-of-the-art results on a variety of benchmarks.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-024-00477-8",
+      "url": "https://www.semanticscholar.org/paper/32b575e13408d926260df237c1dbd50d867a4a75"
+    },
+    {
+      "title": "Historical document image analysis using controlled data for pre-training",
+      "abstract": "Using neural networks for semantic labeling has become a dominant technique for layout analysis of historical document images. However, to train or fine-tune appropriate models, large labeled datasets are needed. This paper addresses the case when only limited labeled data are available and promotes a novel approach using so-called controlled data to pre-train the networks. Two different strategies are proposed: The first addresses the real labeling task by using artificial data; the second uses real data to pre-train the networks with a pretext task. To assess these strategies, a large set of experiments has been carried out on a text line detection and classification task using different variants of U-Net. The observations, obtained from two different datasets, show that globally the approach reduces the training time while offering similar or better performance. Furthermore, the effect is bigger on lightweight network architectures.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-023-00437-8",
+      "url": "https://www.semanticscholar.org/paper/4f2623f575b6b613b0293c101f9a98f28df40bcc"
+    },
+    {
+      "title": "BoundingDocs: a Unified Dataset for Document Question Answering with Spatial Annotations",
+      "abstract": "We present a unified dataset for document Question-Answering (QA), which is obtained combining several public datasets related to Document AI and visually rich document understanding (VRDU). Our main contribution is twofold: on the one hand we reformulate existing Document AI tasks, such as Information Extraction (IE), into a Question-Answering task, making it a suitable resource for training and evaluating Large Language Models; on the other hand, we release the OCR of all the documents and include the exact position of the answer to be found in the document image as a bounding box. Using this dataset, we explore the impact of different prompting techniques (that might include bounding box information) on the performance of open-weight models, identifying the most effective approaches for document comprehension.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-025-00563-5",
+      "url": "https://www.semanticscholar.org/paper/d5457ddeee80510d707737f23069a6d71c8244f6"
+    },
+    {
+      "title": "Tabular context-aware optical character recognition and tabular data reconstruction for historical records",
+      "abstract": "Digitizing historical tabular records is essential for preserving and analyzing valuable data across various fields, but it presents challenges due to complex layouts, mixed text types, and degraded document quality. This paper introduces a comprehensive framework to address these issues through three key contributions. First, it presents UoS_Data_Rescue, a novel dataset of 1,113 historical logbooks with over 594,000 annotated text cells, designed to handle the complexities of handwritten entries, aging artifacts, and intricate layouts. Second, it proposes a novel context-aware text extraction approach (TrOCR-ctx) to reduce cascading errors during table digitization. Third, it proposes an enhanced end-to-end OCR pipeline that integrates TrOCR-ctx with ByT5, combining OCR and post-OCR correction in a unified training framework. This framework enables the system to produce both the raw OCR output and a corrected version in a single pass, improving recognition accuracy, particularly for multilingual and degraded text, within complex table digitization tasks. The model achieves superior performance with a 0.049 word error rate and a 0.035 character error rate, outperforming existing methods by up to 41% in OCR tasks and 10.74% in table reconstruction tasks. This framework offers a robust solution for large-scale digitization of tabular documents, extending its applications beyond climate records to other domains requiring structured document preservation. The dataset and implementation are available as open-source resources.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-025-00543-9",
+      "url": "https://www.semanticscholar.org/paper/a050a9ff5b59a71f75a61470455e0b73acf6ac1c"
+    },
+    {
+      "title": "Oracle character recognition using universal inverted bottleneck and inverse image frequency",
+      "abstract": "The oracle bone script, one of the most well-known ancient writing systems, plays a key role in the study of ancient Chinese characters. To speed up the digitization of oracle bone documents through automatic recognition, we propose a recognition model called QROB (Quick Response Oracle Bone). Due to the unique characteristics of oracle bone characters, only a small portion has been translated, leading to an imbalance in the sample distribution across different characters. To address this issue, we use the Inverse Image Frequency De-biasing method and incorporate the UIB (Universal Inverted Bottleneck) module into a lightweight model structure to improve training performance. Additionally, the limited number of translated oracle bone samples often results in sparse data in character datasets. To overcome this, we apply the FFD (Free-Form Deformation) method for data augmentation. We also introduce a new dataset, OBC-V, which better integrates oracle bone characters and words compared to existing datasets. Experimental results on three different datasets (OBC-V, HWOBV, and OBC306) demonstrate the effectiveness of our approach. This study advances oracle bone character recognition and contributes to a more efficient and accurate interpretation of ancient scripts. The code has been published at https://github.com/alphazzv/DnUse.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-025-00512-2",
+      "url": "https://www.semanticscholar.org/paper/5522b764ce2ef8e2921b86a46e511d885b5d36a4"
+    },
+    {
+      "title": "DANIEL: a fast document attention network for information extraction and labelling of handwritten documents",
+      "abstract": "Information extraction from handwritten documents involves traditionally three distinct steps: Document Layout Analysis, Handwritten Text Recognition, and Named Entity Recognition. Recent approaches have attempted to integrate these steps into a single process using fully end-to-end architectures. Despite this, these integrated approaches have not yet matched the performance of language models, when applied to information extraction in plain text. In this paper, we introduce DANIEL (Document Attention Network for Information Extraction and Labelling), a fully end-to-end architecture integrating a language model and designed for comprehensive handwritten document understanding. DANIEL performs layout recognition, handwriting recognition, and named entity recognition on full-page documents. Moreover, it can simultaneously learn across multiple languages, layouts, and tasks. For named entity recognition, the ontology to be applied can be specified via the input prompt. The architecture employs a convolutional encoder capable of processing images of any size without resizing, paired with an autoregressive decoder based on a transformer-based language model. DANIEL achieves competitive results on four datasets, including a new state-of-the-art performance on RIMES 2009 and M-POPP for Handwriting Text Recognition, and IAM NER for Named Entity Recognition. Furthermore, DANIEL is much faster than existing approaches. We provide the source code and the weights of the trained models at https://github.com/Shulk97/daniel.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1007/s10032-024-00511-9",
+      "url": "https://www.semanticscholar.org/paper/4b2e04b4994c668de1c68a13b90eb71fba9e90e2"
+    }
+  ]
+}

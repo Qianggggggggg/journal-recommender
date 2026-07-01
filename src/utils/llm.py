@@ -22,58 +22,72 @@ def parse_json_response(content: str) -> dict[str, Any] | None:
     从 LLM 响应中解析 JSON。
 
     策略：
-    1. 直接尝试 json.loads 解析完整内容（如果内容本身就是 JSON）
-    2. 使用正则提取第一个 JSON 对象
-    3. 清理常见的 markdown 代码块格式
+    1. 直接尝试 json.loads 解析完整内容
+    2. 清理 markdown 代码块格式，再尝试解析
+    3. 从第一个 [ 尝试解析数组
+    4. 从第一个 { 尝试解析对象
     """
     if not content or not content.strip():
         return None
 
-    # 策略1：直接解析（处理完整响应本身就是 JSON 的情况）
+    # 策略1：直接解析
     try:
-        return json.loads(content)
+        result = json.loads(content)
+        # 确保解析结果是 dict 或 list，否则继续尝试后续策略
+        if isinstance(result, (dict, list)):
+            return result
     except json.JSONDecodeError:
         pass
 
-    # 策略2：清理 markdown 代码块格式
+    # 策略2：清理 markdown 代码块格式（处理多行和前后文字）
     cleaned = content.strip()
-    if cleaned.startswith("```"):
-        # 移除 ```json 或 ``` 等代码块标记
-        lines = cleaned.split("\n")
-        # 跳过第一行（```json 或 ```）
-        if lines and lines[0].startswith("```"):
-            lines = lines[1:]
-        # 移除最后一行（```）
-        if lines and lines[-1].strip() == "```":
-            lines = lines[:-1]
-        cleaned = "\n".join(lines)
+    # 去掉所有 ```...``` 代码块（可能有多层嵌套）
+    import re as re_module
+    # 移除 ```json ... ``` 和 ``` ... ``` 格式
+    cleaned = re_module.sub(r'```json\s*(.*?)\s*```', r'\1', cleaned, flags=re_module.DOTALL)
+    cleaned = re_module.sub(r'```\s*(.*?)\s*```', r'\1', cleaned, flags=re_module.DOTALL)
+    cleaned = cleaned.strip()
 
-    # 策略3：提取 JSON 对象或数组
-    json_patterns = [
-        # 匹配 {...} 或 [...] 包裹的 JSON
-        r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}',  # 嵌套支持
-        r'\[[^\[\]]*(?:\[[^\[\]]*\][^\[\]]*)*\]',
-    ]
+    # 策略2.5：移除无效的控制字符（0x00-0x08, 0x0b-0x0c, 0x0e-0x1f，但保留 \t\n\r）
+    # LLM 响应中的换行符可能被错误编码
+    def remove_invalid_controls(s):
+        return ''.join(c for c in s if ord(c) >= 0x20 or c in '\t\n\r')
+    cleaned = remove_invalid_controls(cleaned)
 
-    for pattern in json_patterns:
-        match = re.search(pattern, cleaned, re.DOTALL)
-        if match:
-            try:
-                return json.loads(match.group())
-            except json.JSONDecodeError:
-                continue
-
-    # 策略4：尝试更宽松的匹配（取最后一个 { 开始的子串）
-    last_brace = content.rfind("{")
-    last_bracket = content.rfind("[")
-    start = max(last_brace, last_bracket)
-    if start > 0:
-        try:
-            return json.loads(content[start:])
-        except json.JSONDecodeError:
-            pass
+    # 策略3：扫描所有可能的 JSON 起点。LLM 有时会先输出分析，
+    # 分析文本里也可能包含非 JSON 的 {集合} 或 [标注]。
+    for result in _iter_json_candidates(cleaned):
+        normalized = _normalize_parsed_json(result)
+        if normalized is not None:
+            return normalized
 
     logger.warning(f"无法解析 JSON 响应: {content[:100]}...")
+    return None
+
+
+def _iter_json_candidates(content: str):
+    decoder = json.JSONDecoder()
+    for idx, char in enumerate(content):
+        if char not in "{[":
+            continue
+        try:
+            result, _ = decoder.raw_decode(content[idx:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(result, (dict, list)):
+            yield result
+
+
+def _normalize_parsed_json(result: Any) -> dict[str, Any] | list[Any] | None:
+    if isinstance(result, dict):
+        for key in ["rankings", "results", "items", "papers", "journals"]:
+            if key in result and isinstance(result[key], list):
+                inner = result[key]
+                if len(inner) > 0:
+                    return inner
+        return result
+    if isinstance(result, list):
+        return result
     return None
 
 

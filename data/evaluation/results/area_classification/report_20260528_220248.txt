@@ -1,0 +1,154 @@
+======================================================================
+                         测试报告                          
+======================================================================
+
+测试时间: 2026-05-28 22:02:48
+测试论文数: 102
+并行线程数: 50
+
+📊 总体准确率
+   领域匹配: 0/102 (0.0%)
+   等级匹配: 0/102 (0.0%)
+
+📋 按领域统计
+   领域                                                  匹配     总数      匹配率
+   ----------------------------------------------------------------------
+   计算机图形学与多媒体                                         0/14     ░░░░░░░░░░    0.0%
+   软件工程/系统软件/程序设计语言                                   0/11     ░░░░░░░░░░    0.0%
+   人工智能                                               0/11     ░░░░░░░░░░    0.0%
+   计算机体系结构/并行与分布计算/存储系统                               0/10     ░░░░░░░░░░    0.0%
+   计算机网络                                              0/10     ░░░░░░░░░░    0.0%
+   人机交互与普适计算                                          0/10     ░░░░░░░░░░    0.0%
+   网络与信息安全                                            0/9      ░░░░░░░░░░    0.0%
+   计算机科学理论                                            0/9      ░░░░░░░░░░    0.0%
+   数据库/数据挖掘/内容检索                                      0/9      ░░░░░░░░░░    0.0%
+   交叉/综合/新兴                                           0/9      ░░░░░░░░░░    0.0%
+
+📋 按CCF等级统计
+       等级       匹配     总数      匹配率
+   ------------------------------
+   CCF-A         0/37     ░░░░░░░░░░    0.0%
+   CCF-B         0/33     ░░░░░░░░░░    0.0%
+   CCF-C         0/32     ░░░░░░░░░░    0.0%
+
+
+======================================================================
+                         详细评分报告                          
+======================================================================
+
+
+## CCF-A 级论文 (37 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Socio-Technical Grounded Theory for Software Engin          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Rethinking Membership Inference Attacks Against Tr          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+NP-Hardness of Approximating Meta-Complexity: A Cr          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+The Ring: Worst-case Optimal Joins in Graph Databa          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+KLNK: Expanding Page Boundaries in a Distributed S          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Adversities in Abstract Interpretation - Accommoda          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Decomposition-based Synthesis for Applying Divide-          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Goal-Oriented Medium Access with Distributed Belie          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Enhancing Neural Network Reliability: Insights Fro          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A High-Throughput and Secure Coded Blockchain for           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+RC-NVM: Recovery-Aware Reliability-Security Co-Des          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Database Repairing with Soft Functional Dependenci          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Multi-Objective Optimization for Multi-UAV-Assiste          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Resilient Collaborative Caching for Multi-Edge Sys          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Instant neural graphics primitives with a multires          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+MoVer: Motion Verification for Motion Graphics Ani          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Real-time Multi-Map Saliency-Driven Gaze Behavior           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Interactive Volume Visualization via Multi-Resolut          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Real-time Neural Appearance Models                     ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Polyhedral Specification and Code Generation of Sp          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Low-Light Phase Retrieval With Implicit Generative          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Aligning Task- and Reconstruction-Oriented Communi          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+High-Similarity-Pass Attention for Single Image Su          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Locally Abstract, Globally Concrete Semantics of C          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Fair Coflow Scheduling via Controlled Slowdown          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Explanation in Artificial Intelligence: Insights f          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Policy Gradient Methods in the Presence of Symmetr          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Localisation of Regularised and Multiview Support           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Mitigating Noise in Quantum Software Testing Using          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Linking Entities across Relations and Graphs           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+GUI Behaviors to Minimize Pointing-based Interacti          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Achieving Symmetry in Synchronous Interaction in H          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Cognitive Spillover in Human-AI Teams                  ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A Survey on Stream-Based Architectures: From Accel          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Adaptive and Fair Transformation for Recoverable M          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A Review of Safe Reinforcement Learning Methods fo          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Unifying Large Language Models and Knowledge Graph          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+
+## CCF-B 级论文 (33 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+CDDA-MD: An efficient malicious traffic detection           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Leakage-Suppressed Encrypted Keyword Queries over           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Proactive–reactive microservice architecture globa          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+LNNIDS: A Hybrid Liquid Neural Network based IDS f          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Generative AI for Self-Adaptive Systems: State of           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Applying bayesian data analysis for causal inferen          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A new hybrid approach combining GCN and LSTM for r          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A User Study on Explainable Online Reinforcement L          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Fair-RGNN: Mitigating Relational Bias on Knowledge          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+hIPPYlib-MUQ: A Bayesian Inference Software Framew          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Ultrasparse Ultrasparsifiers and Faster Laplacian           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+LTL-based runtime verification framework for cyber          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Order, subset construction and sequential pattern           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A Simpler and Parallelizable O(sqrt(log n))-Approx          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Evolution of code technical debt in microservices           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Peeling Close to the Orientability Threshold Spati          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+IoT Firmware Version Identification Using Transfer          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Optimisation of multiple clustering based undersam          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+TIMESAFE: Timing Interruption Monitoring and Secur          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Neurosymbolic Models for Computer Graphics             ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Generalized Lipschitz Tracing of Implicit Surfaces          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+SPaGS: Fast and Accurate 3D Gaussian Splatting for          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A point-normal interpolatory subdivision scheme pr          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Enhancing Heterogeneous Knowledge Graph Completion          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Exploring the Effects of User-Agent and User-Desig          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+GazeFusion: Saliency-Guided Image Generation           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Incremental Learning Methodologies for Addressing           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Understanding user intent modeling for conversatio          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Ironies of Generative AI: Understanding and Mitiga          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+ChangeMamba: Remote Sensing Change Detection With           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+EarthGPT: A Universal Multimodal Large Language Mo          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Serverless Computing: A Technological and Architec          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Synthesizing mmWave range-doppler data from videos          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+
+## CCF-C 级论文 (32 篇)
+标题                                            预测等级     匹配   strength N     R     P     S     C    
+----------------------------------------------------------------------------------------------------
+Analysis and Mitigation of Covert Timing Communica          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A novel model for optimal selection of relay bus w          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Distinguishing Natural and Computer-Generated Imag          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Supporting the identification of prevalent quality          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+NORM: An FPGA-based Non-volatile Memory Emulation           ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Enhancing vulnerability detection efficiency: An e          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Dynamic Reliability Management in Neuromorphic Com          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+A Constrained Shortest Path Scheme for Virtual Net          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Knowledge Management Strategies and Processes in A          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Zero trust-based authentication for Inter-Satellit          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Average-Case Rigidity Lower Bounds                     ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Stateless model checking for TSO and PSO               ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Improved Online Scheduling with Restarts on a Sing          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Control Structures in Computable Numberings and th          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+On the correlation between architectural smells an          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Fairness and Diversity in Recommender Systems: A S          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Trade-off topology design for hierarchical network          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Generative artificial intelligence: a systematic r          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Research on a multi‐scale degradation fusion netwo          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Rendering piecewise approximations of SDFs through          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Exploiting Domain-Specific Parallel Data on Multil          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Feature selection based on multi-perspective dynam          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Discovering top-k periodic and high-utility patter          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Performance analysis of subsampled LiDAR point clo          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+From classification to landmark-aware identificati          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+The Role of Robot Competence, Autonomy, and Person          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+In-bed gesture recognition to support the communic          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Edge computing and 5G network integration for mobi          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Multi-modal Representation Learning Enables Accura          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Robust graph structure learning to improve multi-o          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+On-device indoor place prediction using WiFi-RTT a          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+Rotation Equivariant Convolution-based Network for          ✗    0.000   0.0  0.0  0.0  0.0  0.0
+
+📄 详细评分: data/evaluation/results/area_classification/detail_20260528_220248.json

@@ -1,0 +1,70 @@
+{
+  "journal_id": "tbd",
+  "journal_name": "IEEE Transactions on Big Data",
+  "papers": [
+    {
+      "title": "Big Data-Driven Advancements and Future Directions in Vehicle Perception Technologies: From Autonomous Driving to Modular Buses",
+      "abstract": "The rapid development of Big Data and artificial intelligence (AI) is revolutionizing the automotive and transportation industries, leading to the creation of the Autonomous Modular Bus (AMB). Designed to address the key challenges of modern public transportation systems, the AMB adopts a modular dynamic assembly approach. However, existing research on the AMB predominantly focuses on operational aspects, whereas in-transit docking remains the primary obstacle to its commercial deployment. This challenge stems from the fact that current perception accuracy in autonomous vehicles is limited to the decimeter level, with insufficient capability to manage adverse weather and complex traffic conditions. To enable AMBs to achieve full-scenario autonomous driving capabilities, this paper reviews current perception technologies from three perspectives: single-vehicle single-sensor perception, multi-sensor fusion perception, and cooperative perception. It examines the characteristics of existing perception solutions and evaluates their applicability to AMB-specific requirements. Furthermore, considering the unique challenges of in-transit docking, this paper identifies and proposes four future research directions for advancing AMB perception systems as well as general autonomous driving technologies.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2025.3527208",
+      "url": "https://www.semanticscholar.org/paper/eab9a589b189bf8791ebf7e90febfc793f347f89"
+    },
+    {
+      "title": "A Universal and Efficient Multi-Modal Smart Contract Vulnerability Detection Framework for Big Data",
+      "abstract": "A vulnerability or error in a smart contract will lead to serious consequences including loss of assets and leakage of user privacy. Established smart contract vulnerability detection tools define vulnerabilities through symbolic execution, fuzz testing, and other methods requiring extremely specialized security knowledge. Even so, with the development of vulnerability exploitation techniques, vulnerability detection tools customized by experts cannot cope with the deformation of existing vulnerabilities or unknown vulnerabilities. The vulnerability detection based on machine learning developed in recent years studies vulnerabilities from different dimensions and designs corresponding models to achieve a high detection rate. However, these methods usually only focus on some features of smart contracts, or the model itself does not have universality. Experimental results on the publicly large-scale dataset SmartBugs-Wild demonstrate that this paper's method not only outperforms existing methods in several metrics, but also is scalable, general, and requires less domain knowledge, providing a new idea for the development of smart contract vulnerability detection.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2024.3403376",
+      "url": "https://www.semanticscholar.org/paper/7a63d2768d2d2fc766dddbc2be2abf9b984e7658"
+    },
+    {
+      "title": "Big Data Analysis for Industrial Activity Recognition Using Attention-Inspired Sequential Temporal Convolution Network",
+      "abstract": "Deep-learning-based human activity recognition (HAR) methods have significantly transformed a wide range of domains over recent years. However, the adoption of Big Data techniques in industrial applications remains challenging due to issues such as generalized weight optimization, diverse viewpoints, and the complex spatiotemporal features of videos. To address these challenges, this work presents an industrial HAR framework consisting of two main phases. First, a squeeze bottleneck attention block (SBAB) is introduced to enhance the learning capabilities of the backbone model for contextual learning, which allows for the selection and refinement of an optimal feature vector. In the second phase, we propose an effective sequential temporal convolutional network (STCN), which is designed in parallel fashion to mitigate the issues of exploding and vanishing gradients associated with sequence learning. The high-dimensional spatiotemporal feature vectors from the STCN undergo further refinement through our proposed SBAB in a sequential manner, to optimize the features for HAR and enhance the overall performance. The efficacy of the proposed framework is validated through extensive experiments on six datasets, including data from industrial and general activities.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2024.3489414",
+      "url": "https://www.semanticscholar.org/paper/e88d249b6aff5ae19c73483ea2aa57b6b971808a"
+    },
+    {
+      "title": "Scalable Evidential K-Nearest Neighbor Classification on Big Data",
+      "abstract": "The K -Nearest Neighbor (K-NN) algorithm has garnered widespread utilization in real-world scenarios, due to its exceptional interpretability that other classification algorithms may not have. The evidential K-NN (EK-NN) algorithm builds upon the same nearest neighbor search procedure as K-NN, and provides more informative classification outcomes. However, EK-NN is not practical for Big Data because it is computationally complex. First, the search for K nearest neighbors of test samples from $n$ training samples requires $O(n^{2})$ operations. Additionally, estimating parameters involves performing complicated matrix calculations that increase in scale as the dataset becomes larger. To address these issues, we propose two scalable EK-NN classifiers, Global Exact EK-NN and Local Approximate EK-NN, under the distributed Spark framework. Along with the Local Approximate EK-NN, a new distributed gradient descent algorithm is developed to learn parameters. Data parallelism is used to reduce negative impacts caused by data distribution differences. Experimental results show that Our algorithms are able to achieve state-of-the-art scaling efficiency and accuracy on large datasets with more than 10 million samples.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2023.3327220",
+      "url": "https://www.semanticscholar.org/paper/aaafb29255a5c6a94f31ab756fbc0f1b7254706a"
+    },
+    {
+      "title": "A Survey on Spatio-Temporal Big Data Analytics Ecosystem: Resource Management, Processing Platform, and Applications",
+      "abstract": "With the rapid evolution of the Internet, Internet of Things (IoT), and geographic information systems (GIS), spatio-temporal Big Data (STBD) is experiencing exponential growth, marking the onset of the STBD era. Recent studies have concentrated on developing algorithms and techniques for the collection, management, storage, processing, analysis, and visualization of STBD. Researchers have made significant advancements by enhancing STBD handling techniques, creating novel systems, and integrating spatio-temporal support into existing systems. However, these studies often neglect resource management and system optimization, crucial factors for enhancing the efficiency of STBD processing and applications. Additionally, the transition of STBD to the innovative Cloud-Edge-End unified computing system needs to be noticed. In this survey, we comprehensively explore the entire ecosystem of STBD analytics systems. We delineate the STBD analytics ecosystem and categorize the technologies used to process GIS data into five modules: STBD, computation resources, processing platform, resource management, and applications. Specifically, we subdivide STBD and its applications into geoscience-oriented and human-social activity-oriented. Within the processing platform module, we further categorize it into the data management layer (DBMS-GIS), data processing layer (BigData-GIS), data analysis layer (AI-GIS), and cloud native layer (Cloud-GIS). The resource management module and each layer in the processing platform are classified into three categories: task-oriented, resource-oriented, and cloud-based. Finally, we propose research agendas for potential future developments.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2023.3342619",
+      "url": "https://www.semanticscholar.org/paper/09a02e6a83bc43b5fa3a764ddf761972b2ebc529"
+    },
+    {
+      "title": "Secret Specification Based Personalized Privacy-Preserving Analysis in Big Data",
+      "abstract": "The pursuit of refined data analysis and the preservation of privacy in Big Data pose significant concerns. Among the paramount paradigms for addressing these challenges, differential privacy stands out as a vital area of research. However, traditional differential privacy tends to be excessively restrictive when it comes to individuals’ control over their own data. It often treats all data as inherently sensitive, whereas in reality, not all information related to individuals is sensitive and requires an identical level of protection. In this paper, we define secret specification-based differential privacy (SSDP), where the term “secret specification” implies enabling users to decide what aspects of their information are sensitive and what are not, prior to data generation or processing. By allowing individuals to independently define their secret specifications, the SSDP achieves personalized privacy protection and facilitates effective data analysis. To enable the targeted application of SSDP, we further present task-specific mechanisms designed for database and graph data scenarios. Finally, we assess the trade-offs between privacy and utility inherent in the proposed mechanisms through comparative experiments conducted on real datasets, demonstrating the utility enhancements offered by SSDP mechanisms in practical applications.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2024.3433433",
+      "url": "https://www.semanticscholar.org/paper/a9d45df159ef0321794d8a1e6c52c841523519f0"
+    },
+    {
+      "title": "SBPA: Sybil-Based Backdoor Poisoning Attacks for Distributed Big Data in AIoT-Based Federated Learning System",
+      "abstract": "Federated learning (FL) enables a great deal of distributed independent participants to collaborate in training without sharing data. Malicious adversary can poison the local model by backdoor poisoning attacks and utilize the characteristic that server cannot trace original data to make the poisoned model directly aggregated. Especially in the AIoT-FL network that generates large amounts of data in real-time, such an attack is more powerful. In this article, we design a sybil-based backdoor poisoning attacks (SBPA) against the above vulnerability. Malicious participants inject backdoor triggers into distributed Big Data to covertly complete data poisoning. During subsequent iterative aggregation, the joint model activates the backdoor during testing to achieve misclassification for the backdoor images. Besides, malicious participants create some sybil nodes to join the aggregation by taking advantage of the vulnerability of system devices to be easily disconnected. They are committed to making the poisoned local models aggregated with higher probability. Their goal works on making the final global model misclassify backdoor images while keeping high classification accuracy on the other non-backdoor samples. We conduct extensive experiments on multiple datasets and exhibit more robust performance than the state-of-the-art in various metrics under both data distribution including i.i.d. and non-i.i.d. scenarios.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2022.3224392",
+      "url": "https://www.semanticscholar.org/paper/f494970aadc58616fa8cf40936cb0e6dbff6e750"
+    },
+    {
+      "title": "AB-DOM: An Algorithmic Framework for Supporting Privacy-Preserving Big Data Publishing in Big Data Lakes",
+      "abstract": "With the emergence of new technologies that extend the capabilities of actual data collection methods, healthcare data are more and more amassed in the purpose of being later analyzed to serve the ultimate, well-known, goal of 4P medicine ( Predictive, Preventive, Personalized, Participative ). Given the sensitive nature of healthcare data, and in a matter of compliance with data protection and privacy regulations, there is a need to make data publishing more secure. This is one of the main goals of the EU H2020 QUALITOP research project , with particular regards to the issue of defining a big health data smart digital platform and the shared data lake. In this context, we design, implement and experimentally assess an innovative algorithmic framework called A dvanced Privacy-Preserving B ig Data Publishing in Hierarchical DOM ains (AB-DOM). AB-DOM is based on state-of-the-art anonymization techniques mixed with a graph coloring algorithm and an integrated data sampling method to guarantee that sensitive data are highly secured.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TBDATA.2025.3570081",
+      "url": "https://www.semanticscholar.org/paper/a292a4e9d4818b426d32050e3d58373babb5eec0"
+    }
+  ]
+}

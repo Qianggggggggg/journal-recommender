@@ -1,0 +1,54 @@
+{
+  "journal_id": "informationsciences",
+  "journal_name": "Information Sciences",
+  "papers": [
+    {
+      "title": "Order, subset construction and sequential pattern mining",
+      "abstract": "Sequential Pattern Mining (SPM) is a basic task in data mining. It aims to extract the most occurring sequences in a dataset, which turns out to be instrumental in many fields. In [1] we initiated an attempt to formally unify leading pattern mining approaches. This paper builds upon our previous work to first extend the polynomial model to SPM. Next, we devise an efficient implementation termed WASMA that enhances the standard subset construction method. To do so, we first partition the set of states into independent sets based on their labels, and then define three different state ordering. The first is a global id-based order which we use in global exploration. The second is local and used in itemset extension. A geometric ordering is lastly exploited to avoid redundant computations. To handle the memory bottleneck of the determinization, we propose two variants: WASMA-wsc and WASMA-ssc that rely or not on the state existence check clause. Unlike existing approaches that overlook the appearance of repetitive computation paths, the first variant introduces a novel feature, since it avoids recomputing previously explored sub-branches of the problem space. Besides, we refine for the SPM setting the well-known theoretical upper-bound by establishing new complexities in function of the geometric-order topology. Evaluations demonstrate that our solution outperforms existing approaches for SPM instances with very low support thresholds, persisting sole to yield the result while its competitors hit the time limit.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ins.2025.122348",
+      "url": ""
+    },
+    {
+      "title": "Optimisation of multiple clustering based undersampling using artificial bee colony: Application to improved detection of obfuscated patterns without adversarial training",
+      "abstract": "Attack detection is one of the main features required in modern defence systems. Despite the ongoing research, it remains challenging for a typical mechanism like network-based intrusion detection system (NIDS) to catch up with evolving adversarial attacks. They specifically aim to confuse a machine-learning based predictor. Without the knowledge of adversarial patterns, the best approach is generalising signatures learned from a dataset of legitimate connections and known intrusions. This work focuses on analysing non-payload traffics so that the resulting techniques can be exploited to a range of network-based applications. It investigates a novel means to deal with the problem of imbalanced classes. An optimised undersampling method is introduced to select a subset of majority-class representatives initially created through an ensemble clustering procedure. A weighted combination of criteria representing distributions within and between classes is proposed as the objective function for a global optimisation using the artificial bee colony (ABC). This approach usually outperforms its baselines and other state-of-the-art undersampling models, with ABC being more effective using the global best strategy than a random selection of solutions or an iterative greedy search. The paper also details the parameter analysis offering a heuristic guide for potential taking up of the proposed techniques.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1016/j.ins.2025.121407",
+      "url": ""
+    },
+    {
+      "title": "Signed graphs in data sciences via communicability geometry",
+      "abstract": "Signed graphs are an emergent way of representing data in a variety of contexts where antagonistic interactions exist. These include data from biological, ecological, and social systems. Here we propose the concept of communicability for signed graphs and explore in depth its mathematical properties. We also prove that the communicability induces a hyperspherical geometric embedding of the signed network, and derive communicability-based metrics that satisfy the axioms of a distance even in the presence of negative edges. We then apply these metrics to solve several problems in the data analysis of signed graphs within a unified framework. These include the partitioning of signed graphs, dimensionality reduction, finding hierarchies of alliances in signed networks, and quantifying the degree of polarization between the existing factions in social systems represented by these types of graphs.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ins.2025.122096",
+      "url": "https://www.semanticscholar.org/paper/78ff8023f9dc68cc2f9024fa03467ab6415385a7"
+    },
+    {
+      "title": "Foundational theories of hesitant fuzzy sets and hesitant fuzzy information systems and their applications for multi-strength intelligent classifiers",
+      "abstract": "Hesitant fuzzy sets are widely used in certain instances of uncertainty and hesitation. In sets, the inclusion relationship is an important and foundational deﬁnition. Thus, as a kind of set, hesitant fuzzy sets require an explicit deﬁnition of inclusion relationship. Based on the hesitant fuzzy membership degree of discrete form, several kinds of inclusion relationships for hesitant fuzzy sets are proposed in this work. Then, some foundational propositions of hesitant fuzzy sets are presented, along with propositions of families of hesitant fuzzy sets. Some foundational propositions of hesitant fuzzy information systems are proposed with respect to parameter reductions and an example and an algorithm are given to illustrate the processes of parameter reduction. Finally, a multi-strength intelligent classiﬁer is proposed to make health state diagnoses for complex systems.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.ins.2025.122212",
+      "url": "https://www.semanticscholar.org/paper/04ff7061e0ab1724479885df3701edd6f9eef2d6"
+    },
+    {
+      "title": "HORNET: Fast and minimal adversarial perturbations",
+      "abstract": "Fixed-budget attacks aim to generate adversarial examples—carefully crafted inputs designed to induce misclassifications during inference—while adhering to a predefined perturbation budget. These attacks maximize misclassification confidence and benefit from the transferability property, enabling the generated adversarial examples to remain effective even against multiple unknown models. However, to preserve their transferability, such attacks often yield perceptible perturbations, compromising the visual integrity of the adversarial examples. In this paper, we introduce HORNET, an extension of gradient-based fixed-budget attacks designed to minimize the perturbation magnitude of adversarial examples while maintaining their transferability against the target model. HORNET utilizes a distinct source model to craft the adversarial examples and employs a limited number of queries to the unknown target model to further minimize perturbation magnitude. We evaluate HORNET empirically by integrating it with 41 existing attack implementations and testing it against 9 different models, resulting in a total of 1700 unique configurations. Our results demonstrate that HORNET outperforms the state of the art in generating minimally perturbed yet highly transferable adversarial examples across all tested models. Code available at: https://github.com/louiswup/HORNET .",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ins.2025.123028",
+      "url": "https://doi.org/10.1016/j.ins.2025.123028"
+    },
+    {
+      "title": "Null-adjusted persistence function for high-resolution community detection",
+      "abstract": "Modularity and persistence probability are two widely used quality functions for detecting communities in complex networks. In this paper, we introduce a new objective function called null-adjusted persistence, which incorporates features from both modularity and persistence probability, as it implies a comparison of persistence probability with the same configuration null model of modularity. We prove key analytic properties of this new function, demonstrating that it successfully addresses modularity’s well-known scaling and resolution limitations, as well as the monotonic bias of persistence probability with respect to cluster size. To optimize this new function, we adapt the Louvain method and evaluate our approach on both synthetic benchmarks and real-world networks. Our results show that maximizing null-adjusted persistence consistently yields higher-resolution partitions than standard modularity maximization, particularly in large real networks.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.ins.2025.123032",
+      "url": "https://doi.org/10.1016/j.ins.2025.123032"
+    }
+  ]
+}

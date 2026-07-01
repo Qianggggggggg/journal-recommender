@@ -1,0 +1,86 @@
+{
+  "journal_id": "machinelearning",
+  "journal_name": "Machine Learning",
+  "papers": [
+    {
+      "title": "Contrastive Learning for Explanation Ranking",
+      "abstract": "Explainable recommendation systems enhance user trust and satisfaction by revealing the reasoning behind personalized recommendations. Approaching this as a post-hoc explanation-ranking problem over a fixed pool of candidate explanations, we propose Contrastive Learning for Explanation Ranking (CLER), a model that learns user, item, and explanation representations with a Normalized Temperature-scaled Binary Cross-Entropy (NT-BXent) loss. This function specifically applies a per-row reweighting strategy, preventing the vast number of negative examples from dominating the objective. We evaluate CLER on the Amazon, TripAdvisor, and Yelp datasets from the EXTRA benchmark. Across traditional ranking metrics, CLER achieves the strongest results among the compared baselines.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07099-7",
+      "url": "https://openalex.org/W7165804515"
+    },
+    {
+      "title": "Optimal Confidence Bounds for Sparse Random Projections",
+      "abstract": "Random projections enable efficient dimensionality reduction while preserving geometric structure, with applications spanning accelerating linear algebra computations, differential privacy, and fine-tuning large language models. Variants of the Johnson-Lindenstrauss lemma quantify confidence bounds via Chernoff-type inequalities, yet despite sustained effort, theoretical guarantees remain exponentially weaker than what both known limits and empirical behaviour suggest-gaps often exceeding few orders of magnitude. Closing this gap is both challenging and essential for applicability in non-asymptotic regimes, where precise bounds directly determine computational requirements and guarantees. This paper establishes optimal non-asymptotic concentration bounds for sparse Rademacher projections, achieving the sharp threshold of Burr et al. and improving upon previous results through exponentially better confidence, or equivalently reducing required dimensions by a large factor-observed to be even larger in applications, with extensions to non-oblivious bounds for structured inputs. These results follow from a unified analytical framework of independent interest to probability theory and its applications: a) negative association of moments; b) refined Hanson-Wright-type concentration bounds for randomly masked quadratic chaos achieving optimal constants via rational approximants; and c) precise methods for aggregating conditional Bernstein-type bounds.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07057-3",
+      "url": "https://openalex.org/W7165405598"
+    },
+    {
+      "title": "Constraint- and Score-Based Nonlinear Granger Causality Discovery with Kernels",
+      "abstract": "Kernel-based methods are used in the context of Granger Causality to enable the identification of nonlinear causal relationships between time series variables. In this paper, we show that two state of the art kernel-based Granger Causality (GC) approaches can be theoretically unified under the framework of Kernel Principal Component Regression (KPCR), and introduce a method based on this unification, demonstrating that this approach can improve causal identification. Additionally, we introduce a Gaussian Process score-based model with Smooth Information Criterion penalisation on the marginal likelihood, and demonstrate improved performance over existing state of the art time-series nonlinear causal discovery methods. Furthermore, we propose a contemporaneous causal identification algorithm, fully based on GC, using the proposed score-based $$GP_{SIC}$$ method, and compare its performance to a state of the art contemporaneous time series causal discovery algorithm.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07093-z",
+      "url": "https://openalex.org/W7164900948"
+    },
+    {
+      "title": "Race Strategy Reinforcement Learning: Optimising Pitstop Strategy with Emergent Tactics in Formula One",
+      "abstract": "In Formula One, often described as the pinnacle of motorsport, teams compete to design and produce the fastest cars, driven by some of the best drivers in the world, in order to win races. However, a team has little chance of success without effective race strategy , i.e. selecting which tyre compounds to use and when to take pitstops to change between them. Teams’ methods for solving this problem are usually limited to linear optimisation, while some run Monte Carlo simulations in simple, best-case situations; these approaches thus fail to take into account the complex interactions between teams’ strategies and tactics in this unpredictable multi-agent environment. Further, there is low uptake of AI in this domain, potentially due to a lack of trust in these “black-box” models. In this work, we enable the massive potential of reinforcement learning (RL) models in this space using post-hoc techniques from explainable AI. Specifically, we introduce Race Strategy Reinforcement Learning (RSRL), an RL model which allows us to control the strategies of cars in race simulations, with explanations for their actions to help foster trust in users. We first demonstrate that RSRL outperforms baselines of hard-coded and Monte-Carlo strategies, presenting opportunities for improving race strategy for all Formula One teams, and potentially beyond, especially in other areas of motorsport. Next, we analyse RSRL’s generalisability to unseen tracks and show how performance on one or multiple tracks can be prioritised via training. We then exhibit the fidelity and comprehensibility of the deployed explanations towards improving user trust in RSRL’s decisions. Finally, we highlight the emergent tactics , i.e. emergent behaviours representing real-world tactics, learnt by RSRL, pointing towards the general applicability of RL for modelling and even influencing race strategy in Formula One.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07081-3",
+      "url": "https://openalex.org/W7164025774"
+    },
+    {
+      "title": "On the Stability of Local Interpretable Model-Agnostic Explanations for Quantum Classifiers",
+      "abstract": "The interplay between machine learning and quantum computing can lead to unprecedented prospects for both fundamental research and real-world applications. In this new field of quantum machine learning, quantum classifiers, i.e., quantum algorithms for solving classification problems, have attracted the most attention. However, despite the promising performance of these new models for classification tasks, they are complex black-box models. Therefore, like or even more so than classical machine learning models, their use in critical contexts such as medical diagnosis could be hampered without the support of explanations. This paper addresses this challenge by investigating the use of Local Interpretable Model-agnostic Explanations (LIME) for quantum classifiers, with a specific focus on the stability of the explanations. Stability is a key property for ensuring that explanations are consistent and trustworthy, especially when decisions impact sensitive domains. The paper conducts a systematic stability study of LIME in the quantum setting, validating whether a classical explainable AI technique can be meaningfully applied to quantum models. As shown in experiments involving different datasets belonging to critical applications, LIME provides explanations for quantum support vector machines and quantum neural networks that are not only interpretable but also stable. By highlighting the stability of explanations, these findings demonstrate the suitability of LIME as an explainability tool for quantum classifiers.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07071-5",
+      "url": "https://openalex.org/W7163134215"
+    },
+    {
+      "title": "Interpreting User Opinions: A Multidimensional Approach Leveraging Explainable AI and Generative Models",
+      "abstract": "In today’s digital landscape, user-generated opinions—such as online reviews, user comments, and social media posts—offer valuable insights into people’s experiences, sentiments, and concerns, influencing decisions across businesses, organizations, and public policy. Advanced machine learning techniques, particularly Large Language Models (LLMs) like BERT and GPT, facilitate the automated analysis of this vast, unstructured data to extract actionable information. However, beyond high classification accuracy, there is a growing demand for explainability to ensure transparency and trust in automated systems. Understanding why an opinion is classified in a particular way is critical for informed decision-making. This paper proposes a multidimensional, explainable framework that combines LLM-based classification across latent dimensions (e.g., sentiment, topic, emotion), interpretable AI for identifying influential words, and generative AI for producing human-readable explanations. Unlike standard explanations generated solely by models such as GPT, our method integrates Explainable AI (XAI) techniques to pinpoint influential words for each classification dimension and organizes them into structured, dimension-aware outputs—significantly enhancing interpretability and alignment with model predictions. Experimental results—based on text-level metrics, latent space representations, and qualitative assessments from both automated tools and human experts—demonstrate the effectiveness of our approach in improving transparency, interpretability, and usability in opinion analysis.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07037-7",
+      "url": "https://openalex.org/W7162802150"
+    },
+    {
+      "title": "From Latent to Lucid: Transforming Knowledge Graph Embeddings into Interpretable Structures with KGEPrisma",
+      "abstract": "In this paper, we introduce a post-hoc and local explainable AI method tailored for Knowledge Graph Embedding (KGE) models. These models are essential to Knowledge Graph Completion yet criticized for their black-box nature. Despite their success in capturing the semantics of knowledge graphs through high-dimensional latent representations, their inherent complexity poses substantial challenges to explainability. While existing methods like Kelpie use resource-intensive perturbation to explain KGE models, our approach directly decodes the latent representations encoded by KGE models, leveraging the smoothness of the embeddings, which follows the principle that similar embeddings reflect similar behaviours within the Knowledge Graph, meaning that nodes are similarly embedded because their graph neighbourhood looks similar. This principle is commonly referred to as smoothness. By identifying symbolic structures, in the form of triples, within the subgraph neighborhoods of similarly embedded entities, our method identifies the statistical regularities on which the models rely and translates these insights into human-understandable symbolic rules and facts. This bridges the gap between the abstract representations of KGE models and their predictive outputs, providing clear and interpretable insights. The contributions include a novel post-hoc and local explainable AI method for KGE models, which provides immediate and faithful explanations without retraining, thereby facilitating real-time application on large-scale knowledge graphs. The method’s flexibility enables the generation of rule-based, instance-based, and analogy-based explanations, meeting diverse user needs. Extensive evaluations show the effectiveness of our approach in delivering faithful and well-localized explanations, enhancing the transparency and trustworthiness of KGE models.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07052-8",
+      "url": "https://openalex.org/W7162307553"
+    },
+    {
+      "title": "Predicate Renaming via Large Language Models",
+      "abstract": "In this paper, we address the problem of giving names to predicates in logic rules using Large Language Models (LLMs). In the context of Inductive Logic Programming, various rule generation methods produce rules containing unnamed predicates, with Predicate Invention being a key example. This hinders the readability, interpretability, and reusability of the logic theory. Leveraging recent advancements in LLMs development, we explore their ability to process natural language and code to provide semantically meaningful suggestions for giving a name to unnamed predicates. The evaluation of our approach on some hand-crafted logic rules indicates that LLMs hold potential for this task.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07075-1",
+      "url": "https://openalex.org/W7162215952"
+    },
+    {
+      "title": "Survey on LLM Safety: Attacks, Defenses, Alignment, Metrics, and Guardrails",
+      "abstract": "Large Language Models (LLM) have demonstrated remarkable capabilities across various applications, but their deployment raises critical safety concerns as potential misuse poses significant societal risks. This survey reviews the end-to-end security and safety pipeline of LLMs, focusing on the interaction between users and model responses. We categorize the system into five key components: attacks, defenses, safety alignment, metrics and guarding mechanisms. Attacks involve crafting adversarial inputs to exploit model vulnerabilities. Defenses act as countermeasures, aiming to detect and prevent such inputs before processing. Safety alignment ensures that, even when attacks reach the model, its responses remain consistent with ethical and policy-aligned behavior. Guarding mechanisms operate post-response to flag, filter, or block unsafe outputs. Each of these stages is subject to rigorous evaluation metrics to assess their effectiveness, robustness, and limitations. As LLMs evolve toward more general-purpose intelligence, these safety considerations become increasingly critical for the development of robust and trustworthy AI systems. Finally, we highlight open challenges and future research directions to advance the security and alignment of LLMs.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07060-8",
+      "url": "https://openalex.org/W7161761904"
+    },
+    {
+      "title": "Approximating Shapley Interactions with Marginal Contributions",
+      "abstract": "The Shapley value constitutes a widely recognized tool to assess individual contributions of cooperating entities from a game-theoretic perspective. Within the field of machine learning it is frequently applied to conduct feature attribution or data valuation. Aiming to overcome its deficiencies in capturing intricate interplay between entities, the Shapley interaction index represents a natural extension of the Shapley value, maintaining axiomatic uniqueness. As their complexity renders the exact computation of both quantities impractical, recent work transfers approximation approaches from the Shapley value to Shapley interactions. We propose Permutation-IQ , a domain-independent approximation method based on a novel representation that traces Shapley interactions back to the Shapley value’s fine-grained building blocks of marginal contributions. Sampling these instead of the coarser discrete derivatives of which Shapley interactions are composed, allows to utilize the collected information more efficiently.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1007/s10994-026-07062-6",
+      "url": "https://openalex.org/W7161637873"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "journal_id": "talg",
+  "journal_name": "ACM Transactions on Algorithms",
+  "papers": [
+    {
+      "title": "Ultrasparse Ultrasparsifiers and Faster Laplacian System Solvers",
+      "abstract": "In this article, we provide an O(m loglogO(1) n log (1/ε))-expected time algorithm for solving Laplacian systems on n-node m-edge graphs, improving upon the previous best expected runtime of O(m sqrt{log n} loglog^{O(1)} n log (1/ε)) achieved by Cohen et al. To obtain this result, we provide efficient constructions of low spectral stretch graph approximations with improved stretch and sparsity bounds. As motivation for this work, we show that, for every set of vectors in R^d (not just those induced by graphs) and all integer k > 1, there exist an ultra-sparsifier with d-1 + O(d/k) re-weighted vectors of relative condition number at most k^2. For small k, this improves upon the previous best known multiplicative factor of k * O~(log d), which is only known for the graph case. Additionally, in the graph case, we employ our low-stretch subgraph construction to obtain n - 1 + O(n/k)-edge ultrasparsifiers of relative condition number k^{1+o(1)} for k = ω(log^δ n) for any δ > 0: this improves upon the previous work for k = o(exp(log^{1/2-δ} n)).",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3593809",
+      "url": ""
+    },
+    {
+      "title": "Peeling Close to the Orientability Threshold Spatial Coupling in Hashing-Based Data Structures",
+      "abstract": "In multiple-choice data structures each element x is associated with a set e(x) ⊆ [n] of size ℓ ≥ 1, and one considers the hypergraph H = ([n],{e(x) | x∈ S}). In many applications, it is desirable that H admits a peeling sequence, i.e. an ordering of the edges such that every edge has a vertex of degree 1 at the time it is removed. Many hypergraphs exhibit sharp density thresholds with respect to the property of ℓ-orientability and peeling. We propose a new kind of distribution for hyperedges that results in hypergraphs which are orientable and peelable all the way up to the orientability threshold. Our construction is simple: The hypergraph H consists of nk (slightly overlapping) copies of a hypergraph H0 of constant size. We demonstrate the usefulness of our construction using our hypergraphs as a drop-in replacement in a retrieval data structure by Botelho et al. This reduces memory usage from ≈1.23m to ≈1.12m for m entries and any k > 3.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3711822",
+      "url": ""
+    },
+    {
+      "title": "Finding Matchings in Dense Hypergraphs",
+      "abstract": "We consider the algorithmic decision problem that takes as input an \\( n \\) -vertex \\( k \\) -uniform hypergraph \\( H \\) with minimum codegree at least \\(m-c\\) and decides whether it has a matching of size \\( m \\) . We show that this decision problem is fixed parameter tractable with respect to \\( c \\) . Furthermore, our algorithm not only decides the problem, but actually either finds a matching of size \\( m \\) or a certificate that no such matching exists. In particular, when \\(m=n/k\\) and \\(c=O(\\log n)\\) , this gives a polynomial-time algorithm that, given any \\( n \\) -vertex \\( k \\) -uniform hypergraph \\( H \\) with minimum codegree at least \\(n/k-c\\) , finds either a perfect matching in \\( H \\) or a certificate that no perfect matching exists.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3768574",
+      "url": "https://www.semanticscholar.org/paper/b5356857e83c2424372e11779396f5015bbbdc9e"
+    },
+    {
+      "title": "Sparse Induced Subgraphs in P 6 -free Graphs",
+      "abstract": "We prove that a number of computational problems that ask for the largest sparse induced subgraph satisfying some property definable in \\(\\mathsf{CMSO}_{2}\\) logic, most notably Feedback Vertex Set , are polynomial-time solvable in the class of \\(P_{6}\\) -free graphs. This generalizes the work of Grzesik, Klimošová, Pilipczuk, and Pilipczuk on the Maximum Weight Independent Set problem in \\(P_{6}\\) -free graphs [SODA 2019, TALG 2022], and of Abrishami, Chudnovsky, Pilipczuk, Rzążewski, and Seymour on problems in \\(P_{5}\\) -free graphs [SODA 2021]. The key step is a new generalization of the framework of potential maximal cliques . We show that instead of listing a large family of potential maximal cliques, it is sufficient to only list their carvers : vertex sets that contain the same vertices from the sought solution and have similar separation properties.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1145/3785003",
+      "url": "https://doi.org/10.1145/3785003"
+    },
+    {
+      "title": "Gap Amplification for Reconfiguration Problems",
+      "abstract": "Combinatorial reconfiguration is a brand-new field aimed at investigating the connectivity of the solution space of a combinatorial problem. We study the hardness of achieving “approximate” reconfigurability, which allows to relax the feasibility of intermediate solutions. For example, in the Minmax Set Cover Reconfiguration problem, given a set family and a pair of its covers, we are asked to transform one cover into the other by repeatedly adding or removing a single set from the family. The objective is to minimize the maximum size of covers encountered during the transformation. The recent study by Ohsaka (STACS 2023) showed that several reconfiguration problems are \\(\\mathbf{PSPACE}\\) -hard to approximate assuming the Reconfiguration Inapproximability Hypothesis (RIH) . One limitation of this approach is that inapproximability factors are not explicitly shown, so that even a \\(1.00\\cdots 001\\) -approximation algorithm for Minmax Set Cover Reconfiguration may not be ruled out, whereas it admits a 2-factor approximation algorithm due to Ito, Demaine, Harvey, Papadimitriou, Sideri, Uehara, and Uno (TCS 2011). In this article, we demonstrate gap amplification for reconfiguration problems. Specifically, we establish explicit \\(\\mathbf{PSPACE}\\) -hardness of approximation factors for three reconfiguration problems, assuming only RIH. Our main result is that under RIH, Maxmin 2-CSP Reconfiguration is \\(\\mathbf{PSPACE}\\) -hard to approximate within a factor of 0.9942. The crux of its proof is an alteration of the gap amplification technique due to Dinur (JACM 2007), which boosts the 1 vs. \\(1-\\varepsilon\\) gap to the 1 vs. \\(1-0.0058\\) gap for any small positive real \\(\\varepsilon\\) . As an application of the main result, we further show that Minmax Set Cover Reconfiguration and Minmax Dominating Set Reconfiguration are \\(\\mathbf{PSPACE}\\) -hard to approximate within a factor of 1.0029 under RIH.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1145/3779053",
+      "url": "https://doi.org/10.1145/3779053"
+    },
+    {
+      "title": "Computing NP-hard Repetitiveness Measures via MAX-SAT",
+      "abstract": "Repetitiveness measures reveal profound characteristics of datasets, and give rise to compressed data structures and algorithms working in compressed space. Alas, the computation of some of these measures is NP-hard, and straight-forward computation is infeasible for datasets of even small sizes. Three such measures are the smallest size of a string attractor, the smallest size of a bidirectional macro scheme, and the smallest size of a straight-line program. While a vast variety of implementations for heuristically computing approximations exist, exact computation of these measures has received little to no attention. In this article, we present MAX-SAT formulations that provide the first non-trivial implementations for exact computation of smallest string attractors, smallest bidirectional macro schemes, and smallest straight-line programs. Computational experiments show that our implementations work for texts of length up to a few hundred for straight-line programs and bidirectional macro schemes, and texts even over a million for string attractors.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1145/3777895",
+      "url": "https://doi.org/10.1145/3777895"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "journal_id": "tit",
+  "journal_name": "IEEE Transactions on Information Theory",
+  "papers": [
+    {
+      "title": "Strong Converse Bounds in Quantum Network Information Theory",
+      "abstract": "In this paper, we develop the first method for finding strong converse bounds in quantum network information theory. The general scheme relies on a recently obtained result in the field of non-commutative functional inequalities, namely the tensorization property of quantum reverse hypercontractivity for the quantum depolarizing semigroup. We develop a novel technique to employ this result to find both finite blocklength and exponential strong converse bounds for the tasks of quantum source coding with compressed classical side information, and distributed quantum hypothesis testing with communication constraints for a classical-quantum state. In the classical setting, these two problems can be reformulated in a unified framework in terms of the so-called image-size characterization problem, which we extend to the classical-quantum setting. We also use this technique to establish analogous strong converse bounds in broadcast communication scenarios. In particular, we consider the transmission of classical information through a degraded broadcast channel, whose outputs are two quantum systems, with the state of one being a degraded version of the other. In establishing this last result, we prove a second-order Fano-type inequality, which is of independent interest. Our method to study strong converses has potential applications in other important tasks of quantum network information theory.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIT.2021.3058166",
+      "url": "https://www.semanticscholar.org/paper/d3f3a3f712efc9c89a309a6e2d2a38ecc5bc834b"
+    },
+    {
+      "title": "Proving and Disproving Information Inequalities: Theory and Scalable Algorithms",
+      "abstract": "Proving or disproving an information inequality is a crucial step in establishing the converse results in coding theorems. However, an information inequality involving more than a few random variables is difficult to be proved or disproved manually. In 1997, Yeung developed a framework that uses linear programming for verifying linear information inequalities. Under the framework, this paper considers a few other problems that can be solved by using Lagrange duality and convex approximation. We will demonstrate how linear programming can be used to find an analytic proof of an information inequality or an analytic counterexample to disprove it if the inequality is not true in general. The way to automatically find a shortest proof or a smallest counterexample is explored. When a given information inequality cannot be proved, the sufficient conditions for a counterexample to disprove the information inequality are found by linear programming. Lastly, we propose a scalable algorithmic framework based on the alternating direction method of multipliers to accelerate solving a multitude of user-specific problems whose overall computational cost can be amortized with the number of users, and present its publicly-available software implementation for large-scale problems.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIT.2020.2982642",
+      "url": "https://www.semanticscholar.org/paper/a0f4463baa893f55d435d395b8ebd23b98fbc762"
+    },
+    {
+      "title": "A New Sieving-Style Information-Set Decoding Algorithm",
+      "abstract": "The problem of decoding random codes is a fundamental problem for code-based cryptography, including recent code-based candidates in the NIST post-quantum standardization process. In this paper, we present a novel Sieving-style Information-set Decoding algorithm, addressing the task of solving the syndrome decoding problem. Our approach involves maintaining a list of weight- $2p$ solution vectors to a partial syndrome decoding problem and then creating new vectors by identifying pairs of vectors that collide in p positions. By gradually increasing the parity-check condition by one and repeating this process iteratively, we find the final solution(s). We show that our novel algorithm performs better than other ISDs in the memory-restricted scenario when applied to McEliece. Notably, in the case of problem instances with very low relative weight, the sieving approach uses significantly less memory compared to other ISD algorithms while being competitive in terms of performance.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TIT.2024.3457150",
+      "url": "https://www.semanticscholar.org/paper/1d10c882319b6195dbe435d3406e098589c635bf"
+    },
+    {
+      "title": "The t -Designs and the Subcode Support Weight Distributions of r -GMDS Codes",
+      "abstract": "The Assmus-Mattson Theorem is a famous and effective way to construct t -designs from supports of codewords of a linear code. By extending this idea, we study the t -designs constructed from supports of subcodes of linear codes. In this paper, we introduce the notion of r -generalized maximum distance separable codes ( r -GMDS codes) and determine the t -designs constructed from supports of subcodes of a r -GMDS code. Also, we show that t -designs can be constructed from supports of subcodes of a linear code if the automorphism group of this linear code is t -transitive. In particular, we prove that t -designs can be constructed from supports of subcodes of Reed-Muller codes. Then we show that the number of blocks in the t -design constructed from supports of subcodes of a linear code is related to the subcode support weight distributions of this linear code. Next, we provide some new formulas for the subcode support weight distributions of r -GMDS codes. After we present a connection between l -MDS codes and r -GMDS codes, some new formulas are obtained for the subcode support weight distributions of l -MDS codes. In particular, we completely determine the subcode support weight distributions of maximum distance separable (MDS) codes and near maximum distance separable (NMDS) codes. As an example, the subcode support weight distributions of the extended ternary Golay code are completely determined.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tit.2025.3649882",
+      "url": "https://doi.org/10.1109/tit.2025.3649882"
+    },
+    {
+      "title": "Consensus Capacity of Noisy Broadcast Channels",
+      "abstract": "We study communication with consensus over a broadcast channel—the receivers reliably decode the sender’s message when the sender is honest, and their decoder outputs agree even if the sender acts maliciously. We characterize the broadcast channels which permit this Byzantine consensus and determine their capacity. We show that communication with consensus is possible only when the broadcast channel has embedded in it a natural “common channel” whose output both receivers can unambiguously determine from their own channel outputs. Interestingly, in general, the consensus capacity may be larger than the point-to-point capacity of the common channel, i.e., while decoding, the receivers may make use of parts of their output signals on which they may not have consensus provided there are some parts (namely, the common channel output) on which they can agree.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tit.2025.3649987",
+      "url": "https://doi.org/10.1109/tit.2025.3649987"
+    },
+    {
+      "title": "Self-Orthogonal Codes From Plateaued Functions and Their Applications in Quantum Codes and LCD Codes",
+      "abstract": "Self-orthogonal codes have received great attention due to their important applications in quantum codes, LCD codes and lattices. Recently, several families of self-orthogonal codes containing the all-1 vector were constructed by augmentation technique. In this paper, utilizing plateaued functions, we construct some classes of linear codes which do not contain the all-1 vector. We also investigate their punctured codes. The weight distributions of the constructed codes are explicitly determined. Under certain conditions, these codes are proved to be self-orthogonal. Furthermore, some classes of optimal linear codes are obtained from their duals. Using the self-orthogonal punctured codes, we also construct several new families of at least almost optimal quantum codes and optimal LCD codes.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/tit.2025.3649487",
+      "url": "https://doi.org/10.1109/tit.2025.3649487"
+    }
+  ]
+}

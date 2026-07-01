@@ -1,0 +1,70 @@
+{
+  "journal_id": "tocl",
+  "journal_name": "ACM Transactions on Computational Logic",
+  "papers": [
+    {
+      "title": "Being Correct Is Not Enough: Efficient Verification Using Robust Linear Temporal Logic",
+      "abstract": "While most approaches in formal methods address system correctness, ensuring robustness has remained a challenge. In this article, we present and study the logic rLTL, which provides a means to formally reason about both correctness and robustness in system design. Furthermore, we identify a large fragment of rLTL for which the verification problem can be efficiently solved, i.e., verification can be done by using an automaton, recognizing the behaviors described by the rLTL formula φ, of size at most O(3 |φ |), where |φ | is the length of φ. This result improves upon the previously known bound of O(5|φ |) for rLTL verification and is closer to the LTL bound of O(2|φ |). The usefulness of this fragment is demonstrated by a number of case studies showing its practical significance in terms of expressiveness, the ability to describe robustness, and the fine-grained information that rLTL brings to the process of system verification. Moreover, these advantages come at a low computational overhead with respect to LTL verification.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3491216",
+      "url": "https://www.semanticscholar.org/paper/f5ca88276b18465925ce3971f98e950e5c9b6845"
+    },
+    {
+      "title": "Parameterized Complexity of Elimination Distance to First-Order Logic Properties",
+      "abstract": "The elimination distance to some target graph property P is a general graph modification parameter introduced by Bulian and Dawar. We initiate the study of elimination distances to graph properties expressible in first-order logic. We delimit the problem’s fixed-parameter tractability by identifying sufficient and necessary conditions on the structure of prefixes of first-order logic formulas. Our main result is the following meta-theorem: For every graph property P expressible by a first order-logic formula \\( \\varphi \\in \\Sigma _3 \\) , that is, of the form \\( \\begin{equation*} \\varphi =\\exists x_1\\exists x_2\\cdots \\exists x_r\\ \\ \\forall y_{1}\\forall y_{2}\\cdots \\forall y_{s}\\ \\ \\exists z_1\\exists z_2\\cdots \\exists z_t~~ \\psi ,\\end{equation*} \\) where \\( \\psi \\) is a quantifier-free first-order formula, checking whether the elimination distance of a graph to P does not exceed \\( k \\) , is fixed-parameter tractable parameterized by \\( k \\) . Properties of graphs expressible by formulas from \\( \\Sigma _3 \\) include being of bounded degree, excluding a forbidden subgraph, or containing a bounded dominating set. We complement this theorem by showing that such a general statement does not hold for formulas with even slightly more expressive prefix structure: There are formulas \\( \\varphi \\in \\Pi _3 \\) , for which computing elimination distance is \\( {\\sf W}[2] \\) -hard.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3517129",
+      "url": "https://www.semanticscholar.org/paper/529cc3a138e7c3a1777fc889df0400a4561687a9"
+    },
+    {
+      "title": "Semantic Analysis of a Linear Temporal Extension of Quantum Logic and Its Dynamic Aspect",
+      "abstract": "Although various dynamic or temporal logics have been proposed to verify quantum protocols and systems, these two viewpoints have not been studied comprehensively enough. We propose Linear Temporal Quantum Logic (LTQL), a linear temporal extension of quantum logic with a quantum implication, and extend it to Dynamic Linear Temporal Quantum Logic (DLTQL). This logic has temporal operators to express transitions by unitary operators (quantum gates) and dynamic ones to express those by projections (projective measurement). We then prove some logical properties of the relationship between these two transitions expressed by LTQL and DLTQL. A drawback in applying LTQL to the verification of quantum protocols is that these logics cannot express the future operator in linear temporal logic. We propose a way to mitigate this drawback by using a translation from (D)LTQL to Linear Temporal Modal Logic (LTML) and a simulation. This translation reduces the satisfiability problem of (D)LTQL formulas to that of LTML with the classical semantics over quantum states.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3576926",
+      "url": "https://www.semanticscholar.org/paper/a7c98166e1568ce19da7d520c418616a299a5d8a"
+    },
+    {
+      "title": "A Generalized Realizability and Intuitionistic Logic",
+      "abstract": "Let V be a set of number-theoretical functions. We define a notion of V-realizability for predicate formulas in such a way that the indices of functions in V are used for interpreting the implication and the universal quantifier. In this article, we prove that Intuitionistic Predicate Calculus is sound with respect to the semantics of V-realizability if and only if some natural conditions for V hold.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3565367",
+      "url": "https://www.semanticscholar.org/paper/d0530102cc5b5bb60873b570b6e4ee89bf78c313"
+    },
+    {
+      "title": "The Effects of Adding Reachability Predicates in Quantifier-Free Separation Logic",
+      "abstract": "The list segment predicate ls used in separation logic for verifying programs with pointers is well suited to express properties on singly-linked lists. We study the effects of adding ls to the full quantifier-free separation logic with the separating conjunction and implication, which is motivated by the recent design of new fragments in which all these ingredients are used indifferently and verification tools start to handle the magic wand connective. This is a very natural extension that has not been studied so far. We show that the restriction without the separating implication can be solved in polynomial space by using an appropriate abstraction for memory states, whereas the full extension is shown undecidable by reduction from first-order separation logic. Many variants of the logic and fragments are also investigated from the computational point of view when ls is added, providing numerous results about adding reachability predicates to quantifier-free separation logic.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3448269",
+      "url": "https://www.semanticscholar.org/paper/b1cf6f12984224c0fefdca5d4c2dd8e22b0fc23d"
+    },
+    {
+      "title": "The Bernays-Schönfinkel-Ramsey Class of Separation Logic with Uninterpreted Predicates",
+      "abstract": "This article investigates the satisfiability problem for Separation Logic with k record fields, with unrestricted nesting of separating conjunctions and implications. It focuses on prenex formulæ with a quantifier prefix in the language ∃*∀* that contain uninterpreted (heap-independent) predicate symbols. In analogy with first-order logic, we call this fragment Bernays-Schönfinkel-Ramsey Separation Logic [BSR(SLk)]. In contrast with existing work on Separation Logic, in which the universe of possible locations is assumed to be infinite, we consider both finite and infinite universes in the present article. We show that, unlike in first-order logic, the (in)finite satisfiability problem is undecidable for BSR(SLk). Then we define two non-trivial subsets thereof, for which the finite and infinite satisfiability problems are PSPACE-complete, respectively, assuming that the maximum arity of the uninterpreted predicate symbols does not depend on the input. These fragments are defined by controlling the polarity of the occurrences of separating implications, as well as the occurrences of universally quantified variables within their scope. These decidability results have natural applications in program verification, as they allow to automatically prove lemmas that occur in, e.g., entailment checking between inductively defined predicates and validity checking of Hoare triples expressing partial correctness conditions.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3380809",
+      "url": "https://www.semanticscholar.org/paper/850a0a89ebd588442079fef44d4a9a233861d300"
+    },
+    {
+      "title": "EXPSPACE-Completeness of the Logics K4 × S5 and S4 × S5 and the Logic of Subset Spaces",
+      "abstract": "It is known that the satisfiability problems of the product logics K4 × S5 and S4 × S5 are NEXPTIME-hard and that the satisfiability problem of the logic SSL of subset spaces is PSPACE-hard. Furthermore, it is known that the satisfiability problems of these logics are in N2EXPTIME. We improve the lower and the upper bounds for the complexity of these problems by showing that all three problems are in ESPACE and are EXPSPACE-complete under logspace reduction.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3465384",
+      "url": "https://www.semanticscholar.org/paper/02a49758a1082d8d7fdcdc642fb61d27401717be"
+    },
+    {
+      "title": "Non-well-founded Proof Theory of Transitive Closure Logic",
+      "abstract": "Supporting inductive reasoning is an essential component is any framework of use in computer science. To do so, the logical framework must extend that of first-order logic. Transitive closure logic is a known extension of first-order logic that is particularly straightforward to automate. While other extensions of first-order logic with inductive definitions are a priori parametrized by a set of inductive definitions, the addition of a single transitive closure operator has the advantage of uniformly capturing all finitary inductive definitions. To further improve the reasoning techniques for transitive closure logic, we here present an infinitary proof system for it, which is an infinite descent–style counterpart to the existing (explicit induction) proof system for the logic. We show that the infinitary system is complete for the standard semantics and subsumes the explicit system. Moreover, the uniformity of the transitive closure operator allows semantically meaningful complete restrictions to be defined using simple syntactic criteria. Consequently, the restriction to regular infinitary (i.e., cyclic) proofs provides the basis for an effective system for automating inductive reasoning.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3404889",
+      "url": "https://www.semanticscholar.org/paper/b358db332afdfa1fc259c91a7c9e65079d18474b"
+    }
+  ]
+}

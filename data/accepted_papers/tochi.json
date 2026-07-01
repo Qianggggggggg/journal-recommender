@@ -1,0 +1,54 @@
+{
+  "journal_id": "tochi",
+  "journal_name": "ACM Transactions on Computer-Human Interaction",
+  "papers": [
+    {
+      "title": "GUI Behaviors to Minimize Pointing-based Interaction Interferences",
+      "abstract": "Pointing-based interaction interferences are situations wherein GUI elements appear, disappear, or change shortly before being selected, and too late for the user to inhibit their movement. Their cause lays in the design of most GUIs, for which any user event on an interactive element unquestionably reflects the user's intention—even one millisecond after that element has changed. Previous work indicate that interferences can cause frustration and sometimes severe consequences. This paper investigates new default behaviors for GUI elements that aim to prevent the occurrences of interferences or to mitigate their consequences. We present a design space of the advantages and technical requirements of these behaviors, and demonstrate in a controlled study how simple rules can reduce the occurrences of so-called \"Pop-up-style\" interferences, and user frustration. We then discuss their application to various forms of interaction interferences. We conclude by addressing the feasibility and trade-offs of implementing these behaviors in existing systems.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3660338",
+      "url": ""
+    },
+    {
+      "title": "Achieving Symmetry in Synchronous Interaction in Hybrid Work is Impossible",
+      "abstract": "Designing new technologies to support synchronous interaction across distance has for many years focused on creating symmetry for participation between geographically distributed actors. Symmetry in synchronous interaction has, to some extent, been achieved technologically (while multiple social, historical, political, and hierarchical concerns continue to exist) and proven empirically in the increased use of remote-work technologies that were used during the pandemic. However, synchronous interaction in hybrid work is achieved differently, since the asymmetry produced by some participants being collocated while others geographically distributed introduces increased complexities for such interactions. Focusing on this challenge, we ask: To what extent can symmetry in cooperative work engagements be achieved in hybrid work contexts? We explore this question by interrogating multiple different empirical examples of synchronous hybrid interaction collected across different organizations, activities, and events. We found that the effort required to accomplish hybrid work includes additional articulation work necessary for bounding multiple intertwined artefacts across sites, devices, and applications. Further, the multiple artefacts setup across sites, combined with asymmetric collocation across participants, produce incongruence in technological frames of reference for each participant. All participants in hybrid work have only partial access to the hybrid setup, and no single person has access to the complete setup. The incongruence in technological frames produces insurmountable gaps in collaboration, causing all hybrid work situations to be characterized fundamentally by asymmetric relationships. We argue that symmetry in hybrid synchronous interaction is impossible to attain in attempts to solve this problem through design. Instead, we propose that designers of cooperative technologies for hybrid work shift towards developing artefact-ecologies supporting hybrid work, focusing on asymmetry as a necessary feature. Fundamentally, the design strategy should explore novel ways of taking advantage of the multiple different artefact-ecologies which serve as the foundation for the hybrid collaboration. Instead of striving for symmetry, we propose to feature asymmetric conditions in future technology designs for hybrid interaction.",
+      "year": 2024,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3648617",
+      "url": ""
+    },
+    {
+      "title": "Introduction",
+      "abstract": "Copper is an elemental ion in living organisms. CopP from Helicobacter Pylori (HpCopP) is a copper(I)-binding protein and was suggested as regulator of copper metabolism in vivo. Previously, the metal binding property of HpCopP for Ag(I), Cu(I), and Cu(II) as well as the tertiary structure of HpCopP was shown. In this study, the dynamic profiles of HpCopP depending on metal binding were studied using {H}-N steady-state NOE analysis. The heteroNOE experiment was performed for apo-CopP or metal-bound CopP. The obtained NOE values were analyzed and compared to figure out the effect of metals on the structural flexibility of HpCopP. As a result, Ag(I) and Cu(I) ions improved the rigidity of the structure while Cu(II) ion increased the flexibility of the structure, suggesting the oxidation of the CXXC motif decreases the structural stability of HpCopP.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3461832",
+      "url": "https://www.semanticscholar.org/paper/30071bcb3cb15e77b7c0ac3a0adcafd0a69c6891"
+    },
+    {
+      "title": "Shelfie",
+      "abstract": "Self-monitoring devices are becoming increasingly popular in the support of physical activity experiences. These devices mostly represent on-screen data using numbers and graphs and in doing so, they may miss multi-sensorial methods for engaging with data. Embracing the opportunity for pleasurable interactions with one's own data through the use of different materials and digital fabrication technology, we designed and studied three systems that turn this data into 3D-printed plastic artifacts, sports drinks, and 3D-printed chocolate treats. We utilize the insights gained from associated studies, related literature, and our experiences in designing these systems to develop a conceptual framework, “Shelfie.” The “Shelfie” framework has 13 cards that convey key themes for creating material representations of physical activity data. Through this framework, we present a conceptual understanding of relationships between material representation and physical activity data and contribute guidelines to the design of meaningful material representations of physical activity data.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3379539",
+      "url": "https://www.semanticscholar.org/paper/430065ed230427ef174bbef738998ecadc211dd9"
+    },
+    {
+      "title": "Disconnected Platforms, Networked Lives: Social Bridging across Fragmented Payment Systems in China",
+      "abstract": "Money is increasingly accessed through multifunctional digital platforms via mobile payment and banking apps that offer various financial services, several of which integrate social media connectivity. In China, Alipay and WeChat Pay handle billions of transactions annually to the extent that physical cards and cash are rarely carried or used. These platforms have been described as ‘walled gardens’ because financial transfers cannot be made directly between them. While Alipay and WeChat Pay share similar transactional components, they differ in their financial products, constraints, interdependencies and social media integrations, and each offers different interactional possibilities for users to meet their everyday financial needs. We examine how users navigate infrastructural payment problems, perform financial management across different platforms and accounts, deal with ‘trouble’ in making payments, and weave their social and financial lives across platforms to create interoperability between these otherwise disconnected services. Our analysis suggests these apps do not just initiate, record and track payments, but are actively configured by users through interconnected social, transactional and money-management practices, and that user interactions and digital payment practices are shaped by complex socio-financial arrangements. We discuss the findings, drawing implications for designing social-financial interactions in bridging disconnected services.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1145/3777906",
+      "url": "https://doi.org/10.1145/3777906"
+    },
+    {
+      "title": "Exploring the Human-LLM Synergy in Advancing Theory-driven Qualitative Analysis",
+      "abstract": "Qualitative coding is a demanding yet crucial research method in the field of Human–Computer Interaction (HCI). While recent studies have shown the capability of Large Language Models (LLMs) to perform qualitative coding within theoretical frameworks, their potential for collaborative human-LLM discovery and generation of new insights beyond initial theory remains underexplored. To bridge this gap, we proposed CHALET , a novel approach that harnesses the power of human-LLM partnership to advance theory-driven qualitative analysis by facilitating iterative coding, disagreement analysis, and conceptualization of qualitative data. We demonstrated CHALET ’s utility by applying it to the qualitative analysis of conversations related to mental-illness stigma, using the attribution model as the theoretical framework. Results highlighted the unique contribution of human-LLM collaboration in uncovering latent themes of stigma across the cognitive, emotional, and behavioral dimensions. We discuss the methodological implications of the human-LLM collaborative approach to theory-based qualitative analysis for the HCI community and beyond.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1145/3778354",
+      "url": "https://doi.org/10.1145/3778354"
+    }
+  ]
+}

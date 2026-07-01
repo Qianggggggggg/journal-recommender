@@ -1,0 +1,62 @@
+{
+  "journal_id": "ieeetransactionsonhumanmachinesystems",
+  "journal_name": "IEEE Transactions on Human-Machine Systems",
+  "papers": [
+    {
+      "title": "Review of Human–Machine Interfaces for Small Unmanned Systems With Robotic Manipulators",
+      "abstract": "This article reviews the human–machine interaction (HMI) technologies used for telemanipulation by small unmanned systems (SUS) with remote manipulators. SUS, including land, air, and sea vehicles, can perform a wide range of reconnaissance and manipulation tasks with varying levels of autonomy. SUS operations involving physical interactions with the environment require some level of operator involvement, ranging from direct control to goal-oriented supervision. Telemanipulation remains a challenging task for all levels of human interaction because the operator and the vehicle are not colocated, and operators require HMI technologies that facilitate manipulation from a remote location. This article surveys the human operator interfacing for over 70 teleoperated systems, summarizes the effects of physical and visual interface factors on user performance, and discusses these findings in the context of telemanipulating SUS. This article is of importance to SUS researchers and practitioners who will directly benefit from HMI implementations that improve telemanipulation performance.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/THMS.2020.2969380",
+      "url": "https://www.semanticscholar.org/paper/eee59a31421d5c4116b4d2c87f7ab385c952c3fa"
+    },
+    {
+      "title": "Human-Machine Interaction Sensing Technology Based on Hand Gesture Recognition: A Review",
+      "abstract": "Human machine interaction (HMI) is an interactive way of information exchange between human and machine. By collecting the information that can be conveyed by the person to express the intention, and then transforming and processing the information, the machine can work according to the intention of the person. However, the traditional HMI including mouse, keyboard etc. usually requires a fixed operating space, which limits people's actions and cannot directly reflect people's intentions. It requires people to learn systematically how to operate skillfully, which indirectly affects work efficiency. Hand gesture, as one of the important ways for human to convey information and express intuitive intention, has the advantages of high degree of differentiation, strong flexibility and high efficiency of information transmission, which makes hand gesture recognition (HGR) as one of the research hotspots in the field of HMI. In order to enable readers to systematically and quickly understand the research status of HGR and grasp the basic problems and development direction of HGR, this article takes the sensing method used by HGR technology as the entry point, and makes a detailed elaboration and systematic summary by referring to a large number of research achievements in recent years.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/THMS.2021.3086003",
+      "url": "https://www.semanticscholar.org/paper/30bb11c60b98816d632824286db0eeb741c748f3"
+    },
+    {
+      "title": "A Review of Human–Machine Cooperation in the Robotics Domain",
+      "abstract": "Artificial intelligence (AI) technology has greatly expanded human capabilities through perception, understanding, action, and learning. The future of AI depends on cooperation between humans and AI. In addition to a fully automated or manually controlled machine, a machine can work in tandem with a human with different levels of assistance and automation. Machines and humans cooperate in different ways. Three strategies for cooperation are described in this article, as well as the nesting relationships among different control methods and cooperation strategies. Based on human thinking and behavior, a hierarchical human–machine cooperation (HMC) framework is improved and extended to design safe, efficient, and attractive systems. We review the common methods of perception, decision-making, and execution in the HMC framework. Future applications and trends of HMC are also discussed.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/thms.2021.3131684",
+      "url": "https://www.semanticscholar.org/paper/957e0fed65986bb27144bbc558fdd10a0ab85f08"
+    },
+    {
+      "title": "Estimating Workload for Supervisory Human–Robot Teams: An Initial Analysis of Meta-Learning",
+      "abstract": "A robust understanding of a human's internal state can greatly improve human–robot teaming, as estimating the human teammates' workload can inform more dynamic robot adaptations. Existing workload estimation methods use standard machine learning techniques to model the relationships between physiological metrics and workload. However, such methods are not sufficient for adaptive systems, as standard machine learning techniques struggle to make accurate workload estimates when the human–robot team performs unknown tasks. A meta-learning-based workload estimation algorithm is introduced and an initial analysis is conducted to show how adapting a machine learning model's parameters using task-specific information can improve result in more accurate workload estimates for unknown tasks.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/thms.2025.3640359",
+      "url": "https://doi.org/10.1109/thms.2025.3640359"
+    },
+    {
+      "title": "Nonauditory Schemes for Universal Information Access: Translating Braille into Vibrotactile Cues for the Blind",
+      "abstract": "Despite the progress in human–computer interaction technology, the interaction methods that visually impaired individuals possess are still rudimentary. The widely used Text-to-Speech technology has issues such as privacy leaks in practical applications, and most of the new interaction designs proposed in recent years have limited application scenarios. Geared toward enriching interaction methods for users with visual impairments, this article explores the potential for translating Braille into vibrotactile cues as a way of conveying universal information. We designed a set of schemes and implemented them based on the vibration motor of a mobile phone. These schemes convert a single Braille character into several highly distinguishable vibration combinations, thereby conveying any information that Braille can express. Experiments were conducted on both sighted and visually impaired participants to evaluate the accuracy and efficiency. With a brief learning period of just 10 minutes, individuals can attain an accuracy rate greater than 95%, and the accuracy degradation remains minimal when playback speeds increase. By employing vibration motors to deliver comprehensive information, this framework shows promise for application in a wider range of technological devices.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/thms.2025.3631785",
+      "url": "https://doi.org/10.1109/thms.2025.3631785"
+    },
+    {
+      "title": "Speech2Blend: A Hybrid Network for Speech-Driven 3-D Facial Animation by Learning Blendshape",
+      "abstract": "Recent advances in speech-driven facial animation have attracted significant interest across computer graphics, human–computer interaction systems, and immersive virtual reality applications. However, existing methods remain constrained by dependencies on specific reference videos or proprietary face mesh structures, limiting their applicability across diverse production pipelines and reducing compatibility with industry-standard animation workflows. To overcome these fundamental limitations in generalization and deployment flexibility, we propose Speech2Blend—an end-to-end hybrid convolutional-recurrent network that directly learns nonlinear speech-to-blendshape parameter mappings. This novel approach enables markerless speech-driven facial animation generation without restrictive inputs like video references or specialized facial rigs. Trained on the largest available digital human dataset (BEAT) and rigorously evaluated using three benchmark datasets with photorealistic visualization tools, Speech2Blend achieves state-of-the-art performance. It delivers superior audio-visual synchronization through learned temporal dynamics and reduces lip vertex error by 30% compared to existing baseline methods. These advances significantly lower production costs for virtual human speech animation while enabling cross-platform compatibility with common game engines and animation software.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/thms.2025.3640719",
+      "url": "https://doi.org/10.1109/thms.2025.3640719"
+    },
+    {
+      "title": "Decision-Making in Controlled Environment Agriculture: Producer Perspectives on Digital Decision-Support Tools in the US",
+      "abstract": "This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible.Lauren Lindow1, Catherine Campbell2, Coleman Longwater3, Ying Zhang1, Ana Martin-Ryals1, Ziynet Boz1,* 1Department of Agricultural and Biological Engineering, University of Florida, Gainesville, FL2 Department of Family, Youth and Community Sciences, Institute of Food and Agricultural Sciences3 Herbert Wertheim College of Engineering*Corresponding author: ziynetboz@ufl.edu",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1109/thms.2026.3677667",
+      "url": "https://doi.org/10.1109/thms.2026.3677667"
+    }
+  ]
+}

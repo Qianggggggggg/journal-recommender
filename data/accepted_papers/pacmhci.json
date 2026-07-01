@@ -1,0 +1,78 @@
+{
+  "journal_id": "pacmhci",
+  "journal_name": "Proceedings of the ACM on Human-Computer Interaction",
+  "papers": [
+    {
+      "title": "LookAHead: Hybrid Gaze (Look) And Head Refinement Approach for Hands-Free Computer Interaction ETRA004",
+      "abstract": "Hands-free computer interaction provides an important alternative for users with motor impairments who struggle with conventional input devices. In this paper, we present LookAHead, a hybrid gaze and head-based interaction system that enables natural and hands-free computer control. The system uses gaze estimation to provide a coarse target location, refined by head movements for fast and convenient pointer control. To improve model's accuracy, facial landmarks are used not only for cursor control, 3D head pose estimation, and input normalization, but also to enhance the gaze estimation model. A revised gaze normalization process is proposed to improve stability under varying facial expressions. LookAHead operates without explicit calibration by employing an auto-calibration strategy that continuously adapts to users’ gaze. Experimental results demonstrate that the proposed method enables fast and convenient control, while reducing head movement threefold compared to conventional head-mouse, making it a practical step toward more accessible hands-free computing.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3806018",
+      "url": "https://www.semanticscholar.org/paper/aaa6280ec92af9bb9b64d5cd1d7b3902695b07af"
+    },
+    {
+      "title": "“If They Don't Even Trust Their AI Teammate, Why Should We?”: Understanding Trust Contagion Across Multiple Human-AI Teams CSCW019",
+      "abstract": "Trust plays a critical role in both effective teamwork and successful integration of AI into human-AI teams (HATs), which are becoming increasingly interconnected to tackle large-scale problems. As these HATs grow in complexity, so do the challenges of building, maintaining, calibrating, and aligning trust across HATs, as trust is dynamic, socially influenced, and capable of spreading and evolving over time. To understand the underexplored question of how trust and distrust can spread across HATs, we conducted a laboratory experiment with two interconnected HATs (N=40) distributed across the U.S., each comprising two humans and one AI collaborating over a remotely piloted aircraft system (RPAS) conducting simulated reconnaissance tasks. Our findings show that distrust toward the AI teammate spread more easily than trust, both within and across HATs. While intra-HAT (dis)trust in the AI developed through direct interaction, inter-HAT (dis)trust was more vulnerable to word-of-mouth distrust. Additionally, participants’ trust in the (dis)trust spreader, as well as their team-level trust, reflected in-group favoritism and out-group bias. This work presents the first empirical investigation into trust and distrust contagion across HATs, expanding the current understanding of trust dynamics in multi-agent and multi-team systems. It identifies potential mechanisms driving trust and distrust transfer between interconnected HATs and explores the individual, team, and multi-team level impacts. In doing so, we lay the groundwork for developing theories on trust contagion in multi-agent, multi-team systems, providing valuable insights for future research and design strategies to optimize human-AI collaboration in complex environments.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3788055",
+      "url": "https://www.semanticscholar.org/paper/7b5984b788d16af82eef82256ba6c67a49b2387e"
+    },
+    {
+      "title": "Investigating Mutual Gaze in Real-Time LLM-Driven Avatar Interaction on 2D Screens ETRA005",
+      "abstract": "With the growing presence of AI-driven avatars in everyday applications, understanding how users perceive and respond to such agents becomes increasingly important. A key open question is whether gaze awareness, an avatar’s ability to react to the gaze of a user, contributes to more natural and socially engaging interaction, particularly on conventional 2D screens. We present a real-time system that integrates live speech recognition, LLM-generated responses, and gaze feedback to enable naturalistic unscripted conversations with a virtual avatar. We conducted a within-subjects study (N = 17) comparing a gaze-aware avatar with a nonreactive baseline. The results of the eye-tracking show that gaze awareness significantly altered user eye movement patterns, increasing mutual gaze episodes, and generating subconscious gaze regulation. Our findings demonstrate that realistic gaze behavior affects user interaction on a subconscious level, even outside immersive environments. We discuss implications for designing future conversational AI systems that foster natural social presence.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3806019",
+      "url": "https://www.semanticscholar.org/paper/1525376c9c8a319aa321b33462b9e45b8faebd83"
+    },
+    {
+      "title": "Aligner, Nodder, and Winker: Creating Complete, Hands-Free Interaction Techniques that Unify Precise, UI-Independent Selection and Dragging ETRA016",
+      "abstract": "Hands-free interaction is essential when users’ hands are occupied with primary tasks. A key challenge is unifying precise, UI-independent selection and continuous dragging without explicit mode switching. This paper introduces two novel techniques: Aligner (spatial eye-head alignment) and Nodder (gestural decomposition of a nod); and evaluates them against an established Winker technique, a gestural clutch using single-eye closure. A user study with controlled Fitts’ law and dragging tasks, alongside a practical application, evaluated the techniques. Results show that Aligner offers superior selection precision but creates a visuomotor conflict during dragging; Nodder optimizes movement efficiency for large-amplitude targets despite higher physical effort; and Winker provides the fastest performance but is susceptible to accidental activation. These findings inform the design of future hands-free systems by highlighting the context-dependent nature of this interaction challenge.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3806030",
+      "url": "https://www.semanticscholar.org/paper/271d3a287dd3d2d6061ad3516b54da67e2d2f1fc"
+    },
+    {
+      "title": "Differential Benefits: The Impact of Computer Clubs in Palestine on Volunteers CSCW012",
+      "abstract": "This paper presents a longitudinal case study of two volunteer-led computer clubs in Palestinian refugee camps in the West Bank. Combining participatory action research, autoethnography, and follow-up interviews conducted ten years later, we examine how socio-technical infrastructures of learning were built and sustained under intertwined constraints. While the clubs were designed to support children’s engagement with technology, the most meaningful outcomes were reported by the volunteers, whose roles required navigating logistical, interpersonal, and political challenges in resource-constrained settings. Our findings position volunteers as infrastructural actors: they stitched together tools, partnerships, and routines to stabilize the clubs and create a durable social infrastructure. We identify the breadth of work and social structures implicated in volunteering and show how technology mediates these interdependencies. Recognition and care practices (such as debriefs, reflection rituals, acknowledgments) emerge as design requirements for sustaining participation, reflecting a shift from questions of access to recognition observed in feminist hackerspaces. Gendered trajectories reveal how women volunteers negotiated leadership and gained professional capital in male‑dominated contexts. Our longitudinal findings provide an empirical account of an uneven temporality of impact: durable benefits accrue to those performing infrastructural labor (volunteers), whereas short‑term beneficiaries (child participants) recall little after a decade.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3788048",
+      "url": "https://www.semanticscholar.org/paper/88b7077efe3aa99883fc645b8c9376134fc595a5"
+    },
+    {
+      "title": "“It can feel uncomfortable to say something, but it's for the best of the group”: Examining Moderator Practices in Online Pregnancy Loss Communities CSCW027",
+      "abstract": "Online pregnancy loss communities can allow users to locate valuable support and information after experiencing a loss. However, platform users also face challenges in learning how to safely engage with the emotive content and diverse experiences present in these communities. This raises questions about how these online communities are currently moderated. However, the practices and experiences of online pregnancy loss community moderators have not yet been examined in past research. This study sought to examine how moderators currently work to protect and maintain online pregnancy loss communities, and to determine how community moderation could potentially be improved in these online spaces. To address these research aims, ten semi-structured interviews were conducted with moderators of online pregnancy loss communities located across different online forums and social media platforms. A reflexive thematic analysis was conducted to analyse this interview data. Our findings show that moderators worked to foster supportive and inclusive communities by carefully removing inappropriate or insensitive posts, providing direct informational and emotional support to members, and creating separate online spaces to bring together members with specific experiences. While platform features and the support of charity organisations helped moderators to engage in these practices, we also identified factors which limited moderator performance. Reflecting on these findings, we discuss how many of the moderator practices specifically align with a trauma-informed approach, which could usefully inform the work of moderators in other online support contexts. We also outline research directions and sociotechnical implications for improving online pregnancy loss community moderation in the future.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3788063",
+      "url": "https://www.semanticscholar.org/paper/35e523930a9c14b6a84ce7283562ac4dffc0fd55"
+    },
+    {
+      "title": "\"What Happened Here!?\" A Taxonomy for User Interaction with Spatio-Temporal Game Data Visualization",
+      "abstract": "Currently, there is no formal taxonomy for the activities that users engage in when interacting with and making meaning from spatio-temporal game data visualizations. As data visualization, especially spatio-temporal visualization, becomes more popular for game data analytics, it becomes increasingly crucial that we develop a formal understanding of how users, especially players, interact with and extract meaning from game data using these systems. However, existing taxonomies developed for InfoVis are not directly applicable due to domain differences and a lack of consensus within the literature. This paper presents the beginnings of a taxonomy for user interaction with spatio-temporal data specific to the domain of games, developed from the results of a qualitative user study (n=7) in which experienced players were tasked with using a spatio-temporal visualization system to explore and understand telemetry data from Defense of the Ancients 2 (DotA 2). The taxonomy includes seven activities organized into three categories: Data Interaction, Sense Making, and Validation. We discuss the implications of these activities on design and future research.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3474687",
+      "url": "https://www.semanticscholar.org/paper/62c05d0a785309ff91eb1bbf884328c19350797c"
+    },
+    {
+      "title": "Lazy or Efficient? Towards Accessible Eye-Tracking Event Detection Using LLMs",
+      "abstract": "Gaze event detection is fundamental to vision science, human-computer interaction, and applied analytics. However, current workflows often require specialized programming knowledge and careful handling of heterogeneous raw data formats. Classical detectors such as I-VT and I-DT are effective but highly sensitive to preprocessing and parameterization, limiting their usability outside specialized laboratories. This work introduces a code-free, large language model (LLM)-driven pipeline that converts natural language instructions into an end-to-end analysis. The system (1) inspects raw eye-tracking files to infer structure and metadata, (2) generates executable routines for data cleaning and detector implementation from concise user prompts, (3) applies the generated detector to label fixations and saccades, and (4) returns results and explanatory reports, and allows users to iteratively optimize their code by editing the prompt. Evaluated on public benchmarks, the approach achieves accuracy comparable to traditional methods while substantially reducing technical overhead. The framework lowers barriers to entry for eye-tracking research, providing a flexible and accessible alternative to code-intensive workflows.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3806038",
+      "url": "https://www.semanticscholar.org/paper/36d5236e02b8ba66be73be8f2b4cf50ff0e6796b"
+    },
+    {
+      "title": "Polarization-Based Eye Tracking with Personalized Siamese Architecture ETRA011",
+      "abstract": "Head-mounted devices integrated with eye tracking promise a solution for natural human-computer interaction. However, they typically require per-user calibration for optimal performance due to inter-person variability. A differential personalization approach using Siamese architectures learns relative gaze displacements and reconstructs absolute gaze from a small set of calibration frames. In this paper, we benchmark Siamese personalization on polarization-enabled eye tracking. For benchmarking, we use a 338-subject dataset captured with a polarization-sensitive camera and 850 nm illumination. We achieve performance comparable to linear calibration with 10-fold fewer samples. Using polarization inputs for Siamese personalization reduces gaze error by up to 12% compared to near-infrared (NIR)-based inputs. Combining Siamese personalization with linear calibration yields further improvements of up to 13% over a linearly calibrated baseline. These results establish Siamese personalization as a practical approach enabling accurate eye tracking.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3806025",
+      "url": "https://www.semanticscholar.org/paper/19249b0fa0f6c54d64cc87432ab267e41a35f87f"
+    }
+  ]
+}

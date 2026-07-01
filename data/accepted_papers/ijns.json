@@ -1,0 +1,78 @@
+{
+  "journal_id": "ijns",
+  "journal_name": "International Journal of Neural Systems",
+  "papers": [
+    {
+      "title": "A Parallel Convolutional Network Based on Spiking Neural Systems",
+      "abstract": "Deep convolutional neural networks have shown advanced performance in accurately segmenting images. In this paper, an SNP-like convolutional neuron structure is introduced, abstracted from the nonlinear mechanism in nonlinear spiking neural P (NSNP) systems. Then, a U-shaped convolutional neural network named SNP-like parallel-convolutional network, or SPC-Net, is constructed for segmentation tasks. The dual-convolution concatenate (DCC) and dual-convolution addition (DCA) network blocks are designed, respectively, in the encoder and decoder stages. The two blocks employ parallel convolution with different kernel sizes to improve feature representation ability and make full use of spatial detail information. Meanwhile, different feature fusion strategies are used to fuse their features to achieve feature complementarity and augmentation. Furthermore, a dual-scale pooling (DSP) module in the bottleneck is designed to improve the feature extraction capability, which can extract multi-scale contextual information and reduce information loss while extracting salient features. The SPC-Net is applied in medical image segmentation tasks and is compared with several recent segmentation methods on the GlaS and CRAG datasets. The proposed SPC-Net achieves 90.77% DICE coefficient, 83.76% IoU score and 83.93% F1 score, 86.33% ObjDice coefficient, 135.60 Obj-Hausdorff distance, respectively. The experimental results show that the proposed model can achieve good segmentation performance.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065724500229",
+      "url": "https://www.semanticscholar.org/paper/060f942ad82c9fe7764d8c13730946b58cda1a9b"
+    },
+    {
+      "title": "A Prediction Model Based on Gated Nonlinear Spiking Neural Systems",
+      "abstract": "Nonlinear spiking neural P (NSNP) systems are one of neural-like membrane computing models, abstracted by nonlinear spiking mechanisms of biological neurons. NSNP systems have a nonlinear structure and can show rich nonlinear dynamics. In this paper, we introduce a variant of NSNP systems, called gated nonlinear spiking neural P systems or GNSNP systems. Based on GNSNP systems, a recurrent-like model is investigated, called GNSNP model. Moreover, exchange rate forecasting tasks are used as the application background to verify its ability. For the purpose, we develop a prediction model based on GNSNP model, called ERF-GNSNP model. In ERF-GNSNP model, the GNSNP model is followed by a \"dense\" layer, which is used to capture the correlation between different sub-series in multivariate time series. To evaluate the prediction performance, nine groups of exchange rate data sets are utilized to compare the proposed ERF-GNSNP model with 25 baseline prediction models. The comparison results demonstrate the effectiveness of the proposed ERF-GNSNP model for exchange rate forecasting tasks.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065723500296",
+      "url": "https://www.semanticscholar.org/paper/14fc0e30e6b678f6008599ac4050979ecc139858"
+    },
+    {
+      "title": "Edge Detection Method Based on Nonlinear Spiking Neural Systems",
+      "abstract": "Nonlinear spiking neural P (NSNP) systems are a class of neural-like computational models inspired from the nonlinear mechanism of spiking neurons. NSNP systems have a distinguishing feature: nonlinear spiking mechanism. To handle edge detection of images, this paper proposes a variant, nonlinear spiking neural P (NSNP) systems with two outputs (TO), termed as NSNP-TO systems. Based on NSNP-TO system, an edge detection framework is developed, termed as ED-NSNP detector. The detection ability of ED-NSNP detector relies on two convolutional kernels. To obtain good detection performance, particle swarm optimization (PSO) is used to optimize the parameters of the two convolutional kernels. The proposed ED-NSNP detector is evaluated on several open benchmark images and compared with seven baseline edge detection methods. The comparison results indicate the availability and effectiveness of the proposed ED-NSNP detector.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065722500605",
+      "url": "https://www.semanticscholar.org/paper/a1d47dd112169384ea435599929b7345901410ef"
+    },
+    {
+      "title": "A Time Series Forecasting Approach Based on Nonlinear Spiking Neural Systems",
+      "abstract": "Nonlinear spiking neural P (NSNP) systems are a recently developed theoretical model, which is abstracted by nonlinear spiking mechanism of biological neurons. NSNP systems have a nonlinear structure and the potential to describe nonlinear dynamic systems. Based on NSNP systems, a novel time series forecasting approach is developed in this paper. During the training phase, a time series is first converted to frequency domain by using a redundant wavelet transform, and then according to the frequency data, an NSNP system is automatically constructed and adaptively trained in frequency domain. Then, the well-trained NSNP system can automatically generate sequence data for future time as the prediction results. Eight benchmark time series data sets and two real-life time series data sets are utilized to compare the proposed approach with several state-of-the-art forecasting approaches. The comparison results demonstrate availability and effectiveness of the proposed forecasting approach.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1142/S0129065722500204",
+      "url": "https://www.semanticscholar.org/paper/fa5f710ee189d3f1a53f56a9e7ad71ebc644d9c6"
+    },
+    {
+      "title": "A Generalized Attention Mechanism to Enhance the Accuracy Performance of Neural Networks",
+      "abstract": "In many modern machine learning (ML) models, attention mechanisms (AMs) play a crucial role in processing data and identifying significant parts of the inputs, whether these are text or images. This selective focus enables subsequent stages of the model to achieve improved classification performance. Traditionally, AMs are applied as a preprocessing substructure before a neural network, such as in encoder/decoder architectures. In this paper, we extend the application of AMs to intermediate stages of data propagation within ML models. Specifically, we propose a generalized attention mechanism (GAM), which can be integrated before each layer of a neural network for classification tasks. The proposed GAM allows for at each layer/step of the ML architecture identification of the most relevant sections of the intermediate results. Our experimental results demonstrate that incorporating the proposed GAM into various ML models consistently enhances the accuracy of these models. This improvement is achieved with only a marginal increase in the number of parameters, which does not significantly affect the training time.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065724500631",
+      "url": "https://www.semanticscholar.org/paper/480921c9fdd9dad3f87b8f3935b1fc6ffb67f7ab"
+    },
+    {
+      "title": "On the Computational Complexity of Spiking Neural Membrane Systems with Colored Spikes",
+      "abstract": "Spiking Neural P Systems are parallel and distributed computational models inspired by biological neurons, emerging from membrane computing and applied to solving computationally difficult problems. This paper focuses on the computational complexity of such systems using neuron division rules and colored spikes for the SAT problem. We prove a conjecture stated in a recent paper, showing that enhancing the model with an input module reduces computing time. Additionally, we prove that the inclusion of budding rules extends the model's capability to solve all problems in the complexity class PSPACE. These findings advance research on Spiking Neural P Systems and their application to complex problems; however, whether both budding rules and division rules are required to extend these methods to problem domains beyond the NP class remains an open question.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1142/S0129065725500352",
+      "url": "https://www.semanticscholar.org/paper/f8d2f3c454d9c941aa5515034575cb2df9db3f23"
+    },
+    {
+      "title": "Spiking Neural Membrane Systems with Adaptive Synaptic Time Delay",
+      "abstract": "Spiking neural membrane systems (or spiking neural P systems, SNP systems) are a new type of computation model which have attracted the attention of plentiful scholars for parallelism, time encoding, interpretability and extensibility. The original SNP systems only consider the time delay caused by the execution of rules within neurons, but not caused by the transmission of spikes via synapses between neurons and its adaptive adjustment. In view of the importance of time delay for SNP systems, which are a time encoding computation model, this study proposes SNP systems with adaptive synaptic time delay (ADSNP systems) based on the dynamic regulation mechanism of synaptic transmission delay in neural systems. In ADSNP systems, besides neurons, astrocytes that can generate adenosine triphosphate (ATP) are introduced. After receiving spikes, astrocytes convert spikes into ATP and send ATP to the synapses controlled by them to change the synaptic time delays. The Turing universality of ADSNP systems in number generating and accepting modes is proved. In addition, a small universal ADSNP system using 93 neurons and astrocytes is given. The superiority of the ADSNP system is demonstrated by comparison with the six variants. Finally, an ADSNP system is constructed for credit card fraud detection, which verifies the feasibility of the ADSNP system for solving real-world problems. By considering the adaptive synaptic delay, ADSNP systems better restore the process of information transmission in biological neural networks, and enhance the adaptability of SNP systems, making the control of time more accurate.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s012906572450028x",
+      "url": "https://www.semanticscholar.org/paper/2b634c052232cdd4f6aa7a1da6fbfa80760ca8c4"
+    },
+    {
+      "title": "Multiple-in-Single-Out Object Detector Leveraging Spiking Neural Membrane Systems and Multiple Transformers",
+      "abstract": "Most existing multi-scale object detectors depend on multi-level feature maps. The Feature Pyramid Networks (FPN) is a significant architecture for object detection that utilizes these multi-level feature maps. However, the use of FPN also increases the detector's complexity. For object detection methods that only use a single-level feature map, the detection performance is limited to some extent because the single-level feature map cannot balance deep semantic information and shallow detail information. We introduce a novel detector - the Spiking Neural P Multiple-in-Single-out (SNPMiSo) detector to address these challenges. The SNPMiSo detector is constructed based on SNP-like neurons. In SNPMiSo, we employ two kinds of Transformers to boost the important features across different-level feature maps separately. After enhancing the features, we use an incremental upsampling module to upsample and merge the two feature maps. This combined feature map is input into the NAF dilated residual module and the NAF dual-branch detection head. This process allows us to extract multi-scale features and carry out detection tasks. Our tests show promising results: On the COCO dataset, SNPMiSo attains an Average Precision (AP) of 38.7, an improvement of 1.0 AP over YOLOF. In addition, SNPMiSo demonstrates a quicker detection speed, outperforming some advanced multi-level and single-level object detectors.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065724500357",
+      "url": "https://www.semanticscholar.org/paper/bbe81199045ed09d30177d479dd5c52cf025eee3"
+    },
+    {
+      "title": "Modular Spiking Neural Membrane Systems for Image Classification",
+      "abstract": "A variant of membrane computing models called Spiking Neural P systems (SNP systems) closely mimics the structure and behavior of biological neurons. As third-generation neural networks, SNP systems have flexible architectures allowing the design of bio-inspired machine learning algorithms. This paper proposes Modular Spiking Neural P (MSNP) systems to solve image classification problems, a novel SNP system to be applied in scenarios where hundreds or even thousands of different classes are considered. A main issue to face in such situations is related to the structural complexity of the network. MSNP systems devised in this work allow to approach the general classification problem by dividing it in smaller parts, that are then faced by single entities of the network. As a benchmark dataset, the Oxford Flowers 102 dataset is considered, consisting of more than 8000 pictures of flowers belonging to the 102 species commonly found in the UK. These classes sometimes present large variations within them, may be also very similar to one another, and different images of the same subject may differ a lot. The work describes the architecture of the MSNP system, based on modules focusing on a specific class, their training phase, and the evaluation of the model both concerning result accuracy as well as energy consumption. Experimental results on image classification problems show that the model achieves good results, but is strongly connected to image quality, mainly depending on the frequency of images, remarkable changes of pose, images not centered, and subject mostly not shown.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.1142/s0129065724500217",
+      "url": "https://www.semanticscholar.org/paper/aacd4f9c13795652299d8a304616fbdc08358b02"
+    }
+  ]
+}

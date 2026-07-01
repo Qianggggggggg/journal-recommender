@@ -18,8 +18,14 @@ import json
 import sys
 import os
 import time
-from collections import defaultdict
+import copy
+import hashlib
+import math
+import statistics
+import unicodedata
+from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
+from typing import Optional
 from pathlib import Path
 from datetime import datetime
 from tqdm import tqdm
@@ -38,13 +44,28 @@ from src.journals.vector_searcher import VectorSearcher, FaissIndex
 from src.retriever.bm25_retriever import BM25Retriever
 from src.retriever.embedding_retriever import EmbeddingRetriever
 from src.retriever.candidate_generator import CandidateGenerator
+from src.retriever.typical_abstract_retriever import (
+    TypicalAbstractBM25Retriever,
+    TypicalAbstractEmbeddingRetriever,
+    TypicalAbstractTextRetriever,
+)
+from src.journals.typical_abstract_store import TypicalAbstractStore
 from src.ranker.rule_scorer import RuleScorer
 from src.ranker.llm_ranker import LLMRanker
-from src.utils.llm import MiniMaxLLM
+from src.utils.llm_config import build_minimax_llm
 from src.utils.embedding import OllamaEmbedding
 from src.utils.text import clean_text
 from src.utils.file_parser import extract_layout_blocks
 from src.papers.section_splitter import build_paper_ast
+from src.evaluation.benchmark_manifest import build_benchmark_manifest
+
+
+BENCHMARK_PROFILE_INPUTS = {
+    "light30": "data/evaluation/papers_metadata_light_30.jsonl",
+    "full-v2": "data/evaluation/papers_metadata_v2.jsonl",
+    "full-v2-90": "data/evaluation/papers_metadata_full_v2_90.jsonl",
+    "holdout240": "data/evaluation/papers_metadata_holdout240.jsonl",
+}
 
 
 @dataclass
@@ -70,29 +91,43 @@ class EvaluationResult:
     # Level Match Rate
     level_match_count: int
 
+    # MRR 和 NDCG@5
+    mrr: float = 0.0
+    ndcg_at_5: float = 0.0
+    elapsed_seconds: float = 0.0
+
+    # 新增指标
+    ndcg_at_10: float = 0.0  # NDCG@10（真正跑满10个）
+    area_hit_at_5: int = 0   # 同领域命中（推荐top5中有同领域期刊）
+    area_hit_at_10: int = 0  # 同领域命中 top10
+    level_hit_at_5: int = 0   # 同CCF档位命中（top5中有同CCF等级期刊）
+    level_hit_at_10: int = 0  # 同CCF档位命中 top10
+    acceptable_journal_hit_at_5: int = 0  # exact hit 或同领域且同CCF档位
+
     # 粗排命中统计
-    coarse_hit_count: int  # 粗排命中（实际期刊在 top 50 候选中）
-    coarse_hit_in_rule_top10_count: int  # 粗排候选在 RuleScorer top10 中
-    coarse_hit_in_rule_top20_count: int  # 粗排候选在 RuleScorer top20 中
+    coarse_hit_count: int = 0  # 粗排命中（实际期刊在 top 50 候选中）
+    coarse_hit_in_rule_top10_count: int = 0  # 粗排候选在 RuleScorer top10 中
+    coarse_hit_in_rule_top20_count: int = 0  # 粗排候选在 RuleScorer top20 中
+    fallback_count: int = 0
+    llm_success_count: int = 0
+    empty_recommendation_count: int = 0
 
     # 分质量等级统计 (A/B/C/D)
-    level_a_count: int
-    level_a_hit_at_5: int
-    level_b_count: int
-    level_b_hit_at_5: int
-    level_c_count: int
-    level_c_hit_at_5: int
-    level_d_count: int
-    level_d_hit_at_5: int
+    level_a_count: int = 0
+    level_a_hit_at_5: int = 0
+    level_b_count: int = 0
+    level_b_hit_at_5: int = 0
+    level_c_count: int = 0
+    level_c_hit_at_5: int = 0
+    level_d_count: int = 0
+    level_d_hit_at_5: int = 0
 
     # 按领域统计
-    by_area: dict
-
-    # 按CCF等级统计
-    by_level: dict
+    by_area: dict = None
+    by_level: dict = None
 
     # 每篇论文详情
-    paper_results: list
+    paper_results: list = None
 
 
 def get_paper_quality_level(strength: float) -> str:
@@ -107,6 +142,30 @@ def get_paper_quality_level(strength: float) -> str:
         return "weak"
 
 
+def calculate_mrr(relevant_rank: int) -> float:
+    """计算倒数排名（rank 从 1 开始，未命中为 0）"""
+    if relevant_rank <= 0:
+        return 0.0
+    return 1.0 / relevant_rank
+
+
+def calculate_dcg_at_k(gains: list, k: int) -> float:
+    """计算 DCG@k"""
+    dcg = 0.0
+    for i, gain in enumerate(gains[:k]):
+        dcg += gain / (i + 1)  # 或使用 1/log2(i+2)，这里用位置折扣
+    return dcg
+
+
+def calculate_ndcg_at_k(recommended_gains: list, ideal_gains: list, k: int) -> float:
+    """计算 NDCG@k（recommended_gains 和 ideal_gains 都是相关性分数列表）"""
+    dcg = calculate_dcg_at_k(recommended_gains, k)
+    idcg = calculate_dcg_at_k(ideal_gains, k)
+    if idcg == 0:
+        return 0.0
+    return dcg / idcg
+
+
 def calculate_metrics(result: EvaluationResult) -> dict:
     """计算各项指标"""
     total = result.total_count if result.total_count > 0 else 1
@@ -118,6 +177,14 @@ def calculate_metrics(result: EvaluationResult) -> dict:
         "Hit@10": f"{result.hit_at_10}/{total} ({result.hit_at_10*100/total:.1f}%)",
         "Area Match Rate": f"{result.area_match_count}/{total} ({result.area_match_count*100/total:.1f}%)",
         "Level Match Rate": f"{result.level_match_count}/{total} ({result.level_match_count*100/total:.1f}%)",
+        "MRR": f"{result.mrr/total:.4f}" if total > 0 else "N/A",
+        "NDCG@5": f"{result.ndcg_at_5/total:.4f}" if total > 0 else "N/A",
+        "NDCG@10": f"{result.ndcg_at_10/total:.4f}" if total > 0 else "N/A",
+        "同领域命中@5": f"{result.area_hit_at_5}/{total} ({result.area_hit_at_5*100/total:.1f}%)",
+        "同领域命中@10": f"{result.area_hit_at_10}/{total} ({result.area_hit_at_10*100/total:.1f}%)",
+        "同CCF档位@5": f"{result.level_hit_at_5}/{total} ({result.level_hit_at_5*100/total:.1f}%)",
+        "同CCF档位@10": f"{result.level_hit_at_10}/{total} ({result.level_hit_at_10*100/total:.1f}%)",
+        "可接受期刊命中@5": f"{result.acceptable_journal_hit_at_5}/{total} ({result.acceptable_journal_hit_at_5*100/total:.1f}%)",
     }
 
     # 分质量等级
@@ -142,8 +209,83 @@ def load_papers_metadata(path: str) -> list:
     return papers
 
 
-def init_pipeline() -> RecommenderPipeline:
-    """初始化推荐 pipeline"""
+def _snapshot_match_key(title: str, venue: str) -> tuple[str, str]:
+    def normalize(value: str) -> str:
+        return " ".join(unicodedata.normalize("NFKC", value or "").casefold().split())
+
+    return normalize(title), normalize(venue)
+
+
+def attach_baseline_profile_snapshots(papers: list, baseline_eval_path: str) -> list:
+    """Attach fixed profiles from a completed evaluation to the current benchmark."""
+    with open(baseline_eval_path, "r", encoding="utf-8") as f:
+        baseline_eval = json.load(f)
+
+    snapshots = {}
+    for result in baseline_eval.get("paper_results", []):
+        snapshot = result.get("paper_profile_snapshot")
+        if isinstance(snapshot, dict) and snapshot:
+            snapshots[_snapshot_match_key(result.get("title", ""), result.get("venue", ""))] = snapshot
+
+    attached = []
+    missing = []
+    for paper in papers:
+        key = _snapshot_match_key(paper.get("title", ""), paper.get("venue", ""))
+        snapshot = snapshots.get(key)
+        if snapshot is None:
+            missing.append(paper.get("title", ""))
+            continue
+        merged = dict(paper)
+        merged["paper_profile_snapshot"] = dict(snapshot)
+        attached.append(merged)
+
+    if missing:
+        preview = ", ".join(title[:60] for title in missing[:3])
+        raise ValueError(
+            f"baseline eval 缺少固定 paper_profile_snapshot: {len(missing)} 篇"
+            f"（示例: {preview}）"
+        )
+    return attached
+
+
+def paper_profile_from_snapshot(snapshot: dict, paper: dict) -> PaperProfile:
+    """Build an isolated PaperProfile from a saved evaluation snapshot."""
+    list_fields = {
+        "research_area",
+        "ccf_research_area",
+        "keywords",
+        "techniques",
+        "datasets",
+        "evaluation_metrics",
+        "application_domain",
+    }
+    values = {
+        key: list(value) if key in list_fields and isinstance(value, list) else value
+        for key, value in snapshot.items()
+        if key in PaperProfile.model_fields
+    }
+    values["title"] = snapshot.get("title") or paper.get("title", "")
+    values["abstract"] = paper.get("abstract", "") or ""
+    return PaperProfile(**values)
+
+
+def resolve_benchmark_input(benchmark_profile: str, input_path: str | None) -> str:
+    if benchmark_profile == "custom":
+        if not input_path:
+            raise ValueError("--input is required when --benchmark-profile custom")
+        return input_path
+    if input_path:
+        return input_path
+    return BENCHMARK_PROFILE_INPUTS[benchmark_profile]
+
+
+def init_pipeline(llm_max_candidates: Optional[int] = None) -> RecommenderPipeline:
+    """初始化推荐 pipeline.
+
+    ``llm_max_candidates``: ablation knob, 控制 LLM精排候选池上限。
+    None 时从 yaml ``evidence_role.llm_max_candidates`` 读取（默认 20，
+    推荐 6.4 之后的正式 prod 配置），显式传参优先级最高。
+    """
     import yaml
     from dotenv import load_dotenv
     load_dotenv(override=True)
@@ -172,19 +314,15 @@ def init_pipeline() -> RecommenderPipeline:
     bm25.build_index()
 
     # LLM
-    api_key = os.getenv("MINIMAX_API_KEY")
-    if not api_key:
-        raise RuntimeError("MINIMAX_API_KEY 未配置")
-
-    llm = MiniMaxLLM(
-        api_key=api_key,
-        base_url=app_config["minimax"]["base_url"],
-        model=app_config["minimax"]["model"],
-    )
+    llm = build_minimax_llm(app_config)
 
     embedding_client = OllamaEmbedding(
         base_url=app_config["ollama"]["base_url"],
         model=app_config["ollama"]["embedding_model"],
+        timeout=app_config.get("ollama", {}).get("timeout_seconds", 60),
+        query_instruction=app_config.get("ollama", {}).get(
+            "embedding_query_instruction"
+        ),
     )
 
     embedding_retriever = None
@@ -193,21 +331,224 @@ def init_pipeline() -> RecommenderPipeline:
 
     retrieval_config = app_config.get("candidate_generator", {})
     merge_weights = retrieval_config.get("merge_weights", {"bm25": 0.45, "vector": 0.35, "text": 0.20})
+    retrieval_target = retrieval_config.get("retrieval_target", "scope_text")
+    fusion_strategy = retrieval_config.get("fusion_strategy", "weighted_minmax")
+    hybrid_scope_weight = retrieval_config.get("hybrid_scope_weight", 0.75)
+    hybrid_typical_weight = retrieval_config.get("hybrid_typical_weight", 0.25)
+    identity_anchor_weight = retrieval_config.get("identity_anchor_weight", 0.03)
+    accepted_paper_weight = retrieval_config.get("accepted_paper_weight", 0.20)
+    rrf_k = retrieval_config.get("rrf_k", 60)
+    route_top_k = retrieval_config.get("route_top_k")
 
-    generator = CandidateGenerator(store, bm25, embedding_retriever, merge_weights=merge_weights)
+    typical_bm25_retriever = None
+    typical_text_retriever = None
+    typical_embedding_retriever = None
+    accepted_bm25_retriever = None
+    accepted_embedding_retriever = None
+    if retrieval_target in {"typical_abstracts", "semantic_anchors"}:
+        typical_store = TypicalAbstractStore(abstracts_dir=app_config["data"]["typical_abstracts_dir"])
+        typical_store.load()
+
+        typical_bm25_retriever = TypicalAbstractBM25Retriever(typical_store, store)
+        typical_bm25_retriever.build_index()
+        typical_text_retriever = TypicalAbstractTextRetriever(typical_store, store)
+
+        if store.has_vector_search():
+            typical_embedding_retriever = TypicalAbstractEmbeddingRetriever(
+                typical_store, store, embedding_client,
+                faiss_path=app_config["data"]["typical_abstracts_faiss_path"],
+                metadata_path=app_config["data"]["typical_abstracts_metadata_path"],
+            )
+
+        # accepted-paper 路由:本地 corpus + FAISS 索引齐全才启用
+        from src.journals.accepted_paper_store import AcceptedPaperStore
+        from src.retriever.accepted_paper_retriever import (
+            AcceptedPaperBM25Retriever,
+            AcceptedPaperEmbeddingRetriever,
+        )
+
+        accepted_store = AcceptedPaperStore(
+            accepted_dir=app_config["data"].get("accepted_papers_dir", "data/accepted_papers")
+        )
+        accepted_store.load()
+        if accepted_store.count > 0:
+            accepted_bm25_retriever = AcceptedPaperBM25Retriever(accepted_store, store)
+            accepted_bm25_retriever.build_index()
+            if store.has_vector_search():
+                accepted_embedding_retriever = AcceptedPaperEmbeddingRetriever(
+                    accepted_store=accepted_store,
+                    journal_store=store,
+                    embedding_client=embedding_client,
+                    faiss_path=app_config["data"].get(
+                        "accepted_papers_faiss_path",
+                        "data/processed/accepted_papers_index.faiss",
+                    ),
+                    metadata_path=app_config["data"].get(
+                        "accepted_papers_metadata_path",
+                        "data/processed/accepted_papers_metadata.parquet",
+                    ),
+                )
+                if not accepted_embedding_retriever.is_available:
+                    accepted_embedding_retriever = None
+
+    generator = CandidateGenerator(
+        store, bm25, embedding_retriever,
+        merge_weights=merge_weights,
+        retrieval_target=retrieval_target,
+        typical_bm25_retriever=typical_bm25_retriever,
+        typical_embedding_retriever=typical_embedding_retriever,
+        typical_text_retriever=typical_text_retriever,
+        accepted_bm25_retriever=accepted_bm25_retriever,
+        accepted_embedding_retriever=accepted_embedding_retriever,
+        hybrid_scope_weight=hybrid_scope_weight,
+        hybrid_typical_weight=hybrid_typical_weight,
+        identity_anchor_weight=identity_anchor_weight,
+        accepted_paper_weight=accepted_paper_weight,
+        fusion_strategy=fusion_strategy,
+        rrf_k=rrf_k,
+        route_top_k=route_top_k,
+    )
     # 预建 RuleScorer 的 BM25 索引（传入期刊列表）
-    scorer = RuleScorer(journals=store.journals)
-    llm_ranker = LLMRanker(llm, prompts["llm_ranker_system"], prompts["llm_ranker_user"])
+    rule_weights = app_config.get("ranking", {}).get("rule_scorer", {})
+    scorer = RuleScorer(journals=store.journals, weights=rule_weights)
+
+    # 6.3: 6.3 evidence role ranker 接入 production pipeline.
+    # evidence_role 是默认 OFF 的新路径。打开时用 evidence snapshot 喂
+    # LLMEvidenceRoleRanker; 没 snapshot 或 loading 失败则降级到 LLMRanker。
+    ranking_cfg = app_config.get("ranking", {})
+    use_direct_default = ranking_cfg.get("llm_direct", {}).get("enabled", True)
+    evidence_cfg = ranking_cfg.get("evidence_role", {})
+    use_evidence = bool(evidence_cfg.get("enabled", False))
+    snapshot_path = evidence_cfg.get("snapshot_path", "")
+    evidence_snapshot = None
+    # Track the extractor so the API layer can use it for the per-request
+    # online path (when a paper isn't in the snapshot). The closure capture
+    # below needs the variable to be bound in the outer scope of init_pipeline.
+    evidence_extractor = None
+    if use_evidence:
+        from pathlib import Path as _Path
+        from src.ranker.llm_evidence_role_ranker import (
+            LLMEvidenceRoleRanker,
+            load_evidence_snapshot,
+        )
+        sp = _Path(snapshot_path)
+        if not sp.exists():
+            print(
+                f"[warn] evidence_role.enabled=true but snapshot not found: "
+                f"{snapshot_path}; falling back to llm_direct"
+            )
+        else:
+            try:
+                evidence_snapshot = load_evidence_snapshot(str(sp))
+                # Build a real extractor as required by the constructor even
+                # though we always read from the snapshot (extract() never called).
+                from src.ranker.llm_evidence_extractor import LLMEvidenceExtractor, select_evidence_prompts
+                # P0 (2026-06-16): select v1 or v2 evidence prompt based on
+                # evidence_role.prompt_version. v2 adds CCF-tier calibration.
+                evidence_prompt_version = evidence_cfg.get("prompt_version", "v1")
+                evidence_sys_p, evidence_usr_p = select_evidence_prompts(
+                    prompts, evidence_prompt_version
+                )
+                evidence_extractor = LLMEvidenceExtractor(
+                    llm=llm,
+                    system_prompt=evidence_sys_p,
+                    user_prompt_template=evidence_usr_p,
+                    timeout_seconds=ranking_cfg.get("llm_ranker_timeout_seconds", 200),
+                )
+                accepted_store = None
+                if "accepted_store" in locals():
+                    accepted_store = locals()["accepted_store"]
+                llm_ranker = LLMEvidenceRoleRanker(
+                    evidence_extractor=evidence_extractor,
+                    journal_store=store,
+                    accepted_paper_store=accepted_store,
+                    prior_source=evidence_cfg.get("prior_source", "rule"),
+                    evidence_weight=float(evidence_cfg.get("evidence_weight", 0.8)),
+                    prior_weight=float(evidence_cfg.get("prior_weight", 0.2)),
+                    ltr_score_weight=float(evidence_cfg.get("ltr_score_weight", 0.0)),
+                    evidence_snapshot=evidence_snapshot,
+                    evidence_field_weights=evidence_cfg.get("evidence_field_weights"),
+                )
+                print(
+                    f"[ok] evidence_role enabled, snapshot={snapshot_path}, "
+                    f"prior_source={evidence_cfg.get('prior_source', 'rule')}, "
+                    f"ltr_score_weight={evidence_cfg.get('ltr_score_weight', 0.0)}, "
+                    f"papers={len(evidence_snapshot)}"
+                )
+            except Exception as exc:
+                print(f"[warn] failed to load evidence snapshot: {exc}; falling back to llm_direct")
+                evidence_snapshot = None
+
+    if "llm_ranker" not in locals():
+        if not use_direct_default:
+            raise RuntimeError(
+                "ranking config has neither llm_direct.enabled=true nor a working "
+                "evidence_role snapshot; cannot build a ranker"
+            )
+        llm_ranker = LLMRanker(
+            llm,
+            prompts["llm_ranker_system"],
+            prompts["llm_ranker_user"],
+            timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+        )
+    # 6.5 / ablation: always keep a reference to the raw LLMRanker so
+    # callers (e.g. run_llm_role_ablation) can swap to DirectLLMRoleRanker
+    # without accidentally wrapping an LLMEvidenceRoleRanker.
+    direct_llm_ranker = LLMRanker(
+        llm,
+        prompts["llm_ranker_system"],
+        prompts["llm_ranker_user"],
+        timeout_seconds=app_config.get("ranking", {}).get("llm_ranker_timeout_seconds", 200),
+    )
     quality_assessor = PaperQualityAssessor(llm)
     parser = PaperParser(llm)
+
+    # 5.3: LTR adapter(默认 OFF 时 LTRAdapter.enabled=False,pipeline 走原路径)
+    from src.ranker.ltr_adapter import LTRAdapter
+    ltr_config = (app_config.get("ranking", {}).get("learned_reranker", {}) or {})
+    # accepted_paper_store 引用:仅当 retrieval_target 包含 typical / accepted 时才有
+    accepted_paper_store_ref = accepted_store if (retrieval_target in {"typical_abstracts", "semantic_anchors"} and "accepted_store" in locals()) else None
+    learned_reranker = LTRAdapter(
+        config=ltr_config,
+        journal_store=store,
+        accepted_paper_store=accepted_paper_store_ref,
+    )
 
     pipeline = RecommenderPipeline(
         candidate_generator=generator,
         rule_scorer=scorer,
         llm_ranker=llm_ranker,
         quality_assessor=quality_assessor,
+        llm_anchor_guard=app_config.get("ranking", {}).get("llm_anchor_guard", {}),
+        learned_reranker=learned_reranker,
+        # P-counterfactual 2026-06-16: pass app_config so the pipeline
+        # can read ranking.experimental.skip_quality_assessment and other
+        # experimental flags without coupling to a specific caller.
+        app_config=app_config,
+        evidence_extractor=evidence_extractor,
+        # 6.4: enable 22-dim feature schema when evidence_role is on AND
+        # the snapshot is loaded. attach_features() will fall back to 16
+        # dims per-paper if a paper is missing from the snapshot.
+        evidence_lookup=evidence_snapshot or None,
+        feature_schema=(
+            "22_dim_with_llm_evidence" if evidence_snapshot else "16_dim_base"
+        ),
+        # Ablation knob: max LLM精排 candidate pool size. 优先级: 显式传参 > yaml > 30.
+        llm_max_candidates=(
+            llm_max_candidates
+            if llm_max_candidates is not None
+            else int(
+                app_config.get("ranking", {})
+                .get("evidence_role", {})
+                .get("llm_max_candidates", 30)
+            )
+        ),
     )
     pipeline.parser = parser
+    # 6.5 / ablation: expose the raw LLMRanker so callers can wrap it in
+    # DirectLLMRoleRanker (for the `llm_ranker_direct` ablation variant)
+    # without accidentally wrapping an LLMEvidenceRoleRanker.
+    pipeline.direct_llm_ranker = direct_llm_ranker
 
     return pipeline
 
@@ -218,10 +559,12 @@ def evaluate_single_paper(
     prompts: dict,
     mode: str,
     top_k: int,
+    reuse_profile_snapshot: bool = False,
 ) -> dict:
     """
     并行评估单篇论文，返回结果字典（非 EvaluationResult，避免锁竞争）
     """
+    started_at = time.perf_counter()
     title = paper.get("title", "")
     abstract = paper.get("abstract", "")
     venue = paper.get("venue", "")
@@ -229,6 +572,20 @@ def evaluate_single_paper(
     research_area = paper.get("research_area", [""])[0] if paper.get("research_area") else ""
     arxiv_id = paper.get("external_ids", {}).get("arXiv", "")
     pdf_path = paper.get("pdf_path", "")
+
+    def _normalize_venue(venue: str) -> str:
+        """标准化期刊名用于比较（去除首尾空格，转小写）"""
+        return venue.strip().lower() if venue else ""
+
+    def _find_journal_by_venue(venue_name: str):
+        store = getattr(getattr(pipeline, "candidate_generator", None), "store", None)
+        venue_normalized = _normalize_venue(venue_name)
+        for journal in getattr(store, "journals", []):
+            if _normalize_venue(journal.journal_name) == venue_normalized:
+                return journal
+        return None
+
+    target_journal = _find_journal_by_venue(venue)
 
     # 获取全文（如果需要）
     full_text = ""
@@ -249,16 +606,22 @@ def evaluate_single_paper(
         mode=mode,
     )
 
-    # 解析论文
-    try:
-        profile = pipeline.parser.parse(
-            paper_input,
-            prompts["paper_profile_system"],
-            prompts["paper_profile_user"],
-        )
-    except Exception as e:
-        print(f"\n解析失败: {title[:30]}... - {e}")
-        return None
+    # 正式消融可复用固定快照，避免 PaperParser / QualityAssessor 随机性污染排序对比。
+    if reuse_profile_snapshot:
+        snapshot = paper.get("paper_profile_snapshot")
+        if not isinstance(snapshot, dict) or not snapshot:
+            raise ValueError(f"论文缺少固定 paper_profile_snapshot: {title}")
+        profile = paper_profile_from_snapshot(snapshot, paper)
+    else:
+        try:
+            profile = pipeline.parser.parse(
+                paper_input,
+                prompts["paper_profile_system"],
+                prompts["paper_profile_user"],
+            )
+        except Exception as e:
+            print(f"\n解析失败: {title[:30]}... - {e}")
+            return None
 
     # 推荐
     try:
@@ -266,22 +629,41 @@ def evaluate_single_paper(
             paper_input, profile,
             top_k=top_k,
             mode=mode,
-            quality_prompts={
-                "system": prompts.get("paper_quality_assessor_system", ""),
-                "user": prompts.get("paper_quality_assessor_user", ""),
-            },
+            diagnostic_journal_ids=[target_journal.journal_id] if target_journal else None,
+            quality_prompts=(
+                None
+                if reuse_profile_snapshot
+                else {
+                    "system": prompts.get("paper_quality_assessor_system", ""),
+                    "user": prompts.get("paper_quality_assessor_user", ""),
+                }
+            ),
         )
     except Exception as e:
         print(f"\n推荐失败: {title[:30]}... - {e}")
         return None
 
-    def _normalize_venue(venue: str) -> str:
-        """标准化期刊名用于比较（去除首尾空格，转小写）"""
-        return venue.strip().lower() if venue else ""
-
     recommendations = rec_result.get("recommendations", [])
+    rank_method = rec_result.get("rank_method", "unknown")
+    fallback_used = bool(rec_result.get("fallback_used", False))
+    if not recommendations:
+        llm_pool_size = len(rec_result.get("llm_candidates", []))
+        print(
+            f"\n推荐结果为空: {title[:30]}... | "
+            f"rank_method={rank_method} | llm_pool={llm_pool_size} | "
+            "请检查候选召回或未处理异常"
+        )
     candidates = rec_result.get("candidates", [])
     rule_ranked = rec_result.get("rule_ranked", [])
+    llm_candidates = rec_result.get("llm_candidates", [])
+    llm_candidate_ids = set(rec_result.get("llm_candidate_ids", []))
+    retrieval_trace = rec_result.get("retrieval_trace", {})
+    # 5.3: 透传 LTR 诊断字段(默认 OFF 时 rec_result 里没有这些 key,learned_enabled=False)
+    learned_diag = rec_result.get("learned_diagnostics") or {}
+    final_rank_source = rec_result.get("final_rank_source")
+    learned_enabled = bool(learned_diag.get("status") == "ok")
+    llm_role_diag = rec_result.get("llm_role_diagnostics") or {}
+    llm_role_candidates = llm_role_diag.get("candidates") or {}
     recommended_journals = [rec.journal.journal_name for rec in recommendations]
     candidate_journal_names = [j.journal_name for j in candidates] if candidates else []
     rule_ranked_names = [j.journal_name for j, s, r in rule_ranked] if rule_ranked else []
@@ -291,12 +673,32 @@ def evaluate_single_paper(
     candidate_journal_names_norm = [j.lower() for j in candidate_journal_names]
     rule_ranked_names_norm = [j.lower() for j in rule_ranked_names]
     recommended_journals_norm = [j.lower() for j in recommended_journals]
+    candidate_by_name = {
+        _normalize_venue(j.journal_name): (i + 1, j)
+        for i, j in enumerate(candidates)
+    }
+    rule_by_name = {
+        _normalize_venue(j.journal_name): (i + 1, j, s)
+        for i, (j, s, r) in enumerate(rule_ranked)
+    }
+    llm_candidate_ids.update(j.journal_id for j, s, r in llm_candidates)
 
-    # 计算 Hit@K
-    hit_1 = venue_normalized in recommended_journals_norm[:1] if len(recommended_journals) >= 1 else False
-    hit_3 = venue_normalized in recommended_journals_norm[:3] if len(recommended_journals) >= 3 else False
-    hit_5 = venue_normalized in recommended_journals_norm[:5] if len(recommended_journals) >= 5 else False
-    hit_10 = venue_normalized in recommended_journals_norm[:10] if len(recommended_journals) >= 10 else venue_normalized in recommended_journals_norm
+    # 计算 Hit@K（Hit@10 用 LLM 精排全量排序，而非仅 Top-5 推荐）
+    hit_1 = venue_normalized in recommended_journals_norm[:1] if recommended_journals else False
+    hit_3 = venue_normalized in recommended_journals_norm[:3] if recommended_journals else False
+    hit_5 = venue_normalized in recommended_journals_norm[:5] if recommended_journals else False
+    # 2026-06-30: 修复 Hit@10 恒等于 Hit@5 的 bug。
+    # 用 llm_ranked_all_names（LLM 精排全部排序结果）而非仅 Top-5。
+    llm_ranked_all_names = rec_result.get("llm_ranked_all_names") or []
+    llm_ranked_all_norm = [_normalize_venue(n) for n in llm_ranked_all_names]
+    ranked_for_top10 = llm_ranked_all_norm or recommended_journals_norm
+    full_ranking_available = bool(llm_ranked_all_norm)
+    relevant_rank_at_10 = 0
+    for i, jname in enumerate(ranked_for_top10[:10]):
+        if jname == venue_normalized:
+            relevant_rank_at_10 = i + 1
+            break
+    hit_10 = relevant_rank_at_10 > 0
 
     # 粗排是否命中（实际发表的期刊在 top 50 候选中）
     coarse_hit = venue_normalized in candidate_journal_names_norm if venue else False
@@ -307,23 +709,214 @@ def evaluate_single_paper(
 
     q_level = profile.quality_level or "D"
 
+    # 计算 relevant_rank（1-indexed，未命中为 0）
+    relevant_rank = 0
+    for i, jname in enumerate(recommended_journals_norm):
+        if jname == venue_normalized:
+            relevant_rank = i + 1
+            break
+
+    # 同领域命中（research_area 匹配任一 subject_tags）
+    research_areas_set = {research_area} if research_area else set()
+    area_hit_5 = False
+    area_hit_10 = False
+    for i, rec in enumerate(recommendations[:10]):
+        if rec.journal.subject_tags and research_areas_set:
+            if set(rec.journal.subject_tags) & research_areas_set:
+                if i < 5:
+                    area_hit_5 = True
+                area_hit_10 = True
+                break
+
+    # 同 CCF 档位命中（ccf_level 匹配期刊 ccf_rating）
+    level_hit_5 = False
+    level_hit_10 = False
+    acceptable_journal_hit_5 = False
+    for i, rec in enumerate(recommendations[:10]):
+        if rec.journal.ccf_rating and ccf_level:
+            if rec.journal.ccf_rating.upper() == ccf_level.upper():
+                if i < 5:
+                    level_hit_5 = True
+                level_hit_10 = True
+                break
+
+    acceptable_journal_hit_5 = bool(hit_5 or (area_hit_5 and level_hit_5))
+
+    def _retrieval_info(journal_id: str) -> dict:
+        trace = retrieval_trace.get(journal_id, {})
+        routes = trace.get("routes", {})
+        wide_routes = trace.get("wide_routes", {})
+        return {
+            "retrieval_score": trace.get("total_score"),
+            "retrieval_rank": trace.get("retrieval_rank"),
+            "retrieval_sources": trace.get("primary_routes", []),
+            "retrieval_route_scores": {
+                route: {
+                    "rank": data.get("rank"),
+                    "raw_score": data.get("raw_score"),
+                    "weighted_score": data.get("weighted_score"),
+                    "normalized_score": data.get("normalized_score"),
+                }
+                for route, data in routes.items()
+            },
+            "wide_retrieval_rank": trace.get("wide_retrieval_rank"),
+            "wide_retrieval_route_scores": {
+                route: {
+                    "rank": data.get("rank"),
+                    "raw_score": data.get("raw_score"),
+                    "weighted_score": data.get("weighted_score"),
+                    "normalized_score": data.get("normalized_score"),
+                }
+                for route, data in wide_routes.items()
+            },
+        }
+
+    def _find_venue_journal():
+        candidate_match = candidate_by_name.get(venue_normalized)
+        if candidate_match:
+            _, journal = candidate_match
+            return journal
+
+        rule_match = rule_by_name.get(venue_normalized)
+        if rule_match:
+            _, journal, _ = rule_match
+            return journal
+
+        store = getattr(getattr(pipeline, "candidate_generator", None), "store", None)
+        for journal in getattr(store, "journals", []):
+            if _normalize_venue(journal.journal_name) == venue_normalized:
+                return journal
+        return None
+
+    venue_journal = target_journal or _find_venue_journal()
+    venue_retrieval = _retrieval_info(venue_journal.journal_id) if venue_journal else {
+        "retrieval_score": None,
+        "retrieval_rank": None,
+        "retrieval_sources": [],
+        "retrieval_route_scores": {},
+        "wide_retrieval_rank": None,
+        "wide_retrieval_route_scores": {},
+    }
+    venue_rule = rule_by_name.get(venue_normalized)
+    wide_route_scores = venue_retrieval["wide_retrieval_route_scores"]
+
+    def _miss_stage() -> str:
+        if hit_5:
+            return "final_hit"
+        if not venue_journal:
+            return "target_not_in_store"
+        if not wide_route_scores and venue_retrieval.get("wide_retrieval_rank") is None:
+            return "not_in_wide_recall"
+        if venue_retrieval.get("retrieval_rank") is None:
+            return "wide_recalled_but_not_top50"
+        if not venue_rule or (venue_rule[0] or 9999) > 20:
+            if bool(venue_journal.journal_id in llm_candidate_ids):
+                return "in_llm_but_lost"
+            return "rule_suppressed"
+        if bool(venue_journal.journal_id in llm_candidate_ids):
+            return "in_llm_but_lost"
+        return "rule_suppressed"
+
+    venue_diagnostic = {
+        "journal_id": venue_journal.journal_id if venue_journal else None,
+        "target_journal_id": venue_journal.journal_id if venue_journal else None,
+        "gold_area": research_area,
+        "parsed_ccf_area": profile.ccf_research_area,
+        "area_mismatch": bool(research_area and research_area not in profile.ccf_research_area),
+        "abstract_len": len(abstract or ""),
+        "target_scope_text_preview": (venue_journal.scope_text[:300] if venue_journal else ""),
+        "target_keywords": venue_journal.keywords[:12] if venue_journal else [],
+        "target_subject_tags": venue_journal.subject_tags[:5] if venue_journal else [],
+        "retrieval_sources": venue_retrieval["retrieval_sources"],
+        "retrieval_rank": venue_retrieval["retrieval_rank"],
+        "wide_retrieval_rank": venue_retrieval["wide_retrieval_rank"],
+        "retrieval_score": venue_retrieval["retrieval_score"],
+        "retrieval_route_scores": venue_retrieval["retrieval_route_scores"],
+        "wide_retrieval_route_scores": wide_route_scores,
+        "coarse_rank": candidate_by_name.get(venue_normalized, (None, None))[0],
+        "rule_rank": venue_rule[0] if venue_rule else None,
+        "rule_score": venue_rule[2] if venue_rule else None,
+        "in_llm_pool": bool(venue_journal and venue_journal.journal_id in llm_candidate_ids),
+        "miss_stage": _miss_stage(),
+    }
+    # 5.3: LTR 启用且 status='ok' 时把 learned_score / learned_rank 写到 gold venue 诊断
+    if learned_enabled and venue_journal is not None:
+        learned_score_map = learned_diag.get("learned_score") or {}
+        learned_rank_map = learned_diag.get("learned_rank") or {}
+        venue_diagnostic["learned_score"] = learned_score_map.get(venue_journal.journal_id)
+        venue_diagnostic["learned_rank"] = learned_rank_map.get(venue_journal.journal_id)
+    if venue_journal is not None and venue_journal.journal_id in llm_role_candidates:
+        venue_role = llm_role_candidates[venue_journal.journal_id]
+        venue_diagnostic["llm_role_rank"] = venue_role.get("final_rank")
+        venue_diagnostic["llm_role_final_score"] = venue_role.get("final_score")
+        if "evidence_composite" in venue_role:
+            venue_diagnostic["llm_evidence_rank"] = venue_role.get("final_rank")
+            venue_diagnostic["llm_evidence_final_score"] = venue_role.get(
+                "final_score"
+            )
+            venue_diagnostic["llm_evidence_composite"] = venue_role.get(
+                "evidence_composite"
+            )
+    paper_profile_snapshot = {
+        "title": profile.title,
+        "abstract_len": len(abstract or ""),
+        "abstract_preview": (abstract or "")[:500],
+        "research_area": profile.research_area,
+        "ccf_research_area": profile.ccf_research_area,
+        "method_type": profile.method_type,
+        "paper_type": profile.paper_type,
+        "keywords": profile.keywords,
+        "novelty": profile.novelty,
+        "difficulty_level": profile.difficulty_level,
+        "style": profile.style,
+        "sections_summary": profile.sections_summary,
+        "full_text_summary": profile.full_text_summary,
+        "techniques": profile.techniques,
+        "datasets": profile.datasets,
+        "evaluation_metrics": profile.evaluation_metrics,
+        "application_domain": profile.application_domain,
+        "novelty_type": profile.novelty_type,
+        "quality_level": profile.quality_level,
+        "quality_confidence": profile.quality_confidence,
+        "quality_reasons": profile.quality_reasons,
+        "paper_strength": profile.paper_strength,
+        "readiness": profile.readiness,
+    }
+
     return {
         "arxiv": arxiv_id,
-        "title": title[:50],
+        "title": title,
+        "abstract_len": len(abstract or ""),
         "venue": venue,
         "ccf_level": ccf_level,
         "research_area": research_area,
+        "gold_area": research_area,
+        "parsed_ccf_area": profile.ccf_research_area,
+        "area_mismatch": bool(research_area and research_area not in profile.ccf_research_area),
         "recommended_journals": recommended_journals[:top_k],
         "hit_1": hit_1,
         "hit_3": hit_3,
         "hit_5": hit_5,
         "hit_10": hit_10,
+        "relevant_rank": relevant_rank,  # MRR 计算用
+        "relevant_rank_at_10": relevant_rank_at_10,
+        "ranking_depth": len(ranked_for_top10),
+        "full_ranking_available": full_ranking_available,
+        "ndcg_gain": 1.0 if relevant_rank > 0 else 0.0,  # NDCG 计算用（二值相关性）
         "coarse_hit": coarse_hit,  # 粗排命中
         "coarse_hit_in_rule_top10": coarse_hit_in_rule_top10,  # 粗排候选在 RuleScorer top10 中
         "coarse_hit_in_rule_top20": coarse_hit_in_rule_top20,  # 粗排候选在 RuleScorer top20 中
         "paper_strength": profile.paper_strength,
         "quality_level": q_level,
         "ccf_research_area": profile.ccf_research_area,
+        "paper_profile_snapshot": paper_profile_snapshot,
+        "evaluation_status": (
+            "fallback" if fallback_used else ("ok" if recommendations else "empty")
+        ),
+        "rank_method": rank_method,
+        "fallback_used": fallback_used,
+        "fallback_stage": rec_result.get("fallback_stage", ""),
+        "fallback_reason": rec_result.get("fallback_reason", ""),
         "area_match": bool(
             profile.ccf_research_area and research_area in profile.ccf_research_area
         ) if research_area else False,
@@ -335,6 +928,86 @@ def evaluate_single_paper(
             )
             for rec in recommendations if hasattr(rec, 'journal')
         ) if research_area and recommendations else False,
+        # 新增指标
+        "area_hit_5": area_hit_5,
+        "area_hit_10": area_hit_10,
+        "level_hit_5": level_hit_5,
+        "level_hit_10": level_hit_10,
+        "same_area_hit_5": area_hit_5,
+        "same_area_hit_10": area_hit_10,
+        "same_ccf_level_hit_5": level_hit_5,
+        "same_ccf_level_hit_10": level_hit_10,
+        "acceptable_journal_hit_5": acceptable_journal_hit_5,
+        "venue_diagnostic": venue_diagnostic,
+        # 每篇论文的详细推荐信息（用于定位问题）
+        "recommendations_detail": [
+            {
+                "rank": i + 1,
+                "journal_name": rec.journal.journal_name,
+                "journal_id": rec.journal.journal_id,
+                "ccf_rating": rec.journal.ccf_rating or "未知",
+                "subject_tags": rec.journal.subject_tags[:5],
+                "rule_rank": rule_ranked_names.index(rec.journal.journal_name) + 1 if rec.journal.journal_name in rule_ranked_names else -1,
+                "rule_score": rule_ranked[rule_ranked_names.index(rec.journal.journal_name)][1] if rec.journal.journal_name in rule_ranked_names else None,
+                "llm_score": rec.score,
+                "confidence": rec.confidence,
+                "match_reasons": rec.match_reasons[:5] if rec.match_reasons else [],
+                **_retrieval_info(rec.journal.journal_id),
+                # 5.3: LTR 启用时给每条推荐加 learned_score
+                **(
+                    {"learned_score": (learned_diag.get("learned_score") or {}).get(rec.journal.journal_id)}
+                    if learned_enabled else {}
+                ),
+            }
+            for i, rec in enumerate(recommendations[:top_k])
+        ],
+        "llm_candidates_detail": [
+            {
+                "journal_id": journal.journal_id,
+                "journal_name": journal.journal_name,
+                "candidate_input_rank": index + 1,
+                "candidate_rule_score": score,
+                "candidate_reasons": reasons,
+                **_retrieval_info(journal.journal_id),
+                **llm_role_candidates.get(journal.journal_id, {}),
+            }
+            for index, (journal, score, reasons) in enumerate(llm_candidates)
+        ],
+        **(
+            {
+                "llm_role_status": llm_role_diag.get("status"),
+                "llm_role": llm_role_diag.get("role"),
+                "llm_role_prior_source": llm_role_diag.get("prior_source"),
+                "llm_role_fallback_reason": llm_role_diag.get(
+                    "fallback_reason", ""
+                ),
+                **(
+                    {
+                        "llm_evidence_status": llm_role_diag.get("status"),
+                        "llm_evidence_coverage": llm_role_diag.get(
+                            "evidence_coverage", 0.0
+                        ),
+                        "llm_evidence_prior_source": llm_role_diag.get(
+                            "prior_source"
+                        ),
+                        "llm_evidence_fallback_reason": llm_role_diag.get(
+                            "fallback_reason", ""
+                        ),
+                    }
+                    if llm_role_diag.get("role") == "evidence"
+                    else {}
+                ),
+            }
+            if llm_role_diag
+            else {}
+        ),
+        # 5.3: LTR 启用时 per-paper 顶层加 final_rank_source
+        **(
+            {"final_rank_source": final_rank_source}
+            if learned_enabled or llm_role_diag
+            else {}
+        ),
+        "latency_seconds": round(time.perf_counter() - started_at, 4),
     }
 
 
@@ -346,8 +1019,10 @@ def run_evaluation(
     prompts: dict,
     show_progress: bool = True,
     workers: int = 4,
+    reuse_profile_snapshots: bool = False,
 ) -> EvaluationResult:
     """运行评估（并行）"""
+    evaluation_started_at = time.perf_counter()
 
     result = EvaluationResult(
         total_count=len(papers),
@@ -357,9 +1032,16 @@ def run_evaluation(
         area_match_count=0,
         area_subject_tag_match_count=0,
         level_match_count=0,
+        ndcg_at_10=0.0,
+        area_hit_at_5=0, area_hit_at_10=0,
+        level_hit_at_5=0, level_hit_at_10=0,
+        acceptable_journal_hit_at_5=0,
         coarse_hit_count=0,
         coarse_hit_in_rule_top10_count=0,
         coarse_hit_in_rule_top20_count=0,
+        fallback_count=0,
+        llm_success_count=0,
+        empty_recommendation_count=0,
         level_a_count=0, level_a_hit_at_5=0,
         level_b_count=0, level_b_hit_at_5=0,
         level_c_count=0, level_c_hit_at_5=0,
@@ -395,6 +1077,30 @@ def run_evaluation(
             if paper_result["level_match"]:
                 result.level_match_count += 1
 
+            # MRR 和 NDCG@5 累加
+            rank = paper_result.get("relevant_rank", 0)
+            if rank > 0:
+                result.mrr += 1.0 / rank
+            if 0 < rank <= 5:
+                result.ndcg_at_5 += 1.0 / math.log2(rank + 1)  # 二值相关性: DCG=1/log2(r+1), IDCG=1/log2(2)=1
+
+            # NDCG@10 使用完整精排结果中的真实 rank，而不是仅 Top-5 输出。
+            rank_at_10 = paper_result.get("relevant_rank_at_10", 0)
+            if 0 < rank_at_10 <= 10:
+                result.ndcg_at_10 += 1.0 / math.log2(rank_at_10 + 1)
+
+            # 同领域/同CCF档位命中
+            if paper_result.get("area_hit_5"):
+                result.area_hit_at_5 += 1
+            if paper_result.get("area_hit_10"):
+                result.area_hit_at_10 += 1
+            if paper_result.get("level_hit_5"):
+                result.level_hit_at_5 += 1
+            if paper_result.get("level_hit_10"):
+                result.level_hit_at_10 += 1
+            if paper_result.get("acceptable_journal_hit_5"):
+                result.acceptable_journal_hit_at_5 += 1
+
             # 粗排命中统计
             if paper_result.get("coarse_hit"):
                 result.coarse_hit_count += 1
@@ -402,6 +1108,17 @@ def run_evaluation(
                 result.coarse_hit_in_rule_top10_count += 1
             if paper_result.get("coarse_hit_in_rule_top20"):
                 result.coarse_hit_in_rule_top20_count += 1
+
+            if paper_result.get("fallback_used"):
+                result.fallback_count += 1
+            elif (
+                str(paper_result.get("rank_method", "")).startswith("llm")
+                and paper_result.get("recommended_journals")
+                and paper_result.get("llm_role_status") != "neutral_fallback"
+            ):
+                result.llm_success_count += 1
+            if not paper_result.get("recommended_journals"):
+                result.empty_recommendation_count += 1
 
             # 分质量等级统计
             q_level = paper_result["quality_level"]
@@ -429,16 +1146,17 @@ def run_evaluation(
             if paper_result["hit_5"]: result.by_level[ccf]["hit"] += 1
 
             # 保存单篇结果
+            # 保留逐论文 outcome，方便评测后直接筛选回归/修复样本。
+            # ndcg_gain 可由 relevant_rank 重算，没有必要重复保存。
             result.paper_results.append({
-                k: v for k, v in paper_result.items()
-                if k not in ["hit_1", "hit_3", "hit_5", "hit_10", "area_match", "level_match"]
+                k: v for k, v in paper_result.items() if k != "ndcg_gain"
             })
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = {
             executor.submit(
                 evaluate_single_paper,
-                paper, pipeline, prompts, mode, top_k,
+                paper, pipeline, prompts, mode, top_k, reuse_profile_snapshots,
             ): paper
             for paper in papers
         }
@@ -448,6 +1166,7 @@ def run_evaluation(
             total=len(papers),
             desc=f"评估 [{mode}/top{top_k}/w{workers}]",
             unit="篇",
+            disable=not show_progress,
         )
 
         for future in pbar:
@@ -458,12 +1177,17 @@ def run_evaluation(
             n = len(result.paper_results)
             if n > 0:
                 hit_k = getattr(result, f"hit_at_{top_k}", 0)
+                mrr_val = result.mrr / n
+                ndcg5_val = result.ndcg_at_5 / n
                 pbar.set_postfix({
                     f"Hit@{top_k}": f"{hit_k}/{n}({hit_k*100/n:.1f}%)",
-                    "Level": f"{result.level_match_count}/{n}({result.level_match_count*100/n:.1f}%)",
-                    "Area": f"{result.area_match_count}/{n}({result.area_match_count*100/n:.1f}%)",
+                    "MRR": f"{mrr_val:.3f}",
+                    "NDCG@5": f"{ndcg5_val:.3f}",
+                    "Area@5": f"{result.area_hit_at_5}/{n}",
+                    "level_match": f"{result.level_match_count}/{n}",
                 })
 
+    result.elapsed_seconds = round(time.perf_counter() - evaluation_started_at, 4)
     return result
 
 
@@ -488,12 +1212,25 @@ def print_report(result: EvaluationResult):
     print(f"  领域匹配准确率: {metrics['Area Match Rate']}")
     print(f"  推荐期刊subject_tags命中: {result.area_subject_tag_match_count}/{total} ({result.area_subject_tag_match_count*100/total:.1f}%)")
     print(f"  Level Match Rate: {metrics['Level Match Rate']}")
+    print(f"  MRR: {metrics['MRR']}")
+    print(f"  NDCG@5: {metrics['NDCG@5']}")
+    print(f"  NDCG@10: {metrics['NDCG@10']}")
+    print(f"  同领域命中@5: {metrics['同领域命中@5']}")
+    print(f"  同领域命中@10: {metrics['同领域命中@10']}")
+    print(f"  同CCF档位@5: {metrics['同CCF档位@5']}")
+    print(f"  同CCF档位@10: {metrics['同CCF档位@10']}")
+    print(f"  可接受期刊命中@5: {metrics['可接受期刊命中@5']}")
 
     # 粗排命中分析
     print(f"\n--- 粗排命中分析 ---")
     print(f"  粗排命中（top50候选包含实际期刊）: {result.coarse_hit_count}/{total} ({result.coarse_hit_count*100/total:.1f}%)")
     print(f"  粗排命中且在RuleScorer top10中: {result.coarse_hit_in_rule_top10_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top10_count*100/max(result.coarse_hit_count,1):.1f}%)")
     print(f"  粗排命中且在RuleScorer top20中: {result.coarse_hit_in_rule_top20_count}/{result.coarse_hit_count} ({result.coarse_hit_in_rule_top20_count*100/max(result.coarse_hit_count,1):.1f}%)")
+
+    print(f"\n--- 稳定性诊断 ---")
+    print(f"  LLM 正常完成: {result.llm_success_count}/{total}")
+    print(f"  Rule fallback: {result.fallback_count}/{total}")
+    print(f"  空推荐结果: {result.empty_recommendation_count}/{total}")
 
     print(f"\n--- 分质量等级 Hit@5 ---")
     if result.level_a_count > 0:
@@ -520,44 +1257,499 @@ def print_report(result: EvaluationResult):
     print("=" * 70)
 
 
-def save_results(result: EvaluationResult, output_dir: str = "data/evaluation/results"):
-    """保存评估结果"""
-    os.makedirs(output_dir, exist_ok=True)
+_SENSITIVE_CONFIG_KEYS = {
+    "api_key",
+    "apikey",
+    "authorization",
+    "credential",
+    "credentials",
+    "password",
+    "secret",
+    "token",
+    "access_token",
+    "auth_token",
+    "bearer_token",
+    "client_secret",
+}
+_SENSITIVE_CONFIG_SUFFIXES = (
+    "_api_key",
+    "_credential",
+    "_credentials",
+    "_password",
+    "_secret",
+    "_token",
+    "_access_token",
+    "_auth_token",
+)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"eval_{result.mode}_top{result.top_k}_{timestamp}.json"
-    filepath = os.path.join(output_dir, filename)
+
+def _redact_sensitive_config(value, key: str = ""):
+    """Return a JSON-safe config snapshot without leaking credentials."""
+    normalized_key = key.lower().replace("-", "_")
+    if (
+        normalized_key in _SENSITIVE_CONFIG_KEYS
+        or normalized_key.endswith(_SENSITIVE_CONFIG_SUFFIXES)
+    ):
+        return "<redacted>"
+    if isinstance(value, dict):
+        return {
+            str(child_key): _redact_sensitive_config(child_value, str(child_key))
+            for child_key, child_value in value.items()
+        }
+    if isinstance(value, list):
+        return [_redact_sensitive_config(item) for item in value]
+    return copy.deepcopy(value)
+
+
+def _file_fingerprint(path: str | os.PathLike | None) -> dict | None:
+    """Fingerprint an experiment artifact; missing files remain explicit."""
+    if not path:
+        return None
+    file_path = Path(path)
+    record = {"path": str(path), "exists": file_path.is_file()}
+    if not file_path.is_file():
+        return record
+
+    digest = hashlib.sha256()
+    with file_path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    stat = file_path.stat()
+    record.update(
+        {
+            "sha256": digest.hexdigest(),
+            "size_bytes": stat.st_size,
+            "modified_at": datetime.fromtimestamp(stat.st_mtime).isoformat(
+                timespec="seconds"
+            ),
+        }
+    )
+    return record
+
+
+def _load_ltr_model_metadata(model_path: str | None) -> dict:
+    """Read compact, analysis-relevant metadata from a JSON LTR model."""
+    if not model_path:
+        return {}
+    try:
+        with Path(model_path).open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (OSError, ValueError, TypeError):
+        return {}
+    if not isinstance(payload, dict):
+        return {}
+    return {
+        key: copy.deepcopy(payload[key])
+        for key in (
+            "schema_version",
+            "model_type",
+            "backend",
+            "feature_dim",
+            "feature_names",
+            "metrics",
+            "convergence_info",
+            "seed",
+            "max_iter",
+        )
+        if key in payload
+    }
+
+
+def build_artifact_manifest(
+    *,
+    benchmark_path: str,
+    app_config: dict | None,
+    benchmark_manifest: dict | None,
+    ltr_info: dict | None,
+) -> dict:
+    """Record the exact data, indices, model and evidence used by the run."""
+    config = app_config or {}
+    data_config = config.get("data", {}) or {}
+    evidence_config = (
+        config.get("ranking", {}).get("evidence_role", {}) or {}
+    )
+    model_path = (ltr_info or {}).get("model_path")
+    artifact_paths = {
+        "benchmark_input": benchmark_path,
+        "app_config": "configs/app.yaml",
+        "prompts": "configs/prompts.yaml",
+        "journal_store": data_config.get("journal_store_path"),
+        "journal_index": data_config.get("faiss_index_path"),
+        "journal_metadata": data_config.get("metadata_path"),
+        "typical_abstract_index": data_config.get("typical_abstracts_faiss_path"),
+        "typical_abstract_metadata": data_config.get(
+            "typical_abstracts_metadata_path"
+        ),
+        "accepted_paper_index": data_config.get("accepted_papers_faiss_path"),
+        "accepted_paper_metadata": data_config.get(
+            "accepted_papers_metadata_path"
+        ),
+        "ltr_model": model_path,
+        "evidence_snapshot": evidence_config.get("snapshot_path"),
+        "baseline_eval": (benchmark_manifest or {}).get("baseline_eval_path"),
+    }
+    artifacts = {
+        name: fingerprint
+        for name, path in artifact_paths.items()
+        if (fingerprint := _file_fingerprint(path)) is not None
+    }
+    if "ltr_model" in artifacts:
+        artifacts["ltr_model"]["model_metadata"] = _load_ltr_model_metadata(
+            model_path
+        )
+    return artifacts
+
+
+def _distribution(values) -> dict:
+    return dict(sorted(Counter(value for value in values if value is not None).items()))
+
+
+def build_analysis_summary(result: EvaluationResult) -> dict:
+    """Aggregate diagnostics that are expensive to reconstruct by hand."""
+    papers = result.paper_results or []
+    processed = len(papers)
+    total = result.total_count
+
+    def _rate(count: int, denominator: int = total) -> float:
+        return round(count / denominator, 4) if denominator > 0 else 0.0
+
+    diagnostics = [paper.get("venue_diagnostic") or {} for paper in papers]
+    latencies = sorted(
+        float(paper["latency_seconds"])
+        for paper in papers
+        if isinstance(paper.get("latency_seconds"), (int, float))
+    )
+
+    def _latency_percentile(percentile: float) -> float | None:
+        if not latencies:
+            return None
+        index = max(0, math.ceil(percentile * len(latencies)) - 1)
+        return round(latencies[index], 4)
+
+    funnel_counts = {
+        "target_in_journal_store": sum(
+            bool(diagnostic.get("target_journal_id")) for diagnostic in diagnostics
+        ),
+        "wide_recalled": sum(
+            diagnostic.get("wide_retrieval_rank") is not None
+            or bool(diagnostic.get("wide_retrieval_route_scores"))
+            for diagnostic in diagnostics
+        ),
+        "retrieved_top50": sum(bool(paper.get("coarse_hit")) for paper in papers),
+        "rule_top10": sum(
+            bool(paper.get("coarse_hit_in_rule_top10")) for paper in papers
+        ),
+        "rule_top20": sum(
+            bool(paper.get("coarse_hit_in_rule_top20")) for paper in papers
+        ),
+        "llm_candidate_pool": sum(
+            bool(diagnostic.get("in_llm_pool")) for diagnostic in diagnostics
+        ),
+        "final_hit_at_5": sum(bool(paper.get("hit_5")) for paper in papers),
+        "final_hit_at_10": sum(bool(paper.get("hit_10")) for paper in papers),
+    }
+    stage_funnel = {
+        name: {"count": count, "rate": _rate(count)}
+        for name, count in funnel_counts.items()
+    }
+
+    hit_ranks = [
+        int(paper["relevant_rank"])
+        for paper in papers
+        if isinstance(paper.get("relevant_rank"), int)
+        and paper["relevant_rank"] > 0
+    ]
+    top10_ranks = [
+        int(paper["relevant_rank_at_10"])
+        for paper in papers
+        if isinstance(paper.get("relevant_rank_at_10"), int)
+        and paper["relevant_rank_at_10"] > 0
+    ]
+    evidence_coverages = [
+        float(paper["llm_evidence_coverage"])
+        for paper in papers
+        if isinstance(paper.get("llm_evidence_coverage"), (int, float))
+    ]
+    ranking_depths = [
+        int(paper["ranking_depth"])
+        for paper in papers
+        if isinstance(paper.get("ranking_depth"), int)
+    ]
+
+    by_area = {}
+    for area, stats in sorted((result.by_area or {}).items()):
+        area_total = stats.get("total", 0)
+        by_area[area] = {
+            **dict(stats),
+            "hit_at_5_rate": _rate(stats.get("hit", 0), area_total),
+            "profile_area_match_rate": _rate(
+                stats.get("area_match", 0), area_total
+            ),
+        }
+    by_level = {}
+    for level, stats in sorted((result.by_level or {}).items()):
+        level_total = stats.get("total", 0)
+        by_level[level] = {
+            **dict(stats),
+            "hit_at_5_rate": _rate(stats.get("hit", 0), level_total),
+        }
+
+    return {
+        "processed_count": processed,
+        "failed_or_skipped_count": max(total - processed, 0),
+        "elapsed_seconds": result.elapsed_seconds,
+        "throughput_papers_per_second": (
+            round(processed / result.elapsed_seconds, 4)
+            if result.elapsed_seconds > 0
+            else None
+        ),
+        "latency_seconds": {
+            "count": len(latencies),
+            "mean": round(statistics.fmean(latencies), 4) if latencies else None,
+            "median": round(statistics.median(latencies), 4) if latencies else None,
+            "p95": _latency_percentile(0.95),
+            "max": round(max(latencies), 4) if latencies else None,
+        },
+        "stage_funnel": stage_funnel,
+        "miss_stage_distribution": _distribution(
+            diagnostic.get("miss_stage") for diagnostic in diagnostics
+        ),
+        "evaluation_status_distribution": _distribution(
+            paper.get("evaluation_status") for paper in papers
+        ),
+        "rank_method_distribution": _distribution(
+            paper.get("rank_method") for paper in papers
+        ),
+        "final_rank_source_distribution": _distribution(
+            paper.get("final_rank_source") for paper in papers
+        ),
+        "evidence_status_distribution": _distribution(
+            paper.get("llm_evidence_status") for paper in papers
+        ),
+        "gold_rank_distribution_at_5": {
+            **_distribution(hit_ranks),
+            "miss": processed - len(hit_ranks),
+        },
+        "gold_rank_distribution_at_10": {
+            **_distribution(top10_ranks),
+            "miss": processed - len(top10_ranks),
+        },
+        "gold_rank_on_hits": {
+            "mean_at_5": round(statistics.fmean(hit_ranks), 4)
+            if hit_ranks
+            else None,
+            "median_at_5": statistics.median(hit_ranks) if hit_ranks else None,
+            "mean_at_10": round(statistics.fmean(top10_ranks), 4)
+            if top10_ranks
+            else None,
+        },
+        "ranking_depth": {
+            "full_ranking_available_count": sum(
+                bool(paper.get("full_ranking_available")) for paper in papers
+            ),
+            "min": min(ranking_depths) if ranking_depths else None,
+            "median": statistics.median(ranking_depths)
+            if ranking_depths
+            else None,
+            "max": max(ranking_depths) if ranking_depths else None,
+        },
+        "evidence_coverage": {
+            "count": len(evidence_coverages),
+            "mean": round(statistics.fmean(evidence_coverages), 4)
+            if evidence_coverages
+            else None,
+            "full_coverage_count": sum(
+                coverage >= 1.0 for coverage in evidence_coverages
+            ),
+        },
+        "by_area": by_area,
+        "by_level": by_level,
+    }
+
+
+def save_results(
+    result: EvaluationResult,
+    output_dir: str = "data/evaluation/results",
+    benchmark_manifest: dict | None = None,
+    benchmark_profile: str = "custom",
+    benchmark_path: str = "",
+    app_config: dict | None = None,
+    ltr_info: dict | None = None,
+    filepath: str | None = None,
+):
+    """保存评估结果。
+
+    输出同时包含：
+    - experiment_config: 脱敏后的完整 app.yaml 快照
+    - artifacts: benchmark / index / model / evidence 的 SHA256 指纹
+    - metrics: 主指标、条件召回率和正确分母下的分层指标
+    - analysis: 阶段漏斗、失败分布、排名分布和耗时统计
+    - paper_results: 可稳定排序和逐篇对比的完整诊断
+
+    P0.7 (2026-06-16): ``filepath`` overrides the auto-generated
+    ``eval_<mode>_top<k>_<timestamp>.json`` filename. Used by
+    scripts/run_p0p1_ablation.py so each cell writes to a predictable
+    path that can be glob'd or registered.
+    """
+    if filepath is not None:
+        # Caller provided a full path; ensure its parent dir exists.
+        os.makedirs(os.path.dirname(filepath) or ".", exist_ok=True)
+        # Derive a stable timestamp from the filepath so the JSON `timestamp`
+        # field stays consistent across re-saves of the same result file.
+        # Fall back to "now" if the basename has no parseable timestamp.
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    else:
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"eval_{result.mode}_top{result.top_k}_{timestamp}.json"
+        filepath = os.path.join(output_dir, filename)
+
+    total = result.total_count if result.total_count > 0 else 1
+
+    def _rate(num: int) -> float:
+        return round(num / total, 4) if total > 0 else 0.0
+
+    def _rate_with_denominator(num: int, denominator: int) -> float:
+        return round(num / denominator, 4) if denominator > 0 else 0.0
+
+    config_snapshot = _redact_sensitive_config(app_config or {})
+    artifact_manifest = build_artifact_manifest(
+        benchmark_path=benchmark_path,
+        app_config=app_config,
+        benchmark_manifest=benchmark_manifest,
+        ltr_info=ltr_info,
+    )
+    analysis_summary = build_analysis_summary(result)
+    full_ranking_count = sum(
+        bool(paper.get("full_ranking_available"))
+        for paper in (result.paper_results or [])
+    )
 
     # 转换为可序列化的dict
     result_dict = {
+        "result_schema_version": 2,
         "timestamp": timestamp,
         "mode": result.mode,
         "top_k": result.top_k,
         "total_count": result.total_count,
+        "experiment_config": config_snapshot,
+        "artifacts": artifact_manifest,
+        "environment": {
+            "benchmark_profile": benchmark_profile,
+            "benchmark_path": benchmark_path,
+            "paper_count": result.total_count,
+            "elapsed_seconds": result.elapsed_seconds,
+            "ltr_enabled": (ltr_info or {}).get("enabled", False),
+            "ltr_model_path": (ltr_info or {}).get("model_path"),
+            "ltr_model_converged": (ltr_info or {}).get("model_converged"),
+            "ltr_disable_reason": (ltr_info or {}).get("disable_reason"),
+            "minimax_model": (app_config or {}).get("minimax", {}).get("model"),
+            "embedding_model": (app_config or {}).get("ollama", {}).get("embedding_model"),
+            "retrieval_target": (app_config or {}).get("candidate_generator", {}).get("retrieval_target"),
+            "candidate_generator": {
+                "hybrid_scope_weight": (app_config or {}).get("candidate_generator", {}).get("hybrid_scope_weight"),
+                "hybrid_typical_weight": (app_config or {}).get("candidate_generator", {}).get("hybrid_typical_weight"),
+                "accepted_paper_weight": (app_config or {}).get("candidate_generator", {}).get("accepted_paper_weight"),
+                "identity_anchor_weight": (app_config or {}).get("candidate_generator", {}).get("identity_anchor_weight"),
+            },
+            "ranking": {
+                "llm_anchor_guard_enabled": (app_config or {}).get("ranking", {}).get("llm_anchor_guard", {}).get("enabled"),
+                "rule_scorer": (app_config or {}).get("ranking", {}).get("rule_scorer", {}),
+            },
+            "benchmark_manifest_hash": (benchmark_manifest or {}).get("app_config_hash"),
+            "prompt_hash": (benchmark_manifest or {}).get("prompt_hash"),
+        },
         "metrics": {
+            "processed_count": len(result.paper_results or []),
+            "failed_or_skipped_count": max(
+                result.total_count - len(result.paper_results or []), 0
+            ),
             "hit_at_1": result.hit_at_1,
+            "hit_at_1_rate": _rate(result.hit_at_1),
             "hit_at_3": result.hit_at_3,
+            "hit_at_3_rate": _rate(result.hit_at_3),
             "hit_at_5": result.hit_at_5,
+            "hit_at_5_rate": _rate(result.hit_at_5),
             "hit_at_10": result.hit_at_10,
+            "hit_at_10_rate": _rate(result.hit_at_10),
+            "hit_at_10_evaluable_count": full_ranking_count,
+            "hit_at_10_rate_when_evaluable": _rate_with_denominator(
+                result.hit_at_10, full_ranking_count
+            ),
             "area_match_count": result.area_match_count,
+            "area_match_rate": _rate(result.area_match_count),
             "level_match_count": result.level_match_count,
+            "level_match_rate": _rate(result.level_match_count),
+            "mrr": result.mrr / total if total > 0 else 0.0,
+            "mrr_cutoff": result.top_k,
+            "ndcg_at_5": result.ndcg_at_5 / total if total > 0 else 0.0,
+            "ndcg_at_10": result.ndcg_at_10 / total if total > 0 else 0.0,
             "coarse_hit_count": result.coarse_hit_count,
+            "coarse_hit_rate": _rate(result.coarse_hit_count),
+            "retrieval_recall_at_50": _rate(result.coarse_hit_count),
             "coarse_hit_in_rule_top10_count": result.coarse_hit_in_rule_top10_count,
+            "rule_recall_at_10": _rate(result.coarse_hit_in_rule_top10_count),
+            "rule_retention_at_10_given_retrieved": _rate_with_denominator(
+                result.coarse_hit_in_rule_top10_count, result.coarse_hit_count
+            ),
             "coarse_hit_in_rule_top20_count": result.coarse_hit_in_rule_top20_count,
+            "rule_recall_at_20": _rate(result.coarse_hit_in_rule_top20_count),
+            "rule_retention_at_20_given_retrieved": _rate_with_denominator(
+                result.coarse_hit_in_rule_top20_count, result.coarse_hit_count
+            ),
+            "fallback_count": result.fallback_count,
+            "fallback_rate": _rate(result.fallback_count),
+            "llm_success_count": result.llm_success_count,
+            "llm_success_rate": _rate(result.llm_success_count),
+            "empty_recommendation_count": result.empty_recommendation_count,
+            "empty_recommendation_rate": _rate(result.empty_recommendation_count),
             "area_subject_tag_match_count": result.area_subject_tag_match_count,
+            "area_subject_tag_match_rate": _rate(result.area_subject_tag_match_count),
             "level_a_count": result.level_a_count,
             "level_a_hit_at_5": result.level_a_hit_at_5,
+            "level_a_hit_at_5_rate": _rate_with_denominator(
+                result.level_a_hit_at_5, result.level_a_count
+            ),
             "level_b_count": result.level_b_count,
             "level_b_hit_at_5": result.level_b_hit_at_5,
+            "level_b_hit_at_5_rate": _rate_with_denominator(
+                result.level_b_hit_at_5, result.level_b_count
+            ),
             "level_c_count": result.level_c_count,
             "level_c_hit_at_5": result.level_c_hit_at_5,
+            "level_c_hit_at_5_rate": _rate_with_denominator(
+                result.level_c_hit_at_5, result.level_c_count
+            ),
             "level_d_count": result.level_d_count,
             "level_d_hit_at_5": result.level_d_hit_at_5,
+            "level_d_hit_at_5_rate": _rate_with_denominator(
+                result.level_d_hit_at_5, result.level_d_count
+            ),
+            "area_hit_at_5": result.area_hit_at_5,
+            "area_hit_at_5_rate": _rate(result.area_hit_at_5),
+            "area_hit_at_10": result.area_hit_at_10,
+            "area_hit_at_10_rate": _rate(result.area_hit_at_10),
+            "level_hit_at_5": result.level_hit_at_5,
+            "level_hit_at_5_rate": _rate(result.level_hit_at_5),
+            "level_hit_at_10": result.level_hit_at_10,
+            "level_hit_at_10_rate": _rate(result.level_hit_at_10),
+            "acceptable_journal_hit_at_5": result.acceptable_journal_hit_at_5,
+            "acceptable_journal_hit_at_5_rate": _rate(result.acceptable_journal_hit_at_5),
         },
+        "analysis": analysis_summary,
         "by_area": dict(result.by_area),
         "by_level": dict(result.by_level),
-        "paper_results": result.paper_results,
+        # 并行评测完成顺序不稳定；保存时排序便于 git diff / 跨实验逐篇比较。
+        "paper_results": sorted(
+            result.paper_results or [],
+            key=lambda item: (
+                str(item.get("title", "")).casefold(),
+                str(item.get("venue", "")).casefold(),
+            ),
+        ),
     }
+    if benchmark_manifest is not None:
+        result_dict["benchmark_manifest"] = benchmark_manifest
 
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(result_dict, f, ensure_ascii=False, indent=2)
@@ -570,9 +1762,11 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description="期刊推荐系统评估")
-    parser.add_argument("--input", "-i", default="data/evaluation/papers_metadata.jsonl",
+    parser.add_argument("--benchmark-profile", choices=["light30", "full-v2", "full-v2-90", "holdout240", "custom"], default="custom",
+                        help="Benchmark profile; light30/full-v2 use default inputs unless --input overrides")
+    parser.add_argument("--input", "-i", default=None,
                         help="论文元数据路径")
-    parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="full",
+    parser.add_argument("--mode", "-m", choices=["title", "abstract", "full"], default="abstract",
                         help="推荐模式")
     parser.add_argument("--top-k", "-k", type=int, nargs="+", default=[5],
                         help="Top-K 值，可指定多个如: --top-k 3 5 10")
@@ -580,26 +1774,52 @@ def main():
                         help="限制评估论文数量（用于测试）")
     parser.add_argument("--no-save", action="store_true",
                         help="不保存结果")
-    parser.add_argument("--workers", "-w", type=int, default=4,
-                        help="并行线程数（默认4）")
+    parser.add_argument("--workers", "-w", type=int, default=10,
+                        help="并行线程数（默认10）")
+    parser.add_argument("--output", default=None,
+                        help="P0.7 (2026-06-16): explicit output filepath; overrides "
+                             "the auto-generated eval_<mode>_top<k>_<timestamp>.json. "
+                             "Used by scripts/run_p0p1_ablation.py so each cell "
+                             "writes to a predictable path.")
+    parser.add_argument(
+        "--baseline-eval",
+        default="",
+        help="复用已完成评测中的固定 paper_profile_snapshot，保证排序消融口径一致",
+    )
 
     args = parser.parse_args()
+    args.input = resolve_benchmark_input(args.benchmark_profile, args.input)
 
     # 加载论文
     print(f"加载论文数据: {args.input}")
     papers = load_papers_metadata(args.input)
     if args.papers:
         papers = papers[:args.papers]
+    if args.baseline_eval:
+        papers = attach_baseline_profile_snapshots(papers, args.baseline_eval)
+        print(f"复用固定 PaperProfile 快照: {args.baseline_eval}")
     print(f"共 {len(papers)} 篇论文")
 
     # 初始化 pipeline
     print("\n初始化推荐系统...")
     pipeline = init_pipeline()
 
-    # 加载 prompts
+    # 加载 prompts + app_config (5.4.e: 报告里要写 environment 块)
     import yaml
     with open("configs/prompts.yaml", "r", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
+    with open("configs/app.yaml", "r", encoding="utf-8") as f:
+        app_config = yaml.safe_load(f)
+
+    # LTR 状态 (从 pipeline 拿)
+    ltr_info = {"enabled": False, "model_path": None, "model_converged": None, "disable_reason": None}
+    ltr_cfg = app_config.get("ranking", {}).get("learned_reranker", {}) or {}
+    ltr_info["model_path"] = ltr_cfg.get("model_path")
+    ltr = getattr(pipeline, "learned_reranker", None)
+    if ltr is not None:
+        ltr_info["enabled"] = bool(getattr(ltr, "enabled", False))
+        ltr_info["disable_reason"] = getattr(ltr, "disable_reason", None)
+        ltr_info["model_converged"] = getattr(ltr, "model_converged", None)
 
     # 运行评估
     for top_k in args.top_k:
@@ -607,14 +1827,40 @@ def main():
         print(f"开始评估 | 模式: {args.mode} | Top-{top_k}")
         print(f"{'='*70}")
 
-        result = run_evaluation(papers, pipeline, args.mode, top_k, prompts, show_progress=True, workers=args.workers)
+        result = run_evaluation(
+            papers,
+            pipeline,
+            args.mode,
+            top_k,
+            prompts,
+            show_progress=True,
+            workers=args.workers,
+            reuse_profile_snapshots=bool(args.baseline_eval),
+        )
 
         # 打印报告
         print_report(result)
 
-        # 保存结果
+        # 保存结果 (5.4.e 加 environment + *_rate 字段)
         if not args.no_save:
-            save_results(result)
+            manifest = build_benchmark_manifest(
+                input_path=args.input,
+                mode=args.mode,
+                top_k=top_k,
+                clean_benchmark=False,
+                profile_snapshot_reused=bool(args.baseline_eval),
+                baseline_eval_path=args.baseline_eval or None,
+                workers=args.workers,
+            )
+            save_results(
+                result,
+                benchmark_manifest=manifest,
+                benchmark_profile=args.benchmark_profile,
+                benchmark_path=args.input,
+                app_config=app_config,
+                ltr_info=ltr_info,
+                filepath=args.output,
+            )
 
     print("\n评估完成!")
 

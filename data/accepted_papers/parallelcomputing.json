@@ -1,0 +1,86 @@
+{
+  "journal_id": "parallelcomputing",
+  "journal_name": "Parallel Computing",
+  "papers": [
+    {
+      "title": "Parallel and scalable Dunn Index for the validation of big data clusters",
+      "abstract": "Parallelizing data clustering algorithms has attracted the interest of many researchers over the past few years. Many efficient parallel algorithms were proposed to build partitioning over a huge volume of data. The effectiveness of these algorithms is attributed to the distribution of data among a cluster of nodes and to the parallel computation models. Although the effectiveness of parallel models to deal with increasing volume of data little work is done on the validation of big clusters. To deal with this issue, we propose a parallel and scalable model, referred to as S-DI (Scalable Dunn Index), to compute the Dunn Index measure for an internal validation of clustering results. Rather than computing the Dunn Index on a single machine in the clustering validation process, the new proposed measure is computed by distributing the partitioning among a cluster of nodes using a customized parallel model under Apache Spark framework. The proposed S-DI is also enhanced by a Sketch and Validate sampling technique which aims to approximate the Dunn Index value by using a small representative data-sample. Different experiments on simulated and real datasets showed a good scalability of our proposed measure and a reliable validation compared to other existing measures when handling large scale data.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.parco.2021.102751",
+      "url": "https://www.semanticscholar.org/paper/83c1808e4875488fdabe9e5858fa42b03e1826f4"
+    },
+    {
+      "title": "parGeMSLR: A Parallel Multilevel Schur Complement Low-Rank Preconditioning and Solution Package for General Sparse Matrices",
+      "abstract": "This paper discusses parGeMSLR , a C ++/ MPI software library for the solution of sparse systems of linear algebraic equations via preconditioned Krylov subspace methods in distributed-memory computing environments. The preconditioner implemented in parGeMSLR is based on algebraic domain decomposition and partitions the symmetrized adjacency graph recursively into several non-overlapping partitions via a p -way vertex separator, where p is an integer multiple of the total number of MPI processes. From a numerical perspective, parGeMSLR builds a Schur complement approximate inverse preconditioner as the sum between the matrix inverse of the interface coupling matrix and a low-rank correction term. To reduce the cost associated with the computation of the approximate inverse matrices, parGeMSLR exploits a multilevel partitioning of the algebraic domain. The parGeMSLR library is implemented on top of the Message Passing Interface and can solve both real and complex linear systems. Furthermore, parGeMSLR can take advantage of hybrid computing environments with in-node access to one or more Graphics Processing Units. Finally, the parallel e ﬃ ciency (weak and strong scaling) of parGeMSLR is demonstrated on a few model problems arising from discretizations of 3D Partial Di ﬀ erential Equations.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2205.03224",
+      "url": "https://www.semanticscholar.org/paper/4eb4e7c158d6085f6fe94b5c8c9bdd57877bd7e1"
+    },
+    {
+      "title": "Cache partitioning for sparse matrix–vector multiplication on the A64FX",
+      "abstract": "One of the novel features of the Fujitsu A64FX CPU is the sector cache . This feature enables hardware-supported partitioning of the L1 and L2 caches and allows the programmer control of which partition is used to place data in. This paper performs an in-depth study of applying the sector cache to sparse matrix-vector multiplication (SpMV) in the Compressed Sparse Row (CSR) format using a collection of 490 sparse matrices. A performance model based on reuse analysis is used to better understand situations in which and how the sector cache leads to improved cache reuse and to predict cache behavior. The model predicts the number of L2 cache misses within an error of 2% without cache partitioning. With sector cache enabled, depending on the configuration, the model predicts the number of L2 cache missed within 2–3% and 4–18% for sequential and parallel SpMV with 48 threads, respectively. Further experiments show the effect of various sector cache configurations on performance. A median speedup of about 1.05 × is achieved, whereas the maximum speedup is about 1.6 × .",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103169",
+      "url": "https://doi.org/10.1016/j.parco.2025.103169"
+    },
+    {
+      "title": "Butterfly factorization for vision transformers on multi-IPU systems",
+      "abstract": "Recent advances in machine learning have led to increasingly large and complex models, placing significant demands on computation and memory. Techniques such as Butterfly factorization have emerged to reduce model parameters and memory footprints while preserving accuracy. Specialized hardware accelerators, such as Graphcore’s Intelligence Processing Units (IPUs), are designed to address these challenges through massive parallelism and efficient on-chip memory utilization. In this paper, we extend our analysis of Butterfly structures for efficient utilization on single and multiple IPUs, comparing their performance with GPUs. These structures drastically reduce the number of parameters and memory footprint while preserving model accuracy. Experimental results on the Graphcore GC200 IPU chip, compared with an NVIDIA A30 GPU, demonstrate a 98.5% compression ratio, with speedups of 1.6 × and 1.3 × for Butterfly and Pixelated Butterfly structures, respectively. Extending our evaluation to Vision Transformer (ViT) models, we compare Multi-GPU and Multi-IPU systems on the M2000 machine: Multi-GPU reaches a maximum accuracy of 84.51% with a training time of 401.44 min, whereas Multi-IPU attains a higher maximum accuracy of 88.92% with a training time of 694.03 min. These results demonstrate that Butterfly factorization enables substantial compression of ViT layers (up to 97.17%) while improving model accuracy. The findings highlight the promise of IPU machines as a suitable platform for large-scale machine learning model training, especially when coupled with sparsification methods like Butterfly factorization, thanks to their efficient support for model parallelism.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103165",
+      "url": "https://doi.org/10.1016/j.parco.2025.103165"
+    },
+    {
+      "title": "Detecting chaotic regions of recurrent equations in parallel environments",
+      "abstract": "This paper investigates how parallel computing techniques, such as OpenMP and CUDA, can be optimized to enhance the computational efficiency of detecting chaotic regions in the parameter space of recurrent equations, a critical task in chaos theory. Leveraging the embarrassingly parallel nature of maximum Lyapunov exponent calculations, our method targets systems with known recurrence relations, where governing equations are analytically defined. Applied to a discretized recurrent neural model, the proposed approach achieves significant speedups, addressing the computational intensity of chaos detection. While building on established parallel techniques, this work fills a gap in their systematic application to chaos detection in high-dimensional systems, offering a scalable solution with potential for real-time analysis. We provide detailed performance metrics, parallel I/O guidelines, and visualization strategies, demonstrating adaptability to other analytically defined chaotic systems.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103163",
+      "url": "https://doi.org/10.1016/j.parco.2025.103163"
+    },
+    {
+      "title": "A sleek lock-free hash map in an ERA of safe memory reclamation methods",
+      "abstract": "Lock-free data structures have become increasingly significant due to their algorithmic advantages in multi-core cache-based architectures. Safe Memory Reclamation (SMR) is a technique used in concurrent programming to ensure that memory can be safely reclaimed without causing data corruption, dangling pointers, or access to freed memory. The ERA theorem states that any SMR method for concurrent data structures can only provide at most two of the three main desirable properties: Ease of use, Robustness, and Applicability. This fundamental trade-off influences the design of efficient lock-free data structures at an early stage. This work redesigns a previous lock-free hash map to fully exploit the properties of the ERA theorem and to leverage the characteristics of multi-core cache-based architectures by minimizing the number of cache misses, which are a significant bottleneck in multi-core environments. Experimental results show that our design outperforms the previous design, which was already quite competitive when compared against the Concurrent Hash Map design of the Intel’s TBB library.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103162",
+      "url": "https://doi.org/10.1016/j.parco.2025.103162"
+    },
+    {
+      "title": "Software acceleration of multi-user MIMO uplink detection on GPU",
+      "abstract": "This paper presents the exploration of GPU-accelerated block-wise decompositions for zero-forcing (ZF) based QR and Cholesky methods applied to massive multiple-input multiple-output (MIMO) uplink detection algorithms. Three algorithms are evaluated: ZF with block Cholesky decomposition, ZF with block QR decomposition (QRD), and minimum mean square error (MMSE) with block Cholesky decomposition. The latter was the only one previously explored, but it used standard Cholesky decomposition. Our approach achieves an 11% improvement over the previous GPU-accelerated MMSE study. Through performance analysis, we observe a trade-off between precision and execution time. Reducing precision from FP64 to FP32 improves execution time but increases bit error rate (BER), with ZF-based QRD reducing execution time from 2 . 04 μ s to 1 . 24 μ s for a 128 × 8 MIMO size. The study also highlights that larger MIMO sizes, particularly 2048 × 32, require GPUs to fully utilize their computational and memory capabilities, especially under FP64 precision. In contrast, smaller matrices are compute-bound. Our results recommend GPUs for larger MIMO sizes, as they offer the parallelism and memory resources necessary to efficiently handle the computational demands of next-generation networks. This work paves the way for scalable, GPU-based massive MIMO uplink detection systems.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103150",
+      "url": "https://doi.org/10.1016/j.parco.2025.103150"
+    },
+    {
+      "title": "Byzantine-tolerant detection of causality: There is no holy grail",
+      "abstract": "Detecting causality or the “happened before” relation between events in an asynchronous distributed system is a widely used building block in distributed applications. To the best of our knowledge, this problem has not been examined in a system with Byzantine processes. We prove the following results for an asynchronous system with Byzantine processes. (1) We prove that it is impossible to determine causality between events in the presence of even a single Byzantine process when processes communicate by unicasting. (2) We also prove a similar impossibility result when processes communicate by broadcasting. (3) We also prove a similar impossibility result when processes communicate by multicasting. (4–5) In an execution where there exists a causal path between two events passing through only correct processes, we prove that it is possible to detect causality between such a pair of events when processes communicate by unicasting or broadcasting. (6) However, when processes communicate by multicasting and there exists a causal path between two events passing through only correct processes, we prove that it is impossible to detect causality between such a pair of events. (7–9) Even with the use of cryptography, we prove that the impossibility results of (1–3) for unicasts , broadcasts, and multicasts, respectively, hold. (10–12) With the use of cryptography, when there exists a causal path between two events passing through only correct processes, we prove it is possible to detect causality between such a pair of events, irrespective of whether the communication is by unicasts, broadcasts, or multicasts. Our results are significant because Byzantine systems mirror the real world.",
+      "year": 2025,
+      "source": "openalex_fill_20260617",
+      "doi": "10.1016/j.parco.2025.103136",
+      "url": "https://doi.org/10.1016/j.parco.2025.103136"
+    },
+    {
+      "title": "A parallel computing architecture for high-performance OWL reasoning",
+      "abstract": "The Web Ontology Language (OWL) is a widely used knowledge representation language for describing knowledge in application domains by using classes, properties, and individuals. Ontology classification is an important and widely used service that computes a taxonomy of all classes occurring in an ontology. It can require significant amounts of runtime, but most OWL reasoners do not support any kind of parallel processing. We present a novel thread-level parallel architecture for ontology classification, which is ideally suited for shared-memory SMP servers, but does not rely on locking techniques and thus avoids possible race conditions. We evaluated our prototype implementation with a set of real-world ontologies. Our experiments demonstrate a very good scalability resulting in a speedup that is linear to the number of available cores.",
+      "year": 2019,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.PARCO.2018.05.001",
+      "url": "https://www.semanticscholar.org/paper/bdc74f172f09778aa09dc913c940de6a69b960db"
+    },
+    {
+      "title": "DuctTeip: An efficient programming model for distributed task based parallel computing",
+      "abstract": "Current high-performance computer systems used for scientific computing typically combine shared memory computational nodes in a distributed memory environment. Extracting high performance from these complex systems requires tailored approaches. Task based parallel programming has been successful both in simplifying the programming and in exploiting the available hardware parallelism for shared memory systems. In this paper we focus on how to extend task parallel programming to distributed memory systems. We use a hierarchical decomposition of tasks and data in order to accommodate the different levels of hardware. We test the proposed programming model on two different applications, a Cholesky factorization, and a solver for the Shallow Water Equations. We also compare the performance of our implementation with that of other frameworks for distributed task parallel programming, and show that it is competitive.",
+      "year": 2018,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.parco.2019.102582",
+      "url": "https://www.semanticscholar.org/paper/2f2ce11dc70fd4fc0bb394edbcf71a8dc057f47e"
+    }
+  ]
+}

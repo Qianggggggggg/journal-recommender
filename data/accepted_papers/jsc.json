@@ -1,0 +1,70 @@
+{
+  "journal_id": "jsc",
+  "journal_name": "Journal of Symbolic Computation",
+  "papers": [
+    {
+      "title": "Symbolic computation and satisfiability checking",
+      "abstract": "The two communities of Symbolic Computation and Satisfiability Checking have recently found themselves tackling similar problems and having a growing interest in each other's technology. This special issue presents articles whose contribution is of interest to, and is influenced by, both communities. Given the context of this journal we start this editorial with a more thorough overview of Satisfiability Checking, and then turn to Symbolic Computation and the potentials and challenges for collaboration. The collection of articles in this issue is evidence of the already existing fruitful work at the intersection of these communities.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/J.JSC.2019.07.017",
+      "url": "https://www.semanticscholar.org/paper/af11d49d41f521e08f617cdc7ece53e8fe07a9a7"
+    },
+    {
+      "title": "A method of verifying partition congruences by symbolic computation",
+      "abstract": "Conjectures involving infinite families of restricted partition congruences can be difficult to verify for a number of individual cases, even with a computer. We demonstrate how the machinery of Radu's algorithm may be modified and employed to efficiently check a very large number of cases of such conjectures. This allows substantial evidence to be collected for a given conjecture, before a complete proof is attempted.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2020.04.008",
+      "url": "https://www.semanticscholar.org/paper/e349b4793510c2db2e665ed3aaf270507d03d693"
+    },
+    {
+      "title": "Symbolic integration on planar differential foliations",
+      "abstract": "We consider the problem of symbolic integration of $\\int G(x,y(x)) dx$ where $G$ is rational and $y(x)$ is a non algebraic solution of a differential equation $y'(x)=F(x,y(x))$ with $F$ rational. As $y$ is transcendental, the Galois action generates a family of parametrized integrals $I(x,h)=\\int G(x,y(x,h)) dx$. We prove that $I(x,h)$ is either differentially transcendental or up to parametrization change satisfies a linear differential equation in $h$ with constant coefficients, called a telescoper. This notion generalizes elementary integration. We present an algorithm to compute such telescoper given a priori bound on their order and degree $\\hbox{ord},N$ with complexity $\\tilde{O}(N^{\\omega+1} \\hbox{ord}^{\\omega-1}+N\\hbox{ord}^{\\omega+3})$. For the specific foliation $y=\\ln x$, a more complete algorithm without an a priori bound is presented. Oppositely, non existence of telescoper is proven for a classical planar Hamiltonian system. As an application, we present an algorithm which always finds, if they exist, the Liouvillian solutions of a planar rational vector field, given a bound large enough for some notion of complexity height.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2025.102506",
+      "url": "https://www.semanticscholar.org/paper/cab8d52ca49fe11546e447b455e81383f892f684"
+    },
+    {
+      "title": "On the computation of identities relating partition numbers in arithmetic progressions with eta quotients: An implementation of Radu's algorithm",
+      "abstract": "In 2015 Cristian-Silviu Radu designed an algorithm to detect identities of a class studied by Ramanujan and Kolberg. This class includes the famous identities by Ramanujan which provide a witness to the divisibility properties of $p(5n+4),$ $p(7n+5)$. We give an implementation of this algorithm using Mathematica. The basic theory is first described, and an outline of the algorithm is briefly given, in order to describe the functionality and utility of our package. We thereafter give multiple examples of applications to recent work in partition theory. In many cases we have used our package to derive alternate proofs of various identities or congruences; in other cases we have improved previously established identities, and in at least one case we have confirmed a standing conjecture.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2020.05.003",
+      "url": "https://www.semanticscholar.org/paper/7f8a1919a0a91e3fbbf9d71ce403b7821ed6ea33"
+    },
+    {
+      "title": "Symbolic analysis of multiple steady states in a MAPK chemical reaction network",
+      "abstract": "We consider the problem of analyzing chemical reaction networks that may allow multiple positive steady states. We use tools from “classical” computer algebra (Grobner bases over a parametrized domain, computation of a discriminant variety, graphical and mathematical analysis of solution sets, cylindrical decomposition) to help determine regions of stoichiometric compatibility classes that have multiple steady states. Hybrid symbolic-numeric tools are employed to determine stability of equilibria and also to determine or rule out the possibility of boundary equilibria. Symbolic and numeric methods of perturbation analysis are also developed in order to assess robustness of equilibria and equilibria counts to changes in parameters. A brief consideration of parameter identification for the kinetic rate constants is also presented. Computational effectiveness is demonstrated on a nontrivial benchmark example from biochemistry.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2020.06.004",
+      "url": "https://www.semanticscholar.org/paper/4efc300b25abade225c79a3b23b08d77703a2198"
+    },
+    {
+      "title": "On the computation of Gröbner bases for matrix-weighted homogeneous systems",
+      "abstract": "In this paper, we examine the structure of systems that are weighted homogeneous for several systems of weights, and how it impacts the computation of Gr\\\"obner bases. We present several linear algebra algorithms for computing Gr\\\"obner bases for systems with this structure, either directly or by reducing to existing structures. We also present suitable optimization techniques. As an opening towards complexity studies, we discuss potential definitions of regularity and prove that they are generic if non-empty. Finally, we present experimental data from a prototype implementation of the algorithms in SageMath.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2024.102327",
+      "url": "https://www.semanticscholar.org/paper/6ff130674374b14654abc38c3cd5d7b636aa6760"
+    },
+    {
+      "title": "Rank computation in Euclidean Jordan algebras",
+      "abstract": "Euclidean Jordan algebras are the abstract foundation for symmetric cone optimization. Every element in a Euclidean Jordan algebra has a complete spectral decomposition analogous to the spectral decomposition of a real symmetric matrix into rank-one projections. The spectral decomposition in a Euclidean Jordan algebra stems from the likewise-analogous characteristic polynomial of its elements, whose degree is called the rank of the algebra. As a prerequisite for the spectral decomposition, we derive an algorithm that computes the rank of a Euclidean Jordan algebra and allows us to construct the characteristic polynomials of its elements.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2022.04.003",
+      "url": "https://www.semanticscholar.org/paper/0fb72f6a1a3c56a4169af6ed7c4aee9a21ea17b7"
+    },
+    {
+      "title": "Efficient computation of Cantor's division polynomials of hyperelliptic curves over finite fields",
+      "abstract": "Let $p$ be an odd prime number. We propose an algorithm for computing rational representations of isogenies between Jacobians of hyperelliptic curves via-adic differential equations with a sharp analysis of the loss of precision. Consequently, after having possibly lifted the problem in the $p$-adics, we derive fast algorithms for computing explicitly Cantor's division polynomials of hyperelliptic curves defined over finite fields.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1016/j.jsc.2022.10.006",
+      "url": "https://www.semanticscholar.org/paper/33cf6f38e4a6057d9c727b536bef71fd6db6ad74"
+    }
+  ]
+}

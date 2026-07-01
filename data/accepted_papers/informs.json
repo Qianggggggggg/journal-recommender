@@ -1,0 +1,62 @@
+{
+  "journal_id": "informs",
+  "journal_name": "INFORMS Journal on Computing",
+  "papers": [
+    {
+      "title": "On Computing with Some Convex Relaxations for the Maximum-Entropy Sampling Problem",
+      "abstract": "Based on a factorization of an input covariance matrix, we define a mild generalization of an upper bound of Nikolov and of Li and Xie for the NP-hard constrained maximum-entropy sampling problem ( CMESP ). We demonstrate that this factorization bound is invariant under scaling and independent of the particular factorization chosen. We give a variable-fixing methodology that could be used in a branch-and-bound scheme based on the factorization bound for exact solution of CMESP , and we demonstrate that its ability to fix is independent of the factorization chosen. We report on successful experiments with a commercial nonlinear programming solver. We further demonstrate that the known “mixing” technique can be successfully used to combine the factorization bound with the factorization bound of the complementary CMESP and with the “linx bound” of Anstreicher. History: Andrea Lodi, area editor for Design & Analysis of Algorithms-Discrete. Funding: This work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico [Grants 305444/2019-0 and 434683/2018-3] and the Air Force Office of Scientific Research [Grant A9550-19-1-0175].",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1287/ijoc.2022.1264",
+      "url": "https://www.semanticscholar.org/paper/87996b58e6f1f25edb492ff5da082f6a2ad5fb13"
+    },
+    {
+      "title": "Computing Optimal Strategies for a Search Game in Discrete Locations",
+      "abstract": "Consider a two-person zero-sum search game between a hider and a searcher. The hider hides among n discrete locations, and the searcher successively visits individual locations until finding the hider. Known to both players, a search at location i takes ti time units and detects the hider—if hidden there—independently with probability αi, for [Formula: see text]. The hider aims to maximize the expected time until detection, whereas the searcher aims to minimize it. We present an algorithm to compute an optimal strategy for each player. We demonstrate the algorithm’s efficiency in a numerical study, in which we also study the characteristics of the optimal hiding strategy. History: Accepted by Andrea Lodi, Area Editor for Design & Analysis of Algorithms—Discrete. Funding: J. Clarkson is grateful for the support of the Engineering & Physical Sciences Research Council STOR-i Centre for Doctoral Training at Lancaster University [Grant EP/L015692/1]. Supplemental Material: The software that supports the findings of this study is available within the paper as well as from the IJOC GitHub software repository ( https://github.com/INFORMSJoC/2023.0155 ). The complete IJOC Software and Data Repository is available at https://informsjoc.github.io/ .",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1287/ijoc.2023.0155",
+      "url": "https://www.semanticscholar.org/paper/bcea9de27d39b40e41e0beccd7b033b7cccdacd7"
+    },
+    {
+      "title": "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing",
+      "abstract": "With the rapid development of computing technology, using parallel computing to solve large-scale ranking-and-selection (R&S) problems has emerged as an important research topic. However, direct implementation of traditionally fully sequential procedures in parallel computing environments may encounter various problems. First, the scheme of all-pairwise comparisons, which is commonly used in fully sequential procedures, requires a large amount of computation and significantly slows down the selection process. Second, traditional fully sequential procedures require frequent communication and coordination among processors, which are also not efficient in parallel computing environments. In this paper, we propose three modifications on one classical fully sequential procedure, Paulson’s procedure, to speed up its selection process in parallel computing environments. First, we show that if no common random numbers are used, then we can significantly reduce the computation spent on all-pairwise comparisons at each round. Second, by batching different alternatives, we show that we can reduce the communication cost among the processors, leading the procedure to achieve better performance. Third, to boost the procedure’s final-stage selection, when the number of surviving alternatives is less than the number of processors, we suggest to sample all surviving alternatives to the maximal number of observations that they should take. We show that, after these modifications, the procedure remains statistically valid and is more efficient compared with existing parallel procedures in the literature. Summary of Contribution: Ranking and selection (R&S) is a branch of simulation optimization, which is an important area of operations research. In recent years, using parallel computing to solve large-scale R&S problems has emerged as an important research topic, and this research topic is naturally situated in the intersection of computing and operations research. In this paper, we consider how to improve a fully sequential R&S procedure, namely, Paulson’s procedure, to reduce the high computational complexity of all-pairwise comparisons and the burden of frequent communications and coordination, so that the procedure is more suitable and more efficient in solving large-scale R&S problems using parallel computing environments that are becoming ubiquitous and accessible for ordinary users. The procedure designed in this paper appears more efficient than the ones available in the literature and is capable of solving R&S problems with over a million alternatives in a parallel computing environment with 96 processors. The paper also extended the theory of R&S by showing that the all-pairwise comparisons may be decomposed so that the computational complexity may be reduced significantly, which drastically improves the efficiency of all-pairwise comparisons as observed in numerical experiments.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1287/IJOC.2020.1054",
+      "url": "https://www.semanticscholar.org/paper/901992cfca1c1825212468ef888d895b7a25971e"
+    },
+    {
+      "title": "Computational and Theoretical Challenges for Computing the Minimum Rank of a Graph",
+      "abstract": "The minimum rank of a graph G is the minimum of the ranks of all symmetric adjacency matrices of G. We present a new combinatorial bound for the minimum rank of an arbitrary graph G based on enumerating certain subsets of vertices of G satisfying matroid theoretic properties. We also present some computational and theoretical challenges associated with computing the minimum rank. This includes a conjecture that this bound on the minimum rank actually holds with equality for all graphs.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1287/ijoc.2022.1219",
+      "url": "https://www.semanticscholar.org/paper/f8d25bdf3a0d723687fd8e39b63e3a7c55d2722c"
+    },
+    {
+      "title": "Computing Sensitivities for Distortion Risk Measures",
+      "abstract": "Distortion risk measure, defined by an integral of a distorted tail probability, has been widely used in behavioral economics and risk management as an alternative to expected utility. The sensitivity of the distortion risk measure is a functional of certain distribution sensitivities. We propose a new sensitivity estimator for the distortion risk measure that uses generalized likelihood ratio estimators for distribution sensitivities as input and establish a central limit theorem for the new estimator. The proposed estimator can handle discontinuous sample paths and distortion functions.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1287/IJOC.2020.1016",
+      "url": "https://www.semanticscholar.org/paper/4cc58bbf3d6c743f19455725b8cf0b2ef0797eed"
+    },
+    {
+      "title": "Computing Optimized Path Integrals for Knapsack Feasibility",
+      "abstract": "A generating function technique for solving integer programs via the evaluation of complex path integrals is discussed from a theoretical and computational perspective. Applying the method to knapsack feasibility problems, it is demonstrated how the presented numerical integration algorithm benefits from a preoptimized path of integration. After discussing the algorithmic setup in detail, a numerical study is implemented to evaluate the computational performance of the preoptimized integration method, and the algorithmic parameters are tuned to a set of knapsack instances. The goal is to highlight the method’s computational advantage for hard knapsack instances. Summary of Contribution: A method for evaluating the feasibility of knapsack problems is discussed and connected to the existing theory on generating function techniques for computational integer optimization. Specifically, the number of solutions to knapsack instances is computed using numerical quadrature of complex path integrals. The choice of the path of integration is identified as an important degree of freedom, and it is shown that preoptimizing the path improves the computational performance for hard instances significantly. The scope of this work is to give a self-contained presentation of the mathematical theory, introduce and discuss path optimization as a presolving routine, and demonstrate the computational performance of the overall approach with the help of a detailed numerical study. The main goal is to highlight the computational advantage of the new algorithm for hard knapsack instances.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1287/ijoc.2021.1142",
+      "url": "https://www.semanticscholar.org/paper/d9a021d32bdec2690b96d9432dce819295f381d2"
+    },
+    {
+      "title": "Code and Data Repository for A Polynomial-Time Inner Approximation Algorithm for Multiobjective and Parametric Optimization",
+      "abstract": "This archive is distributed in association with the INFORMS Journal on Computing under the MIT License. It contains the source code, instances, results and scripts for the numerical study in A Polynomial-Time Inner Approximation Algorithm for Multi-Objective and Parametric Optimization by L. Nemesch, S. Ruzika, C. Thielen, A. Wittmann.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1287/ijoc.2025.1308.cd",
+      "url": "https://www.semanticscholar.org/paper/224f12298fe7b01bf66da7aca9abb1e2892a0e2e"
+    }
+  ]
+}

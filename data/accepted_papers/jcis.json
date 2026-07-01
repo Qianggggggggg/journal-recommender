@@ -1,0 +1,86 @@
+{
+  "journal_id": "jcis",
+  "journal_name": "Journal of Computer Information Systems",
+  "papers": [
+    {
+      "title": "Regulations Addressing Key Challenges of Artificial Intelligence: Managing Usage Knowledge",
+      "abstract": "No existing studies have empirically investigated how knowledge of AI use, together with appropriate regulations, influences fear and negative attitudes toward AI. This study examines how AI regulation influences AI’s individual factors (perceived AI trust, privacy, risk, and security) and how AI usage knowledge moderates these effects. The results indicate that perceived AI regulation increases perceived AI trust, privacy, and security, and reduces perceived AI risk. Additionally, the results show that AI usage knowledge moderates the relationships among perceived AI regulation, perceived AI trust, risk, and security. However, AI usage knowledge does not moderate the relationship between perceived AI regulation and perceived AI privacy. Users with knowledge of AI usage seek constant regulations to mitigate risks, enhance trust, and ensure security. Users with knowledge of AI usage do not need AI regulation to protect them from AI privacy issues. Users perceived that knowing how to use AI prevents them from AI-related privacy breaches.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2688779",
+      "url": "https://openalex.org/W7165649991"
+    },
+    {
+      "title": "Optimizing Government Document Processing for Administrative Efficiency",
+      "abstract": "Government document processing systems face high costs, long processing times, and inconsistent performance under large transaction volumes. Unlike prior AI-based or centralized studies that emphasize adoption or system design, this study addresses post-adoption operational optimization in an existing blockchain-enabled system. Positioned within post-adoption IS performance literature, it examines how operational process redesign improves administrative outcomes without introducing new technologies. Using discrete-event simulation calibrated to 1.5 million annual transactions, the analysis compares baseline and optimized process designs within the same institutional setting. Findings show a 17% reduction in annual operating costs and a 26% reduction in average processing time (p < .001), with enhanced process stability. By quantifying how workflow redesign and coordination mechanisms affect cost, time, and stability, this study extends post-adoption IS performance literature beyond incremental contributions and provides actionable guidance for administrators and policymakers seeking to optimize document-intensive government services.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2688782",
+      "url": "https://openalex.org/W7164866847"
+    },
+    {
+      "title": "Whistleblowing Costs and ISP Violation Reporting Intentions",
+      "abstract": "This study examines how the perceived costs of whistleblowing influence employees’ intentions to report information security policy violations. Drawing on ethical egoism theory, it investigates the mediating role of moral beliefs and the moderating role of trust in authority. Using a scenario-based survey with U.S. participants, two common ISP violations—password sharing and failure to log off workstations—were tested. Data were collected via print and online surveys and analyzed with Partial Least Squares to assess structural and measurement models. Results show that intrinsic whistleblowing costs, such as fear of retaliation, social repercussions, and workplace disruption, reduce reporting intentions. However, strong moral beliefs and trust in authority lessen these negative effects. This study offers a more nuanced measurement of whistleblowing costs and highlights the need to cultivate ethical values and institutional trust to promote reporting, thereby strengthening organizational information security.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2678196",
+      "url": "https://openalex.org/W7162436011"
+    },
+    {
+      "title": "Artificial Intelligence in Healthcare Service: Ecosystem of Transformational Health",
+      "abstract": "This exploratory study is engaged to identify the theoretical framework of Transformational health (T-health) service driven by artificial intelligence (AI) where all the stakeholders will equally participate and be mutually benefited so that a healthcare ecosystem can be established. In this regard, this study has followed a mixed method approach including a qualitative study followed by a quantitative study and an experiment to develop and validate the theoretical framework of T-health. This study was conducted in Canada and Bangladesh to evaluate any possible differences in perception by the patients in those two different countries. Introducing AI as a value co-creation facilitator (VCF) in the light of service-dominant logic (SDL) and creating an ecosystem of healthcare (PEH) to establish Transformation health (T-health) is a new idea. This may create a new scope to provide remote healthcare service by AI as a value co-creation facilitator (VCF) which is supplementary to direct service provided by physicians.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2667195",
+      "url": "https://openalex.org/W7161248264"
+    },
+    {
+      "title": "Enhancing Audit Team Performance with Artificial Intelligence",
+      "abstract": "Artificial intelligence (AI) and other digital technologies, such as machine learning, data visualization, and workflow automation, have transformed audit tasks, procedures, and, to an extent, the entire audit profession by providing predictive and intelligent audit capabilities to support auditors. However, to benefit from AI, auditors require cognitive flexibility, which captures the extent to which the collaborating actors (here, audit team members) listen attentively without distraction and are open to multiple perspectives and possibilities, engage in the free flow of ideas and opinions based on their conversations with peers and clients, and evaluate different decision alternatives. This study aimed to ascertain how AI impacts audit team performance and what role cognitive flexibility plays in this process. Data were collected from 191 respondents from India, and partial least squares structural equation modeling (PLS-SEM) was used to conduct a comprehensive analysis of the conceptual model, including testing for mediation effects, testing for heterogeneity utilizing the finite mixture partial least squares (FIMIX) procedure and entropy values, testing for endogeneity using the Gaussian copula term, importance—performance map analysis (IPMA), and PLSpredict modeling. The results showed that cognitive flexibility is significant in AI-enabled audit engagements. This study concludes that AI generates transactional value and that auditors require proficiency in AI to perform audits effectively using such technologies.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2668053",
+      "url": "https://openalex.org/W7160333904"
+    },
+    {
+      "title": "Digital Transformation Paradoxes: Managing Resource-Capability Tensions",
+      "abstract": "This study investigates how organizational resources and capabilities interact during digital transformation (DT) across diverse industries. We conceptualize DT as a form of organization-wide change in which digital technologies act as catalysts for reconfiguring value creation and reshaping organizational identity, in contrast to IT-enabled improvements that largely sustain existing value propositions. Drawing on qualitative analysis of 30 interviews spanning 13 industries in Singapore, we propose the REACT framework, consisting of Resources, Enabling Factors, Adaptive Capabilities, Capability Cultivation, and Transformation Outcomes. Our findings indicate that enabling factors, including leadership commitment, cultural readiness, and external shocks like COVID-19, function as triggers, shifting organizations from resource exploitation toward capability reconfiguration amid heightened uncertainty. This transition produces enduring tensions that require constant balancing of stability with change and efficiency with adaptability, demanding surge capacity to manage unpredictable disruptions.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2659740",
+      "url": "https://openalex.org/W7160100623"
+    },
+    {
+      "title": "Anthropomorphic Cues and Ambivalence in AI Voice Assistants",
+      "abstract": "Anthropomorphism is a defining feature of AI voice assistants, with humanlike voice, interactivity, and empathy cues shaping user perceptions. While prior research has examined the benefits and drawbacks of anthropomorphism, its relationship with ambivalence, i.e. the coexistence of positive and negative evaluations, remains underexplored. Drawing on Attitudinal Ambivalence Theory, this study investigates how anthropomorphic cues influence ambivalence and how ambivalence, in turn, shapes attitude and continuance intention. Survey data from users of AI voice assistants (e.g. Alexa, Siri, Google Assistant) show that voice and interactivity cues directly reduce ambivalence, whereas empathy exerts an indirect effect through these pathways. Ambivalence also mediates the effects of these cues on attitude. Moreover, ambivalence exhibits a dual role: it directly reduces attitude while simultaneously strengthening the relationship between attitude and continuance intention. These findings advance IS research by disentangling anthropomorphic design into cue-level mechanisms and by reconceptualizing ambivalence as a context-dependent moderator that both constrains and amplifies user responses. Practically, the study offers design insights for reducing evaluative conflict and fostering more coherent human—AI interactions.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2656898",
+      "url": "https://openalex.org/W7159806456"
+    },
+    {
+      "title": "Enhancing Human Resilience to AI-Driven Social Engineering",
+      "abstract": "Social engineering remains a critical cybersecurity threat by exploiting human psychology rather than technical weaknesses, a risk increasingly amplified by AI-driven deception such as deepfakes and automated phishing. This study develops a comprehensive human-centered resilience framework to help organizations anticipate, resist, and adapt to both traditional and AI-enabled attacks. Using a mixed-methods approach that combines a systematic literature review, multi-case analysis, and expert interviews, the findings show that social engineering is a psychologically driven, multi-stage process rooted in cognitive biases like authority, urgency, and fear, now scalable through AI. The study also identifies key organizational vulnerabilities, including security fatigue, weak security culture, and limitations of conventional training. In response, the proposed framework integrates adaptive behavioral conditioning, cultural reinforcement, and AI-augmented defenses, shifting cybersecurity from reactive compliance to proactive, capability-based resilience through human—AI collaboration.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2655170",
+      "url": "https://openalex.org/W7154622829"
+    },
+    {
+      "title": "Influence of Online Review Perceptions and Product Certainty",
+      "abstract": "Online reviews are a key information source for consumers, yet limited research explores how perceived credibility and usefulness shape decision outcomes and ongoing engagement. Drawing on Expectation-Confirmation Theory and information adoption perspectives, this study develops and tests a model linking perceived review credibility, usefulness, and product certainty to satisfaction and continuance intention. Survey data from 342 recent online shoppers support the model. Results show that perceived usefulness is the dominant driver of decision certainty, satisfaction, and continuance intention. While credibility exerts no direct effect, it indirectly influences outcomes through usefulness. Product certainty increases satisfaction but does not directly affect continuance intention, underscoring the mediating role of usefulness. Theoretically, the findings extend expectation-confirmation research by showing that information usefulness, not only satisfaction, predicts continued review use. Practically, platforms can foster loyal, satisfied customers by enhancing both the credibility and usefulness of reviews, thereby sustaining participation and long-term engagement.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2655164",
+      "url": "https://openalex.org/W7154390589"
+    },
+    {
+      "title": "Organizational AI Adoption Challenges and Consequent Integration Design",
+      "abstract": "We examine organizational AI adoption challenges with a view to designing an approach to effective adoption and further impact studies, following Design Science Research (DSR) principles. First, we reviewed and categorized these challenges as part of requisite DSR problem analysis. Next, we enriched the design context with a thematic review of AI innovation concepts and tools that have adoption potential in organizations vis-à-vis Enterprise Resource Planning integration. In the light of these reviews, we used inductive reasoning to design approach to AI adoption including a tool that exemplifies our recommendations. Finally, we make some recommendations for progressive impact studies in line with our proposed adoption experimentation.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1080/08874417.2026.2655181",
+      "url": "https://openalex.org/W7153578704"
+    }
+  ]
+}

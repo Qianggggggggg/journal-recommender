@@ -1,0 +1,70 @@
+{
+  "journal_id": "iet_cvi",
+  "journal_name": "IET Computer Vision",
+  "papers": [
+    {
+      "title": "Performance of computer vision algorithms for fine-grained classification using crowdsourced insect images",
+      "abstract": "With fine‐grained classification, we identify unique characteristics to distinguish among classes of the same super‐class. We are focusing on species recognition in Insecta as they are critical for biodiversity monitoring and at the base of many ecosystems. With citizen science campaigns, billions of images are collected in the wild. Once these are labelled, experts can use them to create distribution maps. However, the labelling process is time consuming, which is where computer vision comes in. The field of computer vision offers a wide range of algorithms, each with its strengths and weaknesses; how do we identify the algorithm that is in line with our application? To answer this question, we provide a full and detailed evaluation of nine algorithms among deep convolutional networks (CNN), vision transformers (ViT) and locality‐based vision transformers (LBVT) on 4 different aspects: classification performance, embedding quality, computational cost and gradient activity. We offer insights that we have not yet had in this domain proving to which extent these algorithms solve the fine‐grained tasks in Insecta. We found that ViT performs the best on inference speed and computational cost, whereas LBVT outperforms the others on performance and embedding quality; the CNN provide a trade‐off among the metrics.",
+      "year": 2024,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2404.03474",
+      "url": "https://www.semanticscholar.org/paper/d31549ea3fc728584c2dac06fb0c9cd2cdd1b3eb"
+    },
+    {
+      "title": "Self-supervised Multi-view Clustering in Computer Vision: A Survey",
+      "abstract": "In recent years, multi‐view clustering (MVC) has had significant implications in the fields of cross‐modal representation learning and data‐driven decision‐making. Its main objective is to cluster samples into distinct groups by leveraging consistency and complementary information among multiple views. However, the field of computer vision has witnessed the evolution of contrastive learning, and self‐supervised learning has made substantial research progress. Consequently, self‐supervised learning is progressively becoming dominant in MVC methods. It involves designing proxy tasks to extract supervisory information from image and video data, thereby guiding the clustering process. Despite the rapid development of self‐supervised MVC, there is currently no comprehensive survey analysing and summarising the current state of research progress. Hence, the authors aim to explore the emergence of self‐supervised MVC by discussing the reasons and advantages behind it. Additionally, the internal connections and classifications of common datasets, data issues, representation learning methods, and self‐supervised learning methods are investigated. The authors not only introduce the mechanisms for each category of methods, but also provide illustrative examples of their applications. Finally, some open problems are identified for further investigation and development.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.48550/arXiv.2309.09473",
+      "url": "https://www.semanticscholar.org/paper/7fa385ab9ba52af2cfc65409b3b4c06961f993a0"
+    },
+    {
+      "title": "Recent Advances of Continual Learning in Computer Vision: An Overview",
+      "abstract": "In contrast to batch learning where all training data is available at once, continual learning represents a family of methods that accumulate knowledge and learn continuously with data available in sequential order. Similar to the human learning process with the ability of learning, fusing and accumulating new knowledge acquired at different time steps, continual learning is considered to have high practical significance. Hence, continual learning has been studied in various artificial intelligence tasks. In this paper, we present a comprehensive review of the recent progress of continual learning in computer vision. In particular, the works are grouped by their representative techniques, including regularisation, knowledge distillation, memory, generative replay, parameter isolation and a combination of the above techniques. For each category of these techniques, both its characteristics and applications in computer vision are presented. At the end of this overview, several subareas, where continuous knowledge accumulation is potentially helpful while continual learning has not been well studied, are discussed.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70013",
+      "url": "https://www.semanticscholar.org/paper/15d6e1512089b07a66a3e5260848359cad79dbca"
+    },
+    {
+      "title": "Object Detection Based on CNN and Vision-Transformer: A Survey",
+      "abstract": "Object detection is the most crucial and challenging task of computer vision and has been used in various fields in recent years, such as autonomous driving and industrial inspection. Traditional object detection methods are mainly based on the sliding windows and the handcrafted features, which have problems such as insufficient understanding of image features and low accuracy of detection. With the rapid advancements in deep learning, convolutional neural networks (CNNs) and vision transformers have become fundamental components in object detection models. These components are capable of learning more advanced and deeper image properties, leading to a transformational breakthrough in the performance of object detection. In this review, we comprehensively review the representative object detection models from deep learning periods, tracing their architectural shifts and technological breakthroughs. Furthermore, we discuss key challenges and promising research directions in the object detection. This review aims to provide a comprehensive foundation for practitioners to enhance their understanding of object detection technologies.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70028",
+      "url": "https://www.semanticscholar.org/paper/f574d841ae3d6fea7964215325921b69866d75ac"
+    },
+    {
+      "title": "Frequency Domain Adaptive Filters in Vision Transformers for Small‐Scale Datasets",
+      "abstract": "Transformers have achieved remarkable success in computer vision, but their reliance on self‐attention mechanisms poses challenges for small‐scale datasets due to high computational demands and data requirements. This paper introduces the Multi‐Head Adaptive Filter Frequency Vision Transformer (MAF‐FViT), a Vision Transformer model that replaces self‐attention with frequency‐domain adaptive filters. MAF‐FViT leverages multi‐head adaptive filtering in the frequency domain to capture essential features with reduced computational complexity, providing an efficient alternative for vision tasks on limited data. Training is carried out from scratch without the need for pretraining on large‐scale datasets. The proposed MAF‐FViT model demonstrates strong performance on various image classification tasks, achieving competitive accuracy with a lower parameter count and faster processing times compared to self‐attention‐based models and other models employing alternative token mixers. The multi‐head adaptive filters enable the model to capture complex image features effectively, preserving high classification accuracy while minimising computational load. The results demonstrate that frequency‐domain adaptive filters offer an effective alternative to self‐attention, enabling competitive performance on small‐scale datasets while reducing training time and memory requirements. MAF‐FViT opens avenues for resource‐efficient transformer models in vision applications, making it a promising solution for settings constrained by data or computational resources.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70043",
+      "url": "https://www.semanticscholar.org/paper/1a3ebedc0e17c017c441e66de75d84133da8b253"
+    },
+    {
+      "title": "Refining Vision‐Based Video Captioning via Object Semantic Prior",
+      "abstract": "This paper presents a novel video captioning method guided by object semantic priors, aimed at improving the performance of vision‐based video captioning models. The proposed approach leverages an object detection model to extract semantic representations of objects within image sequences, which are used as prior information to enhance the visual features of the video. During the encoding stage, this prior information is integrated with the video content, enabling a more comprehensive understanding of the visual context. In the decoding stage, the prior information guides the generation of more accurate and contextually appropriate captions. Extensive experiments on the MSVD and MSR‐VTT datasets show that the proposed method significantly outperforms existing vision‐based video captioning approaches in terms of caption accuracy and relevance. The results validate the effectiveness of incorporating object semantic priors into vision‐based models for generating high‐quality video captions.",
+      "year": 2025,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70049",
+      "url": "https://www.semanticscholar.org/paper/705f62c726894f7ef3e470025619a5ce65f50eca"
+    },
+    {
+      "title": "A Systematic Review and Critical Analysis of Vision‐Based and Wearable Sensor Technologies for Hand Rehabilitation in Stroke Survivors",
+      "abstract": "Stroke is a leading cause of long‐term disability, with 80% of survivors experiencing acute upper‐limb impairment. Although vision‐based and wearable sensor technologies have the potential to improve rehabilitation, a thorough analysis of their comparative advantages, technical limitations and clinical readiness is still lacking. This systematic review provides a methodologically rigorous analysis of the peer‐reviewed literature from 2005 to 2025, synthesising and critically evaluating vision‐based and wearable sensor technologies for post‐stroke hand rehabilitation. Following PRISMA guidelines, we searched PubMed, Scopus and Web of Science. We analysed 132 included studies to identify a trend towards deep learning‐based computer vision and hybrid wearable systems. However, quantitative synthesis exposed critical gaps: technical benchmarks (e.g., latency and computational cost) were reported in fewer than 5% of studies, and the median sample size was only 17 participants. Methodological quality was low to moderate, with only 12% of studies being randomised controlled trials. We present a new taxonomy classifying systems by sensing modality and maturity, which reveals a lab‐to‐clinic gap. Although innovation is rapid, a lack of standardised benchmarking hinders clinical translation. We propose a decision‐making framework to guide future research and implementation.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70066",
+      "url": "https://www.semanticscholar.org/paper/5f9cb8e359bd02f0c686d561adad76c00df3adb0"
+    },
+    {
+      "title": "ST‐LoRA: SVD‐Guided Sparse Low‐Rank Adaptation With Trainable Masks for Large Language and Vision Models",
+      "abstract": "The rapid advancement of large‐scale pre‐trained models in computer vision and natural language processing has necessitated the development of parameter‐efficient fine‐tuning (PEFT) techniques. Low‐Rank Adaptation (LoRA) has emerged as a leading approach, enabling efficient adaptation by decomposing weight updates into low‐rank matrices. However, standard LoRA suffers from inefficiencies due to uniform rank allocation, redundant parameter updates, and random initialisation. This paper introduces Sparse Truncated Low‐Rank Adaptation (ST‐LoRA), a novel PEFT method that enhances LoRA through three key innovations: (1) SVD‐based initialisation, leveraging singular value decomposition of pre‐trained weights to provide informed starting points for adaptation matrices. (2) Dynamic rank assignment, allocating layer‐specific ranks based on singular value distributions to optimise parameter efficiency. (3) Learnable sparse masks, selectively updating only the most critical connections to reduce computational overhead. We evaluate ST‐LoRA across vision (ViT‐L/16 on ImageNet‐1K, CIFAR‐100, and fine‐grained datasets) and language (LLaMA‐2 7B on GLUE and instruction‐following tasks) domains. Our comprehensive experiments include rigorous ablation studies, cross‐validation, and statistical significance testing. Our results demonstrate that ST‐LoRA consistently outperforms existing PEFT methods while significantly reducing computational costs. On ImageNet‐1K, ST‐LoRA achieves 84.0% top‐1 accuracy ( 0.12% std), surpassing LoRA ( r = 16) by 0.4% while using only 26.5% of its parameters and reducing training time by 57%. For language tasks, ST‐LoRA approaches full fine‐tuning performance with a fraction of the computational cost, reducing training time by up to 45% versus standard LoRA and 87% versus full fine‐tuning.",
+      "year": 2026,
+      "source": "semantic_scholar",
+      "doi": "10.1049/cvi2.70072",
+      "url": "https://www.semanticscholar.org/paper/88cc71be818dbe7cc6837fe120e0b06b43342399"
+    }
+  ]
+}

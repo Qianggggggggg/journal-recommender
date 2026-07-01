@@ -1,0 +1,86 @@
+{
+  "journal_id": "jasa",
+  "journal_name": "The Journal of the Acoustical Society of America",
+  "papers": [
+    {
+      "title": "Whistle mimicking underwater acoustic communication with Nyquist constrained autoencoder learned whale waveforms",
+      "abstract": "Biomimetic underwater acoustic communication is attractive for covert military operations because it disguises communication signals as marine-mammal whistles, but in modification-type whistle-mimicking schemes, concealment and communication reliability are tightly coupled and often trade off against each other. The proposed method addresses this problem by establishing a whale-whistle waveform-learning framework that extracts baseband pulses from real false killer whale whistles, learns Nyquist-constrained representative symbol waveforms through an autoencoder, and combines them with envelope-driven adaptive symbol durations to preserve whale-like waveform statistics while equalizing symbol energy. The proposed method is evaluated in terms of mimicry using Evaluation of Covertness of Sound Mimicking Marine Mammals (ECSM3) and higher-order cumulants, and in terms of communication performance using Bit Error Rate (BER) under Additive White Gaussian Noise, a simulated underwater channel, and 1.5 km sea trials against BOK, continuous varying carrier frequency modulation (CV-CFM), Hybrid Orthogonal Division Frequency Modulation (HODFM), and Variable Duartion Phase Shift Keying (V-DPSK) at matched data rates. The proposed method achieves the highest mean ECSM3 score with the smallest variation and the lowest BER among the same-rate schemes; in the 1.5 km sea trial at 250 bps, it attains a BER of 0.0245, which corresponds to about 72.8%, 79.4%, and 87.4% lower BER than V-DPSK, HODFM, and CV-CFM, respectively, demonstrating that learned whale-like pulses can simultaneously improve covertness and reliable underwater acoustic communication.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044123",
+      "url": "https://openalex.org/W7165197027"
+    },
+    {
+      "title": "Learning the relationship between operating condition and flame response from acoustic data",
+      "abstract": "Predicting how the thermoacoustic response of a combustor changes across operating conditions is a long-standing challenge because small uncertainties in the flame response lead to large uncertainties in the thermoacoustic response. In this paper, we address this challenge for the Rolls-Royce SCARLET test rig using a combination of Bayesian inference, Gaussian process regression, and information-theoretic experiment design. Starting from a physics-based acoustic network model whose flame parameters are inferred at several operating conditions using Bayesian inference (described in a companion paper), we use Gaussian process regression in Part A to learn how the five parameters of a flame model vary with six operating condition parameters. The resulting Gaussian process model predicts the flame response at unseen conditions with quantified uncertainty, and, when coupled into the acoustic network, produces operating maps of the full thermoacoustic response. In Part B, we use metrics from information theory to identify the small number of forcing frequencies that are most informative about the flame parameters. For the SCARLET rig, three optimally chosen frequencies recover the flame transfer function to the same fidelity as the full dataset of around 20 frequencies forced from both upstream and downstream, reducing the data required by up to 90%.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0043841",
+      "url": "https://openalex.org/W7163910231"
+    },
+    {
+      "title": "An accelerated coupled normal-mode model based on physics-informed neural networks",
+      "abstract": "The coupled normal-mode model is a fundamental tool for simulating underwater sound propagation in range-dependent environments, but its cost is high because the modal Sturm-Liouville problem must be solved repeatedly for every segment. This paper proposes an accelerated coupled normal-mode model based on physics-informed neural networks. Empirical orthogonal function analysis compresses the input sound-speed profiles, and a dual-branch physics-informed neural network predicts the horizontal wavenumbers and modal depth functions. The training loss combines a data-driven term with physics constraints from the modal equation and boundary conditions. On the 2015 Shallow Water Sound Fluctuation experiment dataset, the surrogate reaches a mode-averaged relative error of 1.52 × 10-3% for the wavenumbers and 6.7% for the depth functions, one orders of magnitude smaller than first-order modal perturbation theory, and cuts the online modal-solving time by 85% relative to a finite difference solver. The reconstructed field is evaluated against KRAKENC for idealized internal solitary wave environments, measured 2015 Shallow Water Sound Fluctuation experiment sound-speed sections, and piecewise-linear sloping bathymetry. Transmission loss errors stay within 3 dB and the complex pressure normalized mean squared error remains on the order of 10-5, with comparable accuracy in the measured and sloping environments. The framework offers practical accuracy and computational efficiency for shallow water environments with combined sound-speed and bathymetric range dependence.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044124",
+      "url": "https://openalex.org/W7163687467"
+    },
+    {
+      "title": "Passive source localization with a horizontal line array in the shadow zone of the deep water",
+      "abstract": "Passive source localization remains a prominent research focus in underwater acoustics. Although extensive studies in deep water have emphasized localization using vertical line arrays, far less attention has been directed toward utilizing horizontal line arrays (HLAs) for estimating source range and depth, despite their widespread deployment in deep-water operations. This paper presents a broadband source localization method employing an HLA in the shadow zone of deep water. The proposed approach estimates source range and depth by matching six measured time delays among four dominant multipath arrivals against a precomputed replica library of modeled time delays generated across a grid of hypothesized source ranges and depths. The time delays are extracted from the beamformed acoustic intensity steered toward the estimated source direction. Method effectiveness is validated through both numerical simulations and experimental data acquired during an experiment in the South China Sea, involving a suspended broadband source and a towed HLA. In comparison with the matched-interference-structure method, the proposed technique significantly reduces computational complexity while demonstrating enhanced robustness against environmental mismatches such as sound speed profile and water depth uncertainties.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044103",
+      "url": "https://openalex.org/W7164891061"
+    },
+    {
+      "title": "Temporally stable bottom-interacting upslope sound propagation south of Malta",
+      "abstract": "The influence of dynamical ocean features on seabed-interacting acoustic transmissions was investigated southeast of Malta in the Mediterranean Sea. Waveforms at 610-890 Hz were transmitted to mimic impulse propagation over two fixed paths of 25 and 45 km length. Area conditions included topographically trapped diurnal waves, stochastic internal waves, a 60-m-thick surface mixed layer, and weak mesoscale flows. Many stable arrivals with transmission loss of 57 to 66 dB were observed on the short path. The matched-filter recovered impulse response showed a high degree of temporal coherence over the 5-d-long experiment. Travel times of tracked individual signal peaks showed root mean square variation of 3 ms. Much of this reported travel-time variability results from slowly fluctuating dominance between micromultipaths, rather than time variation of a single steady ray. Spectral analysis of the travel times provided weak evidence of a peak at the diurnal tidal frequency, with no reliable evidence of semidiurnal-band oscillations of arrival peak levels or times. Most rays interact with the seabed, and model simulations with different bottom attenuation coefficients support intuition that seabed properties determine a base-state transmission loss and impulse response in the area, only slightly modified by water column variations.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0043949",
+      "url": "https://openalex.org/W7165112398"
+    },
+    {
+      "title": "Comparative analysis of acoustic absorption performance in micro-perforated panels with multi-shaped perforations: Theory, simulation, and experimental validation",
+      "abstract": "This paper presents a comparison of the acoustic absorption performance of micro-perforated panel with different perforation shapes. The acoustic impedance models of different perforation shapes (circular, triangular, and square cross section and variable cross section tapered micro perforations) are established, and the end correction of acoustic impedance for different micro perforation shapes are optimized. Based on the acoustic electric analogy method, the coupled model of flexible micro-perforated panel absorber considering the vibration of the substrate panel is established, and the Rayleigh-Ritz method is employed to obtain the panel's natural frequencies, while the Spectro-Geometric Method is used to construct the panel's displacement function. The acoustic impedance formula for flexible micro-perforated panel is derived by the modal superposition principle. The semi-analytical results are verified against finite element method results, confirming the accuracy of the semi-analytical model. In addition, the effects of structural parameters (perforation shapes, microporous length, cross-sectional area, perforation ratio and back cavity depth) and boundary conditions on the acoustic absorption coefficients are analyzed and summarized. Finally, an impedance tube test system is designed to measure the sound absorption coefficient of different hole shapes. The experimental results aligned well with the semi-analytical model, proving the accuracy of the proposed approach.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044139",
+      "url": "https://openalex.org/W7164031953"
+    },
+    {
+      "title": "Estimating mechanical impedance from hydrophone measurements",
+      "abstract": "Integrating machine learning or deep learning models into autonomous underwater vehicles often requires extra steps with an accuracy trade-off, and the scarcity of training datasets makes it inconvenient. This work introduces a reduced-order identification approach for thin spherical shells using sparse hydrophone measurements. Because these impedances are unique to a given scatterer, the central hypothesis is that they provide strong identification potential. The method begins by using established techniques to analytically reconstruct the scattered field from hydrophone measurements. From this field, the surface pressures and velocities corresponding to each spherical harmonic are obtained and used to compute the in vacuo mechanical impedance. The method's effectiveness is then evaluated using synthetic data with added noise. Results demonstrate that Modal Mechanical Impedance Estimation can approximate the first two modal mechanical impedances with absolute percentage error less than 10% in the low-frequency range (ka ≤ 2.1) with only 10 hydrophones. Its performance is limited by directivity due to increasing frequency. By enabling efficient computation without any training phase, the proposed method stands out as a promising candidate for real-time and low-energy applications.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0043957",
+      "url": "https://openalex.org/W7163075302"
+    },
+    {
+      "title": "Solving room impulse response inverse problems using flow matching with analytic Wiener denoiser",
+      "abstract": "Room impulse response (RIR) estimation naturally arises as a class of inverse problems, including denoising and deconvolution. While recent approaches often rely on supervised learning or learned generative priors, such methods require large amounts of training data and may generalize poorly outside the training distribution. In this work, we present RIRFlow, a training-free Bayesian framework for RIR inverse problems using flow matching. We derive a flow-consistent analytic prior from the statistical structure of RIRs, eliminating the need for data-driven priors. Specifically, we model RIR as a Gaussian process with exponentially decaying variance, which yields a closed-form Wiener denoiser. This analytic denoiser is integrated as a prior in an existing flow-based inverse solver, where inverse problems are solved via guided posterior sampling. Furthermore, we extend the solver to nonlinear and non-Gaussian inverse problems via a local Gaussian approximation of the guided posterior, and empirically demonstrate that this approximation remains effective in practice. Experiments on real RIRs across different inverse problems demonstrate robust performance, highlighting the effectiveness of combining a classic RIR model with the recent flow-based generative inference.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0043993",
+      "url": "https://openalex.org/W7165157646"
+    },
+    {
+      "title": "Aperiodicity cue for fricative voicing contrasts",
+      "abstract": "This study examines acoustic cues to voicing contrasts in French consonant-vowel-consonant-vowel sequences containing fricatives. We introduce an aperiodicity metric derived from the YIN difference function and evaluate its ability to capture voicing properties in controlled, noise-free speech materials. Results show that the proposed measure enables reliable, objective classification of fricatives as voiced or unvoiced. When combined with a conventional acoustic feature (root mean square amplitude), the metric provides complementary information and supports accurate classification (approximately 83% overall) among unvoiced fricatives, voiced fricatives, and vowels using standard classifiers. These results demonstrate that aperiodicity-based cues offer a valuable addition to established spectral and amplitude-based features for detailed phoneme characterization.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044096",
+      "url": "https://openalex.org/W7163563441"
+    },
+    {
+      "title": "Ensemble learning for predicting the damped response of granular materials and interpretation through feature importance analysis",
+      "abstract": "This study explores the application of ensemble learning, decision tree, random forest, and XGBoost, to predict the damping response of irregular granular materials using a data-driven approach. Training and testing data were measured using an acrylic beam excited with a low-amplitude sinusoidal sweep waveform (root mean square <1 N). Six granular materials, featuring both spherical and irregular particle shapes and varying mechanical properties, were selected as infill for the beam cavity. The main aim was to map between six input features: force, filling ratio, granular materials properties, and two targeted outputs: reduction of the beam's first resonance peak and root mean square acceleration. Feature importance analysis was conducted for each model developed to assess the dependence of the target values on the input features. It is concluded that ensemble models can offer accurate estimates (R2 ≥ 90%) with the XGBoost model incorporating all input features in the estimation. An attempt to estimate the damped response of hard-soft granular mixtures using empirically determined mixture-equivalent properties gave good estimates that differ from simple mass/volume-fraction averaging, with performance varying by filling ratio and excitation amplitude.",
+      "year": 2026,
+      "source": "openalex",
+      "doi": "10.1121/10.0044148",
+      "url": "https://openalex.org/W7164848519"
+    }
+  ]
+}

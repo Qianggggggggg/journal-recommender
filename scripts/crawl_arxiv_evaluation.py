@@ -16,8 +16,8 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-S2_API_KEY = "s2k-AeDASl4PzLGaxug6gQ9aNSlOQM10hmxa5IUVj4Ma"
-S2_HEADERS = {"x-api-key": S2_API_KEY}
+S2_API_KEY = os.environ.get("S2_API_KEY", "")
+S2_HEADERS = {"x-api-key": S2_API_KEY} if S2_API_KEY else {}
 
 TARGET_AREAS = [
     "人工智能",

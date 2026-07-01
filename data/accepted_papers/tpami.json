@@ -1,0 +1,46 @@
+{
+  "journal_id": "tpami",
+  "journal_name": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+  "papers": [
+    {
+      "title": "Deep ROC Analysis and AUC as Balanced Average Accuracy, for Improved Classifier Selection, Audit and Explanation",
+      "abstract": "Optimal performance is desired for decision-making in any field with binary classifiers and diagnostic tests, however common performance measures lack depth in information. The area under the receiver operating characteristic curve (AUC) and the area under the precision recall curve are too general because they evaluate all decision thresholds including unrealistic ones. Conversely, accuracy, sensitivity, specificity, positive predictive value and the F1 score are too specific—they are measured at a single threshold that is optimal for some instances, but not others, which is not equitable. In between both approaches, we propose deep ROC analysis to measure performance in multiple groups of predicted risk (like calibration), or groups of true positive rate or false positive rate. In each group, we measure the group AUC (properly), normalized group AUC, and averages of: sensitivity, specificity, positive and negative predictive value, and likelihood ratio positive and negative. The measurements can be compared between groups, to whole measures, to point measures and between models. We also provide a new interpretation of AUC in whole or part, as balanced average accuracy, relevant to individuals instead of pairs. We evaluate models in three case studies using our method and Python toolkit and confirm its utility.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPAMI.2022.3145392",
+      "url": "https://www.semanticscholar.org/paper/e6702af1063d70c023e83f199d5650a92d1b3d25"
+    },
+    {
+      "title": "Normalization Techniques in Training DNNs: Methodology, Analysis and Application",
+      "abstract": "Normalization techniques are essential for accelerating the training and improving the generalization of deep neural networks (DNNs), and have successfully been used in various applications. This paper reviews and comments on the past, present and future of normalization methods in the context of DNN training. We provide a unified picture of the main motivation behind different approaches from the perspective of optimization, and present a taxonomy for understanding the similarities and differences between them. Specifically, we decompose the pipeline of the most representative normalizing activation methods into three components: the normalization area partitioning, normalization operation and normalization representation recovery. In doing so, we provide insight for designing new normalization technique. Finally, we discuss the current progress in understanding normalization methods, and provide a comprehensive review of the applications of normalization for particular tasks, in which it can effectively solve the key issues.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPAMI.2023.3250241",
+      "url": "https://www.semanticscholar.org/paper/f8c87389d78fc059f18bfc9d04b37614c19c3f91"
+    },
+    {
+      "title": "Knowledge Distillation and Student-Teacher Learning for Visual Intelligence: A Review and New Outlooks",
+      "abstract": "Deep neural models, in recent years, have been successful in almost every field, even solving the most complex problem statements. However, these models are huge in size with millions (and even billions) of parameters, demanding heavy computation power and failing to be deployed on edge devices. Besides, the performance boost is highly dependent on redundant labeled data. To achieve faster speeds and to handle the problems caused by the lack of labeled data, knowledge distillation (KD) has been proposed to transfer information learned from one model to another. KD is often characterized by the so-called ‘Student-Teacher’ (S-T) learning framework and has been broadly applied in model compression and knowledge transfer. This paper is about KD and S-T learning, which are being actively studied in recent years. First, we aim to provide explanations of what KD is and how/why it works. Then, we provide a comprehensive survey on the recent progress of KD methods together with S-T frameworks typically used for vision tasks. In general, we investigate some fundamental questions that have been driving this research area and thoroughly generalize the research progress and technical details. Additionally, we systematically analyze the research status of KD in vision applications. Finally, we discuss the potentials and open challenges of existing methods and prospect the future directions of KD and S-T learning.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPAMI.2021.3055564",
+      "url": "https://www.semanticscholar.org/paper/db3010eedc3a19ed1b4ae06f9006179db05f34bc"
+    },
+    {
+      "title": "Dataset Security for Machine Learning: Data Poisoning, Backdoor Attacks, and Defenses",
+      "abstract": "As machine learning systems grow in scale, so do their training data requirements, forcing practitioners to automate and outsource the curation of training data in order to achieve state-of-the-art performance. The absence of trustworthy human supervision over the data collection process exposes organizations to security vulnerabilities; training data can be manipulated to control and degrade the downstream behaviors of learned models. The goal of this work is to systematically categorize and discuss a wide range of dataset vulnerabilities and exploits, approaches for defending against these threats, and an array of open problems in this space.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPAMI.2022.3162397",
+      "url": "https://www.semanticscholar.org/paper/113fba4c88e2eb74f49544a161ef70e9745e969a"
+    },
+    {
+      "title": "A Survey on Non-Autoregressive Generation for Neural Machine Translation and Beyond",
+      "abstract": "Non-autoregressive (NAR) generation, which is first proposed in neural machine translation (NMT) to speed up inference, has attracted much attention in both machine learning and natural language processing communities. While NAR generation can significantly accelerate inference speed for machine translation, the speedup comes at the cost of sacrificed translation accuracy compared to its counterpart, autoregressive (AR) generation. In recent years, many new models and algorithms have been designed/proposed to bridge the accuracy gap between NAR generation and AR generation. In this paper, we conduct a systematic survey with comparisons and discussions of various non-autoregressive translation (NAT) models from different aspects. Specifically, we categorize the efforts of NAT into several groups, including data manipulation, modeling methods, training criterion, decoding algorithms, and the benefit from pre-trained models. Furthermore, we briefly review other applications of NAR models beyond machine translation, such as grammatical error correction, text summarization, text style transfer, dialogue, semantic parsing, automatic speech recognition, and so on. In addition, we also discuss potential directions for future exploration, including releasing the dependency of KD, reasonable training objectives, pre-training for NAR, and wider applications, etc. We hope this survey can help researchers capture the latest progress in NAR generation, inspire the design of advanced NAR models and algorithms, and enable industry practitioners to choose appropriate solutions for their applications.",
+      "year": 2022,
+      "source": "semantic_scholar",
+      "doi": "10.1109/TPAMI.2023.3277122",
+      "url": "https://www.semanticscholar.org/paper/67dc33f02c8b5f24cd213b6b5fb5c74cead581aa"
+    }
+  ]
+}

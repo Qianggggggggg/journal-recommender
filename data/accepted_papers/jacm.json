@@ -1,0 +1,54 @@
+{
+  "journal_id": "jacm",
+  "journal_name": "Journal of the ACM",
+  "papers": [
+    {
+      "title": "Adaptive and Fair Transformation for Recoverable Mutual Exclusion",
+      "abstract": "Mutual exclusion is one of the most commonly used techniques to handle contention in concurrent systems. Traditionally, mutual exclusion algorithms have been designed under the assumption that a process does not fail while acquiring/releasing a lock or while executing its critical section. However, failures do occur in real life, potentially leaving the lock in an inconsistent state. This gives rise to the problem of recoverable mutual exclusion (RME), which involves designing a mutual exclusion (ME) algorithm that can tolerate failures while maintaining required safety and liveness properties. In this work, we present a framework that transforms any algorithm that solves the RME problem into an algorithm that can also simultaneously adapt to (i) the number of processes concurrently competing for the lock, as well as (ii) the number of unresolved failures in the system, while maintaining the correctness properties and performance characteristics of the underlying RME algorithm. Additionally, the algorithm constructed as a result of this transformation adds certain desirable properties such as bounded recovery and fairness. One of the important performance measures of any ME algorithm, including an RME algorithm, is the number of remote memory references (RMRs) made by a process—to acquire and release a lock, as well as to recover the lock structure after a failure. Let R(n) denote the RMR complexity of a critical section request in the underlying RME algorithm, where n denotes the number of processes in the system. Then, our framework yields an RME algorithm for which the RMR complexity of a critical section request is given by O(min{č,√(F+1), R(n)}), where č denotes the point contention of the request and F denotes the failure-density of the request. We further extend our framework by presenting a novel memory reclamation algorithm to bound the space complexity of the RME algorithm. Our memory reclamation algorithm maintains the correctness, performance, and fairness properties of our transformation. Our approach is general enough that it may also be used to bound the space complexity of other RME algorithms. In addition to read and write instructions, our algorithm uses compare-and-swap (CAS) and fetch-and-store (FAS) hardware instructions, both of which are commonly available in most modern processors.",
+      "year": 2025,
+      "source": "local_evaluation_metadata",
+      "doi": "10.1145/3744236",
+      "url": ""
+    },
+    {
+      "title": "Distribution-Free, Risk-Controlling Prediction Sets",
+      "abstract": "While improving prediction accuracy has been the focus of machine learning in recent years, this alone does not suffice for reliable decision-making. Deploying learning systems in consequential settings also requires calibrating and communicating the uncertainty of predictions. To convey instance-wise uncertainty for prediction tasks, we show how to generate set-valued predictions from a black-box predictor that controls the expected loss on future test points at a user-specified level. Our approach provides explicit finite-sample guarantees for any dataset by using a holdout set to calibrate the size of the prediction sets. This framework enables simple, distribution-free, rigorous error control for many tasks, and we demonstrate it in five large-scale machine learning problems: (1) classification problems where some mistakes are more costly than others; (2) multi-label classification, where each observation has multiple associated labels; (3) classification problems where the labels have a hierarchical structure; (4) image segmentation, where we wish to predict a set of pixels containing an object of interest; and (5) protein structure prediction. Last, we discuss extensions to uncertainty quantification for ranking, metric learning, and distributionally robust learning.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3478535",
+      "url": "https://www.semanticscholar.org/paper/e343f1517f038da090a78159363d14cdad5ddc35"
+    },
+    {
+      "title": "The Frobenius and Factor Universality Problems of the Kleene Star of a Finite Set of Words",
+      "abstract": "We solve open problems concerning the Kleene star of a finite set of words over an alphabet . The Frobenius monoid problem is the question for a given finite set of words , whether the language is cofinite. We show that it is PSPACE-complete. We also exhibit an infinite family of sets such that the length of the longest words not in (when is cofinite) is exponential in the length of the longest words in and subexponential in the sum of the lengths of words in . The factor universality problem is the question for a given finite set of words , whether every word over is a factor (substring) of some word from . We show that it is also PSPACE-complete. Besides that, we exhibit an infinite family of sets such that the length of the shortest words not being a factor of any word in is exponential in the length of the longest words in and subexponential in the sum of the lengths of words in . This essentially settles in the negative the longstanding Restivo’s conjecture (1981) and its weak variations. All our solutions are based on one shared construction, and as an auxiliary general tool, we introduce the concept of set rewriting systems . Finally, we complement the results with upper bounds.",
+      "year": 2021,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3447237",
+      "url": "https://www.semanticscholar.org/paper/07a493906b4fd97be19f95e8bb2bc528c2db9b44"
+    },
+    {
+      "title": "Acceleration by Stepsize Hedging: Multi-Step Descent and the Silver Stepsize Schedule",
+      "abstract": "Can we accelerate the convergence of gradient descent without changing the algorithm—just by judiciously choosing stepsizes? Surprisingly, we show that the answer is yes. Our proposed Silver Stepsize Schedule optimizes strongly convex functions in \\(\\kappa ^{\\log _{\\rho } 2} \\approx \\kappa ^{0.7864}\\) iterations, where \\(\\rho =1+\\sqrt {2}\\) is the silver ratio and κ is the condition number. This is intermediate between the textbook unaccelerated rate κ and the accelerated rate \\(\\kappa ^{1/2}\\) due to Nesterov in 1983. The non-strongly convex setting is conceptually identical, and standard black-box reductions imply an analogous partially accelerated rate \\(\\varepsilon ^{-\\log _{\\rho } 2} \\approx \\varepsilon ^{-0.7864}\\) . We conjecture and provide partial evidence that these rates are optimal among all stepsize schedules. The Silver Stepsize Schedule is constructed recursively in a fully explicit way. It is non-monotonic, fractal-like, and approximately periodic of period \\(\\kappa ^{\\log _{\\rho } 2}\\) . This leads to a phase transition in the convergence rate: initially super-exponential (acceleration regime), then exponential (saturation regime). The core algorithmic intuition is hedging between individually suboptimal strategies—short steps and long steps—since bad cases for the former are good cases for the latter, and vice versa. Properly combining these stepsizes yields faster convergence due to the misalignment of worst-case functions. The key challenge in proving this speedup is enforcing long-range consistency conditions along the algorithm’s trajectory. We do this by developing a technique that recursively glues constraints from different portions of the trajectory, thus removing a key stumbling block in previous analyses of optimization algorithms. More broadly, we believe that the concepts of hedging and multi-step descent have the potential to be powerful algorithmic paradigms in a variety of contexts in optimization and beyond. This article publishes and extends the first author’s 2018 master’s thesis (advised by the second author)—which established for the first time that judiciously choosing stepsizes can enable acceleration in convex optimization. Prior to this thesis, the only such result was for the special case of quadratic optimization, due to Young in 1953.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3708502",
+      "url": "https://www.semanticscholar.org/paper/bca2b835a548b71dd19b265e45fca0d48e309990"
+    },
+    {
+      "title": "On Strongest Algebraic Program Invariants",
+      "abstract": "A polynomial program is one in which all assignments are given by polynomial expressions and in which all branching is nondeterministic (as opposed to conditional). Given such a program, an algebraic invariant is one that is defined by polynomial equations over the program variables at each program location. Müller-Olm and Seidl have posed the question of whether one can compute the strongest algebraic invariant of a given polynomial program. In this article, we show that, while strongest algebraic invariants are not computable in general, they can be computed in the special case of affine programs, that is, programs with exclusively linear assignments. For the latter result, our main tool is an algebraic result of independent interest: Given a finite set of rational square matrices of the same dimension, we show how to compute the Zariski closure of the semigroup that they generate.",
+      "year": 2023,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3614319",
+      "url": "https://www.semanticscholar.org/paper/e9dc575539dedc44b3bbbdd39c2ed1054a1dc0cb"
+    },
+    {
+      "title": "Universally Composable Security",
+      "abstract": "This work presents a general framework for describing cryptographic protocols and analyzing their security. The framework allows specifying the security requirements of practically any cryptographic task in a unified and systematic way. Furthermore, in this framework the security of protocols is preserved under a general composition operation, called universal composition. The proposed framework with its security-preserving composition operation allows for modular design and analysis of complex cryptographic protocols from simpler building blocks. Moreover, within this framework, protocols are guaranteed to maintain their security in any context, even in the presence of an unbounded number of arbitrary protocol sessions that run concurrently in an adversarially controlled manner. This is a useful guarantee, which allows arguing about the security of cryptographic protocols in complex and unpredictable environments such as modern communication networks.",
+      "year": 2020,
+      "source": "semantic_scholar",
+      "doi": "10.1145/3402457",
+      "url": "https://www.semanticscholar.org/paper/aa91ef76e2fea5d6633e7d1a08ca02b15364eb6d"
+    }
+  ]
+}
